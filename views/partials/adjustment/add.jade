@@ -64,6 +64,16 @@ block title
                   .col-md-4
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="adjustment.request.bl_code")
+                        span.col-md-12.help-block BL Code
+                  .col-md-4
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="adjustment.request.condition")
+                        span.col-md-12.help-block Condition
+                  .col-md-4
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="adjustment.request.quantity")
                         span.col-md-12.help-block Quantity
                   .col-md-1
@@ -81,11 +91,15 @@ block title
                           thead.flip-content.bg-grey
                             tr
                               th Product
+                              th BL Code
+                              th Condition
                               th Quantity
                               th(width="5%") Action
                           tbody
                             tr(ng-repeat="adjusted_item in adjustment.adjusted_items")
                               td {{adjusted_item.item.name}}
+                              td {{adjusted_item.bl_code}}
+                              td {{adjusted_item.condition}}
                               td {{adjusted_item.quantity}}
                               td(width="5%")
                                 .btn-group.btn-group-xs.btn-group-solid

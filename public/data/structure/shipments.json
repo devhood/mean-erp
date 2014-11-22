@@ -1,73 +1,58 @@
 [{
-"bl_code": {
-  "name": "bl_code",
-  "title": "BL Code",
+"supplier": {
+  "name": "supplier",
+  "title": "Supplier",
+  "type": "select"
+},
+"shipno": {
+  "name": "shipno",
+  "title": "Shipment Number",
   "type": "text"
 },
-"brand": {
-  "name": "brand",
-  "title": "___",
+"reference_number": {
+  "name": "reference_number",
+  "title": "Reference Number",
   "type": "text"
 },
-"___": {
-  "name": "___",
-  "title": "___",
+"arrival_date": {
+  "name": "arrival_date",
+  "title": "Arrival Date",
   "type": "text"
 },
-"___": {
-  "name": "___",
-  "title": "___",
+"notes": {
+  "name": "notes",
+  "title": "Special Instructions",
   "type": "text"
 },
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-}
-"ordered_items": {
-  "name": "___",
-  "title": "___",
+"shipment_item": {
+  "name": "shipment_item",
+  "title": "SHIPMENT ITEMS",
   "type": "table",
   "child_items": {
-    "___": {
-      "name": "___",
-      "title": "___",
+    "product": {
+      "name": "product",
+      "title": "Product",
+      "type": "select"
+    },
+    "quantity": {
+      "name": "quantity",
+      "title": "Quantity",
       "type": "text"
+    },
+    "cost": {
+      "name": "cost",
+      "title": "Cost",
+      "type": "text"
+    },
+    "expiry_date": {
+      "name": "expiry_date",
+      "title": "Expiry Date",
+      "type": "text"
+    },
+    "condition": {
+      "name": "condition",
+      "title": "Condition",
+      "type": "select"
     }
   }
 }

@@ -1,0 +1,49 @@
+[{
+  "supplier": {
+    "name": "supplier",
+    "title": "Supplier",
+    "type": "select"
+  },
+  "purno": {
+    "name": "purno",
+    "title": "Purchase Number",
+    "type": "text"
+  },
+  "arrival_date": {
+    "name": "arrival_date",
+    "title": "Expected Arrival Date",
+    "type": "text"
+  },
+  "reference_number": {
+    "name": "reference_number",
+    "title": "Reference Number",
+    "type": "text"
+  },
+  "notes": {
+    "name": "notes",
+    "title": "Special Instructions",
+    "type": "text"
+  },
+  "purchase_item": {
+    "name": "purchase_item",
+    "title": "PURCHASE ITEMS",
+    "type": "table",
+    "child_items": {
+      "product": {
+        "name": "product",
+        "title": "Product",
+        "type": "text"
+      },
+      "quantity": {
+        "name": "quantity",
+        "title": "Quantity",
+        "type": "text"
+      },
+      "cost": {
+        "name": "cost",
+        "title": "Cost",
+        "type": "text"
+      }
+    }
+  }
+}]

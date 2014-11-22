@@ -1,72 +1,57 @@
 [{
-"bl_code": {
-  "name": "bl_code",
-  "title": "BL Code",
+"transaction_type": {
+  "name": "transaction_type",
+  "title": "Transaction Type",
+  "type": "select"
+},
+"cono": {
+  "name": "cono",
+  "title": "CO Nummber",
   "type": "text"
 },
-"brand": {
-  "name": "brand",
-  "title": "___",
+"inventory_location": {
+  "name": "inventory_location",
+  "title": "Inventory Location",
+  "type": "select"
+},
+"customer": {
+  "name": "customer",
+  "title": "Customer",
+  "type": "select"
+},
+"shipping_address": {
+  "name": "shipping_address",
+  "title": "Shipping Address",
   "type": "text"
 },
-"___": {
-  "name": "___",
-  "title": "___",
+"billing_address": {
+  "name": "billing_address",
+  "title": "Billing Address",
   "type": "text"
 },
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "text"
-},
-"___": {
-  "name": "___",
-  "title": "___",
+"description": {
+  "name": "description",
+  "title": "Special Instructions",
   "type": "text"
 }
-"ordered_items": {
-  "name": "___",
-  "title": "___",
+"consignment": {
+  "name": "consignment",
+  "title": "CONSIGNED ITEMS",
   "type": "table",
   "child_items": {
-    "___": {
-      "name": "___",
-      "title": "___",
+    "product": {
+      "name": "product",
+      "title": "Product",
+      "type": "text"
+    },
+    "bl_code": {
+      "name": "bl_code",
+      "title": "BL Code",
+      "type": "text"
+    },
+    "quantity": {
+      "name": "quantity",
+      "title": "Product",
       "type": "text"
     }
   }
