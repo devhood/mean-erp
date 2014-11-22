@@ -107,14 +107,39 @@ angular.module('erp')
         $scope.payment_terms = Api.Collection('payment_term').query();
         $scope.discounts = Api.Collection('discounts').query();
         $scope.shipping_modes = Api.Collection('shipping_mode').query();
-        $scope.shipping_modes = Api.Collection('shipping_mode').query();
+        $scope.price_types = Api.Collection('price_type').query();
         $scope.customer_status = Api.Collection('customer_status').query();
+        $scope.countries = Api.Collection('countries').query();
+        $scope.geographys = Api.Collection('geography').query();
         var query = {"position":"Sales Executive"};
         $scope.sales_executives = Api.Collection('users',query).query(function(){});
+
+        $scope.copyShipping = function(customer){
+          if(customer.shipping_address && customer.shipping_address.same){
+            $scope.customer.billing_address = customer.shipping_address;
+          }
+        };
+        $scope.addContact = function(customer){
+          console.log("chito");
+          if(customer.contact && customer.contact.name && customer.contact.position && customer.contact.phone && customer.contact.email ){
+            console.log("chito");
+            if($scope.customer.contacts){
+              $scope.customer.contacts.push(customer.contact);
+            }
+            else{
+              $scope.customer.contacts = [customer.contact];
+            }
+            customer.contact = {};
+          }
+        }
+        $scope.removeContact = function(index){
+          $scope.customer.contacts.splice(index, 1);
+        }
+
         $scope.action = action;
         if(id && action == 'read'){
           $scope.title = "VIEW CUSTOMER " + id;
-          $scope.customer =  Api.Collection('users').get({id:$routeParams.id});
+          $scope.customer =  Api.Collection('customers').get({id:$routeParams.id});
         }
         if(id && action == 'edit'){
           $scope.title = "EDIT CUSTOMER " + id;
@@ -125,7 +150,7 @@ angular.module('erp')
               return false;
             });
           };
-          $scope.deleteCustomer=function(user){
+          $scope.deleteCustomer=function(customer){
             if(popupService.showPopup('You are about to delete Record : '+customer._id)){
               $scope.customer.$delete(function(){
                 $location.path('/customer/index');
@@ -149,9 +174,6 @@ angular.module('erp')
       }
 
   });
-
-
-
 }).controller('ProductCtrl', function ($scope,$window, $filter,Library) {
 
   $scope.dtOptions = Library.DataTable.options('/api/products');
