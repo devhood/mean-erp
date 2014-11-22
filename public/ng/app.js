@@ -16,49 +16,17 @@ angular.module('erp', [
         templateUrl: '/partials/home/index',
         controller: 'MainCtrl'
       })
-      .when('/product/index', {
-        templateUrl: '/partials/product/index',
-        controller: 'ProductCtrl'
-      })
-      .when('/product/add', {
-        templateUrl: '/partials/product/add',
-        controller: 'ProductCtrl'
-      })
-      .when('/product/read', {
-        templateUrl: '/partials/product/read',
-        controller: 'ProductCtrl'
-      })
-      .when('/customer/index', {
-        templateUrl: '/partials/customer/index',
-        controller: 'CustomerCtrl'
-      })
-      .when('/customer/add', {
-        templateUrl: '/partials/customer/add',
-        controller: 'CustomerCtrl'
-      })
-      .when('/customer/read', {
-        templateUrl: '/partials/customer/read',
-        controller: 'CustomerCtrl'
-      })
       .when('/user/index', {
         templateUrl: '/partials/user/index',
         controller: 'UserCtrl'
       })
-      .when('/user/add', {
+      .when('/user/:action', {
         templateUrl: '/partials/user/add',
         controller: 'UserCtrl'
       })
-      .when('/user/:type/:id', {
+      .when('/user/:action/:id', {
         templateUrl: '/partials/user/add',
         controller: 'UserCtrl'
-      })
-      .when('/user/read', {
-        templateUrl: '/partials/user/read',
-        controller: 'UserCtrl'
-      })
-      .when('/sales/index', {
-        templateUrl: '/partials/sales/index',
-        controller: 'SalesCtrl'
       })
       .when('/sales/index/:type', {
         templateUrl: '/partials/sales/index',
@@ -68,23 +36,27 @@ angular.module('erp', [
         templateUrl: '/partials/sales/order',
         controller: 'SalesCtrl'
       })
-      .when('/sales/delivery/:action', {
+      .when('/sales/order/:action/:id', {
+        templateUrl: '/partials/sales/order',
+        controller: 'SalesCtrl'
+      })
+      .when('/sales/delivery/:action/:id', {
         templateUrl: '/partials/sales/delivery',
         controller: 'SalesCtrl'
       })
-      .when('/sales/invoice/:action', {
+      .when('/sales/invoice/:action/:id', {
         templateUrl: '/partials/sales/invoice',
         controller: 'SalesCtrl'
       })
-      .when('/sales/return/:action', {
+      .when('/sales/return/:action/:id', {
         templateUrl: '/partials/sales/return',
         controller: 'SalesCtrl'
       })
-      .when('/sales/memo/:action', {
+      .when('/sales/memo/:action/:id', {
         templateUrl: '/partials/sales/memo',
         controller: 'SalesCtrl'
       })
-      .when('/sales/payment/:action', {
+      .when('/sales/payment/:action/:id', {
         templateUrl: '/partials/sales/payment',
         controller: 'SalesCtrl'
       })

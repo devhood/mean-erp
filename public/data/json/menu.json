@@ -119,11 +119,6 @@
         "href": "/#/user/index"
       },
       {
-        "title": "Permission",
-        "description": "Access Permission",
-        "href": "/#/permission/index"
-      },
-      {
         "title": "Adjustment",
         "description": "Adjustment",
         "href": "/#/adjustment/index"

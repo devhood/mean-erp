@@ -6,8 +6,79 @@ angular.module('erp')
   Session.get(function(client){
     $scope.client = client;
   });
-})
-.controller('ProductCtrl', function ($scope,$window, $filter,Library) {
+}).controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Users.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+
+    $scope.init = function(){
+        columns = [
+          $scope.structure.fullname, $scope.structure.username, $scope.structure.email,
+          $scope.structure.phone, $scope.structure.position, $scope.structure.status
+        ];
+
+        buttons = [
+          {url:"/#/user/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/user/edit/",title:"Edit Record",icon:"fa fa-edit"}
+        ];
+        $scope.title = "USERS"
+        $scope.addUrl = "/#/user/add"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options("/api/users");
+    };
+    $scope.formInit = function(){
+
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.positions = Api.Collection('positions').query();
+      $scope.statuses = Api.Collection('user_status').query();
+
+      $scope.action = action;
+      if(id && action == 'read'){
+        $scope.title = "VIEW USER " + id;
+        $scope.user =  Api.Collection('users').get({id:$routeParams.id});
+      }
+      if(id && action == 'edit'){
+        $scope.title = "EDIT USER " + id;
+        $scope.user =  Api.Collection('users').get({id:$routeParams.id});
+        $scope.saveUser = function(){
+          $scope.user.$update(function(){
+            $location.path('/user/index');
+            return false;
+          });
+        };
+        $scope.deleteUser=function(user){
+          if(popupService.showPopup('You are about to delete Record : '+user._id)){
+            $scope.user.$delete(function(){
+              $location.path('/user/index');
+              return false;
+            });
+          }
+        };
+      }
+      if(action == 'add'){
+        $scope.title = "ADD USER";
+
+        var User = Api.Collection('users');
+        $scope.user = new User();
+        $scope.saveUser = function(){
+          $scope.user.$save(function(){
+            $location.path('/user/index');
+            return false;
+          });
+        }
+      }
+
+
+    }
+  });
+}).controller('ProductCtrl', function ($scope,$window, $filter,Library) {
 
   $scope.dtOptions = Library.DataTable.options('/api/products');
   var columns = [
@@ -47,61 +118,6 @@ angular.module('erp')
   {url:"/#/customer/approve/",title:"Approve Record",icon:"fa fa-edit"}
   ];
   $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-
-}).controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api) {
-
-  $scope.ajax_ready = false;
-  Structure.Users.query().$promise.then(function(data){
-    $scope.structure = data[0];
-    $scope.ajax_ready = true;
-    var columns = [];
-    var buttons = [];
-    var query = {};
-    $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-
-    $scope.init = function(){
-        columns = [
-          $scope.structure.fullname, $scope.structure.username, $scope.structure.email,
-          $scope.structure.phone, $scope.structure.position, $scope.structure.status
-        ];
-
-        buttons = [
-          {url:"/#/user/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/user/edit/",title:"Edit Record",icon:"fa fa-edit"}
-        ];
-        $scope.title = "USERS"
-        $scope.addUrl = "/#/user/add"
-        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-        $scope.dtOptions = Library.DataTable.options("/api/users");
-    };
-    $scope.formInit = function(){
-      var id = $routeParams.id;
-      if(id){
-        $scope.title = "EDIT USER " + id;
-        $scope.user =  Api.Collection('users').get({id:$routeParams.id});
-        $scope.saveUser = function(){
-          $scope.user.$update(function(){
-            $location.path('/user/index');
-            return false;
-          });
-        }
-      }
-      else{
-        $scope.title = "ADD USER";
-
-        var User = Api.Collection('users');
-        $scope.user = new User();
-        $scope.saveUser = function(){
-          $scope.user.$save(function(){
-            $location.path('/user/index');
-            return false;
-          });
-        }
-      }
-
-
-    }
-  });
 
 }).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
 

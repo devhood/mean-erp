@@ -1,6 +1,11 @@
 'use strict';
 
 angular.module('erp')
+  .service('popupService',function($window){
+    this.showPopup=function(message){
+      return $window.confirm(message);
+    }
+  })
   .factory('Reference', function ($resource) {
     return {
       Menu : $resource('/data/json/menu.json')
