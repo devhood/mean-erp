@@ -8,7 +8,8 @@ angular.module('erp')
   })
   .factory('Structure', function ($resource) {
     return {
-      Sales : $resource('/data/structure/sales.json')
+      Sales : $resource('/data/structure/sales.json'),
+      Users : $resource('/data/structure/users.json')
     }
   })
   .factory('Api', function ($resource) {

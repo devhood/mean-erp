@@ -48,34 +48,40 @@ angular.module('erp')
   ];
   $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
-}).controller('UserCtrl', function ($scope,$window, $filter,Library) {
+}).controller('UserCtrl', function ($scope,$window, $filter, Structure, Library) {
 
-  $scope.dtOptions = Library.DataTable.options('/api/users');
-
-  var columns = [
-  {name:"fullname",title:"Fullname"},
-  {name:"username",title:"Username"},
-  {name:"position",title:"Position"},
-  {name:"phone",title:"Phone"},
-  {name:"email",title:"Email"},
-  {name:"status",title:"Status"}
-  ];
-
-  var buttons = [
-  {url:"/#/users/read/",title:"View Record",icon:"fa fa-folder-open"},
-  {url:"/#/users/edit/",title:"Edit Record",icon:"fa fa-edit"},
-  {url:"/#/users/approve/",title:"Approve Record",icon:"fa fa-edit"}
-  ];
-
-  $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-
-}).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, DTColumnBuilder) {
-
-  //var sales = Reference.Sales.query(); // Reference.Menu.query();
   $scope.ajax_ready = false;
-  $scope.sales = {};
+  Structure.Users.query().$promise.then(function(data){
+    console.log(data[0]);
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+
+    $scope.init = function(){
+        columns = [
+          $scope.structure.fullname, $scope.structure.username, $scope.structure.email,
+          $scope.structure.phone, $scope.structure.position, $scope.structure.status
+        ];
+
+        buttons = [
+          {url:"/#/user/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/user/edit/",title:"Edit Record",icon:"fa fa-edit"}
+        ];
+        $scope.title = "USERS"
+        $scope.addUrl = "/#/user/add"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options("/api/users");
+    };
+  });
+
+}).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library) {
+
+  $scope.ajax_ready = false;
   Structure.Sales.query().$promise.then(function(data){
-    $scope.sales = data[0];
+    $scope.structure = data[0];
     $scope.ajax_ready = true;
     var status = Library.Status.Sales;
     var columns = [];
@@ -89,8 +95,8 @@ angular.module('erp')
         case "order" :
 
             columns = [
-              $scope.sales.sono, $scope.sales.customer, $scope.sales.sales_executive,
-              $scope.sales.delivery_method, $scope.sales.payment_term, $scope.sales.status
+              $scope.structure.sono, $scope.structure.customer, $scope.structure.sales_executive,
+              $scope.structure.delivery_method, $scope.structure.payment_term, $scope.structure.status
             ];
 
             buttons = [
@@ -106,8 +112,8 @@ angular.module('erp')
         case "delivery" :
 
           columns = [
-            $scope.sales.sono, $scope.sales.customer, $scope.sales.sales_executive,
-            $scope.sales.delivery_method, $scope.sales.payment_term, $scope.sales.status
+            $scope.structure.sono, $scope.structure.customer, $scope.structure.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.payment_term, $scope.structure.status
           ];
 
           buttons = [
