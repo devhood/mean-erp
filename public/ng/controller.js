@@ -174,26 +174,31 @@ angular.module('erp')
       }
 
   });
-}).controller('ProductCtrl', function ($scope,$window, $filter,Library) {
-
-  $scope.dtOptions = Library.DataTable.options('/api/products');
-  var columns = [
-  {name:"product_code",title:"BL Code"},
-  {name:"brand",title:"Brand"},
-  {name:"name",title:"Item Name"},
-  {name:"size",title:"Size"},
-  {name:"color",title:"Color"},
-  {name:"payment_term",title:"Payment Terms"},
-  {name:"uom",title:"UOM"},
-  {name:"movement",title:"Movement"},
-  {name:"description",title:"Description"},
-  {name:"supplier",title:"Supplier"},
-  {name:"status",title:"Status"}
-  ];
-  var buttons = [
-  {url:"/#/product/read/",title:"View Record",icon:"fa fa-folder-open"},
-  {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"}
-  ];
+}).controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  $scope.ajax_ready = false;
+  Structure.Customers.query().$promise.then(function(data){
+      $scope.structure = data[0];
+      $scope.ajax_ready = true;
+      var columns = [];
+      var buttons = [];
+      var query = {};
+      $scope.init = function(){
+        columns = [
+          $scope.structure.bl_code, $scope.structure.Brand, $scope.structure.Item_name,
+          $scope.structure.Size, $scope.structure.Color,
+          $scope.structure.UOM, $scope.structure.Supplier_code, $scope.structure.Supplier_code, $scope.structure.Status
+        ];
+        buttons = [
+          {url:"/#/product/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"}
+        ];
+      }
+      $scope.title = "PRODUCT"
+      $scope.addUrl = "/#/product/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/product");
+    )};
+  });
   $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
 }).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
