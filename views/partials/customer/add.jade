@@ -156,23 +156,23 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.country",ng-selected="{{customer.shipping_address.country}}", ng-options="country.country for country in countries track by country.country", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.country",ng-selected="{{customer.shipping_address.country}}", ng-options="object.country as object.country for object in countries", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Country
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.province",ng-selected="{{customer.shipping_address.province}}", ng-options="geography.province for geography in geographys track by geography._id",ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('scities',customer.shipping_address.province)",ng-model="customer.shipping_address.province",ng-selected="{{customer.shipping_address.province}}", ng-options="geography.province as geography.province for geography in geographys",ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Province
 						.row
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.city", ng-selected="{{customer.shipping_address.city}}", ng-options="city.city for city in customer.shipping_address.province.cities track by city.city", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-change="CityChange('szipcodes',customer.shipping_address.city)",ng-model="customer.shipping_address.city", ng-selected="{{customer.shipping_address.city}}", ng-options="city.city as city.city for city in scities", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	City
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.zipcode",ng-selected="{{customer.shipping_address.zipcode}}", ng-options="zipcode.zipcode for zipcode in customer.shipping_address.city.zipcodes track by zipcode.zipcode", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.zipcode",ng-selected="{{customer.shipping_address.zipcode}}", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in szipcodes", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Zipcode
 						.row
 							.col-md-6
@@ -182,7 +182,7 @@ block title
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 										label.checkbox Use as Billing
-											input(type="checkbox", ng-checked="copyShipping(customer)", ng-model="customer.shipping_address.same", value="1")
+											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1")
 						.row
 							br
 							.col-md-6
@@ -209,23 +209,23 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.country",ng-selected="{{customer.billing_address.country}}", ng-options="country.country for country in countries track by country.country", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.country", ng-selected="{{customer.billing_address.country}}", ng-options="object.country as object.country for object in countries", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Country
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.province",ng-selected="{{customer.billing_address.province}}", ng-options="geography.province for geography in geographys track by geography._id",ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('bcities',customer.billing_address.province)", ng-model="customer.billing_address.province",ng-selected="{{customer.billing_address.province}}", ng-options="geography.province as geography.province for geography in geographys",ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Province
 						.row
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.city", ng-selected="{{customer.billing_address.city}}",ng-options="city.city for city in customer.billing_address.province.cities track by city.city", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-change="CityChange('bzipcodes',customer.billing_address.city)", ng-model="customer.billing_address.city", ng-selected="{{customer.billing_address.city}}",ng-options="city.city as city.city for city in bcities", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	City
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.zipcode",ng-selected="{{customer.billing_address.zipcode}}", ng-options="zipcode.zipcode for zipcode in customer.billing_address.city.zipcodes track by zipcode.zipcode", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.zipcode",ng-selected="{{customer.billing_address.zipcode}}", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in bzipcodes", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Zipcode
 				.portlet.box.grey
 					.portlet-title
@@ -276,12 +276,14 @@ block title
 														tr
 															th Name
 															th Position
+															th Email
 															th Phone
 															th Action
 													tbody
 														tr(ng-repeat="contact in customer.contacts")
 															td {{contact.name}}
 															td {{contact.position}}
+															td {{contact.email}}
 															td {{contact.phone}}
 															td(width="5%")
 																.btn-group.btn-group-xs.btn-group-solid

@@ -111,18 +111,37 @@ angular.module('erp')
         $scope.customer_status = Api.Collection('customer_status').query();
         $scope.countries = Api.Collection('countries').query();
         $scope.geographys = Api.Collection('geography').query();
+
+        $scope.geographys.$promise.then(function(data){
+          $scope.cities = [];
+          for(var i=0;i<$scope.geographys.length;i++){
+            $scope.cities = $scope.cities.concat($scope.geographys[i].cities);
+          }
+          $scope.bcities = $scope.cities;
+          $scope.scities = $scope.cities;
+          $scope.zipcodes = [];
+          for(var i=0;i<$scope.cities.length;i++){
+            $scope.zipcodes = $scope.zipcodes.concat($scope.cities[i].zipcodes);
+          }
+          $scope.bzipcodes = $scope.zipcodes;
+          $scope.szipcodes = $scope.zipcodes;
+
+        });
+
         var query = {"position":"Sales Executive"};
         $scope.sales_executives = Api.Collection('users',query).query(function(){});
 
-        $scope.copyShipping = function(customer){
-          if(customer.shipping_address && customer.shipping_address.same){
-            $scope.customer.billing_address = customer.shipping_address;
+        $scope.copyShipping = function(){
+          if($scope.customer.shipping_address && $scope.customer.shipping_address.same){
+            $scope.temp_billing_address = $scope.customer.billing_address;
+            $scope.bzipcodes = $scope.szipcodes;
+            $scope.customer.billing_address = angular.copy($scope.customer.shipping_address);
+
           }
         };
+
         $scope.addContact = function(customer){
-          console.log("chito");
           if(customer.contact && customer.contact.name && customer.contact.position && customer.contact.phone && customer.contact.email ){
-            console.log("chito");
             if($scope.customer.contacts){
               $scope.customer.contacts.push(customer.contact);
             }
@@ -132,18 +151,43 @@ angular.module('erp')
             customer.contact = {};
           }
         }
+
         $scope.removeContact = function(index){
           $scope.customer.contacts.splice(index, 1);
         }
+
+        $scope.CityChange = function(key,value){
+          if($scope.customer.shipping_address && !$scope.customer.shipping_address.same){
+            var cities = $scope.cities.filter(function(val){
+              return val.city === value;
+            });
+            $scope[key] = cities[0].zipcodes;
+          }
+        }
+
+        $scope.ProvinceChange = function(key,value){
+          if($scope.customer.shipping_address && !$scope.customer.shipping_address.same){
+            var province = $scope.geographys.filter(function(val){
+              return val.province === value;
+            });
+            $scope[key] = province[0].cities;
+          }
+        }
+
+
 
         $scope.action = action;
         if(id && action == 'read'){
           $scope.title = "VIEW CUSTOMER " + id;
           $scope.customer =  Api.Collection('customers').get({id:$routeParams.id});
+
+          $scope.BillingProvinceChange($scope.customer.billing_address.province);
+          $scope.ShippingCityChange($scope.customer.billing_address.city);
         }
         if(id && action == 'edit'){
           $scope.title = "EDIT CUSTOMER " + id;
           $scope.customer =  Api.Collection('customers').get({id:$routeParams.id});
+          $scope.province_ng_option = "geography.province for geography in geographys track by customer.billing_address.province";
           $scope.saveCustomer = function(){
             $scope.customer.$update(function(){
               $location.path('/customer/index');
@@ -192,12 +236,11 @@ angular.module('erp')
           {url:"/#/product/read/",title:"View Record",icon:"fa fa-folder-open"},
           {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"}
         ];
-      }
-      $scope.title = "PRODUCT"
-      $scope.addUrl = "/#/product/add"
+      };
+      $scope.title = "PRODUCT";
+      $scope.addUrl = "/#/product/add";
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/product");
-    )};
   });
   $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
