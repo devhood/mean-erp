@@ -14,13 +14,18 @@ angular.module('erp')
   .factory('Structure', function ($resource) {
     return {
       Sales : $resource('/data/structure/sales.json'),
-      Users : $resource('/data/structure/users.json')
+      Users : $resource('/data/structure/users.json'),
+      Customers : $resource('/data/structure/customers.json')
     }
   })
   .factory('Api', function ($resource) {
     return {
-      Collection : function(table){
-          return $resource('/api/'+table+'/:id',{id:'@_id'},{
+      Collection : function(table,query){
+          var url = '/api/'+table+'/:id'
+          if(query){
+            url = '/api/'+table+'?filter='+encodeURIComponent(JSON.stringify(query));
+          }
+          return $resource(url,{id:'@_id'},{
             update: {
               method: 'PUT'
             }

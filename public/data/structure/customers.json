@@ -17,7 +17,7 @@
   "website": {
     "name": "website",
     "title": "Website",
-    "type": "___"
+    "type": "text"
   },
   "trade_name": {
     "name": "trade_name",
@@ -72,14 +72,14 @@
   "payment_term": {
     "name": "payment_term",
     "title": "Payment Terms",
-    "type": "___"
+    "type": "select"
   },
   "discount": {
     "name": "discount",
     "title": "Permanent Discount",
     "type": "select"
   },
-  "shipping_mode": {
+  "delivery_method": {
     "name": "shipping_mode",
     "title": "Shipping Mode",
     "type": "select"
@@ -97,37 +97,7 @@
   "status": {
     "name": "status",
     "title": "Customer Status",
-    "type": "___"
-  },
-  "___": {
-    "name": "___",
-    "title": "___",
-    "type": "___"
-  },
-  "___": {
-    "name": "___",
-    "title": "___",
-    "type": "___"
-  },
-  "___": {
-    "name": "___",
-    "title": "___",
-    "type": "___"
-  },
-  "___": {
-    "name": "___",
-    "title": "___",
-    "type": "___"
-  },
-  "___": {
-    "name": "___",
-    "title": "___",
-    "type": "___"
-  },
-  "___": {
-    "name": "___",
-    "title": "___",
-    "type": "___"
+    "type": "select"
   },
   "shipping_address": {
     "name": "shipping_address",

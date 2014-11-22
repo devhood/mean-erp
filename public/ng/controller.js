@@ -15,8 +15,6 @@ angular.module('erp')
     var columns = [];
     var buttons = [];
     var query = {};
-    $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-
     $scope.init = function(){
         columns = [
           $scope.structure.fullname, $scope.structure.username, $scope.structure.email,
@@ -74,10 +72,86 @@ angular.module('erp')
           });
         }
       }
-
-
     }
   });
+}).controller('CustomerCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Customers.query().$promise.then(function(data){
+      $scope.structure = data[0];
+      $scope.ajax_ready = true;
+      var columns = [];
+      var buttons = [];
+      var query = {};
+      $scope.init = function(){
+        columns = [
+          $scope.structure.type, $scope.structure.company_name, $scope.structure.branch,
+          $scope.structure.credit_limit, $scope.structure.payment_term,
+          $scope.structure.sales_executive, $scope.structure.status
+        ];
+
+        buttons = [
+          {url:"/#/customer/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/customer/edit/",title:"Edit Record",icon:"fa fa-edit"}
+        ];
+        $scope.title = "CUSTOMER"
+        $scope.addUrl = "/#/customer/add"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options("/api/customers");
+      };
+      $scope.formInit = function(){
+
+        var id = $routeParams.id;
+        var action = $routeParams.action;
+        $scope.customer_types = Api.Collection('customer_type').query();
+        $scope.payment_terms = Api.Collection('payment_term').query();
+        $scope.discounts = Api.Collection('discounts').query();
+        $scope.shipping_modes = Api.Collection('shipping_mode').query();
+        $scope.shipping_modes = Api.Collection('shipping_mode').query();
+        $scope.customer_status = Api.Collection('customer_status').query();
+        var query = {"position":"Sales Executive"};
+        $scope.sales_executives = Api.Collection('users',query).query(function(){});
+        $scope.action = action;
+        if(id && action == 'read'){
+          $scope.title = "VIEW CUSTOMER " + id;
+          $scope.customer =  Api.Collection('users').get({id:$routeParams.id});
+        }
+        if(id && action == 'edit'){
+          $scope.title = "EDIT CUSTOMER " + id;
+          $scope.customer =  Api.Collection('customers').get({id:$routeParams.id});
+          $scope.saveCustomer = function(){
+            $scope.customer.$update(function(){
+              $location.path('/customer/index');
+              return false;
+            });
+          };
+          $scope.deleteCustomer=function(user){
+            if(popupService.showPopup('You are about to delete Record : '+customer._id)){
+              $scope.customer.$delete(function(){
+                $location.path('/customer/index');
+                return false;
+              });
+            }
+          };
+        }
+        if(action == 'add'){
+          $scope.title = "ADD CUSTOMER";
+
+          var Customer = Api.Collection('customers');
+          $scope.customer = new Customer();
+          $scope.saveCustomer = function(){
+            $scope.customer.$save(function(){
+              $location.path('/customer/index');
+              return false;
+            });
+          }
+        }
+      }
+
+  });
+
+
+
 }).controller('ProductCtrl', function ($scope,$window, $filter,Library) {
 
   $scope.dtOptions = Library.DataTable.options('/api/products');
@@ -99,25 +173,6 @@ angular.module('erp')
   {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"}
   ];
   $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-})
-.controller('CustomerCtrl', function ($scope,$window, $filter,Library) {
-
-  $scope.dtOptions = Library.DataTable.options('/api/customers');
-  var columns = [
-  {name:"company_name",title:"Customer"},
-  {name:"branch_name",title:"Branch"},
-  {name:"credit_limit",title:"Credit Limit"},
-  {name:"transaction_limit",title:"Transaction Limit"},
-  {name:"payment_term",title:"Payment Terms"},
-  {name:"sales_executive",title:"Sales Executive"},
-  {name:"status",title:"Status"},
-  ];
-  var buttons = [
-  {url:"/#/customer/read/",title:"View Record",icon:"fa fa-folder-open"},
-  {url:"/#/customer/edit/",title:"Edit Record",icon:"fa fa-edit"},
-  {url:"/#/customer/approve/",title:"Approve Record",icon:"fa fa-edit"}
-  ];
-  $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
 }).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
 
@@ -129,7 +184,6 @@ angular.module('erp')
     var columns = [];
     var buttons = [];
     var query = {};
-    $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
     $scope.init = function(){
       var type = $routeParams.type;

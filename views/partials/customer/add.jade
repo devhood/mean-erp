@@ -1,14 +1,14 @@
 block title
 	title ADD CUSTOMER PROFILE
-.portlet.box.grey
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
 	.portlet-title
 		.caption
 			i.fa.fa-reorder
-			| ADD CUSTOMER PROFILE
+			| {{title}}
 		.tools
 			a.collapse(href="javascript:;")
 	.portlet-body.form
-		form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addCustomer()", novalidate)
+		form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveCustomer()", novalidate)
 			.form-body
 				.row
 					.col-md-6
@@ -19,13 +19,13 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								select.select2me.form-control.select2-offscreen(ng-model="customer.branch", ng-options="branch.branch_name as branch.branch_name for branch in branches", ng-selected="{{customer.branch}}" ,tabindex="-1", required)
-									span.col-md-12.help-block	Branch Location
+								input#company_name.form-control(type="text", ng-model="customer.branch" ng-minlength="0", ng-maxlength="50", required)
+								span.col-md-12.help-block	Branch Location
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select.select2me.form-control.select2-offscreen(ng-model="customer.type", ng-options="type.type_name as type.type_name for type in types", ng-selected="{{customer.type}}" ,tabindex="-1", required)
+								select.select2me.form-control.select2-offscreen(ng-model="customer.type", ng-options="type.type_name as type.type_name for type in customer_types", ng-selected="{{customer.type}}" ,tabindex="-1", required)
 								span.col-md-12.help-block	Type
 					.col-md-6
 						.form-group
@@ -121,7 +121,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								select#status.select2me.form-control.select2-offscreen(ng-model="customer.status", ng-options="status.status as status.status for status in statuses", ng-selected="{{customer.status}}" required)
+								select#status.select2me.form-control.select2-offscreen(ng-model="customer.status", ng-options="status.status as status.status for status in customer_status", ng-selected="{{customer.status}}" required)
 								span.col-md-12.help-block	Customer Status
 				.portlet.box.grey
 					.portlet-title

@@ -28,6 +28,18 @@ angular.module('erp', [
         templateUrl: '/partials/user/add',
         controller: 'UserCtrl'
       })
+      .when('/customer/index', {
+        templateUrl: '/partials/customer/index',
+        controller: 'CustomerCtrl'
+      })
+      .when('/customer/:action', {
+        templateUrl: '/partials/customer/add',
+        controller: 'CustomerCtrl'
+      })
+      .when('/customer/:action/:id', {
+        templateUrl: '/partials/customer/add',
+        controller: 'CustomerCtrl'
+      })
       .when('/sales/index/:type', {
         templateUrl: '/partials/sales/index',
         controller: 'SalesCtrl'
