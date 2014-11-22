@@ -64,107 +64,28 @@
   "title": "Supplier",
   "type": "select"
 },
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
+"currency": {
+  "name": "currency",
+  "title": "Currency",
+  "type": "select"
 },
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
+"international_cost": {
+  "name": "international_cost",
+  "title": "International Cost",
+  "type": "number"
 },
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
+"retail_price": {
+  "name": "retail_price",
+  "title": "Retail Price",
+  "type": "number"
 },
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
+"professional_price": {
+  "name": "professional_price",
+  "title": "Professional Price",
+  "type": "number"
 },
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"___": {
-  "name": "___",
-  "title": "___",
-  "type": "__"
-},
-"ordered_items": {
+
+/*"ordered_items":{
   "name": "___",
   "title": "___",
   "type": "table",
@@ -175,5 +96,6 @@
       "type": "text"
     }
   }
-}
+}*/
+
 }]
