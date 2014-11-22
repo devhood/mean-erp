@@ -1,0 +1,233 @@
+[{
+  "company_name": {
+    "name": "company_name",
+    "title": "Company Name",
+    "type": "text"
+  },
+  "branch": {
+    "name": "branch",
+    "title": "Branch Location",
+    "type": "select"
+  },
+  "type": {
+    "name": "type",
+    "title": "Type",
+    "type": "select"
+  },
+  "website": {
+    "name": "website",
+    "title": "Website",
+    "type": "___"
+  },
+  "trade_name": {
+    "name": "trade_name",
+    "title": "Trade Name",
+    "type": "text"
+  },
+  "tin": {
+    "name": "tin",
+    "title": "TIN",
+    "type": "text"
+  },
+  "commission_sharing": {
+    "name": "commission_sharing",
+    "title": "Commission Sharing",
+    "type": "text"
+  },
+  "sec_no": {
+    "name": "sec_no",
+    "title": "Sec Number",
+    "type": "text"
+  },
+  "phone": {
+    "name": "phone",
+    "title": "Phone",
+    "type": "number"
+  },
+  "email": {
+    "name": "email",
+    "title": "Email",
+    "type": "email"
+  },
+  "consignee": {
+    "name": "consignee",
+    "title": "Consignee",
+    "type": "checkbox"
+  },
+  "franchise": {
+    "name": "franchise",
+    "title": "Franchise",
+    "type": "checkbox"
+  },
+  "credit_limit": {
+    "name": "credit_limit",
+    "title": "Credit Limit",
+    "type": "number"
+  },
+  "transaction_limit": {
+    "name": "transaction_limit",
+    "title": "Unpaid Transaction Limit",
+    "type": "text"
+  },
+  "payment_term": {
+    "name": "payment_term",
+    "title": "Payment Terms",
+    "type": "___"
+  },
+  "discount": {
+    "name": "discount",
+    "title": "Permanent Discount",
+    "type": "select"
+  },
+  "shipping_mode": {
+    "name": "shipping_mode",
+    "title": "Shipping Mode",
+    "type": "select"
+  },
+  "sales_executive": {
+    "name": "sales_executive",
+    "title": "Sales Executive",
+    "type": "select"
+  },
+  "price_type": {
+    "name": "price_type",
+    "title": "Price Type",
+    "type": "select"
+  },
+  "status": {
+    "name": "status",
+    "title": "Customer Status",
+    "type": "___"
+  },
+  "___": {
+    "name": "___",
+    "title": "___",
+    "type": "___"
+  },
+  "___": {
+    "name": "___",
+    "title": "___",
+    "type": "___"
+  },
+  "___": {
+    "name": "___",
+    "title": "___",
+    "type": "___"
+  },
+  "___": {
+    "name": "___",
+    "title": "___",
+    "type": "___"
+  },
+  "___": {
+    "name": "___",
+    "title": "___",
+    "type": "___"
+  },
+  "___": {
+    "name": "___",
+    "title": "___",
+    "type": "___"
+  },
+  "shipping_address": {
+    "name": "shipping_address",
+    "title": "Shipping Address",
+    "type": "table",
+    "child_items": {
+      "landmark": {
+        "name": "landmark",
+        "title": "Floor/Unit/Building",
+        "type": "text"
+      },
+      "barangay": {
+        "name": "barangay",
+        "title": "Street/Barangay",
+        "type": "text"
+      },
+      "country": {
+        "name": "country",
+        "title": "Country",
+        "type": "select"
+      },
+      "province": {
+        "name": "province",
+        "title": "Province",
+        "type": "select"
+      },
+      "city": {
+        "name": "city",
+        "title": "City",
+        "type": "select"
+      },
+      "zipcode": {
+        "name": "zipcode",
+        "title": "Zipcode",
+        "type": "select"
+      },
+      "same": {
+        "name": "same",
+        "title": "Use as Billing",
+        "type": "checkbox"
+      }
+    }
+  },
+  "billing_address": {
+    "name": "billing_address",
+    "title": "Billing Address",
+    "type": "table",
+    "child_items": {
+      "landmark": {
+        "name": "landmark",
+        "title": "Floor/Unit/Building",
+        "type": "text"
+      },
+      "barangay": {
+        "name": "barangay",
+        "title": "Street/Barangay",
+        "type": "text"
+      },
+      "country": {
+        "name": "country",
+        "title": "Country",
+        "type": "select"
+      },
+      "province": {
+        "name": "province",
+        "title": "Province",
+        "type": "select"
+      },
+      "city": {
+        "name": "city",
+        "title": "City",
+        "type": "select"
+      },
+      "zipcode": {
+        "name": "zipcode",
+        "title": "Zipcode",
+        "type": "select"
+      }
+    }
+  },
+  "billing_address": {
+    "name": "contact",
+    "title": "CONTACT PERSONS",
+    "type": "table",
+    "child_items": {
+      "name": {
+        "name": "name",
+        "title": "Name",
+        "type": "text"
+      },
+      "position": {
+        "name": "position",
+        "title": "Position",
+        "type": "text"
+      },
+      "email": {
+        "name": "email",
+        "title": "Email",
+        "type": "email"
+      }
+    }
+  }
+}]

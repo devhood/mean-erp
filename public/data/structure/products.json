@@ -1,0 +1,179 @@
+[{
+"bl_code": {
+  "name": "bl_code",
+  "title": "BL Code",
+  "type": "text"
+},
+"brand": {
+  "name": "brand",
+  "title": "Brand",
+  "type": "text"
+},
+"name": {
+  "name": "name",
+  "title": "Item Name",
+  "type": "text"
+},
+"size": {
+  "name": "size",
+  "title": "Size",
+  "type": "text"
+},
+"color": {
+  "name": "color",
+  "title": "Color",
+  "type": "text"
+},
+"uom": {
+  "name": "uom",
+  "title": "UOM",
+  "type": "text"
+},
+"part_number": {
+  "name": "part_number",
+  "title": "Part Number",
+  "type": "text"
+},
+"payment_term": {
+  "name": "payment_term",
+  "title": "Payment Terms",
+  "type": "select"
+},
+"description": {
+  "name": "description",
+  "title": "Description Notes",
+  "type": "text"
+},
+"status": {
+  "name": "status",
+  "title": "Status",
+  "type": "select"
+},
+"supplier_code": {
+  "name": "supplier_code",
+  "title": "Supplier Code",
+  "type": "text"
+},
+"movement": {
+  "name": "movement",
+  "title": "Movement",
+  "type": "select"
+},
+"supplier": {
+  "name": "supplier",
+  "title": "Supplier",
+  "type": "select"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"___": {
+  "name": "___",
+  "title": "___",
+  "type": "__"
+},
+"ordered_items": {
+  "name": "___",
+  "title": "___",
+  "type": "table",
+  "child_items": {
+    "___": {
+      "name": "___",
+      "title": "___",
+      "type": "text"
+    }
+  }
+}
+}]
