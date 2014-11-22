@@ -69,12 +69,12 @@ angular.module('erp')
 
   $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
-}).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Reference, Library, DTColumnBuilder) {
+}).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, DTColumnBuilder) {
 
   //var sales = Reference.Sales.query(); // Reference.Menu.query();
   $scope.ajax_ready = false;
   $scope.sales = {};
-  Reference.Sales.query().$promise.then(function(data){
+  Structure.Sales.query().$promise.then(function(data){
     $scope.sales = data[0];
     $scope.ajax_ready = true;
     var status = Library.Status.Sales;

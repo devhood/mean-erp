@@ -3,7 +3,11 @@
 angular.module('erp')
   .factory('Reference', function ($resource) {
     return {
-      Menu : $resource('/data/json/menu.json'),
+      Menu : $resource('/data/json/menu.json')
+    }
+  })
+  .factory('Structure', function ($resource) {
+    return {
       Sales : $resource('/data/structure/sales.json')
     }
   })
