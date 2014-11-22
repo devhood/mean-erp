@@ -18,10 +18,6 @@ angular.module('erp')
           return $resource('/api/'+table+'/:id',{id:'@_id'},{
             update: {
               method: 'PUT'
-            },
-            query: {
-              method: 'GET',
-              isArray: true
             }
           });
       }

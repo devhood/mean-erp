@@ -48,11 +48,10 @@ angular.module('erp')
   ];
   $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
-}).controller('UserCtrl', function ($scope,$window, $filter, Structure, Library) {
+}).controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api) {
 
   $scope.ajax_ready = false;
   Structure.Users.query().$promise.then(function(data){
-    console.log(data[0]);
     $scope.structure = data[0];
     $scope.ajax_ready = true;
     var columns = [];
@@ -75,9 +74,36 @@ angular.module('erp')
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/users");
     };
+    $scope.formInit = function(){
+      var id = $routeParams.id;
+      if(id){
+        $scope.title = "EDIT USER " + id;
+        $scope.user =  Api.Collection('users').get({id:$routeParams.id});
+        $scope.saveUser = function(){
+          $scope.user.$update(function(){
+            $location.path('/user/index');
+            return false;
+          });
+        }
+      }
+      else{
+        $scope.title = "ADD USER";
+
+        var User = Api.Collection('users');
+        $scope.user = new User();
+        $scope.saveUser = function(){
+          $scope.user.$save(function(){
+            $location.path('/user/index');
+            return false;
+          });
+        }
+      }
+
+
+    }
   });
 
-}).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library) {
+}).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
 
   $scope.ajax_ready = false;
   Structure.Sales.query().$promise.then(function(data){
@@ -125,6 +151,22 @@ angular.module('erp')
           $scope.title = "DELIVERY RECEIPTS"
 
         break;
+        case "payment" :
+
+          columns = [
+          $scope.structure.sono, $scope.structure.customer, $scope.structure.sales_executive,
+          $scope.structure.delivery_method, $scope.structure.payment_term, $scope.structure.status
+          ];
+
+          buttons = [
+          {url:"/#/sales/delivery/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/sales/delivery/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/sales/delivery/approve/",title:"Approve Record",icon:"fa fa-edit"}
+          ];
+          query.status_code = {"$in" : [status.order.created]};
+          $scope.title = "PAYMENTS"
+
+          break;
 
       };
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);

@@ -48,6 +48,10 @@ angular.module('erp', [
         templateUrl: '/partials/user/add',
         controller: 'UserCtrl'
       })
+      .when('/user/:type/:id', {
+        templateUrl: '/partials/user/add',
+        controller: 'UserCtrl'
+      })
       .when('/user/read', {
         templateUrl: '/partials/user/read',
         controller: 'UserCtrl'

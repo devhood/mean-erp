@@ -1,17 +1,17 @@
 block title
 	title ADD USER PROFILE
-.portlet.box.grey
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
 	.portlet-title
 		.caption
 			i.fa.fa-reorder
-			| ADD USER PROFILE
+			| {{title}}
 		.tools
 			a.collapse(href="javascript:;")
 			a.config(href="#portlet-config", data-toggle="modal")
 			a.reload(href="javascript:;")
 			a.remove(href="javascript:;")
 	.portlet-body.form
-		form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addUser()", novalidate)
+		form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && saveUser()", novalidate)
 			.form-body
 				.row
 					.col-md-6
@@ -39,7 +39,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-right
-								select#position.select2me.form-control.select2-offscreen(ng-model="user.position", ng-options="position.position_name as position.position_name for position in positions", ng-selected="{{user.position}}" ,tabindex="-1", ng-minlength="0", ng-maxlength="50", required)
+								select#position.select2me.form-control.select2-offscreen(ng-model="user.position", ng-options="position.position_name as position.position_name for position in positions", ng-selected="{{user.position}}" ,tabindex="-1", ng-minlength="0", ng-maxlength="50")
 								span.col-md-12.control-label Position
 					.col-md-6
 						.form-group
@@ -55,12 +55,12 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
-								select#user_status.select2me.form-control.select2-offscreen(ng-model="user.status", tabindex="-1",ng-options="status.status as status.status for status in statuses", ng-selected="{{user.status}}", required)
+								select#user_status.select2me.form-control.select2-offscreen(ng-model="user.status", tabindex="-1",ng-options="status.status as status.status for status in statuses", ng-selected="{{user.status}}")
 								span.col-md-12.control-label User Status
 			.form-actions.fluid
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
-							button.btn.green(type="submit") Submit
-							button.btn.default(type="button", ui-sref="users") Cancel
+							button.btn.green(type="submit" ng-show="add_form.$valid") Submit
+							a.btn.default(type="button", href="/#/user/index") Cancel
 					.col-md-6
