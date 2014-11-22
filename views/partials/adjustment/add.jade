@@ -1,0 +1,101 @@
+block title
+  title ADJUSTMENTS
+.portlet.box.grey
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | ADD ADJUSTMENTS
+    .tools
+      a.collapse(href="javascript:;")
+      a.config(href="#portlet-config", data-toggle="modal")
+      a.reload(href="javascript:;")
+      a.remove(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addAdjustment()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="adjustment.transaction_type", required)
+                  option(value="In") In
+                  option(value="Out") Out
+                span.col-md-12.help-block Transaction Type
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input#supplier_code.form-control(type="text", ng-model="adjustment.adjno", readonly)
+                span.col-md-12.help-block Adjustment Number
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                select.select2me.form-control.select2-offscreen(ng-model="adjustment.inventory_location", ng-options="inventory_location.inventory_location as inventory_location.inventory_location for inventory_location in inventory_locations", ng-selected="{{adjustment.inventory_location}}" ,tabindex="-1", required)
+                span.col-md-12.help-block Inventory Location
+          .col-md-1
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-model="adjustment.description", ng-minlength="0", ng-maxlength="100", required)
+                span.col-md-12.help-block Special Instructions
+          .col-md-1
+        .portlet.box.grey
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ADJUSTED ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row
+                .col-md-1
+                .col-md-10
+                  .col-md-7
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="adjustment.request.item", ng-options="product.name for product in products", ng-selected="{{product.name}}")
+                        span.col-md-12.help-block Product
+                  .col-md-4
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="adjustment.request.quantity")
+                        span.col-md-12.help-block Quantity
+                  .col-md-1
+                    button.btn-sm.green.custom-right(type="button",ng-click="addItem(adjustment)")
+                      i.fa.fa-plus
+                .col-md-1
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Product
+                              th Quantity
+                              th(width="5%") Action
+                          tbody
+                            tr(ng-repeat="adjusted_item in adjustment.adjusted_items")
+                              td {{adjusted_item.item.name}}
+                              td {{adjusted_item.quantity}}
+                              td(width="5%")
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                    i.fa.fa-trash-o
+                .col-md-1
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-3.col-md-9
+              button.btn.green(type="submit") Save &amp; Send
+              button.btn.default(type="button", ui-sref="adjustment") Cancel
+          .col-md-6

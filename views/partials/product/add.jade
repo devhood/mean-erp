@@ -1,0 +1,152 @@
+block title
+	title ADD PRODUCT PROFILE
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-reorder
+			| ADD PRODUCT PROFILE
+		.tools
+			a.collapse(href="javascript:;")
+			a.config(href="#portlet-config", data-toggle="modal")
+			a.reload(href="javascript:;")
+			a.remove(href="javascript:;")
+	.portlet-body.form
+		form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addProduct()", novalidate)
+			.form-body
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#bl_code.form-control(type="text", ng-model="product.bl_code", required)
+								span.col-md-12.help-block BL Code
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="brand.brand as brand.brand for brand in brands", ng-selected="{{product.brand}}" ,tabindex="-1", required)
+								span.col-md-12.help-block Brand
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#name.form-control(type="text", ng-model="product.name", ng-minlength="0", ng-maxlength="40", required)
+								span.col-md-12.help-block Item Name
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#size.form-control(type="text", ng-model="product.size", ng-minlength="0", ng-maxlength="10", required)
+								span.col-md-12.help-block Size
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#color.form-control(type="text", ng-model="product.color", ng-minlength="0", ng-maxlength="25", required)
+								span.col-md-12.help-block Color
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#uom.select2me.form-control.select2-offscreen(ng-model="product.uom", tabindex="-1",ng-options="uom.uom as uom.uom for uom in uoms", ng-selected="{{product.uom}}", required)
+								span.col-md-12.help-block UOM
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								.fileinput.fileinput-new(data-provides="fileinput")
+									.fileinput-new.thumbnail(style="width: 400px; height: 300px;")
+										img(src="http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image", alt="")
+									.fileinput-preview.fileinput-exists.thumbnail(style="width: 400px; height: 300px;")
+									div.col-md-12(style="text-align:center")
+										span.btn.default.btn-file
+											span.fileinput-new
+												| Upload Photo
+											span.fileinput-exists
+												| Change
+											input(type="file", name="...")
+										a.btn.default.fileinput-exists(href="#", data-dismiss="fileinput")
+												| Remove
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#part_no.form-control(type="text", ng-model="product.part_number", required)
+								span.col-md-12.help-block Part Number
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								select#payment_term.select2me.form-control.select2-offscreen(ng-model="product.payment_term", tabindex="-1",ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{product.payment_term}}", required)
+								span.col-md-12.help-block Payment Terms
+				.row
+					.col-md-1
+					.col-md-10
+						.form-group
+							.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+								input#description.form-control(type="text", ng-model="product.description", ng-minlength="0", ng-maxlength="100", required)
+								span.col-md-12.help-block Description Notes
+					.col-md-1
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.status as status.status for status in statuses", ng-selected="{{product.status}}", required)
+								span.col-md-12.help-block Status
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input#supplier_code.form-control(type="text", ng-model="product.supplier_code", required)
+								span.col-md-12.help-block Supplier Code
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#movement.select2me.form-control.select2-offscreen(ng-model="product.movement", tabindex="-1",ng-options="movement.movement as movement.movement for movement in movements", ng-selected="{{product.movement}}", required)
+								span.col-md-12.help-block Movement
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								select#supplier.select2me.form-control.select2-offscreen(ng-model="product.supplier", tabindex="-1",ng-options="supplier.supplier as supplier.supplier for supplier in suppliers", ng-selected="{{product.supplier}}", required)
+								span.col-md-12.help-block Supplier
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#currency.select2me.form-control.select2-offscreen(ng-model="product.currency", tabindex="-1",ng-options="currency.currency as currency.currency for currency in currencies", ng-selected="{{product.currency}}", required)
+								span.col-md-12.help-block Currency
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input#Cost.form-control(type="number", ng-model="product.international_cost", ng-minlength="0", ng-maxlength="20", required)
+								span.col-md-12.help-block International Cost
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#retail_price.form-control(type="number",ng-model="product.retail_price", ng-minlength="0", ng-maxlength="20", required)
+								span.col-md-12.help-block Retail Price
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input#professional_price.form-control(type="number", ng-model="product.professional_price", ng-minlength="0", ng-maxlength="20", required)
+								span.col-md-12.help-block Professional Price
+				.portlet.box.grey
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							| ALMOST THE SAME WITH THE FF
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						.row
+							br
+							.col-md-12(height="160")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+						.row
+							br
+							.col-md-12(height="160")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							button.btn.green(type="submit") Submit
+							button.btn.default(type="button", ui-sref="products") Cancel
+					.col-md-6

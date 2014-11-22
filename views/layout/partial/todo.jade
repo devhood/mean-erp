@@ -1,0 +1,27 @@
+li#header_task_bar.dropdown(ng-controller="TaskController as taskCtrl")
+	a.dropdown-toggle(href="#", data-toggle="dropdown", data-hover="dropdown", data-close-others="true" )
+		i.fa.fa-tasks
+		span.badge
+			| {{taskCtrl.tasks.length}}
+	ul.dropdown-menu.extended.tasks
+		li
+			p
+				| You have {{taskCtrl.tasks.length}} pending tasks
+		li
+			ul.dropdown-menu-list.scroller(style="height: 250px;")
+				li(ng-repeat="task in taskCtrl.tasks")
+					a(href="{{task.link}}")
+						span.task
+							span.desc
+								| {{task.description}}
+							span.percent
+								| {{task.percent}}
+						span.progress
+							span.progress-bar(class="{{task.progress.status}}" style="width: {{task.progress.width}}%;", aria-valuenow="{{task.progress.valuenow}}", aria-valuemin="{{task.progress.valuemin}}", aria-valuemax="{{task.progress.valuemax}}")
+								span.sr-only
+									| {{task.percent}}% Complete
+		li.external
+			a(href="#")
+				| See all tasks
+				i.m-icon-swapright
+// END TODO DROPDOWN

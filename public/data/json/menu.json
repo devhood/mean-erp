@@ -1,0 +1,133 @@
+[
+  {
+    "link": "javascript:;",
+    "title": "Sales",
+    "start": true,
+    "icon": "fa-shopping-cart",
+    "id": 1,
+    "childLink": [
+      {
+        "title": "Sales Order",
+        "description": "Create Sales Order",
+        "href": "/#/sales/index/order"
+      },
+      {
+        "title": "Return Merchandise",
+        "description": "Return Sales Item",
+        "href": "/#/sales/index/return"
+      },
+      {
+        "title": "Proforma Invoice",
+        "description": "Create Proforma Invoice",
+        "href": "/#/sales/index/proforma"
+      },
+      {
+        "title": "Consignment",
+        "description": "Create Consignment",
+        "href": "/#/consignment/index"
+      }
+    ]
+  },
+  {
+    "link": "javascript:;",
+    "title": "Warehouse",
+    "last": true,
+    "icon": "fa-archive",
+    "id": 2,
+    "childLink": [
+      {
+        "title": "Print Pick List",
+        "description": "Prepare Items for Delivery",
+        "href": "/#/salesPickList/index"
+      },
+      {
+        "title": "Delivery Receipts",
+        "description": "Prepare and Approve Items for Delivery",
+        "href": "/#/sales/index/delivery"
+      },
+      {
+        "title": "Trip Ticket",
+        "description": "Print and Update Trip Ticket",
+        "href": "/#/salesTripTicket/index"
+      },
+      {
+        "title": "Print DR and SI",
+        "description": "Print Dr and SI",
+        "href": "/#/sales/index/print"
+      },
+      {
+        "title": "Return Merchandise",
+        "description": "Return Sales Item",
+        "href": "/#/sales/index/return"
+      },
+      {
+        "title": "Shipments",
+        "description": "Manage Shipments",
+        "href": "/#/shipment/index"
+      }
+    ]
+  },
+  {
+    "link": "javascript:;",
+    "title": "Finance",
+    "start": true,
+    "icon": "fa-suitcase",
+    "id": 1,
+    "childLink": [
+      {
+        "title": "Sales Invoices",
+        "description": "Approve Sales Invoices",
+        "href": "/#/sales/index/invoice"
+      },
+      {
+        "title": "Credit Memo",
+        "description": "Apply for Credit Memo",
+        "href": "/#/sales/index/memo"
+      },
+      {
+        "title": "Payment",
+        "description": "Record Payment",
+        "href": "/#/sales/index/payment"
+      },
+      {
+        "title": "Purchase",
+        "description": "Manage Purchase",
+        "href": "/#/purchase/index"
+      }
+    ]
+  },
+  {
+    "link": "javascript:;",
+    "title": "Admin",
+    "last": true,
+    "icon": "fa-gear",
+    "id": 2,
+    "childLink": [
+      {
+        "title": "Customer",
+        "description": "Manage Customers",
+        "href": "/#/customer/index"
+      },
+      {
+        "title": "Products",
+        "description": "Manage Products",
+        "href": "/#/product/index"
+      },
+      {
+        "title": "Users",
+        "description": "Manage Users",
+        "href": "/#/user/index"
+      },
+      {
+        "title": "Permission",
+        "description": "Access Permission",
+        "href": "/#/permission/index"
+      },
+      {
+        "title": "Adjustment",
+        "description": "Adjustment",
+        "href": "/#/adjustment/index"
+      }
+    ]
+  }
+]

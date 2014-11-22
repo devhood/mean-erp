@@ -1,0 +1,15 @@
+block title
+	title CONSIGNMENT
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-edit
+			| CONSIGNMENT LIST
+		.tools
+			a.collapse(href="javascript:;") 
+	.portlet-body(ng-controller="ConsignmentCtrl")
+		.table-toolbar
+			.btn-group(ui-route="/consignment/add", ng-class="{active: $uiRoute}")
+				a.btn.tooltips(href="/#/consignment/add", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
+					i.fa.fa-plus
+		table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions" dt-columns="dtColumns")

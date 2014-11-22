@@ -1,0 +1,19 @@
+li.dropdown.user(ng-controller="MainCtrl" )
+	a.dropdown-toggle(href="#", data-toggle="dropdown", data-hover="dropdown", data-close-others="true")
+		span.username
+			| {{client.fullname}} 
+		i.fa.fa-angle-down
+	ul.dropdown-menu
+		li
+			a(ui-sref="log")
+				i.fa.fa-user
+				| My Profile
+		li.divider
+		li
+			a#trigger_fullscreen(href="javascript:;")
+				i.fa.fa-arrows
+				| Full Screen
+		li
+			a(href="/auth/logout")
+				i.fa.fa-key
+				| Log Out

@@ -1,0 +1,27 @@
+li#header_inbox_bar.dropdown(ng-controller="MessageController as messageCtrl")
+	a.dropdown-toggle(href="#", data-toggle="dropdown", data-hover="dropdown", data-close-others="true")
+		i.fa.fa-envelope
+		span.badge
+			| {{messageCtrl.messages.length}}
+	ul.dropdown-menu.extended.inbox
+		li
+			p
+				| You have {{messageCtrl.messages.length}} new messages
+		li
+			ul.dropdown-menu-list.scroller(style="height: 250px;")
+				li(ng-repeat="message in messageCtrl.messages")
+					a(href="{{message.link}}")
+						span.photo
+							img(ng-src="{{message.photo}}")
+						span.subject
+							span.from
+								| {{message.name}}
+							span.time
+								| {{message.createdOn | date : 'short'}}
+						span.message
+							| {{message.info}}
+		li.external
+			a(href="inbox.html")
+				| See all messages
+				i.m-icon-swapright
+// END INBOX DROPDOWN

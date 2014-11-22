@@ -1,0 +1,66 @@
+block title
+	title ADD USER PROFILE
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-reorder
+			| ADD USER PROFILE
+		.tools
+			a.collapse(href="javascript:;")
+			a.config(href="#portlet-config", data-toggle="modal")
+			a.reload(href="javascript:;")
+			a.remove(href="javascript:;")
+	.portlet-body.form
+		form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addUser()", novalidate)
+			.form-body
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-right
+								input#userId.form-control(type="text", name="_id", ng-model="user._id", disabled="disabled")
+								span.col-md-12.control-label ID
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
+								input#fullName.form-control(type="text", name="fullname", ng-model="user.fullname", ng-minlength="0", ng-maxlength="50", required)
+								span.col-md-12.control-label Full Name
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-right
+								input#userName.form-control(type="text", name="username", ng-model="user.username", ng-minlength="0", ng-maxlength="25", required)
+								span.col-md-12.control-label Username
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
+								input#password.form-control(type="password", name="password", ng-model="user.password", ng-minlength="0", ng-maxlength="30", required)
+								span.col-md-12.control-label Password
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-right
+								select#position.select2me.form-control.select2-offscreen(ng-model="user.position", ng-options="position.position_name as position.position_name for position in positions", ng-selected="{{user.position}}" ,tabindex="-1", ng-minlength="0", ng-maxlength="50", required)
+								span.col-md-12.control-label Position
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
+								input#email.form-control(type="email", name="email", ng-model="user.email", ng-minlength="0", ng-maxlength="30", required)
+								span.col-md-12.control-label Email
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-right
+								input#mobile.form-control(type="number", name="phone", ng-model="user.phone", ng-minlength="0", ng-maxlength="25", ng-change="", required)
+								span.col-md-12.control-label Phone
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
+								select#user_status.select2me.form-control.select2-offscreen(ng-model="user.status", tabindex="-1",ng-options="status.status as status.status for status in statuses", ng-selected="{{user.status}}", required)
+								span.col-md-12.control-label User Status
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							button.btn.green(type="submit") Submit
+							button.btn.default(type="button", ui-sref="users") Cancel
+					.col-md-6

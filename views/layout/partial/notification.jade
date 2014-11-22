@@ -1,0 +1,25 @@
+// BEGIN NOTIFICATION DROPDOWN
+li#header_notification_bar.dropdown(ng-controller="NotificationController as notiCtrl")
+
+	a.dropdown-toggle(href="#", data-toggle="dropdown", data-hover="dropdown", data-close-others="true")
+		i.fa.fa-warning
+		span.badge
+			| {{notiCtrl.notifications.length}}
+	ul.dropdown-menu.extended.notification
+		li
+			p
+				| You have {{notiCtrl.notifications.length}} new notifications
+		li
+			ul.dropdown-menu-list.scroller(style="height: 250px;")
+				li(ng-repeat="notification in notiCtrl.notifications")
+					a(href="{{notification.link}}")
+						span.label.label-icon(class="{{notification.status}}")
+							i.fa(class="{{notification.icon}}")
+						| {{notification.message}}
+						span.time
+							| {{notification.createdOn | date: short}}
+		li.external
+			a(href="#")
+				| See all notifications
+				i.m-icon-swapright
+// END NOTIFICATION DROPDOWN

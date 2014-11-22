@@ -1,0 +1,63 @@
+/* here you can put your own css to customize and override the theme */
+
+
+span.help-block {
+    text-align: center;
+    font-size: 10px;
+}
+span.col-md-12.control-label {
+    text-align:center;
+
+}
+span.col-md-12.modal-control-label {
+    text-align:right;
+}
+.custom-left {
+	float:left;
+}
+.custom-right {
+    float:right;
+}
+
+div.custom-center{
+	text-align:center;
+}
+
+textarea{
+	resize:none;
+}
+
+.dataTables_wrapper.form-inline.no-footer div.btn-group{
+	float: right;
+}
+#DataTables_Table_0_filter.dataTables_filter{
+	float: left;
+}
+.ng-invalid {
+	border-color : #FF4156
+}
+.ng-valid {
+	border-color : #39A358
+}
+.ng-pending{
+  border-color : #3E454C
+}
+.ng-pristine{
+  border-color : #165A85
+}
+div.dataTables_filter {
+  float: left;
+}
+div.dataTables_wrapper .dataTables_filter {
+  float: left;
+}
+div.dataTables_filter{
+  float: left;
+}
+
+td {
+  overflow: hidden;
+  padding: 2 2 2 2;
+  text-overflow: ellipsis;
+  color: #;
+}

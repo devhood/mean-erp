@@ -1,0 +1,39 @@
+[
+  {
+    "fullname": {
+      "name": "fullname",
+      "title": "Fullname",
+      "type": "text"
+    },
+    "username": {
+      "name": "username",
+      "title": "SO Number",
+      "type": "text"
+    },
+    "password": {
+      "name": "password",
+      "title": "Password",
+      "type": "password"
+    },
+    "position": {
+      "name": "position",
+      "title": "Position",
+      "type": "select"
+    },
+    "email": {
+      "name": "email",
+      "title": "Email",
+      "type": "email"
+    },
+    "phone": {
+      "name": "phone",
+      "title": "Phone",
+      "type": "text"
+    },
+    "status": {
+      "name": "status",
+      "title": "Status",
+      "type": "select"
+    },
+  }
+]

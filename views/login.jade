@@ -1,0 +1,74 @@
+doctype html
+html.no-js(lang='en')
+  head
+    meta(charset='utf-8')
+    title ERP | Login
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(content='width=device-width, initial-scale=1.0', name='viewport')
+    meta(content='', name='description')
+    meta(content='', name='author')
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all', rel='stylesheet', type='text/css')
+    link(href='/assets/plugins/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='/assets/plugins/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+    link(href='/assets/plugins/uniform/css/uniform.default.css', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', type='text/css', href='/assets/plugins/select2/select2.css')
+    link(rel='stylesheet', type='text/css', href='/assets/plugins/select2/select2-metronic.css')
+    link(href='/assets/css/style-metronic.css', rel='stylesheet', type='text/css')
+    link(href='/assets/css/style.css', rel='stylesheet', type='text/css')
+    link(href='/assets/css/style-responsive.css', rel='stylesheet', type='text/css')
+    link(href='/assets/css/plugins.css', rel='stylesheet', type='text/css')
+    link#style_color(href='/assets/css/themes/default.css', rel='stylesheet', type='text/css')
+    link(href='/assets/css/pages/login.css', rel='stylesheet', type='text/css')
+    link(href='/assets/css/custom.css', rel='stylesheet', type='text/css')
+    link(rel='shortcut icon', href='/favicon.ico')
+  body.login
+    .logo
+      a(href='index.html')
+        img(src='/assets/img/beautylane-logo.png', alt='', width="250px", height="70px")
+    .content
+      form.login-form(action='/auth/login', method='post')
+        h3.form-title Login to your account
+        if message
+          .alert.alert-danger
+            button.close(data-close='alert')
+            span !{message}
+        .alert.alert-danger.display-hide
+          button.close(data-close='alert')
+          span
+            | Enter any username and password.
+        .form-group
+          label.control-label.visible-ie8.visible-ie9 Username
+          .input-icon
+            i.fa.fa-user
+            input.form-control.placeholder-no-fix(type='text', autocomplete='off', placeholder='Username', name='username')
+        .form-group
+          label.control-label.visible-ie8.visible-ie9 Password
+          .input-icon
+            i.fa.fa-lock
+            input.form-control.placeholder-no-fix(type='password', autocomplete='off', placeholder='Password', name='password')
+        .form-actions
+          label.checkbox
+            input(type='checkbox', name='remember', value='1')
+            | Remember me
+          button.btn.green.pull-right(type='submit')
+            | Login
+            i.m-icon-swapright.m-icon-white
+    .copyright
+      | 2014 © Metronic. Admin Dashboard Template.
+    script(src='/assets/plugins/jquery-1.10.2.min.js', type='text/javascript')
+    script(src='/assets/plugins/jquery-migrate-1.2.1.min.js', type='text/javascript')
+    script(src='/assets/plugins/bootstrap/js/bootstrap.min.js', type='text/javascript')
+    script(src='/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js', type='text/javascript')
+    script(src='/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js', type='text/javascript')
+    script(src='/assets/plugins/jquery.blockui.min.js', type='text/javascript')
+    script(src='/assets/plugins/jquery.cokie.min.js', type='text/javascript')
+    script(src='/assets/plugins/uniform/jquery.uniform.min.js', type='text/javascript')
+    script(src='/assets/plugins/jquery-validation/dist/jquery.validate.min.js', type='text/javascript')
+    script(type='text/javascript', src='/assets/plugins/select2/select2.min.js')
+    script(src='/assets/scripts/core/app.js', type='text/javascript')
+    script(src='/assets/scripts/custom/login.js', type='text/javascript')
+    script(type='text/javascript').
+      jQuery(document).ready(function() {
+        App.init();
+        Login.init();
+      });

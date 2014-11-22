@@ -1,0 +1,20 @@
+.header.navbar.navbar-fixed-top
+	// BEGIN TOP NAVIGATION BAR
+	.header-inner
+		// BEGIN LOGO
+		a.navbar-brand(href="/")
+			img.img-responsive(src="/assets/img/beautylane-logo.png", alt="logo", width="140px", height="40px")
+		// END LOGO
+		// BEGIN RESPONSIVE MENU TOGGLER
+		a.navbar-toggle(href="javascript:;", data-toggle="collapse", data-target=".navbar-collapse")
+			img(src="/assets/img/menu-toggler.png", alt="")
+		// END RESPONSIVE MENU TOGGLER
+		// BEGIN TOP NAVIGATION MENU
+		ul.nav.navbar-nav.pull-right
+			include user
+			// include notification
+			// include inbox
+			// include todo
+
+		// END TOP NAVIGATION MENU
+	// END TOP NAVIGATION BAR

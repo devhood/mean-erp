@@ -1,0 +1,223 @@
+[{
+  "sono": {
+    "name": "sono",
+    "title": "SO Number",
+    "type": "text"
+  },
+  "drno": {
+    "name": "drno",
+    "title": "DR Number",
+    "type": "text"
+  },
+  "sino": {
+    "name": "sino",
+    "title": "SI Number",
+    "type": "text"
+  },
+  "rmrno": {
+    "name": "rmrno",
+    "title": "RMR Number",
+    "type": "text"
+  },
+  "cmno": {
+    "name": "cmno",
+    "title": "CM Number",
+    "type": "text"
+  },
+  "pmno": {
+    "name": "pmno",
+    "title": "PM Number",
+    "type": "text"
+  },
+  "pfno": {
+    "name": "pfno",
+    "title": "PF Number",
+    "type": "text"
+  },
+  "trpno": {
+    "name": "trpno",
+    "title": "Trip Number",
+    "type": "text"
+  },
+  "pckno": {
+    "name": "pckno",
+    "title": "Packing Number",
+    "type": "text"
+  },
+  "transaction_type": {
+    "name": "transaction_type",
+    "title": "Transaction Type",
+    "type": "select"
+  },
+  "customer": {
+    "name": "customer",
+    "title": "Customer",
+    "type": "select"
+  },
+  "billing_address": {
+    "name": "billing_address",
+    "title": "Billing Address",
+    "type": "text"
+  },
+  "shipping_address": {
+    "name": "shipping_address",
+    "title": "Shipping Address",
+    "type": "text"
+  },
+  "price_type": {
+    "name": "price_type",
+    "title": "Price Type",
+    "type": "select"
+  },
+  "discount": {
+    "name": "discount",
+    "title": "Discount",
+    "type": "select"
+  },
+  "sales_executive": {
+    "name": "sales_executive",
+    "title": "Sales Executive",
+    "type": "select"
+  },
+  "payment_term": {
+    "name": "payment_term",
+    "title": "Payment Term",
+    "type": "select"
+  },
+  "order_source": {
+    "name": "order_source",
+    "title": "Order Source",
+    "type": "select"
+  },
+  "delivery_date": {
+    "name": "order_source",
+    "title": "Order Source",
+    "type": "select"
+  },
+  "delivery_method": {
+    "name": "delivery_date",
+    "title": "Delivery Date",
+    "type": "select"
+  },
+  "inventory_location": {
+    "name": "inventory_location",
+    "title": "Inventory Location",
+    "type": "select"
+  },
+  "ordered_by": {
+    "name": "ordered_by",
+    "title": "Ordered By",
+    "type": "text"
+  },
+  "special_instruction": {
+    "name": "special_instruction",
+    "title": "Special Instruction",
+    "type": "text"
+  },
+  "ordered_items": {
+    "name": "ordered_items",
+    "title": "ORDERED ITEMS",
+    "type": "table",
+    "child_items": {
+      "product": {
+        "name": "product",
+        "title": "Product",
+        "type": "text"
+      },
+      "bl_code": {
+        "name": "bl_code",
+        "title": "BL Code",
+        "type": "hidden"
+      },
+      "_id": {
+        "name": "_id",
+        "title": "System ID",
+        "type": "hidden"
+      },
+      "quantity": {
+        "name": "quantity",
+        "title": "Quantity",
+        "type": "text"
+      },
+      "price": {
+        "name": "price",
+        "title": "Price",
+        "type": "text"
+      },
+      "total": {
+        "name": "total",
+        "title": "Total",
+        "type": "text"
+      },
+      "override": {
+        "name": "override",
+        "title": "Override"
+      }
+    }
+  },
+  "status": {
+    "name": "status",
+    "title": "Status",
+    "type": "text"
+  },
+  "vat": {
+    "name": "vat",
+    "title": "Vat",
+    "type": "text"
+  },
+  "total_discount": {
+    "name": "total_discount",
+    "title": "Discount",
+    "type": "text"
+  },
+  "vatable_sales": {
+    "name": "vatable_sales",
+    "title": "Vatable Sales",
+    "type": "text"
+  },
+  "is_withholding_tax": {
+    "name": "is_withholding_tax",
+    "title": "Is Withholding Tax",
+    "type": "checkbox"
+  },
+  "withholding_tax": {
+    "name": "withholding_tax",
+    "title": "Withholding Tax",
+    "type": "text"
+  },
+  "is_zero_rated_tax": {
+    "name": "is_zero_rated_tax",
+    "title": "Is Zero Rated Sales",
+    "type": "checkbox"
+  },
+  "zero_rated_tax": {
+    "name": "zero_rated_tax",
+    "title": "Zero Rated Sales",
+    "type": "text"
+  },
+  "return_discount": {
+    "name": "discount",
+    "title": "Return Discount",
+    "type": "text"
+  },
+  "return_vatable_sales": {
+    "name": "return_vatable_sales",
+    "title": "Return Vatable Sales",
+    "type": "text"
+  },
+  "return_withholding_tax": {
+    "name": "return_withholding_tax",
+    "title": "Return VAT Exempt Sales",
+    "type": "text"
+  },
+  "return_zero_rated_tax": {
+    "name": "return_zero_rated_tax",
+    "title": "Return Zero-Rated Sales",
+    "type": "text"
+  },
+  "total_amount_due": {
+    "name": "total_amount_due",
+    "title": "Total Amount Due ",
+    "type": "text"
+  }
+}]

@@ -1,0 +1,113 @@
+block title
+	title ADD PURCHASE
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-reorder
+			| ADD PURCHASE
+		.tools
+			a.collapse(href="javascript:;")
+			a.config(href="#portlet-config", data-toggle="modal")
+			a.reload(href="javascript:;")
+			a.remove(href="javascript:;")
+	.portlet-body.form
+		form#purchases_add.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addPurchase()", novalidate)
+			.form-body
+				.alert.alert-danger.display-hide
+					button.close(data-close="alert")
+					| You have some form errors. Please check below.
+				.alert.alert-success.display-hide
+					button.close(data-close="alert")
+					| Your form validation is successful!
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-right
+								select#transactionTypeId.select2me.form-control.select2-offscreen(ng-model="purchase.supplier", ng-options="supplier.supplier as supplier.supplier for supplier in suppliers", ng-selected="{{purchase.supplier}}" required)
+								span.col-md-12.control-label	Supplier
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
+								input#purchaseNo.form-control(type="text", ng-model="purchase.purno", disabled)
+								span.col-md-12.control-label	Purchase Number
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-right
+								input#expectedArrivalDate.form-control(type="text", ng-model="purchase.arrival_date", required)
+								span.col-md-12.control-label	Expected Arrival Date
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
+								input#referenceNo.form-control(type="text", ng-model="purchase.reference_number" , required)
+								span.col-md-12.control-label	Reference Number
+				.row
+					.col-md-12
+						.form-group
+							.col-md-2.col-lg-2
+							.col-md-8.col-xs-12.col-sm-12.col-lg-8
+								textarea#purchaseNotes.text-area.form-control(ng-model="purchase.notes", required)
+								span.col-md-12.control-label	Special Instructions
+							.col-md-2.col-lg-2
+				.portlet.box.grey
+									.portlet-title
+										.caption
+											i.fa.fa-reorder
+											| PURCHASE ITEMS
+										.tools
+											a.collapse(href="javascript:;")
+									.portlet-body.form
+										.form-body
+											br
+											br
+											.row
+												.col-md-12
+													.col-md-5
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="purchase.item.product", ng-options="product.name for product in products track by product.name")
+																span.col-md-12.help-block	Product
+													.col-md-3
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="purchase.item.quantity")
+																span.col-md-12.help-block	Quantity
+													.col-md-3
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="purchase.item.cost")
+																span.col-md-12.help-block	Cost
+													.col-md-1
+														button.btn-sm.green.custom-right(type="button",ng-click="addItem(purchase)")
+															i.fa.fa-plus
+											.form-group
+												.col-md-1
+												.col-md-10
+													.row
+														br
+														.col-md-12
+															.portlet-body.flip-scroll
+																table.table.table-bordered.table-condensed.flip-content
+																	thead.flip-content.bg-grey
+																		tr
+																			th Product
+																			th Quantity
+																			th Cost
+																			th(width="5%")
+																	tbody
+																		tr(ng-repeat="purchase_item in purchase.purchase_items")
+																			td {{purchase_item.product.name}}
+																			td {{purchase_item.quantity}}
+																			td {{purchase_item.cost}}
+																			td(width="5%")
+																				.btn-group.btn-group-xs.btn-group-solid
+																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																						i.fa.fa-trash-o
+												.col-md-1
+			.form-actions.fluid
+				.row
+					.col-xs-10.col-sm-10.col-md-11.col-lg-11
+						.custom-right
+							button.btn.green(type="submit") Submit
+							button.btn.default(type="button", ui-sref="purchases") Cancel
+					.col-md-6

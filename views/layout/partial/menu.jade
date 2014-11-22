@@ -1,0 +1,15 @@
+.page-sidebar-wrapper
+	.page-sidebar.navbar-collapse.collapse
+		ul.page-sidebar-menu(data-auto-scroll="true", data-slide-speed="200", ng-controller="MainCtrl")
+			li.sidebar-toggler-wrapper
+				.sidebar-toggler.hidden-phone
+			li.tooltips(ng-repeat="menu in menus", data-container="body", data-placement="right", data-html="true", data-original-title="{{menu.description}}")
+				a(href="{{menu.href}}")
+					i.fa(class="{{menu.icon}}")
+					span.title
+						| {{menu.title}}
+					span.arrow(ng-show="{{menu.childLink.length}}")
+				ul.sub-menu
+					li.tooltips(ng-repeat="submenu in menu.childLink", data-container="body", data-placement="right", data-html="true", data-original-title="{{submenu.description}}")
+						a(href="{{submenu.href}}")
+								| {{submenu.title}}

@@ -1,0 +1,15 @@
+block title
+	title USER LIST
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-edit
+			| USER LIST
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body(ng-controller="UserCtrl")
+		.table-toolbar
+			.btn-group(ui-route="/user/add", ng-class="{active: $uiRoute}")
+				a.btn.tooltips(href="/#/user/add", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
+					i.fa.fa-plus
+		table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions" dt-columns="dtColumns")

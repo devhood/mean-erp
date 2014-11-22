@@ -1,0 +1,24 @@
+doctype html
+//if IE 8
+  html.ie8.no-js(lang="en")
+//if IE 9
+  html.ie9.no-js(lang="en")
+// [if !IE] <!
+html.no-js(lang="en")
+  // <![endif]
+  head
+    include partial/links
+    block title
+  body.page-header-fixed(ng-app="erp")
+    include partial/header
+    .clearfix
+    .page-container
+      include partial/menu
+      .page-content-wrapper
+        .page-content
+          .row
+            .col-md-12
+              block content
+    include partial/footer
+    include partial/scripts
+    block scripts

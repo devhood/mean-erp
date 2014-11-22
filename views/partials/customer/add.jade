@@ -1,0 +1,293 @@
+block title
+	title ADD CUSTOMER PROFILE
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-reorder
+			| ADD CUSTOMER PROFILE
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body.form
+		form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addCustomer()", novalidate)
+			.form-body
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#company_name.form-control(type="text", ng-model="customer.company_name" ng-minlength="0", ng-maxlength="50", required)
+								span.col-md-12.help-block	Company Name
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								select.select2me.form-control.select2-offscreen(ng-model="customer.branch", ng-options="branch.branch_name as branch.branch_name for branch in branches", ng-selected="{{customer.branch}}" ,tabindex="-1", required)
+									span.col-md-12.help-block	Branch Location
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select.select2me.form-control.select2-offscreen(ng-model="customer.type", ng-options="type.type_name as type.type_name for type in types", ng-selected="{{customer.type}}" ,tabindex="-1", required)
+								span.col-md-12.help-block	Type
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input#website.form-control(type="url", ng-model="customer.website", ng-minlength="0", ng-maxlength="30",  required)
+								span.col-md-12.help-block	Website
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#trade_name.form-control(type="text", ng-model="customer.trade_name", ng-minlength="0", ng-maxlength="30", required)
+								span.col-md-12.help-block	Trade Name
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input#tin.form-control(type="text",   ng-model="customer.tin" ng-minlength="0", ng-maxlength="20", ui-mask="9999-9999-9999-9999")
+								span.col-md-12.help-block	TIN
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#commission_sharing.form-control(type="text", ng-model="customer.commission_sharing", ng-minlength="0", ng-maxlength="20",  max="50", ui-mask="99%" required)
+								span.col-md-12.help-block	Commission Sharing
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input#sec_no.form-control(type="text",   ng-model="customer.sec_no" ng-minlength="0", ng-maxlength="20", required)
+								span.col-md-12.help-block	Sec Number
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#phone.form-control(type="number",   ng-model="customer.phone" ng-minlength="0", ng-maxlength="20", required)
+								span.col-md-12.help-block	Phone
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input#email.form-control(type="email",   ng-model="customer.email" ng-minlength="0", ng-maxlength="50", required)
+								span.col-md-12.help-block	Email
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-7.col-lg-7.custom-right
+								label.checkbox
+									input#consignee(type="checkbox",   ng-model="customer.consignee" value="1")
+									| Consignee
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								label.checkbox
+									input#franchise(type="checkbox", ng-model="customer.franchise", value="1")
+									| Franchise
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input#credit_limit.form-control(type="number", ng-model="customer.credit_limit" ng-minlength="0", ng-maxlength="10", required)
+								span.col-md-12.help-block	Credit Limit
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
+								input#transaction_limit.form-control(type="text", ng-model="customer.transaction_limit", min="1", max="3", ui-mask="9" required)
+								span.col-md-12.help-block
+									| Unpaid Transaction Limit
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#payment_term.select2me.form-control.select2-offscreen(ng-model="customer.payment_term", ng-options="payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{customer.payment_term}}" required)
+								span.col-md-12.help-block	Payment Terms
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
+								select.select2me.form-control.select2-offscreen(ng-model="customer.discount", ng-options="discount.discount for discount in discounts")
+								span.col-md-12.help-block	Permanent Discount
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#shippingModeId.select2me.form-control.select2-offscreen(ng-model="customer.shipping_mode", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{customer.shipping_mode}}" required)
+								span.col-md-12.help-block	Shipping Mode
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
+								select#userId.select2me.form-control.select2-offscreen(ng-model="customer.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", ng-selected="{{customer.sales_executive}}" required)
+								span.col-md-12.help-block	Sales Executive
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select#priceTypeId.select2me.form-control.select2-offscreen(ng-model="customer.price_type", ng-options="price_type.price_type_name for price_type in price_types", ng-selected="{{customer.price_type}}" required)
+								span.col-md-12.help-block	Price Type
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
+								select#status.select2me.form-control.select2-offscreen(ng-model="customer.status", ng-options="status.status as status.status for status in statuses", ng-selected="{{customer.status}}" required)
+								span.col-md-12.help-block	Customer Status
+				.portlet.box.grey
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							| ADDRESS
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						.row
+							br
+							.col-md-6
+								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+									h3.inline Shipping Address
+									br
+									br
+								// </div>
+							.col-md-6
+								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+						.row
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										input.form-control(type="text", ng-model="customer.shipping_address.landmark", ng-minlength="0", ng-maxlength="70", required)
+										span.col-md-12.help-block	Floor/Unit/Building
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+										input.form-control(type="text", ng-model="customer.shipping_address.barangay", ng-minlength="0", ng-maxlength="70", required)
+										span.col-md-12.help-block	Street/Barangay
+						.row
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.country",ng-selected="{{customer.shipping_address.country}}", ng-options="country.country for country in countries track by country.country", required)
+										span.col-md-12.help-block	Country
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.province",ng-selected="{{customer.shipping_address.province}}", ng-options="geography.province for geography in geographys track by geography._id",required)
+										span.col-md-12.help-block	Province
+						.row
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.city", ng-selected="{{customer.shipping_address.city}}", ng-options="city.city for city in customer.shipping_address.province.cities track by city.city", required)
+										span.col-md-12.help-block	City
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.zipcode",ng-selected="{{customer.shipping_address.zipcode}}", ng-options="zipcode.zipcode for zipcode in customer.shipping_address.city.zipcodes track by zipcode.zipcode", required)
+										span.col-md-12.help-block	Zipcode
+						.row
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										label.checkbox Use as Billing
+											input(type="checkbox", ng-checked="copyShipping(customer)", ng-model="customer.shipping_address.same", value="1")
+						.row
+							br
+							.col-md-6
+								// <div class="form-group">
+								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+									h3.inline Billing Address
+									br
+									br
+								// </div>
+							.col-md-6
+								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+						.row
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										input.form-control(type="text", ng-model="customer.billing_address.landmark", ng-minlength="0", ng-maxlength="70", required)
+										span.col-md-12.help-block	Floor/Unit/Building
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+										input.form-control(type="text", ng-model="customer.billing_address.barangay", ng-minlength="0", ng-maxlength="70", required)
+										span.col-md-12.help-block	Street/Barangay
+						.row
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.country",ng-selected="{{customer.billing_address.country}}", ng-options="country.country for country in countries track by country.country", required)
+										span.col-md-12.help-block	Country
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.province",ng-selected="{{customer.billing_address.province}}", ng-options="geography.province for geography in geographys track by geography._id",required)
+										span.col-md-12.help-block	Province
+						.row
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.city", ng-selected="{{customer.billing_address.city}}",ng-options="city.city for city in customer.billing_address.province.cities track by city.city", required)
+										span.col-md-12.help-block	City
+							.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.zipcode",ng-selected="{{customer.billing_address.zipcode}}", ng-options="zipcode.zipcode for zipcode in customer.billing_address.city.zipcodes track by zipcode.zipcode", required)
+										span.col-md-12.help-block	Zipcode
+				.portlet.box.grey
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							| CONTACT PERSONS
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						.form-body
+							br
+							br
+							.row
+								.col-md-1
+								.col-md-10
+									.col-md-4
+										.form-group
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12
+												input.form-control(type="text", ng-minlength="0", ng-maxlength="30", ng-model="customer.contact.name")
+												span.col-md-12.help-block	Name
+									.col-md-4
+										.form-group
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12
+												input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="customer.contact.position")
+												span.col-md-12.help-block	Position
+									.col-md-3
+										.form-group
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12
+												input.form-control(type="email", ng-minlength="0", ng-maxlength="30", ng-model="customer.contact.email")
+												span.col-md-12.help-block	Email
+									.col-md-1
+										button.btn-sm.green.custom-right(type="button",ng-click="addContact(customer)")
+											i.fa.fa-plus
+								.col-md-1
+							.form-group
+								.col-md-1
+								.col-md-10
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Name
+															th Position
+															th Phone
+															th Action
+													tbody
+														tr(ng-repeat="contact in customer.contacts")
+															td {{contact.name}}
+															td {{contact.position}}
+															td {{contact.phone}}
+															td(width="5%")
+																.btn-group.btn-group-xs.btn-group-solid
+																	a.tooltips.btn.default(ng-click="removeContact($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																		i.fa.fa-trash-o
+								.col-md-1
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							button.btn.green(type="submit") Submit
+							button.btn.default(type="button", ui-sref="customers") Cancel
+					.col-md-6

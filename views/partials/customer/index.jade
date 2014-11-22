@@ -1,0 +1,15 @@
+block title
+	title CUSTOMER LIST
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-edit
+			| CUSTOMER LIST
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body(ng-controller="CustomerCtrl")
+		.table-toolbar
+			.btn-group(ui-route="/customer/add", ng-class="{active: $uiRoute}")
+				a.btn.tooltips(href="/#/customer/add", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
+					i.fa.fa-plus
+		table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions" dt-columns="dtColumns")
