@@ -36,6 +36,24 @@ angular.module('erp')
       var action = $routeParams.action;
       $scope.positions = Api.Collection('positions').query();
       $scope.statuses = Api.Collection('user_status').query();
+      $scope.permissions = Api.Collection('permissions').query();
+
+      $scope.addPermission = function(user){
+        console.log(user.permission);
+        if(user.permission && user.permission.name && user.permission.allowed){
+          if($scope.user.permissions){
+            $scope.user.permissions.push(user.permission);
+          }
+          else{
+            $scope.user.permissions = [user.permission];
+          }
+          delete user.permission;
+        }
+      };
+
+      $scope.removePermission = function(index){
+        $scope.user.permissions.splice(index, 1);
+      };
 
       $scope.action = action;
       if(id && action == 'read'){
