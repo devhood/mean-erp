@@ -70,7 +70,7 @@ block title
 										.col-md-7
 											.form-group
 												.col-xs-12.col-sm-12.col-md-12.col-lg-12
-													select#permission.select2me.form-control.select2-offscreen(ng-model="user.permission.name", tabindex="-1",ng-options="permission.name as permission.name for permission in permissions", ng-selected="{{user.status}}")
+													select#permission.select2me.form-control.select2-offscreen(ng-model="user.permission", tabindex="-1",ng-options="permission.name for permission in permissions", ng-selected="{{user.status}}")
 													span.col-md-12.control-label Permission
 										.col-md-3
 											.form-group
