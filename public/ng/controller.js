@@ -298,11 +298,16 @@ angular.module('erp')
       $scope.action = action;
       if(id && action == 'read'){
         $scope.title = "VIEW PRODUCT " + id;
-        $scope.product =  Api.Collection('products').get({id:$routeParams.id});
+        $scope.product =  Api.Collection('products').get({id:$routeParams.id},function(){
+          $scope.product.product_photo = $scope.product.product_photo ? "/uploads/"+$scope.product.product_photo  : "http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image";
+        });
+
       }
       if(id && action == 'edit'){
         $scope.title = "EDIT PRODUCT " + id;
-        $scope.product =  Api.Collection('products').get({id:$routeParams.id});
+        $scope.product =  Api.Collection('products').get({id:$routeParams.id},function(){
+          $scope.product.product_photo = $scope.product.product_photo ? "/uploads/"+$scope.product.product_photo  : "http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image";
+        });
         $scope.saveProduct = function(){
           var product_photo = $scope.product.product_photo;
           var uploadUrl = '/api/products/'+id+'/upload';
@@ -323,7 +328,9 @@ angular.module('erp')
       }
       if(id && action == 'approve'){
         $scope.title = "APPROVE PRODUCT " + id;
-        $scope.product =  Api.Collection('products').get({id:$routeParams.id});
+        $scope.product =  Api.Collection('products').get({id:$routeParams.id},function(){
+          $scope.product.product_photo = $scope.product.product_photo ? "/uploads/"+$scope.product.product_photo  : "http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image";
+        });
         $scope.saveProduct = function(){
           var product_photo = $scope.product.product_photo;
           var uploadUrl = '/api/products/'+id+'/upload';
@@ -346,6 +353,7 @@ angular.module('erp')
         $scope.title = "ADD PRODUCT";
         var Product = Api.Collection('products');
         $scope.product = new Product();
+        $scope.product.product_photo = "http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image";
         $scope.saveProduct = function(){
           var product_photo = $scope.product.product_photo;
           delete $scope.product.product_photo;

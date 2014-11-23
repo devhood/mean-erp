@@ -36,8 +36,7 @@ block title
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
 								.fileinput.fileinput-new(data-provides="fileinput")
 									.fileinput-new.thumbnail(style="width: 400px; height: 300px;")
-										img(src="http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image", alt="", ng-hide="product.product_photo")
-										img(src="/uploads/{{product.product_photo}}", alt="", ng-show="product.product_photo")
+										img(ng-src="{{product.product_photo}}")
 									.fileinput-preview.fileinput-exists.thumbnail(style="width: 400px; height: 300px;")
 									div.col-md-12(style="text-align:center", ng-show="action != 'read'")
 										span.btn.default.btn-file
@@ -45,7 +44,7 @@ block title
 												| Upload Photo
 											span.fileinput-exists
 												| Change
-											input(type="file", name="product_photo", file-model="product.product_photo")
+											input(type="file", file-model="product.product_photo")
 										a.btn.default.fileinput-exists(href="#", data-dismiss="fileinput")
 												| Remove
 				.row
