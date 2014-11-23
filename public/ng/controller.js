@@ -284,16 +284,32 @@ angular.module('erp')
         $scope.product =  Api.Collection('products').get({id:$routeParams.id});
         $scope.saveProduct = function(){
           var product_photo = $scope.product.product_photo;
-      //    delete $scope.product.product_photo;
           var uploadUrl = '/api/products/'+id+'/upload';
-
           $scope.product.$update(function(){
             fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
-            console.log($scope.product);
-            console.log(product_photo);
-
-        //    $location.path('/product/index');
-          //  return false;
+            $location.path('/product/index');
+            return false;
+          });
+        };
+        $scope.deleteProduct=function(user){
+          if(popupService.showPopup('You are about to delete Record : '+product._id)){
+            $scope.product.$delete(function(){
+              $location.path('/product/index');
+              return false;
+            });
+          }
+        };
+      }
+      if(id && action == 'approve'){
+        $scope.title = "APPROVE PRODUCT " + id;
+        $scope.product =  Api.Collection('products').get({id:$routeParams.id});
+        $scope.saveProduct = function(){
+          var product_photo = $scope.product.product_photo;
+          var uploadUrl = '/api/products/'+id+'/upload';
+          $scope.product.$update(function(){
+            fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
+            $location.path('/product/index');
+            return false;
           });
         };
         $scope.deleteProduct=function(user){
@@ -307,11 +323,13 @@ angular.module('erp')
       }
       if(action == 'add'){
         $scope.title = "ADD PRODUCT";
-
         var Product = Api.Collection('products');
         $scope.product = new Product();
         $scope.saveProduct = function(){
+          var product_photo = $scope.product.product_photo;
+          var uploadUrl = '/api/products/'+id+'/upload';
           $scope.product.$save(function(){
+            fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
             $location.path('/product/index');
             return false;
           });
