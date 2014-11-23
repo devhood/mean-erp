@@ -291,6 +291,24 @@ angular.module('erp')
       $scope.product_status = Api.Collection('product_status').query();
       $scope.movements = Api.Collection('movements').query();
       $scope.suppliers = Api.Collection('suppliers').query();
+      var query = {"uom":{"$ne":"Bundle"}};
+      $scope.products = Api.Collection('products',query).query();
+
+      $scope.addPackage = function(product){
+        if( product.package && product.package.name && product.package.quantity ){
+          if($scope.product.packages){
+            $scope.product.packages.push(product.package);
+          }
+          else{
+            $scope.product.packages = [product.package];
+          }
+          delete product.package;
+        }
+      }
+
+      $scope.removePackage = function(index){
+        $scope.product.packages.splice(index, 1);
+      }
 
       $scope.action = action;
       if(id && action == 'read'){
@@ -307,9 +325,13 @@ angular.module('erp')
         });
         $scope.saveProduct = function(){
           var product_photo = $scope.product.product_photo;
-          var uploadUrl = '/api/products/'+id+'/upload';
+          delete $scope.product.product_photo;
           $scope.product.$update(function(){
-            fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
+            if(product_photo.name){
+              var uploadUrl = '/api/products/'+id+'/upload';
+              fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
+            }
+
             $location.path('/product/index');
             return false;
           });
@@ -330,12 +352,16 @@ angular.module('erp')
         });
         $scope.saveProduct = function(){
           var product_photo = $scope.product.product_photo;
-          var uploadUrl = '/api/products/'+id+'/upload';
+          delete $scope.product.product_photo;
           $scope.product.$update(function(){
-            fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
+            if(product_photo.name){
+              var uploadUrl = '/api/products/'+id+'/upload';
+              fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
+            }
             $location.path('/product/index');
             return false;
           });
+
         };
         $scope.deleteProduct=function(user){
           if(popupService.showPopup('You are about to delete Record : '+product._id)){
@@ -447,7 +473,9 @@ angular.module('erp')
   $scope.discounts = Api.Collection('discounts').query();
   $scope.payment_terms = Api.Collection('payment_term').query();
   $scope.order_sources = Api.Collection('order_source').query();
-  $scope.delivery_methods = Api.Collection('shipping_mode').query();
+  $scope.shipping_modes = Api.Collection('shipping_mode').query();
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  $scope.title = "ADD SALES ORDER"
 });

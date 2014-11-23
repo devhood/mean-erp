@@ -4,7 +4,7 @@ block title
   .portlet-title
     .caption
       i.fa.fa-reorder
-      | ADD SALES ORDER
+      | {{title}}
     .tools
       a.collapse(href="javascript:;")
       a.config(href="#portlet-config", data-toggle="modal")
@@ -29,7 +29,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer", ng-options="customer.company_name for customer in customers", ng-selected="{{sales.customer.company_name}}" ,tabindex="-1", required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.company_name", ng-options="customer.company_name as customer.company_name for customer in customers", ng-selected="{{sales.company_name}}" ,tabindex="-1", required)
                 span.col-md-12.help-block Customer
           .col-md-1
         .row(ng-show="sales.customer")
@@ -37,7 +37,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-value="sales.customer.shipping_address.landmark +', '+ sales.customer.shipping_address.barangay +', '+ sales.customer.shipping_address.city.city +', '+ sales.customer.shipping_address.province.province +', '+ sales.customer.shipping_address.country.country +', '+ sales.customer.shipping_address.zipcode.zipcode", disabled)
+                input.form-control(type="text", ng-model="sales.shipping_address", disabled)
                 span.col-md-12.help-block Shipping Address
           .col-md-1
         .row(ng-show="sales.customer")
@@ -45,30 +45,30 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-value="sales.customer.billing_address.landmark +', '+ sales.customer.billing_address.barangay +', '+ sales.customer.billing_address.city.city +', '+ sales.customer.billing_address.province.province +', '+ sales.customer.billing_address.country.country +', '+ sales.customer.billing_address.zipcode.zipcode", disabled)
+                input.form-control(type="text", ng-model="sales.billing_address", disabled)
                 span.col-md-12.help-block Billing Address
           .col-md-1
         .row(ng-show="sales.customer")
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.price_type_name for price_type in price_types track by price_type.price_type_name", ng-selected="{{sales.customer.price_type}}" ,tabindex="-1", disabled)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.price_type", ng-options="price_type.price_type_name as price_type.price_type_name for price_type in price_types", ng-selected="{{sales.price_type}}" ,tabindex="-1", disabled)
                 span.col-md-12.help-block Price Type
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.discount for discount in discounts track by discount.discount", ng-selected="{{sales.customer.discount}}" ,disabled)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.discount", ng-options="discount.discount as discount.discount for discount in discounts", ng-selected="{{sales.discount}}" ,disabled)
                 span.col-md-12.help-block Discount
         .row(ng-show="sales.customer")
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-value="sales.customer.sales_executive", disabled)
+                input.form-control(type="text", ng-value="sales.sales_executive", disabled)
                 span.col-md-12.help-block Sales Executive
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms track by payment_term.payment_term_name", ng-selected="{{customer.sales.payment_term}}" ,tabindex="-1", disabled)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{sales.payment_term}}" ,tabindex="-1", disabled)
                 span.col-md-12.help-block Payment Terms
         .row
           .col-md-6
@@ -79,13 +79,13 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.shipping_mode", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{sales.shipping_mode}}" ,tabindex="-1", required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{sales.delivery_method}}" ,tabindex="-1", required)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location.inventory_location as inventory_location.inventory_location for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location.company_name as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
@@ -97,10 +97,10 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="sales.description", ng-minlength="0", ng-maxlength="100", required)
+                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", required)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
-        .portlet.box.grey(ng-show="sales.customer")
+        .portlet.box.grey
           .portlet-title
             .caption
               i.fa.fa-reorder
@@ -114,18 +114,25 @@ block title
               .row
                 .col-md-1
                 .col-md-10
-                  .col-md-7
+                  .col-md-5
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="sales.order.item", ng-options="product.name for product in products", ng-selected="{{product.name}}")
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.name for product in products")
                         span.col-md-12.help-block Product
-                  .col-md-4
+                  .col-md-3
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="sales.order.quantity")
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="sales.item.quantity")
                         span.col-md-12.help-block Quantity
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item.override")
+                          option(value='FREEBIE') Freebie
+                          option(value='DEMO') Demo
+                        span.col-md-12.help-block Override
                   .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addItem(sales)")
+                    button.btn-sm.green.custom-right(type="button",ng-click="addOrder(sales)")
                       i.fa.fa-plus
                 .col-md-1
               .form-group
@@ -178,9 +185,9 @@ block title
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
           .col-md-6
             .form-group
-              .col-xs-12.col-sm-12.col-md-3.col-lg-3.custom-left
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
                 input.form-control(type="checkbox", ng-model="sales.is_vat_percent",ng-checked="computeVat(sales)", value=".11")
-              .col-xs-12.col-sm-12.col-md-7.col-lg-7.custom-left
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
                 input.form-control(type="text", ng-model="sales.withholding_tax", readonly)
                 span.col-md-12.help-block W/Holding Tax
               .col-md-2
@@ -191,9 +198,9 @@ block title
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
           .col-md-6
             .form-group
-              .col-xs-12.col-sm-12.col-md-3.col-lg-3.custom-left
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
                 input.form-control(type="checkbox", ng-model="sales.is_zero_rated",ng-checked="computeZeroRated(sales)", value="1")
-              .col-xs-12.col-sm-12.col-md-7.col-lg-7.custom-left
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
                 input.form-control(type="text", ng-model="sales.zero_rate_sales", readonly)
                 span.col-md-12.help-block VAT Exempt/ Zero Rated Sales
               .col-md-2

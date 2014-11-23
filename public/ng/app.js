@@ -58,7 +58,7 @@ angular.module('erp', [
       })
       .when('/sales/order/:action', {
         templateUrl: '/partials/sales/order',
-        controller: 'SalesCtrl'
+        controller: 'SalesOrderCtrl'
       })
       .when('/sales/order/:action/:id', {
         templateUrl: '/partials/sales/order',
