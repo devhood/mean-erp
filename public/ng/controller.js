@@ -150,7 +150,7 @@ angular.module('erp')
         });
 
         var query = {"position":"Sales Executive"};
-        $scope.sales_executives = Api.Collection('users',query).query(function(){});
+        $scope.sales_executives = Api.Collection('users',query).query();
 
         $scope.copyShipping = function(){
           if($scope.customer.shipping_address && $scope.customer.shipping_address.same){
@@ -444,5 +444,13 @@ angular.module('erp')
 
   var id = $routeParams.id;
   var action = $routeParams.action;
-  $scope.positions = Api.Collection('positions').query();
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_type').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_term').query();
+  $scope.order_sources = Api.Collection('order_source').query();
+  $scope.delivery_methods = Api.Collection('shipping_mode').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
 });
