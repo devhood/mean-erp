@@ -6,7 +6,8 @@ angular.module('erp')
   Session.get(function(client){
     $scope.client = client;
   });
-}).controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+})
+.controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
   $scope.ajax_ready = false;
   Structure.Users.query().$promise.then(function(data){
@@ -39,9 +40,9 @@ angular.module('erp')
       $scope.permissions = Api.Collection('permissions').query();
 
       $scope.addPermission = function(user){
-        console.log(user.permission);
         if(user.permission && user.permission.name && user.permission.allowed){
           if($scope.user.permissions){
+            delete user.permission._id;
             $scope.user.permissions.push(user.permission);
           }
           else{
@@ -92,7 +93,8 @@ angular.module('erp')
       }
     }
   });
-}).controller('CustomerCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+})
+.controller('CustomerCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
   $scope.ajax_ready = false;
   Structure.Customers.query().$promise.then(function(data){
@@ -256,7 +258,8 @@ angular.module('erp')
       }
 
   });
-}).controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService, fileUpload) {
+})
+.controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService, fileUpload) {
 
   $scope.ajax_ready = false;
   Structure.Products.query().$promise.then(function(data){
@@ -309,7 +312,7 @@ angular.module('erp')
             return false;
           });
         };
-        $scope.deleteProduct=function(user){
+        $scope.deleteProduct=function(product){
           if(popupService.showPopup('You are about to delete Record : '+product._id)){
             $scope.product.$delete(function(){
               $location.path('/product/index');
@@ -345,8 +348,9 @@ angular.module('erp')
         $scope.product = new Product();
         $scope.saveProduct = function(){
           var product_photo = $scope.product.product_photo;
-          var uploadUrl = '/api/products/'+id+'/upload';
+          delete $scope.product.product_photo;
           $scope.product.$save(function(){
+            var uploadUrl = '/api/products/'+$scope.product._id+'/upload';
             fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
             $location.path('/product/index');
             return false;
@@ -356,7 +360,8 @@ angular.module('erp')
     }
   });
 
-}).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
+})
+.controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
 
   $scope.ajax_ready = false;
   Structure.Sales.query().$promise.then(function(data){
@@ -406,8 +411,8 @@ angular.module('erp')
         case "payment" :
 
           columns = [
-          $scope.structure.sono, $scope.structure.customer, $scope.structure.sales_executive,
-          $scope.structure.delivery_method, $scope.structure.payment_term, $scope.structure.status
+            $scope.structure.sono, $scope.structure.customer, $scope.structure.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.payment_term, $scope.structure.status
           ];
 
           buttons = [
@@ -424,5 +429,12 @@ angular.module('erp')
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
     };
+
   });
+})
+.controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.positions = Api.Collection('positions').query();
 });

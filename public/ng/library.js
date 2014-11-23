@@ -50,7 +50,6 @@ angular.module('erp')
         return dtcolumns;
       }
     },
-
   Status : {
     Sales : {
       order : {

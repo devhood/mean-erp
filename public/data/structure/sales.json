@@ -90,13 +90,13 @@
     "type": "select"
   },
   "delivery_date": {
-    "name": "order_source",
-    "title": "Order Source",
+    "name": "delivery_date",
+    "title": "Delivery Date",
     "type": "select"
   },
   "delivery_method": {
-    "name": "delivery_date",
-    "title": "Delivery Date",
+    "name": "delivery_method",
+    "title": "Delivery Method",
     "type": "select"
   },
   "inventory_location": {

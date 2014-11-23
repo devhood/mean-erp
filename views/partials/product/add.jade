@@ -8,7 +8,7 @@ block title
 		.tools
 			a.collapse(href="javascript:;")
 	.portlet-body.form
-		form.form-horizontal(role="form", name="add_form", enctype="multipart/form-data", ng-submit="add_form.$valid && saveProduct()", novalidate)
+		form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && saveProduct()", novalidate)
 			.form-body
 				.row
 					.col-md-6
@@ -17,7 +17,7 @@ block title
 								input#bl_code.form-control(type="text", ng-model="product.bl_code", required)
 								span.col-md-12.help-block BL Code
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="brand.brand as brand.brand for brand in brands", ng-selected="{{product.brand}}" ,tabindex="-1", required)
+								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="br.brand as br.brand for br in brands", ng-selected="{{product.brand}}" ,tabindex="-1", required)
 								span.col-md-12.help-block Brand
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 								input#name.form-control(type="text", ng-model="product.name", ng-minlength="0", ng-maxlength="40", required)
@@ -145,6 +145,9 @@ block title
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
-							button.btn.green(type="submit") Submit
-							button.btn.default(type="button", ui-sref="products") Cancel
+							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+							| &nbsp;
+							button.btn.red(type="button", ng-click="deleteProduct(product)", ng-show="action=='edit' || action=='approve'") Delete
+							| &nbsp;
+							a.btn.default(type="button", href="/#/product/index") Cancel
 					.col-md-6
