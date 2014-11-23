@@ -201,9 +201,6 @@ angular.module('erp')
         if(id && action == 'read'){
           $scope.title = "VIEW CUSTOMER " + id;
           $scope.customer =  Api.Collection('customers').get({id:$routeParams.id});
-
-          $scope.BillingProvinceChange($scope.customer.billing_address.province);
-          $scope.ShippingCityChange($scope.customer.billing_address.city);
         }
         if(id && action == 'edit'){
           $scope.title = "EDIT CUSTOMER " + id;
