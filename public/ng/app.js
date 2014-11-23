@@ -40,6 +40,18 @@ angular.module('erp', [
         templateUrl: '/partials/customer/add',
         controller: 'CustomerCtrl'
       })
+      .when('/product/index', {
+        templateUrl: '/partials/product/index',
+        controller: 'ProductCtrl'
+      })
+      .when('/product/:action', {
+        templateUrl: '/partials/product/add',
+        controller: 'ProductCtrl'
+      })
+      .when('/product/:action/:id', {
+        templateUrl: '/partials/product/add',
+        controller: 'ProductCtrl'
+      })
       .when('/sales/index/:type', {
         templateUrl: '/partials/sales/index',
         controller: 'SalesCtrl'

@@ -92,7 +92,8 @@ angular.module('erp')
 
         buttons = [
           {url:"/#/customer/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/customer/edit/",title:"Edit Record",icon:"fa fa-edit"}
+          {url:"/#/customer/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/customer/approve/",title:"Approve Record",icon:"fa fa-gear"}
         ];
         $scope.title = "CUSTOMER"
         $scope.addUrl = "/#/customer/add"
@@ -148,7 +149,7 @@ angular.module('erp')
             else{
               $scope.customer.contacts = [customer.contact];
             }
-            customer.contact = {};
+            delete customer.contact;
           }
         }
 
@@ -203,6 +204,25 @@ angular.module('erp')
             }
           };
         }
+        if(id && action == 'approve'){
+          $scope.title = "APPROVE CUSTOMER " + id;
+          $scope.customer =  Api.Collection('customers').get({id:$routeParams.id});
+          $scope.province_ng_option = "geography.province for geography in geographys track by customer.billing_address.province";
+          $scope.saveCustomer = function(){
+            $scope.customer.$update(function(){
+              $location.path('/customer/index');
+              return false;
+            });
+          };
+          $scope.deleteCustomer=function(customer){
+            if(popupService.showPopup('You are about to delete Record : '+customer._id)){
+              $scope.customer.$delete(function(){
+                $location.path('/customer/index');
+                return false;
+              });
+            }
+          };
+        }
         if(action == 'add'){
           $scope.title = "ADD CUSTOMER";
 
@@ -218,31 +238,87 @@ angular.module('erp')
       }
 
   });
-}).controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+}).controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService, fileUpload) {
+
   $scope.ajax_ready = false;
-  Structure.Customers.query().$promise.then(function(data){
-      $scope.structure = data[0];
-      $scope.ajax_ready = true;
-      var columns = [];
-      var buttons = [];
-      var query = {};
-      $scope.init = function(){
-        columns = [
-          $scope.structure.bl_code, $scope.structure.Brand, $scope.structure.Item_name,
-          $scope.structure.Size, $scope.structure.Color,
-          $scope.structure.UOM, $scope.structure.Supplier_code, $scope.structure.Supplier_code, $scope.structure.Status
-        ];
-        buttons = [
-          {url:"/#/product/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"}
-        ];
-      };
-      $scope.title = "PRODUCT";
-      $scope.addUrl = "/#/product/add";
+  Structure.Products.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.init = function(){
+      columns = [
+      $scope.structure.bl_code, $scope.structure.name, $scope.structure.brand,$scope.structure.family,
+      $scope.structure.size, $scope.structure.color, $scope.structure.payment_term
+      ];
+
+      buttons = [
+      {url:"/#/product/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"},
+      {url:"/#/product/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+      $scope.title = "PRODUCTS"
+      $scope.addUrl = "/#/product/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/product");
+      $scope.dtOptions = Library.DataTable.options("/api/products");
+    };
+    $scope.formInit = function(){
+
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.brands = Api.Collection('brands').query();
+      $scope.uoms = Api.Collection('uom').query();
+      $scope.payment_terms = Api.Collection('payment_term').query();
+      $scope.product_status = Api.Collection('product_status').query();
+      $scope.movements = Api.Collection('movements').query();
+      $scope.suppliers = Api.Collection('suppliers').query();
+
+      $scope.action = action;
+      if(id && action == 'read'){
+        $scope.title = "VIEW PRODUCT " + id;
+        $scope.product =  Api.Collection('products').get({id:$routeParams.id});
+      }
+      if(id && action == 'edit'){
+        $scope.title = "EDIT PRODUCT " + id;
+        $scope.product =  Api.Collection('products').get({id:$routeParams.id});
+        $scope.saveProduct = function(){
+          var product_photo = $scope.product.product_photo;
+      //    delete $scope.product.product_photo;
+          var uploadUrl = '/api/products/'+id+'/upload';
+
+          $scope.product.$update(function(){
+            fileUpload.uploadFileToUrl('product_photo',product_photo, uploadUrl);
+            console.log($scope.product);
+            console.log(product_photo);
+
+        //    $location.path('/product/index');
+          //  return false;
+          });
+        };
+        $scope.deleteProduct=function(user){
+          if(popupService.showPopup('You are about to delete Record : '+product._id)){
+            $scope.product.$delete(function(){
+              $location.path('/product/index');
+              return false;
+            });
+          }
+        };
+      }
+      if(action == 'add'){
+        $scope.title = "ADD PRODUCT";
+
+        var Product = Api.Collection('products');
+        $scope.product = new Product();
+        $scope.saveProduct = function(){
+          $scope.product.$save(function(){
+            $location.path('/product/index');
+            return false;
+          });
+        }
+      }
+    }
   });
-  $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
 }).controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
 

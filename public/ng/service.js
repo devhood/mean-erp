@@ -15,7 +15,8 @@ angular.module('erp')
     return {
       Sales : $resource('/data/structure/sales.json'),
       Users : $resource('/data/structure/users.json'),
-      Customers : $resource('/data/structure/customers.json')
+      Customers : $resource('/data/structure/customers.json'),
+      Products : $resource('/data/structure/products.json')
     }
   })
   .factory('Api', function ($resource) {
@@ -70,4 +71,31 @@ angular.module('erp')
       },
 
     };
-  });
+  }).service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(key,file, uploadUrl){
+      var fd = new FormData();
+      fd.append(key, file);
+      $http.put(uploadUrl, fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+      })
+      .success(function(){
+      })
+      .error(function(){
+      });
+    }
+  }]).directive('fileModel', ['$parse', function ($parse) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function(){
+          scope.$apply(function(){
+            modelSetter(scope, element[0].files[0]);
+          });
+        });
+      }
+    };
+  }]);

@@ -1,17 +1,14 @@
 block title
 	title ADD PRODUCT PROFILE
-.portlet.box.grey
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
 	.portlet-title
 		.caption
 			i.fa.fa-reorder
 			| {{title}}
 		.tools
 			a.collapse(href="javascript:;")
-			a.config(href="#portlet-config", data-toggle="modal")
-			a.reload(href="javascript:;")
-			a.remove(href="javascript:;")
 	.portlet-body.form
-		form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addProduct()", novalidate)
+		form.form-horizontal(role="form", name="add_form", enctype="multipart/form-data", ng-submit="add_form.$valid && saveProduct()", novalidate)
 			.form-body
 				.row
 					.col-md-6
@@ -47,7 +44,7 @@ block title
 												| Upload Photo
 											span.fileinput-exists
 												| Change
-											input(type="file", name="...")
+											input(type="file", name="product_photo", file-model="product.product_photo")
 										a.btn.default.fileinput-exists(href="#", data-dismiss="fileinput")
 												| Remove
 				.row
@@ -73,7 +70,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.status as status.status for status in statuses", ng-selected="{{product.status}}", required)
+								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.status as status.status for status in product_status", ng-selected="{{product.status}}", required)
 								span.col-md-12.help-block Status
 					.col-md-6
 						.form-group
@@ -95,8 +92,8 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#currency.select2me.form-control.select2-offscreen(ng-model="product.currency", tabindex="-1",ng-options="currency.currency as currency.currency for currency in currencies", ng-selected="{{product.currency}}", required)
-								span.col-md-12.help-block Currency
+								input#Family.form-control(type="text", ng-model="product.family")
+								span.col-md-12.help-block Product Family
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
@@ -113,7 +110,7 @@ block title
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
 								input#professional_price.form-control(type="number", ng-model="product.professional_price", ng-minlength="0", ng-maxlength="20", required)
 								span.col-md-12.help-block Professional Price
-				.portlet.box.grey
+				.portlet.box.grey(ng-show="action=='read'")
 					.portlet-title
 						.caption
 							i.fa.fa-reorder

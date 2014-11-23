@@ -82,19 +82,19 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#credit_limit.form-control(type="number", ng-model="customer.credit_limit" ng-minlength="0", ng-maxlength="10", ng-disabled="action=='read'", required)
+								input#credit_limit.form-control(type="number", ng-model="customer.credit_limit" ng-minlength="0", ng-maxlength="10", ng-disabled="action!='approve'")
 								span.col-md-12.help-block	Credit Limit
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								input#transaction_limit.form-control(type="text", ng-model="customer.transaction_limit", min="1", max="3", ui-mask="9" ng-disabled="action=='read'", required)
+								input#transaction_limit.form-control(type="text", ng-model="customer.transaction_limit", min="1", max="3", ui-mask="9" ng-disabled="action!='approve'")
 								span.col-md-12.help-block
 									| Unpaid Transaction Limit
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#payment_term.select2me.form-control.select2-offscreen(ng-model="customer.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{customer.payment_term}}" ng-disabled="action=='read'", required)
+								select#payment_term.select2me.form-control.select2-offscreen(ng-model="customer.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{customer.payment_term}}" ng-disabled="action!='approve'")
 								span.col-md-12.help-block	Payment Terms
 					.col-md-6
 						.form-group
@@ -296,7 +296,7 @@ block title
 						.col-md-offset-3.col-md-9
 							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
 							| &nbsp;
-							button.btn.red(type="button", ng-click="deleteCustomer(customer)", ng-show="action=='edit'") Delete
+							button.btn.red(type="button", ng-click="deleteCustomer(customer)", ng-show="action=='edit' && action=='approve'") Delete
 							| &nbsp;
 							a.btn.default(type="button", href="/#/customer/index") Cancel
 					.col-md-6

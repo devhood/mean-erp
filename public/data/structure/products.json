@@ -4,6 +4,11 @@
   "title": "BL Code",
   "type": "text"
 },
+"photo_url": {
+  "name": "photo_url",
+  "title": "Product Photo",
+  "type": "file"
+},
 "brand": {
   "name": "brand",
   "title": "Brand",
@@ -64,10 +69,10 @@
   "title": "Supplier",
   "type": "select"
 },
-"currency": {
-  "name": "currency",
-  "title": "Currency",
-  "type": "select"
+"family": {
+  "name": "family",
+  "title": "Product Family",
+  "type": "text"
 },
 "international_cost": {
   "name": "international_cost",
@@ -83,19 +88,5 @@
   "name": "professional_price",
   "title": "Professional Price",
   "type": "number"
-},
-
-/*"ordered_items":{
-  "name": "___",
-  "title": "___",
-  "type": "table",
-  "child_items": {
-    "___": {
-      "name": "___",
-      "title": "___",
-      "type": "text"
-    }
-  }
-}*/
-
+}
 }]

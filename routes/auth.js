@@ -21,12 +21,10 @@ router.get('/login',function(req,res){
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     var error = err || info;
-    console.log(err,user,info);
     if (error) { res.redirect("/auth/login") }
     else{
       req.logIn(user, function(err) {
         if (err) {
-          console.log(err);
           return res.send(err);
         }
         else{
