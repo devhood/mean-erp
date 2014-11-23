@@ -49,7 +49,12 @@ angular.module('erp')
         }
         return dtcolumns;
       }
-    },
+  },
+  Compute : {
+      Order : function(items,discount,){
+
+      }
+  },
   Status : {
     Sales : {
       order : {

@@ -467,6 +467,7 @@ angular.module('erp')
 
   var id = $routeParams.id;
   var action = $routeParams.action;
+  $scope.action = action;
   $scope.transaction_types = Api.Collection('transaction_types').query();
   $scope.customers = Api.Collection('customers').query();
   $scope.price_types = Api.Collection('price_type').query();
@@ -477,5 +478,65 @@ angular.module('erp')
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
   $scope.products = Api.Collection('products').query();
-  $scope.title = "ADD SALES ORDER"
+
+  $scope.CustomerChange = function(){
+    if($scope.sales.customer){
+      $scope.shipping_address =
+          $scope.sales.customer.shipping_address.landmark + ', ' +
+          $scope.sales.customer.shipping_address.barangay + ', ' +
+          $scope.sales.customer.shipping_address.city + ', ' +
+          $scope.sales.customer.shipping_address.province + ', ' +
+          $scope.sales.customer.shipping_address.country + ', ' +
+          $scope.sales.customer.shipping_address.zipcode;
+      $scope.billing_address =
+          $scope.sales.customer.billing_address.landmark + ', ' +
+          $scope.sales.customer.billing_address.barangay + ', ' +
+          $scope.sales.customer.billing_address.city + ', ' +
+          $scope.sales.customer.billing_address.province + ', ' +
+          $scope.sales.customer.billing_address.country + ', ' +
+          $scope.sales.customer.billing_address.zipcode;
+    }
+  }
+  $scope.addOrder = function(sales){
+    var item = angular.copy(sales.item);
+    if( item && item.name && item.quantity ){
+      if(sales.customer.price_type == "Professional"){
+        item.price = item.professional_price
+      }
+      if(sales.customer.price_type == "Retail"){
+        item.price = item.retail_price;
+      }
+      if(item.override != "NORMAL"){
+        item.price = item.override;
+        item.total = 0.00;
+      }
+      if(!isNaN(item.price)){
+        item.total = item.quantity * item.price;
+      }
+      if($scope.sales.ordered_items){
+        $scope.sales.ordered_items.push(item);
+      }
+      else{
+        $scope.sales.ordered_items = [item];
+      }
+      delete sales.item;
+    }
+  }
+
+  $scope.removeOrder = function(index){
+    $scope.sales.ordered_items.splice(index, 1);
+  }
+  if(action == 'add'){
+    $scope.title = "ADD SALES ORDER";
+    var Sales = Api.Collection('sales');
+    $scope.sales = new Sales();
+
+    $scope.saveSales = function(){
+      $scope.product.$save(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    }
+  }
+
 });

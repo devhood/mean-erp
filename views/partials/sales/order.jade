@@ -11,7 +11,7 @@ block title
       a.reload(href="javascript:;")
       a.remove(href="javascript:;")
   .portlet-body.form
-    form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addSales()", novalidate)
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && addSales()", novalidate)
       .form-body
         .row
           .col-md-6
@@ -29,7 +29,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                select.select2me.form-control.select2-offscreen(ng-model="sales.company_name", ng-options="customer.company_name as customer.company_name for customer in customers", ng-selected="{{sales.company_name}}" ,tabindex="-1", required)
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="sales.customer", ng-options="customer.company_name for customer in customers", ng-selected="{{sales.company_name}}" ,tabindex="-1", required, ng-disabled="sales.ordered_items && sales.ordered_items.length")
                 span.col-md-12.help-block Customer
           .col-md-1
         .row(ng-show="sales.customer")
@@ -37,7 +37,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="sales.shipping_address", disabled)
+                input.form-control(type="text", ng-value="shipping_address", disabled)
                 span.col-md-12.help-block Shipping Address
           .col-md-1
         .row(ng-show="sales.customer")
@@ -45,36 +45,36 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="sales.billing_address", disabled)
+                input.form-control(type="text", ng-value="billing_address", disabled)
                 span.col-md-12.help-block Billing Address
           .col-md-1
         .row(ng-show="sales.customer")
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.price_type", ng-options="price_type.price_type_name as price_type.price_type_name for price_type in price_types", ng-selected="{{sales.price_type}}" ,tabindex="-1", disabled)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.price_type_name as price_type.price_type_name for price_type in price_types" ,tabindex="-1", , ng-disabled="action!='approve'")
                 span.col-md-12.help-block Price Type
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.discount", ng-options="discount.discount as discount.discount for discount in discounts", ng-selected="{{sales.discount}}" ,disabled)
-                span.col-md-12.help-block Discount
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.discount as discount.discount for discount in discounts", ng-selected="{{sales.discount}}" ,ng-disabled="action!='approve'")
+                span.col-md-12.help-block Permanent Discount
         .row(ng-show="sales.customer")
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-value="sales.sales_executive", disabled)
+                input.form-control(type="text", ng-model="sales.customer.sales_executive", ng-disabled="action!='approve'")
                 span.col-md-12.help-block Sales Executive
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{sales.payment_term}}" ,tabindex="-1", disabled)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms",tabindex="-1", ng-disabled="action!='approve'")
                 span.col-md-12.help-block Payment Terms
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.order_source as order_source.order_source for order_source in order_sources", ng-selected="{{sales.order_source}}" ,tabindex="-1", required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.order_source as order_source.order_source for order_source in order_sources", tabindex="-1", required)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
@@ -100,7 +100,7 @@ block title
                 input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", required)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
-        .portlet.box.grey
+        .portlet.box.grey(ng-show="sales.customer")
           .portlet-title
             .caption
               i.fa.fa-reorder
@@ -128,6 +128,7 @@ block title
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         select.select2me.form-control.select2-offscreen(ng-model="sales.item.override")
+                          option(value='NORMAL') None
                           option(value='FREEBIE') Freebie
                           option(value='DEMO') Demo
                         span.col-md-12.help-block Override
@@ -151,14 +152,14 @@ block title
                               th Total
                               th(width="5%") Action
                           tbody
-                            tr(ng-repeat="ordered_item in sales.ordered_items")
-                              td {{ordered_item.item.name}}
+                            tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
+                              td {{ordered_item.name}}
                               td {{ordered_item.quantity}}
                               td {{ordered_item.price}}
                               td {{ordered_item.total}}
                               td(width="5%")
                                 .btn-group.btn-group-xs.btn-group-solid
-                                  a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
                 .col-md-1
         .row
@@ -217,6 +218,9 @@ block title
         .row
           .col-md-6
             .col-md-offset-3.col-md-9
-              button.btn.green(type="submit") Approve &amp; Send
-              button.btn.default(type="button", ui-sref="salesProforma") Cancel
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              | &nbsp;
+              button.btn.red(type="button", ng-click="deleteSales(sales)", ng-show="action=='edit' || action=='approve'") Delete
+              | &nbsp;
+              a.btn.default(type="button", href="/#/sales/index/order") Cancel
           .col-md-6
