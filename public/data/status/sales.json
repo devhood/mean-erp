@@ -5,6 +5,10 @@
         "status_code": "SALES_ORDER_CREATED",
         "status_name": "Sales-Order submitted"
       },
+      "override": {
+        "status_code": "SALES_ORDER_OVERRIDE",
+        "status_name": "Sales-Order for approval"
+      },
       "revised": {
         "status_code": "SALES_ORDER_REVISED",
         "status_name": "Sales-Order revised"

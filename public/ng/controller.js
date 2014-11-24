@@ -409,8 +409,8 @@ angular.module('erp')
         case "order" :
 
             columns = [
-              $scope.structure.sono, $scope.structure.customer, $scope.structure.sales_executive,
-              $scope.structure.delivery_method, $scope.structure.payment_term, $scope.structure.status
+              $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+              $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
             ];
 
             buttons = [
@@ -418,9 +418,26 @@ angular.module('erp')
               {url:"/#/sales/order/edit/",title:"Edit Record",icon:"fa fa-edit"},
               {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-edit"}
             ];
-            query.status_code = {"$in" : [status.order.created]};
+
+            query = { "status.status_code" : {"$in" : [status.order.created.status_code]}};
             $scope.title = "SALES ORDERS"
             $scope.addUrl = "/#/sales/order/add"
+
+        break;
+        case "override" :
+
+          columns = [
+            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+          ];
+
+          buttons = [
+            {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-edit"}
+          ];
+
+          query = { "status.status_code" : {"$in" : [status.order.override.status_code]}};
+          $scope.title = "APPROVE SALES ORDERS";
 
         break;
         case "delivery" :
@@ -435,6 +452,7 @@ angular.module('erp')
             {url:"/#/sales/delivery/edit/",title:"Edit Record",icon:"fa fa-edit"},
             {url:"/#/sales/delivery/approve/",title:"Approve Record",icon:"fa fa-edit"}
           ];
+
           query.status_code = {"$in" : [status.order.created]};
           $scope.title = "DELIVERY RECEIPTS"
 
@@ -478,6 +496,7 @@ angular.module('erp')
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
   $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Sales;
 
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
@@ -523,8 +542,12 @@ angular.module('erp')
       delete sales.item;
     }
     $scope.sales.subtotal = 0;
+    $scope.sales.isNeedApproval = false;
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
       $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+      if($scope.sales.ordered_items[i].override != "NORMAL"){
+        $scope.sales.isNeedApproval = true;
+      }
     }
      var computation = Library.Compute.Order(
         $scope.sales.subtotal,
@@ -557,8 +580,12 @@ angular.module('erp')
   $scope.removeOrder = function(index){
     $scope.sales.ordered_items.splice(index, 1);
     $scope.sales.subtotal = 0;
+    $scope.sales.isNeedApproval = false;
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
       $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+      if($scope.sales.ordered_items[i].override != "NORMAL"){
+        $scope.sales.isNeedApproval = true;
+      }
     }
   }
   if(action == 'add'){
@@ -567,11 +594,67 @@ angular.module('erp')
     $scope.sales = new Sales();
 
     $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+
+        $scope.sales.status = status.order.override;
+        console.log($scope.sales);
+      }
+      else{
+        $scope.sales.status = status.order.created;
+      }
       $scope.sales.$save(function(){
         $location.path('/sales/index/order');
         return false;
       });
     }
+  }
+  if(action == 'edit'){
+
+    $scope.title = "EDIT SALES ORDER "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.order.override;
+      }
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    };
+    $scope.deleteSales=function(sales){
+      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
+        $scope.sales.$delete(function(){
+          $location.path('/sales/index/order');
+          return false;
+        });
+      }
+    };
+  }
+  if(action == 'approve'){
+
+    $scope.title = "APPROVE SALES ORDER "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.order.created;
+      }
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    };
+    $scope.deleteSales=function(sales){
+      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
+        $scope.sales.$delete(function(){
+          $location.path('/sales/index/order');
+          return false;
+        });
+      }
+    };
   }
 
 });

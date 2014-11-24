@@ -122,7 +122,12 @@
         "title": "Adjustment",
         "description": "Adjustment",
         "href": "/#/adjustment/index"
-      }
+      },
+      {
+        "title": "Approve Sales Order",
+        "description": "Create Sales Order",
+        "href": "/#/sales/index/order"
+      },
     ]
   }
 ]

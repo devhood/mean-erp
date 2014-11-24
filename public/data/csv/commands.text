@@ -1,0 +1,1 @@
+mongoimport --db erp-beautylane --collection number_generator --type csv --headerline --file public/data/csv/nogen.csv 
