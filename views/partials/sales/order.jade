@@ -11,7 +11,7 @@ block title
       a.reload(href="javascript:;")
       a.remove(href="javascript:;")
   .portlet-body.form
-    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && addSales()", novalidate)
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSales()", novalidate)
       .form-body
         .row
           .col-md-6
@@ -187,7 +187,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
-                input.form-control(type="checkbox", ng-model="sales.is_vat_percent",ng-checked="computeVat(sales)", value=".11")
+                input.form-control(type="checkbox", ng-model="sales.isWithholdingTax",ng-checked="reCompute(sales)", value="1")
               .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
                 input.form-control(type="text", ng-model="sales.withholding_tax", readonly)
                 span.col-md-12.help-block W/Holding Tax
@@ -200,7 +200,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
-                input.form-control(type="checkbox", ng-model="sales.is_zero_rated",ng-checked="computeZeroRated(sales)", value="1")
+                input.form-control(type="checkbox", ng-model="sales.isZeroRateSales",ng-checked="reCompute(sales)", value="1")
               .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
                 input.form-control(type="text", ng-model="sales.zero_rate_sales", readonly)
                 span.col-md-12.help-block VAT Exempt/ Zero Rated Sales

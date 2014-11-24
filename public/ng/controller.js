@@ -499,7 +499,8 @@ angular.module('erp')
   }
   $scope.addOrder = function(sales){
     var item = angular.copy(sales.item);
-    if( item && item.name && item.quantity ){
+    if( item && item.name && item.quantity && item.quantity ){
+      item.override = item.override ? item.override : "NORMAL";
       if(sales.customer.price_type == "Professional"){
         item.price = item.professional_price
       }
@@ -521,10 +522,44 @@ angular.module('erp')
       }
       delete sales.item;
     }
+    $scope.sales.subtotal = 0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+    }
+     var computation = Library.Compute.Order(
+        $scope.sales.subtotal,
+        $scope.sales.customer.discount.replace(" %","")/100,
+        $scope.sales.isWithholdingTax,
+        $scope.sales.isZeroRateSales
+     );
+     $scope.sales.discount = computation.totalDiscount;
+     $scope.sales.total_vat = computation.vatableSales;
+     $scope.sales.total_amount_due = computation.totalAmountDue;
+     $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+     $scope.sales.withholding_tax = computation.withholdingTax;
   }
 
+  $scope.reCompute = function(sales){
+    if($scope.sales.customer){
+      var computation = Library.Compute.Order(
+        $scope.sales.subtotal,
+        $scope.sales.customer.discount.replace(" %","")/100,
+        $scope.sales.isWithholdingTax,
+        $scope.sales.isZeroRateSales
+      );
+      $scope.sales.discount = computation.totalDiscount;
+      $scope.sales.total_vat = computation.vatableSales;
+      $scope.sales.total_amount_due = computation.totalAmountDue;
+      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+      $scope.sales.withholding_tax = computation.withholdingTax;
+    }
+  }
   $scope.removeOrder = function(index){
     $scope.sales.ordered_items.splice(index, 1);
+    $scope.sales.subtotal = 0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+    }
   }
   if(action == 'add'){
     $scope.title = "ADD SALES ORDER";
@@ -532,7 +567,7 @@ angular.module('erp')
     $scope.sales = new Sales();
 
     $scope.saveSales = function(){
-      $scope.product.$save(function(){
+      $scope.sales.$save(function(){
         $location.path('/sales/index/order');
         return false;
       });

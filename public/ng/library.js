@@ -51,8 +51,22 @@ angular.module('erp')
       }
   },
   Compute : {
-      Order : function(items,discount,){
+      Order : function(total,discount,isWithholdingTax,isVatZeroRated){
+          var totalDiscount = total * discount;
+          var vatableSales = total - totalDiscount;
+          var taxAmount = total - (total / 1.12);
+          var withholdingTax = isWithholdingTax ? (total * 0.01) : 0.00;
+          var zeroRatedSales = isVatZeroRated ? total : 0.00;
+          var totalAmountDue = isVatZeroRated ? (total - totalDiscount - withholdingTax - taxAmount) : (total - totalDiscount - withholdingTax);
 
+          return {
+            totalDiscount: totalDiscount,
+            vatableSales: vatableSales,
+            taxAmount : taxAmount,
+            withholdingTax : withholdingTax,
+            zeroRatedSales : zeroRatedSales,
+            totalAmountDue : totalAmountDue
+          };
       }
   },
   Status : {
