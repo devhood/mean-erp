@@ -52,6 +52,30 @@ angular.module('erp', [
         templateUrl: '/partials/product/add',
         controller: 'ProductCtrl'
       })
+      .when('/packing/index', {
+        templateUrl: '/partials/packing/index',
+        controller: 'PackingCtrl'
+      })
+      .when('/packing/:action', {
+        templateUrl: '/partials/packing/add',
+        controller: 'PackingCtrl'
+      })
+      .when('/packing/:action/:id', {
+        templateUrl: '/partials/packing/add',
+        controller: 'PackingCtrl'
+      })
+      .when('/trips/index', {
+        templateUrl: '/partials/trips/index',
+        controller: 'TripsCtrl'
+      })
+      .when('/trips/:action', {
+        templateUrl: '/partials/trips/add',
+        controller: 'TripsCtrl'
+      })
+      .when('/trips/:action/:id', {
+        templateUrl: '/partials/trips/add',
+        controller: 'TripsCtrl'
+      })
       .when('/sales/index/:type', {
         templateUrl: '/partials/sales/index',
         controller: 'SalesCtrl'

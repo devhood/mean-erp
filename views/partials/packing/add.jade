@@ -1,0 +1,106 @@
+block title
+	title ADD PRODUCT PROFILE
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
+	.portlet-title
+		.caption
+			i.fa.fa-reorder
+			| {{title}}
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body.form
+		form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && savePacking()", novalidate)
+			.form-body
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location.company_name as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{packing.inventory_location}}", ng-disabled="action=='read'",required)
+								span.col-md-12.help-block Inventory Location
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input.form-control(type="text", ng-change="ListChange()", ng-model="packing.delivery_date", ng-disabled="action=='read'",required)
+								span.col-md-12.help-block Delivery Date
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input.form-control(type="text", ng-model="packing.prepared_by", ng-disabled="action=='read'",required)
+								span.col-md-12.help-block Prepared By
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input.form-control(type="text", ng-model="packing.preparation_date", ng-disabled="action=='read'",required)
+								span.col-md-12.help-block Preparation Date
+				.portlet.box.grey
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							| LIST OF ORDER
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						.form-body
+							.form-group
+								.col-md-1
+								.col-md-10
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th SO Number
+															th Customer
+															th Brand
+															th Product
+															th Quantity
+													tbody
+														tr(ng-repeat="item in packing.list")
+															td {{item.sono}}
+															td {{item.customer}}
+															td {{item.brand}}
+															td {{item.product}}
+															td {{item.quantity}}
+								.col-md-1
+				.portlet.box.grey(ng-show="action=='read'")
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							| ALMOST THE SAME WITH THE FF
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						.row
+							br
+							.col-md-12(height="160")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+						.row
+							br
+							.col-md-12(height="160")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+								.col-md-3
+									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+							| &nbsp;
+							button.btn.red(type="button", ng-click="deleteProduct(product)", ng-show="action=='edit' || action=='approve'") Delete
+							| &nbsp;
+							a.btn.default(type="button", href="/#/product/index") Cancel
+					.col-md-6

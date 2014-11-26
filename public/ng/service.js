@@ -16,7 +16,9 @@ angular.module('erp')
       Sales : $resource('/data/structure/sales.json'),
       Users : $resource('/data/structure/users.json'),
       Customers : $resource('/data/structure/customers.json'),
-      Products : $resource('/data/structure/products.json')
+      Products : $resource('/data/structure/products.json'),
+      Packing : $resource('/data/structure/packing.json'),
+      Trips : $resource('/data/structure/trips.json')
     }
   })
   .factory('Api', function ($resource) {

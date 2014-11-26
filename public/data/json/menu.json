@@ -38,7 +38,7 @@
       {
         "title": "Print Pick List",
         "description": "Prepare Items for Delivery",
-        "href": "/#/salesPickList/index"
+        "href": "/#/packing/index"
       },
       {
         "title": "Delivery Receipts",
@@ -48,7 +48,7 @@
       {
         "title": "Trip Ticket",
         "description": "Print and Update Trip Ticket",
-        "href": "/#/salesTripTicket/index"
+        "href": "/#/trips/index"
       },
       {
         "title": "Print DR and SI",

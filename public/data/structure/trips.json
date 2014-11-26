@@ -1,0 +1,44 @@
+[
+  {
+    "inventory_location" : {
+      "name": "inventory_location",
+      "title": "Inventory Location",
+      "type": "select"
+    },
+    "delivery_date" : {
+      "name": "delivery_date",
+      "title": "Delivery Date",
+      "type": "select"
+    },
+    "release_by" : {
+      "name": "release_by",
+      "title": "Release By",
+      "type": "select"
+    },
+    "release_to" : {
+      "name": "release_to",
+      "title": "Release To",
+      "type": "select"
+    },
+    "release_date" : {
+      "name": "release_date",
+      "title": "Release Date",
+      "type": "select"
+    },
+    "received_by" : {
+      "name": "received_by",
+      "title": "Received By",
+      "type": "select"
+    },
+    "received_date" : {
+      "name": "received_date",
+      "title": "Received Date",
+      "type": "select"
+    },
+    "trpno" : {
+      "name": "trpno",
+      "title": "Trip No",
+      "type": "select"
+    }
+  }
+]

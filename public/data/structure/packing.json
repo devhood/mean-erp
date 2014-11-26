@@ -1,0 +1,29 @@
+[
+  {
+    "inventory_location" : {
+      "name": "inventory_location",
+      "title": "Inventory Location",
+      "type": "select"
+    },
+    "delivery_date" : {
+      "name": "delivery_date",
+      "title": "Delivery Date",
+      "type": "select"
+    },
+    "prepared_by" : {
+      "name": "prepared_by",
+      "title": "Prepared By",
+      "type": "select"
+    },
+    "preparation_date" : {
+      "name": "preparation_date",
+      "title": "Prepared By",
+      "type": "select"
+    },
+    "pckno" : {
+      "name": "pckno",
+      "title": "Pack No",
+      "type": "select"
+    }
+  }
+]

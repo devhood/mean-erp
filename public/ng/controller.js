@@ -750,4 +750,99 @@ angular.module('erp')
       });
     };
   }
+})
+.controller('PackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Packing.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.init = function(){
+      columns = [
+      $scope.structure.pckno, $scope.structure.inventory_location, $scope.structure.delivery_date, $scope.structure.prepared_by,
+      $scope.structure.preparation_date
+      ];
+
+      buttons = [
+      {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/packing/edit/",title:"Edit Record",icon:"fa fa-edit"}
+      ];
+      $scope.title = "PACKING"
+      $scope.addUrl = "/#/packing/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/packing");
+    };
+    $scope.formInit = function(){
+
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+
+      $scope.inventory_locations = Api.Collection('customers',query).query();
+      $scope.ListChange = function(){
+          $scope.packing.list = [];
+          if($scope.packing.inventory_location){
+            var query = {"inventory_location":$scope.packing.inventory_location};
+            Api.Collection('sales',query).query().$promise.then(function(data){
+              console.log(data);
+              for(var i in data){
+                for(var j in data[i].ordered_items){
+                  var item = {
+                    sono : data[i].sono,
+                    customer : data[i].customer.company_name,
+                    brand : data[i].ordered_items[j].brand,
+                    product : data[i].ordered_items[j].name,
+                    quantity : data[i].ordered_items[j].quantity,
+                  };
+                  $scope.packing.list.push(item);
+                }
+              }
+
+            });
+
+
+          }
+      };
+
+      $scope.action = action;
+      if(id && action == 'read'){
+        $scope.title = "VIEW PACKING " + id;
+        $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
+      }
+      if(id && action == 'edit'){
+        $scope.title = "EDIT PACKING " + id;
+        $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
+
+        $scope.savePacking = function(){
+          $scope.packing.$update(function(){
+            $location.path('/packing/index');
+            return false;
+          });
+        };
+
+        $scope.deletePacking=function(packing){
+          if(popupService.showPopup('You are about to delete Record : '+packing._id)){
+            $scope.packing.$delete(function(){
+              $location.path('/packing/index');
+              return false;
+            });
+          }
+        };
+      }
+      if(action == 'add'){
+        $scope.title = "ADD PACKING";
+
+        var Packing = Api.Collection('packing');
+        $scope.packing = new Packing();
+        $scope.savePacking = function(){
+          $scope.packing.$save(function(){
+            $location.path('/packing/index');
+            return false;
+          });
+        }
+      }
+    }
+  });
 });
