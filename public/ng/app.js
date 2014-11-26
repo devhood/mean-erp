@@ -66,7 +66,7 @@ angular.module('erp', [
       })
       .when('/sales/delivery/:action/:id', {
         templateUrl: '/partials/sales/delivery',
-        controller: 'SalesCtrl'
+        controller: 'DeliveryReceiptCtrl'
       })
       .when('/sales/invoice/:action/:id', {
         templateUrl: '/partials/sales/invoice',

@@ -39,7 +39,7 @@ angular.module('erp')
         if(buttons.length){
           dtcolumns.push(DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
           .renderWith(function(data, type, full, meta) {
-            var btnGroup = '<div class="btn-group btn-group-xs btn-group-solid">';
+            var btnGroup = '<div class="btn-group btn-group-xs btn-group-solid style="min-width:100px;">';
             for(var i in buttons){
               btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
             }
