@@ -1,0 +1,5 @@
+status,description
+Active,"Allowed to Transact"
+Inactive,"Not Allowed to Transact"
+Suspended,"Account is temporary not allowed to Transact"
+Blocked,"Account is permanently not allowed to Transact"

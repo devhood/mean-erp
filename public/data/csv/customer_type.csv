@@ -1,0 +1,4 @@
+type_name,type_description
+Professional,"Professional Customer"
+Retail, "Retail Customer"
+Consignment, "Consignment Customer"

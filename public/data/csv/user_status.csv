@@ -1,0 +1,5 @@
+status,description
+Active,"Allowed to Access"
+Inactive,"Not Allowed to Access"
+Suspended,"Account is temporary not allowed to access"
+Blocked,"Account is permanently not allowed to access"

@@ -1,0 +1,13 @@
+position_name,position_description
+Developer,"ERP Developer"
+"President/CEO", "Full Access"
+"Accounting Manager", "Full Accounting Access"
+"Warehouse Manager", "Full Warehouse Access"
+"HR Manager", "Full HR Access"
+"Sales Manager", "Full Sales Access"
+"Administrator", "Full Access"
+"Accounting Staff", "Limited Access"
+"Warehouse Staff", "Limited Access"
+"Sales Executive", "Limited Access"
+"Sales Assistant", "Limited Access"
+"Warehouse Supervisor", "Power User"
