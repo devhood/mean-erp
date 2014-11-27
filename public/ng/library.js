@@ -8,6 +8,7 @@ angular.module('erp')
         var options = DTOptionsBuilder
         .fromSource(api)
         .withBootstrap()
+        .withPaginationType('full_numbers')
         .withBootstrapOptions({
           TableTools: {
             classes: {
@@ -28,7 +29,6 @@ angular.module('erp')
 
         options.sScrollX = "100%";
         options.sScrollXInner = "100%";
-        options.bPaginate = false;
         return options;
       },
       columns : function(columns,buttons){
