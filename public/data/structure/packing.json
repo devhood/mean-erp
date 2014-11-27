@@ -17,7 +17,7 @@
     },
     "preparation_date" : {
       "name": "preparation_date",
-      "title": "Prepared By",
+      "title": "Preparation Date",
       "type": "select"
     },
     "pckno" : {

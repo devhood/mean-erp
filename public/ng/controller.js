@@ -779,7 +779,7 @@ angular.module('erp')
 
       var id = $routeParams.id;
       var action = $routeParams.action;
-
+      var status = Library.Status.Sales;
       $scope.inventory_locations = Api.Collection('customers',query).query();
       $scope.ListChange = function(){
           console.log($scope.packing.inventory_location,$scope.packing.delivery_date);
@@ -790,6 +790,7 @@ angular.module('erp')
               for(var i in data){
                 for(var j in data[i].ordered_items){
                   var item = {
+                    id : data[i]._id,
                     sono : data[i].sono,
                     customer : data[i].customer.company_name,
                     brand : data[i].ordered_items[j].brand,
@@ -815,14 +816,6 @@ angular.module('erp')
         $scope.title = "EDIT PACKING " + id;
         $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
 
-        $scope.savePacking = function(){
-          $scope.packing.status = status.packing.created;
-          $scope.packing.$update(function(){
-            $location.path('/packing/index');
-            return false;
-          });
-        };
-
         $scope.deletePacking=function(packing){
           if(popupService.showPopup('You are about to delete Record : '+packing._id)){
             $scope.packing.$delete(function(){
@@ -838,7 +831,34 @@ angular.module('erp')
         var Packing = Api.Collection('packing');
         $scope.packing = new Packing();
         $scope.savePacking = function(){
+          $scope.packing.status = status.packing.created;
           $scope.packing.$save(function(){
+            var sono = [];
+            async.each($scope.packing.list, function( item, callback) {
+              console.log(sono.indexOf(item.sono) > -1);
+              console.log(sono.indexOf(item.sono));
+              if(sono.indexOf(item.sono) == -1){
+                console.log(item.sono);
+                $scope.sales =  Api.Collection('sales').get({id : item.id},function(){
+                  console.log("chito",item.sono);
+                  $scope.sales.status = status.packing.created;
+                  $scope.sales.pckno = status.packing.pckno;
+                  $scope.sales.$update(function(){
+                    console.log('chito');
+                    sono.push(item.sono)
+                    callback();
+                  });
+                });
+              }
+              else{
+                callback();
+              }
+            },function(err){
+              if(err){
+                console.log(err);
+              }
+            });
+
             $location.path('/packing/index');
             return false;
           });
