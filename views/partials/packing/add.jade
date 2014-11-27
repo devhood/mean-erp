@@ -14,12 +14,12 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location.company_name as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{packing.inventory_location}}", ng-disabled="action=='read'",required)
+								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location.company_name as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Inventory Location
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input.form-control(type="text", ng-change="ListChange()", ng-model="packing.delivery_date", ng-disabled="action=='read'",required)
+								input.form-control(type="text", ng-change="ListChange()", ng-model="packing.delivery_date", ng-disabled="action=='read'", datepicker-popup="{{'MM/dd/yyyy'}}", required)
 								span.col-md-12.help-block Delivery Date
 				.row
 					.col-md-6
@@ -30,7 +30,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input.form-control(type="text", ng-model="packing.preparation_date", ng-disabled="action=='read'",required)
+								input.form-control(type="text", ng-model="packing.preparation_date", ng-disabled="action=='read'", datepicker-popup="{{'MM/dd/yyyy'}}",required)
 								span.col-md-12.help-block Preparation Date
 				.portlet.box.grey
 					.portlet-title
@@ -64,43 +64,13 @@ block title
 															td {{item.product}}
 															td {{item.quantity}}
 								.col-md-1
-				.portlet.box.grey(ng-show="action=='read'")
-					.portlet-title
-						.caption
-							i.fa.fa-reorder
-							| ALMOST THE SAME WITH THE FF
-						.tools
-							a.collapse(href="javascript:;")
-					.portlet-body.form
-						.row
-							br
-							.col-md-12(height="160")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
-						.row
-							br
-							.col-md-12(height="160")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
-								.col-md-3
-									img(src="http://www.placehold.it/220x150/EFEFEF/AAAAAA&text=no+image", alt="")
 			.form-actions.fluid
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
 							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
 							| &nbsp;
-							button.btn.red(type="button", ng-click="deleteProduct(product)", ng-show="action=='edit' || action=='approve'") Delete
+							button.btn.red(type="button", ng-click="deletePacking(packing)", ng-show="action=='edit' || action=='approve'") Delete
 							| &nbsp;
-							a.btn.default(type="button", href="/#/product/index") Cancel
+							a.btn.default(type="button", href="/#/packing/index") Cancel
 					.col-md-6

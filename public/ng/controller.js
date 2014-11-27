@@ -472,7 +472,7 @@ angular.module('erp')
           {url:"/#/sales/delivery/read/",title:"View Record",icon:"fa fa-folder-open"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.delivery.approved]}};
+          query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code]}};
           $scope.title1 = "APPROVED DELIVERY RECEIPTS";
 
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
@@ -782,11 +782,11 @@ angular.module('erp')
 
       $scope.inventory_locations = Api.Collection('customers',query).query();
       $scope.ListChange = function(){
+          console.log($scope.packing.inventory_location,$scope.packing.delivery_date);
           $scope.packing.list = [];
-          if($scope.packing.inventory_location){
-            var query = {"inventory_location":$scope.packing.inventory_location};
+          if($scope.packing.inventory_location && $scope.packing.delivery_date){
+            var query = {"inventory_location":$scope.packing.inventory_location, "delivery_date":$scope.packing.delivery_date};
             Api.Collection('sales',query).query().$promise.then(function(data){
-              console.log(data);
               for(var i in data){
                 for(var j in data[i].ordered_items){
                   var item = {
@@ -816,6 +816,7 @@ angular.module('erp')
         $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
 
         $scope.savePacking = function(){
+          $scope.packing.status = status.packing.created;
           $scope.packing.$update(function(){
             $location.path('/packing/index');
             return false;

@@ -8,7 +8,7 @@ mongoimport --db erp-beautylane --collection shipping_mode --type csv --headerli
 mongoimport --db erp-beautylane --collection price_type --type csv --headerline --file public/data/csv/price_type.csv
 mongoimport --db erp-beautylane --collection customer_status --type csv --headerline --file public/data/csv/customer_status.csv
 mongoimport --db erp-beautylane --collection countries --type csv --headerline --file public/data/csv/countries.csv
-mongoimport --db erp-beautylane --collection geography --type csv --headerline --file public/data/csv/geography.csv
+mongoimport --db erp-beautylane --collection geography --file public/data/csv/geography.json
 mongoimport --db erp-beautylane --collection product_status --type csv --headerline --file public/data/csv/product_status.csv
 mongoimport --db erp-beautylane --collection movements --type csv --headerline --file public/data/csv/movement.csv
 mongoimport --db erp-beautylane --collection suppliers --type csv --headerline --file public/data/csv/supplier.csv
