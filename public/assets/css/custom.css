@@ -54,6 +54,13 @@ div.dataTables_wrapper .dataTables_filter {
 div.dataTables_filter{
   float: left;
 }
+div.dataTables_length{
+  position: relative;
+  margin-left: 286px;
+  padding-top: 49px;
+  display: none;
+}
+}
 
 td {
   overflow: hidden;
