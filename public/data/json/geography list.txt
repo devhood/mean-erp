@@ -1,0 +1,18 @@
+geography_b1 list
+
+1.Cavite
+2.Bulacan
+3.Albay
+4.Cebu
+5.Ilo-ilo
+6.Davao del Sur
+7.Davao del Norte
+8.Davao Occidental
+9.Davao Oriental
+10.Laguna
+11.Aklan
+12. Lanao del Norte
+13.Benguet
+14.Bataan
+15.Metro Manila - Taguig
+16 Metro Manila - Quezon City

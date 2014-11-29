@@ -267,14 +267,13 @@ angular.module('erp')
     var query = {};
     $scope.init = function(){
       columns = [
-      $scope.structure.bl_code, $scope.structure.name, $scope.structure.brand,$scope.structure.family,
+      $scope.structure.bl_code, $scope.structure.name, $scope.structure.brand,
       $scope.structure.size, $scope.structure.color, $scope.structure.payment_term
       ];
 
       buttons = [
       {url:"/#/product/read/",title:"View Record",icon:"fa fa-folder-open"},
-      {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"},
-      {url:"/#/product/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      {url:"/#/product/edit/",title:"Edit Record",icon:"fa fa-edit"}
       ];
       $scope.title = "PRODUCTS"
       $scope.addUrl = "/#/product/add"
@@ -457,7 +456,7 @@ angular.module('erp')
             {url:"/#/sales/delivery/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.order.created.status_code]}};
+          query = { "status.status_code" : {"$in" : [status.packing.created.status_code]}};
           $scope.title = "DELIVERY RECEIPTS";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -689,68 +688,6 @@ angular.module('erp')
   }
 
 })
-.controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
-  var id = $routeParams.id;
-  var action = $routeParams.action;
-  $scope.action = action;
-  $scope.transaction_types = Api.Collection('transaction_types').query();
-  $scope.customers = Api.Collection('customers').query();
-  $scope.price_types = Api.Collection('price_type').query();
-  $scope.discounts = Api.Collection('discounts').query();
-  $scope.payment_terms = Api.Collection('payment_term').query();
-  $scope.order_sources = Api.Collection('order_source').query();
-  $scope.shipping_modes = Api.Collection('shipping_mode').query();
-  var query = {"type":"Retail"};
-  $scope.inventory_locations = Api.Collection('customers',query).query();
-  $scope.products = Api.Collection('products').query();
-  var status = Library.Status.Sales;
-
-  $scope.CustomerChange = function(){
-    if($scope.sales.customer){
-      $scope.shipping_address =
-      $scope.sales.customer.shipping_address.landmark + ', ' +
-      $scope.sales.customer.shipping_address.barangay + ', ' +
-      $scope.sales.customer.shipping_address.city + ', ' +
-      $scope.sales.customer.shipping_address.province + ', ' +
-      $scope.sales.customer.shipping_address.country + ', ' +
-      $scope.sales.customer.shipping_address.zipcode;
-      $scope.billing_address =
-      $scope.sales.customer.billing_address.landmark + ', ' +
-      $scope.sales.customer.billing_address.barangay + ', ' +
-      $scope.sales.customer.billing_address.city + ', ' +
-      $scope.sales.customer.billing_address.province + ', ' +
-      $scope.sales.customer.billing_address.country + ', ' +
-      $scope.sales.customer.billing_address.zipcode;
-    }
-  }
-  if(action == 'read'){
-    $scope.title = "VIEW DELIVERY RECEIPT";
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
-  }
-  if(action == 'approve'){
-
-    $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
-    $scope.saveSales = function(){
-      $scope.sales.status = status.delivery.approved;
-      $scope.sales.$update(function(){
-        $location.path('/sales/index/delivery');
-        return false;
-      });
-    };
-    $scope.rejectSales = function(){
-      $scope.sales.status = status.delivery.rejected;
-      $scope.sales.$update(function(){
-        $location.path('/sales/index/delivery');
-        return false;
-      });
-    };
-  }
-})
 .controller('PackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
   $scope.ajax_ready = false;
@@ -827,7 +764,6 @@ angular.module('erp')
       }
       if(action == 'add'){
         $scope.title = "ADD PACKING";
-
         var Packing = Api.Collection('packing');
         $scope.packing = new Packing();
         $scope.savePacking = function(){
@@ -835,17 +771,12 @@ angular.module('erp')
           $scope.packing.$save(function(){
             var sono = [];
             async.each($scope.packing.list, function( item, callback) {
-              console.log(sono.indexOf(item.sono) > -1);
-              console.log(sono.indexOf(item.sono));
               if(sono.indexOf(item.sono) == -1){
-                console.log(item.sono);
-                $scope.sales =  Api.Collection('sales').get({id : item.id},function(){
-                  console.log("chito",item.sono);
-                  $scope.sales.status = status.packing.created;
-                  $scope.sales.pckno = status.packing.pckno;
-                  $scope.sales.$update(function(){
-                    console.log('chito');
-                    sono.push(item.sono)
+                sono.push(item.sono);
+                Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
+                  sales.status = status.packing.created;
+                  sales.pckno =  $scope.packing.pckno;
+                  sales.$update(function(){
                     callback();
                   });
                 });
@@ -866,4 +797,67 @@ angular.module('erp')
       }
     }
   });
+})
+.controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_type').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_term').query();
+  $scope.order_sources = Api.Collection('order_source').query();
+  $scope.shipping_modes = Api.Collection('shipping_mode').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Sales;
+
+  $scope.CustomerChange = function(){
+    if($scope.sales.customer){
+      $scope.shipping_address =
+      $scope.sales.customer.shipping_address.landmark + ', ' +
+      $scope.sales.customer.shipping_address.barangay + ', ' +
+      $scope.sales.customer.shipping_address.city + ', ' +
+      $scope.sales.customer.shipping_address.province + ', ' +
+      $scope.sales.customer.shipping_address.country + ', ' +
+      $scope.sales.customer.shipping_address.zipcode;
+
+      $scope.billing_address =
+      $scope.sales.customer.billing_address.landmark + ', ' +
+      $scope.sales.customer.billing_address.barangay + ', ' +
+      $scope.sales.customer.billing_address.city + ', ' +
+      $scope.sales.customer.billing_address.province + ', ' +
+      $scope.sales.customer.billing_address.country + ', ' +
+      $scope.sales.customer.billing_address.zipcode;
+    }
+  }
+  if(action == 'read'){
+    $scope.title = "VIEW DELIVERY RECEIPT";
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+  if(action == 'approve'){
+
+    $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      $scope.sales.status = status.delivery.approved;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/delivery');
+        return false;
+      });
+    };
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.delivery.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/delivery');
+        return false;
+      });
+    };
+  }
 });
