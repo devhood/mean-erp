@@ -1,0 +1,113 @@
+{
+    "province": "Pampanga",
+    "cities": [
+        {
+            "city": "Apalit",
+            "zipcodes": [
+                {
+                    "area": "Apalit",
+                    "zipcode": "2016"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "___",
+            "zipcodes": [
+                {
+                    "area": "___",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Masantol",
+            "zipcodes": [
+                {
+                    "area": "Masantol",
+                    "zipcode": "2017"
+                }
+            ]
+        }
+    ]
+}

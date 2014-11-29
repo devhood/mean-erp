@@ -1,0 +1,203 @@
+{
+    "province": "Ilocos Norte",
+    "cities": [
+        {
+            "city": "Laoag",
+            "zipcodes": [
+                {
+                    "area": "Laoag",
+                    "zipcode": "2900"
+                }
+            ]
+        },
+        {
+            "city": "Batac",
+            "zipcodes": [
+                {
+                    "area": "Batac",
+                    "zipcode": "2906"
+                }
+            ]
+        },
+        {
+            "city": "Adams",
+            "zipcodes": [
+                {
+                    "area": "Adams",
+                    "zipcode": "2922"
+                }
+            ]
+        },
+        {
+            "city": "Bacarra",
+            "zipcodes": [
+                {
+                    "area": "Bacarra",
+                    "zipcode": "2916"
+                }
+            ]
+        },
+        {
+            "city": "Badoc",
+            "zipcodes": [
+                {
+                    "area": "Badoc",
+                    "zipcode": "2904"
+                }
+            ]
+        },
+        {
+            "city": "Bangui",
+            "zipcodes": [
+                {
+                    "area": "Bangui",
+                    "zipcode": "2920"
+                }
+            ]
+        },
+        {
+            "city": "Burgos",
+            "zipcodes": [
+                {
+                    "area": "Burgos",
+                    "zipcode": "2918"
+                }
+            ]
+        },
+        {
+            "city": "Carasi",
+            "zipcodes": [
+                {
+                    "area": "Carasi",
+                    "zipcode": "2911"
+                }
+            ]
+        },
+        {
+            "city": "Currimao",
+            "zipcodes": [
+                {
+                    "area": "Currimao",
+                    "zipcode": "2903"
+                }
+            ]
+        },
+        {
+            "city": "Dingras",
+            "zipcodes": [
+                {
+                    "area": "Dingras",
+                    "zipcode": "2913"
+                }
+            ]
+        },
+        {
+            "city": "Dumalneg",
+            "zipcodes": [
+                {
+                    "area": "Dumalneg",
+                    "zipcode": "2921"
+                }
+            ]
+        },
+        {
+            "city": "Marcos",
+            "zipcodes": [
+                {
+                    "area": "Marcos",
+                    "zipcode": "2907"
+                }
+            ]
+        },
+        {
+            "city": "Nueva Era",
+            "zipcodes": [
+                {
+                    "area": "Nueva Era",
+                    "zipcode": "2909"
+                }
+            ]
+        },
+        {
+            "city": "Pagudpud",
+            "zipcodes": [
+                {
+                    "area": "Pagudpud",
+                    "zipcode": "2919"
+                }
+            ]
+        },
+        {
+            "city": "Paoay",
+            "zipcodes": [
+                {
+                    "area": "Paoay",
+                    "zipcode": "2902"
+                }
+            ]
+        },
+        {
+            "city": "Pasuquin",
+            "zipcodes": [
+                {
+                    "area": "Pasuquin",
+                    "zipcode": "2917"
+                }
+            ]
+        },
+        {
+            "city": "Piddig",
+            "zipcodes": [
+                {
+                    "area": "Piddig",
+                    "zipcode": "2912"
+                }
+            ]
+        },
+        {
+            "city": "Pinili",
+            "zipcodes": [
+                {
+                    "area": "Pinili",
+                    "zipcode": "2905"
+                }
+            ]
+        },
+        {
+            "city": "San Nicolas",
+            "zipcodes": [
+                {
+                    "area": "San Nicolas",
+                    "zipcode": "2901"
+                }
+            ]
+        },
+        {
+            "city": "Sarrat",
+            "zipcodes": [
+                {
+                    "area": "Sarrat",
+                    "zipcode": "2914"
+                }
+            ]
+        },
+        {
+            "city": "Solsona",
+            "zipcodes": [
+                {
+                    "area": "Solsona",
+                    "zipcode": "2910"
+                }
+            ]
+        },
+        {
+            "city": "Vintar",
+            "zipcodes": [
+                {
+                    "area": "Vintar",
+                    "zipcode": "2915"
+                }
+            ]
+        }
+    ]
+}

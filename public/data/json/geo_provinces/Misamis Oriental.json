@@ -1,0 +1,248 @@
+{
+    "province": "Misamis Oriental",
+    "cities": [
+        {
+            "city": "Cagayan de Oro",
+            "zipcodes": [
+                {
+                    "area": "Cagayan de Oro",
+                    "zipcode": "9000"
+                }
+            ]
+        },
+        {
+            "city": "Gingoog",
+            "zipcodes": [
+                {
+                    "area": "Gingoog",
+                    "zipcode": "9014"
+                }
+            ]
+        },
+        {
+            "city": "El Salvador",
+            "zipcodes": [
+                {
+                    "area": "El Salvador",
+                    "zipcode": "9017"
+                }
+            ]
+        },
+        {
+            "city": "Alubijid",
+            "zipcodes": [
+                {
+                    "area": "Alubijid",
+                    "zipcode": "9018"
+                }
+            ]
+        },
+        {
+            "city": "Balingasag",
+            "zipcodes": [
+                {
+                    "area": "Balingasag",
+                    "zipcode": "9005"
+                }
+            ]
+        },
+        {
+            "city": "Balingoan",
+            "zipcodes": [
+                {
+                    "area": "Balingoan",
+                    "zipcode": "9011"
+                }
+            ]
+        },
+        {
+            "city": "Binuangan",
+            "zipcodes": [
+                {
+                    "area": "Binuangan",
+                    "zipcode": "9008"
+                }
+            ]
+        },
+        {
+            "city": "Claveria",
+            "zipcodes": [
+                {
+                    "area": "Claveria",
+                    "zipcode": "9004"
+                }
+            ]
+        },
+        {
+            "city": "El Salvador",
+            "zipcodes": [
+                {
+                    "area": "El Salvador",
+                    "zipcode": "9017"
+                }
+            ]
+        },
+        {
+            "city": "Gitagum",
+            "zipcodes": [
+                {
+                    "area": "Gitagum",
+                    "zipcode": "9020"
+                }
+            ]
+        },
+        {
+            "city": "Initao",
+            "zipcodes": [
+                {
+                    "area": "Initao",
+                    "zipcode": "9022"
+                }
+            ]
+        },
+        {
+            "city": "Jasaan",
+            "zipcodes": [
+                {
+                    "area": "Jasaan",
+                    "zipcode": "9003"
+                }
+            ]
+        },
+        {
+            "city": "Kinoguitan",
+            "zipcodes": [
+                {
+                    "area": "Kinoguitan",
+                    "zipcode": "9010"
+                }
+            ]
+        },
+        {
+            "city": "Lagonglong",
+            "zipcodes": [
+                {
+                    "area": "Lagonglong",
+                    "zipcode": "9006"
+                }
+            ]
+        },
+        {
+            "city": "Laguindingan",
+            "zipcodes": [
+                {
+                    "area": "Laguindingan",
+                    "zipcode": "9019"
+                }
+            ]
+        },
+        {
+            "city": "Libertad",
+            "zipcodes": [
+                {
+                    "area": "Libertad",
+                    "zipcode": "9021"
+                }
+            ]
+        },
+        {
+            "city": "Lugait",
+            "zipcodes": [
+                {
+                    "area": "Lugait",
+                    "zipcode": "9025"
+                }
+            ]
+        },
+        {
+            "city": "Magsaysay",
+            "zipcodes": [
+                {
+                    "area": "Magsaysay",
+                    "zipcode": "9015"
+                }
+            ]
+        },
+        {
+            "city": "Manticao",
+            "zipcodes": [
+                {
+                    "area": "Manticao",
+                    "zipcode": "9024"
+                }
+            ]
+        },
+        {
+            "city": "Medina",
+            "zipcodes": [
+                {
+                    "area": "Medina",
+                    "zipcode": "9013"
+                }
+            ]
+        },
+        {
+            "city": "Naawan",
+            "zipcodes": [
+                {
+                    "area": "Naawan",
+                    "zipcode": "9023"
+                }
+            ]
+        },
+        {
+            "city": "Opol",
+            "zipcodes": [
+                {
+                    "area": "Opol",
+                    "zipcode": "9016"
+                }
+            ]
+        },
+        {
+            "city": "Salay",
+            "zipcodes": [
+                {
+                    "area": "Salay",
+                    "zipcode": "9007"
+                }
+            ]
+        },
+        {
+            "city": "Sugbongcogon",
+            "zipcodes": [
+                {
+                    "area": "Sugbongcogon",
+                    "zipcode": "9009"
+                }
+            ]
+        },
+        {
+            "city": "Tagoloan",
+            "zipcodes": [
+                {
+                    "area": "Tagoloan",
+                    "zipcode": "9001"
+                }
+            ]
+        },
+        {
+            "city": "Talisayan",
+            "zipcodes": [
+                {
+                    "area": "Talisayan",
+                    "zipcode": "9012"
+                }
+            ]
+        },
+        {
+            "city": "Villanueva",
+            "zipcodes": [
+                {
+                    "area": "Villanueva",
+                    "zipcode": "9002"
+                }
+            ]
+        }
+    ]
+}

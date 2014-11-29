@@ -1,0 +1,104 @@
+{
+    "province": "Tawi-Tawi",
+    "cities": [
+        {
+            "city": "Bongao",
+            "zipcodes": [
+                {
+                    "area": "Bongao",
+                    "zipcode": "7500"
+                }
+            ]
+        },
+        {
+            "city": "Languyan",
+            "zipcodes": [
+                {
+                    "area": "Languyan",
+                    "zipcode": "7509"
+                }
+            ]
+        },
+        {
+            "city": "Mapun",
+            "zipcodes": [
+                {
+                    "area": "Mapun",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Panglima Sugala",
+            "zipcodes": [
+                {
+                    "area": "Panglima Sugala",
+                    "zipcode": "7415"
+                }
+            ]
+        },
+        {
+            "city": "Sapa-Sapa",
+            "zipcodes": [
+                {
+                    "area": "Sapa-Sapa",
+                    "zipcode": "7503"
+                }
+            ]
+        },
+        {
+            "city": "Sibutu",
+            "zipcodes": [
+                {
+                    "area": "Sibutu",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Simunul",
+            "zipcodes": [
+                {
+                    "area": "Simunul",
+                    "zipcode": "7505"
+                }
+            ]
+        },
+        {
+            "city": "Sitangkai",
+            "zipcodes": [
+                {
+                    "area": "Sitangkai",
+                    "zipcode": "7506"
+                }
+            ]
+        },
+        {
+            "city": "South Ubian",
+            "zipcodes": [
+                {
+                    "area": "South Ubian",
+                    "zipcode": "7504"
+                }
+            ]
+        },
+        {
+            "city": "Tandubas",
+            "zipcodes": [
+                {
+                    "area": "Tandubas",
+                    "zipcode": "7502"
+                }
+            ]
+        },
+        {
+            "city": "Turtle Islands",
+            "zipcodes": [
+                {
+                    "area": "Turtle Islands",
+                    "zipcode": "7507"
+                }
+            ]
+        }
+    ]
+}

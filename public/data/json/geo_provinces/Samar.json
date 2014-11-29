@@ -1,0 +1,239 @@
+{
+    "province": "Samar",
+    "cities": [
+        {
+            "city": "Catbalogan",
+            "zipcodes": [
+                {
+                    "area": "Catbalogan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Calbayog",
+            "zipcodes": [
+                {
+                    "area": "Calbayog",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Almagro",
+            "zipcodes": [
+                {
+                    "area": "Almagro",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Basey",
+            "zipcodes": [
+                {
+                    "area": "Basey",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Calbiga",
+            "zipcodes": [
+                {
+                    "area": "Calbiga",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Daram",
+            "zipcodes": [
+                {
+                    "area": "Daram",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Gandara",
+            "zipcodes": [
+                {
+                    "area": "Gandara",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Hinabangan",
+            "zipcodes": [
+                {
+                    "area": "Hinabangan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Jiabong",
+            "zipcodes": [
+                {
+                    "area": "Jiabong",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Marabut",
+            "zipcodes": [
+                {
+                    "area": "Marabut",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Matuguinao",
+            "zipcodes": [
+                {
+                    "area": "Matuguinao",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Motiong",
+            "zipcodes": [
+                {
+                    "area": "Motiong",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Pagsanghan",
+            "zipcodes": [
+                {
+                    "area": "Pagsanghan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Paranas",
+            "zipcodes": [
+                {
+                    "area": "Paranas",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Pinabacdao",
+            "zipcodes": [
+                {
+                    "area": "Pinabacdao",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "San Jorge",
+            "zipcodes": [
+                {
+                    "area": "San Jorge",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "San Jose de Buan",
+            "zipcodes": [
+                {
+                    "area": "San Jose de Buan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "San Sebastian",
+            "zipcodes": [
+                {
+                    "area": "San Sebastian",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Margarita",
+            "zipcodes": [
+                {
+                    "area": "Sta. Margarita",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Rita",
+            "zipcodes": [
+                {
+                    "area": "Sta. Rita",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Sto. Niño",
+            "zipcodes": [
+                {
+                    "area": "Sto. Niño",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Tagapul-an",
+            "zipcodes": [
+                {
+                    "area": "Tagapul-an",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Talalora",
+            "zipcodes": [
+                {
+                    "area": "Talalora",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Tarangnan",
+            "zipcodes": [
+                {
+                    "area": "Tarangnan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Villareal",
+            "zipcodes": [
+                {
+                    "area": "Villareal",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Zumarraga",
+            "zipcodes": [
+                {
+                    "area": "Zumarraga",
+                    "zipcode": "___"
+                }
+            ]
+        }
+    ]
+}

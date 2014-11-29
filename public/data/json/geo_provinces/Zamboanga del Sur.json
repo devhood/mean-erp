@@ -1,0 +1,257 @@
+{
+    "province": "Zamboanga del Sur",
+    "cities": [
+        {
+            "city": "Pagadian",
+            "zipcodes": [
+                {
+                    "area": "Pagadian",
+                    "zipcode": "7016"
+                }
+            ]
+        },
+        {
+            "city": "Zamboanga",
+            "zipcodes": [
+                {
+                    "area": "Zamboanga",
+                    "zipcode": "7000"
+                }
+            ]
+        },
+        {
+            "city": "Aurora",
+            "zipcodes": [
+                {
+                    "area": "Aurora",
+                    "zipcode": "7020"
+                }
+            ]
+        },
+        {
+            "city": "Bayog",
+            "zipcodes": [
+                {
+                    "area": "Bayog",
+                    "zipcode": "7011"
+                }
+            ]
+        },
+        {
+            "city": "Dimataling",
+            "zipcodes": [
+                {
+                    "area": "Dimataling",
+                    "zipcode": "7032"
+                }
+            ]
+        },
+        {
+            "city": "Dinas",
+            "zipcodes": [
+                {
+                    "area": "Dinas",
+                    "zipcode": "7030"
+                }
+            ]
+        },
+        {
+            "city": "Dumalinao",
+            "zipcodes": [
+                {
+                    "area": "Dumalinao",
+                    "zipcode": "7015"
+                }
+            ]
+        },
+        {
+            "city": "Dumingag",
+            "zipcodes": [
+                {
+                    "area": "Dumingag",
+                    "zipcode": "7028"
+                }
+            ]
+        },
+        {
+            "city": "Guipos",
+            "zipcodes": [
+                {
+                    "area": "Guipos",
+                    "zipcode": "7042"
+                }
+            ]
+        },
+        {
+            "city": "Josefina",
+            "zipcodes": [
+                {
+                    "area": "Josefina",
+                    "zipcode": "7027"
+                }
+            ]
+        },
+        {
+            "city": "Kumalarang",
+            "zipcodes": [
+                {
+                    "area": "Kumalarang",
+                    "zipcode": "7013"
+                }
+            ]
+        },
+        {
+            "city": "Labangan",
+            "zipcodes": [
+                {
+                    "area": "Labangan",
+                    "zipcode": "7017"
+                }
+            ]
+        },
+        {
+            "city": "Lakewood",
+            "zipcodes": [
+                {
+                    "area": "Lakewood",
+                    "zipcode": "7014"
+                }
+            ]
+        },
+        {
+            "city": "Lapuyan",
+            "zipcodes": [
+                {
+                    "area": "Lapuyan",
+                    "zipcode": "7037"
+                }
+            ]
+        },
+        {
+            "city": "Mahayag",
+            "zipcodes": [
+                {
+                    "area": "Mahayag",
+                    "zipcode": "7026"
+                }
+            ]
+        },
+        {
+            "city": "Margosatubig",
+            "zipcodes": [
+                {
+                    "area": "Margosatubig",
+                    "zipcode": "7035"
+                }
+            ]
+        },
+        {
+            "city": "Midsalip",
+            "zipcodes": [
+                {
+                    "area": "Midsalip",
+                    "zipcode": "7021"
+                }
+            ]
+        },
+        {
+            "city": "Molave",
+            "zipcodes": [
+                {
+                    "area": "Molave",
+                    "zipcode": "7023"
+                }
+            ]
+        },
+        {
+            "city": "Pitogo",
+            "zipcodes": [
+                {
+                    "area": "Pitogo",
+                    "zipcode": "7033"
+                }
+            ]
+        },
+        {
+            "city": "Ramon Magsaysay",
+            "zipcodes": [
+                {
+                    "area": "Ramon Magsaysay",
+                    "zipcode": "7024"
+                }
+            ]
+        },
+        {
+            "city": "San Miguel",
+            "zipcodes": [
+                {
+                    "area": "San Miguel",
+                    "zipcode": "7029"
+                }
+            ]
+        },
+        {
+            "city": "San Pablo",
+            "zipcodes": [
+                {
+                    "area": "San Pablo",
+                    "zipcode": "7031"
+                }
+            ]
+        },
+        {
+            "city": "Sominot",
+            "zipcodes": [
+                {
+                    "area": "Sominot",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Tabina",
+            "zipcodes": [
+                {
+                    "area": "Tabina",
+                    "zipcode": "7034"
+                }
+            ]
+        },
+        {
+            "city": "Tambulig",
+            "zipcodes": [
+                {
+                    "area": "Tambulig",
+                    "zipcode": "7025"
+                }
+            ]
+        },
+        {
+            "city": "Tigbao",
+            "zipcodes": [
+                {
+                    "area": "Tigbao",
+                    "zipcode": "7043"
+                }
+            ]
+        },
+        {
+            "city": "Tukuran",
+            "zipcodes": [
+                {
+                    "area": "Tukuran",
+                    "zipcode": "7019"
+                }
+            ]
+        },
+        {
+            "city": "Vincenzo A. Sagun",
+            "zipcodes": [
+                {
+                    "area": "Vincenzo A. Sagun",
+                    "zipcode": "7036"
+                }
+            ]
+        }
+    ]
+}

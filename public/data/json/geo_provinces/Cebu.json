@@ -1,0 +1,491 @@
+{
+    "province": "Cebu",
+    "cities": [
+        {
+            "city": "Argao",
+            "zipcodes": [
+                {
+                    "area": "Argao",
+                    "zipcode": "6021"
+                }
+            ]
+        },
+        {
+            "city": "Bogo",
+            "zipcodes": [
+                {
+                    "area": "Bogo",
+                    "zipcode": "6010"
+                }
+            ]
+        },
+        {
+            "city": "Carcar",
+            "zipcodes": [
+                {
+                    "area": "Carcar",
+                    "zipcode": "6019"
+                }
+            ]
+        },
+        {
+            "city": "Cebu",
+            "zipcodes": [
+                {
+                    "area": "Cebu",
+                    "zipcode": "6000"
+                }
+            ]
+        },
+        {
+            "city": "Danao",
+            "zipcodes": [
+                {
+                    "area": "Danao",
+                    "zipcode": "6004"
+                }
+            ]
+        },
+        {
+            "city": "Lapu-Lapu",
+            "zipcodes": [
+                {
+                    "area": "Lapu-Lapu",
+                    "zipcode": "6015"
+                }
+            ]
+        },
+        {
+            "city": "Mandaue",
+            "zipcodes": [
+                {
+                    "area": "Mandaue",
+                    "zipcode": "6014"
+                }
+            ]
+        },
+        {
+            "city": "Talisay",
+            "zipcodes": [
+                {
+                    "area": "Talisay",
+                    "zipcode": "6045"
+                }
+            ]
+        },
+        {
+            "city": "Toledo",
+            "zipcodes": [
+                {
+                    "area": "Toledo",
+                    "zipcode": "6038"
+                }
+            ]
+        },
+        {
+            "city": "Naga",
+            "zipcodes": [
+                {
+                    "area": "Naga",
+                    "zipcode": "6037"
+                }
+            ]
+        },
+        {
+            "city": "Alcantara",
+            "zipcodes": [
+                {
+                    "area": "Alcantara",
+                    "zipcode": "6033"
+                }
+            ]
+        },
+        {
+            "city": "Alcoy",
+            "zipcodes": [
+                {
+                    "area": "Alcoy",
+                    "zipcode": "6023"
+                }
+            ]
+        },
+        {
+            "city": "Alegria",
+            "zipcodes": [
+                {
+                    "area": "Alegria",
+                    "zipcode": "6030"
+                }
+            ]
+        },
+        {
+            "city": "Aloguinsan",
+            "zipcodes": [
+                {
+                    "area": "Aloguinsan",
+                    "zipcode": "6040"
+                }
+            ]
+        },
+        {
+            "city": "Argao",
+            "zipcodes": [
+                {
+                    "area": "Argao",
+                    "zipcode": "6021"
+                }
+            ]
+        },
+        {
+            "city": "Asturias",
+            "zipcodes": [
+                {
+                    "area": "Asturias",
+                    "zipcode": "6042"
+                }
+            ]
+        },
+        {
+            "city": "Badian",
+            "zipcodes": [
+                {
+                    "area": "Badian",
+                    "zipcode": "6031"
+                }
+            ]
+        },
+        {
+            "city": "Balamban",
+            "zipcodes": [
+                {
+                    "area": "Balamban",
+                    "zipcode": "6041"
+                }
+            ]
+        },
+        {
+            "city": "Bantayan",
+            "zipcodes": [
+                {
+                    "area": "Bantayan",
+                    "zipcode": "6052"
+                }
+            ]
+        },
+        {
+            "city": "Barili",
+            "zipcodes": [
+                {
+                    "area": "Barili",
+                    "zipcode": "6036"
+                }
+            ]
+        },
+        {
+            "city": "Boljoon",
+            "zipcodes": [
+                {
+                    "area": "Boljoon",
+                    "zipcode": "6024"
+                }
+            ]
+        },
+        {
+            "city": "Borbon",
+            "zipcodes": [
+                {
+                    "area": "Borbon",
+                    "zipcode": "6008"
+                }
+            ]
+        },
+        {
+            "city": "Carmen",
+            "zipcodes": [
+                {
+                    "area": "Carmen",
+                    "zipcode": "6005"
+                }
+            ]
+        },
+        {
+            "city": "Catmon",
+            "zipcodes": [
+                {
+                    "area": "Catmon",
+                    "zipcode": "6006"
+                }
+            ]
+        },
+        {
+            "city": "Compostela",
+            "zipcodes": [
+                {
+                    "area": "Compostela",
+                    "zipcode": "6003"
+                }
+            ]
+        },
+        {
+            "city": "Consolacion",
+            "zipcodes": [
+                {
+                    "area": "Consolacion",
+                    "zipcode": "6001"
+                }
+            ]
+        },
+        {
+            "city": "Cordoba",
+            "zipcodes": [
+                {
+                    "area": "Cordoba",
+                    "zipcode": "6017"
+                }
+            ]
+        },
+        {
+            "city": "Daang-Bantayan",
+            "zipcodes": [
+                {
+                    "area": "Daang-Bantayan",
+                    "zipcode": "6013"
+                }
+            ]
+        },
+        {
+            "city": "Dalaguete",
+            "zipcodes": [
+                {
+                    "area": "Dalaguete",
+                    "zipcode": "6022"
+                }
+            ]
+        },
+        {
+            "city": "Dumanjug",
+            "zipcodes": [
+                {
+                    "area": "Dumanjug",
+                    "zipcode": "6035"
+                }
+            ]
+        },
+        {
+            "city": "Ginatilan",
+            "zipcodes": [
+                {
+                    "area": "Ginatilan",
+                    "zipcode": "6028"
+                }
+            ]
+        },
+        {
+            "city": "Liloan",
+            "zipcodes": [
+                {
+                    "area": "Liloan",
+                    "zipcode": "6002"
+                }
+            ]
+        },
+        {
+            "city": "Madridejos",
+            "zipcodes": [
+                {
+                    "area": "Madridejos",
+                    "zipcode": "6053"
+                }
+            ]
+        },
+        {
+            "city": "Malabuyoc",
+            "zipcodes": [
+                {
+                    "area": "Malabuyoc",
+                    "zipcode": "6029"
+                }
+            ]
+        },
+        {
+            "city": "Medellin",
+            "zipcodes": [
+                {
+                    "area": "Medellin",
+                    "zipcode": "6012"
+                }
+            ]
+        },
+        {
+            "city": "Minglanilla",
+            "zipcodes": [
+                {
+                    "area": "Minglanilla",
+                    "zipcode": "6046"
+                }
+            ]
+        },
+        {
+            "city": "Moalboal",
+            "zipcodes": [
+                {
+                    "area": "Moalboal",
+                    "zipcode": "6032"
+                }
+            ]
+        },
+        {
+            "city": "Oslob",
+            "zipcodes": [
+                {
+                    "area": "Oslob",
+                    "zipcode": "6025"
+                }
+            ]
+        },
+        {
+            "city": "Pilar",
+            "zipcodes": [
+                {
+                    "area": "Pilar",
+                    "zipcode": "6048"
+                }
+            ]
+        },
+        {
+            "city": "Pinamungahan",
+            "zipcodes": [
+                {
+                    "area": "Pinamungahan",
+                    "zipcode": "6039"
+                }
+            ]
+        },
+        {
+            "city": "Poro",
+            "zipcodes": [
+                {
+                    "area": "Poro",
+                    "zipcode": "6049"
+                }
+            ]
+        },
+        {
+            "city": "Ronda",
+            "zipcodes": [
+                {
+                    "area": "Ronda",
+                    "zipcode": "6034"
+                }
+            ]
+        },
+        {
+            "city": "Samboan",
+            "zipcodes": [
+                {
+                    "area": "Samboan",
+                    "zipcode": "6027"
+                }
+            ]
+        },
+        {
+            "city": "San Fernando",
+            "zipcodes": [
+                {
+                    "area": "San Fernando",
+                    "zipcode": "6018"
+                }
+            ]
+        },
+        {
+            "city": "San Francisco",
+            "zipcodes": [
+                {
+                    "area": "San Francisco",
+                    "zipcode": "6050"
+                }
+            ]
+        },
+        {
+            "city": "San Remigio",
+            "zipcodes": [
+                {
+                    "area": "San Remigio",
+                    "zipcode": "6011"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Fe",
+            "zipcodes": [
+                {
+                    "area": "Sta. Fe",
+                    "zipcode": "6047"
+                }
+            ]
+        },
+        {
+            "city": "Santander",
+            "zipcodes": [
+                {
+                    "area": "Santander",
+                    "zipcode": "6026"
+                }
+            ]
+        },
+        {
+            "city": "Sibonga",
+            "zipcodes": [
+                {
+                    "area": "Sibonga",
+                    "zipcode": "6020"
+                }
+            ]
+        },
+        {
+            "city": "Sogod",
+            "zipcodes": [
+                {
+                    "area": "Sogod",
+                    "zipcode": "6007"
+                }
+            ]
+        },
+        {
+            "city": "Tabogon",
+            "zipcodes": [
+                {
+                    "area": "Tabogon",
+                    "zipcode": "6009"
+                }
+            ]
+        },
+        {
+            "city": "Tabuelan",
+            "zipcodes": [
+                {
+                    "area": "Tabuelan",
+                    "zipcode": "6044"
+                }
+            ]
+        },
+        {
+            "city": "Tuburan",
+            "zipcodes": [
+                {
+                    "area": "Tuburan",
+                    "zipcode": "6043"
+                }
+            ]
+        },
+        {
+            "city": "Tudela",
+            "zipcodes": [
+                {
+                    "area": "Tudela",
+                    "zipcode": "6051"
+                }
+            ]
+        }
+    ]
+}

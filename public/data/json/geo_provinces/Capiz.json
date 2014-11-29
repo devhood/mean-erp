@@ -1,0 +1,158 @@
+{
+    "province": "Capiz",
+    "cities": [
+        {
+            "city": "Roxas",
+            "zipcodes": [
+                {
+                    "area": "Roxas",
+                    "zipcode": "5800"
+                }
+            ]
+        },
+        {
+            "city": "Cuartero",
+            "zipcodes": [
+                {
+                    "area": "Cuartero",
+                    "zipcode": "5811"
+                }
+            ]
+        },
+        {
+            "city": "Dao",
+            "zipcodes": [
+                {
+                    "area": "Dao",
+                    "zipcode": "5810"
+                }
+            ]
+        },
+        {
+            "city": "Dumalag",
+            "zipcodes": [
+                {
+                    "area": "Dumalag",
+                    "zipcode": "5813"
+                }
+            ]
+        },
+        {
+            "city": "Dumarao",
+            "zipcodes": [
+                {
+                    "area": "Dumarao",
+                    "zipcode": "5812"
+                }
+            ]
+        },
+        {
+            "city": "Ivisan",
+            "zipcodes": [
+                {
+                    "area": "Ivisan",
+                    "zipcode": "5805"
+                }
+            ]
+        },
+        {
+            "city": "Jamindan",
+            "zipcodes": [
+                {
+                    "area": "Jamindan",
+                    "zipcode": "5808"
+                }
+            ]
+        },
+        {
+            "city": "Ma-ayon",
+            "zipcodes": [
+                {
+                    "area": "Ma-ayon",
+                    "zipcode": "5809"
+                }
+            ]
+        },
+        {
+            "city": "Mambusao",
+            "zipcodes": [
+                {
+                    "area": "Mambusao",
+                    "zipcode": "5807"
+                }
+            ]
+        },
+        {
+            "city": "Panay",
+            "zipcodes": [
+                {
+                    "area": "Panay",
+                    "zipcode": "5801"
+                }
+            ]
+        },
+        {
+            "city": "Panitan",
+            "zipcodes": [
+                {
+                    "area": "Panitan",
+                    "zipcode": "5815"
+                }
+            ]
+        },
+        {
+            "city": "Pilar",
+            "zipcodes": [
+                {
+                    "area": "Pilar",
+                    "zipcode": "5804"
+                }
+            ]
+        },
+        {
+            "city": "Pontevedra",
+            "zipcodes": [
+                {
+                    "area": "Pontevedra",
+                    "zipcode": "5802"
+                }
+            ]
+        },
+        {
+            "city": "Roxas",
+            "zipcodes": [
+                {
+                    "area": "Roxas",
+                    "zipcode": "5800"
+                }
+            ]
+        },
+        {
+            "city": "Sapi-an",
+            "zipcodes": [
+                {
+                    "area": "Sapi-an",
+                    "zipcode": "5806"
+                }
+            ]
+        },
+        {
+            "city": "Sigma",
+            "zipcodes": [
+                {
+                    "area": "Sigma",
+                    "zipcode": "5816"
+                }
+            ]
+        },
+        {
+            "city": "Tapaz",
+            "zipcodes": [
+                {
+                    "area": "Tapaz",
+                    "zipcode": "5814"
+                }
+            ]
+        }
+    ]
+}

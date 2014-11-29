@@ -1,0 +1,68 @@
+{
+    "province": "Dinagat Islands",
+    "cities": [
+        {
+            "city": "Basilisia (Rizal)",
+            "zipcodes": [
+                {
+                    "area": "Basilisia (Rizal)",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Cagdianao",
+            "zipcodes": [
+                {
+                    "area": "Cagdianao",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Dinagat",
+            "zipcodes": [
+                {
+                    "area": "Dinagat",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Libjo(Albor)",
+            "zipcodes": [
+                {
+                    "area": "Libjo(Albor)",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Loreto",
+            "zipcodes": [
+                {
+                    "area": "Loreto",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "SanJose",
+            "zipcodes": [
+                {
+                    "area": "SanJose",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Tubajon",
+            "zipcodes": [
+                {
+                    "area": "Tubajon",
+                    "zipcode": ""
+                }
+            ]
+        }
+    ]
+}

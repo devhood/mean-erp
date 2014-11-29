@@ -1,0 +1,212 @@
+{
+    "province": "Eastern Samar",
+    "cities": [
+        {
+            "city": "Borongan",
+            "zipcodes": [
+                {
+                    "area": "Borongan",
+                    "zipcode": "Bongonan"
+                }
+            ]
+        },
+        {
+            "city": "Arteche",
+            "zipcodes": [
+                {
+                    "area": "Arteche",
+                    "zipcode": "6822"
+                }
+            ]
+        },
+        {
+            "city": "Balangiga",
+            "zipcodes": [
+                {
+                    "area": "Balangiga",
+                    "zipcode": "6812"
+                }
+            ]
+        },
+        {
+            "city": "Balangkayan",
+            "zipcodes": [
+                {
+                    "area": "Balangkayan",
+                    "zipcode": "6801"
+                }
+            ]
+        },
+        {
+            "city": "Can-avid",
+            "zipcodes": [
+                {
+                    "area": "Can-avid",
+                    "zipcode": "6806"
+                }
+            ]
+        },
+        {
+            "city": "Dolores",
+            "zipcodes": [
+                {
+                    "area": "Dolores",
+                    "zipcode": "6817"
+                }
+            ]
+        },
+        {
+            "city": "General Mac Arthur",
+            "zipcodes": [
+                {
+                    "area": "General Mac Arthur",
+                    "zipcode": "6805"
+                }
+            ]
+        },
+        {
+            "city": "Giporlos",
+            "zipcodes": [
+                {
+                    "area": "Giporlos",
+                    "zipcode": "6811"
+                }
+            ]
+        },
+        {
+            "city": "Guiuan",
+            "zipcodes": [
+                {
+                    "area": "Guiuan",
+                    "zipcode": "6809"
+                }
+            ]
+        },
+        {
+            "city": "Hernani",
+            "zipcodes": [
+                {
+                    "area": "Hernani",
+                    "zipcode": "6804"
+                }
+            ]
+        },
+        {
+            "city": "Jipapad",
+            "zipcodes": [
+                {
+                    "area": "Jipapad",
+                    "zipcode": "6819"
+                }
+            ]
+        },
+        {
+            "city": "Lawaan",
+            "zipcodes": [
+                {
+                    "area": "Lawaan",
+                    "zipcode": "6813"
+                }
+            ]
+        },
+        {
+            "city": "Llorente",
+            "zipcodes": [
+                {
+                    "area": "Llorente",
+                    "zipcode": "6803"
+                }
+            ]
+        },
+        {
+            "city": "Maslog",
+            "zipcodes": [
+                {
+                    "area": "Maslog",
+                    "zipcode": "6820"
+                }
+            ]
+        },
+        {
+            "city": "Maydolong",
+            "zipcodes": [
+                {
+                    "area": "Maydolong",
+                    "zipcode": "6802"
+                }
+            ]
+        },
+        {
+            "city": "Mercedes",
+            "zipcodes": [
+                {
+                    "area": "Mercedes",
+                    "zipcode": "6808"
+                }
+            ]
+        },
+        {
+            "city": "Oras",
+            "zipcodes": [
+                {
+                    "area": "Oras",
+                    "zipcode": "6818"
+                }
+            ]
+        },
+        {
+            "city": "Quinapondan",
+            "zipcodes": [
+                {
+                    "area": "Quinapondan",
+                    "zipcode": "6810"
+                }
+            ]
+        },
+        {
+            "city": "Salcedo",
+            "zipcodes": [
+                {
+                    "area": "Salcedo",
+                    "zipcode": "6807"
+                }
+            ]
+        },
+        {
+            "city": "San Julian",
+            "zipcodes": [
+                {
+                    "area": "San Julian",
+                    "zipcode": "6814"
+                }
+            ]
+        },
+        {
+            "city": "San Policarpio",
+            "zipcodes": [
+                {
+                    "area": "San Policarpio",
+                    "zipcode": "6821"
+                }
+            ]
+        },
+        {
+            "city": "Sulat",
+            "zipcodes": [
+                {
+                    "area": "Sulat",
+                    "zipcode": "6815"
+                }
+            ]
+        },
+        {
+            "city": "Taft",
+            "zipcodes": [
+                {
+                    "area": "Taft",
+                    "zipcode": "6816"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "province": "Benguet",
+    "cities": [
+        {
+            "city": "Atok",
+            "zipcodes": [
+                {
+                    "area": "Atok",
+                    "zipcode": "2612"
+                }
+            ]
+        },
+        {
+            "city": "Bakun",
+            "zipcodes": [
+                {
+                    "area": "Bakun",
+                    "zipcode": "2610"
+                }
+            ]
+        },
+        {
+            "city": "Bokod",
+            "zipcodes": [
+                {
+                    "area": "Bokod",
+                    "zipcode": "2605"
+                }
+            ]
+        },
+        {
+            "city": "Buguias",
+            "zipcodes": [
+                {
+                    "area": "Buguias",
+                    "zipcode": "2607"
+                }
+            ]
+        },
+        {
+            "city": "Itogon",
+            "zipcodes": [
+                {
+                    "area": "Itogon",
+                    "zipcode": "2604"
+                }
+            ]
+        },
+        {
+            "city": "Kabayan",
+            "zipcodes": [
+                {
+                    "area": "Kabayan",
+                    "zipcode": "2606"
+                }
+            ]
+        },
+        {
+            "city": "Kapangan",
+            "zipcodes": [
+                {
+                    "area": "Kapangan",
+                    "zipcode": "2613"
+                }
+            ]
+        },
+        {
+            "city": "Kibungan",
+            "zipcodes": [
+                {
+                    "area": "Kibungan",
+                    "zipcode": "2611"
+                }
+            ]
+        },
+        {
+            "city": "La Trinidad",
+            "zipcodes": [
+                {
+                    "area": "La Trinidad",
+                    "zipcode": "2601"
+                }
+            ]
+        },
+        {
+            "city": "Mankayan",
+            "zipcodes": [
+                {
+                    "area": "Mankayan",
+                    "zipcode": "2608"
+                }
+            ]
+        },
+        {
+            "city": "Sablan",
+            "zipcodes": [
+                {
+                    "area": "Sablan",
+                    "zipcode": "2614"
+                }
+            ]
+        },
+        {
+            "city": "Tuba",
+            "zipcodes": [
+                {
+                    "area": "Tuba",
+                    "zipcode": "2603"
+                }
+            ]
+        },
+        {
+            "city": "Tublay",
+            "zipcodes": [
+                {
+                    "area": "Tublay",
+                    "zipcode": "2615"
+                }
+            ]
+        }
+    ]
+}

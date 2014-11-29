@@ -1,0 +1,176 @@
+{
+    "province": "Surigao del Sur",
+    "cities": [
+        {
+            "city": "Bislig",
+            "zipcodes": [
+                {
+                    "area": "Bislig",
+                    "zipcode": "8311"
+                }
+            ]
+        },
+        {
+            "city": "Tandag",
+            "zipcodes": [
+                {
+                    "area": "Tandag",
+                    "zipcode": "8300"
+                }
+            ]
+        },
+        {
+            "city": "Barobo",
+            "zipcodes": [
+                {
+                    "area": "Barobo",
+                    "zipcode": "8309"
+                }
+            ]
+        },
+        {
+            "city": "Bayabas",
+            "zipcodes": [
+                {
+                    "area": "Bayabas",
+                    "zipcode": "8303"
+                }
+            ]
+        },
+        {
+            "city": "Cagwait",
+            "zipcodes": [
+                {
+                    "area": "Cagwait",
+                    "zipcode": "8304"
+                }
+            ]
+        },
+        {
+            "city": "Cantilan",
+            "zipcodes": [
+                {
+                    "area": "Cantilan",
+                    "zipcode": "8317"
+                }
+            ]
+        },
+        {
+            "city": "Carmen",
+            "zipcodes": [
+                {
+                    "area": "Carmen",
+                    "zipcode": "8315"
+                }
+            ]
+        },
+        {
+            "city": "Carrascal",
+            "zipcodes": [
+                {
+                    "area": "Carrascal",
+                    "zipcode": "8318"
+                }
+            ]
+        },
+        {
+            "city": "Cortez",
+            "zipcodes": [
+                {
+                    "area": "Cortez",
+                    "zipcode": "8313"
+                }
+            ]
+        },
+        {
+            "city": "Hinatuan",
+            "zipcodes": [
+                {
+                    "area": "Hinatuan",
+                    "zipcode": "8310"
+                }
+            ]
+        },
+        {
+            "city": "Lanuza",
+            "zipcodes": [
+                {
+                    "area": "Lanuza",
+                    "zipcode": "8314"
+                }
+            ]
+        },
+        {
+            "city": "Lianga",
+            "zipcodes": [
+                {
+                    "area": "Lianga",
+                    "zipcode": "8307"
+                }
+            ]
+        },
+        {
+            "city": "Lingig",
+            "zipcodes": [
+                {
+                    "area": "Lingig",
+                    "zipcode": "8312"
+                }
+            ]
+        },
+        {
+            "city": "Madrid",
+            "zipcodes": [
+                {
+                    "area": "Madrid",
+                    "zipcode": "8316"
+                }
+            ]
+        },
+        {
+            "city": "Marihatag",
+            "zipcodes": [
+                {
+                    "area": "Marihatag",
+                    "zipcode": "8306"
+                }
+            ]
+        },
+        {
+            "city": "San Agustin",
+            "zipcodes": [
+                {
+                    "area": "San Agustin",
+                    "zipcode": "8305"
+                }
+            ]
+        },
+        {
+            "city": "San Miguel",
+            "zipcodes": [
+                {
+                    "area": "San Miguel",
+                    "zipcode": "8301"
+                }
+            ]
+        },
+        {
+            "city": "Tagbina",
+            "zipcodes": [
+                {
+                    "area": "Tagbina",
+                    "zipcode": "8308"
+                }
+            ]
+        },
+        {
+            "city": "Tago",
+            "zipcodes": [
+                {
+                    "area": "Tago",
+                    "zipcode": "8302"
+                }
+            ]
+        }
+    ]
+}

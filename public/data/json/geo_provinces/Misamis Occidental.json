@@ -1,0 +1,158 @@
+{
+    "province": "Misamis Occidental",
+    "cities": [
+        {
+            "city": "Oroquieta",
+            "zipcodes": [
+                {
+                    "area": "Oroquieta",
+                    "zipcode": "7207"
+                }
+            ]
+        },
+        {
+            "city": "Ozamis",
+            "zipcodes": [
+                {
+                    "area": "Ozamis",
+                    "zipcode": "7200"
+                }
+            ]
+        },
+        {
+            "city": "Tangub",
+            "zipcodes": [
+                {
+                    "area": "Tangub",
+                    "zipcode": "7214"
+                }
+            ]
+        },
+        {
+            "city": "Aloran",
+            "zipcodes": [
+                {
+                    "area": "Aloran",
+                    "zipcode": "7206"
+                }
+            ]
+        },
+        {
+            "city": "Baliangao",
+            "zipcodes": [
+                {
+                    "area": "Baliangao",
+                    "zipcode": "7211"
+                }
+            ]
+        },
+        {
+            "city": "Bonifacio",
+            "zipcodes": [
+                {
+                    "area": "Bonifacio",
+                    "zipcode": "7215"
+                }
+            ]
+        },
+        {
+            "city": "Calamba",
+            "zipcodes": [
+                {
+                    "area": "Calamba",
+                    "zipcode": "7210"
+                }
+            ]
+        },
+        {
+            "city": "Clarin",
+            "zipcodes": [
+                {
+                    "area": "Clarin",
+                    "zipcode": "7201"
+                }
+            ]
+        },
+        {
+            "city": "Concepcion",
+            "zipcodes": [
+                {
+                    "area": "Concepcion",
+                    "zipcode": "7213"
+                }
+            ]
+        },
+        {
+            "city": "Don Victoriano Chiongbian",
+            "zipcodes": [
+                {
+                    "area": "Don Victoriano Chiongbian",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Jimenez",
+            "zipcodes": [
+                {
+                    "area": "Jimenez",
+                    "zipcode": "7204"
+                }
+            ]
+        },
+        {
+            "city": "Lopez Jaena",
+            "zipcodes": [
+                {
+                    "area": "Lopez Jaena",
+                    "zipcode": "7208"
+                }
+            ]
+        },
+        {
+            "city": "Panaon",
+            "zipcodes": [
+                {
+                    "area": "Panaon",
+                    "zipcode": "7205"
+                }
+            ]
+        },
+        {
+            "city": "Plaridel",
+            "zipcodes": [
+                {
+                    "area": "Plaridel",
+                    "zipcode": "7209"
+                }
+            ]
+        },
+        {
+            "city": "Sapang Dalaga",
+            "zipcodes": [
+                {
+                    "area": "Sapang Dalaga",
+                    "zipcode": "7212"
+                }
+            ]
+        },
+        {
+            "city": "Sinacaban",
+            "zipcodes": [
+                {
+                    "area": "Sinacaban",
+                    "zipcode": "7203"
+                }
+            ]
+        },
+        {
+            "city": "Tangub",
+            "zipcodes": [
+                {
+                    "area": "Tangub",
+                    "zipcode": "7214"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "province": "Davao Oriental",
+    "cities": [
+        {
+            "city": "Mati",
+            "zipcodes": [
+                {
+                    "area": "Mati",
+                    "zipcode": "8200"
+                }
+            ]
+        },
+        {
+            "city": "Baganga",
+            "zipcodes": [
+                {
+                    "area": "Baganga",
+                    "zipcode": "8204"
+                }
+            ]
+        },
+        {
+            "city": "Banaybanay",
+            "zipcodes": [
+                {
+                    "area": "Banaybanay",
+                    "zipcode": "8208"
+                }
+            ]
+        },
+        {
+            "city": "Boston",
+            "zipcodes": [
+                {
+                    "area": "Boston",
+                    "zipcode": "8206"
+                }
+            ]
+        },
+        {
+            "city": "Caraga",
+            "zipcodes": [
+                {
+                    "area": "Caraga",
+                    "zipcode": "8203"
+                }
+            ]
+        },
+        {
+            "city": "Cateel",
+            "zipcodes": [
+                {
+                    "area": "Cateel",
+                    "zipcode": "8205"
+                }
+            ]
+        },
+        {
+            "city": "Gov. Generoso",
+            "zipcodes": [
+                {
+                    "area": "Gov. Generoso",
+                    "zipcode": "8210"
+                }
+            ]
+        },
+        {
+            "city": "Lupon",
+            "zipcodes": [
+                {
+                    "area": "Lupon",
+                    "zipcode": "8207"
+                }
+            ]
+        },
+        {
+            "city": "Manay",
+            "zipcodes": [
+                {
+                    "area": "Manay",
+                    "zipcode": "8202"
+                }
+            ]
+        },
+        {
+            "city": "San Isidro",
+            "zipcodes": [
+                {
+                    "area": "San Isidro",
+                    "zipcode": "8209"
+                }
+            ]
+        },
+        {
+            "city": "Tarragona",
+            "zipcodes": [
+                {
+                    "area": "Tarragona",
+                    "zipcode": "8201"
+                }
+            ]
+        }
+    ]
+}

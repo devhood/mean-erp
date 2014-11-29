@@ -1,0 +1,284 @@
+{
+    "province": "Negros Occidental",
+    "cities": [
+        {
+            "city": "Bacolod",
+            "zipcodes": [
+                {
+                    "area": "Bacolod",
+                    "zipcode": "6100"
+                }
+            ]
+        },
+        {
+            "city": "Bago",
+            "zipcodes": [
+                {
+                    "area": "Bago",
+                    "zipcode": "6101"
+                }
+            ]
+        },
+        {
+            "city": "Cadiz",
+            "zipcodes": [
+                {
+                    "area": "Cadiz",
+                    "zipcode": "6121"
+                }
+            ]
+        },
+        {
+            "city": "Escalante",
+            "zipcodes": [
+                {
+                    "area": "Escalante",
+                    "zipcode": "6124"
+                }
+            ]
+        },
+        {
+            "city": "Himamaylan",
+            "zipcodes": [
+                {
+                    "area": "Himamaylan",
+                    "zipcode": "6108"
+                }
+            ]
+        },
+        {
+            "city": "Kabankalan",
+            "zipcodes": [
+                {
+                    "area": "Kabankalan",
+                    "zipcode": "6111"
+                }
+            ]
+        },
+        {
+            "city": "La Carlota",
+            "zipcodes": [
+                {
+                    "area": "La Carlota",
+                    "zipcode": "6130"
+                }
+            ]
+        },
+        {
+            "city": "Sagay",
+            "zipcodes": [
+                {
+                    "area": "Sagay",
+                    "zipcode": "6122"
+                }
+            ]
+        },
+        {
+            "city": "San Carlos",
+            "zipcodes": [
+                {
+                    "area": "San Carlos",
+                    "zipcode": "6127"
+                }
+            ]
+        },
+        {
+            "city": "Silay",
+            "zipcodes": [
+                {
+                    "area": "Silay",
+                    "zipcode": "6116"
+                }
+            ]
+        },
+        {
+            "city": "Sipalay",
+            "zipcodes": [
+                {
+                    "area": "Sipalay",
+                    "zipcode": "6113"
+                }
+            ]
+        },
+        {
+            "city": "Talisay",
+            "zipcodes": [
+                {
+                    "area": "Talisay",
+                    "zipcode": "6115"
+                }
+            ]
+        },
+        {
+            "city": "Victorias",
+            "zipcodes": [
+                {
+                    "area": "Victorias",
+                    "zipcode": "6119"
+                }
+            ]
+        },
+        {
+            "city": "Binalbagan",
+            "zipcodes": [
+                {
+                    "area": "Binalbagan",
+                    "zipcode": "6107"
+                }
+            ]
+        },
+        {
+            "city": "Calatrava",
+            "zipcodes": [
+                {
+                    "area": "Calatrava",
+                    "zipcode": "6126"
+                }
+            ]
+        },
+        {
+            "city": "Candoni",
+            "zipcodes": [
+                {
+                    "area": "Candoni",
+                    "zipcode": "6110"
+                }
+            ]
+        },
+        {
+            "city": "Cauayan",
+            "zipcodes": [
+                {
+                    "area": "Cauayan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "San Enrique",
+            "zipcodes": [
+                {
+                    "area": "San Enrique",
+                    "zipcode": "6104"
+                }
+            ]
+        },
+        {
+            "city": "Enrique  Magalona",
+            "zipcodes": [
+                {
+                    "area": "Enrique Magalona",
+                    "zipcode": "6118"
+                }
+            ]
+        },
+        {
+            "city": "Hinigaran",
+            "zipcodes": [
+                {
+                    "area": "Hinigaran",
+                    "zipcode": "6106"
+                }
+            ]
+        },
+        {
+            "city": "Hinoba-an",
+            "zipcodes": [
+                {
+                    "area": "Hinoba-an",
+                    "zipcode": "6114"
+                }
+            ]
+        },
+        {
+            "city": "Ilog",
+            "zipcodes": [
+                {
+                    "area": "Ilog",
+                    "zipcode": "6109"
+                }
+            ]
+        },
+        {
+            "city": "Isabela",
+            "zipcodes": [
+                {
+                    "area": "Isabela",
+                    "zipcode": "6128"
+                }
+            ]
+        },
+        {
+            "city": "La Castellana",
+            "zipcodes": [
+                {
+                    "area": "La Castellana",
+                    "zipcode": "6131"
+                }
+            ]
+        },
+        {
+            "city": "Manapla",
+            "zipcodes": [
+                {
+                    "area": "Manapla",
+                    "zipcode": "6120"
+                }
+            ]
+        },
+        {
+            "city": "Moises Padilla",
+            "zipcodes": [
+                {
+                    "area": "Moises Padilla",
+                    "zipcode": "6132"
+                }
+            ]
+        },
+        {
+            "city": "Murcia",
+            "zipcodes": [
+                {
+                    "area": "Murcia",
+                    "zipcode": "6129"
+                }
+            ]
+        },
+        {
+            "city": "Pontevedra",
+            "zipcodes": [
+                {
+                    "area": "Pontevedra",
+                    "zipcode": "6105"
+                }
+            ]
+        },
+        {
+            "city": "Pulupandan",
+            "zipcodes": [
+                {
+                    "area": "Pulupandan",
+                    "zipcode": "6102"
+                }
+            ]
+        },
+        {
+            "city": "Toboso",
+            "zipcodes": [
+                {
+                    "area": "Toboso",
+                    "zipcode": "5125"
+                }
+            ]
+        },
+        {
+            "city": "Valladolid",
+            "zipcodes": [
+                {
+                    "area": "Valladolid",
+                    "zipcode": "6103"
+                }
+            ]
+        }
+    ]
+}

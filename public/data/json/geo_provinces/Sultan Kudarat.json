@@ -1,0 +1,113 @@
+{
+    "province": "Sultan Kudarat",
+    "cities": [
+        {
+            "city": "Tacurong",
+            "zipcodes": [
+                {
+                    "area": "Tacurong",
+                    "zipcode": "9800"
+                }
+            ]
+        },
+        {
+            "city": "Bagumbayan",
+            "zipcodes": [
+                {
+                    "area": "Bagumbayan",
+                    "zipcode": "9810"
+                }
+            ]
+        },
+        {
+            "city": "Columbio",
+            "zipcodes": [
+                {
+                    "area": "Columbio",
+                    "zipcode": "9801"
+                }
+            ]
+        },
+        {
+            "city": "Esperanza",
+            "zipcodes": [
+                {
+                    "area": "Esperanza",
+                    "zipcode": "9806"
+                }
+            ]
+        },
+        {
+            "city": "Isulan",
+            "zipcodes": [
+                {
+                    "area": "Isulan",
+                    "zipcode": "9805"
+                }
+            ]
+        },
+        {
+            "city": "Kalamansig",
+            "zipcodes": [
+                {
+                    "area": "Kalamansig",
+                    "zipcode": "9808"
+                }
+            ]
+        },
+        {
+            "city": "Lambayong",
+            "zipcodes": [
+                {
+                    "area": "Lambayong",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Lebak",
+            "zipcodes": [
+                {
+                    "area": "Lebak",
+                    "zipcode": "9807"
+                }
+            ]
+        },
+        {
+            "city": "Lutayan",
+            "zipcodes": [
+                {
+                    "area": "Lutayan",
+                    "zipcode": "9803"
+                }
+            ]
+        },
+        {
+            "city": "Palimbang",
+            "zipcodes": [
+                {
+                    "area": "Palimbang",
+                    "zipcode": "9809"
+                }
+            ]
+        },
+        {
+            "city": "President Quirino",
+            "zipcodes": [
+                {
+                    "area": "President Quirino",
+                    "zipcode": "9804"
+                }
+            ]
+        },
+        {
+            "city": "Sen.Nino Aquino",
+            "zipcodes": [
+                {
+                    "area": "Sen.Nino Aquino",
+                    "zipcode": "___"
+                }
+            ]
+        }
+    ]
+}

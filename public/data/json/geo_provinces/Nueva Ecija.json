@@ -1,0 +1,293 @@
+{
+    "province": "Nueva Ecija",
+    "cities": [
+        {
+            "city": "Cabanatuan",
+            "zipcodes": [
+                {
+                    "area": "Cabanatuan",
+                    "zipcode": "3100"
+                }
+            ]
+        },
+        {
+            "city": "Gapan",
+            "zipcodes": [
+                {
+                    "area": "Gapan",
+                    "zipcode": "3105"
+                }
+            ]
+        },
+        {
+            "city": "Palayan",
+            "zipcodes": [
+                {
+                    "area": "Palayan",
+                    "zipcode": "3132"
+                }
+            ]
+        },
+        {
+            "city": "San Jose",
+            "zipcodes": [
+                {
+                    "area": "San Jose",
+                    "zipcode": "3121"
+                }
+            ]
+        },
+        {
+            "city": "Muñoz",
+            "zipcodes": [
+                {
+                    "area": "Muñoz",
+                    "zipcode": "3119"
+                }
+            ]
+        },
+        {
+            "city": "Aliaga",
+            "zipcodes": [
+                {
+                    "area": "Aliaga",
+                    "zipcode": "3111"
+                }
+            ]
+        },
+        {
+            "city": "Bongabon",
+            "zipcodes": [
+                {
+                    "area": "Bongabon",
+                    "zipcode": "3128"
+                }
+            ]
+        },
+        {
+            "city": "Cabiao",
+            "zipcodes": [
+                {
+                    "area": "Cabiao",
+                    "zipcode": "3107"
+                }
+            ]
+        },
+        {
+            "city": "Carranglan",
+            "zipcodes": [
+                {
+                    "area": "Carranglan",
+                    "zipcode": "3123"
+                }
+            ]
+        },
+        {
+            "city": "Cuyapo",
+            "zipcodes": [
+                {
+                    "area": "Cuyapo",
+                    "zipcode": "3117"
+                }
+            ]
+        },
+        {
+            "city": "Gabaldon",
+            "zipcodes": [
+                {
+                    "area": "Gabaldon",
+                    "zipcode": "3131"
+                }
+            ]
+        },
+        {
+            "city": "Gen. Mamerto Natividad",
+            "zipcodes": [
+                {
+                    "area": "Gen. Mamerto Natividad",
+                    "zipcode": "3125"
+                }
+            ]
+        },
+        {
+            "city": "Gen. Tinio",
+            "zipcodes": [
+                {
+                    "area": "Gen. Tinio",
+                    "zipcode": "3104"
+                }
+            ]
+        },
+        {
+            "city": "Guimba",
+            "zipcodes": [
+                {
+                    "area": "Guimba",
+                    "zipcode": "3115"
+                }
+            ]
+        },
+        {
+            "city": "Jaen",
+            "zipcodes": [
+                {
+                    "area": "Jaen",
+                    "zipcode": "3109"
+                }
+            ]
+        },
+        {
+            "city": "Laur",
+            "zipcodes": [
+                {
+                    "area": "Laur",
+                    "zipcode": "3129"
+                }
+            ]
+        },
+        {
+            "city": "Licab",
+            "zipcodes": [
+                {
+                    "area": "Licab",
+                    "zipcode": "3112"
+                }
+            ]
+        },
+        {
+            "city": "Llanera",
+            "zipcodes": [
+                {
+                    "area": "Llanera",
+                    "zipcode": "3126"
+                }
+            ]
+        },
+        {
+            "city": "Lupao",
+            "zipcodes": [
+                {
+                    "area": "Lupao",
+                    "zipcode": "3122"
+                }
+            ]
+        },
+        {
+            "city": "Nampicuan",
+            "zipcodes": [
+                {
+                    "area": "Nampicuan",
+                    "zipcode": "3116"
+                }
+            ]
+        },
+        {
+            "city": "Pantabangan",
+            "zipcodes": [
+                {
+                    "area": "Pantabangan",
+                    "zipcode": "3124"
+                }
+            ]
+        },
+        {
+            "city": "Peñaranda",
+            "zipcodes": [
+                {
+                    "area": "Peñaranda",
+                    "zipcode": "3103"
+                }
+            ]
+        },
+        {
+            "city": "Quezon",
+            "zipcodes": [
+                {
+                    "area": "Quezon",
+                    "zipcode": "3113"
+                }
+            ]
+        },
+        {
+            "city": "Rizal",
+            "zipcodes": [
+                {
+                    "area": "Rizal",
+                    "zipcode": "3127"
+                }
+            ]
+        },
+        {
+            "city": "San Antonio",
+            "zipcodes": [
+                {
+                    "area": "San Antonio",
+                    "zipcode": "3108"
+                }
+            ]
+        },
+        {
+            "city": "San Isidro",
+            "zipcodes": [
+                {
+                    "area": "San Isidro",
+                    "zipcode": "3106"
+                }
+            ]
+        },
+        {
+            "city": "San  Leonardo",
+            "zipcodes": [
+                {
+                    "area": "San  Leonardo",
+                    "zipcode": "3102"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Rosa",
+            "zipcodes": [
+                {
+                    "area": "Sta. Rosa",
+                    "zipcode": "3101"
+                }
+            ]
+        },
+        {
+            "city": "Sto. Domingo",
+            "zipcodes": [
+                {
+                    "area": "Sto. Domingo",
+                    "zipcode": "3133"
+                }
+            ]
+        },
+        {
+            "city": "Talavera",
+            "zipcodes": [
+                {
+                    "area": "Talavera",
+                    "zipcode": "3114"
+                }
+            ]
+        },
+        {
+            "city": "Talugtug",
+            "zipcodes": [
+                {
+                    "area": "Talugtug",
+                    "zipcode": "3118"
+                }
+            ]
+        },
+        {
+            "city": "Zaragoza",
+            "zipcodes": [
+                {
+                    "area": "Zaragoza",
+                    "zipcode": "3110"
+                }
+            ]
+        }
+    ]
+}

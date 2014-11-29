@@ -1,0 +1,59 @@
+{
+    "province": "Quirino",
+    "cities": [
+        {
+            "city": "Aglipay",
+            "zipcodes": [
+                {
+                    "area": "Aglipay",
+                    "zipcode": "3403"
+                }
+            ]
+        },
+        {
+            "city": "Cabarroguis",
+            "zipcodes": [
+                {
+                    "area": "Cabarroguis",
+                    "zipcode": "3400"
+                }
+            ]
+        },
+        {
+            "city": "Diffun",
+            "zipcodes": [
+                {
+                    "area": "Diffun",
+                    "zipcode": "3401"
+                }
+            ]
+        },
+        {
+            "city": "Maddela",
+            "zipcodes": [
+                {
+                    "area": "Maddela",
+                    "zipcode": "3404"
+                }
+            ]
+        },
+        {
+            "city": "Nagtipunan",
+            "zipcodes": [
+                {
+                    "area": "Nagtipunan",
+                    "zipcode": "3405"
+                }
+            ]
+        },
+        {
+            "city": "Saguday",
+            "zipcodes": [
+                {
+                    "area": "Saguday",
+                    "zipcode": "3402"
+                }
+            ]
+        }
+    ]
+}

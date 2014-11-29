@@ -1,0 +1,149 @@
+{
+    "province": "Romblon",
+    "cities": [
+        {
+            "city": "Alcantara",
+            "zipcodes": [
+                {
+                    "area": "Alcantara",
+                    "zipcode": "5509"
+                }
+            ]
+        },
+        {
+            "city": "Banton",
+            "zipcodes": [
+                {
+                    "area": "Banton",
+                    "zipcode": "5515"
+                }
+            ]
+        },
+        {
+            "city": "Cajidiocan",
+            "zipcodes": [
+                {
+                    "area": "Cajidiocan",
+                    "zipcode": "5512"
+                }
+            ]
+        },
+        {
+            "city": "Calatrava",
+            "zipcodes": [
+                {
+                    "area": "Calatrava",
+                    "zipcode": "5503"
+                }
+            ]
+        },
+        {
+            "city": "Concepcion",
+            "zipcodes": [
+                {
+                    "area": "Concepcion",
+                    "zipcode": "5516"
+                }
+            ]
+        },
+        {
+            "city": "Corcuera",
+            "zipcodes": [
+                {
+                    "area": "Corcuera",
+                    "zipcode": "5514"
+                }
+            ]
+        },
+        {
+            "city": "Ferrol",
+            "zipcodes": [
+                {
+                    "area": "Ferrol",
+                    "zipcode": "5506"
+                }
+            ]
+        },
+        {
+            "city": "Looc",
+            "zipcodes": [
+                {
+                    "area": "Looc",
+                    "zipcode": "5507"
+                }
+            ]
+        },
+        {
+            "city": "Magdiwang",
+            "zipcodes": [
+                {
+                    "area": "Magdiwang",
+                    "zipcode": "5511"
+                }
+            ]
+        },
+        {
+            "city": "Odiongan",
+            "zipcodes": [
+                {
+                    "area": "Odiongan",
+                    "zipcode": "5505"
+                }
+            ]
+        },
+        {
+            "city": "Romblon",
+            "zipcodes": [
+                {
+                    "area": "Romblon",
+                    "zipcode": "5500"
+                }
+            ]
+        },
+        {
+            "city": "San Agustin",
+            "zipcodes": [
+                {
+                    "area": "San Agustin",
+                    "zipcode": "5501"
+                }
+            ]
+        },
+        {
+            "city": "San Andres",
+            "zipcodes": [
+                {
+                    "area": "San Andres",
+                    "zipcode": "5504"
+                }
+            ]
+        },
+        {
+            "city": "San Fernando",
+            "zipcodes": [
+                {
+                    "area": "San Fernando",
+                    "zipcode": "5513"
+                }
+            ]
+        },
+        {
+            "city": "San Jose",
+            "zipcodes": [
+                {
+                    "area": "San Jose",
+                    "zipcode": "5510"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Fe",
+            "zipcodes": [
+                {
+                    "area": "Sta. Fe",
+                    "zipcode": "5508"
+                }
+            ]
+        }
+    ]
+}

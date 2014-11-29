@@ -1,0 +1,59 @@
+{
+    "province": "Marinduque",
+    "cities": [
+        {
+            "city": "Boac",
+            "zipcodes": [
+                {
+                    "area": "Boac",
+                    "zipcode": "4900"
+                }
+            ]
+        },
+        {
+            "city": "Buenavista",
+            "zipcodes": [
+                {
+                    "area": "Buenavista",
+                    "zipcode": "4904"
+                }
+            ]
+        },
+        {
+            "city": "Gasan",
+            "zipcodes": [
+                {
+                    "area": "Gasan",
+                    "zipcode": "4905"
+                }
+            ]
+        },
+        {
+            "city": "Maogpog",
+            "zipcodes": [
+                {
+                    "area": "Maogpog",
+                    "zipcode": "4901"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Cruz",
+            "zipcodes": [
+                {
+                    "area": "Sta. Cruz",
+                    "zipcode": "4902"
+                }
+            ]
+        },
+        {
+            "city": "Torrijos",
+            "zipcodes": [
+                {
+                    "area": "Torrijos",
+                    "zipcode": "4903"
+                }
+            ]
+        }
+    ]
+}

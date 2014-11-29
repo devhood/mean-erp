@@ -1,0 +1,140 @@
+{
+    "province": "Nueva Vizcaya",
+    "cities": [
+        {
+            "city": "Alfonso Castaneda",
+            "zipcodes": [
+                {
+                    "area": "Alfonso Castaneda",
+                    "zipcode": "3714"
+                }
+            ]
+        },
+        {
+            "city": "Ambaguio",
+            "zipcodes": [
+                {
+                    "area": "Ambaguio",
+                    "zipcode": "3701"
+                }
+            ]
+        },
+        {
+            "city": "Aritao",
+            "zipcodes": [
+                {
+                    "area": "Aritao",
+                    "zipcode": "3704"
+                }
+            ]
+        },
+        {
+            "city": "Bagabag",
+            "zipcodes": [
+                {
+                    "area": "Bagabag",
+                    "zipcode": "3711"
+                }
+            ]
+        },
+        {
+            "city": "Bambang",
+            "zipcodes": [
+                {
+                    "area": "Bambang",
+                    "zipcode": "3702"
+                }
+            ]
+        },
+        {
+            "city": "Bayombong",
+            "zipcodes": [
+                {
+                    "area": "Bayombong",
+                    "zipcode": "3700"
+                }
+            ]
+        },
+        {
+            "city": "Diadi",
+            "zipcodes": [
+                {
+                    "area": "Diadi",
+                    "zipcode": "3712"
+                }
+            ]
+        },
+        {
+            "city": "Dupax del Norte",
+            "zipcodes": [
+                {
+                    "area": "Dupax del Norte",
+                    "zipcode": "3706"
+                }
+            ]
+        },
+        {
+            "city": "Dupax del Sur",
+            "zipcodes": [
+                {
+                    "area": "Dupax del Sur",
+                    "zipcode": "3707"
+                }
+            ]
+        },
+        {
+            "city": "Kasibu",
+            "zipcodes": [
+                {
+                    "area": "Kasibu",
+                    "zipcode": "3703"
+                }
+            ]
+        },
+        {
+            "city": "Kayapa",
+            "zipcodes": [
+                {
+                    "area": "Kayapa",
+                    "zipcode": "3708"
+                }
+            ]
+        },
+        {
+            "city": "Quezon",
+            "zipcodes": [
+                {
+                    "area": "Quezon",
+                    "zipcode": "3713"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Fe",
+            "zipcodes": [
+                {
+                    "area": "Sta. Fe",
+                    "zipcode": "3705"
+                }
+            ]
+        },
+        {
+            "city": "Solano",
+            "zipcodes": [
+                {
+                    "area": "Solano",
+                    "zipcode": "3709"
+                }
+            ]
+        },
+        {
+            "city": "Villaverde",
+            "zipcodes": [
+                {
+                    "area": "Villaverde",
+                    "zipcode": "3710"
+                }
+            ]
+        }
+    ]
+}

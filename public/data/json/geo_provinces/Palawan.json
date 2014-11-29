@@ -1,0 +1,221 @@
+{
+    "province": "Palawan",
+    "cities": [
+        {
+            "city": "Puerto Princesa",
+            "zipcodes": [
+                {
+                    "area": "Puerto Princesa",
+                    "zipcode": "5300"
+                }
+            ]
+        },
+        {
+            "city": "Aborlan",
+            "zipcodes": [
+                {
+                    "area": "Aborlan",
+                    "zipcode": "5302"
+                }
+            ]
+        },
+        {
+            "city": "Agutaya",
+            "zipcodes": [
+                {
+                    "area": "Agutaya",
+                    "zipcode": "5320"
+                }
+            ]
+        },
+        {
+            "city": "Araceli",
+            "zipcodes": [
+                {
+                    "area": "Araceli",
+                    "zipcode": "5311"
+                }
+            ]
+        },
+        {
+            "city": "Balabac",
+            "zipcodes": [
+                {
+                    "area": "Balabac",
+                    "zipcode": "5307"
+                }
+            ]
+        },
+        {
+            "city": "Bataraza",
+            "zipcodes": [
+                {
+                    "area": "Bataraza",
+                    "zipcode": "5306"
+                }
+            ]
+        },
+        {
+            "city": "Brooke's Point",
+            "zipcodes": [
+                {
+                    "area": "Brooke's Point",
+                    "zipcode": "5305"
+                }
+            ]
+        },
+        {
+            "city": "Busuanga",
+            "zipcodes": [
+                {
+                    "area": "Busuanga",
+                    "zipcode": "5317"
+                }
+            ]
+        },
+        {
+            "city": "Cagayancillo",
+            "zipcodes": [
+                {
+                    "area": "Cagayancillo",
+                    "zipcode": "5321"
+                }
+            ]
+        },
+        {
+            "city": "Coron",
+            "zipcodes": [
+                {
+                    "area": "Coron",
+                    "zipcode": "5316"
+                }
+            ]
+        },
+        {
+            "city": "Culion",
+            "zipcodes": [
+                {
+                    "area": "Culion",
+                    "zipcode": "5315"
+                }
+            ]
+        },
+        {
+            "city": "Cuyo",
+            "zipcodes": [
+                {
+                    "area": "Cuyo",
+                    "zipcode": "5318"
+                }
+            ]
+        },
+        {
+            "city": "Dumaran",
+            "zipcodes": [
+                {
+                    "area": "Dumaran",
+                    "zipcode": "5310"
+                }
+            ]
+        },
+        {
+            "city": "El Nido",
+            "zipcodes": [
+                {
+                    "area": "El Nido",
+                    "zipcode": "5313"
+                }
+            ]
+        },
+        {
+            "city": "Kalayaan",
+            "zipcodes": [
+                {
+                    "area": "Kalayaan",
+                    "zipcode": "5322"
+                }
+            ]
+        },
+        {
+            "city": "Linapacan",
+            "zipcodes": [
+                {
+                    "area": "Linapacan",
+                    "zipcode": "5314"
+                }
+            ]
+        },
+        {
+            "city": "Magsaysay",
+            "zipcodes": [
+                {
+                    "area": "Magsaysay",
+                    "zipcode": "5319"
+                }
+            ]
+        },
+        {
+            "city": "Narra",
+            "zipcodes": [
+                {
+                    "area": "Narra",
+                    "zipcode": "5303"
+                }
+            ]
+        },
+        {
+            "city": "Quezon",
+            "zipcodes": [
+                {
+                    "area": "Quezon",
+                    "zipcode": "5304"
+                }
+            ]
+        },
+        {
+            "city": "Rizal",
+            "zipcodes": [
+                {
+                    "area": "Rizal",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Roxas",
+            "zipcodes": [
+                {
+                    "area": "Roxas",
+                    "zipcode": "5308"
+                }
+            ]
+        },
+        {
+            "city": "San Vicente",
+            "zipcodes": [
+                {
+                    "area": "San Vicente",
+                    "zipcode": "5309"
+                }
+            ]
+        },
+        {
+            "city": "Sofronio Española",
+            "zipcodes": [
+                {
+                    "area": "Sofronio Española",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Taytay",
+            "zipcodes": [
+                {
+                    "area": "Taytay",
+                    "zipcode": "5312"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,212 @@
+{
+    "province": "Maguindanao",
+    "cities": [
+        {
+            "city": "Cotabato",
+            "zipcodes": [
+                {
+                    "area": "Cotabato",
+                    "zipcode": "9600"
+                }
+            ]
+        },
+        {
+            "city": "Ampatuan",
+            "zipcodes": [
+                {
+                    "area": "Ampatuan",
+                    "zipcode": "9609"
+                }
+            ]
+        },
+        {
+            "city": "Buluan",
+            "zipcodes": [
+                {
+                    "area": "Buluan",
+                    "zipcode": "9616"
+                }
+            ]
+        },
+        {
+            "city": "Datu Abdullah Sangki",
+            "zipcodes": [
+                {
+                    "area": "Datu Abdullah Sangki",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Datu Anggal Midtimbang",
+            "zipcodes": [
+                {
+                    "area": "Datu Anggal Midtimbang",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Datu Paglas",
+            "zipcodes": [
+                {
+                    "area": "Datu Paglas",
+                    "zipcode": "9617"
+                }
+            ]
+        },
+        {
+            "city": "Datu Piang",
+            "zipcodes": [
+                {
+                    "area": "Datu Piang",
+                    "zipcode": "9607"
+                }
+            ]
+        },
+        {
+            "city": "Datu Saudi-Ampatuan",
+            "zipcodes": [
+                {
+                    "area": "Datu Saudi-Ampatuan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Datu Unsay",
+            "zipcodes": [
+                {
+                    "area": "Datu Unsay",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Gen.S.K.Pendatun",
+            "zipcodes": [
+                {
+                    "area": "Gen.S.K.Pendatun",
+                    "zipcode": "9618"
+                }
+            ]
+        },
+        {
+            "city": "Guindulungan",
+            "zipcodes": [
+                {
+                    "area": "Guindulungan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Mamasapano",
+            "zipcodes": [
+                {
+                    "area": "Mamasapano",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Mangudadatu",
+            "zipcodes": [
+                {
+                    "area": "Mangudadatu",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Pagagawan",
+            "zipcodes": [
+                {
+                    "area": "Pagagawan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Pagalungan",
+            "zipcodes": [
+                {
+                    "area": "Pagalungan",
+                    "zipcode": "9610"
+                }
+            ]
+        },
+        {
+            "city": "Paglat",
+            "zipcodes": [
+                {
+                    "area": "Paglat",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Pandag",
+            "zipcodes": [
+                {
+                    "area": "Pandag",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "RajahBuayan",
+            "zipcodes": [
+                {
+                    "area": "RajahBuayan",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Shariff Aguak",
+            "zipcodes": [
+                {
+                    "area": "Shariff Aguak",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "South Upi",
+            "zipcodes": [
+                {
+                    "area": "South Upi",
+                    "zipcode": "9603"
+                }
+            ]
+        },
+        {
+            "city": "Sultansa Barongis",
+            "zipcodes": [
+                {
+                    "area": "Sultansa Barongis",
+                    "zipcode": "___"
+                }
+            ]
+        },
+        {
+            "city": "Talayan",
+            "zipcodes": [
+                {
+                    "area": "Talayan",
+                    "zipcode": "9612"
+                }
+            ]
+        },
+        {
+            "city": "Talitay",
+            "zipcodes": [
+                {
+                    "area": "Talitay",
+                    "zipcode": "___"
+                }
+            ]
+        }
+    ]
+}

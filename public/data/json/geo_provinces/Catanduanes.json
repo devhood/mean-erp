@@ -1,0 +1,104 @@
+{
+    "province": "Catanduanes",
+    "cities": [
+        {
+            "city": "Bagamanoc",
+            "zipcodes": [
+                {
+                    "area": "Bagamanoc",
+                    "zipcode": "4807"
+                }
+            ]
+        },
+        {
+            "city": "Baras",
+            "zipcodes": [
+                {
+                    "area": "Baras",
+                    "zipcode": "4803"
+                }
+            ]
+        },
+        {
+            "city": "Bato",
+            "zipcodes": [
+                {
+                    "area": "Bato",
+                    "zipcode": "4801"
+                }
+            ]
+        },
+        {
+            "city": "Caramoran",
+            "zipcodes": [
+                {
+                    "area": "Caramoran",
+                    "zipcode": "4808"
+                }
+            ]
+        },
+        {
+            "city": "Gigmoto",
+            "zipcodes": [
+                {
+                    "area": "Gigmoto",
+                    "zipcode": "4804"
+                }
+            ]
+        },
+        {
+            "city": "Pandan",
+            "zipcodes": [
+                {
+                    "area": "Pandan",
+                    "zipcode": "4809"
+                }
+            ]
+        },
+        {
+            "city": "Panganiban",
+            "zipcodes": [
+                {
+                    "area": "Panganiban",
+                    "zipcode": "4806"
+                }
+            ]
+        },
+        {
+            "city": "San Andres",
+            "zipcodes": [
+                {
+                    "area": "San Andres",
+                    "zipcode": "4810"
+                }
+            ]
+        },
+        {
+            "city": "San Miguel",
+            "zipcodes": [
+                {
+                    "area": "San Miguel",
+                    "zipcode": "4802"
+                }
+            ]
+        },
+        {
+            "city": "Viga",
+            "zipcodes": [
+                {
+                    "area": "Viga",
+                    "zipcode": "4805"
+                }
+            ]
+        },
+        {
+            "city": "Virac",
+            "zipcodes": [
+                {
+                    "area": "Virac",
+                    "zipcode": "4800"
+                }
+            ]
+        }
+    ]
+}

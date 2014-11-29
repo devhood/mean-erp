@@ -1,0 +1,311 @@
+{
+    "province": "Ilocos Sur",
+    "cities": [
+        {
+            "city": "Candon",
+            "zipcodes": [
+                {
+                    "area": "Candon",
+                    "zipcode": "2710"
+                }
+            ]
+        },
+        {
+            "city": "Vigan",
+            "zipcodes": [
+                {
+                    "area": "Vigan",
+                    "zipcode": "2700"
+                }
+            ]
+        },
+        {
+            "city": "Alilem",
+            "zipcodes": [
+                {
+                    "area": "Alilem",
+                    "zipcode": "2716"
+                }
+            ]
+        },
+        {
+            "city": "Banayoyo",
+            "zipcodes": [
+                {
+                    "area": "Banayoyo",
+                    "zipcode": "2708"
+                }
+            ]
+        },
+        {
+            "city": "Bantay",
+            "zipcodes": [
+                {
+                    "area": "Bantay",
+                    "zipcode": "2727"
+                }
+            ]
+        },
+        {
+            "city": "Burgos",
+            "zipcodes": [
+                {
+                    "area": "Burgos",
+                    "zipcode": "2724"
+                }
+            ]
+        },
+        {
+            "city": "Cabugao",
+            "zipcodes": [
+                {
+                    "area": "Cabugao",
+                    "zipcode": "2732"
+                }
+            ]
+        },
+        {
+            "city": "Caoayan",
+            "zipcodes": [
+                {
+                    "area": "Caoayan",
+                    "zipcode": "2702"
+                }
+            ]
+        },
+        {
+            "city": "Cervantes",
+            "zipcodes": [
+                {
+                    "area": "Cervantes",
+                    "zipcode": "2718"
+                }
+            ]
+        },
+        {
+            "city": "Galimuyod",
+            "zipcodes": [
+                {
+                    "area": "Galimuyod",
+                    "zipcode": "2709"
+                }
+            ]
+        },
+        {
+            "city": "Gregorio Del Pilar",
+            "zipcodes": [
+                {
+                    "area": "Gregorio Del Pilar",
+                    "zipcode": "2720"
+                }
+            ]
+        },
+        {
+            "city": "Lidlidda",
+            "zipcodes": [
+                {
+                    "area": "Lidlidda",
+                    "zipcode": "2723"
+                }
+            ]
+        },
+        {
+            "city": "Magsingal",
+            "zipcodes": [
+                {
+                    "area": "Magsingal",
+                    "zipcode": "2730"
+                }
+            ]
+        },
+        {
+            "city": "Nagbukel",
+            "zipcodes": [
+                {
+                    "area": "Nagbukel",
+                    "zipcode": "2725"
+                }
+            ]
+        },
+        {
+            "city": "Narvacan",
+            "zipcodes": [
+                {
+                    "area": "Narvacan",
+                    "zipcode": "2704"
+                }
+            ]
+        },
+        {
+            "city": "Quirino",
+            "zipcodes": [
+                {
+                    "area": "Quirino",
+                    "zipcode": "2721"
+                }
+            ]
+        },
+        {
+            "city": "Salcedo",
+            "zipcodes": [
+                {
+                    "area": "Salcedo",
+                    "zipcode": "2711"
+                }
+            ]
+        },
+        {
+            "city": "San Emilio",
+            "zipcodes": [
+                {
+                    "area": "San Emilio",
+                    "zipcode": "2722"
+                }
+            ]
+        },
+        {
+            "city": "San Esteban",
+            "zipcodes": [
+                {
+                    "area": "San Esteban",
+                    "zipcode": "2706"
+                }
+            ]
+        },
+        {
+            "city": "San Ildefonso",
+            "zipcodes": [
+                {
+                    "area": "San Ildefonso",
+                    "zipcode": "2728"
+                }
+            ]
+        },
+        {
+            "city": "San Juan",
+            "zipcodes": [
+                {
+                    "area": "San Juan",
+                    "zipcode": "2731"
+                }
+            ]
+        },
+        {
+            "city": "San Vicente",
+            "zipcodes": [
+                {
+                    "area": "San Vicente",
+                    "zipcode": "2726"
+                }
+            ]
+        },
+        {
+            "city": "Santa",
+            "zipcodes": [
+                {
+                    "area": "Santa",
+                    "zipcode": "2703"
+                }
+            ]
+        },
+        {
+            "city": "Santa Catalina",
+            "zipcodes": [
+                {
+                    "area": "Santa Catalina",
+                    "zipcode": "2701"
+                }
+            ]
+        },
+        {
+            "city": "Santa Cruz",
+            "zipcodes": [
+                {
+                    "area": "Santa Cruz",
+                    "zipcode": "2713"
+                }
+            ]
+        },
+        {
+            "city": "Santa Lucia",
+            "zipcodes": [
+                {
+                    "area": "Santa Lucia",
+                    "zipcode": "2712"
+                }
+            ]
+        },
+        {
+            "city": "Santa Maria",
+            "zipcodes": [
+                {
+                    "area": "Santa Maria",
+                    "zipcode": "2705"
+                }
+            ]
+        },
+        {
+            "city": "Santiago",
+            "zipcodes": [
+                {
+                    "area": "Santiago",
+                    "zipcode": "2707"
+                }
+            ]
+        },
+        {
+            "city": "Santo Domingo",
+            "zipcodes": [
+                {
+                    "area": "Santo Domingo",
+                    "zipcode": "2729"
+                }
+            ]
+        },
+        {
+            "city": "Sigay",
+            "zipcodes": [
+                {
+                    "area": "Sigay",
+                    "zipcode": "2719"
+                }
+            ]
+        },
+        {
+            "city": "Sinait",
+            "zipcodes": [
+                {
+                    "area": "Sinait",
+                    "zipcode": "2733"
+                }
+            ]
+        },
+        {
+            "city": "Sugpon",
+            "zipcodes": [
+                {
+                    "area": "Sugpon",
+                    "zipcode": "2717"
+                }
+            ]
+        },
+        {
+            "city": "Suyo",
+            "zipcodes": [
+                {
+                    "area": "Suyo",
+                    "zipcode": "2715"
+                }
+            ]
+        },
+        {
+            "city": "Tagudin",
+            "zipcodes": [
+                {
+                    "area": "Tagudin",
+                    "zipcode": "2714"
+                }
+            ]
+        }
+    ]
+}

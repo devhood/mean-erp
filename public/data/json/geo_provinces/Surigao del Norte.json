@@ -1,0 +1,194 @@
+{
+    "province": "Surigao del Norte",
+    "cities": [
+        {
+            "city": "Surigao",
+            "zipcodes": [
+                {
+                    "area": "Surigao",
+                    "zipcode": "8400"
+                }
+            ]
+        },
+        {
+            "city": "Alegria",
+            "zipcodes": [
+                {
+                    "area": "Alegria",
+                    "zipcode": "8425"
+                }
+            ]
+        },
+        {
+            "city": "Bacuag",
+            "zipcodes": [
+                {
+                    "area": "Bacuag",
+                    "zipcode": "8408"
+                }
+            ]
+        },
+        {
+            "city": "Burgos",
+            "zipcodes": [
+                {
+                    "area": "Burgos",
+                    "zipcode": "8424"
+                }
+            ]
+        },
+        {
+            "city": "Claver",
+            "zipcodes": [
+                {
+                    "area": "Claver",
+                    "zipcode": "8410"
+                }
+            ]
+        },
+        {
+            "city": "Dapa",
+            "zipcodes": [
+                {
+                    "area": "Dapa",
+                    "zipcode": "8417"
+                }
+            ]
+        },
+        {
+            "city": "Del Carmen",
+            "zipcodes": [
+                {
+                    "area": "Del Carmen",
+                    "zipcode": "8418"
+                }
+            ]
+        },
+        {
+            "city": "Gen. Luna",
+            "zipcodes": [
+                {
+                    "area": "Gen. Luna",
+                    "zipcode": "8419"
+                }
+            ]
+        },
+        {
+            "city": "Gigaquit",
+            "zipcodes": [
+                {
+                    "area": "Gigaquit",
+                    "zipcode": "8409"
+                }
+            ]
+        },
+        {
+            "city": "Mainit",
+            "zipcodes": [
+                {
+                    "area": "Mainit",
+                    "zipcode": "8407"
+                }
+            ]
+        },
+        {
+            "city": "Malimono",
+            "zipcodes": [
+                {
+                    "area": "Malimono",
+                    "zipcode": "8402"
+                }
+            ]
+        },
+        {
+            "city": "Pilar",
+            "zipcodes": [
+                {
+                    "area": "Pilar",
+                    "zipcode": "8420"
+                }
+            ]
+        },
+        {
+            "city": "Placer",
+            "zipcodes": [
+                {
+                    "area": "Placer",
+                    "zipcode": "8405"
+                }
+            ]
+        },
+        {
+            "city": "San Benito",
+            "zipcodes": [
+                {
+                    "area": "San Benito",
+                    "zipcode": "8423"
+                }
+            ]
+        },
+        {
+            "city": "San Francisco",
+            "zipcodes": [
+                {
+                    "area": "San Francisco",
+                    "zipcode": "8401"
+                }
+            ]
+        },
+        {
+            "city": "San Isidro",
+            "zipcodes": [
+                {
+                    "area": "San Isidro",
+                    "zipcode": "8421"
+                }
+            ]
+        },
+        {
+            "city": "Sta. Monica",
+            "zipcodes": [
+                {
+                    "area": "Sta. Monica",
+                    "zipcode": "8422"
+                }
+            ]
+        },
+        {
+            "city": "Sison",
+            "zipcodes": [
+                {
+                    "area": "Sison",
+                    "zipcode": "8404"
+                }
+            ]
+        },
+        {
+            "city": "Socorro",
+            "zipcodes": [
+                {
+                    "area": "Socorro",
+                    "zipcode": "8416"
+                }
+            ]
+        },
+        {
+            "city": "Tagana-an",
+            "zipcodes": [
+                {
+                    "area": "Tagana-an",
+                    "zipcode": "8403"
+                }
+            ]
+        },
+        {
+            "city": "Tubod",
+            "zipcodes": [
+                {
+                    "area": "Tubod",
+                    "zipcode": "8406"
+                }
+            ]
+        }
+    ]
+}
