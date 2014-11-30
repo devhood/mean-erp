@@ -33,12 +33,14 @@ router.use(function(req, res, next) {
     });
 
 })
-.post('/:object', generator.generate, inventory.transact, function(req, res) {
+.post('/:object', generator.generate, inventory.check, function(req, res) {
     db.collection(req.params.object)
       .insert(req.body, {safe: true})
       .done(function(data){
         generator.update(req,function(err,result){
-          res.status(200).json(data[0]);
+          inventory.deduct(req,res,function(err,result){
+            res.status(200).json(data[0]);
+          });
         });
       })
       .fail( function( err ) {
@@ -97,7 +99,7 @@ router.use(function(req, res, next) {
   }
 
 })
-.put('/:object/:id', generator.generate, inventory.transact, function(req, res) {
+.put('/:object/:id', generator.generate, inventory.check, function(req, res) {
     var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     delete req.body._id;
     req.query.filter = JSON.parse(req.query.filter || '{}');
@@ -108,7 +110,10 @@ router.use(function(req, res, next) {
       .update(req.query.filter, {"$set" : req.body}, {safe: true})
       .done(function(data){
         generator.update(req,function(err,result){
-          res.status(200).json(data);
+          inventory.deduct(req,res,function(err,result){
+            res.status(200).json(data);
+          });
+
         });
       })
       .fail( function( err ) {
