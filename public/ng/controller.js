@@ -284,12 +284,14 @@ angular.module('erp')
       var id = $routeParams.id;
       var action = $routeParams.action;
       $scope.brands = Api.Collection('brands').query();
-      $scope.uoms = Api.Collection('uom').query();
-      $scope.payment_terms = Api.Collection('payment_term').query();
+      $scope.uoms = Api.Collection('uoms').query();
+      $scope.payment_terms = Api.Collection('payment_terms').query();
       $scope.product_status = Api.Collection('product_status').query();
+      var query = {"type":"Retail"};
+      $scope.inventory_locations = Api.Collection('customers',query).query();
       $scope.movements = Api.Collection('movements').query();
       $scope.suppliers = Api.Collection('suppliers').query();
-      var query = {"uom":{"$ne":"Bundle"}};
+      var query = {"uom":{"$ne":"Package"}};
       $scope.products = Api.Collection('products',query).query();
 
       $scope.addPackage = function(product){
@@ -306,6 +308,31 @@ angular.module('erp')
 
       $scope.removePackage = function(index){
         $scope.product.packages.splice(index, 1);
+      }
+
+      $scope.addInventory = function(product){
+        if( product.inventory && product.inventory.company_name && product.inventory.quantity ){
+          var content = {
+            _id: product.inventory._id,
+            company_name: product.inventory.company_name,
+            branch: product.inventory.branch,
+            price_type: product.inventory.price_type,
+            shipping_address: product.inventory.shipping_address,
+            quantity: product.inventory.quantity
+          };
+
+          if($scope.product.inventories){
+            $scope.product.inventories.push(content);
+          }
+          else{
+            $scope.product.inventories = [content];
+          }
+          delete product.inventory;
+        }
+      }
+
+      $scope.removeInventory = function(index){
+        $scope.product.inventories.splice(index, 1);
       }
 
       $scope.action = action;
@@ -511,11 +538,11 @@ angular.module('erp')
   $scope.action = action;
   $scope.transaction_types = Api.Collection('transaction_types').query();
   $scope.customers = Api.Collection('customers').query();
-  $scope.price_types = Api.Collection('price_type').query();
+  $scope.price_types = Api.Collection('price_types').query();
   $scope.discounts = Api.Collection('discounts').query();
-  $scope.payment_terms = Api.Collection('payment_term').query();
-  $scope.order_sources = Api.Collection('order_source').query();
-  $scope.shipping_modes = Api.Collection('shipping_mode').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
   $scope.products = Api.Collection('products').query();

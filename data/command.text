@@ -17,3 +17,5 @@ mongoimport --db beautylane-db --collection user_status --type csv --headerline 
 mongoimport --db beautylane-db --collection permissions --type csv --headerline --file data/csv/permissions.csv
 mongoimport --db beautylane-db --collection users --type csv --headerline --file data/csv/users.csv
 mongoimport --db beautylane-db --collection customer_types --type csv --headerline --file data/csv/customer_types.csv
+mongoimport --db beautylane-db --collection order_sources --type csv --headerline --file data/csv/order_sources.csv
+mongoimport --db beautylane-db --collection number_generators --type csv --headerline --file data/csv/number_generators.csv

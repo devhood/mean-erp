@@ -13,7 +13,7 @@ var db = module.parent.exports.db;
 var numberGenerator = {
   generate : function(req,res,next){
     if(req.body.status && req.body.status.status_code){
-      db.collection("number_generator")
+      db.collection("number_generators")
       .find({status_code : req.body.status.status_code}).toArray()
       .done(function(data){
         var ticket = data[0];
@@ -45,7 +45,7 @@ var numberGenerator = {
         var ticket = req.ticket;
         delete ticket._id;
         ticket.count+=1;
-        db.collection("number_generator")
+        db.collection("number_generators")
         .update({status_code : ticket.status_code}, ticket, {safe: true})
         .done(function(data){
           cb(null,null);
@@ -65,7 +65,6 @@ router.get('/:object', function(req, res) {
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
-    req.query.sorting._id = 1;
     db.collection(req.params.object)
     .find(req.query.filter,req.query.columns)
     .sort(req.query.sorting).skip(req.query.page || 0)

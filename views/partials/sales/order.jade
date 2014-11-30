@@ -17,7 +17,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.transaction_type as transaction_type.transaction_type for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Transaction Type
           .col-md-6
             .form-group
@@ -52,12 +52,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.price_type_name as price_type.price_type_name for price_type in price_types" ,tabindex="-1", , ng-disabled="action!='approve'")
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types" ,tabindex="-1", , ng-disabled="action!='approve'")
                 span.col-md-12.help-block Price Type
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.discount as discount.discount for discount in discounts", ng-selected="{{sales.discount}}" ,ng-disabled="action!='approve'")
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.name as discount.name for discount in discounts", ng-selected="{{sales.discount}}" ,ng-disabled="action!='approve'")
                 span.col-md-12.help-block Permanent Discount
         .row(ng-show="sales.customer")
           .col-md-6
@@ -68,18 +68,18 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms",tabindex="-1", ng-disabled="action!='approve'")
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms",tabindex="-1", ng-disabled="action!='approve'")
                 span.col-md-12.help-block Payment Terms
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.order_source as order_source.order_source for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-6
