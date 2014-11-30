@@ -65,6 +65,7 @@ router.get('/:object', function(req, res) {
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
+    req.query.sorting._id = 1;
     db.collection(req.params.object)
     .find(req.query.filter,req.query.columns)
     .sort(req.query.sorting).skip(req.query.page || 0)

@@ -74,12 +74,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.order_source as order_source.order_source for order_source in order_sources", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.order_source as order_source.order_source for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{sales.delivery_method}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-6
@@ -114,17 +114,22 @@ block title
               .row(ng-hide="action=='read'")
                 .col-md-1
                 .col-md-10
-                  .col-md-5
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-4
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.name for product in products")
                         span.col-md-12.help-block Product
-                  .col-md-3
+                  .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="sales.item.quantity")
                         span.col-md-12.help-block Quantity
-                  .col-md-3
+                  .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         select.select2me.form-control.select2-offscreen(ng-model="sales.item.override")
@@ -146,13 +151,15 @@ block title
                         table.table.table-bordered.table-condensed.flip-content
                           thead.flip-content.bg-grey
                             tr
-                              th Product Order
+                              th Code
+                              th Product
                               th Quantity
                               th Unit Price
                               th Total
                               th(width="5%") Action
                           tbody
                             tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
+                              td {{ordered_item.bl_code}}
                               td {{ordered_item.name}}
                               td {{ordered_item.quantity}}
                               td {{ordered_item.price}}

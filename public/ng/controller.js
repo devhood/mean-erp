@@ -417,7 +417,7 @@ angular.module('erp')
               {url:"/#/sales/order/edit/",title:"Edit Record",icon:"fa fa-edit"}
             ];
 
-            query = { "status.status_code" : {"$in" : [status.order.created.status_code]}};
+            query = { "status.status_code" : {"$in" : [status.order.created.status_code,status.order.override.status_code]}};
             $scope.title = "SALES ORDERS"
             $scope.addUrl = "/#/sales/order/add";
 
