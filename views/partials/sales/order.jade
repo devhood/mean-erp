@@ -22,8 +22,19 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input#supplier_code.form-control(type="text", ng-model="sales.sono", readonly)
+                input.form-control(type="text", ng-model="sales.sono", readonly)
                 span.col-md-12.help-block SO Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="action=='read'")
+                span.col-md-12.help-block Reference No
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block Delivery Date
         .row
           .col-md-1
           .col-md-10
@@ -85,7 +96,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location.company_name as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group

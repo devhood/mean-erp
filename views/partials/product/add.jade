@@ -131,7 +131,7 @@ block title
 									.col-md-4
 										.form-group
 											.col-xs-12.col-sm-12.col-md-12.col-lg-12
-												input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="product.inventory.quantity")
+												input.form-control(type="number", ng-minlength="0", ng-maxlength="20", ng-model="product.inventory.quantity")
 												span.col-md-12.help-block	Quantity
 									.col-md-1
 										button.btn-sm.green.custom-right(type="button",ng-click="addInventory(product)")
@@ -180,7 +180,7 @@ block title
 									.col-md-4
 										.form-group
 											.col-xs-12.col-sm-12.col-md-12.col-lg-12
-												input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="product.package.quantity")
+												input.form-control(type="number", ng-minlength="0", ng-maxlength="20", ng-model="product.package.quantity")
 												span.col-md-12.help-block	Quantity
 									.col-md-1
 										button.btn-sm.green.custom-right(type="button",ng-click="addPackage(product)")

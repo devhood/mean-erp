@@ -296,6 +296,7 @@ angular.module('erp')
 
       $scope.addPackage = function(product){
         if( product.package && product.package.name && product.package.quantity ){
+          delete product.package.inventories;
           if($scope.product.packages){
             $scope.product.packages.push(product.package);
           }
@@ -583,6 +584,7 @@ angular.module('erp')
       if(!isNaN(item.price)){
         item.total = item.quantity * item.price;
       }
+      delete item.inventories;
       if($scope.sales.ordered_items){
         $scope.sales.ordered_items.push(item);
       }
@@ -674,6 +676,7 @@ angular.module('erp')
       if($scope.sales.isNeedApproval){
         $scope.sales.status = status.order.override;
       }
+      $scope.sales.triggerInventory  = "OUT";
       $scope.sales.$update(function(){
         $location.path('/sales/index/order');
         return false;
