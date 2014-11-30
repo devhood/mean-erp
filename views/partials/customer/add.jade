@@ -14,40 +14,40 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#company_name.form-control(type="text", ng-model="customer.company_name", ng-minlength="0", ng-maxlength="50", ng-disabled="action=='read'", required)
+								input.form-control(type="text", ng-model="customer.company_name", ng-minlength="0", ng-maxlength="50", ng-disabled="action=='read'", required)
 								span.col-md-12.help-block	Company Name
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input#company_name.form-control(type="text", ng-model="customer.branch" ng-minlength="0", ng-maxlength="50", ng-disabled="action=='read'", required)
+								input.form-control(type="text", ng-model="customer.branch" ng-minlength="0", ng-maxlength="50", ng-disabled="action=='read'", required)
 								span.col-md-12.help-block	Branch Location
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select.select2me.form-control.select2-offscreen(ng-model="customer.type", ng-options="type.type_name as type.type_name for type in customer_types", ng-selected="{{customer.type}}" ,tabindex="-1", ng-disabled="action=='read'", required)
+								select.select2me.form-control.select2-offscreen(ng-model="customer.type", ng-options="type.name as type.name for type in customer_types", ng-selected="{{customer.type}}" ,tabindex="-1", ng-disabled="action=='read'", required)
 								span.col-md-12.help-block	Type
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input#website.form-control(type="url", ng-model="customer.website", ng-minlength="0", ng-maxlength="30",  ng-disabled="action=='read'")
+								input.form-control(type="url", ng-model="customer.website", ng-minlength="0", ng-maxlength="30",  ng-disabled="action=='read'")
 								span.col-md-12.help-block	Website
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#trade_name.form-control(type="text", ng-model="customer.trade_name", ng-minlength="0", ng-maxlength="30", ng-disabled="action=='read'", required)
+								input.form-control(type="text", ng-model="customer.trade_name", ng-minlength="0", ng-maxlength="30", ng-disabled="action=='read'", required)
 								span.col-md-12.help-block	Trade Name
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input#tin.form-control(type="text",   ng-model="customer.tin" ng-minlength="0", ng-maxlength="20", ui-mask="9999-9999-9999-9999", ng-disabled="action=='read'")
+								input.form-control(type="text",   ng-model="customer.tin" ng-minlength="0", ng-maxlength="20", ui-mask="9999-9999-9999-9999", ng-disabled="action=='read'")
 								span.col-md-12.help-block	TIN
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#commission_sharing.form-control(type="text", ng-model="customer.commission_sharing", ng-minlength="0", ng-maxlength="20",  max="50", ui-mask="99%" ng-disabled="action=='read'", required)
+								input.form-control(type="text", ng-model="customer.commission_sharing", ng-minlength="0", ng-maxlength="20",  max="50", ui-mask="99%" ng-disabled="action=='read'", required)
 								span.col-md-12.help-block	Commission Sharing
 					.col-md-6
 						.form-group
@@ -94,19 +94,19 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#payment_term.select2me.form-control.select2-offscreen(ng-model="customer.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{customer.payment_term}}" ng-disabled="action!='approve'")
+								select#payment_term.select2me.form-control.select2-offscreen(ng-model="customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms", ng-selected="{{customer.payment_term}}" ng-disabled="action!='approve'")
 								span.col-md-12.help-block	Payment Terms
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								select.select2me.form-control.select2-offscreen(ng-model="customer.discount", ng-options="discount.discount as discount.discount for discount in discounts")
+								select.select2me.form-control.select2-offscreen(ng-model="customer.discount", ng-options="discount.name as discount.name for discount in discounts")
 								span.col-md-12.help-block	Permanent Discount
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#shippingModeId.select2me.form-control.select2-offscreen(ng-model="customer.shipping_mode", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{customer.shipping_mode}}" ng-disabled="action=='read'", required)
-								span.col-md-12.help-block	Shipping Mode
+								select#shippingModeId.select2me.form-control.select2-offscreen(ng-model="customer.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{customer.shipping_mode}}" ng-disabled="action=='read'", required)
+								span.col-md-12.help-block	Delivery Method
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
@@ -116,12 +116,12 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#priceTypeId.select2me.form-control.select2-offscreen(ng-model="customer.price_type", ng-options="price_type.price_type_name as price_type.price_type_name for price_type in price_types", ng-selected="{{customer.price_type}}" ng-disabled="action=='read'", required)
+								select#priceTypeId.select2me.form-control.select2-offscreen(ng-model="customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types", ng-selected="{{customer.price_type}}" ng-disabled="action=='read'", required)
 								span.col-md-12.help-block	Price Type
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								select#status.select2me.form-control.select2-offscreen(ng-model="customer.status", ng-options="status.status as status.status for status in customer_status", ng-selected="{{customer.status}}" ng-disabled="action=='read'", required)
+								select#status.select2me.form-control.select2-offscreen(ng-model="customer.status", ng-options="status.name as status.name for status in customer_status", ng-selected="{{customer.status}}" ng-disabled="action=='read'", required)
 								span.col-md-12.help-block	Customer Status
 				.portlet.box.grey
 					.portlet-title
@@ -156,12 +156,12 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.country",ng-selected="{{customer.shipping_address.country}}", ng-options="object.country as object.country for object in countries", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.country", ng-options="object.name as object.name for object in countries", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Country
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('scities',customer.shipping_address.province)",ng-model="customer.shipping_address.province",ng-selected="{{customer.shipping_address.province}}", ng-options="geography.province as geography.province for geography in geographys",ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('scities',customer.shipping_address.province)",ng-model="customer.shipping_address.province", ng-options="province.province as province.province for province in provinces",ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Province
 						.row
 							.col-md-6
@@ -209,23 +209,23 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.country", ng-selected="{{customer.billing_address.country}}", ng-options="object.country as object.country for object in countries", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.country", ng-options="object.name as object.name for object in countries", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Country
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('bcities',customer.billing_address.province)", ng-model="customer.billing_address.province",ng-selected="{{customer.billing_address.province}}", ng-options="geography.province as geography.province for geography in geographys",ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('bcities',customer.billing_address.province)", ng-model="customer.billing_address.province", ng-options="province.province as province.province for province in provinces",ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Province
 						.row
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-change="CityChange('bzipcodes',customer.billing_address.city)", ng-model="customer.billing_address.city", ng-selected="{{customer.billing_address.city}}",ng-options="city.city as city.city for city in bcities", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-change="CityChange('bzipcodes',customer.billing_address.city)", ng-model="customer.billing_address.city", ng-options="city.city as city.city for city in bcities", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	City
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.zipcode",ng-selected="{{customer.billing_address.zipcode}}", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in bzipcodes", ng-disabled="action=='read'", required)
+										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.zipcode", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in bzipcodes", ng-disabled="action=='read'", required)
 										span.col-md-12.help-block	Zipcode
 				.portlet.box.grey
 					.portlet-title

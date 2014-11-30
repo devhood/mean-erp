@@ -11,7 +11,9 @@ mongoimport --db beautylane-db --collection product_status --type csv --headerli
 mongoimport --db beautylane-db --collection product_condition --type csv --headerline --file data/csv/product_condition.csv
 mongoimport --db beautylane-db --collection customer_status --type csv --headerline --file data/csv/customer_status.csv
 mongoimport --db beautylane-db --collection countries --type csv --headerline --file data/csv/countries.csv
-mongoimport --db beautylane-db --collection provinces --file data/csv/metromanila.json
-mongoimport --db beautylane-db --collection positions --file data/csv/positions.json
-mongoimport --db beautylane-db --collection user_status --file data/csv/user_status.json
-mongoimport --db beautylane-db --collection permissions --file data/csv/permissions.json
+mongoimport --db beautylane-db --collection provinces --file data/json/metromanila.json
+mongoimport --db beautylane-db --collection positions --type csv --headerline --file data/csv/positions.csv
+mongoimport --db beautylane-db --collection user_status --type csv --headerline --file data/csv/user_status.csv
+mongoimport --db beautylane-db --collection permissions --type csv --headerline --file data/csv/permissions.csv
+mongoimport --db beautylane-db --collection users --type csv --headerline --file data/csv/users.csv
+mongoimport --db beautylane-db --collection customer_types --type csv --headerline --file data/csv/customer_types.csv

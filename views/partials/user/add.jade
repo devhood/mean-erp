@@ -52,7 +52,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-8.col-lg-8.custom-left
-								select#user_status.select2me.form-control.select2-offscreen(ng-model="user.status", tabindex="-1",ng-options="status.status as status.status for status in statuses", ng-selected="{{user.status}}", required, ng-disabled="action=='read'")
+								select#user_status.select2me.form-control.select2-offscreen(ng-model="user.status", tabindex="-1",ng-options="status.name as status.name for status in statuses", ng-selected="{{user.status}}", required, ng-disabled="action=='read'")
 								span.col-md-12.control-label User Status
 				.portlet.box.grey
 						.portlet-title

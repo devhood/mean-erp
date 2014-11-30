@@ -106,7 +106,6 @@ angular.module('erp')
       $scope.init = function(){
         columns = [
           $scope.structure.type, $scope.structure.company_name, $scope.structure.branch,
-          $scope.structure.credit_limit, $scope.structure.payment_term,
           $scope.structure.sales_executive, $scope.structure.status
         ];
 
@@ -124,19 +123,19 @@ angular.module('erp')
 
         var id = $routeParams.id;
         var action = $routeParams.action;
-        $scope.customer_types = Api.Collection('customer_type').query();
-        $scope.payment_terms = Api.Collection('payment_term').query();
+        $scope.customer_types = Api.Collection('customer_types').query();
+        $scope.payment_terms = Api.Collection('payment_terms').query();
         $scope.discounts = Api.Collection('discounts').query();
-        $scope.shipping_modes = Api.Collection('shipping_mode').query();
-        $scope.price_types = Api.Collection('price_type').query();
+        $scope.delivery_methods = Api.Collection('delivery_methods').query();
+        $scope.price_types = Api.Collection('price_types').query();
         $scope.customer_status = Api.Collection('customer_status').query();
         $scope.countries = Api.Collection('countries').query();
-        $scope.geographys = Api.Collection('geography').query();
+        $scope.provinces = Api.Collection('provinces').query();
 
-        $scope.geographys.$promise.then(function(data){
+        $scope.provinces.$promise.then(function(data){
           $scope.cities = [];
-          for(var i=0;i<$scope.geographys.length;i++){
-            $scope.cities = $scope.cities.concat($scope.geographys[i].cities);
+          for(var i=0;i<$scope.provinces.length;i++){
+            $scope.cities = $scope.cities.concat($scope.provinces[i].cities);
           }
           $scope.bcities = $scope.cities;
           $scope.scities = $scope.cities;
@@ -188,7 +187,7 @@ angular.module('erp')
 
         $scope.ProvinceChange = function(key,value){
           if($scope.customer.shipping_address && !$scope.customer.shipping_address.same){
-            var province = $scope.geographys.filter(function(val){
+            var province = $scope.provinces.filter(function(val){
               return val.province === value;
             });
             $scope[key] = province[0].cities;
