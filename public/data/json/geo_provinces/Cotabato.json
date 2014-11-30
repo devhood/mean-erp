@@ -1,0 +1,167 @@
+{
+    "province": "North Cotabato",
+    "cities": [
+        {
+            "city": "Kidapawan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Alamada",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Aleosan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Antipas",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Arakan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Banisilan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Carmen",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Kabacan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Libungan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "M'Lang",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Magpet",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Makilala",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Matalam",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Midsayap",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Pigkawayan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Pikit",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "PresidentRoxas",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        },
+        {
+            "city": "Tulunan",
+            "zipcodes": [
+                {
+                    "area": "",
+                    "zipcode": ""
+                }
+            ]
+        }
+    ]
+}
