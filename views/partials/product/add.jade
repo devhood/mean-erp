@@ -17,7 +17,7 @@ block title
 								input#bl_code.form-control(type="text", ng-model="product.bl_code", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block BL Code
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="br.brand as br.brand for br in brands", ng-selected="{{product.brand}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="br.name as br.name for br in brands", ng-selected="{{product.brand}}" ,tabindex="-1", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Brand
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 								input#name.form-control(type="text", ng-model="product.name", ng-minlength="0", ng-maxlength="40", ng-disabled="action=='read'",required)
@@ -29,7 +29,7 @@ block title
 								input#color.form-control(type="text", ng-model="product.color", ng-minlength="0", ng-maxlength="25", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Color
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#uom.select2me.form-control.select2-offscreen(ng-model="product.uom", tabindex="-1",ng-options="uom.uom as uom.uom for uom in uoms", ng-disabled="action=='read'",required)
+								select#uom.select2me.form-control.select2-offscreen(ng-model="product.uom", tabindex="-1",ng-options="uom.name as uom.name for uom in uoms", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block UOM
 					.col-md-6
 						.form-group
@@ -56,7 +56,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								select#payment_term.select2me.form-control.select2-offscreen(ng-model="product.payment_term", tabindex="-1",ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms", ng-selected="{{product.payment_term}}", ng-disabled="action=='read'",required)
+								select#payment_term.select2me.form-control.select2-offscreen(ng-model="product.payment_term", tabindex="-1",ng-options="payment_term.name as payment_term.name for payment_term in payment_terms", ng-selected="{{product.payment_term}}", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Payment Terms
 				.row
 					.col-md-1
@@ -70,7 +70,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.status as status.status for status in product_status", ng-selected="{{product.status}}", ng-disabled="action!='approve'")
+								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.name as status.name for status in product_status", ng-selected="{{product.status}}", ng-disabled="action!='approve'")
 								span.col-md-12.help-block Status
 					.col-md-6
 						.form-group
@@ -81,12 +81,12 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#movement.select2me.form-control.select2-offscreen(ng-model="product.movement", tabindex="-1",ng-options="movement.movement as movement.movement for movement in movements", ng-selected="{{product.movement}}", ng-disabled="action=='read'",required)
+								select#movement.select2me.form-control.select2-offscreen(ng-model="product.movement", tabindex="-1",ng-options="movement.name as movement.name for movement in movements", ng-selected="{{product.movement}}", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Movement
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								select#supplier.select2me.form-control.select2-offscreen(ng-model="product.supplier", tabindex="-1",ng-options="supplier.supplier as supplier.supplier for supplier in suppliers", ng-selected="{{product.supplier}}", ng-disabled="action=='read'",required)
+								select#supplier.select2me.form-control.select2-offscreen(ng-model="product.supplier", tabindex="-1",ng-options="supplier.name as supplier.name for supplier in suppliers", ng-selected="{{product.supplier}}", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Supplier
 				.row
 					.col-md-6
@@ -110,6 +110,55 @@ block title
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
 								input#professional_price.form-control(type="number", ng-model="product.professional_price", ng-minlength="0", ng-maxlength="20", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Professional Price
+				.portlet.box.grey
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							| INVENTORIES
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						.form-body
+							br
+							.row(ng-hide="action=='read'")
+								.col-md-1
+								.col-md-10
+									.col-md-7
+										.form-group
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12
+												select.select2me.form-control.select2-offscreen(ng-model="product.inventory", ng-options="customer.company_name for customer in inventory_locations")
+												span.col-md-12.help-block Inventory Location
+									.col-md-4
+										.form-group
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12
+												input.form-control(type="number", ng-minlength="0", ng-maxlength="20", ng-model="product.inventory.quantity")
+												span.col-md-12.help-block	Quantity
+									.col-md-1
+										button.btn-sm.green.custom-right(type="button",ng-click="addInventory(product)")
+											i.fa.fa-plus
+								.col-md-1
+							.form-group
+								.col-md-1
+								.col-md-10
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Inventory Location
+															th Quantity
+															th Action
+													tbody
+														tr(ng-repeat="item in product.inventories")
+															td {{item.company_name}}
+															td {{item.quantity}}
+															td(width="5%")
+																.btn-group.btn-group-xs.btn-group-solid
+																	a.tooltips.btn.default(ng-click="removeInventory($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																		i.fa.fa-trash-o
+								.col-md-1
 				.portlet.box.grey(ng-show="product.uom=='Package'")
 					.portlet-title
 						.caption
@@ -131,7 +180,7 @@ block title
 									.col-md-4
 										.form-group
 											.col-xs-12.col-sm-12.col-md-12.col-lg-12
-												input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="product.package.quantity")
+												input.form-control(type="number", ng-minlength="0", ng-maxlength="20", ng-model="product.package.quantity")
 												span.col-md-12.help-block	Quantity
 									.col-md-1
 										button.btn-sm.green.custom-right(type="button",ng-click="addPackage(product)")

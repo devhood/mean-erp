@@ -1,0 +1,12 @@
+name,route
+"Add User","/user/add"
+"Edit User","/user/edit"
+"View User","/user/read"
+"Add Customer","/customer/add"
+"Edit Customer","/customer/edit"
+"View Customer","/customer/read"
+"Approve Customer","/customer/read"
+"Add Product","/product/add"
+"Edit Product","/product/edit"
+"View Product","/product/read"
+"Approve Product","/product/approve"
