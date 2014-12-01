@@ -461,7 +461,7 @@ angular.module('erp')
 
           buttons = [
             {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-edit"}
+            {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
           query = { "status.status_code" : {"$in" : [status.order.override.status_code]}};
@@ -500,6 +500,40 @@ angular.module('erp')
 
           query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code]}};
           $scope.title1 = "APPROVED DELIVERY RECEIPTS";
+
+          $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+          $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+        break;
+        case "invoice" :
+
+          columns = [
+          $scope.structure.sono,$scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+          ];
+
+          buttons = [
+          {url:"/#/sales/invoice/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/sales/invoice/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          ];
+
+          query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code]}};
+          $scope.title = "SALES INVOICE";
+
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          var columns1 = [
+          $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+          ];
+
+          var buttons1 = [
+          {url:"/#/sales/invoice/read/",title:"View Record",icon:"fa fa-folder-open"}
+          ];
+
+          query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
+          $scope.title1 = "APPROVED SALES INVOICE";
 
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
@@ -659,6 +693,7 @@ angular.module('erp')
       }
       else{
         $scope.sales.status = status.order.created;
+        $scope.sales.triggerInventory  = "OUT";
       }
       $scope.sales.$save(function(){
         $location.path('/sales/index/order');
@@ -676,7 +711,6 @@ angular.module('erp')
       if($scope.sales.isNeedApproval){
         $scope.sales.status = status.order.override;
       }
-      $scope.sales.triggerInventory  = "OUT";
       $scope.sales.$update(function(){
         $location.path('/sales/index/order');
         return false;
@@ -750,9 +784,11 @@ angular.module('erp')
       $scope.ListChange = function(){
           console.log($scope.packing.inventory_location,$scope.packing.delivery_date);
           $scope.packing.list = [];
-          if($scope.packing.inventory_location && $scope.packing.delivery_date){
-            var query = {"inventory_location":$scope.packing.inventory_location, "delivery_date":$scope.packing.delivery_date};
+          if($scope.packing.inventory_location){
+            var query = {"inventory_location":$scope.packing.inventory_location};
+
             Api.Collection('sales',query).query().$promise.then(function(data){
+              console.log(data);
               for(var i in data){
                 for(var j in data[i].ordered_items){
                   var item = {
@@ -833,11 +869,11 @@ angular.module('erp')
   $scope.action = action;
   $scope.transaction_types = Api.Collection('transaction_types').query();
   $scope.customers = Api.Collection('customers').query();
-  $scope.price_types = Api.Collection('price_type').query();
+  $scope.price_types = Api.Collection('price_types').query();
   $scope.discounts = Api.Collection('discounts').query();
-  $scope.payment_terms = Api.Collection('payment_term').query();
-  $scope.order_sources = Api.Collection('order_source').query();
-  $scope.shipping_modes = Api.Collection('shipping_mode').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
   $scope.products = Api.Collection('products').query();
@@ -885,6 +921,69 @@ angular.module('erp')
       $scope.sales.status = status.delivery.rejected;
       $scope.sales.$update(function(){
         $location.path('/sales/index/delivery');
+        return false;
+      });
+    };
+  }
+})
+.controller('SalesInvoiceCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_types').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Sales;
+
+  $scope.CustomerChange = function(){
+    if($scope.sales.customer){
+      $scope.shipping_address =
+      $scope.sales.customer.shipping_address.landmark + ', ' +
+      $scope.sales.customer.shipping_address.barangay + ', ' +
+      $scope.sales.customer.shipping_address.city + ', ' +
+      $scope.sales.customer.shipping_address.province + ', ' +
+      $scope.sales.customer.shipping_address.country + ', ' +
+      $scope.sales.customer.shipping_address.zipcode;
+
+      $scope.billing_address =
+      $scope.sales.customer.billing_address.landmark + ', ' +
+      $scope.sales.customer.billing_address.barangay + ', ' +
+      $scope.sales.customer.billing_address.city + ', ' +
+      $scope.sales.customer.billing_address.province + ', ' +
+      $scope.sales.customer.billing_address.country + ', ' +
+      $scope.sales.customer.billing_address.zipcode;
+    }
+  }
+  if(action == 'read'){
+    $scope.title = "VIEW SALES INVOICE";
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+  if(action == 'approve'){
+
+    $scope.title = "APPROVE SALES INVOICE "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      $scope.sales.status = status.invoice.approved;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/invoice');
+        return false;
+      });
+    };
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.invoice.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/invoice');
         return false;
       });
     };

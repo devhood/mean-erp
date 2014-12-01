@@ -28,13 +28,20 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.transaction_type as transaction_type.transaction_type for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="true",required)
                 span.col-md-12.help-block Transaction Type
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                 input.form-control(type="text", ng-model="sales.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}")
                 span.col-md-12.help-block Delivery Date
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="action=='read'")
+                span.col-md-12.help-block Reference No
+          .col-md-6
         .row
           .col-md-1
           .col-md-10
@@ -63,12 +70,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.price_type_name as price_type.price_type_name for price_type in price_types" ,tabindex="-1", , ng-disabled="true")
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types" ,tabindex="-1", , ng-disabled="true")
                 span.col-md-12.help-block Price Type
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.discount as discount.discount for discount in discounts", ng-selected="{{sales.discount}}" ,ng-disabled="true")
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.name as discount.name for discount in discounts", ng-selected="{{sales.discount}}" ,ng-disabled="true")
                 span.col-md-12.help-block Permanent Discount
         .row(ng-show="sales.customer")
           .col-md-6
@@ -79,24 +86,24 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.payment_term_name as payment_term.payment_term_name for payment_term in payment_terms",tabindex="-1", ng-disabled="true")
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms",tabindex="-1", ng-disabled="true")
                 span.col-md-12.help-block Payment Terms
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.order_source as order_source.order_source for order_source in order_sources", tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", tabindex="-1", ng-disabled="true",required)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="shipping_mode.shipping_mode_name as shipping_mode.shipping_mode_name for shipping_mode in shipping_modes", ng-selected="{{sales.delivery_method}}" ,tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}" ,tabindex="-1", ng-disabled="true",required)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location.company_name as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="true",required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
@@ -157,12 +164,14 @@ block title
                         table.table.table-bordered.table-condensed.flip-content
                           thead.flip-content.bg-grey
                             tr
+                              th Code
                               th Product Order
                               th Quantity
                               th Unit Price
                               th Total
                           tbody
                             tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
+                              td {{ordered_item.bl_code}}
                               td {{ordered_item.name}}
                               td {{ordered_item.quantity}}
                               td {{ordered_item.price}}

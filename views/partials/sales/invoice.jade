@@ -25,6 +25,17 @@ block title
                 input#supplier_code.form-control(type="text", ng-model="sales.sono", readonly)
                 span.col-md-12.help-block SO Number
         .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="action=='read'")
+                span.col-md-12.help-block Reference No
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input#supplier_code.form-control(type="text", ng-model="sales.drno", readonly)
+                span.col-md-12.help-block DR Number
+        .row
           .col-md-1
           .col-md-10
             .form-group
