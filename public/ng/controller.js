@@ -432,34 +432,6 @@ angular.module('erp')
     $scope.init = function(){
       var type = $routeParams.type;
       switch(type){
-         case "payment" :
-
-            columns = [
-              $scope.structure.pmno,
-              $scope.structure.rmrno,
-              $scope.structure.cmno,
-              $scope.structure.sino, $scope.structure.drno,
-              $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-              // $scope.structure.delivery_method,
-              // $scope.structure.delivery_date,
-              // $scope.structure.shipping_mode,
-              $scope.structure.customer.payment_term,
-              $scope.structure.status.status_name
-            ];
-
-            buttons = [
-              {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-              // {url:"/#/sales/payment/edit/",title:"Edit Record",icon:"fa fa-edit"}
-            ];
-
-            query = { "status.status_code" : {"$in" : [status.proforma.created.status_code,]}};
-            $scope.title = "SALES PAYMENT"
-            $scope.addUrl = "/#/sales/payment/add";
-
-            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-
-        break;
         case "proforma" :
 
             columns = [
@@ -587,28 +559,41 @@ angular.module('erp')
           $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
         break;
-        case "payment" :
+
+        case "return" :
 
           columns = [
-            $scope.structure.sono, $scope.structure.customer, $scope.structure.sales_executive,
-            $scope.structure.delivery_method, $scope.structure.payment_term, $scope.structure.status
+          $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
           ];
 
           buttons = [
-          {url:"/#/sales/delivery/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/sales/delivery/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/sales/delivery/approve/",title:"Approve Record",icon:"fa fa-edit"}
+          {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/sales/return/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
-          query.status_code = {"$in" : [status.order.created]};
-          $scope.title = "PAYMENTS";
+
+          query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code]}};
+          $scope.title = "RETURN MERCHANDISE RECEIPT";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
           $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
+          var columns1 = [
+          $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+          ];
+
+          var buttons1 = [
+          {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"}
+          ];
+
+          query = { "status.status_code" : {"$in" : [status.returned.approved.status_code]}};
+          $scope.title1 = "APPROVED RETURN MERCHANDISE RECEIPTE";
+
+          $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+          $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
           break;
-
-      };
-
 
     };
 
