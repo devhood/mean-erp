@@ -19,3 +19,4 @@ mongoimport --db beautylane-db --collection users --type csv --headerline --file
 mongoimport --db beautylane-db --collection customer_types --type csv --headerline --file data/csv/customer_types.csv
 mongoimport --db beautylane-db --collection order_sources --type csv --headerline --file data/csv/order_sources.csv
 mongoimport --db beautylane-db --collection number_generators --type csv --headerline --file data/csv/number_generators.csv
+mongoimport --db beautylane-db --collection customers --file data/json/customers.json
