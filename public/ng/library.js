@@ -111,6 +111,7 @@ angular.module('erp')
         created : {status_code : "PROFORMA_INVOICE_CREATED", status_name : "Sales-Pro Forma submitted"},
         approved : {status_code : "PROFORMA_INVOICE_APPROVED", status_name : "Accounting-Pro Forma approved"},
         rejected : {status_code : "PROFORMA_INVOICE_REJECTED", status_name : "Accounting-Pro Forma rejected"},
+        override : {status_code : "SALES_ORDER_OVERRIDE", status_name : "Sales-Pro Forma for approval"},
         revised : {status_code : "PROFORMA_INVOICE_REVISED", status_name : "Sales-Pro Forma revised"},
         rescheduled : {status_code : "PROFORMA_INVOICE_SCHEDULE_UPDATED", status_name : "Sales-Delivery Schedule updated"}
       }
