@@ -432,6 +432,54 @@ angular.module('erp')
     $scope.init = function(){
       var type = $routeParams.type;
       switch(type){
+         case "payment" :
+
+            columns = [
+              $scope.structure.pmno,
+              $scope.structure.rmrno,
+              $scope.structure.cmno,
+              $scope.structure.sino, $scope.structure.drno,
+              $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+              // $scope.structure.delivery_method,
+              // $scope.structure.delivery_date,
+              // $scope.structure.shipping_mode,
+              $scope.structure.customer.payment_term,
+              $scope.structure.status.status_name
+            ];
+
+            buttons = [
+              {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
+              // {url:"/#/sales/payment/edit/",title:"Edit Record",icon:"fa fa-edit"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.proforma.created.status_code,]}};
+            $scope.title = "SALES PAYMENT"
+            $scope.addUrl = "/#/sales/payment/add";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+        break;
+        case "proforma" :
+
+            columns = [
+              $scope.structure.pfno, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+              $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+              {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
+              {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.proforma.created.status_code,status.proforma.revised.status_code]}};
+            $scope.title = "PROFORMA INVOICE"
+            $scope.addUrl = "/#/sales/proforma/add";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+        break;
         case "order" :
 
             columns = [
@@ -751,6 +799,191 @@ angular.module('erp')
   }
 
 })
+.controller('SalesProformaCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_types').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Sales;
+
+  $scope.CustomerChange = function(){
+    if($scope.sales.customer){
+      $scope.shipping_address =
+          $scope.sales.customer.shipping_address.landmark + ', ' +
+          $scope.sales.customer.shipping_address.barangay + ', ' +
+          $scope.sales.customer.shipping_address.city + ', ' +
+          $scope.sales.customer.shipping_address.province + ', ' +
+          $scope.sales.customer.shipping_address.country + ', ' +
+          $scope.sales.customer.shipping_address.zipcode;
+      $scope.billing_address =
+          $scope.sales.customer.billing_address.landmark + ', ' +
+          $scope.sales.customer.billing_address.barangay + ', ' +
+          $scope.sales.customer.billing_address.city + ', ' +
+          $scope.sales.customer.billing_address.province + ', ' +
+          $scope.sales.customer.billing_address.country + ', ' +
+          $scope.sales.customer.billing_address.zipcode;
+    }
+  }
+  $scope.addProforma = function(sales){
+    var item = angular.copy(sales.item);
+    if( item && item.name && item.quantity && item.quantity ){
+      item.override = item.override ? item.override : "NORMAL";
+      if(sales.customer.price_type == "Professional"){
+        item.price = item.professional_price
+      }
+      if(sales.customer.price_type == "Retail"){
+        item.price = item.retail_price;
+      }
+      if(item.override != "NORMAL"){
+        item.price = item.override;
+        item.total = 0.00;
+      }
+      if(!isNaN(item.price)){
+        item.total = item.quantity * item.price;
+      }
+      delete item.inventories;
+      if($scope.sales.ordered_items){
+        $scope.sales.ordered_items.push(item);
+      }
+      else{
+        $scope.sales.ordered_items = [item];
+      }
+      delete sales.item;
+    }
+    $scope.sales.subtotal = 0;
+    $scope.sales.isNeedApproval = false;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+      if($scope.sales.ordered_items[i].override != "NORMAL"){
+        $scope.sales.isNeedApproval = true;
+      }
+    }
+     var computation = Library.Compute.Order(
+        $scope.sales.subtotal,
+        $scope.sales.customer.discount.replace(" %","")/100,
+        $scope.sales.isWithholdingTax,
+        $scope.sales.isZeroRateSales
+     );
+     $scope.sales.discount = computation.totalDiscount;
+     $scope.sales.total_vat = computation.vatableSales;
+     $scope.sales.total_amount_due = computation.totalAmountDue;
+     $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+     $scope.sales.withholding_tax = computation.withholdingTax;
+  }
+
+  $scope.reCompute = function(sales){
+    if($scope.sales.customer){
+      var computation = Library.Compute.Order(
+        $scope.sales.subtotal,
+        $scope.sales.customer.discount.replace(" %","")/100,
+        $scope.sales.isWithholdingTax,
+        $scope.sales.isZeroRateSales
+      );
+      $scope.sales.discount = computation.totalDiscount;
+      $scope.sales.total_vat = computation.vatableSales;
+      $scope.sales.total_amount_due = computation.totalAmountDue;
+      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+      $scope.sales.withholding_tax = computation.withholdingTax;
+    }
+  }
+  $scope.removeOrder = function(index){
+    $scope.sales.ordered_items.splice(index, 1);
+    $scope.sales.subtotal = 0;
+    $scope.sales.isNeedApproval = false;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+      if($scope.sales.ordered_items[i].override != "NORMAL"){
+        $scope.sales.isNeedApproval = true;
+      }
+    }
+  }
+  if(action == 'read'){
+    $scope.title = "VIEW PROFORMA INVOICE";
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+  if(action == 'add'){
+    $scope.title = "ADD PROFORMA INVOICE";
+    var Sales = Api.Collection('sales');
+    $scope.sales = new Sales();
+
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+
+        $scope.sales.status = status.order.override;
+        console.log($scope.sales);
+      }
+      else{
+        $scope.sales.status = status.order.created;
+        $scope.sales.triggerInventory  = "OUT";
+      }
+      $scope.sales.$save(function(){
+        $location.path('/sales/index/proforma');
+        return false;
+      });
+    }
+  }
+  if(action == 'edit'){
+
+    $scope.title = "EDIT PROFORMA INVOICE"+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.order.override;
+      }
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/proforma');
+        return false;
+      });
+    };
+    $scope.deleteSales=function(sales){
+      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
+        $scope.sales.$delete(function(){
+          $location.path('/sales/index/proforma');
+          return false;
+        });
+      }
+    };
+  }
+  if(action == 'approve'){
+
+    $scope.title = "APPROVE PROFORMA INVOICE"+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.order.created;
+      }
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/override');
+        return false;
+      });
+    };
+    $scope.deleteSales=function(sales){
+      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
+        $scope.sales.$delete(function(){
+          $location.path('/sales/index/override');
+          return false;
+        });
+      }
+    };
+  }
+
+})
 .controller('PackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
   $scope.ajax_ready = false;
@@ -987,5 +1220,140 @@ angular.module('erp')
         return false;
       });
     };
+  }
+}).controller('SalesPaymentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_types').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.sales_executives = Api.Collection('sales_executives').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  $scope.shipping_modes = Api.Collection('shipping_modes').query();
+  $scope.inventory_locations = Api.Collection('inventory_locations').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Sales;
+
+  $scope.CustomerChange = function(){
+    if($scope.sales.customer){
+      $scope.shipping_address =
+      $scope.sales.customer.shipping_address.landmark + ', ' +
+      $scope.sales.customer.shipping_address.barangay + ', ' +
+      $scope.sales.customer.shipping_address.city + ', ' +
+      $scope.sales.customer.shipping_address.province + ', ' +
+      $scope.sales.customer.shipping_address.country + ', ' +
+      $scope.sales.customer.shipping_address.zipcode;
+
+      $scope.billing_address =
+      $scope.sales.customer.billing_address.landmark + ', ' +
+      $scope.sales.customer.billing_address.barangay + ', ' +
+      $scope.sales.customer.billing_address.city + ', ' +
+      $scope.sales.customer.billing_address.province + ', ' +
+      $scope.sales.customer.billing_address.country + ', ' +
+      $scope.sales.customer.billing_address.zipcode;
+    }
+  }
+  if(action == 'read'){
+    $scope.title = "VIEW SALES PAYMENT";
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+  if(action == 'approve'){
+    $scope.title = "APPROVE PAYMENT "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      $scope.sales.status = status.payment.confirmed;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/payment');
+        return false;
+      });
+    };
+
+
+    $scope.addProforma = function(sales){
+      var item = angular.copy(sales.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        item.override = item.override ? item.override : "NORMAL";
+        if(sales.customer.price_type == "Professional"){
+          item.price = item.professional_price
+        }
+        if(sales.customer.price_type == "Retail"){
+          item.price = item.retail_price;
+        }
+        if(item.override != "NORMAL"){
+          item.price = item.override;
+          item.total = 0.00;
+        }
+        if(!isNaN(item.price)){
+          item.total = item.quantity * item.price;
+        }
+        delete item.inventories;
+        if($scope.sales.ordered_items){
+          $scope.sales.ordered_items.push(item);
+        }
+        else{
+          $scope.sales.ordered_items = [item];
+        }
+        delete sales.item;
+      }
+      $scope.sales.subtotal = 0;
+      $scope.sales.isNeedApproval = false;
+      for(var i=0;i<$scope.sales.ordered_items.length; i++){
+        $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+        if($scope.sales.ordered_items[i].override != "NORMAL"){
+          $scope.sales.isNeedApproval = true;
+        }
+      }
+       var computation = Library.Compute.Order(
+          $scope.sales.subtotal,
+          $scope.sales.customer.discount.replace(" %","")/100,
+          $scope.sales.isWithholdingTax,
+          $scope.sales.isZeroRateSales
+       );
+       $scope.sales.discount = computation.totalDiscount;
+       $scope.sales.total_vat = computation.vatableSales;
+       $scope.sales.total_amount_due = computation.totalAmountDue;
+       $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+       $scope.sales.withholding_tax = computation.withholdingTax;
+    }
+
+    $scope.reCompute = function(sales){
+      if($scope.sales.customer){
+        var computation = Library.Compute.Order(
+          $scope.sales.subtotal,
+          $scope.sales.customer.discount.replace(" %","")/100,
+          $scope.sales.isWithholdingTax,
+          $scope.sales.isZeroRateSales
+        );
+        $scope.sales.discount = computation.totalDiscount;
+        $scope.sales.total_vat = computation.vatableSales;
+        $scope.sales.total_amount_due = computation.totalAmountDue;
+        $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+        $scope.sales.withholding_tax = computation.withholdingTax;
+      }
+    }
+    $scope.removeOrder = function(index){
+      $scope.sales.ordered_items.splice(index, 1);
+      $scope.sales.subtotal = 0;
+      $scope.sales.isNeedApproval = false;
+      for(var i=0;i<$scope.sales.ordered_items.length; i++){
+        $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+        if($scope.sales.ordered_items[i].override != "NORMAL"){
+          $scope.sales.isNeedApproval = true;
+        }
+      }
+    }
+
+
+
   }
 });

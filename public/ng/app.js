@@ -96,6 +96,10 @@ angular.module('erp', [
         templateUrl: '/partials/sales/invoice',
         controller: 'SalesInvoiceCtrl'
       }) 
+      .when('/sales/proforma/:action', {
+        templateUrl: '/partials/sales/proforma',
+        controller: 'SalesProformaCtrl'
+      })
       .when('/sales/proforma/:action/:id', {
         templateUrl: '/partials/sales/proforma',
         controller: 'SalesProformaCtrl'
@@ -106,6 +110,10 @@ angular.module('erp', [
       })
       .when('/sales/memo/:action/:id', {
         templateUrl: '/partials/sales/memo',
+        controller: 'SalesCtrl'
+      })
+      .when('/sales/payment/:action', {
+        templateUrl: '/partials/sales/payment',
         controller: 'SalesCtrl'
       })
       .when('/sales/payment/:action/:id', {
