@@ -129,9 +129,9 @@ module.exports.print = function(siinfo,result){
 		if(doc.y >= 640){
 			doc.addPage();
 			doc = pdf.pageHeader(doc,siinfo);
-			doc = pdf.pageFooter(doc,siinfo);
 			doc.y =315;
 		}
+		if i==	doc = pdf.pageFooter(doc,siinfo);
 	}
 	doc.end();
 
