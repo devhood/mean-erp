@@ -594,7 +594,7 @@ angular.module('erp')
           $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
           break;
-
+      }
     };
 
   });
@@ -1206,7 +1206,8 @@ angular.module('erp')
       });
     };
   }
-}).controller('SalesPaymentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+})
+.controller('SalesPaymentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
