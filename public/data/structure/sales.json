@@ -329,8 +329,8 @@
       "title": "Discount",
       "type": "text"
     },
-    "vatable_sales": {
-      "name": "vatable_sales",
+    "total_vat": {
+      "name": "total_vat",
       "title": "Vatable Sales",
       "type": "text"
     },
@@ -359,8 +359,8 @@
       "title": "Return Discount",
       "type": "text"
     },
-    "return_vatable_sales": {
-      "name": "return_vatable_sales",
+    "return_total_vat": {
+      "name": "return_total_vat",
       "title": "Return Vatable Sales",
       "type": "text"
     },

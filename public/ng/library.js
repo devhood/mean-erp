@@ -51,7 +51,7 @@ angular.module('erp')
       }
   },
   Compute : {
-      Order : function(total,discount,isWithholdingTax,isVatZeroRated){
+      Order : function(total,returnTotal,discount,isWithholdingTax,isVatZeroRated){
           var totalDiscount = total * discount;
           var vatableSales = total - totalDiscount;
           var taxAmount = total - (total / 1.12);
@@ -67,7 +67,7 @@ angular.module('erp')
             zeroRatedSales : zeroRatedSales,
             totalAmountDue : totalAmountDue
           };
-      }
+      },
   },
   Status : {
     Sales : {
