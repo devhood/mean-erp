@@ -596,7 +596,6 @@ angular.module('erp')
           break;
       }
     };
-  }
 
   });
 })
