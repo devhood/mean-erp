@@ -1344,12 +1344,9 @@ angular.module('erp')
         }
       }
     }
-
-
-
   }
 })
-.controller('ReturnReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesReturnCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
@@ -1362,9 +1359,28 @@ angular.module('erp')
   $scope.delivery_methods = Api.Collection('delivery_methods').query();
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
-  $scope.products = Api.Collection('products').query();
+  $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+    $scope.CustomerChange();
+    $scope.products = angular.copy($scope.sales.ordered_items);
+  });
   var status = Library.Status.Sales;
 
+  $scope.addReturn = function(sales){
+    var item = angular.copy(sales.return);
+    if( item && item.name && item.quantity && item.quantity ){
+      $scope.sales.returned_items
+    }
+    if($scope.sales.returned_items){
+      $$scope.sales.returned_items.push(item);
+    }
+    else{
+      $scope.sales.returned_items = [item];
+    }
+    delete sales.returne;
+  }
+  $scope.removeReturn = function(index){
+    $scope.sales.returned_items.splice(index, 1);
+  }
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
       $scope.shipping_address =
@@ -1386,27 +1402,22 @@ angular.module('erp')
   }
   if(action == 'read'){
     $scope.title = "VIEW RETURN MERCHANDISE RECEIPT";
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
+
   }
   if(action == 'approve'){
 
-    $scope.title = "APPROVE DELIVERY MERCHANDISE RECEIPT"+ id;
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
+    $scope.title = "APPROVE RETURN MERCHANDISE RECEIPT"+ id;
     $scope.saveSales = function(){
-      $scope.sales.status = status.delivery.approved;
+      $scope.sales.status = status.returned.approved;
       $scope.sales.$update(function(){
-        $location.path('/sales/index/delivery');
+        $location.path('/sales/index/return');
         return false;
       });
     };
     $scope.rejectSales = function(){
-      $scope.sales.status = status.delivery.rejected;
+      $scope.sales.status = status.returned.rejected;
       $scope.sales.$update(function(){
-        $location.path('/sales/index/delivery');
+        $location.path('/sales/index/return');
         return false;
       });
     };
