@@ -596,6 +596,7 @@ angular.module('erp')
           break;
 
     };
+  }
 
   });
 })
@@ -819,7 +820,8 @@ angular.module('erp')
           $scope.sales.customer.billing_address.zipcode;
     }
   }
-  $scope.addProforma = function(sales){
+  $scope.addOrder = function(sales){
+    console.log("passed addOrder");
     var item = angular.copy(sales.item);
     if( item && item.name && item.quantity && item.quantity ){
       item.override = item.override ? item.override : "NORMAL";
@@ -859,6 +861,7 @@ angular.module('erp')
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
      );
+     console.log("passed add Computation");
      $scope.sales.discount = computation.totalDiscount;
      $scope.sales.total_vat = computation.vatableSales;
      $scope.sales.total_amount_due = computation.totalAmountDue;
@@ -867,6 +870,7 @@ angular.module('erp')
   }
 
   $scope.reCompute = function(sales){
+    console.log("passed re Compute");
     if($scope.sales.customer){
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
@@ -882,6 +886,7 @@ angular.module('erp')
     }
   }
   $scope.removeOrder = function(index){
+    console.log("passed remove Order");
     $scope.sales.ordered_items.splice(index, 1);
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
@@ -893,12 +898,14 @@ angular.module('erp')
     }
   }
   if(action == 'read'){
+    console.log("passed proforma read");
     $scope.title = "VIEW PROFORMA INVOICE";
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
   }
   if(action == 'add'){
+    console.log("passed proforma invoice");
     $scope.title = "ADD PROFORMA INVOICE";
     var Sales = Api.Collection('sales');
     $scope.sales = new Sales();
@@ -906,12 +913,12 @@ angular.module('erp')
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){
 
-        $scope.sales.status = status.order.override;
+        $scope.sales.status = status.proforma.override;
         console.log($scope.sales);
       }
       else{
-        $scope.sales.status = status.order.created;
-        $scope.sales.triggerInventory  = "OUT";
+        $scope.sales.status = status.proforma.created;
+      //  $scope.sales.triggerInventory  = "OUT";
       }
       $scope.sales.$save(function(){
         $location.path('/sales/index/proforma');
@@ -1264,7 +1271,7 @@ angular.module('erp')
     };
 
 
-    $scope.addProforma = function(sales){
+    $scope.addOrder = function(sales){
       var item = angular.copy(sales.item);
       if( item && item.name && item.quantity && item.quantity ){
         item.override = item.override ? item.override : "NORMAL";
