@@ -57,6 +57,7 @@ var pdf = {
 			doc.text(drinfo.sono,35,180);
 			doc.text(drinfo.pono,205,180);
 			doc.text(drinfo.refno,360,180);
+			doc.text(drinfo.ordered_by,520,180);
 			doc.moveDown(0);
 			y = doc.y;
 			doc.text(drinfo.term,35);
