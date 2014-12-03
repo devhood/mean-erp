@@ -109,14 +109,15 @@ module.exports.print = function(drinfo,result){
 	for(var i in drinfo.dr_item){
 		var y= doc.y;
 		doc.font('Courier');
+		doc.fontSize(10);
 		doc.text(drinfo.dr_item[i].code,-1,y,{width:60});
 		doc.text(drinfo.dr_item[i].name,90,y,{width:80});
 		doc.text(drinfo.dr_item[i].brand,205,y,{width:100});
 		doc.text(drinfo.dr_item[i].description,310,y,{width:165});
 		doc.text(drinfo.dr_item[i].uom,510,y,{width:50});
 		doc.text(drinfo.dr_item[i].quantity,560,y,{width:35,align:'center'});
-		doc.moveDown(0.5);
-		if(doc.y >= 590){
+		doc.moveDown(1);
+		if(doc.y >= 540){
 			doc.addPage();
 			doc = pdf.pageHeader(doc,drinfo);
 			doc = pdf.pageFooter(doc,drinfo);

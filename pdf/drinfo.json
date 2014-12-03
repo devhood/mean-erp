@@ -11,6 +11,7 @@
 		"delivery_created_by" : "Chito Cascante",
 		"delivery_notes" : "undefined",
 		"drno" : "DR-1000000014",
+                "sino" : "SI-1000000014",
 		"pono" : "PO-1000000014",
 		"refno" : "REF-10000014",
 		"order_notes" : "sample only",
