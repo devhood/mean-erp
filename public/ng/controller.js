@@ -667,9 +667,10 @@ angular.module('erp')
       if($scope.sales.ordered_items[i].override != "NORMAL"){
         $scope.sales.isNeedApproval = true;
       }
-    }
+     }
      var computation = Library.Compute.Order(
         $scope.sales.subtotal,
+        0,
         $scope.sales.customer.discount.replace(" %","")/100,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
@@ -685,6 +686,7 @@ angular.module('erp')
     if($scope.sales.customer){
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
+        0,
         $scope.sales.customer.discount.replace(" %","")/100,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
@@ -1009,7 +1011,10 @@ angular.module('erp')
           console.log($scope.packing.inventory_location,$scope.packing.delivery_date);
           $scope.packing.list = [];
           if($scope.packing.inventory_location){
-            var query = {"inventory_location":$scope.packing.inventory_location};
+            var query = {
+              "inventory_location":$scope.packing.inventory_location,
+              "status.status_code" : {"$in" : [status.order.created.status_code,status.order.revised.status_code]}
+            };
 
             Api.Collection('sales',query).query().$promise.then(function(data){
               console.log(data);
@@ -1345,12 +1350,9 @@ angular.module('erp')
         }
       }
     }
-
-
-
   }
 })
-.controller('ReturnReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesReturnCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
@@ -1363,9 +1365,68 @@ angular.module('erp')
   $scope.delivery_methods = Api.Collection('delivery_methods').query();
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
-  $scope.products = Api.Collection('products').query();
+  $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+    $scope.CustomerChange();
+    $scope.products = angular.copy($scope.sales.ordered_items);
+  });
   var status = Library.Status.Sales;
 
+  $scope.addReturn = function(sales){
+    var item = angular.copy(sales.return);
+    if( item && item.name && item.quantity && item.quantity ){
+      $scope.sales.returned_items
+    }
+    if($scope.sales.returned_items){
+      $scope.sales.returned_items.push(item);
+    }
+    else{
+      $scope.sales.returned_items = [item];
+    }
+    delete sales.return;
+    $scope.sales.returnsubtotal = 0;
+    $scope.sales.subtotal = 0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+    }
+    for(var i=0;i<$scope.sales.returned_items.length; i++){
+      $scope.sales.returnsubtotal+=$scope.sales.returned_items[i].total;
+    }
+    var computation = Library.Compute.Order(
+      $scope.sales.subtotal,
+      $scope.sales.returnsubtotal,
+      $scope.sales.customer.discount.replace(" %","")/100,
+      $scope.sales.isWithholdingTax,
+      $scope.sales.isZeroRateSales
+    );
+    $scope.sales.discount = computation.totalDiscount;
+    $scope.sales.total_vat = computation.vatableSales;
+    $scope.sales.total_amount_due = computation.totalAmountDue;
+    $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+    $scope.sales.withholding_tax = computation.withholdingTax;
+  }
+  $scope.removeReturn = function(index){
+    $scope.sales.returned_items.splice(index, 1);
+    $scope.sales.returnsubtotal = 0;
+    $scope.sales.subtotal = 0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+    }
+    for(var i=0;i<$scope.sales.returned_items.length; i++){
+      $scope.sales.returnsubtotal+=$scope.sales.returned_items[i].total;
+    }
+    var computation = Library.Compute.Order(
+      $scope.sales.subtotal,
+      $scope.sales.returnsubtotal,
+      $scope.sales.customer.discount.replace(" %","")/100,
+      $scope.sales.isWithholdingTax,
+      $scope.sales.isZeroRateSales
+    );
+    $scope.sales.discount = computation.totalDiscount;
+    $scope.sales.total_vat = computation.vatableSales;
+    $scope.sales.total_amount_due = computation.totalAmountDue;
+    $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+    $scope.sales.withholding_tax = computation.withholdingTax;
+  }
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
       $scope.shipping_address =
@@ -1387,27 +1448,22 @@ angular.module('erp')
   }
   if(action == 'read'){
     $scope.title = "VIEW RETURN MERCHANDISE RECEIPT";
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
+
   }
   if(action == 'approve'){
 
-    $scope.title = "APPROVE DELIVERY MERCHANDISE RECEIPT"+ id;
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
+    $scope.title = "APPROVE RETURN MERCHANDISE RECEIPT"+ id;
     $scope.saveSales = function(){
-      $scope.sales.status = status.delivery.approved;
+      $scope.sales.status = status.returned.approved;
       $scope.sales.$update(function(){
-        $location.path('/sales/index/delivery');
+        $location.path('/sales/index/return');
         return false;
       });
     };
     $scope.rejectSales = function(){
-      $scope.sales.status = status.delivery.rejected;
+      $scope.sales.status = status.returned.rejected;
       $scope.sales.$update(function(){
-        $location.path('/sales/index/delivery');
+        $location.path('/sales/index/return');
         return false;
       });
     };

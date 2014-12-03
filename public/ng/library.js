@@ -51,7 +51,8 @@ angular.module('erp')
       }
   },
   Compute : {
-      Order : function(total,discount,isWithholdingTax,isVatZeroRated){
+      Order : function(total,returnTotal,discount,isWithholdingTax,isVatZeroRated){
+          total = total-returnTotal;
           var totalDiscount = total * discount;
           var vatableSales = total - totalDiscount;
           var taxAmount = total - (total / 1.12);
@@ -67,7 +68,7 @@ angular.module('erp')
             zeroRatedSales : zeroRatedSales,
             totalAmountDue : totalAmountDue
           };
-      }
+      },
   },
   Status : {
     Sales : {
@@ -96,6 +97,7 @@ angular.module('erp')
       returned : {
         created : {status_code : "RETURN_CREATED", status_name : "Sales-Return submitted"},
         approved : {status_code : "RETURN_APPROVED", status_name : "Warehouse-Return approved"},
+        rejected : {status_code : "RETURN_REJECTED", status_name : "Warehouse-Return rejected"},
         cancel : {status_code : "RETURN_CANCEL", status_name : "Warehouse-Return cancelled"}
       },
       memo : {
