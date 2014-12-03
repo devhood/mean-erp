@@ -52,6 +52,7 @@ angular.module('erp')
   },
   Compute : {
       Order : function(total,returnTotal,discount,isWithholdingTax,isVatZeroRated){
+          total = total-returnTotal;
           var totalDiscount = total * discount;
           var vatableSales = total - totalDiscount;
           var taxAmount = total - (total / 1.12);

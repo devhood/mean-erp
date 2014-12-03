@@ -670,6 +670,7 @@ angular.module('erp')
      }
      var computation = Library.Compute.Order(
         $scope.sales.subtotal,
+        0,
         $scope.sales.customer.discount.replace(" %","")/100,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
@@ -685,6 +686,7 @@ angular.module('erp')
     if($scope.sales.customer){
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
+        0,
         $scope.sales.customer.discount.replace(" %","")/100,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
@@ -1009,7 +1011,10 @@ angular.module('erp')
           console.log($scope.packing.inventory_location,$scope.packing.delivery_date);
           $scope.packing.list = [];
           if($scope.packing.inventory_location){
-            var query = {"inventory_location":$scope.packing.inventory_location};
+            var query = {
+              "inventory_location":$scope.packing.inventory_location,
+              "status.status_code" : {"$in" : [status.order.created.status_code,status.order.revised.status_code]}
+            };
 
             Api.Collection('sales',query).query().$promise.then(function(data){
               console.log(data);
@@ -1372,19 +1377,19 @@ angular.module('erp')
       $scope.sales.returned_items
     }
     if($scope.sales.returned_items){
-      $$scope.sales.returned_items.push(item);
+      $scope.sales.returned_items.push(item);
     }
     else{
       $scope.sales.returned_items = [item];
     }
     delete sales.return;
-    $scope.sales.rsubtotal = 0;
-    $scope.sales.isNeedApproval = false;
+    $scope.sales.returnsubtotal = 0;
+    $scope.sales.subtotal = 0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+    }
     for(var i=0;i<$scope.sales.returned_items.length; i++){
-      $scope.sales.rsubtotal+=$scope.sales.returned_items[i].total;
-      if($scope.sales.returned_items[i].override != "NORMAL"){
-        $scope.sales.isNeedApproval = true;
-      }
+      $scope.sales.returnsubtotal+=$scope.sales.returned_items[i].total;
     }
     var computation = Library.Compute.Order(
       $scope.sales.subtotal,
@@ -1395,14 +1400,32 @@ angular.module('erp')
     );
     $scope.sales.discount = computation.totalDiscount;
     $scope.sales.total_vat = computation.vatableSales;
-    $scope.sales.return_discount = computation.totalDiscount;
-    $scope.sales.return_total_vat = computation.vatableSales;
     $scope.sales.total_amount_due = computation.totalAmountDue;
     $scope.sales.zero_rate_sales = computation.zeroRatedSales;
     $scope.sales.withholding_tax = computation.withholdingTax;
   }
   $scope.removeReturn = function(index){
     $scope.sales.returned_items.splice(index, 1);
+    $scope.sales.returnsubtotal = 0;
+    $scope.sales.subtotal = 0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+    }
+    for(var i=0;i<$scope.sales.returned_items.length; i++){
+      $scope.sales.returnsubtotal+=$scope.sales.returned_items[i].total;
+    }
+    var computation = Library.Compute.Order(
+      $scope.sales.subtotal,
+      $scope.sales.returnsubtotal,
+      $scope.sales.customer.discount.replace(" %","")/100,
+      $scope.sales.isWithholdingTax,
+      $scope.sales.isZeroRateSales
+    );
+    $scope.sales.discount = computation.totalDiscount;
+    $scope.sales.total_vat = computation.vatableSales;
+    $scope.sales.total_amount_due = computation.totalAmountDue;
+    $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+    $scope.sales.withholding_tax = computation.withholdingTax;
   }
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
