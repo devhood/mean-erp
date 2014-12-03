@@ -58,7 +58,8 @@ block title
 															th Quantity
 													tbody
 														tr(ng-repeat="item in packing.list")
-															td {{item.sono}}
+															td(ng-show="item.sono") {{item.sono}}
+															td(ng-show="item.pfno") {{item.pfno}}
 															td {{item.customer}}
 															td {{item.brand}}
 															td {{item.product}}

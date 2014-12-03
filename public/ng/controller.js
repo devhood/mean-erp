@@ -1017,6 +1017,7 @@ angular.module('erp')
                 for(var j in data[i].ordered_items){
                   var item = {
                     id : data[i]._id,
+                    pfno : data[i].pfno,
                     sono : data[i].sono,
                     customer : data[i].customer.company_name,
                     brand : data[i].ordered_items[j].brand,
