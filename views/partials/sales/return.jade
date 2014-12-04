@@ -191,7 +191,7 @@ block title
             .form-body
               br
               br
-              .row(ng-hide="action=='read'")
+              .row(ng-hide="action!='create'")
                 .col-md-1
                 .col-md-10
                   .col-md-3
@@ -228,7 +228,7 @@ block title
                               th Return Quantity
                               th Unit Price
                               th Total
-                              th(width="5%") Action
+                              th(width="5%", ng-hide="action!='create'") Action
                           tbody
                             tr(ng-repeat="returned_item in sales.returned_items track by $index")
                               td {{returned_item.bl_code}}
@@ -236,7 +236,7 @@ block title
                               td {{returned_item.quantity}}
                               td {{returned_item.price}}
                               td {{returned_item.total}}
-                              td(width="5%")
+                              td(width="5%", ng-hide="action!='create'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeReturn($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
@@ -299,7 +299,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="deleteSales(sales)", ng-show="action=='edit' || action=='approve'") Delete
+              button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='edit' || action=='approve'") Reject
               | &nbsp;
               a.btn.default(type="button", href="/#/sales/index/order") Cancel
           .col-md-6
