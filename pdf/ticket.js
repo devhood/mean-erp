@@ -73,21 +73,21 @@ var pdf = {
 		},
 		pageFooter : function(doc,ticket){
 			doc.font('Courier');
-			doc.text("RELEASING:", 25,670);
-			doc.text("________________", 100,670);
-			doc.text("DATE/TIME", 120,680);
-			doc.text("________________",250,670);
-			doc.text("RELEASED BY", 260,680);
-			doc.text("________________", 410,670);
-			doc.text("RELEASED TO", 430,680);
-
-			doc.text("RETURN:", 25,700);
+			doc.text("RELEASING:", 25,700);
 			doc.text("________________", 100,700);
-			doc.text("TIME", 140,710);
-			doc.text("________________", 250,700);
-			doc.text("RECEIVED BY", 260,710);
-		  doc.text("___________________________", 390,700);
-		  doc.text("ENTERED INTO SYSTEM BY/DATE", 390,710);
+			doc.text("DATE/TIME", 120,710);
+			doc.text("________________",250,700);
+			doc.text("RELEASED BY", 260,710);
+			doc.text("________________", 410,700);
+			doc.text("RELEASED TO", 430,710);
+
+			doc.text("RETURN:", 25,730);
+			doc.text("________________", 100,730);
+			doc.text("TIME", 140,740);
+			doc.text("________________", 250,730);
+			doc.text("RECEIVED BY", 260,740);
+		  doc.text("___________________________", 390,730);
+		  doc.text("ENTERED INTO SYSTEM BY/DATE", 390,740);
 			return doc
 		}
 };
