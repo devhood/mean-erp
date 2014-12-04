@@ -58,7 +58,7 @@
       {
         "title": "Return Merchandise",
         "description": "Return Sales Item",
-        "href": "/#/sales/index/return"
+        "href": "/#/sales/index/approveReturn"
       },
       {
         "title": "Shipments",

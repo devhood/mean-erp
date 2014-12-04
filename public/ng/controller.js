@@ -568,8 +568,8 @@ angular.module('erp')
           ];
 
           buttons = [
-          {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/sales/return/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/return/create/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
           query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
@@ -587,11 +587,79 @@ angular.module('erp')
           {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.returned.approved.status_code]}};
-          $scope.title1 = "APPROVED RETURN MERCHANDISE RECEIPTE";
+          query = { "status.status_code" : {"$in" : [status.returned.created.status_code]}};
+          $scope.title1 = "CREATED RETURN MERCHANDISE RECEIPT";
 
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          break;
+          case "approveReturn" :
+
+            columns = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/return/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.returned.created.status_code]}};
+            $scope.title = "RETURN MERCHANDISE RECEIPT";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            var columns1 = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.rmrno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            var buttons1 = [
+            {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.returned.approved.status_code]}};
+            $scope.title1 = "APPROVED RETURN MERCHANDISE RECEIPT";
+
+            $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+            $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          break;
+          case "memo" :
+
+            columns = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.rmrno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/memo/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/memo/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.returned.approved.status_code]}};
+            $scope.title = "CREDIT MEMO";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            var columns1 = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            var buttons1 = [
+            {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.memo.approved.status_code]}};
+            $scope.title1 = "APPROVED CREDIT MEMO";
+
+            $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+            $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
           break;
       }
@@ -1373,6 +1441,7 @@ angular.module('erp')
 
   $scope.addReturn = function(sales){
     var item = angular.copy(sales.return);
+    item.total = item.price * item.quantity ;
     if( item && item.name && item.quantity && item.quantity ){
       $scope.sales.returned_items
     }
@@ -1450,9 +1519,27 @@ angular.module('erp')
     $scope.title = "VIEW RETURN MERCHANDISE RECEIPT";
 
   }
+  if(action == 'create'){
+
+    $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
+    $scope.saveSales = function(){
+      $scope.sales.status = status.returned.created;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/return');
+        return false;
+      });
+    };
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.returned.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/return');
+        return false;
+      });
+    };
+  }
   if(action == 'approve'){
 
-    $scope.title = "APPROVE RETURN MERCHANDISE RECEIPT"+ id;
+    $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
     $scope.saveSales = function(){
       $scope.sales.status = status.returned.approved;
       $scope.sales.$update(function(){
@@ -1464,6 +1551,69 @@ angular.module('erp')
       $scope.sales.status = status.returned.rejected;
       $scope.sales.$update(function(){
         $location.path('/sales/index/return');
+        return false;
+      });
+    };
+  }
+})
+.controller('SalesMemoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_types').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Sales;
+
+  $scope.CustomerChange = function(){
+    if($scope.sales.customer){
+      $scope.shipping_address =
+      $scope.sales.customer.shipping_address.landmark + ', ' +
+      $scope.sales.customer.shipping_address.barangay + ', ' +
+      $scope.sales.customer.shipping_address.city + ', ' +
+      $scope.sales.customer.shipping_address.province + ', ' +
+      $scope.sales.customer.shipping_address.country + ', ' +
+      $scope.sales.customer.shipping_address.zipcode;
+
+      $scope.billing_address =
+      $scope.sales.customer.billing_address.landmark + ', ' +
+      $scope.sales.customer.billing_address.barangay + ', ' +
+      $scope.sales.customer.billing_address.city + ', ' +
+      $scope.sales.customer.billing_address.province + ', ' +
+      $scope.sales.customer.billing_address.country + ', ' +
+      $scope.sales.customer.billing_address.zipcode;
+    }
+  }
+  if(action == 'read'){
+    $scope.title = "VIEW CREDIT MEMO";
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+  if(action == 'approve'){
+
+    $scope.title = "APPROVE CREDIT MEMO "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      $scope.sales.status = status.memo.approved;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/memo');
+        return false;
+      });
+    };
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.memo.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/memo');
         return false;
       });
     };
