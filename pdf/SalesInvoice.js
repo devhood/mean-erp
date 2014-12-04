@@ -88,9 +88,9 @@ var pdf = {
 			doc.text(drinfo.ttl_net,560,646);/*Total Sales Vat inclusive*/
 			doc.text(drinfo.ttl_net,560,658);/*Less Vat*/
 			doc.text(drinfo.ttl_net,560,670);/*Amount Net of VAT*/
-			doc.text(drinfo.dr_item.length,560,682,{width:35,align:'center'});/*Less CS/PWD Discount*/
-			doc.text(drinfo.dr_item.length,560,694,{width:35,align:'center'});/*Amount Due*/
-			doc.text(drinfo.dr_item.length,560,706,{width:35,align:'center'});/*Add Vat*/
+			doc.text(drinfo.dr_item.length,560,682,{width:50,align:'center'});/*Less CS/PWD Discount*/
+			doc.text(drinfo.dr_item.length,560,694,{width:50,align:'center'});/*Amount Due*/
+			doc.text(drinfo.dr_item.length,560,706,{width:50,align:'center'});/*Add Vat*/
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
 			doc.text(drinfo.dr_item.length,560,718,{width:35,align:'center'});/*Total Amount Due*/
@@ -121,8 +121,8 @@ module.exports.print = function(drinfo,result){
 		doc.font('Courier');
 	        doc.fontSize(10);
 		doc.text(drinfo.dr_item[i].code,-1,y,{width:65});
-		doc.text(drinfo.dr_item[i].name,70,y,{width:80});
-		doc.text(drinfo.dr_item[i].description,175,y,{width:100});
+		doc.text(drinfo.dr_item[i].name,70,y,{width:100});
+		doc.text(drinfo.dr_item[i].description,175,y,{width:160});
 		doc.text(drinfo.dr_item[i].quantity,340,y,{width:35,align:'center'});
 		doc.text(drinfo.dr_item[i].uom,390,y,{width:50});
 		doc.text(drinfo.dr_item[i].pprice,440,y,{width:35,align:'center'});
