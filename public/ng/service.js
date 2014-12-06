@@ -18,6 +18,8 @@ angular.module('erp')
       Customers : $resource('/data/structure/customers.json'),
       Products : $resource('/data/structure/products.json'),
       Packing : $resource('/data/structure/packing.json'),
+      Shipments : $resource('/data/structure/shipments.json'),
+      Purchases : $resource('/data/structure/purchases.json'),
       Trips : $resource('/data/structure/trips.json')
     }
   })

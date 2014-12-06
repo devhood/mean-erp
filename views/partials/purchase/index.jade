@@ -1,15 +1,15 @@
 block title
-	title PURCHASE
-.portlet.box.grey
+	title ERP | PURCHASE
+.portlet.box.grey(ng-if="ajax_ready", ng-init="init()")
 	.portlet-title
 		.caption
 			i.fa.fa-edit
-			| PURCHASE
+			| {{title}}
 		.tools
-			a.collapse(href="javascript:;") 
-	.portlet-body(ng-controller="PurchaseCtrl")
-		.table-toolbar
-			.btn-group(ui-route="/purchase/add", ng-class="{active: $uiRoute}")
-				a.btn.tooltips(href="/#/purchase/add", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
+			a.collapse(href="javascript:;")
+	.portlet-body
+		.table-toolbar(ng-show='"{{addUrl}}"?true:false')
+			.btn-group.btn-group-xs.btn-group-solid
+				a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
 					i.fa.fa-plus
 		table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions" dt-columns="dtColumns")

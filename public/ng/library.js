@@ -71,6 +71,18 @@ angular.module('erp')
       },
   },
   Status : {
+    Shipments : {
+      created  : {status_code : "SHIPMENT_CREATED", status_name : "Shipment submitted"},
+      approved : {status_code : "SHIPMENT_APPROVED", status_name : "Shipment approved"},
+      cancel : {status_code : "SHIPMENT_CANCEL", status_name : "Shipment cancelled"},
+      updated : {status_code : "SHIPMENT_UPDATED", status_name : "Shipment updated"}
+    },
+    Purchases : {
+      created  : {status_code : "PURCHASE_CREATED", status_name : "Purchase submitted"},
+      approved : {status_code : "PURCHASE_APPROVED", status_name : "Purchase approved"},
+      cancel : {status_code : "PURCHASE_CANCEL", status_name : "Purchase cancelled"},
+      updated : {status_code : "PURCHASE_UPDATED", status_name : "Purchase updated"}
+    },
     Sales : {
       order : {
         created : {status_code : "SALES_ORDER_CREATED", status_name : "Sales-Order submitted"},

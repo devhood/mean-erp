@@ -90,6 +90,11 @@
         "href": "/#/sales/index/payment"
       },
       {
+        "title": "Shipment",
+        "description": "Manage Payment",
+        "href": "/#/shipment/index"
+      },
+      {
         "title": "Purchase",
         "description": "Manage Purchase",
         "href": "/#/purchase/index"

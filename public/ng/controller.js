@@ -805,7 +805,6 @@ angular.module('erp')
     }
   }
   if(action == 'edit'){
-
     $scope.title = "EDIT SALES ORDER "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -852,6 +851,282 @@ angular.module('erp')
       }
     };
   }
+
+})
+.controller('ShipmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Shipments.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.init = function(){
+      columns = [
+      $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
+      $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
+      ];
+
+      buttons = [
+      {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
+      {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
+      ];
+
+      var status = Library.Status.Shipments;
+      console.log(status);
+      query = { "status.status_code" : {"$in" : [status.created.status_code, status.updated.status_code]}};
+
+      $scope.title = "SHIPMENTS"
+      $scope.addUrl = "/#/shipment/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
+    };
+
+
+    $scope.formInit = function(){
+      console.log("form init passed");
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.suppliers = Api.Collection('suppliers').query();
+      $scope.products = Api.Collection('products').query();
+      $scope.conditions = Api.Collection('conditions').query();
+      var status = Library.Status.Shipments;
+
+
+
+      $scope.action = action;
+      if(action == 'add'){
+        $scope.title = "ADD SHIPMENT";
+        var Shipment = Api.Collection('shipments');
+        $scope.shipment = new Shipment();
+        $scope.shipment.status = status.created;
+        $scope.saveShipment = function(){
+          $scope.shipment.$save(function(){
+            $location.path('/shipment/index');
+            return false;
+          });
+        }
+      }//end action add
+
+
+
+      if(action == 'read'){
+        console.log("reading");
+        $scope.title = "VIEW SHIPMENT " + id;
+        $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+        });
+      }
+
+      if (action == 'edit') {
+        console.log("editing");
+        $scope.title = "EDIT SHIPMENT" + id;
+        $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+        });
+        $scope.saveShipment = function(){
+          $scope.shipment.status = status.updated;
+          $scope.shipment.$update(function(){
+            $location.path('/shipment/index/');
+            return false;
+          });
+        };
+        $scope.deleteShipment=function(shipment){
+          if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
+            $scope.shipment.$delete(function(){
+              $location.path('/shipment/index');
+              return false;
+            });
+          }
+        };
+      }
+
+
+
+      if(action == 'approve'){
+        $scope.title = "APPROVE SHIPMENT "+ id;
+        $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+        });
+        $scope.saveShipment = function(){
+          $scope.shipment.status = status.approved;
+          $scope.shipment.$update(function(){
+            $location.path('/shipment/index/');
+            return false;
+          });
+        };
+        $scope.deleteShipment=function(shipment){
+          if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
+            $scope.shipment.$delete(function(){
+              $location.path('/shipment/index');
+              return false;
+            });
+          }
+        };
+      } //end action approve
+
+      $scope.addItem = function(item){
+        var shipment_item = angular.copy(item);
+        delete shipment_item.inventories;
+        console.log(shipment_item.name);
+        console.log(shipment_item.quantity);
+        console.log(shipment_item.cost);
+        console.log(shipment_item.expiry_date);
+        console.log(shipment_item.condition);
+
+        if(shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.expiry_date && shipment_item.condition ){
+
+          if($scope.shipment.shipment_items){
+            $scope.shipment.shipment_items.push(shipment_item);
+          }
+          else{
+            $scope.shipment.shipment_items = [shipment_item];
+          }
+        }
+      }
+      $scope.removeItem = function(index){
+        $scope.shipment.shipment_items.splice(index, 1);
+      }
+    }
+
+  });
+
+})
+.controller('PurchaseCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Purchases.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.init = function(){
+      columns = [
+      $scope.structure.purno, $scope.structure.supplier, $scope.structure.reference_number,
+      $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
+      ];
+
+      buttons = [
+      {url:"/#/purchase/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/purchase/edit/",title:"Edit Record",icon:"fa fa-edit"},
+      {url:"/#/purchase/approve/",title:"Approve Purchase",icon:"fa fa-gear"}
+      ];
+
+      var status = Library.Status.Purchases;
+      console.log(status);
+      query = { "status.status_code" : {"$in" : [status.created.status_code, status.updated.status_code]}};
+
+      $scope.title = "PURCHASE"
+      $scope.addUrl = "/#/purchase/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/purchases?filter="+encodeURIComponent(JSON.stringify(query)));
+    };
+
+
+    $scope.formInit = function(){
+      console.log("form init passed");
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.suppliers = Api.Collection('suppliers').query();
+      $scope.products = Api.Collection('products').query();
+      $scope.conditions = Api.Collection('conditions').query();
+      var status = Library.Status.Purchases;
+
+
+
+      $scope.action = action;
+      if(action == 'add'){
+        $scope.title = "ADD PURCHASE";
+        var Purchase = Api.Collection('purchases');
+        $scope.purchase = new Purchase();
+        $scope.purchase.status = status.created;
+        $scope.savePurchase = function(){
+          $scope.purchase.$save(function(){
+            $location.path('/purchase/index');
+            return false;
+          });
+        }
+      }//end action add
+
+
+
+      if(action == 'read'){
+        console.log("reading");
+        $scope.title = "VIEW PURCHASE " + id;
+        $scope.purchase =  Api.Collection('purchases').get({id:$routeParams.id},function(){
+        });
+      }
+
+      if (action == 'edit') {
+        console.log("editing");
+        $scope.title = "EDIT PURCHASE" + id;
+        $scope.purchase =  Api.Collection('purchases').get({id:$routeParams.id},function(){
+        });
+        $scope.savePurchase = function(){
+          $scope.purchase.status = status.updated;
+          $scope.purchase.$update(function(){
+            $location.path('/purchase/index/');
+            return false;
+          });
+        };
+        $scope.deletePurchase=function(purchase){
+          if(popupService.showPopup('You are about to delete Record : '+purchase._id)){
+            $scope.purchase.$delete(function(){
+              $location.path('/purchase/index');
+              return false;
+            });
+          }
+        };
+      }
+
+
+
+      if(action == 'approve'){
+        $scope.title = "APPROVE PURCHASE "+ id;
+        $scope.purchase =  Api.Collection('purchases').get({id:$routeParams.id},function(){
+        });
+        $scope.savePurchase = function(){
+          $scope.purchase.status = status.approved;
+          $scope.purchase.$update(function(){
+            $location.path('/purchase/index/');
+            return false;
+          });
+        };
+        $scope.deletePurchase=function(purchase){
+          if(popupService.showPopup('You are about to delete Record : '+purchase._id)){
+            $scope.purchase.$delete(function(){
+              $location.path('/purchase/index');
+              return false;
+            });
+          }
+        };
+      } //end action approve
+
+      $scope.addItem = function(item){
+        var purchase_item = angular.copy(item);
+        delete purchase_item.inventories;
+        console.log(purchase_item.name);
+        console.log(purchase_item.quantity);
+        console.log(purchase_item.cost);
+        console.log(purchase_item.expiry_date);
+        console.log(purchase_item.condition);
+
+        if(purchase_item.name && purchase_item.quantity && purchase_item.cost && purchase_item.expiry_date && purchase_item.condition ){
+
+          if($scope.purchase.purchase_items){
+            $scope.purchase.purchase_items.push(purchase_item);
+          }
+          else{
+            $scope.purchase.purchase_items = [purchase_item];
+          }
+        }
+      }
+      $scope.removeItem = function(index){
+        $scope.shipment.shipment_items.splice(index, 1);
+      }
+    }
+
+  });
 
 })
 .controller('SalesProformaCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
