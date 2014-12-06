@@ -119,7 +119,7 @@ module.exports.print = function(drinfo,result){
 	for(var i in drinfo.dr_item){
 		var y= doc.y;
 		doc.font('Courier');
-	        doc.fontSize(10);
+	        doc.fontSize(8);
 		doc.text(drinfo.dr_item[i].code,-1,y,{width:65});
 		doc.text(drinfo.dr_item[i].name,70,y,{width:100});
 		doc.text(drinfo.dr_item[i].description,175,y,{width:160});

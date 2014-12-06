@@ -1893,4 +1893,226 @@ angular.module('erp')
       });
     };
   }
+})
+.controller('ConsignmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  $scope.ajax_ready = false;
+  Structure.Consignments.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    $scope.consignment_transaction_types = Api.Collection('consignment_transaction_type').query();
+    $scope.price_types = Api.Collection('price_types').query();
+    $scope.order_sources = Api.Collection('order_sources').query();
+    $scope.delivery_methods = Api.Collection('delivery_methods').query();
+    var query = {"type":"Retail"};
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+    $scope.products = Api.Collection('products').query();
+    var status = Library.Status.Consignment;
+   
+
+    $scope.init = function(){
+         columns = [
+          $scope.structure.cono,$scope.structure.consignment_transaction_type,
+          $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
+          ];
+
+        buttons = [
+          {url:"/#/consignment/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/consignment/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/consignment/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          ];
+
+        query = { "status.status_code" : {"$in" : [status.created.status_code,status.override.status_code]}};
+        $scope.title = "CONSIGNMENTS";
+        $scope.addUrl = "/#/consignment/add";
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+
+
+    $scope.CustomerChange = function(){
+      if($scope.consignments.customer){
+        $scope.shipping_address =
+        $scope.consignments.customer.shipping_address.landmark + ', ' +
+        $scope.consignments.customer.shipping_address.barangay + ', ' +
+        $scope.consignments.customer.shipping_address.city + ', ' +
+        $scope.consignments.customer.shipping_address.province + ', ' +
+        $scope.consignments.customer.shipping_address.country + ', ' +
+        $scope.consignments.customer.shipping_address.zipcode;
+        $scope.billing_address =
+        $scope.consignments.customer.billing_address.landmark + ', ' +
+        $scope.consignments.customer.billing_address.barangay + ', ' +
+        $scope.consignments.customer.billing_address.city + ', ' +
+        $scope.consignments.customer.billing_address.province + ', ' +
+        $scope.consignments.customer.billing_address.country + ', ' +
+        $scope.consignments.customer.billing_address.zipcode;
+      }
+    }
+    $scope.addOrder = function(consignments){
+      var item = angular.copy(consignments.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        item.override = item.override ? item.override : "NORMAL";
+        if(consignments.customer.price_type == "Professional"){
+          item.price = item.professional_price
+        }
+        if(consignments.customer.price_type == "Retail"){
+          item.price = item.retail_price;
+        }
+        if(item.override != "NORMAL"){
+          item.price = item.override;
+          item.total = 0.00;
+        }
+        if(!isNaN(item.price)){
+          item.total = item.quantity * item.price;
+        }
+        delete item.inventories;
+        if($scope.consignments.consigned_item){
+          $scope.consignments.consigned_item.push(item);
+        }
+        else{
+          $scope.consignments.consigned_item = [item];
+        }
+        delete consignments.item;
+      }
+      $scope.consignments.subtotal = 0;
+      $scope.consignments.isNeedApproval = false;
+      for(var i=0;i<$scope.consignments.consigned_item.length; i++){
+        $scope.consignments.subtotal+=$scope.consignments.consigned_item[i].total;
+        if($scope.consignments.consigned_item[i].override != "NORMAL"){
+          $scope.consignments.isNeedApproval = true;
+        }
+      }
+
+      var computation = Library.Compute.Order(
+
+        $scope.consignments.subtotal,
+        0,
+        $scope.consignments.customer.discount.replace(" %","")/100,
+        $scope.consignments.isWithholdingTax,
+        $scope.consignments.isZeroRateSales
+      );
+      $scope.consignments.discount = computation.totalDiscount;
+      $scope.consignments.total_vat = computation.vatableSales;
+      $scope.consignments.total_amount_due = computation.totalAmountDue;
+      $scope.consignments.zero_rate_sales = computation.zeroRatedSales;
+      $scope.consignments.withholding_tax = computation.withholdingTax;
+    //  console.log('frank');
+    }
+
+    $scope.reCompute = function(consignments){
+     // console.log($scope.consignments.customer);
+      if($scope.consignments.customer){
+        var computation = Library.Compute.Order(
+          $scope.consignments.subtotal,
+          0,
+          $scope.consignments.customer.discount.replace(" %","")/100,
+          $scope.consignments.isWithholdingTax,
+          $scope.consignments.isZeroRateSales
+        );
+        $scope.consignments.discount = computation.totalDiscount;
+        $scope.consignments.total_vat = computation.vatableSales;
+        $scope.consignments.total_amount_due = computation.totalAmountDue;
+        $scope.consignments.zero_rate_sales = computation.zeroRatedSales;
+        $scope.consignments.withholding_tax = computation.withholdingTax;
+      }
+    }
+    $scope.removeOrder = function(index){
+      $scope.consignments.consigned_item.splice(index, 1);
+      $scope.consignments.subtotal = 0;
+      $scope.consignments.isNeedApproval = false;
+      for(var i=0;i<$scope.consignments.consigned_item.length; i++){
+        $scope.consignments.subtotal+=$scope.consignments.consigned_item[i].total;
+        if($scope.consignments.consigned_item[i].override != "NORMAL"){
+          $scope.consignments.isNeedApproval = true;
+        }
+      }
+    }
+
+   
+    
+    if( action == 'read'){
+      
+    
+      $scope.title = "VIEW CONSIGN ORDER";
+      $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+      });
+    }
+    if(action == 'add'){
+      $scope.title = "ADD CONSIGN ORDER";
+      var Consignments = Api.Collection('consignments');
+      $scope.consignments = new Consignments();
+
+      $scope.saveConsignments = function(){
+        
+        if($scope.consignments.isNeedApproval){
+
+          $scope.consignments.status = status.override;
+          console.log($scope.consignments);
+        }
+        else{
+          $scope.consignments.status = status.created;
+          //    $scope.sales.triggerInventory  = "OUT";
+        }
+        $scope.consignments.$save(function(){
+          $location.path('/consignment/index/add');
+          return false;
+        });
+      }
+    }
+    if( id && action == 'edit'){
+
+      $scope.title = "EDIT CONSIGNED ORDER "+ id;
+      $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveConsignments = function(){
+        if($scope.consignments.isNeedApproval){
+          $scope.consignments.status = status.override;
+        }
+        $scope.consignments.$update(function(){
+          $location.path('/consignment/index/add');
+          return false;
+        });
+      };
+      $scope.deleteConsignments=function(consignments){
+        if(popupService.showPopup('You are about to delete Record : '+consignments._id)){
+          $scope.consignments.$delete(function(){
+            $location.path('/consignment/index/add');
+            return false;
+          });
+        }
+      };
+    }
+    if(id && action == 'approve'){
+
+      $scope.title = "APPROVE CONSIGNED ORDER "+ id;
+      $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveConsignments = function(){
+        if($scope.consignments.isNeedApproval){
+          $scope.consignments.status = status.created;
+        }
+        $scope.consignments.$update(function(){
+          $location.path('/consignment/index/override');
+          return false;
+        });
+      };
+      $scope.deleteSales=function(consignments){
+        if(popupService.showPopup('You are about to delete Record : '+consignments._id)){
+          $scope.consignments.$delete(function(){
+            $location.path('/consignment/index/override');
+            return false;
+          });
+        }
+      };
+    }
+  
+});
 });
