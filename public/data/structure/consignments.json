@@ -1,59 +1,229 @@
-[{
-"transaction_type": {
-  "name": "transaction_type",
-  "title": "Transaction Type",
-  "type": "select"
-},
-"cono": {
-  "name": "cono",
-  "title": "CO Nummber",
-  "type": "text"
-},
-"inventory_location": {
-  "name": "inventory_location",
-  "title": "Inventory Location",
-  "type": "select"
-},
-"customer": {
-  "name": "customer",
-  "title": "Customer",
-  "type": "select"
-},
-"shipping_address": {
-  "name": "shipping_address",
-  "title": "Shipping Address",
-  "type": "text"
-},
-"billing_address": {
-  "name": "billing_address",
-  "title": "Billing Address",
-  "type": "text"
-},
-"description": {
-  "name": "description",
-  "title": "Special Instructions",
-  "type": "text"
-}
-"consignment": {
-  "name": "consignment",
-  "title": "CONSIGNED ITEMS",
-  "type": "table",
-  "child_items": {
-    "product": {
-      "name": "product",
-      "title": "Product",
-      "type": "text"
-    },
-    "bl_code": {
-      "name": "bl_code",
-      "title": "BL Code",
-      "type": "text"
-    },
-    "quantity": {
-      "name": "quantity",
-      "title": "Product",
-      "type": "text"
+[
+    {
+        "consignment_transaction_type": {
+            "name": "consignment_transaction_type",
+            "title": "Transaction Type",
+            "type": "select"
+        },
+        "cono": {
+            "name": "cono",
+            "title": "CO Number",
+            "type": "text"
+        },
+        "status": {
+            "status_code": {
+                "name": "status.status_code",
+                "title": "Status",
+                "type": "text"
+            },
+            "status_name": {
+                "name": "status.status_name",
+                "title": "Status Code",
+                "type": "text"
+            }
+        },
+        "order_source": {
+            "name": "order_source",
+            "title": "Order Source",
+            "type": "select"
+        },
+        "inventory_location": {
+            "name": "inventory_location_name",
+            "title": "Inventory Location",
+            "type": "select"
+        },
+        "vat": {
+            "name": "vat",
+            "title": "Vat",
+            "type": "text"
+        },
+        "total_discount": {
+            "name": "total_discount",
+            "title": "Discount",
+            "type": "text"
+        },
+        "total_vat": {
+            "name": "total_vat",
+            "title": "Vatable Sales",
+            "type": "text"
+        },
+        "is_withholding_tax": {
+            "name": "is_withholding_tax",
+            "title": "Is Withholding Tax",
+            "type": "checkbox"
+        },
+        "withholding_tax": {
+            "name": "withholding_tax",
+            "title": "Withholding Tax",
+            "type": "text"
+        },
+        "is_zero_rated_tax": {
+            "name": "is_zero_rated_tax",
+            "title": "Is Zero Rated Sales",
+            "type": "checkbox"
+        },
+        "zero_rated_tax": {
+            "name": "zero_rated_tax",
+            "title": "Zero Rated Sales",
+            "type": "text"
+        },
+        "return_discount": {
+            "name": "discount",
+            "title": "Return Discount",
+            "type": "text"
+        },
+        "return_total_vat": {
+            "name": "return_total_vat",
+            "title": "Return Vatable Sales",
+            "type": "text"
+        },
+        "return_withholding_tax": {
+            "name": "return_withholding_tax",
+            "title": "Return VAT Exempt Sales",
+            "type": "text"
+        },
+        "return_zero_rated_tax": {
+            "name": "return_zero_rated_tax",
+            "title": "Return Zero-Rated Sales",
+            "type": "text"
+        },
+        "total_amount_due": {
+            "name": "total_amount_due",
+            "title": "Total Amount Due ",
+            "type": "text"
+        },
+        "delivery_date": {
+            "name": "delivery_date",
+            "title": "Delivery Date",
+            "type": "select"
+        },
+        "customer": {
+            "company_name": {
+                "name": "customer.company_name",
+                "title": "Company Name",
+                "type": "select"
+            },
+            "shipping_mode": {
+                "name": "customer.shipping_mode",
+                "title": "Delivery Method",
+                "type": "select"
+            },
+            "branch": {
+                "name": "customer.branch",
+                "title": "Branch",
+                "type": "select"
+            },
+            "price_type": {
+                "name": "customer.price_type",
+                "title": "Price Type",
+                "type": "select"
+            },
+            "shipping_address": {
+                "landmark": {
+                    "name": "customer.shipping_address.landmark",
+                    "title": "ShipTo landmark",
+                    "type": "select"
+                },
+                "barangay": {
+                    "name": "customer.shipping_address.barangay",
+                    "title": "Barangay",
+                    "type": "select"
+                },
+                "country": {
+                    "name": "customer.shipping_address.country",
+                    "title": "ShipTo Country",
+                    "type": "select"
+                },
+                "province": {
+                    "name": "customer.shipping_address.province",
+                    "title": "ShipTo Province",
+                    "type": "select"
+                },
+                "city": {
+                    "name": "customer.shipping_address.city",
+                    "title": "ShipTo City",
+                    "type": "select"
+                },
+                "zipcode": {
+                    "name": "customer.shipping_address.zipcode",
+                    "title": "ShipTo Zipcode",
+                    "type": "select"
+                }
+            },
+            "billing_address": {
+                "landmark": {
+                    "name": "customer.billing_address.landmark",
+                    "title": "BillTo Landmark",
+                    "type": "select"
+                },
+                "barangay": {
+                    "name": "customer.billing_address.barangay",
+                    "title": "BillTo Barangay",
+                    "type": "select"
+                },
+                "country": {
+                    "name": "customer.billing_address.country",
+                    "title": "BillTo Country",
+                    "type": "select"
+                },
+                "province": {
+                    "name": "customer.billing_address.province",
+                    "title": "BillTo Province",
+                    "type": "select"
+                },
+                "city": {
+                    "name": "customer.billing_address.city",
+                    "title": "BillTo City",
+                    "type": "select"
+                },
+                "zipcode": {
+                    "name": "customer.billing_address.zipcode",
+                    "title": "BillTo Zipcode",
+                    "type": "select"
+                }
+            }
+        },
+        "price_type": {
+            "name": "price_type",
+            "title": "Price Type",
+            "type": "select"
+        },
+        "description": {
+            "name": "description",
+            "title": "Special Instructions",
+            "type": "text"
+        },
+        "consigned_item": {
+            "name": "consigned_item",
+            "title": "CONSIGNED ITEMS",
+            "type": "table",
+            "child_items": {
+                "product": {
+                    "name": "product",
+                    "title": "Product",
+                    "type": "text"
+                },
+                "bl_code": {
+                    "name": "bl_code",
+                    "title": "BL Code",
+                    "type": "text"
+                },
+                "quantity": {
+                    "name": "quantity",
+                    "title": "Product",
+                    "type": "text"
+                },
+                "price": {
+                    "name": "price",
+                    "title": "Price",
+                    "type": "text"
+                },
+                "total": {
+                    "name": "total",
+                    "title": "Total",
+                    "type": "text"
+                }
+            }
+        }
     }
-  }
-}
-}]
+]

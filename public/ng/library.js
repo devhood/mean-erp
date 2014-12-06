@@ -71,6 +71,13 @@ angular.module('erp')
       },
   },
   Status : {
+    Consignment:{
+        created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order submitted"},
+        revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
+        override : {status_code : "CONSIGNED_ORDER_OVERRIDE", status_name : "Consigned-Order for approval"},
+        rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
+
+      },
     Sales : {
       order : {
         created : {status_code : "SALES_ORDER_CREATED", status_name : "Sales-Order submitted"},

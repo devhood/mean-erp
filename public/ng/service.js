@@ -14,6 +14,7 @@ angular.module('erp')
   .factory('Structure', function ($resource) {
     return {
       Sales : $resource('/data/structure/sales.json'),
+      Consignments : $resource('/data/structure/consignments.json'),
       Users : $resource('/data/structure/users.json'),
       Customers : $resource('/data/structure/customers.json'),
       Products : $resource('/data/structure/products.json'),

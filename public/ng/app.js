@@ -124,6 +124,20 @@ angular.module('erp', [
         templateUrl: '/partials/sales/payment',
         controller: 'SalesCtrl'
       })
+      .when('/consignment/index', {
+        templateUrl: '/partials/consignment/index',
+        controller: 'ConsignmentCtrl'
+      })
+      .when('/consignment/:action', {
+        templateUrl: '/partials/consignment/add',
+        controller: 'ConsignmentCtrl'
+      })
+      .when('/consignment/:action/:id', {
+        templateUrl: '/partials/consignment/add',
+        controller: 'ConsignmentCtrl'
+      })
+
+
       .otherwise({
         redirectTo: '/'
       });
