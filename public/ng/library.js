@@ -71,13 +71,22 @@ angular.module('erp')
       },
   },
   Status : {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f27227060adea7791b4ea865202c87c6b28152f7
     Consignment:{
         created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order submitted"},
         revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
         override : {status_code : "CONSIGNED_ORDER_OVERRIDE", status_name : "Consigned-Order for approval"},
         rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
 
+<<<<<<< HEAD
     },
+=======
+      },
+=======
+>>>>>>> f27227060adea7791b4ea865202c87c6b28152f7
     Shipments : {
       created  : {status_code : "SHIPMENT_CREATED", status_name : "Shipment submitted"},
       approved : {status_code : "SHIPMENT_APPROVED", status_name : "Shipment approved"},
@@ -90,6 +99,7 @@ angular.module('erp')
       cancel : {status_code : "PURCHASE_CANCEL", status_name : "Purchase cancelled"},
       updated : {status_code : "PURCHASE_UPDATED", status_name : "Purchase updated"}
     },
+>>>>>>> c2e47f548d41e246ed47251a937dccdd0533689f
     Sales : {
       order : {
         created : {status_code : "SALES_ORDER_CREATED", status_name : "Sales-Order submitted"},

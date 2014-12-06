@@ -44,7 +44,7 @@ block title
 									.portlet-title
 										.caption
 											i.fa.fa-reorder
-											| SHIPMENT ITEMS
+											| PURCHASE ITEMS
 										.tools
 											a.collapse(href="javascript:;")
 									.portlet-body.form
@@ -73,11 +73,6 @@ block title
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
 																input.form-control(type="text", ng-model="purchase_item.product.expiry_date" , datepicker-popup="{{format}}", ng-disabled="action=='read'")
 																span.col-md-12.help-block	Expiry Date
-													.col-md-2
-														.form-group
-															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product.condition", ng-options="condition.name as condition.name for condition in conditions", ng-selected="{{purchase_item.product.condition}}", ng-disabled="action=='read'")
-																span.col-md-12.help-block	Condition
 													.col-md-1
 														button.btn-sm.green.custom-right(type="button",ng-click="addItem(purchase_item.product)")
 															i.fa.fa-plus
@@ -95,7 +90,6 @@ block title
 																			th Quantity
 																			th Cost
 																			th Expiry Date
-																			th Condition
 																			th(width="5%")
 																	tbody
 																		tr(ng-repeat="purchase_item in purchase.purchase_items track by $index")
@@ -103,7 +97,6 @@ block title
 																			td {{purchase_item.quantity}}
 																			td {{purchase_item.cost}}
 																			td {{purchase_item.expiry_date}}
-																			td {{purchase_item.condition}}
 																			td(width="5%")
 																				.btn-group.btn-group-xs.btn-group-solid
 																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")

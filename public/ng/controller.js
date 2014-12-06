@@ -113,12 +113,12 @@ angular.module('erp')
           {url:"/#/customer/read/",title:"View Record",icon:"fa fa-folder-open"},
           {url:"/#/customer/edit/",title:"Edit Record",icon:"fa fa-edit"},
           {url:"/#/customer/approve/",title:"Approve Record",icon:"fa fa-gear"}
-        ];
+              ];
         $scope.title = "CUSTOMER"
         $scope.addUrl = "/#/customer/add"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/customers");
-      };
+        };
       $scope.formInit = function(){
 
         var id = $routeParams.id;
