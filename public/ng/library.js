@@ -71,6 +71,7 @@ angular.module('erp')
       },
   },
   Status : {
+<<<<<<< HEAD
     Consignment:{
         created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order submitted"},
         revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
@@ -78,6 +79,20 @@ angular.module('erp')
         rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
 
       },
+=======
+    Shipments : {
+      created  : {status_code : "SHIPMENT_CREATED", status_name : "Shipment submitted"},
+      approved : {status_code : "SHIPMENT_APPROVED", status_name : "Shipment approved"},
+      cancel : {status_code : "SHIPMENT_CANCEL", status_name : "Shipment cancelled"},
+      updated : {status_code : "SHIPMENT_UPDATED", status_name : "Shipment updated"}
+    },
+    Purchases : {
+      created  : {status_code : "PURCHASE_CREATED", status_name : "Purchase submitted"},
+      approved : {status_code : "PURCHASE_APPROVED", status_name : "Purchase approved"},
+      cancel : {status_code : "PURCHASE_CANCEL", status_name : "Purchase cancelled"},
+      updated : {status_code : "PURCHASE_UPDATED", status_name : "Purchase updated"}
+    },
+>>>>>>> c2e47f548d41e246ed47251a937dccdd0533689f
     Sales : {
       order : {
         created : {status_code : "SALES_ORDER_CREATED", status_name : "Sales-Order submitted"},

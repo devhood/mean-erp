@@ -1,0 +1,114 @@
+block title
+	title PURCHASE
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							|  {{title}}
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						form.form-horizontal(role="form", name="save_form",  enctype="multipart/form-data", ng-submit="save_form.$valid && savePurchase()", novalidate)
+							.form-body
+								.row
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+												select.select2me.form-control.select2-offscreen(ng-model="purchase.supplier", ng-options="supplier.name as supplier.name for supplier in suppliers", ng-selected="{{purchase.supplier}}", ng-disabled="action=='read'", required)
+												span.col-md-12.control-label	Supplier
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+												input#purchaseNo.form-control(type="text", ng-model="purchase.purno" disabled)
+												span.col-md-12.control-label	Purchase Number
+								.row
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+														input#referenceNo.form-control(type="text", ng-model="purchase.reference_number", ng-disabled="action=='read'", required)
+														span.col-md-12.control-label	Reference Number
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+												input#arrivalDate.form-control(type="text", ng-model="purchase.arrival_date", datepicker-popup="{{format}}" , ng-disabled="action=='read'" required)
+												span.col-md-12.control-label	Arrival Date
+								.row
+									.col-md-12
+										.form-group
+											.col-md-2.col-lg-2
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+												textarea#purchaseNotes.text-area.form-control(ng-model="purchase.notes" required)
+												span.col-md-12.control-label	Special Instructions
+											.col-md-2.col-lg-2
+								.portlet.box.grey
+									.portlet-title
+										.caption
+											i.fa.fa-reorder
+											| PURCHASE ITEMS
+										.tools
+											a.collapse(href="javascript:;")
+									.portlet-body.form
+										.form-body
+											br
+											br
+											.row(ng-hide="action!='add'")
+												.col-md-12
+													.col-md-3
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product", ng-options="product.name for product in products", ng-disabled="action=='read'")
+																span.col-md-12.help-block	Product
+													.col-md-2
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="purchase_item.product.quantity", ng-disabled="action=='read'")
+																span.col-md-12.help-block	Quantity
+													.col-md-2
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="purchase_item.product.cost", ng-disabled="action=='read'")
+																span.col-md-12.help-block	Cost
+													.col-md-2
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="purchase_item.product.expiry_date" , datepicker-popup="{{format}}", ng-disabled="action=='read'")
+																span.col-md-12.help-block	Expiry Date
+													.col-md-1
+														button.btn-sm.green.custom-right(type="button",ng-click="addItem(purchase_item.product)")
+															i.fa.fa-plus
+											.form-group
+												.col-md-1
+												.col-md-10
+													.row
+														br
+														.col-md-12
+															.portlet-body.flip-scroll
+																table.table.table-bordered.table-condensed.flip-content
+																	thead.flip-content.bg-grey
+																		tr
+																			th Product
+																			th Quantity
+																			th Cost
+																			th Expiry Date
+																			th(width="5%")
+																	tbody
+																		tr(ng-repeat="purchase_item in purchase.purchase_items track by $index")
+																			td {{purchase_item.name}}
+																			td {{purchase_item.quantity}}
+																			td {{purchase_item.cost}}
+																			td {{purchase_item.expiry_date}}
+																			td(width="5%")
+																				.btn-group.btn-group-xs.btn-group-solid
+																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																						i.fa.fa-trash-o
+												.col-md-1
+							.form-actions.fluid
+								.row
+										.col-md-6
+											.col-md-offset-3.col-md-9
+												button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+												| &nbsp;
+												button.btn.red(type="button", ng-click="deletePurchase(purchase)", ng-show="action=='edit' || action=='approve'") Delete
+												| &nbsp;
+												a.btn.default(type="button", href="/#/purchase/index") Cancel
+										.col-md-6

@@ -17,10 +17,10 @@ block title
 								input#bl_code.form-control(type="text", ng-model="product.bl_code", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block BL Code
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="br.name as br.name for br in brands", ng-selected="{{product.brand}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="br.name as br.name for br in brands track by product.brand", ng-selected="{{product.brand}}" ,tabindex="-1", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Brand
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#name.form-control(type="text", ng-model="product.name", ng-minlength="0", ng-maxlength="40", ng-disabled="action=='read'",required)
+								input#name.form-control(type="text", ng-model="product.name",ng-selected="{{product.name}}", ng-minlength="0", ng-maxlength="40", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Item Name
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 								input#size.form-control(type="text", ng-model="product.size", ng-minlength="0", ng-maxlength="10", ng-disabled="action=='read'",required)
@@ -70,7 +70,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.name as status.name for status in product_status", ng-selected="{{product.status}}", ng-disabled="action!='approve'")
+								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.name as status.name for status in product_status track by product.status", ng-selected="{{product.status}}", ng-disabled="action!='approve'")
 								span.col-md-12.help-block Status
 					.col-md-6
 						.form-group
@@ -81,7 +81,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#movement.select2me.form-control.select2-offscreen(ng-model="product.movement", tabindex="-1",ng-options="movement.name as movement.name for movement in movements", ng-selected="{{product.movement}}", ng-disabled="action=='read'",required)
+								select#movement.select2me.form-control.select2-offscreen(ng-model="product.movement", tabindex="-1",ng-options="movement.name as movement.name for movement in movements track by product.movement", ng-selected="{{product.movement}}", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Movement
 					.col-md-6
 						.form-group
