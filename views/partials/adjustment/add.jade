@@ -1,17 +1,17 @@
 block title
-  title ADJUSTMENTS
+  title adjustments Order
 .portlet.box.grey
   .portlet-title
     .caption
       i.fa.fa-reorder
-      | ADD ADJUSTMENTS
+      | {{title}}
     .tools
       a.collapse(href="javascript:;")
       a.config(href="#portlet-config", data-toggle="modal")
       a.reload(href="javascript:;")
       a.remove(href="javascript:;")
   .portlet-body.form
-    form.form-horizontal(role="form", name="add_form", ng-submit="add_form.$valid && addAdjustment()", novalidate)
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveAdjustments()", novalidate)
       .form-body
         .row
           .col-md-6
@@ -21,63 +21,62 @@ block title
                   option(value="In") In
                   option(value="Out") Out
                 span.col-md-12.help-block Transaction Type
+
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input#supplier_code.form-control(type="text", ng-model="adjustment.adjno", readonly)
-                span.col-md-12.help-block Adjustment Number
+                input.form-control(type="text", ng-model="adjustments.adjno", readonly)
+                span.col-md-12.help-block ADJ Number
         .row
-          .col-md-1
-          .col-md-10
+          .col-md-6
             .form-group
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                select.select2me.form-control.select2-offscreen(ng-model="adjustment.inventory_location", ng-options="inventory_location.inventory_location as inventory_location.inventory_location for inventory_location in inventory_locations", ng-selected="{{adjustment.inventory_location}}" ,tabindex="-1", required)
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="adjustments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{adjustments.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Inventory Location
-          .col-md-1
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="adjustments.adjustment_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block Adjustment Date
         .row
           .col-md-1
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="adjustment.description", ng-minlength="0", ng-maxlength="100", required)
+                input.form-control(type="text", ng-model="adjustments.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
         .portlet.box.grey
           .portlet-title
             .caption
               i.fa.fa-reorder
-              | ADJUSTED ITEMS
+              | ADJUSTMENT ITEMS
             .tools
               a.collapse(href="javascript:;")
           .portlet-body.form
             .form-body
               br
               br
-              .row
+              .row(ng-hide="action=='read'")
                 .col-md-1
                 .col-md-10
-                  .col-md-7
+                  .col-md-3
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="adjustment.request.item", ng-options="product.name for product in products", ng-selected="{{product.name}}")
+                        select.select2me.form-control.select2-offscreen(ng-model="adjustments.item", ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-4
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="adjustments.item", ng-options="product.name for product in products")
                         span.col-md-12.help-block Product
-                  .col-md-4
+                  .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="adjustment.request.bl_code")
-                        span.col-md-12.help-block BL Code
-                  .col-md-4
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="adjustment.request.condition")
-                        span.col-md-12.help-block Condition
-                  .col-md-4
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="text", ng-minlength="0", ng-maxlength="20", ng-model="adjustment.request.quantity")
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="adjustments.item.quantity")
                         span.col-md-12.help-block Quantity
                   .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addItem(adjustment)")
+                    button.btn-sm.green.custom-right(type="button",ng-click="addOrder(adjustments)")
                       i.fa.fa-plus
                 .col-md-1
               .form-group
@@ -90,26 +89,28 @@ block title
                         table.table.table-bordered.table-condensed.flip-content
                           thead.flip-content.bg-grey
                             tr
+                              th Code
                               th Product
-                              th BL Code
-                              th Condition
                               th Quantity
-                              th(width="5%") Action
+
+                              th(width="5%")(ng-hide="action=='read'") Action
                           tbody
-                            tr(ng-repeat="adjusted_item in adjustment.adjusted_items")
-                              td {{adjusted_item.item.name}}
+                            tr(ng-repeat="adjusted_item in adjustments.adjusted_item track by $index")
                               td {{adjusted_item.bl_code}}
-                              td {{adjusted_item.condition}}
+                              td {{adjusted_item.name}}
                               td {{adjusted_item.quantity}}
-                              td(width="5%")
+                              td(width="5%")(ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
-                                  a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
                 .col-md-1
-      .form-actions.fluid
+  
         .row
           .col-md-6
             .col-md-offset-3.col-md-9
-              button.btn.green(type="submit") Save &amp; Send
-              button.btn.default(type="button", ui-sref="adjustment") Cancel
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              | &nbsp;
+              button.btn.red(type="button", ng-click="deleteAdjustments(adjustments)", ng-show="action=='edit' || action=='approve'") Delete
+              | &nbsp;
+              a.btn.default(type="button", href="/#/adjsutment/index") Cancel
           .col-md-6

@@ -73,16 +73,18 @@ angular.module('erp')
   Status : {
 
      Adjustment:{
-        created : {status_code : "ADJUSTMENT_CREATED", status_name : "Consigned-Order submitted"},
-        revised : {status_code : "ADJUSTMENT_REVISED", status_name : "Consigned-Order revised"},
-        override : {status_code : "ADJUSTMENT_OVERRIDE", status_name : "Consigned-Order for approval"},
+        created : {status_code : "ADJUSTMENT_CREATED", status_name : "Adjustment submitted"},
+        revised : {status_code : "ADJUSTMENT_REVISED", status_name : "Adjustment revised"},
+        approved : {status_code : "ADJUSTMENT_APPROVED", status_name : "Adjustment approved"},
+        override : {status_code : "ADJUSTMENT_OVERRIDE", status_name : "Adjustment for approval"},
+        
       },
     Consignment:{
         created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order submitted"},
         revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
         override : {status_code : "CONSIGNED_ORDER_OVERRIDE", status_name : "Consigned-Order for approval"},
         approved : {status_code : "CONSIGNED_ORDER_APPROVED", status_name : "Consigned-Order approved"},
-                rejected : {status_code : "DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-DR rejected"},
+        rejected : {status_code : "DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-DR rejected"},
         rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
       },
     Shipments : {

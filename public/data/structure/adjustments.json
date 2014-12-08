@@ -1,61 +1,68 @@
-[{
-"transaction_type": {
-  "name": "transaction_type",
-  "title": "Transaction Type",
-  "type": "select"
-},
-"adjno": {
-  "name": "adjno",
-  "title": "Adjustment Number",
-  "type": "text"
-},
-"inventory_location": {
-  "name": "inventory_location",
-  "title": "Inventory Location",
-  "type": "select"
-},
-"description": {
-  "name": "description",
-  "title": "Special Instructions",
-  "type": "text"
-},
-"adjusted_item": {
-  "name": "adjusted_item",
-  "title": "ADJUSTED ITEMS",
-  "type": "table",
-  "child_items": {
-    "product_name": {
-      "name": "product_name",
-      "title": "Product",
-      "type": "text"
-    },
-    "bl_code": {
-      "name": "bl_code",
-      "title": "BL Code",
-      "type": "text"
-    },
-    "quantity": {
-      "name": "quantity",
-      "title": "Quantity",
-      "type": "text"
-    },
-    "condition": {
-      "name": "condition",
-      "title": "Condition",
-      "type": "text"
+[
+    {
+        "transaction_type": {
+            "name": "transaction_type",
+            "title": "Transaction Type",
+            "type": "select"
+        },
+        "adjustment_date": {
+            "name": "adjustment_date",
+            "title": "Adjustment Date",
+            "type": "select"
+        },
+        "adjno": {
+            "name": "adjno",
+            "title": "Adjustment Number",
+            "type": "text"
+        },
+        "inventory_location": {
+            "name": "inventory_location",
+            "title": "Inventory Location",
+            "type": "select"
+        },
+        "description": {
+            "name": "description",
+            "title": "Special Instructions",
+            "type": "text"
+        },
+        "adjusted_item": {
+            "name": "adjusted_item",
+            "title": "ADJUSTED ITEMS",
+            "type": "table",
+            "child_items": {
+                "product": {
+                    "name": "product",
+                    "title": "Product",
+                    "type": "text"
+                },
+                "bl_code": {
+                    "name": "bl_code",
+                    "title": "BL Code",
+                    "type": "text"
+                },
+                "quantity": {
+                    "name": "quantity",
+                    "title": "Quantity",
+                    "type": "text"
+                },
+                "condition": {
+                    "name": "condition",
+                    "title": "Condition",
+                    "type": "text"
+                }
+            }
+        },
+        "status": {
+            "status_code": {
+                "name": "status.status_code",
+                "title": "Status",
+                "type": "text"
+            },
+            "status_name": {
+                "name": "status.status_name",
+                "title": "Status Code",
+                "type": "text"
+            }
+        }
     }
-  }
-},
-  "status": {
-     "status_code": {
-          "name": "status.status_code",
-          "title": "Status",
-          "type": "text"
-         },
-     "status_name": {
-          "name": "status.status_name",
-          "title": "Status Code",
-          "type": "text"
-          }
-      }
-}]
+]
