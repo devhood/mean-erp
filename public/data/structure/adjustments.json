@@ -45,5 +45,17 @@
       "type": "text"
     }
   }
-}
+},
+  "status": {
+     "status_code": {
+          "name": "status.status_code",
+          "title": "Status",
+          "type": "text"
+         },
+     "status_name": {
+          "name": "status.status_name",
+          "title": "Status Code",
+          "type": "text"
+          }
+      }
 }]

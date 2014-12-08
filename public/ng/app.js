@@ -124,7 +124,7 @@ angular.module('erp', [
         templateUrl: '/partials/sales/payment',
         controller: 'SalesCtrl'
       })
-<<<<<<< HEAD
+
       .when('/consignment/index', {
         templateUrl: '/partials/consignment/index',
         controller: 'ConsignmentCtrl'
@@ -137,9 +137,6 @@ angular.module('erp', [
         templateUrl: '/partials/consignment/add',
         controller: 'ConsignmentCtrl'
       })
-
-
-=======
       .when('/shipment/index', {
         templateUrl: '/partials/shipment/index',
         controller: 'ShipmentCtrl'
@@ -164,7 +161,7 @@ angular.module('erp', [
         templateUrl: '/partials/purchase/page',
         controller: 'PurchaseCtrl'
       })
-<<<<<<< HEAD
+
       .when('/consignment/index', {
         templateUrl: '/partials/consignment/index',
         controller: 'ConsignmentCtrl'
@@ -177,9 +174,19 @@ angular.module('erp', [
         templateUrl: '/partials/consignment/add',
         controller: 'ConsignmentCtrl'
       })
-=======
->>>>>>> c2e47f548d41e246ed47251a937dccdd0533689f
->>>>>>> f27227060adea7791b4ea865202c87c6b28152f7
+      .when('/adjustment/index', {
+        templateUrl: '/partials/adjustment/index',
+        controller: 'AdjustmentCtrl'
+      })
+      .when('/adjustment/:action', {
+        templateUrl: '/partials/adjustment/add',
+        controller: 'AdjustmentCtrl'
+      })
+      .when('/adjustment/:action/:id', {
+        templateUrl: '/partials/adjustment/add',
+        controller: 'AdjustmentCtrl'
+      })
+
       .otherwise({
         redirectTo: '/'
       });

@@ -2002,7 +2002,7 @@ angular.module('erp')
       $scope.consignments.total_amount_due = computation.totalAmountDue;
       $scope.consignments.zero_rate_sales = computation.zeroRatedSales;
       $scope.consignments.withholding_tax = computation.withholdingTax;
-    //  console.log('frank');
+
     }
 
     $scope.reCompute = function(consignments){
@@ -2060,7 +2060,7 @@ angular.module('erp')
           //    $scope.sales.triggerInventory  = "OUT";
         }
         $scope.consignments.$save(function(){
-          $location.path('/consignment/index/add');
+          $location.path('/consignment/index/');
           return false;
         });
       }
@@ -2090,21 +2090,21 @@ angular.module('erp')
       };
     }
     if(id && action == 'approve'){
-
+      console.log('approved');
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
       $scope.saveConsignments = function(){
         if($scope.consignments.isNeedApproval){
-          $scope.consignments.status = status.created;
+          $scope.consignments.status = status.approved;
         }
         $scope.consignments.$update(function(){
-          $location.path('/consignment/index/override');
+          $location.path('/consignment/index/');
           return false;
         });
       };
-      $scope.deleteSales=function(consignments){
+      $scope.deleteConsignments=function(consignments){
         if(popupService.showPopup('You are about to delete Record : '+consignments._id)){
           $scope.consignments.$delete(function(){
             $location.path('/consignment/index/override');
@@ -2115,4 +2115,91 @@ angular.module('erp')
     }
   
 });
+})
+.controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Adjustments.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.init = function(){
+        columns = [
+          $scope.structure.adjno, $scope.structure.transaction_type, $scope.structure.inventory_location,
+          $scope.structure.status.status_name
+        ];
+
+        buttons = [
+          {url:"/#/adjustment/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/adjustment/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/adjustment/approve/",title:"Approve Record",icon:"fa fa-gear"}
+        ];
+        $scope.title = "ADJUSTMENT"
+        $scope.addUrl = "/#/adjustment/add"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options("/api/adjustments?filter="+encodeURIComponent(JSON.stringify(query)));    };
+    $scope.formInit = function(){
+
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.positions = Api.Collection('positions').query();
+      $scope.statuses = Api.Collection('user_status').query();
+      $scope.permissions = Api.Collection('permissions').query();
+
+      $scope.addPermission = function(user){
+        if(user.permission && user.permission.name && user.permission.allowed){
+          if($scope.user.permissions){
+            delete user.permission._id;
+            $scope.user.permissions.push(user.permission);
+          }
+          else{
+            $scope.user.permissions = [user.permission];
+          }
+          delete user.permission;
+        }
+      };
+
+      $scope.removePermission = function(index){
+        $scope.user.permissions.splice(index, 1);
+      };
+
+      $scope.action = action;
+      if(id && action == 'read'){
+        $scope.title = "VIEW USER " + id;
+        $scope.user =  Api.Collection('users').get({id:$routeParams.id});
+      }
+      if(id && action == 'edit'){
+        $scope.title = "EDIT USER " + id;
+        $scope.user =  Api.Collection('users').get({id:$routeParams.id});
+        $scope.saveUser = function(){
+          $scope.user.$update(function(){
+            $location.path('/user/index');
+            return false;
+          });
+        };
+        $scope.deleteUser=function(user){
+          if(popupService.showPopup('You are about to delete Record : '+user._id)){
+            $scope.user.$delete(function(){
+              $location.path('/user/index');
+              return false;
+            });
+          }
+        };
+      }
+      if(action == 'add'){
+        $scope.title = "ADD USER";
+
+        var User = Api.Collection('users');
+        $scope.user = new User();
+        $scope.saveUser = function(){
+          $scope.user.$save(function(){
+            $location.path('/user/index');
+            return false;
+          });
+        }
+      }
+    }
+  });
 });

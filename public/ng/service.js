@@ -13,6 +13,7 @@ angular.module('erp')
   })
   .factory('Structure', function ($resource) {
     return {
+      Adjustments : $resource('/data/structure/adjustments.json'),
       Sales : $resource('/data/structure/sales.json'),
       Consignments : $resource('/data/structure/consignments.json'),
       Users : $resource('/data/structure/users.json'),

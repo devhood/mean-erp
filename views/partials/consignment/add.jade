@@ -17,7 +17,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types track by consignment_transaction_type.name", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Consignment Transaction Type
 
           .col-md-6
@@ -206,7 +206,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="deleteconsignments(consignments)", ng-show="action=='edit' || action=='approve'") Delete
+              button.btn.red(type="button", ng-click="deleteConsignments(consignments)", ng-show="action=='edit' || action=='approve'") Delete
               | &nbsp;
               a.btn.default(type="button", href="/#/consignment/index") Cancel
           .col-md-6
