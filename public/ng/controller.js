@@ -1048,10 +1048,11 @@ angular.module('erp')
 
       $scope.addItem = function(item){
         var shipment_item = angular.copy(item);
-        delete shipment_item.inventories;
-
-        if(shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.expiry_date && shipment_item.condition ){
-
+        if(shipment_item){
+          delete shipment_item.inventories;
+        }
+        console.log(shipment_item);
+        if(shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
           if($scope.shipment.shipment_items){
             $scope.shipment.shipment_items.push(shipment_item);
           }
@@ -1188,7 +1189,7 @@ angular.module('erp')
         console.log(purchase_item.cost);
         console.log(purchase_item.expiry_date);
 
-        if(purchase_item.name && purchase_item.quantity && purchase_item.cost && purchase_item.expiry_date){
+        if(purchase_item.name && purchase_item.quantity && purchase_item.cost){
           if($scope.purchase.purchase_items){
             $scope.purchase.purchase_items.push(purchase_item);
           }

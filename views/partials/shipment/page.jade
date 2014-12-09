@@ -33,13 +33,13 @@ block title
 												input#arrivalDate.form-control(type="text", ng-model="shipment.arrival_date", datepicker-popup="{{format}}" , ng-disabled="action=='read'" required)
 												span.col-md-12.control-label	Arrival Date
 								.row
-									.col-md-12
+									.col-md-1
+									.col-md-10
 										.form-group
-											.col-md-2.col-lg-2
 											.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-												textarea#shipmentNotes.text-area.form-control(ng-model="shipment.notes",  ng-disabled="action=='read'")
-												span.col-md-12.control-label	Special Instructions
-											.col-md-2.col-lg-2
+												input.form-control(type="text", ng-model="shipment.notes", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
+												span.col-md-12.help-block Special Instructions
+									.col-md-1
 								.portlet.box.grey
 									.portlet-title
 										.caption
@@ -53,32 +53,26 @@ block title
 											br
 											.row(ng-hide="action!='add'")
 												.col-md-12
-													.col-md-6
+													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.item", ng-options="product.bl_code for product in products")
+																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product", ng-options="product.bl_code for product in products")
 																span.col-md-12.help-block Code
-													.col-md-6
+													.col-md-3
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.item", ng-options="product.name for product in products")
+																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product", ng-options="product.name for product in products")
 																span.col-md-12.help-block	Product
-												.col-md-12
-													.col-md-3
+													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
 																input.form-control(type="text", ng-model="shipment_item.product.quantity")
 																span.col-md-12.help-block	Quantity
-													.col-md-3
+													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
 																input.form-control(type="text", ng-model="shipment_item.product.cost")
 																span.col-md-12.help-block	Cost
-													.col-md-3
-														.form-group
-															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="shipment_item.product.expiry_date" , datepicker-popup="{{format}}")
-																span.col-md-12.help-block	Expiry Date
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -101,7 +95,6 @@ block title
 																			th Product
 																			th Quantity
 																			th Cost
-																			th Expiry Date
 																			th Condition
 																			th(width="5%")
 																	tbody
@@ -110,7 +103,6 @@ block title
 																			td {{shipment_item.name}}
 																			td {{shipment_item.quantity}}
 																			td {{shipment_item.cost}}
-																			td {{shipment_item.expiry_date}}
 																			td {{shipment_item.condition}}
 																			td(width="5%")
 																				.btn-group.btn-group-xs.btn-group-solid
