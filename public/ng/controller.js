@@ -867,27 +867,73 @@ angular.module('erp')
     var columns = [];
     var buttons = [];
     var query = {};
+
+
     $scope.init = function(){
-      columns = [
-      $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
-      $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
-      ];
-
-      buttons = [
-      {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
-      {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
-      {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
-      ];
-
+      var type = $routeParams.type;
       var status = Library.Status.Shipments;
-      console.log(status);
-      query = { "status.status_code" : {"$in" : [status.created.status_code, status.updated.status_code]}};
+      switch(type){
+        case "create" :
+          columns = [
+          $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
+          $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
+          ];
 
-      $scope.title = "SHIPMENTS"
-      $scope.addUrl = "/#/shipment/add"
-      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
-    };
+          buttons = [
+          {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
+          ];
+
+          query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+
+          $scope.title = "NEW SHIPMENTS"
+          $scope.addUrl = "/#/shipment/add"
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          var columns1 = [
+          $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
+          $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
+          ];
+
+          var buttons1 = [
+          {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
+          ];
+
+          query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+
+          $scope.title = "NEW SHIPMENTS"
+          $scope.addUrl = "/#/shipment/add"
+          $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+          $scope.dtOptions1 = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
+        break;
+        case "approve" :
+          columns = [
+          $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
+          $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
+          ];
+
+          buttons = [
+          {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
+          ];
+
+          var status = Library.Status.Shipments;
+          console.log(status);
+          query = { "status.status_code" : {"$in" : [status.created.status_code, status.approved.status_code]}};
+
+          $scope.title = "SHIPMENTS FOR APPROVAL"
+          $scope.addUrl = "/#/shipment/add"
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
+
+        break;
+      }//end of switch
+  };
 
 
     $scope.formInit = function(){
@@ -909,7 +955,7 @@ angular.module('erp')
         $scope.shipment.status = status.created;
         $scope.saveShipment = function(){
           $scope.shipment.$save(function(){
-            $location.path('/shipment/index');
+            $location.path('/shipment/index/create');
             return false;
           });
         }
@@ -932,14 +978,14 @@ angular.module('erp')
         $scope.saveShipment = function(){
           $scope.shipment.status = status.updated;
           $scope.shipment.$update(function(){
-            $location.path('/shipment/index/');
+            $location.path('/shipment/index/create');
             return false;
           });
         };
         $scope.deleteShipment=function(shipment){
           if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
             $scope.shipment.$delete(function(){
-              $location.path('/shipment/index');
+              $location.path('/shipment/index/create');
               return false;
             });
           }
@@ -955,14 +1001,14 @@ angular.module('erp')
         $scope.saveShipment = function(){
           $scope.shipment.status = status.approved;
           $scope.shipment.$update(function(){
-            $location.path('/shipment/index/');
+            $location.path('/shipment/index/approve');
             return false;
           });
         };
         $scope.deleteShipment=function(shipment){
           if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
             $scope.shipment.$delete(function(){
-              $location.path('/shipment/index');
+              $location.path('/shipment/index/aprove');
               return false;
             });
           }
