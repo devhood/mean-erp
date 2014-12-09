@@ -2167,7 +2167,7 @@ angular.module('erp')
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
-  $scope.ajax_ready = false;
+    $scope.ajax_ready = false;
   Structure.Adjustments.query().$promise.then(function(data){
     $scope.structure = data[0];
     $scope.ajax_ready = true;
@@ -2184,12 +2184,12 @@ angular.module('erp')
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.products = Api.Collection('products').query();
     var status = Library.Status.Adjustment;
-
+    
     $scope.init = function(){
-      console.log('frank');
+      
         columns = [
-
-         $scope.structure.adjno,$scope.structure.status.status_name
+     
+         $scope.structure.adjno,$scope.structure.transaction_type,$scope.structure.inventory_location,$scope.structure.status.status_name
           ];
 
         buttons = [
@@ -2202,10 +2202,10 @@ angular.module('erp')
         $scope.addUrl = "/#/adjustment/add"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/adjustments?filter="+encodeURIComponent(JSON.stringify(query)));
-  };
+  }
     $scope.addOrder = function(adjustments){
       var item = angular.copy(adjustments.item);
-      if( item && item.name && item.quantity && item.quantity ){
+      if( item && item.name && item.quantity && item.quantity ){  
         delete item.inventories;
         if($scope.adjustments.adjusted_item){
           $scope.adjustments.adjusted_item.push(item);
@@ -2227,7 +2227,15 @@ angular.module('erp')
         }
       }
     }
-        if( action == 'read'){
+    $scope.deleteAdjustments=function(adjustments){
+        if(popupService.showPopup('You are about to delete Record : '+adjustments._id)){
+          $scope.adjustments.$delete(function(){
+            $location.path('/adjustment/index');
+            return false;
+          });
+        }
+      };
+        if( action == 'read'){ 
       $scope.title = "VIEW ADJUSTMENT ORDER";
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -2239,7 +2247,7 @@ angular.module('erp')
       $scope.adjustments = new Adjustments();
 
       $scope.saveAdjustments = function(){
-
+        
         if($scope.adjustments.isNeedApproval){
 
           $scope.adjustments.status = status.override;
@@ -2255,7 +2263,7 @@ angular.module('erp')
         });
       }
     }
-
+    
     if( id && action == 'edit'){
       $scope.title = "EDIT ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
@@ -2280,7 +2288,7 @@ angular.module('erp')
       };
     }
     if(id && action == 'approve'){
-
+     
       $scope.title = "APPROVE ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
@@ -2294,15 +2302,8 @@ angular.module('erp')
           return false;
         });
       };
-      $scope.deleteAdjustments=function(adjustments){
-        if(popupService.showPopup('You are about to delete Record : '+adjustments._id)){
-          $scope.adjustments.$delete(function(){
-            $location.path('/adjustment/index/override');
-            return false;
-          });
-        }
-      };
+      
     }
-
-  });
+   
+});
 });
