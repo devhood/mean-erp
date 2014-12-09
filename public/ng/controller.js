@@ -667,6 +667,39 @@ angular.module('erp')
             $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
           break;
+          case "payment" :
+            columns = [
+            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code]}};
+            $scope.title = "PAYMENT";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            // columns1 = [
+            // $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.rmrno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            // $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            // ];
+            //
+            // buttons1 = [
+            // {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
+            // ];
+            //
+            // query1 = { "status.status_code" : {"$in" : [status.payment.rejected.status_code, status.payment.rejected.status_code]}};
+            // $scope.title1 = "APPROVED PAYMENT";
+            //
+            // $scope.dtColumns1 = Library.DataTable.columns(columns,buttons);
+            // $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query1)));
+
+          break;
       }
     };
 
@@ -773,6 +806,7 @@ angular.module('erp')
   }
   $scope.removeOrder = function(index){
     $scope.sales.ordered_items.splice(index, 1);
+
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
@@ -1158,7 +1192,7 @@ angular.module('erp')
         console.log(purchase_item.cost);
         console.log(purchase_item.expiry_date);
 
-        if(purchase_item.name && purchase_item.quantity && purchase_item.cost && purchase_item.expiry_date && purchase_item.condition ){
+        if(purchase_item.name && purchase_item.quantity && purchase_item.cost && purchase_item.expiry_date){
           if($scope.purchase.purchase_items){
             $scope.purchase.purchase_items.push(purchase_item);
           }
@@ -1607,18 +1641,18 @@ angular.module('erp')
   }
 })
 .controller('SalesPaymentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
   $scope.transaction_types = Api.Collection('transaction_types').query();
   $scope.customers = Api.Collection('customers').query();
   $scope.price_types = Api.Collection('price_types').query();
+  $scope.payment_types = Api.Collection('payment_types').query();
   $scope.discounts = Api.Collection('discounts').query();
   $scope.payment_terms = Api.Collection('payment_terms').query();
   $scope.order_sources = Api.Collection('order_sources').query();
-  $scope.sales_executives = Api.Collection('sales_executives').query();
   $scope.delivery_methods = Api.Collection('delivery_methods').query();
-  $scope.shipping_modes = Api.Collection('shipping_modes').query();
   $scope.inventory_locations = Api.Collection('inventory_locations').query();
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
@@ -1628,116 +1662,97 @@ angular.module('erp')
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
       $scope.shipping_address =
-      $scope.sales.customer.shipping_address.landmark + ', ' +
-      $scope.sales.customer.shipping_address.barangay + ', ' +
-      $scope.sales.customer.shipping_address.city + ', ' +
-      $scope.sales.customer.shipping_address.province + ', ' +
-      $scope.sales.customer.shipping_address.country + ', ' +
-      $scope.sales.customer.shipping_address.zipcode;
-
+          $scope.sales.customer.shipping_address.landmark + ', ' +
+          $scope.sales.customer.shipping_address.barangay + ', ' +
+          $scope.sales.customer.shipping_address.city + ', ' +
+          $scope.sales.customer.shipping_address.province + ', ' +
+          $scope.sales.customer.shipping_address.country + ', ' +
+          $scope.sales.customer.shipping_address.zipcode;
       $scope.billing_address =
-      $scope.sales.customer.billing_address.landmark + ', ' +
-      $scope.sales.customer.billing_address.barangay + ', ' +
-      $scope.sales.customer.billing_address.city + ', ' +
-      $scope.sales.customer.billing_address.province + ', ' +
-      $scope.sales.customer.billing_address.country + ', ' +
-      $scope.sales.customer.billing_address.zipcode;
+          $scope.sales.customer.billing_address.landmark + ', ' +
+          $scope.sales.customer.billing_address.barangay + ', ' +
+          $scope.sales.customer.billing_address.city + ', ' +
+          $scope.sales.customer.billing_address.province + ', ' +
+          $scope.sales.customer.billing_address.country + ', ' +
+          $scope.sales.customer.billing_address.zipcode;
     }
   }
+  $scope.addPayment = function(payment_detail){
+    var payment = angular.copy(payment_detail);
+    if(payment.type && payment.check_number && payment.check_dep_date && payment.bank && payment.bank && payment.amount)
+      {
+          if($scope.sales.payment_details){
+            $scope.sales.payment_details.push(payment);
+          }
+          else{
+            $scope.sales.payment_details = [payment];
+          }
+      }
+  }
+  $scope.removePayment = function(index){
+    $scope.sales.ordered_items.splice(index, 1);
+  }
+
   if(action == 'read'){
     $scope.title = "VIEW SALES PAYMENT";
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
   }
-  if(action == 'approve'){
-    $scope.title = "APPROVE PAYMENT "+ id;
+  if(action == 'add'){
+    $scope.title = "ADD SALES PAYMENT";
+    var Sales = Api.Collection('sales');
+    $scope.sales = new Sales();
+
+    $scope.saveSales = function(){
+        $scope.sales.status = status.payment.created;
+
+      $scope.sales.$save(function(){
+        $location.path('/sales/index/payment');
+        return false;
+      });
+    }
+  }
+
+  if(action == 'edit'){
+    $scope.title = "EDIT SALES PAYMENT"+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
-      $scope.sales.status = status.payment.confirmed;
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.payment.override;
+      }
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
       });
     };
-
-
-    $scope.addOrder = function(sales){
-      var item = angular.copy(sales.item);
-      if( item && item.name && item.quantity && item.quantity ){
-        item.override = item.override ? item.override : "NORMAL";
-        if(sales.customer.price_type == "Professional"){
-          item.price = item.professional_price
-        }
-        if(sales.customer.price_type == "Retail"){
-          item.price = item.retail_price;
-        }
-        if(item.override != "NORMAL"){
-          item.price = item.override;
-          item.total = 0.00;
-        }
-        if(!isNaN(item.price)){
-          item.total = item.quantity * item.price;
-        }
-        delete item.inventories;
-        if($scope.sales.ordered_items){
-          $scope.sales.ordered_items.push(item);
-        }
-        else{
-          $scope.sales.ordered_items = [item];
-        }
-        delete sales.item;
+    $scope.deleteSales=function(sales){
+      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
+        $scope.sales.$delete(function(){
+          $location.path('/sales/index/payment');
+          return false;
+        });
       }
-      $scope.sales.subtotal = 0;
-      $scope.sales.isNeedApproval = false;
-      for(var i=0;i<$scope.sales.ordered_items.length; i++){
-        $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
-        if($scope.sales.ordered_items[i].override != "NORMAL"){
-          $scope.sales.isNeedApproval = true;
-        }
-      }
-       var computation = Library.Compute.Order(
-          $scope.sales.subtotal,
-          $scope.sales.customer.discount.replace(" %","")/100,
-          $scope.sales.isWithholdingTax,
-          $scope.sales.isZeroRateSales
-       );
-       $scope.sales.discount = computation.totalDiscount;
-       $scope.sales.total_vat = computation.vatableSales;
-       $scope.sales.total_amount_due = computation.totalAmountDue;
-       $scope.sales.zero_rate_sales = computation.zeroRatedSales;
-       $scope.sales.withholding_tax = computation.withholdingTax;
-    }
-
-    $scope.reCompute = function(sales){
-      if($scope.sales.customer){
-        var computation = Library.Compute.Order(
-          $scope.sales.subtotal,
-          $scope.sales.customer.discount.replace(" %","")/100,
-          $scope.sales.isWithholdingTax,
-          $scope.sales.isZeroRateSales
-        );
-        $scope.sales.discount = computation.totalDiscount;
-        $scope.sales.total_vat = computation.vatableSales;
-        $scope.sales.total_amount_due = computation.totalAmountDue;
-        $scope.sales.zero_rate_sales = computation.zeroRatedSales;
-        $scope.sales.withholding_tax = computation.withholdingTax;
-      }
-    }
-    $scope.removeOrder = function(index){
-      $scope.sales.ordered_items.splice(index, 1);
-      $scope.sales.subtotal = 0;
-      $scope.sales.isNeedApproval = false;
-      for(var i=0;i<$scope.sales.ordered_items.length; i++){
-        $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
-        if($scope.sales.ordered_items[i].override != "NORMAL"){
-          $scope.sales.isNeedApproval = true;
-        }
-      }
-    }
+    };
   }
+
+  if(action == 'approve'){
+
+    $scope.title = "APPROVE SALES PAYMENT "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      $scope.sales.status = status.payment.approved;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/payment');
+        return false;
+      });
+    };
+  }
+
 })
 .controller('SalesReturnCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;

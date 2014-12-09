@@ -77,7 +77,7 @@ angular.module('erp')
         revised : {status_code : "ADJUSTMENT_REVISED", status_name : "Adjustment revised"},
         approved : {status_code : "ADJUSTMENT_APPROVED", status_name : "Adjustment approved"},
         override : {status_code : "ADJUSTMENT_OVERRIDE", status_name : "Adjustment for approval"},
-        
+
       },
     Consignment:{
         created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order submitted"},
@@ -135,6 +135,8 @@ angular.module('erp')
       payment : {
         created : {status_code : "PAYMENT_CREATED", status_name : "Accounting-Payment received"},
         updated : {status_code : "PAYMENT_UPDATED", status_name : "Accounting-Payment updated"},
+        rejected : {status_code : "PAYMENT_REJECTED", status_name : "Accounting-Payment rejected"},
+        approved : {status_code : "PAYMENT_APPROVED", status_name : "Accounting-Payment approved"},
         confirmed : {status_code : "PAYMENT_CONFIRMED", status_name : "TRANSACTION COMPLETE"}
       },
       proforma : {
