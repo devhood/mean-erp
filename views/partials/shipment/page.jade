@@ -37,7 +37,7 @@ block title
 										.form-group
 											.col-md-2.col-lg-2
 											.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-												textarea#shipmentNotes.text-area.form-control(ng-model="shipment.notes" required)
+												textarea#shipmentNotes.text-area.form-control(ng-model="shipment.notes",  ng-disabled="action=='read'")
 												span.col-md-12.control-label	Special Instructions
 											.col-md-2.col-lg-2
 								.portlet.box.grey
@@ -53,30 +53,36 @@ block title
 											br
 											.row(ng-hide="action!='add'")
 												.col-md-12
+													.col-md-6
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.item", ng-options="product.bl_code for product in products")
+																span.col-md-12.help-block Code
+													.col-md-6
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product", ng-options="product.name for product in products")
+																span.col-md-12.help-block	Product
+												.col-md-12
 													.col-md-3
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product", ng-options="product.name for product in products", ng-disabled="action=='read'")
-																span.col-md-12.help-block	Product
-													.col-md-2
-														.form-group
-															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="shipment_item.product.quantity", ng-disabled="action=='read'")
+																input.form-control(type="text", ng-model="shipment_item.product.quantity")
 																span.col-md-12.help-block	Quantity
-													.col-md-2
+													.col-md-3
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="shipment_item.product.cost", ng-disabled="action=='read'")
+																input.form-control(type="text", ng-model="shipment_item.product.cost")
 																span.col-md-12.help-block	Cost
-													.col-md-2
+													.col-md-3
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="shipment_item.product.expiry_date" , datepicker-popup="{{format}}", ng-disabled="action=='read'")
+																input.form-control(type="text", ng-model="shipment_item.product.expiry_date" , datepicker-popup="{{format}}")
 																span.col-md-12.help-block	Expiry Date
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product.condition", ng-options="condition.name as condition.name for condition in conditions", ng-selected="{{shipment_item.product.condition}}", ng-disabled="action=='read'")
+																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product.condition", ng-options="condition.name as condition.name for condition in conditions", ng-selected="{{shipment_item.product.condition}}")
 																span.col-md-12.help-block	Condition
 													.col-md-1
 														button.btn-sm.green.custom-right(type="button",ng-click="addItem(shipment_item.product)")
@@ -91,6 +97,7 @@ block title
 																table.table.table-bordered.table-condensed.flip-content
 																	thead.flip-content.bg-grey
 																		tr
+																			th Code
 																			th Product
 																			th Quantity
 																			th Cost
@@ -99,6 +106,7 @@ block title
 																			th(width="5%")
 																	tbody
 																		tr(ng-repeat="shipment_item in shipment.shipment_items track by $index")
+																			td {{shipment_item.bl_code}}
 																			td {{shipment_item.name}}
 																			td {{shipment_item.quantity}}
 																			td {{shipment_item.cost}}
@@ -106,7 +114,7 @@ block title
 																			td {{shipment_item.condition}}
 																			td(width="5%")
 																				.btn-group.btn-group-xs.btn-group-solid
-																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record", ng-hide="action=='read'")
 																						i.fa.fa-trash-o
 												.col-md-1
 							.form-actions.fluid
@@ -117,5 +125,5 @@ block title
 												| &nbsp;
 												button.btn.red(type="button", ng-click="deleteShipment(shipment)", ng-show="action=='edit' || action=='approve'") Delete
 												| &nbsp;
-												a.btn.default(type="button", href="/#/shipment/index") Cancel
+												a.btn.default(type="button", href="/#/shipment/index/create") Cancel
 										.col-md-6
