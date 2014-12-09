@@ -852,6 +852,10 @@ angular.module('erp')
       if($scope.sales.isNeedApproval){
         $scope.sales.status = status.order.override;
       }
+      else{
+        $scope.sales.status = status.order.created;
+        //    $scope.sales.triggerInventory  = "OUT";
+      }
       $scope.sales.$update(function(){
         $location.path('/sales/index/order');
         return false;
