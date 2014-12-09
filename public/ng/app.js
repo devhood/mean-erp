@@ -118,13 +118,12 @@ angular.module('erp', [
       })
       .when('/sales/payment/:action', {
         templateUrl: '/partials/sales/payment',
-        controller: 'SalesCtrl'
+        controller: 'SalesPaymentCtrl'
       })
       .when('/sales/payment/:action/:id', {
         templateUrl: '/partials/sales/payment',
-        controller: 'SalesCtrl'
+        controller: 'SalesPaymentCtrl'
       })
-
       .when('/consignment/index', {
         templateUrl: '/partials/consignment/index',
         controller: 'ConsignmentCtrl'
@@ -161,7 +160,6 @@ angular.module('erp', [
         templateUrl: '/partials/purchase/page',
         controller: 'PurchaseCtrl'
       })
-
       .when('/consignment/index', {
         templateUrl: '/partials/consignment/index',
         controller: 'ConsignmentCtrl'

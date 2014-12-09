@@ -5,17 +5,7 @@ var pdf = {
 
 		pageSetting : function(options){
 
-			// var doc = new PDFDocument({
-			// 	size: options.size || 'letter',
-			// 	layout: options.layout || 'portrait',
-			// 	margin : options.margin || {
-			// 		top:10,
-			// 		bottom:10,
-			// 		left:10,
-			// 		right:0
-			// 	},
-					var	doc = new PDF({
-			  // size: [700,600],
+				var	doc = new PDF({
 			  size: options.size || 'letter',
 			  layout: 'portrait',
 			  margins: {
@@ -65,27 +55,13 @@ var pdf = {
 			doc.text(drinfo.shipping,360,y);
 			doc.text(drinfo.se,500,y);
 			doc.text(drinfo.oreder_notes,35,y+10);
-			/***      Stop Header     ***/
-
-//			doc.font('Courier-Bold');
-//			doc.text("CODE",25,230);
-//			doc.text("PRODUCT",105,230);
-//			doc.text("BRAND",225,230);
-//			doc.text("DESCRIPTION",335,230);
-//			doc.text("UOM",495,230);
-//			doc.text("QTY",560,230);
-
 			doc.moveDown(1);
 			return doc;
 		},
 		pageFooter : function(doc,drinfo){
 			/***      Start Footer     ***/
-			doc.text(drinfo.dr_item.length,130,610);
-			doc.text(drinfo.dr_item.length,560,610,{width:35,align:'center'});
-//			doc.text(drinfo.ttl_sales,500,680);
-//			doc.text(drinfo.ttl_discount,500,680);
-//			doc.text(drinfo.ttl_vat,500,700);
-//			doc.text(drinfo.ttl_net,500,710);
+			doc.text(drinfo.ordered_items.length,130,610);
+			doc.text(drinfo.ordered_items.length,560,610,{width:35,align:'center'});
 			doc.text(drinfo.order_created_by,25,730);
 			doc.text(drinfo.delivery_created_by,180,730);
 			 return doc
@@ -106,17 +82,17 @@ module.exports.print = function(drinfo,result){
 	doc = pdf.pageHeader(doc,drinfo);
 	doc = pdf.pageFooter(doc,drinfo);
 	doc.y = 255;
-	for(var i in drinfo.dr_item){
+	for(var i in drinfo.ordered_items){
 		var y= doc.y;
 		doc.font('Courier');
 		doc.fontSize(8);
-		doc.text(drinfo.dr_item[i].code,-1,y,{width:80});
-		doc.text(drinfo.dr_item[i].name,90,y,{width:100});
-		doc.text(drinfo.dr_item[i].brand,205,y,{width:100});
-		doc.text(drinfo.dr_item[i].description,310,y,{width:190});
-		doc.text(drinfo.dr_item[i].uom,510,y,{width:50});
-		doc.text(drinfo.dr_item[i].quantity,560,y,{width:35,align:'center'});
-		doc.moveDown(0.5);
+		doc.text(drinfo.ordered_items[i].code,-1,y,{width:80});
+		doc.text(drinfo.ordered_items[i].name,90,y,{width:100});
+		doc.text(drinfo.ordered_items[i].brand,205,y,{width:100});
+		doc.text(drinfo.ordered_items[i].description,310,y,{width:190});
+		doc.text(drinfo.ordered_items[i].uom,510,y,{width:50});
+		doc.text(drinfo.ordered_items[i].quantity,560,y,{width:35,align:'center'});
+		doc.moveuDown(0.5);
 		if(doc.y >= 580){
 			doc.addPage();
 			doc = pdf.pageHeader(doc,drinfo);

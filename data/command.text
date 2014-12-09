@@ -22,6 +22,7 @@ mongoimport --db beautylane-db --collection number_generators --type csv --heade
 mongoimport --db beautylane-db --collection conditions --type csv --headerline --file data/csv/conditions.csv
 mongoimport --db beautylane-db --collection customers --file data/json/customers.json
 mongoimport --db beautylane-db --collection products --file data/json/products.json
+<<<<<<< HEAD
 mongoimport --db beautylane-db --collection provinces --file data/json/Albay.json
 mongoimport --db beautylane-db --collection provinces --file data/json/AgusandelNorte.json
 mongoimport --db beautylane-db --collection provinces --file data/json/Bulacan.json
@@ -86,3 +87,6 @@ mongoimport --db beautylane-db --collection provinces --file data/json/TawiTawi.
 mongoimport --db beautylane-db --collection provinces --file data/json/ZamboangadelNorte.json
 mongoimport --db beautylane-db --collection provinces --file data/json/ZamboangaSibugay.json
 mongoimport --db beautylane-db --collection provinces --file data/json/ZamboangadelSur.json
+=======
+mongoimport --db beautylane-db --collection payment_types --type csv --headerline --file data/csv/payment_types.csv
+>>>>>>> 4d5784b437437ca26f108926d9644af52421108e
