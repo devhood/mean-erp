@@ -63,7 +63,7 @@
       {
         "title": "Shipments",
         "description": "Manage Shipments",
-        "href": "/#/shipment/index"
+        "href": "/#/shipment/index/create"
       }
     ]
   },
@@ -92,7 +92,7 @@
       {
         "title": "Shipment",
         "description": "Manage Payment",
-        "href": "/#/shipment/index"
+        "href": "/#/shipment/index/approve"
       },
       {
         "title": "Purchase",

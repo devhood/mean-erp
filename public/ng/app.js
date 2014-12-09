@@ -137,7 +137,7 @@ angular.module('erp', [
         templateUrl: '/partials/consignment/add',
         controller: 'ConsignmentCtrl'
       })
-      .when('/shipment/index', {
+      .when('/shipment/index/:type', {
         templateUrl: '/partials/shipment/index',
         controller: 'ShipmentCtrl'
       })
