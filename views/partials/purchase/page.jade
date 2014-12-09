@@ -37,7 +37,7 @@ block title
 										.form-group
 											.col-md-2.col-lg-2
 											.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-												textarea#purchaseNotes.text-area.form-control(ng-model="purchase.notes" required)
+												textarea#purchaseNotes.text-area.form-control(ng-model="purchase.notes")
 												span.col-md-12.control-label	Special Instructions
 											.col-md-2.col-lg-2
 								.portlet.box.grey
@@ -56,22 +56,27 @@ block title
 													.col-md-3
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product", ng-options="product.name for product in products", ng-disabled="action=='read'")
+																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.item", ng-options="product.bl_code for product in products")
+																span.col-md-12.help-block Code
+													.col-md-3
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product", ng-options="product.name for product in products")
 																span.col-md-12.help-block	Product
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="purchase_item.product.quantity", ng-disabled="action=='read'")
+																input.form-control(type="text", ng-model="purchase_item.product.quantity")
 																span.col-md-12.help-block	Quantity
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="purchase_item.product.cost", ng-disabled="action=='read'")
+																input.form-control(type="text", ng-model="purchase_item.product.cost")
 																span.col-md-12.help-block	Cost
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="purchase_item.product.expiry_date" , datepicker-popup="{{format}}", ng-disabled="action=='read'")
+																input.form-control(type="text", ng-model="purchase_item.product.expiry_date" , datepicker-popup="{{format}}")
 																span.col-md-12.help-block	Expiry Date
 													.col-md-1
 														button.btn-sm.green.custom-right(type="button",ng-click="addItem(purchase_item.product)")
@@ -86,6 +91,7 @@ block title
 																table.table.table-bordered.table-condensed.flip-content
 																	thead.flip-content.bg-grey
 																		tr
+																			th Code
 																			th Product
 																			th Quantity
 																			th Cost
@@ -93,6 +99,7 @@ block title
 																			th(width="5%")
 																	tbody
 																		tr(ng-repeat="purchase_item in purchase.purchase_items track by $index")
+																			td {{purchase_item.bl_code}}
 																			td {{purchase_item.name}}
 																			td {{purchase_item.quantity}}
 																			td {{purchase_item.cost}}

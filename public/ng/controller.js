@@ -881,8 +881,7 @@ angular.module('erp')
 
           buttons = [
           {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
+          {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"}
           ];
 
           query = { "status.status_code" : {"$in" : [status.created.status_code]}};
@@ -899,16 +898,15 @@ angular.module('erp')
 
           var buttons1 = [
           {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+          query = { "status.status_code" : {"$in" : [status.approved.status_code]}};
 
-          $scope.title = "NEW SHIPMENTS"
+          $scope.title1 = "SHIPMENTS FOR APPROVAL"
           $scope.addUrl = "/#/shipment/add"
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
+
         break;
         case "approve" :
           columns = [
@@ -923,7 +921,6 @@ angular.module('erp')
           ];
 
           var status = Library.Status.Shipments;
-          console.log(status);
           query = { "status.status_code" : {"$in" : [status.created.status_code, status.approved.status_code]}};
 
           $scope.title = "SHIPMENTS FOR APPROVAL"
@@ -959,7 +956,7 @@ angular.module('erp')
             return false;
           });
         }
-      }//end action add
+      }
 
 
 
@@ -1013,16 +1010,11 @@ angular.module('erp')
             });
           }
         };
-      } //end action approve
+      }
 
       $scope.addItem = function(item){
         var shipment_item = angular.copy(item);
         delete shipment_item.inventories;
-        console.log(shipment_item.name);
-        console.log(shipment_item.quantity);
-        console.log(shipment_item.cost);
-        console.log(shipment_item.expiry_date);
-        console.log(shipment_item.condition);
 
         if(shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.expiry_date && shipment_item.condition ){
 
@@ -1156,14 +1148,13 @@ angular.module('erp')
       $scope.addItem = function(item){
         var purchase_item = angular.copy(item);
         delete purchase_item.inventories;
+        console.log(purchase_item.bl_code);
         console.log(purchase_item.name);
         console.log(purchase_item.quantity);
         console.log(purchase_item.cost);
         console.log(purchase_item.expiry_date);
-        console.log(purchase_item.condition);
 
         if(purchase_item.name && purchase_item.quantity && purchase_item.cost && purchase_item.expiry_date && purchase_item.condition ){
-
           if($scope.purchase.purchase_items){
             $scope.purchase.purchase_items.push(purchase_item);
           }
@@ -1173,7 +1164,7 @@ angular.module('erp')
         }
       }
       $scope.removeItem = function(index){
-        $scope.shipment.shipment_items.splice(index, 1);
+        $scope.purchase.purchase_items.splice(index, 1);
       }
     }
 
