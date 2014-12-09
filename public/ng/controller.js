@@ -667,6 +667,26 @@ angular.module('erp')
             $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
           break;
+          case "payment" :
+            console.log("payment  ");
+
+            columns = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.rmrno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.payment.created.status_code, status.payment.approved.status_code]}};
+            $scope.title = "PAYMENT";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          break;
       }
     };
 
@@ -1154,7 +1174,7 @@ angular.module('erp')
         console.log(purchase_item.cost);
         console.log(purchase_item.expiry_date);
 
-        if(purchase_item.name && purchase_item.quantity && purchase_item.cost && purchase_item.expiry_date && purchase_item.condition ){
+        if(purchase_item.name && purchase_item.quantity && purchase_item.cost && purchase_item.expiry_date){
           if($scope.purchase.purchase_items){
             $scope.purchase.purchase_items.push(purchase_item);
           }
