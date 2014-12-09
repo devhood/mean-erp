@@ -34,6 +34,14 @@ router.use(function(req, res, next) {
 
 })
 .post('/:object', generator.generate, inventory.check, function(req, res) {
+    delete req.user.password;
+    delete req.user.permissions;
+    var audit = {
+      user : req.user,
+      creation_date : new Date(),
+      module : req.params.object
+    };
+    req.body.audit_history = [audit];
     db.collection(req.params.object)
       .insert(req.body, {safe: true})
       .done(function(data){
@@ -106,6 +114,14 @@ router.use(function(req, res, next) {
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
     req.query.filter._id = id;
+    delete req.user.password;
+    delete req.user.permissions;
+    var audit = {
+      user : req.user,
+      update_date : new Date(),
+      module : req.params.object
+    };
+    req.body.audit_history = [audit];
     db.collection(req.params.object)
       .update(req.query.filter, {"$set" : req.body}, {safe: true})
       .done(function(data){

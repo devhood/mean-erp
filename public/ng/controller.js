@@ -1331,8 +1331,7 @@ angular.module('erp')
     var query = {};
     $scope.init = function(){
       columns = [
-      $scope.structure.pckno, $scope.structure.inventory_location, $scope.structure.delivery_date, $scope.structure.prepared_by,
-      $scope.structure.preparation_date
+      $scope.structure.pckno, $scope.structure.prepared_by
       ];
 
       buttons = [
@@ -1351,7 +1350,6 @@ angular.module('erp')
       var status = Library.Status.Sales;
       $scope.inventory_locations = Api.Collection('customers',query).query();
       $scope.ListChange = function(){
-          console.log($scope.packing.inventory_location,$scope.packing.delivery_date);
           $scope.packing.list = [];
           if($scope.packing.inventory_location){
             var query = {
@@ -1360,7 +1358,6 @@ angular.module('erp')
             };
 
             Api.Collection('sales',query).query().$promise.then(function(data){
-              console.log(data);
               for(var i in data){
                 for(var j in data[i].ordered_items){
                   var item = {
@@ -1377,8 +1374,6 @@ angular.module('erp')
               }
 
             });
-
-
           }
       };
 
@@ -1432,6 +1427,9 @@ angular.module('erp')
             return false;
           });
         }
+        $scope.removeItem = function(index){
+          $scope.packing.list.splice(index, 1);
+        };
       }
     }
   });
@@ -1914,7 +1912,7 @@ angular.module('erp')
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.products = Api.Collection('products').query();
     var status = Library.Status.Consignment;
-   
+
 
     $scope.init = function(){
          columns = [
@@ -2033,8 +2031,8 @@ angular.module('erp')
         }
       }
     }
-  
-    if( action == 'read'){ 
+
+    if( action == 'read'){
       $scope.title = "VIEW CONSIGN ORDER";
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -2046,7 +2044,7 @@ angular.module('erp')
       $scope.consignments = new Consignments();
 
       $scope.saveConsignments = function(){
-        
+
         if($scope.consignments.isNeedApproval){
 
           $scope.consignments.status = status.override;
@@ -2103,7 +2101,7 @@ angular.module('erp')
       };
       $scope.deleteConsignments=function(consignments){
         console.log('for Delete');
-        
+
         if(popupService.showPopup('You are about to delete Record : '+consignments._id)){
           $scope.consignments.$delete(function(){
             $location.path('/consignment/index/override');
@@ -2112,9 +2110,9 @@ angular.module('erp')
         }
     }
       };
- 
-  
-});
+
+
+    });
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
@@ -2135,11 +2133,11 @@ angular.module('erp')
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.products = Api.Collection('products').query();
     var status = Library.Status.Adjustment;
-    
+
     $scope.init = function(){
       console.log('frank');
         columns = [
-     
+
          $scope.structure.adjno,$scope.structure.status.status_name
           ];
 
@@ -2156,7 +2154,7 @@ angular.module('erp')
   };
     $scope.addOrder = function(adjustments){
       var item = angular.copy(adjustments.item);
-      if( item && item.name && item.quantity && item.quantity ){  
+      if( item && item.name && item.quantity && item.quantity ){
         delete item.inventories;
         if($scope.adjustments.adjusted_item){
           $scope.adjustments.adjusted_item.push(item);
@@ -2178,7 +2176,7 @@ angular.module('erp')
         }
       }
     }
-        if( action == 'read'){ 
+        if( action == 'read'){
       $scope.title = "VIEW ADJUSTMENT ORDER";
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -2190,7 +2188,7 @@ angular.module('erp')
       $scope.adjustments = new Adjustments();
 
       $scope.saveAdjustments = function(){
-        
+
         if($scope.adjustments.isNeedApproval){
 
           $scope.adjustments.status = status.override;
@@ -2206,7 +2204,7 @@ angular.module('erp')
         });
       }
     }
-    
+
     if( id && action == 'edit'){
       $scope.title = "EDIT ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
@@ -2231,7 +2229,7 @@ angular.module('erp')
       };
     }
     if(id && action == 'approve'){
-     
+
       $scope.title = "APPROVE ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
@@ -2254,8 +2252,6 @@ angular.module('erp')
         }
       };
     }
-   
-});  
-    
 
+  });
 });

@@ -167,7 +167,7 @@ block title
                               th Quantity
                               th Unit Price
                               th Total
-                              th(width="5%") Action
+                              th(width="5%", ng-hide="action=='read'") Action
                           tbody
                             tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
                               td {{ordered_item.bl_code}}
@@ -175,7 +175,7 @@ block title
                               td {{ordered_item.quantity}}
                               td {{ordered_item.price}}
                               td {{ordered_item.total}}
-                              td(width="5%")
+                              td(width="5%", ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o

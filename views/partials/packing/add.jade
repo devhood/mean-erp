@@ -14,24 +14,13 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations track by inventory_location.company_name", ng-disabled="action=='read'",required)
+								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Inventory Location
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input.form-control(type="text", ng-change="ListChange()", ng-model="packing.delivery_date", ng-disabled="action=='read'", datepicker-popup="{{'MM/dd/yyyy'}}", required)
-								span.col-md-12.help-block Delivery Date
-				.row
-					.col-md-6
-						.form-group
-							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 								input.form-control(type="text", ng-model="packing.prepared_by", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Prepared By
-					.col-md-6
-						.form-group
-							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input.form-control(type="text", ng-model="packing.preparation_date", ng-disabled="action=='read'", datepicker-popup="{{'MM/dd/yyyy'}}",required)
-								span.col-md-12.help-block Preparation Date
 				.portlet.box.grey
 					.portlet-title
 						.caption
@@ -56,6 +45,7 @@ block title
 															th Brand
 															th Product
 															th Quantity
+															th(width="5%", ng-hide="action=='read'") Action
 													tbody
 														tr(ng-repeat="item in packing.list")
 															td(ng-show="item.sono") {{item.sono}}
@@ -64,6 +54,10 @@ block title
 															td {{item.brand}}
 															td {{item.product}}
 															td {{item.quantity}}
+															td(width="5%", ng-hide="action=='read'")
+																.btn-group.btn-group-xs.btn-group-solid
+																	a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																		i.fa.fa-trash-o
 								.col-md-1
 			.form-actions.fluid
 				.row
