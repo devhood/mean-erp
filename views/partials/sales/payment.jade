@@ -1,5 +1,5 @@
 block title
-  title CREDIT MEMO
+  title PAYMENT RECORD
 .portlet.box.grey
   .portlet-title
     .caption
@@ -13,6 +13,17 @@ block title
   .portlet-body.form
     form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSales()", novalidate)
       .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.pfno", readonly)
+                span.col-md-12.help-block PF Number
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.cmno", readonly)
+                span.col-md-12.help-block  CM Number
         .row
           .col-md-6
             .form-group
@@ -107,7 +118,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations" ,tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations track by inventory_locations._id" ,tabindex="-1", ng-disabled="true",required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
@@ -263,7 +274,7 @@ block title
             .form-body
               br
               br
-              .row(ng-hide="action=='read'")
+              .row(ng-show="action=='add' || action=='update'")
                 .col-md-1
                 .col-md-10
                   .col-md-2
@@ -279,7 +290,7 @@ block title
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="text", ng-model="payment_detail.check_dep_date",  datepicker-popup="{{'MM/dd/yyyy'}}")
+                        input.form-control(type="text", ng-model="payment_detail.check_dep_date",  datepicker-popup="{{format}}")
                         span.col-md-12.help-block Check/Dep date
                   .col-md-3
                     .form-group
@@ -312,10 +323,10 @@ block title
                               th Amount
                               th(width="5%", ng-hide="action=='read'") Action
                           tbody
-                            tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
-                              td {{payment_detail.name}}
+                            tr(ng-repeat="payment_detail in sales.payment_details track by $index")
+                              td {{payment_detail.payment_type}}
                               td {{payment_detail.check_number}}
-                              td {{payment_detail.check_dep_date}}
+                              td {{payment_detail.check_dep_date | date}}
                               td {{payment_detail.bank}}
                               td {{payment_detail.amount}}
                               td(width="5%", ng-hide="action=='read'")
@@ -381,7 +392,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='edit' || action=='approve'") Reject
+              button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='update'") Reject
               | &nbsp;
-              a.btn.default(type="button", href="/#/sales/index/order") Cancel
+              a.btn.default(type="button", href="/#/sales/index/payment") Cancel
           .col-md-6

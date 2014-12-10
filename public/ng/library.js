@@ -136,7 +136,6 @@ angular.module('erp')
         created : {status_code : "PAYMENT_CREATED", status_name : "Accounting-Payment received"},
         updated : {status_code : "PAYMENT_UPDATED", status_name : "Accounting-Payment updated"},
         rejected : {status_code : "PAYMENT_REJECTED", status_name : "Accounting-Payment rejected"},
-        approved : {status_code : "PAYMENT_APPROVED", status_name : "Accounting-Payment approved"},
         confirmed : {status_code : "PAYMENT_CONFIRMED", status_name : "TRANSACTION COMPLETE"}
       },
       proforma : {

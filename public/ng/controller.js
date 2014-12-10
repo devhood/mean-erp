@@ -444,7 +444,7 @@ angular.module('erp')
               {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"}
             ];
 
-            query = { "status.status_code" : {"$in" : [status.proforma.created.status_code,status.proforma.revised.status_code]}};
+            query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.proforma.created.status_code, status.proforma.revised.status_code, status.payment.rejected.status_code]}};
             $scope.title = "PROFORMA INVOICE"
             $scope.addUrl = "/#/sales/proforma/add";
 
@@ -542,7 +542,7 @@ angular.module('erp')
           {url:"/#/sales/invoice/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code]}};
+          query = {"drno": { "$exists": true }, "status.status_code" : {"$in" : [status.delivery.approved.status_code, status.payment.rejected.status_code]}};
           $scope.title = "SALES INVOICE";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -645,9 +645,9 @@ angular.module('erp')
             {url:"/#/sales/memo/approve/",title:"Approve Record",icon:"fa fa-gear"}
             ];
 
-            query = { "status.status_code" : {"$in" : [status.returned.approved.status_code]}};
-            $scope.title = "CREDIT MEMO";
+            query = {"rmrno": { "$exists": true }, "status.status_code" : {"$in" : [status.returned.approved.status_code, status.payment.rejected.status_code]}};
 
+            $scope.title = "CREDIT MEMO";
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
@@ -675,11 +675,13 @@ angular.module('erp')
 
             buttons = [
             {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"},
+            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit"}
             ];
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code]}};
             $scope.title = "PAYMENT";
+            $scope.addUrl = "/#/sales/payment/add";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
@@ -1172,12 +1174,6 @@ angular.module('erp')
       $scope.addItem = function(item){
         var purchase_item = angular.copy(item);
         delete purchase_item.inventories;
-        console.log(purchase_item.bl_code);
-        console.log(purchase_item.name);
-        console.log(purchase_item.quantity);
-        console.log(purchase_item.cost);
-        console.log(purchase_item.expiry_date);
-
         if(purchase_item.name && purchase_item.quantity && purchase_item.cost){
           if($scope.purchase.purchase_items){
             $scope.purchase.purchase_items.push(purchase_item);
@@ -1665,9 +1661,8 @@ angular.module('erp')
   }
   $scope.addPayment = function(payment_detail){
     var payment = angular.copy(payment_detail);
-    if(payment.type && payment.check_number && payment.check_dep_date && payment.bank && payment.bank && payment.amount)
-      {
-          if($scope.sales.payment_details){
+    if(payment.payment_type && payment.check_number && payment.check_dep_date && payment.bank && payment.amount){
+          if($scope.sales.payment){
             $scope.sales.payment_details.push(payment);
           }
           else{
@@ -1681,9 +1676,7 @@ angular.module('erp')
 
   if(action == 'read'){
     $scope.title = "VIEW SALES PAYMENT";
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
   }
   if(action == 'add'){
     $scope.title = "ADD SALES PAYMENT";
@@ -1700,27 +1693,21 @@ angular.module('erp')
     }
   }
 
-  if(action == 'edit'){
-    $scope.title = "EDIT SALES PAYMENT"+ id;
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-    });
+  if(action == 'update'){
+    $scope.title = "UPDATE SALES PAYMENT"+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
     $scope.saveSales = function(){
-      if($scope.sales.isNeedApproval){
-        $scope.sales.status = status.payment.override;
-      }
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
       });
     };
-    $scope.deleteSales=function(sales){
-      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
-        $scope.sales.$delete(function(){
-          $location.path('/sales/index/payment');
-          return false;
-        });
-      }
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.payment.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/payment');
+        return false;
+      });
     };
   }
 
@@ -1731,12 +1718,13 @@ angular.module('erp')
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
-      $scope.sales.status = status.payment.approved;
+      $scope.sales.status = status.payment.confirmed;
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
       });
     };
+
   }
 
 })
@@ -2180,11 +2168,11 @@ angular.module('erp')
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.products = Api.Collection('products').query();
     var status = Library.Status.Adjustment;
-    
+
     $scope.init = function(){
-      
+
         columns = [
-     
+
          $scope.structure.adjno,$scope.structure.transaction_type,$scope.structure.inventory_location,$scope.structure.status.status_name
           ];
 
@@ -2201,7 +2189,7 @@ angular.module('erp')
   }
     $scope.addOrder = function(adjustments){
       var item = angular.copy(adjustments.item);
-      if( item && item.name && item.quantity && item.quantity ){  
+      if( item && item.name && item.quantity && item.quantity ){
         delete item.inventories;
         if($scope.adjustments.adjusted_item){
           $scope.adjustments.adjusted_item.push(item);
@@ -2231,7 +2219,7 @@ angular.module('erp')
           });
         }
       };
-        if( action == 'read'){ 
+        if( action == 'read'){
       $scope.title = "VIEW ADJUSTMENT ORDER";
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -2243,7 +2231,7 @@ angular.module('erp')
       $scope.adjustments = new Adjustments();
 
       $scope.saveAdjustments = function(){
-        
+
         if($scope.adjustments.isNeedApproval){
 
           $scope.adjustments.status = status.override;
@@ -2259,7 +2247,7 @@ angular.module('erp')
         });
       }
     }
-    
+
     if( id && action == 'edit'){
       $scope.title = "EDIT ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
@@ -2284,7 +2272,7 @@ angular.module('erp')
       };
     }
     if(id && action == 'approve'){
-     
+
       $scope.title = "APPROVE ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
@@ -2298,8 +2286,8 @@ angular.module('erp')
           return false;
         });
       };
-      
+
     }
-   
+
 });
 });
