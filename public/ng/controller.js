@@ -678,26 +678,11 @@ angular.module('erp')
             {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"}
             ];
 
-            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code]}};
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code]}};
             $scope.title = "PAYMENT";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-
-            // columns1 = [
-            // $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.rmrno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-            // $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
-            // ];
-            //
-            // buttons1 = [
-            // {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-            // ];
-            //
-            // query1 = { "status.status_code" : {"$in" : [status.payment.rejected.status_code, status.payment.rejected.status_code]}};
-            // $scope.title1 = "APPROVED PAYMENT";
-            //
-            // $scope.dtColumns1 = Library.DataTable.columns(columns,buttons);
-            // $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query1)));
 
           break;
       }
