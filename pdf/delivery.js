@@ -14,17 +14,12 @@ var pdf = {
 			    left: 0,
 			    right: 0
 				},
-				info: options.info || {
-					Title:'DR-0000001',
-					Subject:'DR-00000001',
-					Author:'Chito Cascante'
-				}
+				info: options.info
 			});
 			return doc;
 		},
 
 		pageHeader : function(doc,drinfo){
-			/***      Start Header     ***/
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
 			doc.text(drinfo.drno,465,88,{align:'left'});
@@ -35,8 +30,8 @@ var pdf = {
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
 			doc.fontSize(10);
-			doc.text(drinfo.customer + (drinfo.branch? " - " + drinfo.branch : ""),40,123,{width:260,indent:40});
-			doc.text(drinfo.customer + (drinfo.branch? " - " + drinfo.branch : ""),340,123,{width:260,indent:40});
+			doc.text(drinfo.customer.company_name),40,123,{width:260,indent:40});
+			doc.text(drinfo.customer.company_name),340,123,{width:260,indent:40});
 			doc.moveDown(0);
 			doc.font('Courier');
 			doc.fontSize(10);
@@ -59,7 +54,6 @@ var pdf = {
 			return doc;
 		},
 		pageFooter : function(doc,drinfo){
-			/***      Start Footer     ***/
 			doc.text(drinfo.ordered_items.length,130,610);
 			doc.text(drinfo.ordered_items.length,560,610,{width:35,align:'center'});
 			doc.text(drinfo.order_created_by,25,730);
