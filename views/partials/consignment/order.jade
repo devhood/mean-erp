@@ -17,7 +17,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Consignment Transaction Type
 
           .col-md-6
@@ -29,7 +29,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
@@ -64,19 +64,19 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{consignments.order_source}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{consignments.order_source}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{consignments.delivery_method}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{consignments.delivery_method}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-1
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="consignments.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
+                input.form-control(type="text", ng-model="consignments.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
         .portlet.box.grey(ng-show="consignments.customer")
@@ -90,24 +90,24 @@ block title
             .form-body
               br
               br
-              .row(ng-hide="action=='read'")
+              .row(ng-hide="action=='read' || action=='approve' || action=='reschedule'" )
                 .col-md-1
                 .col-md-10
-                  .col-md-3
-                    .form-group
+                  .col-md-4
+                    .form-group 
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="consignments.item", ng-options="product.bl_code for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="consignments.item" , ng-options="product.bl_code for product in products")
                         span.col-md-12.help-block Code
                   .col-md-4
-                    .form-group
+                    .form-group 
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         select.select2me.form-control.select2-offscreen(ng-model="consignments.item", ng-options="product.name for product in products")
-                        span.col-md-12.help-block Product
-                  .col-md-2
+                        span.col-md-12.help-block Product 
+                  .col-md-3 
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="consignments.item.quantity")
-                        span.col-md-12.help-block Quantity
+                        span.col-md-12.help-block Quantity 
                  
                   .col-md-1
                     button.btn-sm.green.custom-right(type="button",ng-click="addOrder(consignments)")
@@ -128,7 +128,7 @@ block title
                               th Quantity
                               th Unit Price
                               th Total
-                              th(width="5%")(ng-hide="action=='read'") Action
+                              th(width="5%")(ng-hide="action=='read' || action=='approve' || action=='reschedule' ") Action
                           tbody
                             tr(ng-repeat="consigned_item in consignments.consigned_item track by $index")
                               td {{consigned_item.bl_code}}
@@ -136,7 +136,7 @@ block title
                               td {{consigned_item.quantity}}
                               td {{consigned_item.price}}
                               td {{consigned_item.total}}
-                              td(width="5%")(ng-hide="action=='read'")
+                              td(width="5%")(ng-hide="action=='read'|| action=='approve'|| action=='reschedule'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
@@ -196,10 +196,12 @@ block title
       .form-actions.fluid
         .row
           .col-md-6
-            .col-md-offset-3.col-md-9
-              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+            .col-md-offset-1.col-md-11
+              button.btn.green(type="submit" ng-show="save_form.$valid && action==('approve'||'add')") Submit
               | &nbsp;
-              button.btn.blue(type="submit" ng-show="save_form.$valid && action=='edit'") For Approval
+              button.btn.yellow(type="submit" ng-show="save_form.$valid && action==('reschedule')") Reschedule
+              | &nbsp;
+              button.btn.blue(type="submit" ng-show="save_form.$valid && (action=='edit')") For Approval
               | &nbsp;
               button.btn.red(type="button", ng-click="deleteConsignments(consignments)", ng-show="action=='edit' || action=='approve'") Delete
               | &nbsp;
