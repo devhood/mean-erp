@@ -675,11 +675,13 @@ angular.module('erp')
 
             buttons = [
             {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save",filter:{key:"pmno",value:""}},
+            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit"},
             {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"},
-            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit"}
+
             ];
 
-            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code, status.payment.updated.status_code ]}};
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code, status.payment.updated.status_code, status.payment.created.status_code ]}};
             $scope.title = "PAYMENT";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1720,8 +1722,21 @@ angular.module('erp')
     };
   }
 
-  if(action == 'approve'){
+  if(action == 'create'){
+    $scope.title = "CREATE SALES PAYMENT "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      $scope.sales.status = status.payment.created;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/payment');
+        return false;
+      });
+    };
 
+  }
+  if(action == 'approve'){
     $scope.title = "APPROVE SALES PAYMENT "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
