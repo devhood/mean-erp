@@ -1041,7 +1041,7 @@ angular.module('erp')
         if(shipment_item){
           delete shipment_item.inventories;
         }
-        if(shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
+        if(shipment && shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
           if($scope.shipment.shipment_items){
             $scope.shipment.shipment_items.push(shipment_item);
           }
@@ -1687,7 +1687,7 @@ angular.module('erp')
 
     delete sales.payment_detail;
     PrintTotalPayment();
-
+//push new line
   }
 
   $scope.removePayment = function(index){
