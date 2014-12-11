@@ -1041,7 +1041,6 @@ angular.module('erp')
         if(shipment_item){
           delete shipment_item.inventories;
         }
-        console.log(shipment_item);
         if(shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
           if($scope.shipment.shipment_items){
             $scope.shipment.shipment_items.push(shipment_item);
@@ -1670,17 +1669,20 @@ angular.module('erp')
   }
 
 
-  $scope.addPayment = function(payment_detail){
-    var payment = angular.copy(payment_detail);
-    if(payment.payment_type && payment.check_number && payment.check_dep_date && payment.bank && payment.amount){
+  $scope.addPayment = function(sales){
+    var payment = angular.copy(sales.payment_detail);
+    if(payment && payment.payment_type && payment.check_number && payment.check_dep_date && payment.bank && payment.amount){
         if($scope.sales.payment_details){
           $scope.sales.payment_details.push(payment);
+          console.log(payment);
         }
         else{
           $scope.sales.payment_details = [payment];
         }
     }
+    delete sales.payment_detail;
     PrintTotalPayment();
+
   }
 
   $scope.removePayment = function(index){
@@ -1691,12 +1693,15 @@ angular.module('erp')
 
   if(action == 'read'){
     $scope.title = "VIEW SALES PAYMENT";
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id}, function(){
+      $scope.CustomerChange();
+    });
   }
 
   if(action == 'update'){
     $scope.title = "UPDATE SALES PAYMENT"+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
       PrintTotalPayment();
     });
     $scope.saveSales = function(){
