@@ -14,7 +14,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations track by inventory_locations._id", ng-disabled="action=='read'",required)
+								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Inventory Location
 					.col-md-6
 						.form-group
