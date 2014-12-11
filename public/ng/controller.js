@@ -681,7 +681,6 @@ angular.module('erp')
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code]}};
             $scope.title = "PAYMENT";
-            $scope.addUrl = "/#/sales/payment/add";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
