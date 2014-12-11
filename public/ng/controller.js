@@ -1049,6 +1049,7 @@ angular.module('erp')
             $scope.shipment.shipment_items = [shipment_item];
           }
         }
+      // delete shipment_item.product;
       }
       $scope.removeItem = function(index){
         $scope.shipment.shipment_items.splice(index, 1);
