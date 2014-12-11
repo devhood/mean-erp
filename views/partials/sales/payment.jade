@@ -400,9 +400,7 @@ block title
         .row
           .col-md-6
             .col-md-offset-3.col-md-9
-              button.btn.green(type="submit" ng-show="save_form.$valid action=='update'") Update
-              | &nbsp;
-              button.btn.green(type="submit" ng-show="save_form.$valid && action=='approve'") Submit
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
               button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='update'") Reject
               | &nbsp;
