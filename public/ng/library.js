@@ -87,32 +87,32 @@ angular.module('erp')
         override : {status_code : "ADJUSTMENT_OVERRIDE", status_name : "Adjustment for approval"},
 
       },
-    Consignment:{
-      add :{
-        created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order Created"},
-        revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
-        approved : {status_code : "CONSIGNED_ORDER_APPROVED", status_name : "Consigned-Order approved"},
-        rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
-    },
-    packing :{
-        created : {status_code : "PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
-    },
-    delivery : {
-        approved : {status_code : "DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consign DR approved"},
-        rejected : {status_code : "DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consign DR rejected"}
-      }
+    Consignments:{
+           order :{
+                 created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order Created"},
+                 revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
+                 approved : {status_code : "CONSIGNED_ORDER_APPROVED", status_name : "Consigned-Order approved"},
+                 rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
+          },
+         packing :{
+                 created : {status_code : "PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
+          },
+        delivery : {
+                 approved : {status_code : "DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consign DR approved"},
+                 rejected : {status_code : "DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consign DR rejected"}
+          }
     },
     Shipments : {
-      created  : {status_code : "SHIPMENT_CREATED", status_name : "Shipment submitted"},
-      approved : {status_code : "SHIPMENT_APPROVED", status_name : "Shipment approved"},
-      cancel : {status_code : "SHIPMENT_CANCEL", status_name : "Shipment cancelled"},
-      updated : {status_code : "SHIPMENT_UPDATED", status_name : "Shipment updated"}
+          created  : {status_code : "SHIPMENT_CREATED", status_name : "Shipment submitted"},
+          approved : {status_code : "SHIPMENT_APPROVED", status_name : "Shipment approved"},
+          cancel : {status_code : "SHIPMENT_CANCEL", status_name : "Shipment cancelled"},
+          updated : {status_code : "SHIPMENT_UPDATED", status_name : "Shipment updated"}
     },
     Purchases : {
-      created  : {status_code : "PURCHASE_CREATED", status_name : "Purchase submitted"},
-      approved : {status_code : "PURCHASE_APPROVED", status_name : "Purchase approved"},
-      cancel : {status_code : "PURCHASE_CANCEL", status_name : "Purchase cancelled"},
-      updated : {status_code : "PURCHASE_UPDATED", status_name : "Purchase updated"}
+          created  : {status_code : "PURCHASE_CREATED", status_name : "Purchase submitted"},
+          approved : {status_code : "PURCHASE_APPROVED", status_name : "Purchase approved"},
+          cancel : {status_code : "PURCHASE_CANCEL", status_name : "Purchase cancelled"},
+          updated : {status_code : "PURCHASE_UPDATED", status_name : "Purchase updated"}
     },
     Sales : {
       order : {
