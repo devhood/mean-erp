@@ -1,21 +1,10 @@
 var PDF = require('pdfkit');
-var drinfo = require('./drinfo.json');
 var fs = require("fs");
 var pdf = {
 
 		pageSetting : function(options){
 
-			// var doc = new PDFDocument({
-			// 	size: options.size || 'letter',
-			// 	layout: options.layout || 'portrait',
-			// 	margin : options.margin || {
-			// 		top:10,
-			// 		bottom:10,
-			// 		left:10,
-			// 		right:0
-			// 	},
-					var	doc = new PDF({
-			  // size: [700,600],
+			var	doc = new PDF({
 			  size: options.size || 'letter',
 			  layout: 'portrait',
 			  margins: {
@@ -24,17 +13,12 @@ var pdf = {
 			    left: 0,
 			    right: 0
 				},
-				info: options.info || {
-					Title:'SI-0000001',
-					Subject:'SI-00000001',
-					Author:'Chito Cascante'
-				}
+				info: options.info
 			});
 			return doc;
 		},
 
 		pageHeader : function(doc,drinfo){
-			/***      Start Header     ***/
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
 			doc.text(drinfo.sino,500,55);
@@ -44,8 +28,8 @@ var pdf = {
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
 			doc.fontSize(10);
-			doc.text(drinfo.customer + (drinfo.branch? " - " + drinfo.branch : ""),40,90,{width:260,indent:40});
-			doc.text(drinfo.customer + (drinfo.branch? " - " + drinfo.branch : ""),340,90,{width:260,indent:40});
+			doc.text(drinfo.company_name),40,90,{width:260,indent:40});
+			doc.text(drinfo.company_name),340,90,{width:260,indent:40});
 			doc.moveDown(0);
 			doc.font('Courier');
 			doc.fontSize(10);
@@ -64,8 +48,6 @@ var pdf = {
 			doc.text(drinfo.shipping,360,y);
 			doc.text(drinfo.se,500,y);
 			doc.text(drinfo.oreder_notes,35,y+10);
-			
-			/***      Stop Header     ***/
 
 			doc.font('Courier-Bold');
 			doc.text("CODE",10,200);
@@ -80,20 +62,19 @@ var pdf = {
 			return doc;
 		},
 		pageFooter : function(doc,drinfo){
-			/***      Start Footer     ***/
-			doc.text(drinfo.ttl_vat,130,646);/*VATable Sales*/
-			doc.text(drinfo.ttl_discount,130,658);/*Vat Exempt Sales*/
-			doc.text(drinfo.ttl_sales,130,670); /*Zero Rated Sales*/
-			doc.text(drinfo.dr_item.length,130,682);/*VAT AMOUNT*/
-			doc.text(drinfo.ttl_net,560,646);/*Total Sales Vat inclusive*/
-			doc.text(drinfo.ttl_net,560,658);/*Less Vat*/
-			doc.text(drinfo.ttl_net,560,670);/*Amount Net of VAT*/
-			doc.text(drinfo.dr_item.length,560,682,{width:50,align:'center'});/*Less CS/PWD Discount*/
-			doc.text(drinfo.dr_item.length,560,694,{width:50,align:'center'});/*Amount Due*/
-			doc.text(drinfo.dr_item.length,560,706,{width:50,align:'center'});/*Add Vat*/
+			doc.text(drinfo.ttl_vat,130,646);
+			doc.text(drinfo.ttl_discount,130,658);
+			doc.text(drinfo.ttl_sales,130,670);
+			doc.text(drinfo.dr_item.length,130,682);
+			doc.text(drinfo.ttl_net,560,646);
+			doc.text(drinfo.ttl_net,560,658);
+			doc.text(drinfo.ttl_net,560,670);
+			doc.text(drinfo.dr_item.length,560,682,{width:50,align:'center'});
+			doc.text(drinfo.dr_item.length,560,694,{width:50,align:'center'});
+			doc.text(drinfo.dr_item.length,560,706,{width:50,align:'center'});
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
-			doc.text(drinfo.dr_item.length,560,718,{width:35,align:'center'});/*Total Amount Due*/
+			doc.text(drinfo.dr_item.length,560,718,{width:35,align:'center'});
 			doc.fontSize(10);
 			doc.font('Courier');
 			doc.text(drinfo.order_created_by,25,755);
@@ -137,10 +118,5 @@ module.exports.print = function(drinfo,result){
 		}
 	}
 	doc.end();
-
+	result(null,filename);
 };
-
-module.exports.print(drinfo,function(err,result){
-	console.log(err);
-	console.log(result);
-});

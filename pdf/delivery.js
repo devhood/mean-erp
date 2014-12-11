@@ -1,5 +1,4 @@
 var PDF = require('pdfkit');
-var drinfo = require('./drinfo.json');
 var fs = require("fs");
 var pdf = {
 
