@@ -80,13 +80,20 @@ angular.module('erp')
 
       },
     Consignment:{
-        created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order submitted"},
+      add :{
+        created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order Created"},
         revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
-        override : {status_code : "CONSIGNED_ORDER_OVERRIDE", status_name : "Consigned-Order for approval"},
         approved : {status_code : "CONSIGNED_ORDER_APPROVED", status_name : "Consigned-Order approved"},
-        rejected : {status_code : "DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-DR rejected"},
         rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
-      },
+    },
+    packing :{
+        created : {status_code : "PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
+    },
+    delivery : {
+        approved : {status_code : "DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consign DR approved"},
+        rejected : {status_code : "DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consign DR rejected"}
+      }
+    },
     Shipments : {
       created  : {status_code : "SHIPMENT_CREATED", status_name : "Shipment submitted"},
       approved : {status_code : "SHIPMENT_APPROVED", status_name : "Shipment approved"},

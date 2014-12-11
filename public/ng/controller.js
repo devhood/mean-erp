@@ -1680,6 +1680,8 @@ angular.module('erp')
           $scope.sales.payment_details = [payment];
         }
     }
+    payment_detail = {};
+    payment = {};
     PrintTotalPayment();
   }
 
@@ -2111,14 +2113,14 @@ angular.module('erp')
           $scope.consignments.status = status.override;
         }
         $scope.consignments.$update(function(){
-          $location.path('/consignment/index/add');
+          $location.path('/consignment/index/');
           return false;
         });
       };
       $scope.deleteConsignments=function(consignments){
         if(popupService.showPopup('You are about to delete Record : '+consignments._id)){
           $scope.consignments.$delete(function(){
-            $location.path('/consignment/index/add');
+            $location.path('/consignment/index/');
             return false;
           });
         }

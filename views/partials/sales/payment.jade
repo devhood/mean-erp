@@ -322,27 +322,27 @@ block title
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="payment_detail.payment_type", ng-options="payment_type.name as payment_type.name for payment_type in payment_types")
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.payment_detail.payment_type", ng-options="payment_type.name as payment_type.name for payment_type in payment_types")
                         span.col-md-12.help-block Type
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="text", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="payment_detail.check_number")
+                        input.form-control(type="text", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="sales.payment_detail.check_number")
                         span.col-md-12.help-block Check No.
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="text", ng-model="payment_detail.check_dep_date",  datepicker-popup="{{format}}")
+                        input.form-control(type="text", ng-model="sales.payment_detail.check_dep_date",  datepicker-popup="{{format}}")
                         span.col-md-12.help-block Check/Dep date
                   .col-md-3
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                          input.form-control(type="text", ng-model="payment_detail.bank")
+                          input.form-control(type="text", ng-model="sales.payment_detail.bank")
                           span.col-md-12.help-block Bank
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                          input.form-control(type="number", ng-model="payment_detail.amount")
+                          input.form-control(type="number", ng-model="sales.payment_detail.amount")
                           span.col-md-12.help-block Amount
                   .col-md-1
                     button.btn-sm.green.custom-right(type="button",ng-click="addPayment(payment_detail)")
