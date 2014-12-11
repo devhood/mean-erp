@@ -101,10 +101,5 @@ module.exports.print = function(drinfo,result){
 		}
 	}
 	doc.end();
-
+	result(null,filename);
 };
-
-module.exports.print(drinfo,function(err,result){
-	console.log(err);
-	console.log(result);
-});
