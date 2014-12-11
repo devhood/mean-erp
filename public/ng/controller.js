@@ -1658,49 +1658,55 @@ angular.module('erp')
           $scope.sales.customer.billing_address.zipcode;
     }
   }
+
+  var PrintTotalPayment = function() {
+    $scope.sales.total_payment = 0;
+    console.log("chito",$scope.sales.payment_details);
+    if($scope.sales.payment_details){
+      for(var i=0;i<$scope.sales.payment_details.length; i++){
+        $scope.sales.total_payment+=$scope.sales.payment_details[i].amount;
+      }
+    }
+  }
+
+
   $scope.addPayment = function(payment_detail){
     var payment = angular.copy(payment_detail);
     if(payment.payment_type && payment.check_number && payment.check_dep_date && payment.bank && payment.amount){
-          if($scope.sales.payment){
-            $scope.sales.payment_details.push(payment);
-          }
-          else{
-            $scope.sales.payment_details = [payment];
-          }
-      }
+        if($scope.sales.payment_details){
+          $scope.sales.payment_details.push(payment);
+        }
+        else{
+          $scope.sales.payment_details = [payment];
+        }
+    }
+    PrintTotalPayment();
   }
+
   $scope.removePayment = function(index){
-    $scope.sales.ordered_items.splice(index, 1);
+    $scope.sales.payment_details.splice(index, 1);
+    PrintTotalPayment();
   }
+
 
   if(action == 'read'){
     $scope.title = "VIEW SALES PAYMENT";
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
   }
-  if(action == 'add'){
-    $scope.title = "ADD SALES PAYMENT";
-    var Sales = Api.Collection('sales');
-    $scope.sales = new Sales();
-
-    $scope.saveSales = function(){
-        $scope.sales.status = status.payment.created;
-
-      $scope.sales.$save(function(){
-        $location.path('/sales/index/payment');
-        return false;
-      });
-    }
-  }
 
   if(action == 'update'){
     $scope.title = "UPDATE SALES PAYMENT"+ id;
-    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      PrintTotalPayment();
+    });
     $scope.saveSales = function(){
+      $scope.sales.status = status.payment.confirmed;
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
       });
     };
+
     $scope.rejectSales = function(){
       $scope.sales.status = status.payment.rejected;
       $scope.sales.$update(function(){

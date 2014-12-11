@@ -189,7 +189,6 @@ block title
                               th Quantity
                               th Unit Price
                               th Total
-                              th(width="5%") Action
                           tbody
                             tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
                               td {{ordered_item.bl_code}}
@@ -197,12 +196,8 @@ block title
                               td {{ordered_item.quantity}}
                               td {{ordered_item.price}}
                               td {{ordered_item.total}}
-                              td(width="5%")
-                                .btn-group.btn-group-xs.btn-group-solid
-                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
-                                    i.fa.fa-trash-o
                 .col-md-1
-        .portlet.box.grey(ng-show="sales.customer")
+        .portlet.box.grey(ng-show="sales.returned_items")
           .portlet-title
             .caption
               i.fa.fa-reorder
@@ -250,7 +245,6 @@ block title
                               th Return Quantity
                               th Unit Price
                               th Total
-                              th(width="5%", ng-hide="action!='create'") Action
                           tbody
                             tr(ng-repeat="returned_item in sales.returned_items track by $index")
                               td {{returned_item.bl_code}}
@@ -258,11 +252,59 @@ block title
                               td {{returned_item.quantity}}
                               td {{returned_item.price}}
                               td {{returned_item.total}}
-                              td(width="5%", ng-hide="action!='create'")
-                                .btn-group.btn-group-xs.btn-group-solid
-                                  a.tooltips.btn.default.tooltips(ng-click="removeReturn($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
-                                    i.fa.fa-trash-o
                 .col-md-1
+       .row
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+               input.form-control(type="text", ng-model="sales.discount", readonly, style="text-align: right;")
+               span.col-md-12.help-block Discount
+       .row
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+               input.form-control(type="text", ng-model="sales.total_vat", readonly, style="text-align: right;")
+               span.col-md-12.help-block VATable Sales
+       .row
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+               input.form-control(type="checkbox", ng-model="sales.isWithholdingTax",ng-checked="reCompute(sales)", value="1", ng-disabled="true", style="text-align: right;")
+             .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+               input.form-control(type="text", ng-model="sales.withholding_tax", readonly, style="text-align: right;")
+               span.col-md-12.help-block W/Holding Tax
+             .col-md-2
+
+       .row
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+               input.form-control(type="checkbox", ng-model="sales.isZeroRateSales",ng-checked="reCompute(sales)", value="1", ng-disabled="true")
+             .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+               input.form-control(type="text", ng-model="sales.zero_rate_sales", readonly, style="text-align: right;")
+               span.col-md-12.help-block VAT Exempt/ Zero Rated Sales
+             .col-md-2
+       .row
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+         .col-md-6
+           .form-group
+             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+               input.form-control(type="text", ng-model="sales.total_amount_due", readonly, style="text-align: right;")
+               span.col-md-12.help-block TOTAL AMOUNT DUE
         .portlet.box.grey(ng-show="sales.customer")
           .portlet-title
             .caption
@@ -274,7 +316,7 @@ block title
             .form-body
               br
               br
-              .row(ng-show="action=='add' || action=='update'")
+              .row(ng-show="action=='update'")
                 .col-md-1
                 .col-md-10
                   .col-md-2
@@ -328,64 +370,32 @@ block title
                               td {{payment_detail.check_number}}
                               td {{payment_detail.check_dep_date | date}}
                               td {{payment_detail.bank}}
-                              td {{payment_detail.amount}}
+                              td(style="text-align: right;") {{payment_detail.amount}}
                               td(width="5%", ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removePayment($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
                 .col-md-1
+            .row
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                    input.form-control(type="text", ng-model="sales.total_payment", readonly, style="text-align: right;")
+                    span.col-md-12.help-block  Total Payment
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.orno")
+                span.col-md-12.help-block OR Number
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.discount", readonly)
-                span.col-md-12.help-block Discount
-        .row
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.total_vat", readonly)
-                span.col-md-12.help-block VATable Sales
-        .row
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
-                input.form-control(type="checkbox", ng-model="sales.isWithholdingTax",ng-checked="reCompute(sales)", value="1", ng-disabled="true")
-              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
-                input.form-control(type="text", ng-model="sales.withholding_tax", readonly)
-                span.col-md-12.help-block W/Holding Tax
-              .col-md-2
-
-        .row
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
-                input.form-control(type="checkbox", ng-model="sales.isZeroRateSales",ng-checked="reCompute(sales)", value="1", ng-disabled="true")
-              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
-                input.form-control(type="text", ng-model="sales.zero_rate_sales", readonly)
-                span.col-md-12.help-block VAT Exempt/ Zero Rated Sales
-              .col-md-2
-        .row
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.total_amount_due",readonly)
-                span.col-md-12.help-block TOTAL AMOUNT DUE
+                input.form-control(type="text", ng-model="sales.prno")
+                span.col-md-12.help-block  PR Number
       .form-actions.fluid
         .row
           .col-md-6
