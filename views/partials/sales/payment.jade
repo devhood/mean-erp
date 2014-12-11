@@ -65,7 +65,7 @@ block title
                 select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="sales.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{sales.customer.company_name}}" ,tabindex="-1", required, ng-disabled="sales.ordered_items && sales.ordered_items.length")
                 span.col-md-12.help-block Customer
           .col-md-1
-        .row(ng-show="sales.customer")
+        .row
           .col-md-1
           .col-md-10
             .form-group
@@ -73,7 +73,7 @@ block title
                 input.form-control(type="text", ng-value="shipping_address", disabled)
                 span.col-md-12.help-block Shipping Address
           .col-md-1
-        .row(ng-show="sales.customer")
+        .row
           .col-md-1
           .col-md-10
             .form-group
@@ -345,7 +345,7 @@ block title
                           input.form-control(type="number", ng-model="sales.payment_detail.amount")
                           span.col-md-12.help-block Amount
                   .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addPayment(payment_detail)")
+                    button.btn-sm.green.custom-right(type="button",ng-click="addPayment(sales)")
                       i.fa.fa-plus
                 .col-md-1
               .form-group
