@@ -39,9 +39,17 @@ angular.module('erp')
         if(buttons.length){
           dtcolumns.push(DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
           .renderWith(function(data, type, full, meta) {
-            var btnGroup = '<div class="btn-group btn-group-xs btn-group-solid style="min-width:100px;">';
+            var btnGroup = '<div class="btn-group btn-group-xs btn-group-solid style="min-width:150px;">';
             for(var i in buttons){
-              btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
+              if(buttons[i].filter){
+                if(!data[buttons[i].filter.key]){
+                  btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
+                }
+              }
+              else{
+                btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
+              }
+
             }
             btnGroup+='</div>';
             return btnGroup;
@@ -140,7 +148,7 @@ angular.module('erp')
         rejected : {status_code : "MEMO_REJECTED", status_name : "Accounting-Credit Memo Rejected"}
       },
       payment : {
-        created : {status_code : "PAYMENT_CREATED", status_name : "Accounting-Payment received"},
+        created : {status_code : "PAYMENT_CREATED", status_name : "Accounting-Payment created"},
         updated : {status_code : "PAYMENT_UPDATED", status_name : "Accounting-Payment updated"},
         rejected : {status_code : "PAYMENT_REJECTED", status_name : "Accounting-Payment rejected"},
         confirmed : {status_code : "PAYMENT_CONFIRMED", status_name : "TRANSACTION COMPLETE"}
