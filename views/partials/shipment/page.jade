@@ -56,30 +56,30 @@ block title
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product", ng-options="product.bl_code for product in products")
+																select.select2me.form-control.select2-offscreen(ng-model="shipment.item", ng-options="product.bl_code for product in products")
 																span.col-md-12.help-block Code
 													.col-md-3
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product", ng-options="product.name for product in products")
+																select.select2me.form-control.select2-offscreen(ng-model="shipment.item", ng-options="product.name for product in products")
 																span.col-md-12.help-block	Product
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="shipment_item.product.quantity")
+																input.form-control(type="text", ng-model="shipment.item.quantity")
 																span.col-md-12.help-block	Quantity
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="shipment_item.product.cost")
+																input.form-control(type="text", ng-model="shipment.item.cost")
 																span.col-md-12.help-block	Cost
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="shipment_item.product.condition", ng-options="condition.name as condition.name for condition in conditions", ng-selected="{{shipment_item.product.condition}}")
+																select.select2me.form-control.select2-offscreen(ng-model="shipment.item.condition", ng-options="condition.name as condition.name for condition in conditions", ng-selected="{{shipment_item.product.condition}}")
 																span.col-md-12.help-block	Condition
 													.col-md-1
-														button.btn-sm.green.custom-right(type="button",ng-click="addItem(shipment_item.product)")
+														button.btn-sm.green.custom-right(type="button",ng-click="addItem(shipment)")
 															i.fa.fa-plus
 											.form-group
 												.col-md-1

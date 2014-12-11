@@ -679,7 +679,7 @@ angular.module('erp')
             {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit"}
             ];
 
-            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code]}};
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code, status.payment.updated.status_code ]}};
             $scope.title = "PAYMENT";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1036,12 +1036,12 @@ angular.module('erp')
         };
       }
 
-      $scope.addItem = function(item){
-        var shipment_item = angular.copy(item);
+      $scope.addItem = function(shipment){
+        var shipment_item = angular.copy(shipment.item);
         if(shipment_item){
           delete shipment_item.inventories;
         }
-        if(shipment && shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
+        if(shipment_item && shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
           if($scope.shipment.shipment_items){
             $scope.shipment.shipment_items.push(shipment_item);
           }
@@ -1049,7 +1049,7 @@ angular.module('erp')
             $scope.shipment.shipment_items = [shipment_item];
           }
         }
-      // delete shipment_item.product;
+       delete shipment.item ;
       }
       $scope.removeItem = function(index){
         $scope.shipment.shipment_items.splice(index, 1);
@@ -1661,7 +1661,6 @@ angular.module('erp')
 
   var PrintTotalPayment = function() {
     $scope.sales.total_payment = 0;
-    console.log("chito",$scope.sales.payment_details);
     if($scope.sales.payment_details){
       for(var i=0;i<$scope.sales.payment_details.length; i++){
         $scope.sales.total_payment+=$scope.sales.payment_details[i].amount;
@@ -1687,7 +1686,6 @@ angular.module('erp')
 
     delete sales.payment_detail;
     PrintTotalPayment();
-//push new line
   }
 
   $scope.removePayment = function(index){
@@ -1710,7 +1708,7 @@ angular.module('erp')
       PrintTotalPayment();
     });
     $scope.saveSales = function(){
-      $scope.sales.status = status.payment.confirmed;
+      $scope.sales.status = status.payment.updated;
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
