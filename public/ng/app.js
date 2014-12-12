@@ -144,6 +144,16 @@ angular.module('erp', [
         templateUrl: '/partials/consignment/order',
         controller: 'ConsignOrderCtrl'
       })
+      .when('/consignment/delivery/:action', {
+        templateUrl: '/partials/consignment/delivery',
+        controller: 'ConsignDeliveryCtrl'
+      })
+
+      .when('/consignment/delivery/:action/:id', {
+        templateUrl: '/partials/consignment/delivery',
+        controller: 'ConsignDeliveryCtrl'
+      })
+
       .when('/shipment/index/:type', {
         templateUrl: '/partials/shipment/index',
         controller: 'ShipmentCtrl'

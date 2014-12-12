@@ -1440,7 +1440,7 @@ angular.module('erp')
             var query1 = {
               "inventory_location":$scope.packing.inventory_location,
               "statusConsignments.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
-              "consignment_transaction_type" : $scope.consignments.consigment_transaction_type,
+              "consignment_transaction_typex" : $scope.consignments.consigment_transaction_type,
             }
             Api.Collection('consignments',query1).query().$promise.then(function(data){
               for(var i in data){
@@ -2010,7 +2010,6 @@ angular.module('erp')
   $scope.ajax_ready = false;
   Structure.Consignments.query().$promise.then(function(data){
     $scope.structure = data[0];
-    console.log(data[0]);
     $scope.ajax_ready = true;
     var status = Library.Status.Consignments;
     var columns = [];
@@ -2305,6 +2304,69 @@ angular.module('erp')
     }
       };
  
+})
+.controller('ConsignDeliveryCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_types').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Consignments;
+
+  $scope.CustomerChange = function(){
+    if($scope.consignments.customer){
+      $scope.shipping_address =
+      $scope.consignments.customer.shipping_address.landmark + ', ' +
+      $scope.consignments.customer.shipping_address.barangay + ', ' +
+      $scope.consignments.customer.shipping_address.city + ', ' +
+      $scope.consignments.customer.shipping_address.province + ', ' +
+      $scope.consignments.customer.shipping_address.country + ', ' +
+      $scope.consignments.customer.shipping_address.zipcode;
+
+      $scope.billing_address =
+      $scope.consignments.customer.billing_address.landmark + ', ' +
+      $scope.consignments.customer.billing_address.barangay + ', ' +
+      $scope.consignments.customer.billing_address.city + ', ' +
+      $scope.consignments.customer.billing_address.province + ', ' +
+      $scope.consignments.customer.billing_address.country + ', ' +
+      $scope.consignments.customer.billing_address.zipcode;
+    }
+  }
+  if(action == 'read'){
+    $scope.title = "VIEW CONSIGNMENT DELIVERY RECEIPT";
+    $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+  if(action == 'approve'){
+
+    $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
+    $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveConsignments = function(){
+      $scope.consignments.status = status.delivery.approved;
+      $scope.consignments.$update(function(){
+        $location.path('/consignment/index/delivery');
+        return false;
+      });
+    };
+    $scope.rejectConsignments = function(){
+      $scope.consignments.status = status.delivery.rejected;
+      $scope.consignments.$update(function(){
+        $location.path('/consignment/index/delivery');
+        return false;
+      });
+    };
+  }
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
