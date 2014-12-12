@@ -14,23 +14,23 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="trip.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="packing.prepared_by", ng-disabled="action=='read'",required)
-                span.col-md-12.help-block Prepared By
+                input.form-control(type="text", ng-model="tripticket.trpno", readonly)
+                span.col-md-12.help-block Trip Ticket Number
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
-                span.col-md-12.help-block Inventory Location
+                input.form-control(type="text", ng-model="trip.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block Delivery Date
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="packing.prepared_by", ng-disabled="action=='read'",required)
+                input.form-control(type="text", ng-model="trip.prepared_by", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Prepared By
         .portlet.box.grey
           .portlet-title
@@ -51,21 +51,22 @@ block title
                         table.table.table-bordered.table-condensed.flip-content
                           thead.flip-content.bg-grey
                             tr
-                              td SO Number
-                              td PF Number
+                              th DR Number
                               th Customer
-                              th Brand
-                              th Product
-                              th Quantity
+                              th Shipping Address
+                              th Arrival
+                              th Departure
+                              th Received By
+                              th Status
                               th(width="5%", ng-hide="action=='read'") Action
                           tbody
-                            tr(ng-repeat="item in packing.list")
-                              td {{item.sono}}
-                              td {{item.pfno}}
+                            tr(ng-repeat="item in trip.list")
+                              td {{item.drno}}
                               td {{item.customer}}
-                              td {{item.brand}}
-                              td {{item.product}}
-                              td {{item.quantity}}
+                              td {{item.shipping_address}}
+                              td {{item.arrival_date}}
+                              td {{item.departure_date}}
+                              td {{item.received_by}}
                               td(width="5%", ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
@@ -77,7 +78,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="deletePacking(packing)", ng-show="action=='edit' || action=='approve'") Delete
+              button.btn.red(type="button", ng-click="deleteTrip(packing)", ng-show="action=='edit' || action=='approve'") Delete
               | &nbsp;
-              a.btn.default(type="button", href="/#/packing/index") Cancel
+              a.btn.default(type="button", href="/#/tri/index") Cancel
           .col-md-6

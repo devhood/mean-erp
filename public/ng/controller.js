@@ -1542,9 +1542,7 @@ angular.module('erp')
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/trips");
     };
-    console.log("chito");
   $scope.formInit = function(){
-    console.log("chito");
     var id = $routeParams.id;
     var action = $routeParams.action;
     var statusSales = Library.Status.Sales;
@@ -1561,7 +1559,6 @@ angular.module('erp')
     };
 
     $scope.action = action;
-    console.log("chito",action);
     if(id && action == 'read'){
       $scope.title = "VIEW TRIP TICKET " + id;
       $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
@@ -1570,6 +1567,7 @@ angular.module('erp')
     if(id && action == 'edit'){
       $scope.title = "EDIT TRIP TICKET " + id;
       $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
+
       $scope.deleteTrip=function(trip){
         if(popupService.showPopup('You are about to delete Record : '+trip._id)){
           $scope.trip.$delete(function(){
