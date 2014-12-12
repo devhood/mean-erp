@@ -99,8 +99,8 @@ angular.module('erp')
                  created : {status_code : "PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
           },
         delivery : {
-                 approved : {status_code : "DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consign DR approved"},
-                 rejected : {status_code : "DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consign DR rejected"}
+                 approved : {status_code : "CONSIGN_DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consign DR approved"},
+                 rejected : {status_code : "CONSIGN_DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consign DR rejected"}
           }
     },
     Shipments : {

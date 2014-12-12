@@ -4,7 +4,7 @@ angular.module('erp')
 .controller('MainCtrl', function ($scope, $location, Reference, Session) {
   $scope.menus = Reference.Menu.query();
   Session.get(function(client){
-    $scope.client = client;
+    $scope.client = client; 
   });
 })
 .controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
@@ -2135,7 +2135,6 @@ angular.module('erp')
                 status.order.created.status_code,
                 status.delivery.rejected.status_code,
                 status.order.rescheduled.status_code,
-                status.packing.created.status_code,
                 status.order.update.status_code,
                 ]}};
             $scope.title = "CONSIGNMENT ORDERS"
@@ -2168,29 +2167,28 @@ angular.module('erp')
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
-
         break;
         case "delivery" :
-
-          columns = [
-              $scope.structure.cdrno,$scope.structure.cpckno,$scope.structure.cono,$scope.structure.consignment_transaction_type,
+            columns = [
+              $scope.structure.cono,$scope.structure.consignment_transaction_type,
               $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
-          ];
-
-          buttons = [
+            ];
+            buttons = [
             {url:"/#/consignment/delivery/read/",title:"View Record",icon:"fa fa-folder-open"},
             {url:"/#/consignment/delivery/approve/",title:"Approve Record",icon:"fa fa-gear"}
-          ];
+            ];
+            query = { "status.status_code" : {"$in" : [
+              status.packing.created.status_code,
+                ]}};
+            $scope.title = "CONSIGNMENT ORDERS FOR APPROVAL"
+            $scope.addUrl = "/#/consignment/delivery/add";
 
-          query = { "status.status_code" : {"$in" : [status.packing.created.status_code]}};
-          $scope.title = "DELIVERY RECEIPTS";
-
-          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-          $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
-
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
+  
           var columns1 = [
-          $scope.structure.cdrno,$scope.structure.cpckno,$scope.structure.cono,$scope.structure.consignment_transaction_type,
-          $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
+          $scope.structure.cdrno,$scope.structure.cono,$scope.structure.consignment_transaction_type,
+          $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name,
           ];
 
           var buttons1 = [
@@ -2198,11 +2196,11 @@ angular.module('erp')
           ];
 
           query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code]}};
-          $scope.title1 = "APPROVED DELIVERY RECEIPTS";
+          $scope.title1 = "APPROVED CONSIGNMENT DELIVERY RECEIPTS";
 
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
-
+       
         break;
         }
     };
