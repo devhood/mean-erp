@@ -819,7 +819,6 @@ angular.module('erp')
       if($scope.sales.isNeedApproval){
 
         $scope.sales.status = status.order.override;
-        console.log($scope.sales);
       }
       else{
         $scope.sales.status = status.order.created;
@@ -960,7 +959,6 @@ angular.module('erp')
 
 
     $scope.formInit = function(){
-      console.log("form init passed");
       var id = $routeParams.id;
       var action = $routeParams.action;
       $scope.suppliers = Api.Collection('suppliers').query();
@@ -987,14 +985,12 @@ angular.module('erp')
 
 
       if(action == 'read'){
-        console.log("reading");
         $scope.title = "VIEW SHIPMENT " + id;
         $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
         });
       }
 
       if (action == 'edit') {
-        console.log("editing");
         $scope.title = "EDIT SHIPMENT" + id;
         $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
         });
@@ -1083,7 +1079,6 @@ angular.module('erp')
       ];
 
       var status = Library.Status.Purchases;
-      console.log(status);
       query = { "status.status_code" : {"$in" : [status.created.status_code, status.updated.status_code]}};
 
       $scope.title = "PURCHASE"
@@ -1094,7 +1089,6 @@ angular.module('erp')
 
 
     $scope.formInit = function(){
-      console.log("form init passed");
       var id = $routeParams.id;
       var action = $routeParams.action;
       $scope.suppliers = Api.Collection('suppliers').query();
@@ -1121,14 +1115,12 @@ angular.module('erp')
 
 
       if(action == 'read'){
-        console.log("reading");
         $scope.title = "VIEW PURCHASE " + id;
         $scope.purchase =  Api.Collection('purchases').get({id:$routeParams.id},function(){
         });
       }
 
       if (action == 'edit') {
-        console.log("editing");
         $scope.title = "EDIT PURCHASE" + id;
         $scope.purchase =  Api.Collection('purchases').get({id:$routeParams.id},function(){
         });
@@ -1228,7 +1220,6 @@ angular.module('erp')
     }
   }
   $scope.addOrder = function(sales){
-    console.log("passed addOrder");
     var item = angular.copy(sales.item);
     if( item && item.name && item.quantity && item.quantity ){
       item.override = item.override ? item.override : "NORMAL";
@@ -1268,7 +1259,6 @@ angular.module('erp')
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
      );
-     console.log("passed add Computation");
      $scope.sales.discount = computation.totalDiscount;
      $scope.sales.total_vat = computation.vatableSales;
      $scope.sales.total_amount_due = computation.totalAmountDue;
@@ -1277,7 +1267,6 @@ angular.module('erp')
   }
 
   $scope.reCompute = function(sales){
-    console.log("passed re Compute");
     if($scope.sales.customer){
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
@@ -1293,7 +1282,6 @@ angular.module('erp')
     }
   }
   $scope.removeOrder = function(index){
-    console.log("passed remove Order");
     $scope.sales.ordered_items.splice(index, 1);
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
@@ -1305,14 +1293,12 @@ angular.module('erp')
     }
   }
   if(action == 'read'){
-    console.log("passed proforma read");
     $scope.title = "VIEW PROFORMA INVOICE";
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
   }
   if(action == 'add'){
-    console.log("passed proforma invoice");
     $scope.title = "ADD PROFORMA INVOICE";
     var Sales = Api.Collection('sales');
     $scope.sales = new Sales();
@@ -1321,7 +1307,6 @@ angular.module('erp')
       if($scope.sales.isNeedApproval){
 
         $scope.sales.status = status.proforma.override;
-        console.log($scope.sales);
       }
       else{
         $scope.sales.status = status.proforma.created;
@@ -1478,7 +1463,6 @@ angular.module('erp')
         };
       }
       if(action == 'add'){
-        console.log("add action");
         $scope.title = "ADD PACKING";
         var Packing = Api.Collection('packing');
         $scope.packing = new Packing();
@@ -1559,7 +1543,6 @@ angular.module('erp')
     var statusConsignments = Library.Status.Consignments;
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.ListChange = function(){
-      console.log("listChange");
         $scope.trip.list = [];
         if($scope.trip.inventory_location){
           var query = {
@@ -1605,8 +1588,6 @@ angular.module('erp')
 
       $scope.saveTrip = function(){
         async.each($scope.trip.list, function( item, callback) {
-        console.log("IN async");
-        console.log("chito",item);
             Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
               if(item.status == "delivered"){
                 sales.status = statusSales.tripticket.delivered;
@@ -1616,8 +1597,6 @@ angular.module('erp')
                 sales.status = statusSales.tripticket.failed;
                 $scope.trip.status = statusSales.tripticket.failed;
               }
-      console.log(sales.status);
-      console.log($scope.trip.status);
 
               sales.trpno =  $scope.trip.trpno;
               sales.$update(function(){
@@ -1649,7 +1628,6 @@ angular.module('erp')
     }
 
     if(action == 'add'){
-      console.log("add action");
       $scope.title = "ADD TRIP TICKET";
       var Trip = Api.Collection('trips');
       $scope.trip = new Trip();
@@ -1860,7 +1838,6 @@ angular.module('erp')
     if(payment && payment.payment_type && payment.check_number && payment.check_dep_date && payment.bank && payment.amount){
         if($scope.sales.payment_details){
           $scope.sales.payment_details.push(payment);
-          console.log(payment);
         }
         else{
           $scope.sales.payment_details = [payment];
@@ -2189,9 +2166,6 @@ angular.module('erp')
               {url:"/#/consignment/order/read/",title:"View Record",icon:"fa fa-folder-open"},
               {url:"/#/consignment/order/approve/",title:"Approve Record",icon:"fa fa-gear"}
             ];
-            console.log("chito",status.order.created.status_code);
-                        console.log("chito",status.order.rescheduled.status_code);
-                        console.log("chito",status.order.update.status_code);
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
                 status.order.rescheduled.status_code,
@@ -2321,7 +2295,6 @@ angular.module('erp')
     }
 
     $scope.reCompute = function(consignments){
-     // console.log($scope.consignments.customer);
       if($scope.consignments.customer){
         var computation = Library.Compute.Order(
           $scope.consignments.subtotal,
@@ -2588,7 +2561,6 @@ angular.module('erp')
         if($scope.adjustments.isNeedApproval){
 
           $scope.adjustments.status = status.override;
-          console.log($scope.adjustments);
         }
         else{
           $scope.adjustments.status = status.created;
