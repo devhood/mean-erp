@@ -1440,7 +1440,7 @@ angular.module('erp')
             var query1 = {
               "inventory_location":$scope.packing.inventory_location,
               "statusConsignments.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
-              "consignment_transaction_typex" : $scope.consignments.consigment_transaction_type,
+              "consignment_transaction_type" : $scope.consignments.consigment_transaction_type,
             }
             Api.Collection('consignments',query1).query().$promise.then(function(data){
               for(var i in data){
@@ -2282,18 +2282,20 @@ angular.module('erp')
     }
     
     if(id && action == 'approve'){
-      console.log('approved');
+      console.log('approved frank');
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
+      
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
+      $scope.consignments.status = status.order.approved;
       $scope.saveConsignments = function(){
         $scope.consignments.$update(function(){
           $location.path('/consignment/index/order');
           return false;
         });
       };
-      $scope.consignments.status = status.order.approved;
+      
       $scope.deleteConsignments=function(consignments){
         if(popupService.showPopup('You are about to delete Record : '+consignments._id)){
           $scope.consignments.$delete(function(){
