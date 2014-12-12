@@ -203,7 +203,7 @@ block title
               | &nbsp;
               button.btn.blue(type="submit" ng-show="save_form.$valid && (action=='edit')") For Approval
               | &nbsp;
-              button.btn.red(type="button", ng-click="deleteConsignments(consignments)", ng-show="action=='edit' || action=='approve'") Delete
+              button.btn.red(type="button", ng-click="rejectConsignments(consignments)", ng-show="action=='edit'") Reject
               | &nbsp;
               a.btn.default(type="button", href="/#/consignment/index") Cancel
           .col-md-6

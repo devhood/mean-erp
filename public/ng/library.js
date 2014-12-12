@@ -92,7 +92,7 @@ angular.module('erp')
                  created : {status_code : "CONSIGNED_ORDER_CREATED", status_name : "Consigned-Order Created"},
                  revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
                  approved : {status_code : "CONSIGNED_ORDER_APPROVED", status_name : "Consigned-Order approved"},
-                 update : {status_code : "CONSIGNED_ORDER_APPROVED", status_name : "Consigned-Order for approval"},
+                 update : {status_code : "CONSIGNED_ORDER_UPDATED", status_name : "Consigned-Order for approval"},
                  rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
           },
          packing :{
