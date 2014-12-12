@@ -24,7 +24,7 @@
       {
         "title": "Consignment",
         "description": "Create Consignment",
-        "href": "/#/consignment/index"
+        "href": "/#/consignment/index/order"
       }
     ]
   },
@@ -44,6 +44,11 @@
         "title": "Delivery Receipts",
         "description": "Prepare and Approve Items for Delivery",
         "href": "/#/sales/index/delivery"
+      },
+      {
+        "title": "Consignment Delivery Receipts",
+        "description": "Prepare and Approve Items for Delivery",
+        "href": "/#/consignment/index/delivery"
       },
       {
         "title": "Trip Ticket",
@@ -132,6 +137,11 @@
         "title": "Approve Sales Order",
         "description": "Create Sales Order",
         "href": "/#/sales/index/override"
+      },
+      {
+        "title": "Approve Consigned Order",
+        "description": "Create Sales Order",
+        "href": "/#/consignment/index/capprove"
       }
     ]
   }

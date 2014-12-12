@@ -132,17 +132,17 @@ angular.module('erp', [
         templateUrl: '/partials/sales/payment',
         controller: 'SalesPaymentCtrl'
       })
-      .when('/consignment/index', {
+      .when('/consignment/index/:type', {
         templateUrl: '/partials/consignment/index',
-        controller: 'ConsignmentCtrl'
+        controller: 'ConsignCtrl'
       })
-      .when('/consignment/:action', {
-        templateUrl: '/partials/consignment/add',
-        controller: 'ConsignmentCtrl'
+      .when('/consignment/order/:action', {
+        templateUrl: '/partials/consignment/order',
+        controller: 'ConsignOrderCtrl'
       })
-      .when('/consignment/:action/:id', {
-        templateUrl: '/partials/consignment/add',
-        controller: 'ConsignmentCtrl'
+      .when('/consignment/order/:action/:id', {
+        templateUrl: '/partials/consignment/order',
+        controller: 'ConsignOrderCtrl'
       })
       .when('/shipment/index/:type', {
         templateUrl: '/partials/shipment/index',
@@ -167,18 +167,6 @@ angular.module('erp', [
       .when('/purchase/:action/:id', {
         templateUrl: '/partials/purchase/page',
         controller: 'PurchaseCtrl'
-      })
-      .when('/consignment/index', {
-        templateUrl: '/partials/consignment/index',
-        controller: 'ConsignmentCtrl'
-      })
-      .when('/consignment/:action', {
-        templateUrl: '/partials/consignment/add',
-        controller: 'ConsignmentCtrl'
-      })
-      .when('/consignment/:action/:id', {
-        templateUrl: '/partials/consignment/add',
-        controller: 'ConsignmentCtrl'
       })
       .when('/adjustment/index', {
         templateUrl: '/partials/adjustment/index',

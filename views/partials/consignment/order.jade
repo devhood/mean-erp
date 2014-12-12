@@ -1,0 +1,209 @@
+block title
+  title consignments ORDER
+.portlet.box.grey
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+      a.config(href="#portlet-config", data-toggle="modal")
+      a.reload(href="javascript:;")
+      a.remove(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveConsignments()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                span.col-md-12.help-block Consignment Transaction Type
+
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="consignments.cono", readonly)
+                span.col-md-12.help-block CO Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                span.col-md-12.help-block Inventory Location
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="consignments.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block Delivery Date
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="consignments.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{consignments.customer.company_name}}" ,tabindex="-1", required, ng-disabled="consignments.consigned_item && consignments.consigned_item.length")
+                span.col-md-12.help-block Customer
+          .col-md-1
+        .row(ng-show="consignments.customer")
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-value="shipping_address", disabled)
+                span.col-md-12.help-block Shipping Address
+          .col-md-1
+        .row(ng-show="consignments.customer")
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-value="billing_address", disabled)
+                span.col-md-12.help-block Billing Address
+          .col-md-1
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{consignments.order_source}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                span.col-md-12.help-block Order Source
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{consignments.delivery_method}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                span.col-md-12.help-block Delivery Method
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-model="consignments.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                span.col-md-12.help-block Special Instructions
+          .col-md-1
+        .portlet.box.grey(ng-show="consignments.customer")
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ORDERED ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row(ng-hide="action=='read' || action=='approve' || action=='reschedule'" )
+                .col-md-1
+                .col-md-10
+                  .col-md-4
+                    .form-group 
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="consignments.item" , ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-4
+                    .form-group 
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="consignments.item", ng-options="product.name for product in products")
+                        span.col-md-12.help-block Product 
+                  .col-md-3 
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="consignments.item.quantity")
+                        span.col-md-12.help-block Quantity 
+                 
+                  .col-md-1
+                    button.btn-sm.green.custom-right(type="button",ng-click="addOrder(consignments)")
+                      i.fa.fa-plus
+                .col-md-1
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Quantity
+                              th Unit Price
+                              th Total
+                              th(width="5%")(ng-hide="action=='read' || action=='approve' || action=='reschedule' ") Action
+                          tbody
+                            tr(ng-repeat="consigned_item in consignments.consigned_item track by $index")
+                              td {{consigned_item.bl_code}}
+                              td {{consigned_item.name}}
+                              td {{consigned_item.quantity}}
+                              td {{consigned_item.price}}
+                              td {{consigned_item.total}}
+                              td(width="5%")(ng-hide="action=='read'|| action=='approve'|| action=='reschedule'")
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                    i.fa.fa-trash-o
+                .col-md-1
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="consignments.discount", readonly)
+                span.col-md-12.help-block Discount
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="consignments.total_vat", readonly)
+                span.col-md-12.help-block VATable consignments
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                input.form-control(type="checkbox", ng-model="consignments.isWithholdingTax",ng-checked="reCompute(consignment)", value="1", ng-disabled="action=='read'")
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                input.form-control(type="text", ng-model="consignments.withholding_tax", readonly)
+                span.col-md-12.help-block W/Holding Tax
+              .col-md-2
+
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                input.form-control(type="checkbox", ng-model="consignments.isZeroRateconsignments",ng-checked="reCompute(consignments)", value="1", ng-disabled="action=='read'")
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                input.form-control(type="text", ng-model="consignments.zero_rate_consignments", readonly)
+                span.col-md-12.help-block VAT Exempt/ Zero Rated consignments
+              .col-md-2
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="consignments.total_amount_due",readonly)
+                span.col-md-12.help-block TOTAL AMOUNT DUE
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-1.col-md-11
+              button.btn.green(type="submit" ng-show="save_form.$valid && action==('approve'||'add')") Submit
+              | &nbsp;
+              button.btn.yellow(type="submit" ng-show="save_form.$valid && action==('reschedule')") Reschedule
+              | &nbsp;
+              button.btn.blue(type="submit" ng-show="save_form.$valid && (action=='edit')") For Approval
+              | &nbsp;
+              button.btn.red(type="button", ng-click="deleteConsignments(consignments)", ng-show="action=='edit' || action=='approve'") Delete
+              | &nbsp;
+              a.btn.default(type="button", href="/#/consignment/index") Cancel
+          .col-md-6

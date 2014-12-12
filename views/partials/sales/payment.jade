@@ -363,7 +363,7 @@ block title
                               th Check/Dep date
                               th Bank
                               th Amount
-                              th(width="5%", ng-hide="action=='read'") Action
+                              th(width="5%", ng-hide=("action=='read'")) Action
                           tbody
                             tr(ng-repeat="payment_detail in sales.payment_details track by $index")
                               td {{payment_detail.payment_type}}
@@ -371,7 +371,7 @@ block title
                               td {{payment_detail.check_dep_date | date}}
                               td {{payment_detail.bank}}
                               td(style="text-align: right;") {{payment_detail.amount}}
-                              td(width="5%", ng-hide="action=='read'")
+                              td(width="5%", ng-hide=("action=='read'"))
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removePayment($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
