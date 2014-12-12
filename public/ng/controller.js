@@ -1444,12 +1444,6 @@ angular.module('erp')
             }
             Api.Collection('consignments',query1).query().$promise.then(function(data){
               for(var i in data){
-<<<<<<< HEAD
-                if (cosingments.consignment_transaction_type == 1) {
-
-
-=======
->>>>>>> 2d81877176f8ea3c7b6a3001de824d09a5994028
                 for(var j in data[i].consigned_item){
                   var item = {
                     id : data[i]._id,
@@ -2362,10 +2356,8 @@ angular.module('erp')
           });
         }
     }
-      };
+  };
 
-<<<<<<< HEAD
-=======
 })
 .controller('ConsignDeliveryCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
@@ -2429,7 +2421,6 @@ angular.module('erp')
       });
     };
   }
->>>>>>> 2d81877176f8ea3c7b6a3001de824d09a5994028
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
