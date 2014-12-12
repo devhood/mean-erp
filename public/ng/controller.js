@@ -1531,7 +1531,6 @@ angular.module('erp')
   });
 })
 .controller('TripsCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
-
   $scope.ajax_ready = false;
   Structure.Trips.query().$promise.then(function(data){
     $scope.structure = data[0];
@@ -1561,6 +1560,7 @@ angular.module('erp')
     var statusConsignments = Library.Status.Consignments;
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.ListChange = function(){
+      console.log("listChange");
         $scope.trip.list = [];
         if($scope.trip.inventory_location){
           var query = {
@@ -1603,6 +1603,15 @@ angular.module('erp')
       $scope.title = "EDIT TRIP TICKET " + id;
       $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
 
+
+
+      $scope.saveTrip = function(){
+        $scope.trip.status = statusSales.tripticket.updated;
+        $scope.trip.$update(function(){
+          $location.path('/trips/index');
+          return false;
+        });
+      }
       $scope.deleteTrip=function(trip){
         if(popupService.showPopup('You are about to delete Record : '+trip._id)){
           $scope.trip.$delete(function(){
@@ -1610,6 +1619,9 @@ angular.module('erp')
             return false;
           });
         }
+      };
+      $scope.removeItem = function(index){
+        $scope.trip.list.splice(index, 1);
       };
     }
 

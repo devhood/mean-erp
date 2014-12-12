@@ -69,11 +69,11 @@ angular.module('erp', [
         controller: 'TripsCtrl'
       })
       .when('/trips/:action', {
-        templateUrl: '/partials/trips/page',
+        templateUrl: '/partials/trips/add',
         controller: 'TripsCtrl'
       })
       .when('/trips/:action/:id', {
-        templateUrl: '/partials/trips/page',
+        templateUrl: '/partials/trips/add',
         controller: 'TripsCtrl'
       })
       .when('/sales/index/:type', {
@@ -151,11 +151,11 @@ angular.module('erp', [
         controller: 'ShipmentCtrl'
       })
       .when('/shipment/:action', {
-        templateUrl: '/partials/shipment/page',
+        templateUrl: '/partials/shipment/add',
         controller: 'ShipmentCtrl'
       })
       .when('/shipment/:action/:id', {
-        templateUrl: '/partials/shipment/page',
+        templateUrl: '/partials/shipment/add',
         controller: 'ShipmentCtrl'
       })
       .when('/purchase/index', {
@@ -163,11 +163,11 @@ angular.module('erp', [
         controller: 'PurchaseCtrl'
       })
       .when('/purchase/:action', {
-        templateUrl: '/partials/purchase/page',
+        templateUrl: '/partials/purchase/add',
         controller: 'PurchaseCtrl'
       })
       .when('/purchase/:action/:id', {
-        templateUrl: '/partials/purchase/page',
+        templateUrl: '/partials/purchase/add',
         controller: 'PurchaseCtrl'
       })
       .when('/adjustment/index', {

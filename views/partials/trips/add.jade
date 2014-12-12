@@ -54,8 +54,8 @@ block title
                               th DR Number
                               th Customer
                               th Shipping Address
-                              th Arrival
                               th Departure
+                              th Arrival
                               th Received By
                               th Status
                               th(width="5%", ng-hide="action=='read'") Action
@@ -65,10 +65,15 @@ block title
                               td {{item.customer}}
                               td {{item.shipping_address}}
                               td
-                                input.form-control(type="text", ng-model="item.arrival_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
-                              td {{item.departure_date}}
-                              td {{item.received_by}}
-                              td {{item.status}}
+                                input.form-control(type="text", ng-model="item.departure_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action!='add'", ng-required="action=='edit'")
+                              td
+                                input.form-control(type="text", ng-model="item.arrival_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action!='edit'", ng-required="action=='edit'")
+                              td
+                                input.form-control(type="text", ng-model="item.received_by", ng-disabled="action!='edit'", ng-required="action=='edit'")
+                              td
+                                select.select2me.form-control.select2-offscreen(ng-model="item.status", tabindex="-1", ng-disabled="action!='edit'", ng-required="action=='edit'", ng-selected="Good")
+                                  option(value="delivered") Delivered
+                                  option(value="failed") Failed
                               td(width="5%", ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
