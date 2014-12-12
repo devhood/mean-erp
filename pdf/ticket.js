@@ -6,17 +6,7 @@ var pdf = {
 
 		pageSetting : function(options){
 
-			// var doc = new PDFDocument({
-			// 	size: options.size || 'letter',
-			// 	layout: options.layout || 'portrait',
-			// 	margin : options.margin || {
-			// 		top:10,
-			// 		bottom:10,
-			// 		left:10,
-			// 		right:0
-			// 	},
-					var	doc = new PDF({
-			  // size: [700,600],
+				var	doc = new PDF({
 			  layout: 'portrait',
 			  margins: {
 			    top: 0,
@@ -24,20 +14,15 @@ var pdf = {
 			    left: 10,
 			    right: 10
 				},
-				info: options.info || {
-					Title:'TI-0000001',
-					Subject:'TI-00000001',
-					Author:'Ace'
-				}
+				info: options.info
 			});
 			return doc;
 		},
 
 		pageHeader : function(doc,ticket){
-			/***      Start Header     ***/
 			doc.image('../public/assets/img/beautylane-logo.png', 15, 15, {width: 130});
 			doc.y = 20;
-		doc.font('Courier');
+			doc.font('Courier');
 			doc.fontSize(7);
 			doc.text("BEAUTY LANE PHILIPPINES, INC.",{align:'center'});
 			doc.moveDown(0.2);

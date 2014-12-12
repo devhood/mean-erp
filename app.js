@@ -37,10 +37,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(logger('dev'));
+app.use(function(req, res, next) {
+  req.db = db;
+  next();
+})
 app.use('/api', require('./routes/api'));
 app.use('/auth', require('./routes/auth'));
+app.use('/print', require('./routes/print'))
 app.get('/',function(req,res){
   res.render('dashboard',{});
 });

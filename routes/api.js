@@ -11,17 +11,12 @@ var async = require("async");
 var inventory = require('../lib/inventory.js');
 var generator = require('../lib/generator.js');
 
-var db = module.parent.exports.db;
-
-router.use(function(req, res, next) {
-  req.db = db;
-  next();
-})
+router
 .get('/:object', function(req, res) {
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
-    db.collection(req.params.object)
+    req.db.collection(req.params.object)
     .find(req.query.filter,req.query.columns)
     .sort(req.query.sorting).skip(req.query.page || 0)
     .limit(req.query.rows || 0).toArray()
@@ -42,7 +37,7 @@ router.use(function(req, res, next) {
       module : req.params.object
     };
     req.body.audit_history = [audit];
-    db.collection(req.params.object)
+    req.db.collection(req.params.object)
       .insert(req.body, {safe: true})
       .done(function(data){
         generator.update(req,function(err,result){
@@ -56,12 +51,12 @@ router.use(function(req, res, next) {
       });
 })
 .get('/:object/:id', function(req, res) {
-    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
+    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
     req.query.filter._id = id;
-    db.collection(req.params.object)
+    req.db.collection(req.params.object)
       .find(req.query.filter,req.query.columns || {})
       .sort(req.query.sorting || {}).skip(req.query.page || 0)
       .limit(req.query.rows || 0).toArray()
@@ -73,24 +68,24 @@ router.use(function(req, res, next) {
       });
 })
 .get('/print/:object/:id', function(req, res) {
-  var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
-  req.query.filter = JSON.parse(req.query.filter || '{}');
-  req.query.columns = JSON.parse(req.query.columns || '{}');
-  req.query.sorting = JSON.parse(req.query.sorting || '{}');
-  req.query.filter._id = id;
-  db.collection(req.params.object)
-  .find(req.query.filter,req.query.columns || {})
-  .sort(req.query.sorting || {}).skip(req.query.page || 0)
-  .limit(req.query.rows || 0).toArray()
-  .done(function(data){
-    res.status(200).json(data[0]);
-  })
-  .fail( function( err ) {
-    res.status(400).json(err);
-  });
+    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
+    req.query.filter = JSON.parse(req.query.filter || '{}');
+    req.query.columns = JSON.parse(req.query.columns || '{}');
+    req.query.sorting = JSON.parse(req.query.sorting || '{}');
+    req.query.filter._id = id;
+    req.db.collection(req.params.object)
+    .find(req.query.filter,req.query.columns || {})
+    .sort(req.query.sorting || {}).skip(req.query.page || 0)
+    .limit(req.query.rows || 0).toArray()
+    .done(function(data){
+      res.status(200).json(data[0]);
+    })
+    .fail( function( err ) {
+      res.status(400).json(err);
+    });
 })
 .put('/:object/:id/upload',multipartMiddleware, function(req, res) {
-  var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
+  var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
   if(req.files){
     for( var i in req.files){
         var temp_path = req.files[i].path;
@@ -104,7 +99,7 @@ router.use(function(req, res, next) {
               res.status(400).json(err);
             }
             else{
-              db.collection(req.params.object)
+              req.db.collection(req.params.object)
               .update(req.query.filter, {"$set" : req.content}, {safe: true})
               .done(function(data){
 
@@ -125,7 +120,7 @@ router.use(function(req, res, next) {
 
 })
 .put('/:object/:id', generator.generate, inventory.check, function(req, res) {
-    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
+    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
     delete req.body._id;
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
@@ -139,7 +134,7 @@ router.use(function(req, res, next) {
       module : req.params.object
     };
     req.body.audit_history = [audit];
-    db.collection(req.params.object)
+    req.db.collection(req.params.object)
       .update(req.query.filter, {"$set" : req.body}, {safe: true})
       .done(function(data){
         generator.update(req,function(err,result){
@@ -154,10 +149,10 @@ router.use(function(req, res, next) {
       });
 })
 .delete('/:object/:id', function(req, res) {
-    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
+    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.filter._id = id;
-    db.collection(req.params.object)
+    req.db.collection(req.params.object)
       .remove(req.query.filter, {safe: true})
       .done(function(data){
         res.status(200).json(data);
