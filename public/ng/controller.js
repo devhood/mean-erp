@@ -1440,12 +1440,12 @@ angular.module('erp')
             var query1 = {
               "inventory_location":$scope.packing.inventory_location,
               "statusConsignments.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
+              "consignment_transaction_type" : $scope.consignments.consigment_transaction_type,
             }
-            Api.Collection('consignmnets',query1).query().$promise.then(function(data){
+            Api.Collection('consignments',query1).query().$promise.then(function(data){
               for(var i in data){
-                if (cosingments.consignment_transaction_type == 1) {
+                if (consignment_transaction_type == 1) {
                   
-                
                 for(var j in data[i].consigned_item){
                   var item = {
                     id : data[i]._id,
