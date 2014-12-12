@@ -4,7 +4,7 @@ angular.module('erp')
 .controller('MainCtrl', function ($scope, $location, Reference, Session) {
   $scope.menus = Reference.Menu.query();
   Session.get(function(client){
-    $scope.client = client; 
+    $scope.client = client;
   });
 })
 .controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
@@ -1398,8 +1398,7 @@ angular.module('erp')
       ];
 
       buttons = [
-      {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
-      {url:"/#/packing/edit/",title:"Edit Record",icon:"fa fa-edit"}
+      {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"}
       ];
       $scope.title = "PACKING"
       $scope.addUrl = "/#/packing/add"
@@ -1509,7 +1508,7 @@ angular.module('erp')
                   });
                 });
               }
-              
+
               else{
                 callback();
               }
@@ -2221,7 +2220,7 @@ angular.module('erp')
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
-  
+
           var columns1 = [
           $scope.structure.cdrno,$scope.structure.cono,$scope.structure.consignment_transaction_type,
           $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name,
@@ -2236,7 +2235,7 @@ angular.module('erp')
 
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
-       
+
         break;
         }
     };
@@ -2437,12 +2436,12 @@ angular.module('erp')
         return false;
       });
     };
-     
+
   };
 
 })
 .controller('ConsignDeliveryCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
-    
+
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
@@ -2455,7 +2454,7 @@ angular.module('erp')
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.products = Api.Collection('products').query();
     var status = Library.Status.Consignments;
-    
+
   $scope.CustomerChange = function(){
     if($scope.consignments.customer){
       $scope.shipping_address =
