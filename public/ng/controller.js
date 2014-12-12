@@ -1440,12 +1440,10 @@ angular.module('erp')
             var query1 = {
               "inventory_location":$scope.packing.inventory_location,
               "statusConsignments.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
-              "consignment_transaction_type" : $scope.consignments.consigment_transaction_type,
+              "consignment_transaction_type" : "OUT",
             }
             Api.Collection('consignments',query1).query().$promise.then(function(data){
               for(var i in data){
-                if (consignments.consignment_transaction_type == 1) {
-                  
                 for(var j in data[i].consigned_item){
                   var item = {
                     id : data[i]._id,
@@ -1457,7 +1455,6 @@ angular.module('erp')
                   };
                   $scope.packing.list.push(item);
                 }
-              }
               }
             });
           }
@@ -2108,11 +2105,11 @@ angular.module('erp')
   });
 })
 .controller('ConsignOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
- 
+
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
-    $scope.consignment_transaction_types = Api.Collection('consignment_transaction_type').query();
+    $scope.consignment_transaction_types = Api.Collection('consignment_transaction_types').query();
     $scope.price_types = Api.Collection('price_types').query();
     $scope.order_sources = Api.Collection('order_sources').query();
     $scope.delivery_methods = Api.Collection('delivery_methods').query();
@@ -2229,7 +2226,7 @@ angular.module('erp')
 
           $scope.consignments.status = status.order.created;
           //    $scope.sales.triggerInventory  = "OUT";
-   
+
         $scope.consignments.$save(function(){
           $location.path('/consignment/index/order');
           return false;
@@ -2280,22 +2277,22 @@ angular.module('erp')
         }
       };
     }
-    
+
     if(id && action == 'approve'){
       console.log('approved frank');
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
-      $scope.consignments.status = status.order.approved; 
+      $scope.consignments.status = status.order.approved;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
-     
+
       $scope.saveConsignments = function(){
         $scope.consignments.$update(function(){
           $location.path('/consignment/index/order');
           return false;
         });
       };
-      
+
       $scope.deleteConsignments=function(consignments){
         if(popupService.showPopup('You are about to delete Record : '+consignments._id)){
           $scope.consignments.$delete(function(){
@@ -2305,7 +2302,7 @@ angular.module('erp')
         }
     }
       };
- 
+
 })
 .controller('ConsignDeliveryCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;

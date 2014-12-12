@@ -1,4 +1,5 @@
 mongoimport --db beautylane-db --collection transaction_types --type csv --headerline --file data/csv/transaction_types.csv
+mongoimport --db beautylane-db --collection consignment_transaction_types --type csv --headerline --file data/csv/consignment_transaction_types.csv
 mongoimport --db beautylane-db --collection price_types --type csv --headerline --file data/csv/price_types.csv
 mongoimport --db beautylane-db --collection discounts --type csv --headerline --file data/csv/discounts.csv
 mongoimport --db beautylane-db --collection payment_terms --type csv --headerline --file data/csv/payment_terms.csv

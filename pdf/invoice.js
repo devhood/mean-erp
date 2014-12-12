@@ -28,8 +28,8 @@ var pdf = {
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
 			doc.fontSize(10);
-			doc.text(drinfo.company_name),40,90,{width:260,indent:40});
-			doc.text(drinfo.company_name),340,90,{width:260,indent:40});
+			doc.text(drinfo.company_name,40,90,{width:260,indent:40});
+			doc.text(drinfo.company_name,340,90,{width:260,indent:40});
 			doc.moveDown(0);
 			doc.font('Courier');
 			doc.fontSize(10);
