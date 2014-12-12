@@ -17,7 +17,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-               select.select2me.form-control.select2-offscreen(ng-model="tripticket.inventory_location", ng-options="inventory_location.inventory_location as inventory_location.inventory_location for inventory_location in inventory_locations", ng-selected="{{tripticket.inventory_location}}" ,tabindex="-1", required)
+               select.select2me.form-control.select2-offscreen(ng-model="tripticket.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{tripticket.inventory_location}}" ,tabindex="-1", required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
@@ -39,7 +39,7 @@ block title
           .portlet-title
             .caption
               i.fa.fa-reorder
-              | TRIPS
+              | TRIP TICKET
             .tools
               a.collapse(href="javascript:;")
           .portlet-body.form

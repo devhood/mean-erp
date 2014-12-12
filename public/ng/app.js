@@ -88,14 +88,6 @@ angular.module('erp', [
         templateUrl: '/partials/sales/order',
         controller: 'SalesOrderCtrl'
       })
-      .when('/sales/trips/:action', {
-        templateUrl: '/partials/sales/trips',
-        controller: 'SalesTripsCtrl'
-      })
-      .when('/sales/trips/:action/:id', {
-        templateUrl: '/partials/sales/trips',
-        controller: 'SalesTripsCtrl'
-      })
       .when('/sales/delivery/:action/:id', {
         templateUrl: '/partials/sales/delivery',
         controller: 'DeliveryReceiptCtrl'

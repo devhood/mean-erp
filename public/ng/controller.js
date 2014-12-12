@@ -1444,8 +1444,8 @@ angular.module('erp')
             Api.Collection('consignmnets',query1).query().$promise.then(function(data){
               for(var i in data){
                 if (cosingments.consignment_transaction_type == 1) {
-                  
-                
+
+
                 for(var j in data[i].consigned_item){
                   var item = {
                     id : data[i]._id,
@@ -1482,6 +1482,7 @@ angular.module('erp')
         };
       }
       if(action == 'add'){
+        console.log("add action");
         $scope.title = "ADD PACKING";
         var Packing = Api.Collection('packing');
         $scope.packing = new Packing();
@@ -1531,20 +1532,74 @@ angular.module('erp')
     var query = {};
     $scope.init = function(){
       columns = [
-      // $scope.structure.inventory_location, $scope.structure.delivery_date,
-      // $scope.structure.release_date, $scope.structure.received_date, $scope.structure.status.status_name
+      $scope.structure.inventory_location, $scope.structure.delivery_date,
+      $scope.structure.release_date, $scope.structure.received_date, $scope.structure.status.status_name
       ];
 
       buttons = [
       {url:"/#/trips/read/",title:"View Record",icon:"fa fa-folder-open"},
       {url:"/#/trips/edit/",title:"Edit Record",icon:"fa fa-edit"}
       ];
-      $scope.title = "TRIP TICKET"
-      $scope.addUrl = "/#/trips/page"
+      $scope.title = "TRIP TICKET";
+      $scope.addUrl = "/#/trips/add";
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/trips");
     };
 
+  $scope.formInit = function(){
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    var statusSales = Library.Status.Sales;
+    var statusConsignments = Library.Status.Consignments;
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+    $scope.ListChange = function(){
+        $scope.trip.list = [];
+        if($scope.trip.inventory_location){
+          var query = {
+            "inventory_location":$scope.trip.inventory_location,
+            "statusSales.status_code" : {"$in" : [statusSales.delivery.approved.status_code,statusSales.proforma.approved.status_code]}
+          };
+        }
+    };
+
+    $scope.action = action;
+    if(id && action == 'read'){
+      $scope.title = "VIEW TRIP TICKET " + id;
+      $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
+    }
+
+    if(id && action == 'edit'){
+      $scope.title = "EDIT TRIP TICKET " + id;
+      $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
+      $scope.deleteTrip=function(trip){
+        if(popupService.showPopup('You are about to delete Record : '+trip._id)){
+          $scope.trip.$delete(function(){
+            $location.path('/trips/index');
+            return false;
+          });
+        }
+      };
+    }
+
+    if(action == 'add'){
+      console.log("add action");
+      $scope.title = "ADD TRIP TICKET";
+      var Trip = Api.Collection('trips');
+      $scope.trip = new Trip();
+      $scope.saveTrip = function(){
+        $scope.trip.status = status.trip.created;
+        $scope.trip.$save(function(){
+          var sono = [];
+          //async functions here
+          $location.path('/trips/index');
+          return false;
+        });
+      }
+      $scope.removeItem = function(index){
+        $scope.trip.list.splice(index, 1);
+      };
+    }
+  }
   });
 })
 .controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
@@ -2109,7 +2164,7 @@ angular.module('erp')
   });
 })
 .controller('ConsignOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
- 
+
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
@@ -2230,7 +2285,7 @@ angular.module('erp')
 
           $scope.consignments.status = status.order.created;
           //    $scope.sales.triggerInventory  = "OUT";
-   
+
         $scope.consignments.$save(function(){
           $location.path('/consignment/index/order');
           return false;
@@ -2281,7 +2336,7 @@ angular.module('erp')
         }
       };
     }
-    
+
     if(id && action == 'approve'){
       console.log('approved');
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
@@ -2304,7 +2359,7 @@ angular.module('erp')
         }
     }
       };
- 
+
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
