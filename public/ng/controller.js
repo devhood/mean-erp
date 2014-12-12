@@ -1444,7 +1444,7 @@ angular.module('erp')
             }
             Api.Collection('consignments',query1).query().$promise.then(function(data){
               for(var i in data){
-                if (consignment_transaction_type == 1) {
+                if (consignments.consignment_transaction_type == 1) {
                   
                 for(var j in data[i].consigned_item){
                   var item = {
@@ -2284,11 +2284,11 @@ angular.module('erp')
     if(id && action == 'approve'){
       console.log('approved frank');
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
-      
+      $scope.consignments.status = status.order.approved; 
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
-      $scope.consignments.status = status.order.approved;
+     
       $scope.saveConsignments = function(){
         $scope.consignments.$update(function(){
           $location.path('/consignment/index/order');
