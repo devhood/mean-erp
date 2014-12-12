@@ -1418,7 +1418,7 @@ angular.module('erp')
           if($scope.packing.inventory_location){
             var query = {
               "inventory_location":$scope.packing.inventory_location,
-              "statusSales.status_code" : {"$in" : [statusSales.order.created.status_code,statusSales.order.revised.status_code]}
+              "status.status_code" : {"$in" : [statusSales.order.created.status_code,statusSales.order.revised.status_code]}
             };
 
             Api.Collection('sales',query).query().$promise.then(function(data){
@@ -1439,7 +1439,7 @@ angular.module('erp')
             });
             var query1 = {
               "inventory_location":$scope.packing.inventory_location,
-              "statusConsignments.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
+              "status.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
               "consignment_transaction_type" : "OUT",
             }
             Api.Collection('consignments',query1).query().$promise.then(function(data){
@@ -1484,14 +1484,14 @@ angular.module('erp')
         var Packing = Api.Collection('packing');
         $scope.packing = new Packing();
         $scope.savePacking = function(){
-          $scope.packing.status = status.packing.created;
+          $scope.packing.status = statusSales.packing.created;
           $scope.packing.$save(function(){
             var sono = [];
             async.each($scope.packing.list, function( item, callback) {
               if(sono.indexOf(item.sono) == -1){
                 sono.push(item.sono);
                 Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
-                  sales.status = status.packing.created;
+                  sales.status = statusSales.packing.created;
                   sales.pckno =  $scope.packing.pckno;
                   sales.$update(function(){
                     callback();
@@ -1553,8 +1553,31 @@ angular.module('erp')
         if($scope.trip.inventory_location){
           var query = {
             "inventory_location":$scope.trip.inventory_location,
-            "statusSales.status_code" : {"$in" : [statusSales.delivery.approved.status_code,statusSales.proforma.approved.status_code]}
+            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code]}
           };
+
+          Api.Collection('sales',query).query().$promise.then(function(data){
+            for(var i in data){
+              if(data[i].customer){
+                $scope.trip.list.push({
+                  drno : data[i].drno,
+                  customer : data[i].customer.company_name,
+                  shipping_address :
+                      data[i].customer.shipping_address.landmark + ', ' +
+                      data[i].customer.shipping_address.barangay + ', ' +
+                      data[i].customer.shipping_address.city + ', ' +
+                      data[i].customer.shipping_address.province + ', ' +
+                      data[i].customer.shipping_address.country + ', ' +
+                      data[i].customer.shipping_address.zipcode,
+                  received_by : "",
+                  arrival_date : "",
+                  departure : "",
+                  status : ""
+
+                });
+              }
+            }
+          });
         }
     };
 
@@ -1584,7 +1607,7 @@ angular.module('erp')
       var Trip = Api.Collection('trips');
       $scope.trip = new Trip();
       $scope.saveTrip = function(){
-        $scope.trip.status = status.trip.created;
+        $scope.trip.status = statusSales.tripticket.created;
         $scope.trip.$save(function(){
           var sono = [];
           //async functions here

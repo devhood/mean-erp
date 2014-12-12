@@ -8,7 +8,7 @@ block title
     .tools
       a.collapse(href="javascript:;")
   .portlet-body.form
-    form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && savePacking()", novalidate)
+    form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && saveTrip()", novalidate)
       .form-body
         .row
           .col-md-6
@@ -64,9 +64,11 @@ block title
                               td {{item.drno}}
                               td {{item.customer}}
                               td {{item.shipping_address}}
-                              td {{item.arrival_date}}
+                              td
+                                input.form-control(type="text", ng-model="item.arrival_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
                               td {{item.departure_date}}
                               td {{item.received_by}}
+                              td {{item.status}}
                               td(width="5%", ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")

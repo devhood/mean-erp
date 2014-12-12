@@ -51,7 +51,7 @@ router
       });
 })
 .get('/:object/:id', function(req, res) {
-    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
+    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
@@ -68,7 +68,7 @@ router
       });
 })
 .get('/print/:object/:id', function(req, res) {
-    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
+    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
@@ -85,7 +85,7 @@ router
     });
 })
 .put('/:object/:id/upload',multipartMiddleware, function(req, res) {
-  var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
+  var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
   if(req.files){
     for( var i in req.files){
         var temp_path = req.files[i].path;
@@ -120,7 +120,7 @@ router
 
 })
 .put('/:object/:id', generator.generate, inventory.check, function(req, res) {
-    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
+    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     delete req.body._id;
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
@@ -149,7 +149,7 @@ router
       });
 })
 .delete('/:object/:id', function(req, res) {
-    var id = mongoq.mongoreq.db.BSONPure.ObjectID.createFromHexString(req.params.id);
+    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.filter._id = id;
     req.db.collection(req.params.object)
