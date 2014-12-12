@@ -1410,14 +1410,15 @@ angular.module('erp')
 
       var id = $routeParams.id;
       var action = $routeParams.action;
-      var status = Library.Status.Sales;
+      var statusSales = Library.Status.Sales;
+      var statusConsignments = Library.Status.Consignments;
       $scope.inventory_locations = Api.Collection('customers',query).query();
       $scope.ListChange = function(){
           $scope.packing.list = [];
           if($scope.packing.inventory_location){
             var query = {
               "inventory_location":$scope.packing.inventory_location,
-              "status.status_code" : {"$in" : [status.order.created.status_code,status.order.revised.status_code]}
+              "statusSales.status_code" : {"$in" : [statusSales.order.created.status_code,statusSales.order.revised.status_code]}
             };
 
             Api.Collection('sales',query).query().$promise.then(function(data){
@@ -1435,7 +1436,29 @@ angular.module('erp')
                   $scope.packing.list.push(item);
                 }
               }
-
+            });
+            var query1 = {
+              "inventory_location":$scope.packing.inventory_location,
+              "statusConsignments.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
+            }
+            Api.Collection('consignmnets',query1).query().$promise.then(function(data){
+              for(var i in data){
+                if (cosingments.consignment_transaction_type == 1) {
+                  
+                
+                for(var j in data[i].consigned_item){
+                  var item = {
+                    id : data[i]._id,
+                    sono : data[i].cono,
+                    customer : data[i].customer.company_name,
+                    brand : data[i].consigned_item[j].brand,
+                    product : data[i].consigned_item[j].name,
+                    quantity : data[i].consigned_item[j].quantity,
+                  };
+                  $scope.packing.list.push(item);
+                }
+              }
+              }
             });
           }
       };
