@@ -69,7 +69,7 @@ module.exports.print = function(drinfo,result){
 		Subject:drinfo.drno,
 		Author:drinfo.delivery_created_by
 	}});
-	var filename = __dirname+"/"+drinfo.drno+'.pdf';
+	var filename = __dirname.replace("/pdf","/public/print")+"/"+drinfo.drno+'.pdf';
 	doc.pipe(fs.createWriteStream(filename));
 
 	doc = pdf.pageHeader(doc,drinfo);
@@ -85,7 +85,7 @@ module.exports.print = function(drinfo,result){
 		doc.text(drinfo.ordered_items[i].description,310,y,{width:190});
 		doc.text(drinfo.ordered_items[i].uom,510,y,{width:50});
 		doc.text(drinfo.ordered_items[i].quantity,560,y,{width:35,align:'center'});
-		doc.moveuDown(0.5);
+		doc.moveDown(0.5);
 		if(doc.y >= 580){
 			doc.addPage();
 			doc = pdf.pageHeader(doc,drinfo);
@@ -94,5 +94,5 @@ module.exports.print = function(drinfo,result){
 		}
 	}
 	doc.end();
-	result(null,filename);
+	result(null,"/print/"+drinfo.drno+'.pdf');
 };

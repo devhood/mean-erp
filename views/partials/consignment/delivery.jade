@@ -16,8 +16,17 @@ block title
         .row
           .col-md-6
             .form-group
+
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="consignments.cdrno", readonly)
+                span.col-md-12.help-block CDR Number
+        .row
+          .col-md-6
+            .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types track by consignment_transaction_type.name", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'", readonly)
                 span.col-md-12.help-block Consignment Transaction Type
 
           .col-md-6
@@ -34,7 +43,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="consignments.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="consignments.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'", readonly)
                 span.col-md-12.help-block Delivery Date
         .row
           .col-md-1
@@ -64,19 +73,19 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{consignments.order_source}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{consignments.order_source}}", tabindex="-1", ng-disabled="action=='read'",required,readonly)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{consignments.delivery_method}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{consignments.delivery_method}}", tabindex="-1", ng-disabled="action=='read'",required,readonly)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-1
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="consignments.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
+                input.form-control(type="text", ng-model="consignments.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required,readonly)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
         .portlet.box.grey(ng-show="consignments.customer")
@@ -91,35 +100,6 @@ block title
               br
               br
               .row(ng-hide="action=='read'")
-                .col-md-1
-                .col-md-10
-                  .col-md-3
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="consignments.item", ng-options="product.bl_code for product in products")
-                        span.col-md-12.help-block Code
-                  .col-md-4
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="consignments.item", ng-options="product.name for product in products")
-                        span.col-md-12.help-block Product
-                  .col-md-2
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="consignments.item.quantity")
-                        span.col-md-12.help-block Quantity
-                  .col-md-2
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="consignments.item.override")
-                          option(value='NORMAL') None
-                          option(value='FREEBIE') Freebie
-                          option(value='DEMO') Demo
-                        span.col-md-12.help-block Override
-                  .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addOrder(consignments)")
-                      i.fa.fa-plus
-                .col-md-1
               .form-group
                 .col-md-1
                 .col-md-10
@@ -135,7 +115,6 @@ block title
                               th Quantity
                               th Unit Price
                               th Total
-                              th(width="5%")(ng-hide="action=='read'") Action
                           tbody
                             tr(ng-repeat="consigned_item in consignments.consigned_item track by $index")
                               td {{consigned_item.bl_code}}
@@ -143,10 +122,7 @@ block title
                               td {{consigned_item.quantity}}
                               td {{consigned_item.price}}
                               td {{consigned_item.total}}
-                              td(width="5%")(ng-hide="action=='read'")
-                                .btn-group.btn-group-xs.btn-group-solid
-                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
-                                    i.fa.fa-trash-o
+
                 .col-md-1
         .row
           .col-md-6
@@ -206,7 +182,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="deleteConsignments(consignments)", ng-show="action=='edit' || action=='approve'") Delete
+              button.btn.red(type="button", ng-click="rejectConsignments(consignments)", ng-show="action=='edit' || action=='approve'") Delete
               | &nbsp;
               a.btn.default(type="button", href="/#/consignment/index") Cancel
           .col-md-6

@@ -5,6 +5,16 @@
             "title": "Transaction Type",
             "type": "select"
         },
+        "cdrno": {
+            "name": "cdrno",
+            "title": "CDR Number",
+            "type": "text"
+        },
+        "cpckno": {
+            "name": "cpckno",
+            "title": "CPK Number",
+            "type": "text"
+        },
         "cono": {
             "name": "cono",
             "title": "CO Number",
