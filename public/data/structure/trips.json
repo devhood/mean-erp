@@ -10,9 +10,9 @@
       "title": "Delivery Date",
       "type": "select"
     },
-    "release_by" : {
-      "name": "release_by",
-      "title": "Release By",
+    "prepared_by" : {
+      "name": "prepared_by",
+      "title": "Prepared By",
       "type": "select"
     },
     "release_to" : {

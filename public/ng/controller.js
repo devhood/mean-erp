@@ -1528,8 +1528,8 @@ angular.module('erp')
     var query = {};
     $scope.init = function(){
       columns = [
-      $scope.structure.inventory_location, $scope.structure.delivery_date,
-      $scope.structure.release_date, $scope.structure.received_date, $scope.structure.status.status_name
+      $scope.structure.trpno, $scope.structure.inventory_location, $scope.structure.delivery_date,
+      $scope.structure.prepared_by, $scope.structure.status.status_name
       ];
 
       buttons = [
@@ -1553,13 +1553,14 @@ angular.module('erp')
         if($scope.trip.inventory_location){
           var query = {
             "inventory_location":$scope.trip.inventory_location,
-            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code]}
+            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code, statusSales.tripticket.created.status_code]}
           };
 
           Api.Collection('sales',query).query().$promise.then(function(data){
             for(var i in data){
               if(data[i].customer){
                 $scope.trip.list.push({
+                  id : data[i]._id,
                   drno : data[i].drno,
                   customer : data[i].customer.company_name,
                   shipping_address :
@@ -1591,15 +1592,38 @@ angular.module('erp')
       $scope.title = "EDIT TRIP TICKET " + id;
       $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
 
-
-
       $scope.saveTrip = function(){
-        $scope.trip.status = statusSales.tripticket.updated;
+        async.each($scope.trip.list, function( item, callback) {
+        console.log("IN async");
+        console.log("chito",item);
+            Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
+              if(item.status == "delivered"){
+                sales.status = statusSales.tripticket.delivered;
+                $scope.trip.status = statusSales.tripticket.delivered;
+              }
+              else if(item.status == "failed"){
+                sales.status = statusSales.tripticket.failed;
+                $scope.trip.status = statusSales.tripticket.failed;
+              }
+      console.log(sales.status);
+      console.log($scope.trip.status);
+
+              sales.trpno =  $scope.trip.trpno;
+              sales.$update(function(){
+                callback();
+              });
+            });
+        },function(err){
+          if(err){
+            console.log(err);
+          }
+        });
         $scope.trip.$update(function(){
           $location.path('/trips/index');
           return false;
         });
       }
+
       $scope.deleteTrip=function(trip){
         if(popupService.showPopup('You are about to delete Record : '+trip._id)){
           $scope.trip.$delete(function(){
@@ -1621,12 +1645,24 @@ angular.module('erp')
       $scope.saveTrip = function(){
         $scope.trip.status = statusSales.tripticket.created;
         $scope.trip.$save(function(){
-          var sono = [];
-          //async functions here
+          async.each($scope.trip.list, function( item, callback) {
+              Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
+                sales.status = statusSales.tripticket.created;
+                sales.trpno =  $scope.trip.trpno;
+                sales.$update(function(){
+                  callback();
+                });
+              });
+          },function(err){
+            if(err){
+              console.log(err);
+            }
+          });
           $location.path('/trips/index');
           return false;
         });
       }
+
       $scope.removeItem = function(index){
         $scope.trip.list.splice(index, 1);
       };

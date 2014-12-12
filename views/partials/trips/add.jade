@@ -1,5 +1,5 @@
 block title
-  title ADD PACKING
+  title TRIP TICKET
 .portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
   .portlet-title
     .caption
@@ -19,7 +19,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="tripticket.trpno", readonly)
+                input.form-control(type="text", ng-model="trip.trpno", readonly)
                 span.col-md-12.help-block Trip Ticket Number
         .row
           .col-md-6
@@ -42,8 +42,7 @@ block title
           .portlet-body.form
             .form-body
               .form-group
-                .col-md-1
-                .col-md-10
+                .col-md-12
                   .row
                     br
                     .col-md-12
@@ -65,27 +64,26 @@ block title
                               td {{item.customer}}
                               td {{item.shipping_address}}
                               td
-                                input.form-control(type="text", ng-model="item.departure_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action!='add'", ng-required="action=='edit'")
+                                input.form-control(type="text", ng-model="item.departure_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'", ng-required="action=='edit'")
                               td
-                                input.form-control(type="text", ng-model="item.arrival_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action!='edit'", ng-required="action=='edit'")
+                                input.form-control(type="text", ng-model="item.arrival_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'", ng-required="action=='edit'")
                               td
-                                input.form-control(type="text", ng-model="item.received_by", ng-disabled="action!='edit'", ng-required="action=='edit'")
-                              td
-                                select.select2me.form-control.select2-offscreen(ng-model="item.status", tabindex="-1", ng-disabled="action!='edit'", ng-required="action=='edit'", ng-selected="Good")
+                                input.form-control(type="text", ng-model="item.received_by", ng-disabled="action!='edit'", ng-required="action=='read'")
+                              td(width="13%")
+                                select.select2me.form-control.select2-offscreen(ng-model="item.status", tabindex="-1", ng-disabled="action=='read'", ng-required="action=='edit'", ng-selected="Good")
                                   option(value="delivered") Delivered
                                   option(value="failed") Failed
                               td(width="5%", ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
-                .col-md-1
       .form-actions.fluid
         .row
           .col-md-6
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="deleteTrip(packing)", ng-show="action=='edit' || action=='approve'") Delete
+              button.btn.red(type="button", ng-click="deleteTrip(trip)", ng-show="action=='edit' || action=='approve'") Delete
               | &nbsp;
-              a.btn.default(type="button", href="/#/tri/index") Cancel
+              a.btn.default(type="button", href="/#/trips/index") Cancel
           .col-md-6
