@@ -69,11 +69,11 @@ angular.module('erp', [
         controller: 'TripsCtrl'
       })
       .when('/trips/:action', {
-        templateUrl: '/partials/trips/add',
+        templateUrl: '/partials/trips/page',
         controller: 'TripsCtrl'
       })
       .when('/trips/:action/:id', {
-        templateUrl: '/partials/trips/add',
+        templateUrl: '/partials/trips/page',
         controller: 'TripsCtrl'
       })
       .when('/sales/index/:type', {
@@ -87,6 +87,14 @@ angular.module('erp', [
       .when('/sales/order/:action/:id', {
         templateUrl: '/partials/sales/order',
         controller: 'SalesOrderCtrl'
+      })
+      .when('/sales/trips/:action', {
+        templateUrl: '/partials/sales/trips',
+        controller: 'SalesTripsCtrl'
+      })
+      .when('/sales/trips/:action/:id', {
+        templateUrl: '/partials/sales/trips',
+        controller: 'SalesTripsCtrl'
       })
       .when('/sales/delivery/:action/:id', {
         templateUrl: '/partials/sales/delivery',
