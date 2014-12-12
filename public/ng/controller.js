@@ -1520,6 +1520,33 @@ angular.module('erp')
     }
   });
 })
+.controller('TripsCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Trips.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    $scope.init = function(){
+      columns = [
+      // $scope.structure.inventory_location, $scope.structure.delivery_date,
+      // $scope.structure.release_date, $scope.structure.received_date, $scope.structure.status.status_name
+      ];
+
+      buttons = [
+      {url:"/#/trips/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/trips/edit/",title:"Edit Record",icon:"fa fa-edit"}
+      ];
+      $scope.title = "TRIP TICKET"
+      $scope.addUrl = "/#/trips/page"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/trips");
+    };
+
+  });
+})
 .controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
   var action = $routeParams.action;
