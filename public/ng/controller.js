@@ -1547,7 +1547,7 @@ angular.module('erp')
         if($scope.trip.inventory_location){
           var query = {
             "inventory_location":$scope.trip.inventory_location,
-            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code, statusSales.tripticket.created.status_code]}
+            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code]}
           };
 
           Api.Collection('sales',query).query().$promise.then(function(data){
