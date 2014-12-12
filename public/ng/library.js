@@ -135,6 +135,7 @@ angular.module('erp')
       },
       tripticket : {
         created : {status_code : "TRIP_TICKET_CREATED", status_name : "Warehouse-Delivery in progress"},
+        updated : {status_code : "TRIP_TICKET_UPDATED", status_name : "Warehouse-Delivery updated"},
         delivered : {status_code : "TRIP_TICKET_DELIVERED", status_name : "Warehouse-Order delivered"},
         failed : {status_code : "TRIP_TICKET_FAILED", status_name : "Warehouse-Delivery failed"}
       },
