@@ -14,8 +14,7 @@ router
   .done(function(data){
     printer.printDR(data[0],function(err,filename){
       setTimeout(function(){
-        res.status(200).json(data[0]);
-     //   res.redirect(filename);
+       res.redirect(filename);
       }, 1000);
 
     });
@@ -34,7 +33,6 @@ var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
   .done(function(data){
     printer.printSI(data[0],function(err,filename){
       setTimeout(function(){
-     //   res.status(200).json(data[0]);
         res.redirect(filename);
       }, 1000);
 

@@ -688,6 +688,25 @@ angular.module('erp')
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
           break;
+          case "print" :
+            columns = [
+            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.drno, $scope.structure.sino
+            ];
+
+            buttons = [
+            {url:"/#/print/sales/delivery/",title:"View Record",icon:"fa fa-print"},
+            {url:"/#/print/sales/invoice/",title:"Create Payment Record",icon:"fa fa-print"},
+
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
+            $scope.title = "Print DR nd SI";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          break;
       }
     };
 
