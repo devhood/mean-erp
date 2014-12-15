@@ -2494,6 +2494,109 @@ angular.module('erp')
     };
   }
 })
+.controller('CDSCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.CDS.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+
+
+    $scope.init = function(){
+      columns = [
+       $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.date
+        ];
+
+      buttons = [
+        {url:"/#/cds/read/",title:"View Record",icon:"fa fa-folder-open"},
+        {url:"/#/cds/edit/",title:"Edit Record",icon:"fa fa-edit"},
+        {url:"/#/cds/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+      // query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      query= {};
+      $scope.title = "CONSIGNMENT DAILY"
+      $scope.addUrl = "/#/cds/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/adjustments?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+
+$scope.formInit = function(){
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.products = Api.Collection('products').query();
+    // $scope.bl_consultants = Api.Collection('bl_consultants',query).query();
+    var status = Library.Status.ConsignmentDaily;
+
+
+  // $scope.CustomerChange = function(){
+  //   if($scope.cds.customer){
+  //     $scope.shipping_address =
+  //     $scope.cds.customer.shipping_address.landmark + ', ' +
+  //     $scope.cds.customer.shipping_address.barangay + ', ' +
+  //     $scope.cds.customer.shipping_address.city + ', ' +
+  //     $scope.cds.customer.shipping_address.province + ', ' +
+  //     $scope.cds.customer.shipping_address.country + ', ' +
+  //     $scope.cds.customer.shipping_address.zipcode;
+  //
+  //     $scope.billing_address =
+  //     $scope.cds.customer.billing_address.landmark + ', ' +
+  //     $scope.cds.customer.billing_address.barangay + ', ' +
+  //     $scope.cds.customer.billing_address.city + ', ' +
+  //     $scope.cds.customer.billing_address.province + ', ' +
+  //     $scope.cds.customer.billing_address.country + ', ' +
+  //     $scope.cds.customer.billing_address.zipcode;
+  //   }
+  // }
+  if(action == 'read'){
+    $scope.title = "VIEW CONSIGNMENT DELIVERY RECEIPT";
+    $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+
+  $scope.action = action;
+  console.log("adding cds");
+  if(action == 'add'){
+    $scope.title = "ADD CONSIGNMENT DAILY SALE";
+    var CDS = Api.Collection('cds');
+    $scope.cds = new CDS();
+    $scope.cds.status = status.created;
+    $scope.saveCDS = function(){
+      $scope.cds.$save(function(){
+        $location.path('/cds/index');
+        return false;
+      });
+    }
+  }//end action add
+
+  // if(action == 'approve'){
+  //   $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
+  //   $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
+  //     $scope.CustomerChange();
+  //   });
+  //   $scope.saveCds = function(){
+  //     $scope.cds.status = status.delivery.approved;
+  //     $scope.cds.$update(function(){
+  //       $location.path('/cds/index');
+  //       return false;
+  //     });
+  //   };
+  //   $scope.rejectCds = function(){
+  //     $scope.cds.status = status.delivery.rejected;
+  //     $scope.cds.$update(function(){
+  //       $location.path('/cds/index');
+  //       return false;
+  //     });
+  //   };
+  // }
+}
+});
+})
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
     $scope.ajax_ready = false;
@@ -2740,13 +2843,13 @@ angular.module('erp')
     }
     ]
   });
-  
+
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
   $scope.customers = Api.Collection('customers').query();
-  
-  
+
+
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
