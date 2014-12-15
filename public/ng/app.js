@@ -190,6 +190,10 @@ angular.module('erp', [
         templateUrl: '/partials/calendar/index',
         controller: 'CalendarCtrl'
       })
+      .when('/print/sales/:type/:id', {
+        templateUrl: '/partials/sales/index',
+        controller: 'PrintCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

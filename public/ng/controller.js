@@ -2637,5 +2637,11 @@ angular.module('erp')
   });
 })
 .controller('CalendarCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
-  
+
+})
+.controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  var id = $routeParams.id;
+  var type = $routeParams.type;
+
+  $window.location.href = '/print/sales/'+type+'/'+id;
 });

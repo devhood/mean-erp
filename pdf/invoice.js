@@ -92,7 +92,7 @@ module.exports.print = function(siinfo,result){
 		Subject:siinfo.sino,
 		Author:siinfo.invoice_created_by
 	}});
-	var filename = __dirname+"/"+siinfo.sino+'.pdf';
+	var filename = __dirname.replace(path.sep+"pdf",path.sep+"public"+path.sep+"print")+path.sep+siinfo.sino+'.pdf';
 	doc.pipe(fs.createWriteStream(filename));
 
 	doc = pdf.pageHeader(doc,siinfo);
@@ -119,5 +119,5 @@ module.exports.print = function(siinfo,result){
 		}
 	}
 	doc.end();
-	result(null,filename);
+	result(null,"/print/"+siinfo.sino+'.pdf');
 };
