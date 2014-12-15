@@ -281,6 +281,11 @@
                               "title": "BL Code",
                               "type": "hidden"
                   },
+                  "brand": {
+                              "name": "brand",
+                              "title": "Brand",
+                              "type": "hidden"
+                  },
                   "_id": {
                               "name": "_id",
                               "title": "System ID",

@@ -1,5 +1,5 @@
 block title
-  title adjustments Order
+  title adjustments Kit
 .portlet.box.grey
   .portlet-title
     .caption
@@ -17,7 +17,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-               select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Transaction Type
 
           .col-md-6
