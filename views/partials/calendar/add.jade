@@ -15,25 +15,25 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                select.select2me.form-control.select2-offscreen(ng-model="schedule.company_name", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{sales.customer.company_name}}" ,tabindex="-1", required, ng-disabled="sales.ordered_items && sales.ordered_items.length")
+                   select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="schedule.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{consignments.customer.company_name}}" ,tabindex="-1", required, ng-disabled="consignments.consigned_item && consignments.consigned_item.length")
                 span.col-md-12.help-block Customer
           .col-md-1
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="schedule.beauty_educator", tabindex="-1",ng-options="", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="scheduel.customer.sales_executive", tabindex="-1",ng-options="", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Beauty Educator
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="schedule.sales_executive", tabindex="-1",ng-options="", ng-disabled="action=='read'",required)
+                input.form-control(type="text", ng-model="schedule.customer.sales_executive", ng-disabled="action!='approve'")
                 span.col-md-12.help-block Sales Executive
         .row
             .col-md-6
               .form-group
                 .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                  input.form-control(type="text", ng-model="schedule.startDate", ng-disabled="action=='read'",required)
+                  input.form-control(type="text", ng-model="schedule.startDate",  datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'",required)
                   span.col-md-12.help-block Start Date
             .col-md-6
               .form-group

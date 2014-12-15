@@ -2640,7 +2640,6 @@ angular.module('erp')
   if (!jQuery().fullCalendar) {
     return;
   }
-
   var date = new Date();
   var d = date.getDate();
   var m = date.getMonth();
@@ -2741,7 +2740,13 @@ angular.module('erp')
     }
     ]
   });
-
+  
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.customers = Api.Collection('customers').query();
+  
+  
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
