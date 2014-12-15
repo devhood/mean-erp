@@ -2494,7 +2494,6 @@ angular.module('erp')
     };
   }
 })
-
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
     $scope.ajax_ready = false;
