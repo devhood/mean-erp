@@ -158,6 +158,18 @@ angular.module('erp', [
         templateUrl: '/partials/shipment/add',
         controller: 'ShipmentCtrl'
       })
+      .when('/consignmentdaily/index/:type', {
+        templateUrl: '/partials/consignmentdaily/index',
+        controller: 'ConsignmentDailyCtrl'
+      })
+      .when('/consignmentdaily/:action', {
+        templateUrl: '/partials/consignmentdaily/add',
+        controller: 'ConsignmentDailyCtrl'
+      })
+      .when('/consignmentdaily/:action/:id', {
+        templateUrl: '/partials/consignmentdaily/add',
+        controller: 'ConsignmentDailyCtrl'
+      })
       .when('/purchase/index', {
         templateUrl: '/partials/purchase/index',
         controller: 'PurchaseCtrl'
