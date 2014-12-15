@@ -1,0 +1,33 @@
+block title
+  title ADD SCHEDULE
+.portlet.box.grey()
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && savePacking()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
+                span.col-md-12.help-block Inventory Location
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="packing.prepared_by", ng-disabled="action=='read'",required)
+                span.col-md-12.help-block Prepared By
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-3.col-md-9
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              | &nbsp;
+              button.btn.red(type="button", ng-click="deleteSchedule(schedule)", ng-show="action=='edit' || action=='approve'") Delete
+              | &nbsp;
+              a.btn.default(type="button", href="/#/calendar/index") Cancel
+          .col-md-6

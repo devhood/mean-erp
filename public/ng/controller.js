@@ -2494,6 +2494,7 @@ angular.module('erp')
     };
   }
 })
+
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
     $scope.ajax_ready = false;
@@ -2633,5 +2634,8 @@ angular.module('erp')
 
     }
 
-});
+  });
+})
+.controller('CalendarCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  
 });
