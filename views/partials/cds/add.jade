@@ -1,0 +1,165 @@
+block title
+  title CONSIGNMENT DAILY SALES
+.portlet.box.grey
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+      a.config(href="#portlet-config", data-toggle="modal")
+      a.reload(href="javascript:;")
+      a.remove(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveCds()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select#userId.select2me.form-control.select2-offscreen(ng-model="cds.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", ng-selected="{{customer.sales_executive}}" ng-disabled="action=='read'", required)
+                span.col-md-12.help-block	Sales Executive
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cds.cdsno", readonly)
+                span.col-md-12.help-block CDS Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="cds.inventory_location ", ng-options="inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                span.col-md-12.help-block Inventory Location
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cds.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block Date
+        .portlet.box.grey
+          //- (ng-show="cds.customer")
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ORDERED ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row(ng-hide="action=='read' || action=='approve' || action=='reschedule'" )
+                .col-md-1
+                .col-md-10
+                  .col-md-4
+                    .form-group 
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="cds.item" , ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-4
+                    .form-group 
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="cds.item", ng-options="product.name for product in products")
+                        span.col-md-12.help-block Product 
+                  .col-md-3 
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="cds.item.quantity")
+                        span.col-md-12.help-block Quantity 
+                  .col-md-1
+                    button.btn-sm.green.custom-right(type="button",ng-click="addOrder(cds)")
+                      i.fa.fa-plus
+                .col-md-1
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Quantity
+                              th Unit Price
+                              th Total
+                              th(width="5%")(ng-hide="action=='read' || action=='approve' || action=='reschedule' ") Action
+                          tbody
+                            tr(ng-repeat="consigned_item in cds.consigned_item track by $index")
+                              td {{consigned_item.bl_code}}
+                              td {{consigned_item.name}}
+                              td {{consigned_item.quantity}}
+                              td {{consigned_item.price}}
+                              td {{consigned_item.total}}
+                              td(width="5%")(ng-hide="action=='read'|| action=='approve'|| action=='reschedule'")
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                    i.fa.fa-trash-o
+                .col-md-1
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cds.discount", readonly)
+                span.col-md-12.help-block Discount
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cds.total_vat", readonly)
+                span.col-md-12.help-block VATable cds
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                input.form-control(type="checkbox", ng-model="cds.isWithholdingTax",ng-checked="reCompute(consignment)", value="1", ng-disabled="action=='read'")
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                input.form-control(type="text", ng-model="cds.withholding_tax", readonly)
+                span.col-md-12.help-block W/Holding Tax
+              .col-md-2
+
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                input.form-control(type="checkbox", ng-model="cds.isZeroRatecds",ng-checked="reCompute(cds)", value="1", ng-disabled="action=='read'")
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                input.form-control(type="text", ng-model="cds.zero_rate_cds", readonly)
+                span.col-md-12.help-block VAT Exempt/ Zero Rated consignments
+              .col-md-2
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cd.total_amount_due",readonly)
+                span.col-md-12.help-block TOTAL AMOUNT DUE
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-1.col-md-11
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              | &nbsp;
+              button.btn.yellow(type="submit" ng-show="save_form.$valid && action==('reschedule')") Reschedule
+              | &nbsp;
+              button.btn.blue(type="submit" ng-show="save_form.$valid && (action=='edit')") For Approval
+              | &nbsp;
+              button.btn.red(type="button", ng-click="rejectConsignments(cd)", ng-show="action=='edit'") Reject
+              | &nbsp;
+              a.btn.default(type="button", href="/#/consignment/index") Cancel
+          .col-md-6

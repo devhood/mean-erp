@@ -140,12 +140,22 @@ angular.module('erp', [
         templateUrl: '/partials/consignment/delivery',
         controller: 'ConsignDeliveryCtrl'
       })
-
       .when('/consignment/delivery/:action/:id', {
         templateUrl: '/partials/consignment/delivery',
         controller: 'ConsignDeliveryCtrl'
       })
-
+      .when('/cds/index', {
+        templateUrl: '/partials/cds/index',
+        controller: 'CDSCtrl'
+      })
+      .when('/cds/:action', {
+        templateUrl: '/partials/cds/add',
+        controller: 'CDSCtrl'
+      })
+      .when('/cds/:action/:id', {
+        templateUrl: '/partials/cds/add',
+        controller: 'CDSCtrl'
+      })
       .when('/shipment/index/:type', {
         templateUrl: '/partials/shipment/index',
         controller: 'ShipmentCtrl'
@@ -157,18 +167,6 @@ angular.module('erp', [
       .when('/shipment/:action/:id', {
         templateUrl: '/partials/shipment/add',
         controller: 'ShipmentCtrl'
-      })
-      .when('/consignmentdaily/index/:type', {
-        templateUrl: '/partials/consignmentdaily/index',
-        controller: 'ConsignmentDailyCtrl'
-      })
-      .when('/consignmentdaily/:action', {
-        templateUrl: '/partials/consignmentdaily/add',
-        controller: 'ConsignmentDailyCtrl'
-      })
-      .when('/consignmentdaily/:action/:id', {
-        templateUrl: '/partials/consignmentdaily/add',
-        controller: 'ConsignmentDailyCtrl'
       })
       .when('/purchase/index', {
         templateUrl: '/partials/purchase/index',

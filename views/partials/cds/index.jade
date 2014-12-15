@@ -1,0 +1,15 @@
+block title
+	title ERP | CONSIGNMENT DAILY SALES
+.portlet.box.grey(ng-if="ajax_ready", ng-init="init()")
+	.portlet-title
+		.caption
+			i.fa.fa-edit
+			| {{title}}
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body
+		.table-toolbar(ng-show='"{{addUrl}}"?true:false')
+			.btn-group.btn-group-xs.btn-group-solid
+				a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
+					i.fa.fa-plus
+		table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions" dt-columns="dtColumns")

@@ -25,6 +25,11 @@
         "title": "Consignment",
         "description": "Create Consignment",
         "href": "/#/consignment/index/order"
+      },
+      {
+        "title": "Consignment Daily Sales",
+        "description": "Create Consignment",
+        "href": "/#/cds/index"
       }
     ]
   },

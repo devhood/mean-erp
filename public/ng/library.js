@@ -80,6 +80,10 @@ angular.module('erp')
     },
     Status : {
 
+      CDS:{
+        created : {status_code : "CONSIGNMENTDAILY_CREATED", status_name : "Consignment Daily submitted"},
+        approved : {status_code : "CONSIGNMENTDAILY_APPROVED", status_name : "Consignment Daily approved"},
+      },
       Adjustment:{
         created : {status_code : "ADJUSTMENT_CREATED", status_name : "Adjustment submitted"},
         revised : {status_code : "ADJUSTMENT_REVISED", status_name : "Adjustment revised"},
