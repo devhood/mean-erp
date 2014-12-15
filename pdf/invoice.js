@@ -51,7 +51,7 @@ var pdf = {
 			doc.text(siinfo.special_instruction,35,y+10);
 
 			doc.font('Courier-Bold');
-			doc.text("CODE",10,200);
+			doc.text("CODE",15,200);
 			doc.text("PRODUCT",85,200);
 			doc.text("DESCRIPTION",205,200);
 			doc.text("QTY",345,200);
@@ -67,15 +67,15 @@ var pdf = {
 			doc.text(siinfo.ttl_discount,130,658);/*Vat Exempt Sales*/
 			doc.text(siinfo.zero_rate_sales,130,670);/*Zero Rated Sales*/
 			doc.text(siinfo.total_vat,130,682);/*VAT AMOUNT*/
-			doc.text(siinfo.withholding_tax,560,646);/*Total Sales Vat inclusive*/
+			doc.text(siinfo.subtotal,560,646);/*Total Sales Vat inclusive*/
 			doc.text(siinfo.total_vat,560,658);/*Less Vat*/
 			doc.text(siinfo.total_vat,560,670);/*Amount Net of VAT*/
-			doc.text(siinfo.discount,560,682,{width:50,align:'center'});/*Less CS/PWD Discount*/
-			doc.text(siinfo.total_vat,560,694,{width:50,align:'center'});/*Amount Due*/
-			doc.text(siinfo.total_vat,560,706,{width:50,align:'center'});/*Add Vat*/
+			doc.text(siinfo.discount,560,682,{width:50});/*Less CS/PWD Discount*/
+			doc.text(siinfo.total_vat,560,694,{width:50});/*Amount Due*/
+			doc.text(siinfo.total_vat,560,706,{width:50});/*Add Vat*/
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
-			doc.text(siinfo.total_amount_due,560,718,{width:35,align:'center'});/*Total Amount Due*/
+			doc.text(siinfo.total_amount_due,560,718,{width:50});/*Total Amount Due*/
 			doc.fontSize(10);
 			doc.font('Courier');
 			doc.text(siinfo.order_created_by,25,755);
@@ -92,17 +92,17 @@ module.exports.print = function(siinfo,result){
 		Subject:siinfo.sino,
 		Author:siinfo.invoice_created_by
 	}});
-	var filename = __dirname+"/"+siinfo.sino+'.pdf';
+	var filename = __dirname.replace(path.sep+"pdf",path.sep+"public"+path.sep+"print")+path.sep+siinfo.sino+'.pdf';
 	doc.pipe(fs.createWriteStream(filename));
 
 	doc = pdf.pageHeader(doc,siinfo);
 	doc = pdf.pageFooter(doc,siinfo);
 	doc.y = 225;
-	for(var i in siinfo.dr_item){
+	for(var i in siinfo.ordered_items){
 		var y= doc.y;
 		doc.font('Courier');
 	        doc.fontSize(8);
-		doc.text(siinfo.ordered_items[i].bl_code,-1,y,{width:65});
+		doc.text(siinfo.ordered_items[i].bl_code,3,y,{width:65});
 		doc.text(siinfo.ordered_items[i].name,70,y,{width:100});
 		doc.text(siinfo.ordered_items[i].description,175,y,{width:160});
 		doc.text(siinfo.ordered_items[i].quantity,340,y,{width:35,align:'center'});
@@ -119,5 +119,5 @@ module.exports.print = function(siinfo,result){
 		}
 	}
 	doc.end();
-	result(null,filename);
+	result(null,"/print/"+siinfo.sino+'.pdf');
 };

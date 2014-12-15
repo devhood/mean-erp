@@ -147,6 +147,11 @@
         "title": "Approve Consigned Order",
         "description": "Create Sales Order",
         "href": "/#/consignment/index/capprove"
+      },
+      {
+        "title": "Calendar",
+        "description": "Calendar",
+        "href": "/#/calendar/index"
       }
     ]
   }
