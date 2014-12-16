@@ -72,11 +72,6 @@
         "href": "/#/sales/index/approveReturn"
       },
       {
-        "title": "Product Merge",
-        "description": "Manage Products",
-        "href": "/#/prodmerge/index"
-      },
-      {
         "title": "Shipments",
         "description": "Manage Shipments",
         "href": "/#/shipment/index/create"
@@ -110,15 +105,10 @@
         "description": "Record Payment",
         "href": "/#/sales/index/payment"
       },
-      { 
+      {
         "title": "Shipment",
-        "description": "Manage Payment",
+        "description": "Manage Shipment",
         "href": "/#/shipment/index/approve"
-      },
-      { 
-        "title": "Product Merge Appoval",
-        "description": "Manage Product merge Approval",
-        "href": "/#/prodmerge/index/approve"
       },
       {
         "title": "Purchase",
