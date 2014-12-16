@@ -2505,7 +2505,7 @@ angular.module('erp')
 
     $scope.init = function(){
       columns = [
-       $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.sales_date
+       $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.sales_date, $scope.structure.status.status_name
         ];
 
       buttons = [
@@ -2578,10 +2578,9 @@ angular.module('erp')
     if(action == 'approve'){
       $scope.title = "APPROVE CONSIGNMENT DAILY SALES"+ id;
       $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
       });
-      $scope.saveCds = function(){
-        $scope.cds.status = status.cds.approved;
+      $scope.saveCDS = function(){
+        $scope.cds.status = status.approved;
         $scope.cds.$update(function(){
           $location.path('/cds/index');
           return false;
@@ -2855,12 +2854,12 @@ angular.module('erp')
       }
    if(action == 'add'){
       $scope.title = "ADD SCHEDULE";
-       console.log('frank');   
+       console.log('frank');
       var Schedules = Api.Collection('schedules');
       $scope.schedules = new Schedules();
 
       $scope.saveSched = function(){
-   
+
           $scope.schedules.status = status.created;
           $scope.schedules.$save(function(){
           $location.path('/calendar/index/');
@@ -2868,7 +2867,7 @@ angular.module('erp')
         });
       }
     }
-    
+
   if (id && action == 'edit') {
         $scope.title = "EDIT SCHEDULE" + id;
         $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
@@ -2901,7 +2900,7 @@ angular.module('erp')
         return false;
       });
     };
-   }    
+   }
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
