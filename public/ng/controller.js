@@ -2385,7 +2385,7 @@ angular.module('erp')
     }
         if( id && action == 'reschedule'){
 
-      $scope.title = "EDIT CONSIGNED ORDER "+ id;
+      $scope.title = "EDIT CONSIGNED DELIVERY ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -2842,9 +2842,66 @@ angular.module('erp')
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
+  $scope.schedule_types = Api.Collection('schedule_types').query();
+  $scope.brands = Api.Collection('brands').query();
   $scope.customers = Api.Collection('customers').query();
+  $scope.users = Api.Collection('users').query();
+  var status = Library.Status.Schedules;
+  console.log(action);
+   if(action == 'read'){
+        $scope.title = "VIEW SCHEDULE " + id;
+        $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        });
+      }
+   if(action == 'add'){
+      $scope.title = "ADD SCHEDULE";
+       console.log('frank');   
+      var Schedules = Api.Collection('schedules');
+      $scope.schedules = new Schedules();
 
+      $scope.saveSched = function(){
+   
+          $scope.schedules.status = status.created;
+          $scope.schedules.$save(function(){
+          $location.path('/calendar/index/');
+          return false;
+        });
+      }
+    }
+    
+  if (id && action == 'edit') {
+        $scope.title = "EDIT SCHEDULE" + id;
+        $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        });
+        $scope.saveSched = function(){
+          $scope.schedules.status = status.updated;
+          $scope.schedules.$update(function(){
+            $location.path('/calendar/index');
+            return false;
+          });
+        }
+      };
+  if(id && action == 'approve'){
 
+      $scope.title = "APPROVE SCHEDULE "+ id;
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveSched = function(){
+        $scope.schedules.status = status.approved;
+        $scope.schedules.$update(function(){
+          $location.path('/calendar/index/');
+          return false;
+        });
+      };
+    $scope.rejectSched = function(){
+      $scope.schedules.status = status.rejected;
+      $scope.schedules.$update(function(){
+        $location.path('/calendar/index');
+        return false;
+      });
+    };
+   }    
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;

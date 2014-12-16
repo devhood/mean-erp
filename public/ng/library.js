@@ -79,7 +79,12 @@ angular.module('erp')
       },
     },
     Status : {
-
+      Schedules:{
+        created : {status_code : "SCHEDULE_CREATED", status_name : "Schedule Submitted"},
+        update : {status_code : "SCHEDULE_UPDATED", status_name : "Update Schedule Submitted"},
+        rejected : {status_code : "SCHEDULED_REJECTED", status_name : "Schedule rejecteded"},
+        approved : {status_code : "SCHEDULED_APPROVED", status_name : "Schedule approved"},
+      },
       CDS:{
         created : {status_code : "CDS_CREATED", status_name : "Consignment Daily submitted"},
         approved : {status_code : "CDS_APPROVED", status_name : "Consignment Daily approved"},

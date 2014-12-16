@@ -33,6 +33,7 @@
       }
     ]
   },
+  
   {
     "link": "javascript:;",
     "title": "Warehouse",
@@ -69,6 +70,11 @@
         "title": "Return Merchandise",
         "description": "Return Sales Item",
         "href": "/#/sales/index/approveReturn"
+      },
+      {
+        "title": "Transact Assembly",
+        "description": "Manage Transfer",
+        "href": "/#/assembly/index"
       },
       {
         "title": "Shipments",
@@ -113,6 +119,35 @@
   },
   {
     "link": "javascript:;",
+    "title": "Reports",
+    "start": true,
+    "icon": "fa-shopping-cart",
+    "id": 1,
+    "childLink": [
+      {
+        "title": "Sales Report",
+        "description": "Vies Sales",
+        "href": "/#/sales/report/index"
+      },
+      {
+        "title": "RMR Report",
+        "description": "View Returns",
+        "href": "/#/sales/index/return"
+      },
+      {
+        "title": "Retail Sales Report",
+        "description": "View Sales Declararion",
+        "href": "/#/consignment/index/order"
+      },
+      {
+        "title": "Inventory Report",
+        "description": "View Inventory",
+        "href": "/#/consignment/index/order"
+      }
+    ]
+  },
+  {
+    "link": "javascript:;",
     "title": "Admin",
     "last": true,
     "icon": "fa-gear",
@@ -152,6 +187,11 @@
         "title": "Calendar",
         "description": "Calendar",
         "href": "/#/calendar/index"
+      },
+      {
+        "title": "Schedule Approval",
+        "description": "Demo Schedule",
+        "href": "/#/calendar/index/add"
       }
     ]
   }

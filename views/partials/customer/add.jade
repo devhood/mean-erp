@@ -190,11 +190,13 @@ block title
 								// <div class="form-group">
 								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 									h3.inline Billing Address
-									br
-									br
 								// </div>
 							.col-md-6
-								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										label.checkbox Use as Billing
+									br
+									br											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1")
 						.row
 							.col-md-6
 								.form-group
