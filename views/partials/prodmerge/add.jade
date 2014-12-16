@@ -1,0 +1,171 @@
+block title
+  title adjustments MERGING ITEMS
+.portlet.box.grey
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+      a.config(href="#portlet-config", data-toggle="modal")
+      a.reload(href="javascript:;")
+      a.remove(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveMerge()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="prodmerges.pm_type ", ng-options="pm_type.name as pm_type.name for pm_type  in pm_types", ng-selected="{{prodmerges.pm_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                span.col-md-12.help-block Transaction Type
+
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="prodmerges.pmno", readonly)
+                span.col-md-12.help-block Product Merge Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="prodmerges.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{prodmerges.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                span.col-md-12.help-block Inventory Location
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="prodmerges.adjustment_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block Merge/Unmerge Date
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-model="prodmerges.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
+                span.col-md-12.help-block Special Instructions
+          .col-md-1
+        .portlet.box.grey
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ITEM OUT
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row(ng-hide="action=='read'")
+                .col-md-1
+                .col-md-10
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-4
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.name for product in products")
+                        span.col-md-12.help-block Product
+                  .col-md-2
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="prodmerges.item.quantity")
+                        span.col-md-12.help-block Quantity
+                  .col-md-1
+                    button.btn-sm.green.custom-right(type="button",ng-click="addItemIn(prodmerges)")
+                      i.fa.fa-plus
+                .col-md-1
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Quantity
+
+                              th(width="5%")(ng-hide="action=='read'") Action
+                          tbody
+                            tr(ng-repeat="pm_item in prodmerges.pm_item track by $index")
+                              td {{pm_item.bl_code}}
+                              td {{pm_item.name}}
+                              td {{pm_item.quantity}}
+                              td(width="5%")(ng-hide="action=='read'")
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-click="removeItemIn($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                    i.fa.fa-trash-o
+                .col-md-1
+        .portlet.box.grey
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ITEM IN
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row(ng-hide="action=='read'")
+                .col-md-1
+                .col-md-10
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-4
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.name for product in products")
+                        span.col-md-12.help-block Product
+                  .col-md-2
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="prodmerges.item.quantity")
+                        span.col-md-12.help-block Quantity
+                  .col-md-1
+                    button.btn-sm.green.custom-right(type="button",ng-click="addItemOut(prodmerges)")
+                      i.fa.fa-plus
+                .col-md-1
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Quantity
+
+                              th(width="5%")(ng-hide="action=='read'") Action
+                          tbody
+                            tr(ng-repeat="unmerge_item in prodmerges.unmerge_item track by $index")
+                              td {{unmerge_item.bl_code}}
+                              td {{unmerge_item.name}}
+                              td {{unmerge_item.quantity}}
+                              td(width="5%")(ng-hide="action=='read'")
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-click="removeItemOut($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                    i.fa.fa-trash-o
+                .col-md-1
+        .row
+          .col-md-6
+            .col-md-offset-3.col-md-9
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              | &nbsp;
+              button.btn.red(type="button", ng-click="rejectMerge(prodmerges)", ng-show="action=='edit' || action=='approve'") Reject
+              | &nbsp;
+              a.btn.default(type="button", href="/#/prodmerge/index") Cancel
+          .col-md-6

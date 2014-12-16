@@ -196,6 +196,14 @@ angular.module('erp', [
         templateUrl: '/partials/calendar/index',
         controller: 'CalendarCtrl'
       })
+      .when('/schedule/index', {
+        templateUrl: '/partials/schedule/index',
+        controller: 'CalendarCtrl'
+      })
+      .when('/schedule/:action', {
+        templateUrl: '/partials/schedule/index',
+        controller: 'CalendarCtrl'
+      })
       .when('/calendar/:action', {
         templateUrl: '/partials/calendar/add',
         controller: 'CalendarCtrl'
@@ -219,6 +227,18 @@ angular.module('erp', [
       .when('/print/sales/:type/:id', {
         templateUrl: '/partials/sales/index',
         controller: 'PrintCtrl'
+      })
+      .when('/prodmerge/index/:type ', {
+        templateUrl: '/partials/prodmerge/index',
+        controller: 'MergeCtrl'
+      })
+      .when('/prodmerge/:action', {
+        templateUrl: '/partials/prodmerge/index',
+        controller: 'ProdMergeCtrl'
+      })
+      .when('/prodmerge/:action/:id', {
+        templateUrl: '/partials/prodmerge/index',
+        controller: 'ProdMergeCtrl'
       })
       .otherwise({
         redirectTo: '/'

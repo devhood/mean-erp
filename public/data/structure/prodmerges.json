@@ -1,0 +1,80 @@
+[
+    {
+        "pm_type": {
+            "name": "pm_type",
+            "title": "Transfer Type",
+            "type": "select"
+        },
+        "transfer_date": {
+            "name": "transfer_date",
+            "title": "Transfer Date",
+            "type": "select"
+        },
+        "pmno": {
+            "name": "pmno",
+            "title": "Product Merge Number",
+            "type": "text"
+        },
+        "inventory_location": {
+            "name": "inventory_location",
+            "title": "Inventory Location",
+            "type": "select"
+        },
+        "pm_item": {
+            "name": "pm_item",
+            "title": "KIT LIST",
+            "type": "table",
+            "child_items": {
+                "product": {
+                    "name": "product",
+                    "title": "Product",
+                    "type": "text"
+                },
+                "bl_code": {
+                    "name": "bl_code",
+                    "title": "BL Code",
+                    "type": "text"
+                },
+                "quantity": {
+                    "name": "quantity",
+                    "title": "Quantity",
+                    "type": "text"
+                }
+            }
+        },
+        "unmerge_item": {
+            "name": "unmerge_item",
+            "title": "BREAK MERGE",
+            "type": "table",
+            "child_items": {
+                "product": {
+                    "name": "product",
+                    "title": "Product",
+                    "type": "text"
+                },
+                "bl_code": {
+                    "name": "bl_code",
+                    "title": "BL Code",
+                    "type": "text"
+                },
+                "quantity": {
+                    "name": "quantity",
+                    "title": "Quantity",
+                    "type": "text"
+                }
+            }
+        },
+        "status": {
+            "status_code": {
+                "name": "status.status_code",
+                "title": "Status",
+                "type": "text"
+            },
+            "status_name": {
+                "name": "status.status_name",
+                "title": "Status Code",
+                "type": "text"
+            }
+        }
+    }
+]
