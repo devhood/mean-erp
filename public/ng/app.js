@@ -196,6 +196,14 @@ angular.module('erp', [
         templateUrl: '/partials/calendar/index',
         controller: 'CalendarCtrl'
       })
+      .when('/schedule/index', {
+        templateUrl: '/partials/schedule/index',
+        controller: 'CalendarCtrl'
+      })
+      .when('/schedule/:action', {
+        templateUrl: '/partials/schedule/index',
+        controller: 'CalendarCtrl'
+      })
       .when('/calendar/:action', {
         templateUrl: '/partials/calendar/add',
         controller: 'CalendarCtrl'

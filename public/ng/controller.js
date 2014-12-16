@@ -2843,6 +2843,14 @@ $scope.formInit = function(){
     }
     ]
   });
+Structure.Schedules.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    
+  $scope.ajax_ready = false;
 
   var id = $routeParams.id;
   var action = $routeParams.action;
@@ -2851,8 +2859,26 @@ $scope.formInit = function(){
   $scope.brands = Api.Collection('brands').query();
   $scope.customers = Api.Collection('customers').query();
   $scope.users = Api.Collection('users').query();
-  var status = Library.Status.Schedules;
-  console.log(action);
+  var status = Library.Status.Schedule;
+  
+ 
+  $scope.init = function(){ 
+    columns = [
+            $scope.structure.customer.company_name, $scope.structure.asno,
+            $scope.structure.startDate, $scope.structure.status.status_name
+          ];
+
+          buttons = [
+            {url:"/#/schedule/index/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/schedule/index/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          ];
+
+          query = { "status.status_code" : {"$in" : [status.created.status_code,status.update.status_code]}};
+          $scope.title = "For APPROVAL";
+
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
+  }
    if(action == 'read'){
         $scope.title = "VIEW SCHEDULE " + id;
         $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
@@ -2860,20 +2886,19 @@ $scope.formInit = function(){
       }
    if(action == 'add'){
       $scope.title = "ADD SCHEDULE";
-       console.log('frank');   
+
       var Schedules = Api.Collection('schedules');
       $scope.schedules = new Schedules();
 
       $scope.saveSched = function(){
-   
+
           $scope.schedules.status = status.created;
           $scope.schedules.$save(function(){
-          $location.path('/calendar/index/');
+          $location.path('/schedule/index/');
           return false;
         });
       }
-    }
-    
+    }    
   if (id && action == 'edit') {
         $scope.title = "EDIT SCHEDULE" + id;
         $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
@@ -2881,7 +2906,7 @@ $scope.formInit = function(){
         $scope.saveSched = function(){
           $scope.schedules.status = status.updated;
           $scope.schedules.$update(function(){
-            $location.path('/calendar/index');
+            $location.path('/schedule/index');
             return false;
           });
         }
@@ -2906,7 +2931,8 @@ $scope.formInit = function(){
         return false;
       });
     };
-   }    
+  }
+  });   
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
