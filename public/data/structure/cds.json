@@ -1,7 +1,7 @@
 [
   {
-    "date": {
-      "name": "date",
+    "sales_date": {
+      "name": "sales_date",
       "title": "Date",
       "type": "text"
     },

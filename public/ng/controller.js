@@ -1853,6 +1853,7 @@ angular.module('erp')
 
 
   $scope.addPayment = function(sales){
+    console.log(sales);
     var payment = angular.copy(sales.payment_detail);
     if(payment && payment.payment_type && payment.check_number && payment.check_dep_date && payment.bank && payment.amount){
         if($scope.sales.payment_details){
@@ -1862,8 +1863,6 @@ angular.module('erp')
           $scope.sales.payment_details = [payment];
         }
     }
-
-    payment_detail = {};
     payment = {};
 
     delete sales.payment_detail;
@@ -1918,7 +1917,6 @@ angular.module('erp')
         return false;
       });
     };
-
   }
   if(action == 'approve'){
     $scope.title = "APPROVE SALES PAYMENT "+ id;
@@ -2507,100 +2505,97 @@ angular.module('erp')
 
     $scope.init = function(){
       columns = [
-       $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.date
+       $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.sales_date
         ];
 
       buttons = [
         {url:"/#/cds/read/",title:"View Record",icon:"fa fa-folder-open"},
-        {url:"/#/cds/edit/",title:"Edit Record",icon:"fa fa-edit"},
         {url:"/#/cds/approve/",title:"Approve Record",icon:"fa fa-gear"}
       ];
       // query = { "status.status_code" : {"$in" : [status.created.status_code]}};
       query= {};
-      $scope.title = "CONSIGNMENT DAILY"
+      $scope.title = "CONSIGNMENT DAILY SALES"
       $scope.addUrl = "/#/cds/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/adjustments?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions = Library.DataTable.options("/api/cds?filter="+encodeURIComponent(JSON.stringify(query)));
     }
 
-$scope.formInit = function(){
+  $scope.formInit = function(){
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
+    var status = Library.Status.CDS;
+
     $scope.customers = Api.Collection('customers',query).query();
     $scope.products = Api.Collection('products').query();
-    // $scope.bl_consultants = Api.Collection('bl_consultants',query).query();
-    var status = Library.Status.ConsignmentDaily;
+    var query = {"type":"Retail"};
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+    var query = {"position":"Sales Executive"};
+    $scope.sales_executives = Api.Collection('users',query).query();
 
 
-  // $scope.CustomerChange = function(){
-  //   if($scope.cds.customer){
-  //     $scope.shipping_address =
-  //     $scope.cds.customer.shipping_address.landmark + ', ' +
-  //     $scope.cds.customer.shipping_address.barangay + ', ' +
-  //     $scope.cds.customer.shipping_address.city + ', ' +
-  //     $scope.cds.customer.shipping_address.province + ', ' +
-  //     $scope.cds.customer.shipping_address.country + ', ' +
-  //     $scope.cds.customer.shipping_address.zipcode;
-  //
-  //     $scope.billing_address =
-  //     $scope.cds.customer.billing_address.landmark + ', ' +
-  //     $scope.cds.customer.billing_address.barangay + ', ' +
-  //     $scope.cds.customer.billing_address.city + ', ' +
-  //     $scope.cds.customer.billing_address.province + ', ' +
-  //     $scope.cds.customer.billing_address.country + ', ' +
-  //     $scope.cds.customer.billing_address.zipcode;
-  //   }
-  // }
   if(action == 'read'){
     $scope.title = "VIEW CONSIGNMENT DELIVERY RECEIPT";
     $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
+    console.log("reading" + $scope.cds.sales_executive);
     });
   }
-
-  $scope.action = action;
-  console.log("adding cds");
   if(action == 'add'){
+  console.log("adding cds");
     $scope.title = "ADD CONSIGNMENT DAILY SALE";
-    var CDS = Api.Collection('cds');
-    $scope.cds = new CDS();
-    $scope.cds.status = status.created;
+    var cds = Api.Collection('cds');
+    $scope.cds = new cds();
+
     $scope.saveCDS = function(){
+        console.log("saved");
       $scope.cds.$save(function(){
         $location.path('/cds/index');
         return false;
       });
+    $scope.cds.status = status.created;
     }
   }//end action add
 
-  // if(action == 'approve'){
-  //   $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
-  //   $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
-  //     $scope.CustomerChange();
-  //   });
-  //   $scope.saveCds = function(){
-  //     $scope.cds.status = status.delivery.approved;
-  //     $scope.cds.$update(function(){
-  //       $location.path('/cds/index');
-  //       return false;
-  //     });
-  //   };
-  //   $scope.rejectCds = function(){
-  //     $scope.cds.status = status.delivery.rejected;
-  //     $scope.cds.$update(function(){
-  //       $location.path('/cds/index');
-  //       return false;
-  //     });
-  //   };
-  // }
-}
-});
+  $scope.addCDS = function(cds){
+    var item = angular.copy(cds.consigned_item);
+    if (item && item.name && item.quantity){
+      if($scope.cds.consigned_items){
+        $scope.cds.consigned_items.push(item);
+      }
+      else{
+        $scope.cds.consigned_items = [item];
+      }
+    }
+      cds.consigned_item = null;
+      cds.consigned_item.quantity = null;
+      cds.consigned_item.refno = null;
+      console.log("cds: "+cds);
+    }
+      $scope.removeCDS = function(index){
+      $scope.cds.consigned_items.splice(index, 1);
+    }
+
+    if(action == 'approve'){
+      $scope.title = "APPROVE CONSIGNMENT DAILY SALES"+ id;
+      $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveCds = function(){
+        $scope.cds.status = status.cds.approved;
+        $scope.cds.$update(function(){
+          $location.path('/cds/index');
+          return false;
+        });
+      };
+    }
+
+  }
+  });
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
     $scope.ajax_ready = false;
-  Structure.Adjustments.query().$promise.then(function(data){
+    Structure.Adjustments.query().$promise.then(function(data){
     $scope.structure = data[0];
     $scope.ajax_ready = true;
     var columns = [];
