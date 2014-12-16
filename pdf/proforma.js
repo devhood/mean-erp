@@ -119,5 +119,5 @@ module.exports.print = function(pfinfo,result){
 		}
 	}
 	doc.end();
-	result(null,"/print/"+pfinfo.sino+'.pdf');
+	result(null,"/print/"+pfinfo.pfno+'.pdf');
 };
