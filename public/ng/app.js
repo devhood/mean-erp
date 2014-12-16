@@ -216,6 +216,18 @@ angular.module('erp', [
         templateUrl: '/partials/sales/index',
         controller: 'PrintCtrl'
       })
+      .when('/prodmerge/index/:type ', {
+        templateUrl: '/partials/prodmerge/index',
+        controller: 'MergeCtrl'
+      })
+      .when('/prodmerge/:action', {
+        templateUrl: '/partials/prodmerge/index',
+        controller: 'ProdMergeCtrl'
+      })
+      .when('/prodmerge/:action/:id', {
+        templateUrl: '/partials/prodmerge/index',
+        controller: 'ProdMergeCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

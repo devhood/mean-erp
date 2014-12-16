@@ -79,6 +79,12 @@ angular.module('erp')
       },
     },
     Status : {
+      ProdMerge:{
+          created : {status_code : "PRODUCT_MERGE_CREATED", status_name : "Product Merge Submitted"},
+          update : {status_code : "PRODUCT_MERGE_UPDATED", status_name : "Update Product Merge Submitted"},
+          rejected : {status_code : "PRODUCT_MERGE_REJECTED", status_name : "Product Merge rejecteded"},
+          approved : {status_code : "PRODUCT_MERGE_APPROVED", status_name : "Product Merge approved"},      
+      },
       Schedule:{
           created : {status_code : "SCHEDULE_CREATED", status_name : "Schedule Submitted"},
           update : {status_code : "SCHEDULE_UPDATED", status_name : "Update Schedule Submitted"},

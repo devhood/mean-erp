@@ -38,7 +38,6 @@ angular.module('erp')
       $scope.positions = Api.Collection('positions').query();
       $scope.statuses = Api.Collection('user_status').query();
       $scope.permissions = Api.Collection('permissions').query();
-
       $scope.addPermission = function(user){
         if(user.permission && user.permission.name && user.permission.allowed){
           if($scope.user.permissions){
@@ -51,7 +50,6 @@ angular.module('erp')
           delete user.permission;
         }
       };
-
       $scope.removePermission = function(index){
         $scope.user.permissions.splice(index, 1);
       };
@@ -2880,7 +2878,7 @@ Structure.Schedules.query().$promise.then(function(data){
       }
    if(action == 'add'){
       $scope.title = "ADD SCHEDULE";
-       console.log('frank');
+
       var Schedules = Api.Collection('schedules');
       $scope.schedules = new Schedules();
 
@@ -2888,12 +2886,12 @@ Structure.Schedules.query().$promise.then(function(data){
 
           $scope.schedules.status = status.created;
           $scope.schedules.$save(function(){
-          $location.path('/schedule/index/');
+          $location.path('/schedule/index/schedule');
           return false;
         });
       }
     }    
-    }
+  
 
   if (id && action == 'edit') {
         $scope.title = "EDIT SCHEDULE" + id;
@@ -2907,6 +2905,7 @@ Structure.Schedules.query().$promise.then(function(data){
           });
         }
       };
+  
   if(id && action == 'approve'){
 
       $scope.title = "APPROVE SCHEDULE "+ id;
@@ -2927,16 +2926,167 @@ Structure.Schedules.query().$promise.then(function(data){
         return false;
       });
     };
-<<<<<<< HEAD
+
   }
   });   
-=======
-   }
->>>>>>> 7be20bc3bc8af19ac0ebcaee585a5782b8637423
+   
+
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
   var type = $routeParams.type;
 
   $window.location.href = '/print/sales/'+type+'/'+id;
+})
+.controller('MergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+    $scope.ajax_ready = false;
+    Structure.ProdMerges.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var status = Library.Status.ProdMerge;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+
+    $scope.init = function(){
+      var type = $routeParams.type;
+      switch(type){
+          case "add" :
+        console.log ('frank');
+            columns = [
+              $scope.structure.pmno, $scope.structure.pm_type, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+              {url:"/#/prodmerge/read/",title:"View Record",icon:"fa fa-folder-open"},
+              {url:"/#/prodmerge/edit/",title:"Edit Record",icon:"fa fa-edit"}
+            ];
+
+            query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.created.status_code, status.update.status_code]}};
+            $scope.title = "MERGE AND UNMERGE LIST"
+            $scope.addUrl = "/#/prodmerge/add";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/prodmerges?filter="+encodeURIComponent(JSON.stringify(query)));
+        break;
+        case "approve" :
+        console.log ('frank');
+            columns = [
+              $scope.structure.pmno, $scope.structure.pm_type, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+              {url:"/#/prodmerge/read/",title:"View Record",icon:"fa fa-folder-open"},
+              {url:"/#/prodmerge/approve/",title:"Edit Record",icon:"fa fa-gear"}
+            ];
+
+            query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.created.status_code, status.update.status_code]}};
+            $scope.title = "MERGE AND UNMERGE LIST"
+            
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/prodmerges?filter="+encodeURIComponent(JSON.stringify(query)));
+
+        break;
+      }
+      }
+    });
+  })
+.controller('ProdMergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+   // $scope.price_types = Api.Collection('price_types').query();
+   // $scope.transaction_types = Api.Collection('transaction_type').query();
+    $scope.pm_types = Api.Collection('pm_types').query();
+    var query = {"type":"Retail"};
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+    $scope.products = Api.Collection('products').query();
+    var status = Library.Status.ProdMerge;
+    
+    $scope.addItemIn = function(prodmerges){
+      var item = angular.copy(prodmerges.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        delete item.inventories;
+        if($scope.prodmerges.pm_item){
+          $scope.prodmerges.pm_item.push(item);
+        }
+        else{
+          $scope.prodmerges.pm_item = [item];
+        }
+        delete prodmerges.item;
+      }
+    }
+    $scope.removeItemIn = function(index){
+      $scope.prodmerges.pm_item.splice(index, 1);
+      $scope.prodmerges.subtotal = 0;
+      for(var i=0;i<$scope.prodmerges.pm_item.length; i++){
+        $scope.prodmerges.subtotal+=$scope.prodmerges.pm_item[i].total;
+
+      }
+    } 
+  
+    $scope.addItemOut = function(prodmerges){
+      var item = angular.copy(prodmerges.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        delete item.inventories;
+        if($scope.prodmerges.unmerge_item){
+          $scope.prodmerges.unmerge_item.push(item);
+        }
+        else{
+          $scope.prodmerges.unmerge_item = [item];
+        }
+        delete prodmerges.item;
+      }
+    }
+    $scope.removeItemOut = function(index){
+      $scope.prodmerges.unmerge_item.splice(index, 1);
+      $scope.prodmerges.subtotal = 0;
+      for(var i=0;i<$scope.prodmerges.unmerge_item.length; i++){
+        $scope.prodmerges.subtotal+=$scope.prodmerges.unmerge_item[i].total;
+
+      }
+    }
+    
+    if( action == 'read'){
+      $scope.title = "VIEW MERGE OR UNMERGE ITEM";
+      $scope.prodmerges =  Api.Collection('prodmerges').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+      });
+    }
+      if(action == 'add'){
+      $scope.title = "ADD DETAIL FOR MERGE OR UNMERGE ITEMS";
+      var Prodmerges = Api.Collection('prodmerges');
+      $scope.prodmerges = new Prodmerges();
+
+      $scope.saveMerge = function(){
+        
+          $scope.prodmerges.status = status.created;
+        
+          //    $scope.sales.triggerInventory  = "OUT";
+
+        $scope.prodmerges.$save(function(){
+          $location.path('/prodmerge/index');
+          return false;
+        });
+      }
+    }
+        if( id && action == 'edit'){
+
+      $scope.title = "EDIT MERGE ITEM "+ id;
+      $scope.prodmerges =  Api.Collection('prodmerges').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveMerge = function(){
+          $scope.prodmerges.status = status.update;
+       $scope.prodmerges.$update(function(){
+          $location.path('/prodmerge/index');
+          return false;
+        });
+      };
+
+    }
+
+
+
 });

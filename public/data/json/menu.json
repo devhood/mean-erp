@@ -72,9 +72,9 @@
         "href": "/#/sales/index/approveReturn"
       },
       {
-        "title": "Transact Assembly",
-        "description": "Manage Transfer",
-        "href": "/#/assembly/index"
+        "title": "Product Merge",
+        "description": "Manage Products",
+        "href": "/#/prodmerge/index"
       },
       {
         "title": "Shipments",
@@ -109,6 +109,11 @@
         "title": "Shipment",
         "description": "Manage Payment",
         "href": "/#/shipment/index/approve"
+      },
+      { 
+        "title": "Product Merge Appoval",
+        "description": "Manage Product merge Approval",
+        "href": "/#/prodmerge/index/approve"
       },
       {
         "title": "Purchase",

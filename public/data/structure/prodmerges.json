@@ -1,8 +1,8 @@
 [
     {
-        "transaction_type": {
-            "name": "transaction_type",
-            "title": "Transaction Type",
+        "pm_type": {
+            "name": "pm_type",
+            "title": "Transfer Type",
             "type": "select"
         },
         "transfer_date": {
@@ -10,9 +10,9 @@
             "title": "Transfer Date",
             "type": "select"
         },
-        "asno": {
-            "name": "asno",
-            "title": "Assembly Number",
+        "pmno": {
+            "name": "pmno",
+            "title": "Product Merge Number",
             "type": "text"
         },
         "inventory_location": {
@@ -20,9 +20,9 @@
             "title": "Inventory Location",
             "type": "select"
         },
-        "assembly_item": {
-            "name": "assembly_item",
-            "title": "KITTED ITEMS",
+        "pm_item": {
+            "name": "pm_item",
+            "title": "KIT LIST",
             "type": "table",
             "child_items": {
                 "product": {
@@ -42,9 +42,9 @@
                 }
             }
         },
-        "disassmbled_item": {
-            "name": "disassmbled_item",
-            "title": "BREAK KITTED ITEMS",
+        "unmerge_item": {
+            "name": "unmerge_item",
+            "title": "BREAK MERGE",
             "type": "table",
             "child_items": {
                 "product": {
