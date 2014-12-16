@@ -84,11 +84,6 @@ angular.module('erp')
       },
     },
     Status : {
-      ProdMerge:{
-          created : {status_code : "PRODUCT_MERGE_CREATED", status_name : "Product Merge Submitted"},
-          update : {status_code : "PRODUCT_MERGE_UPDATED", status_name : "Update Product Merge Submitted"},
-          rejected : {status_code : "PRODUCT_MERGE_REJECTED", status_name : "Product Merge rejecteded"},
-          approved : {status_code : "PRODUCT_MERGE_APPROVED", status_name : "Product Merge approved"},
       Cycle:{
         created : {status_code : "CYCLE_CREATED", status_name : "Cycle Count submitted"},
         approved : {status_code : "CYCLE_APPROVED", status_name : "Cycle Count approved"},
@@ -194,6 +189,5 @@ angular.module('erp')
         }
       }
     }
-  }
   }
 });
