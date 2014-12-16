@@ -23,6 +23,7 @@ angular.module('erp')
       Shipments : $resource('/data/structure/shipments.json'),
       Purchases : $resource('/data/structure/purchases.json'),
       Trips : $resource('/data/structure/trips.json'),
+      Schedules : $resource('/data/structure/schedules.json'),
       CDS : $resource('/data/structure/cds.json')
     }
   })

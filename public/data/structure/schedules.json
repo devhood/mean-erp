@@ -1,5 +1,15 @@
 [
     {
+      "schno": {
+            "name": "schno",
+            "title": "Schedule Number",
+            "type": "text"
+        },
+      "schedule_type": {
+            "name": "schedule_type",
+            "title": "Schedule Type",
+            "type": "select"
+      },
         "customer": {
             "company_name": {
                 "name": "customer.company_name",
@@ -133,6 +143,12 @@
                 }
             }
         },
+        "brand": {
+            "name": "brand",
+            "title": "Brand",
+            "type": "select"
+        },
+        
         "status": {
             "status_code": {
                 "name": "status.status_code",

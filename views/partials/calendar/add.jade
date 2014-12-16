@@ -8,21 +8,36 @@ block title
     .tools
       a.collapse(href="javascript:;")
   .portlet-body.form
-    form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && saveSched()", novalidate)
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSched()", novalidate)
       .form-body
-        .row
-          .col-md-1
-          .col-md-10
-            .form-group
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                   select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="schedules.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{consignments.customer.company_name}}" ,tabindex="-1", required, ng-disabled="consignments.consigned_item && consignments.consigned_item.length")
-                span.col-md-12.help-block Customer
-          .col-md-1
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="schedules.users.position_name",ng-options="users.fullname for user in users track by users.position_name", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1", required)
+                span.col-md-12.help-block Schedule Type
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="schedules.schno", readonly)
+                span.col-md-12.help-block Sched Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="schedules.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{schedules.customer.company_name}}" ,tabindex="-1", required)
+                span.col-md-12.help-block Customer
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                select.select2me.form-control.select2-offscreen( ng-model="schedules.brand", ng-disabled="action=='read'",ng-options="brand.name for brand in brands track by brand.name",required)
+                span.col-md-12.help-block Brand
+     
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="schedules.customer.sales_executive", ng-disabled="action=='read'",readonly)
                 span.col-md-12.help-block Educator
           .col-md-6
             .form-group
@@ -40,56 +55,14 @@ block title
                 .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                   input.form-control(type="text",   ng-model="schedules.start_time" ng-minlength="0", ng-maxlength="20", ui-mask="99:99", ng-disabled="action=='read'")
                   span.col-md-12.help-block Start Time
-        .portlet.box.grey
-          .portlet-title
-            .caption
-              i.fa.fa-reorder
-              | DEMO BRAND
-            .tools
-              a.collapse(href="javascript:;")
-         .portlet-body.form
-            .form-body
-              br
-              br
-              .row(ng-hide="action=='read'")
-                .col-md-1
-                .col-md-10
-                  .col-md-3
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="schedules.item", ng-options="brand.name for brand in brands")
-                        span.col-md-12.help-block Brand
-                  .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addOrder(brand)")
-                      i.fa.fa-plus
-                .col-md-1
-              .form-group
-                .col-md-1
-                .col-md-10
-                  .row
-                    br
-                    .col-md-12
-                      .portlet-body.flip-scroll
-                        table.table.table-bordered.table-condensed.flip-content
-                          thead.flip-content.bg-grey
-                            tr
-                              th BRAND
-                              th(width="5%")(ng-hide="action=='read'") Action
-                          tbody
-                            tr(ng-repeat="demo_brand in schedules.demo_brand track by $index")
-                              td {{demo_brand.brand}}
-                              td(width="5%")(ng-hide="action=='read'")
-                                .btn-group.btn-group-xs.btn-group-solid
-                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
-                                    i.fa.fa-trash-o
-                .col-md-1
-      .form-actions.fluid
+     
+       .form-actions.fluid
         .row
           .col-md-6
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="rejectSchedule(schedule)", ng-show="action=='edit' || action=='approve'") Reject
+              button.btn.red(type="button", ng-click="rejectSchedule(schedules)", ng-show="action=='edit' || action=='approve'") Reject
               | &nbsp;
               a.btn.default(type="button", href="/#/calendar/index") Cancel
           .col-md-6

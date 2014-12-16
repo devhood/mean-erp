@@ -72,6 +72,11 @@
         "href": "/#/sales/index/approveReturn"
       },
       {
+        "title": "Transact Assembly",
+        "description": "Manage Transfer",
+        "href": "/#/assembly/index"
+      },
+      {
         "title": "Shipments",
         "description": "Manage Shipments",
         "href": "/#/shipment/index/create"
