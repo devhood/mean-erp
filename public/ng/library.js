@@ -88,7 +88,7 @@ angular.module('erp')
           created : {status_code : "PRODUCT_MERGE_CREATED", status_name : "Product Merge Submitted"},
           update : {status_code : "PRODUCT_MERGE_UPDATED", status_name : "Update Product Merge Submitted"},
           rejected : {status_code : "PRODUCT_MERGE_REJECTED", status_name : "Product Merge rejecteded"},
-          approved : {status_code : "PRODUCT_MERGE_APPROVED", status_name : "Product Merge approved"},      
+          approved : {status_code : "PRODUCT_MERGE_APPROVED", status_name : "Product Merge approved"},
       Cycle:{
         created : {status_code : "CYCLE_CREATED", status_name : "Cycle Count submitted"},
         approved : {status_code : "CYCLE_APPROVED", status_name : "Cycle Count approved"},
@@ -151,7 +151,7 @@ angular.module('erp')
           override : {status_code : "SALES_ORDER_OVERRIDE", status_name : "Sales-Order for approval"},
           rescheduled : {status_code : "SALES_ORDER_SCHEDULE_UPDATED", status_name : "Sales-Delivery Schedule updated"}
         },
-        
+
         packing : {
           created : {status_code : "PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
         },
@@ -194,5 +194,6 @@ angular.module('erp')
         }
       }
     }
+  }
   }
 });
