@@ -1282,9 +1282,10 @@ angular.module('erp')
   }
 
   $scope.reCompute = function(sales){
-    if($scope.sales.customer){
+    if($scope.sales.customer){      
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
+        0,
         $scope.sales.customer.discount.replace(" %","")/100,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
