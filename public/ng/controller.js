@@ -2880,21 +2880,22 @@ angular.module('erp')
       $scope.dtOptions = Library.DataTable.options("/api/cycle?filter="+encodeURIComponent(JSON.stringify(query)));
     }
 
-
-
-
     $scope.formInit =function(){
       var id = $routeParams.id;
       var action = $routeParams.action;
       $scope.action = action;
-        $scope.products = Api.Collection('products').query();
+      $scope.products = Api.Collection('products').query();
+      $scope.movement = Api.Collection('movements').query();
 
       if(action=='add'){
         console.log("adding cycle");
-        $scope.title = "ADD CONSIGNMENT DAILY SALE";
+        $scope.title = "ADD CYCLE COUNT";
         var cycle = Api.Collection('cycle');
         $scope.cycle = new cycle();
-
+        var query = {"movement":"C","page":1,"rows":40};
+        $scope.counted_items = Api.Collection('products',query).query().$promise.then(function(data){
+          console.log("chito",data);
+        });
       $scope.saveCycle = function(){
         console.log("saved");
         $scope.cycle.$save(function(){

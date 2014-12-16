@@ -1,5 +1,5 @@
 block title
-  title CONSIGNMENT DAILY SALES
+  title CYCLE COUNT SALES
 .portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
   .portlet-title
     .caption
@@ -14,24 +14,43 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select#userId.select2me.form-control.select2-offscreen(ng-model="cycle.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", ng-disabled="action=='read'", required)
-                span.col-md-12.help-block	Sales Executive
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="cycle.cycleno", readonly)
-                span.col-md-12.help-block Cycle Number
-        .row
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="cycle.company_name", ng-options="inventory_location.company_name as inventory_location.company_name  for inventory_location in inventory_locations" ,tabindex="-1", ng-disabled=("action=='read' || action=='approve'"),required)
-                span.col-md-12.help-block Inventory Location
+                select.select2me.form-control.select2-offscreen(ng-model="cycle_id", ng-options="" ,tabindex="-1", ng-disabled=("action=='read' || action=='approve'"),required)
+                span.col-md-12.help-block Cycle Count
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                 input.form-control(type="text", ng-model="cycle.sales_date", datepicker-popup="{{format}}", ng-disabled="action=='read'")
                 span.col-md-12.help-block Date
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="cycle.sales_date", datepicker-popup="{{format}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block	Date Start
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cycle.sales_date", datepicker-popup="{{format}}", ng-disabled="action=='read'")
+                span.col-md-12.help-block Date End
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12.center
+                input.form-control(type="text", ng-model="cycle.notes", ng-disabled="action=='read'")
+                span.col-md-12.help-block Notes
+          .col-md-1
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="cycle.encoded_by", ng-disabled="action=='read'")
+                span.col-md-12.help-block Encoded By
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cycle.approved_by", ng-disabled="action=='read'")
+                span.col-md-12.help-block Approved By
         .portlet.box.grey
           .portlet-title
             .caption
@@ -41,32 +60,6 @@ block title
               a.collapse(href="javascript:;")
           .portlet-body.form
             .form-body
-              br
-              br
-              .row(ng-hide="action=='read' || action=='approve'")
-                  .col-md-3
-                    .form-group 
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="cycle.counted_item" , ng-options="product.bl_code for product in products")
-                        span.col-md-12.help-block Code
-                  .col-md-4
-                    .form-group 
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="cycle.counted_item", ng-options="product.name for product in products")
-                        span.col-md-12.help-block Product 
-                  .col-md-2
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="number", ng-min="1", ng-model="cycle.counted_item.quantity")
-                        span.col-md-12.help-block Quantity 
-                  .col-md-2
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="number", ng-min="1", ng-model="cycle.counted_item.refno")
-                        span.col-md-12.help-block Reference Number 
-                  .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addCycle(cycle)")
-                      i.fa.fa-plus
               .form-group
                 .col-md-1
                 .col-md-10
