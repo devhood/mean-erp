@@ -1,0 +1,19 @@
+[
+  {
+    "date_start": {
+      "name": "date_start",
+      "title": "Date",
+      "type": "text"
+    },
+    "date_end": {
+      "name": "date_end",
+      "title": "Date",
+      "type": "text"
+    },
+    "cycle_id": {
+      "name": "cycle_id",
+      "title": "Cycle ID",
+      "type": "text"
+    }
+  }
+]

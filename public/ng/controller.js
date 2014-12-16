@@ -2385,7 +2385,7 @@ angular.module('erp')
     }
         if( id && action == 'reschedule'){
 
-      $scope.title = "EDIT CONSIGNED DELIVERY ORDER "+ id;
+      $scope.title = "EDIT CONSIGNED ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -2842,70 +2842,68 @@ angular.module('erp')
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
-  $scope.schedule_types = Api.Collection('schedule_types').query();
-  $scope.brands = Api.Collection('brands').query();
   $scope.customers = Api.Collection('customers').query();
-  $scope.users = Api.Collection('users').query();
-  var status = Library.Status.Schedules;
-  console.log(action);
-   if(action == 'read'){
-        $scope.title = "VIEW SCHEDULE " + id;
-        $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
-        });
-      }
-   if(action == 'add'){
-      $scope.title = "ADD SCHEDULE";
-       console.log('frank');   
-      var Schedules = Api.Collection('schedules');
-      $scope.schedules = new Schedules();
 
-      $scope.saveSched = function(){
-   
-          $scope.schedules.status = status.created;
-          $scope.schedules.$save(function(){
-          $location.path('/calendar/index/');
-          return false;
-        });
-      }
-    }
-    
-  if (id && action == 'edit') {
-        $scope.title = "EDIT SCHEDULE" + id;
-        $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
-        });
-        $scope.saveSched = function(){
-          $scope.schedules.status = status.updated;
-          $scope.schedules.$update(function(){
-            $location.path('/calendar/index');
-            return false;
-          });
-        }
-      };
-  if(id && action == 'approve'){
 
-      $scope.title = "APPROVE SCHEDULE "+ id;
-      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
-      });
-      $scope.saveSched = function(){
-        $scope.schedules.status = status.approved;
-        $scope.schedules.$update(function(){
-          $location.path('/calendar/index/');
-          return false;
-        });
-      };
-    $scope.rejectSched = function(){
-      $scope.schedules.status = status.rejected;
-      $scope.schedules.$update(function(){
-        $location.path('/calendar/index');
-        return false;
-      });
-    };
-   }    
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
   var type = $routeParams.type;
 
   $window.location.href = '/print/sales/'+type+'/'+id;
+})
+.controller('CycleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Cycle.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+
+
+    $scope.init = function(){
+      columns = [
+      //  $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.sales_date
+        ];
+
+      buttons = [
+        {url:"/#/cycle/read/",title:"View Record",icon:"fa fa-folder-open"},
+        {url:"/#/cycle/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+      // query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      query= {};
+      $scope.title = "CYCLE SALES"
+      $scope.addUrl = "/#/cycle/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/cycle?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+
+
+
+
+    $scope.formInit =function(){
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.action = action;
+      $scope.products = Api.Collection('products').query();
+
+      if(action=='add'){
+        console.log("adding cycle");
+        $scope.title = "ADD CONSIGNMENT DAILY SALE";
+        var cycle = Api.Collection('cycle');
+        $scope.cycle = new cycle();
+
+      $scope.saveCycle = function(){
+        console.log("saved");
+        $scope.cycle.$save(function(){
+          $location.path('/cycle/index');
+          return false;
+        });
+      }
+    }
+
+  } //end form init
+  });
 });

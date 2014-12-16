@@ -204,6 +204,18 @@ angular.module('erp', [
         templateUrl: '/partials/calendar/add',
         controller: 'CalendarCtrl'
       })
+      .when('/cycle/index', {
+        templateUrl: '/partials/cycle/index',
+        controller: 'CycleCtrl'
+      })
+      .when('/cycle/:action', {
+        templateUrl: '/partials/cycle/add',
+        controller: 'CycleCtrl'
+      })
+      .when('/cycle/:action:/id', {
+        templateUrl: '/partials/cycle/add',
+        controller: 'CycleCtrl'
+      })
       .when('/print/sales/:type/:id', {
         templateUrl: '/partials/sales/index',
         controller: 'PrintCtrl'
