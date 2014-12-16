@@ -79,6 +79,10 @@ angular.module('erp')
       },
     },
     Status : {
+      Cycle:{
+        created : {status_code : "CYCLE_CREATED", status_name : "Cycle Count submitted"},
+        approved : {status_code : "CYCLE_APPROVED", status_name : "Cycle Count approved"},
+      },
       Schedules:{
         created : {status_code : "SCHEDULE_CREATED", status_name : "Schedule Submitted"},
         update : {status_code : "SCHEDULE_UPDATED", status_name : "Update Schedule Submitted"},

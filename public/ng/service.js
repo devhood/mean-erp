@@ -30,10 +30,13 @@ angular.module('erp')
   })
   .factory('Api', function ($resource) {
     return {
-      Collection : function(table,query){
+      Collection : function(table,query,page,rows){
           var url = '/api/'+table+'/:id'
           if(query){
-            url = '/api/'+table+'?filter='+encodeURIComponent(JSON.stringify(query));
+            url = '/api/'+table+'?&filter='+encodeURIComponent(JSON.stringify(query));
+          }
+          if(page && rows && query){
+            url = '/api/'+table+'?page='+page+'&rows='+rows+'&filter='+encodeURIComponent(JSON.stringify(query));
           }
           return $resource(url,{id:'@_id'},{
             update: {

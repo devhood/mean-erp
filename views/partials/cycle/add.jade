@@ -14,24 +14,24 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="cycle_id", ng-options="" ,tabindex="-1", ng-disabled=("action=='read' || action=='approve'"),required)
+                input.form-control(type="text", ng-model="cycle.cycno", readonly)
                 span.col-md-12.help-block Cycle Count
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="cycle.sales_date", datepicker-popup="{{format}}", ng-disabled="action=='read'")
-                span.col-md-12.help-block Date
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="cycle.sales_date", datepicker-popup="{{format}}", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="cycle.date_start", datepicker-popup="{{format}}", ng-disabled="action!='add'")
                 span.col-md-12.help-block	Date Start
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="cycle.sales_date", datepicker-popup="{{format}}", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="cycle.date_end", datepicker-popup="{{format}}", ng-disabled="action!='add'")
                 span.col-md-12.help-block Date End
+                br
+                br
         .row
           .col-md-1
           .col-md-10
@@ -44,12 +44,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="cycle.encoded_by", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="cycle.encoded_by", ng-disabled="action!='add'")
                 span.col-md-12.help-block Encoded By
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="cycle.approved_by", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="cycle.approved_by", ng-disabled="action!='add'")
                 span.col-md-12.help-block Approved By
         .portlet.box.grey
           .portlet-title
@@ -65,7 +65,8 @@ block title
                 .col-md-10
                   .row
                     br
-                    .col-md-12
+                    .col-md-1
+                    .col-md-10
                       .portlet-body.flip-scroll
                         table.table.table-bordered.table-condensed.flip-content
                           thead.flip-content.bg-grey
@@ -74,19 +75,14 @@ block title
                               th Item Name
                               th Movement
                               th Quantity
-                              th Condition ID
-                              th(width="5%")(ng-hide="action=='read' || action=='approve'") Action
                           tbody
                             tr(ng-repeat="counted_item in cycle.counted_items track by $index")
                               td {{counted_item.bl_code}}
                               td {{counted_item.name}}
                               td {{counted_item.movement}}
-                              td {{counted_item.quantity}}
-                              td {{counted_item.condition_id}}
-                              td(width="5%")(ng-hide="action=='read'|| action=='approve'")
-                                .btn-group.btn-group-xs.btn-group-solid
-                                  a.tooltips.btn.default.tooltips(ng-click="removeCycle($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
-                                    i.fa.fa-trash-o
+                              td 
+                                input.form-control(type="number", ng-model="counted_item.quantity", ng-disabled="action!='add'")
+                    .col-md-1
                 .col-md-1
       .form-actions.fluid
         .row

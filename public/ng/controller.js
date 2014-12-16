@@ -678,7 +678,6 @@ angular.module('erp')
             {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save",filter:{key:"pmno",value:""}},
             {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit"},
             {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"},
-
             ];
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code, status.payment.updated.status_code, status.payment.created.status_code ]}};
@@ -2865,7 +2864,7 @@ angular.module('erp')
 
     $scope.init = function(){
       columns = [
-      //  $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.sales_date
+       $scope.structure.cycno, $scope.structure.date_start, $scope.structure.date_end, $scope.structure.status.status_name
         ];
 
       buttons = [
@@ -2874,11 +2873,11 @@ angular.module('erp')
       ];
       // query = { "status.status_code" : {"$in" : [status.created.status_code]}};
       query= {};
-      $scope.title = "CYCLE SALES"
+      $scope.title = "CYCLE COUNT"
       $scope.addUrl = "/#/cycle/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/cycle?filter="+encodeURIComponent(JSON.stringify(query)));
-    }
+    };
 
     $scope.formInit =function(){
       var id = $routeParams.id;
@@ -2886,24 +2885,47 @@ angular.module('erp')
       $scope.action = action;
       $scope.products = Api.Collection('products').query();
       $scope.movement = Api.Collection('movements').query();
+      var status = Library.Status.Cycle;
 
-      if(action=='add'){
-        console.log("adding cycle");
-        $scope.title = "ADD CYCLE COUNT";
-        var cycle = Api.Collection('cycle');
-        $scope.cycle = new cycle();
-        var query = {"movement":"C","page":1,"rows":40};
-        $scope.counted_items = Api.Collection('products',query).query().$promise.then(function(data){
-          console.log("chito",data);
-        });
-      $scope.saveCycle = function(){
-        console.log("saved");
-        $scope.cycle.$save(function(){
-          $location.path('/cycle/index');
-          return false;
-        });
+    if(action=='add'){
+      console.log("adding cycle");
+      $scope.title = "ADD CYCLE COUNT";
+      var cycle = Api.Collection('cycle');
+      $scope.cycle = new cycle();
+      var query = {"movement":"C"};
+      Api.Collection('products',query,2,100).query().$promise.then(function(data){
+        $scope.cycle.counted_items = data;
+      });
+    $scope.saveCycle = function(){
+      console.log("saved");
+      $scope.cycle.$save(function(){
+        $location.path('/cycle/index');
+        return false;
+      });
+        $scope.cycle.status = status.created;
+          console.log($scope.cycle.status);
+
       }
     }
+
+    if(action == 'read'){
+      $scope.title = "VIEW CYCLE COUNT" + id;
+      $scope.cycle =  Api.Collection('cycle').get({id:$routeParams.id});
+    }
+
+    if(action == 'approve'){
+      $scope.title = "APPROVE CYCLE COUNT" + id;
+      $scope.cycle =  Api.Collection('cycle').get({id:$routeParams.id});
+
+      $scope.saveCycle = function(){
+        $scope.cycle.status = status.approved;
+        $scope.cycle.$update(function(){
+          $location.path('/cds/index');
+          return false;
+        });
+      };
+    }
+
 
   } //end form init
   });

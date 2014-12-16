@@ -2,18 +2,30 @@
   {
     "date_start": {
       "name": "date_start",
-      "title": "Date",
+      "title": "Date Start",
       "type": "text"
     },
     "date_end": {
       "name": "date_end",
-      "title": "Date",
+      "title": "Date End",
       "type": "text"
     },
-    "cycle_id": {
-      "name": "cycle_id",
+    "cycno": {
+      "name": "cycno",
       "title": "Cycle ID",
       "type": "text"
+    },
+    "status": {
+      "status_code": {
+        "name": "status.status_code",
+        "title": "Status",
+        "type": "text"
+      },
+      "status_name": {
+        "name": "status.status_name",
+        "title": "Status",
+        "type": "text"
+      }
     }
   }
 ]

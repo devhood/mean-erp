@@ -18,8 +18,8 @@ router
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
     req.db.collection(req.params.object)
     .find(req.query.filter,req.query.columns)
-    .sort(req.query.sorting).skip(req.query.page || 0)
-    .limit(req.query.rows || 0).toArray()
+    .sort(req.query.sorting).skip(Number(req.query.page) || 0)
+    .limit(Number(req.query.rows) || 0).toArray()
     .done(function(data){
       res.status(200).json(data);
     })
