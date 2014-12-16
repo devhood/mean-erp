@@ -42,6 +42,25 @@ var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     res.status(400).json(err);
   });
 })
+.get('/sales/proforma/:id',function(req,res){
+var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
+  req.query.filter = JSON.parse(req.query.filter || '{}');
+  req.query.filter._id = id;
+  req.db.collection('sales')
+  .find(req.query.filter)
+  .toArray()
+  .done(function(data){
+    printer.printPF(data[0],function(err,filename){
+      setTimeout(function(){
+        res.redirect(filename);
+      }, 1000);
+
+    });
+  })
+  .fail( function( err ) {
+    res.status(400).json(err);
+  });
+})
 .get('/sales/consignment',function(req,res){
 
 })
