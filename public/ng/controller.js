@@ -675,9 +675,9 @@ angular.module('erp')
 
             buttons = [
             {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save",filter:{key:"pmno",value:""}},
-            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit"},
-            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"},
+            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save",filter:{key:"pmno"}},
+            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit", exclude:{key:"pmno"}},
+            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", exclude:{key:"pmno"}},
             ];
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code, status.payment.updated.status_code, status.payment.created.status_code ]}};
@@ -1450,6 +1450,26 @@ angular.module('erp')
                   var item = {
                     id : data[i]._id,
                     sono : data[i].cono,
+                    customer : data[i].customer.company_name,
+                    brand : data[i].consigned_item[j].brand,
+                    product : data[i].consigned_item[j].name,
+                    quantity : data[i].consigned_item[j].quantity,
+                  };
+                  $scope.packing.list.push(item);
+                }
+              }
+            });
+            var query2 = {
+              "inventory_location":$scope.packing.inventory_location,
+              "status.status_code" : {"$in" : [statusSales.payment.created.status_code]},
+              "pfno" : {"$exist":true},
+            }
+            Api.Collection('sales',query2).query().$promise.then(function(data){
+              for(var i in data){
+                for(var j in data[i].consigned_item){
+                  var item = {
+                    id : data[i]._id,
+                    sono : data[i].pfno,
                     customer : data[i].customer.company_name,
                     brand : data[i].consigned_item[j].brand,
                     product : data[i].consigned_item[j].name,

@@ -41,7 +41,12 @@ angular.module('erp')
           .renderWith(function(data, type, full, meta) {
             var btnGroup = '<div class="btn-group btn-group-xs btn-group-solid style="min-width:150px;">';
             for(var i in buttons){
-              if(buttons[i].filter){
+              if(buttons[i].exclude){
+                if(data[buttons[i].exclude.key]){
+                  btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
+                }
+              }
+              else if(buttons[i].filter){
                 if(!data[buttons[i].filter.key]){
                   btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
                 }
