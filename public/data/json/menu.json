@@ -33,7 +33,7 @@
       }
     ]
   },
-  
+
   {
     "link": "javascript:;",
     "title": "Warehouse",
@@ -80,6 +80,11 @@
         "title": "Shipments",
         "description": "Manage Shipments",
         "href": "/#/shipment/index/create"
+      },
+      {
+        "title": "Cycle Count",
+        "description": "Cycle Monitoring",
+        "href": "/#/cycle/index"
       }
     ]
   },

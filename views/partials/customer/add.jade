@@ -138,7 +138,6 @@ block title
 									h3.inline Shipping Address
 									br
 									br
-								// </div>
 							.col-md-6
 								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
 						.row
@@ -179,24 +178,19 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										label.checkbox Use as Billing Address
+											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1")
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										label.checkbox Use as Billing
-											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1")
 						.row
 							br
 							.col-md-6
-								// <div class="form-group">
-								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-									h3.inline Billing Address
-								// </div>
-							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										label.checkbox Use as Billing
-									br
-									br											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1")
+										h3.inline Billing Address
+										br
+										br
 						.row
 							.col-md-6
 								.form-group

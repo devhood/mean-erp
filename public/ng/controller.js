@@ -673,10 +673,9 @@ angular.module('erp')
 
             buttons = [
             {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save",filter:{key:"pmno",value:""}},
-            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit"},
-            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear"},
-
+            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save",filter:{key:"pmno"}},
+            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit", exclude:{key:"pmno"}},
+            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", exclude:{key:"pmno"}},
             ];
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code, status.payment.updated.status_code, status.payment.created.status_code ]}};
@@ -1449,6 +1448,26 @@ angular.module('erp')
                   var item = {
                     id : data[i]._id,
                     sono : data[i].cono,
+                    customer : data[i].customer.company_name,
+                    brand : data[i].consigned_item[j].brand,
+                    product : data[i].consigned_item[j].name,
+                    quantity : data[i].consigned_item[j].quantity,
+                  };
+                  $scope.packing.list.push(item);
+                }
+              }
+            });
+            var query2 = {
+              "inventory_location":$scope.packing.inventory_location,
+              "status.status_code" : {"$in" : [statusSales.payment.created.status_code]},
+              "pfno" : {"$exist":true},
+            }
+            Api.Collection('sales',query2).query().$promise.then(function(data){
+              for(var i in data){
+                for(var j in data[i].consigned_item){
+                  var item = {
+                    id : data[i]._id,
+                    sono : data[i].pfno,
                     customer : data[i].customer.company_name,
                     brand : data[i].consigned_item[j].brand,
                     product : data[i].consigned_item[j].name,
@@ -2383,7 +2402,7 @@ angular.module('erp')
     }
         if( id && action == 'reschedule'){
 
-      $scope.title = "EDIT CONSIGNED DELIVERY ORDER "+ id;
+      $scope.title = "EDIT CONSIGNED ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -2503,7 +2522,7 @@ angular.module('erp')
 
     $scope.init = function(){
       columns = [
-       $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.sales_date, $scope.structure.status.status_name
+       $scope.structure.cdsno, $scope.structure.bl_consultant,  $scope.structure.sales_date
         ];
 
       buttons = [
@@ -2576,9 +2595,10 @@ angular.module('erp')
     if(action == 'approve'){
       $scope.title = "APPROVE CONSIGNMENT DAILY SALES"+ id;
       $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
       });
-      $scope.saveCDS = function(){
-        $scope.cds.status = status.approved;
+      $scope.saveCds = function(){
+        $scope.cds.status = status.cds.approved;
         $scope.cds.$update(function(){
           $location.path('/cds/index');
           return false;
@@ -2847,9 +2867,8 @@ Structure.Schedules.query().$promise.then(function(data){
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
-  $scope.schedule_types = Api.Collection('schedule_types').query();
-  $scope.brands = Api.Collection('brands').query();
   $scope.customers = Api.Collection('customers').query();
+
   $scope.users = Api.Collection('users').query();
   var status = Library.Status.Schedule;
   
@@ -2882,13 +2901,73 @@ Structure.Schedules.query().$promise.then(function(data){
       var Schedules = Api.Collection('schedules');
       $scope.schedules = new Schedules();
 
-      $scope.saveSched = function(){
-
           $scope.schedules.status = status.created;
           $scope.schedules.$save(function(){
           $location.path('/schedule/index/schedule');
           return false;
         });
+})
+.controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+  var id = $routeParams.id;
+  var type = $routeParams.type;
+
+  $window.location.href = '/print/sales/'+type+'/'+id;
+})
+.controller('CycleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Cycle.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+
+
+    $scope.init = function(){
+      columns = [
+       $scope.structure.cycno, $scope.structure.date_start, $scope.structure.date_end, $scope.structure.status.status_name
+        ];
+
+      buttons = [
+        {url:"/#/cycle/read/",title:"View Record",icon:"fa fa-folder-open"},
+        {url:"/#/cycle/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+      // query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      query= {};
+      $scope.title = "CYCLE COUNT"
+      $scope.addUrl = "/#/cycle/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/cycle?filter="+encodeURIComponent(JSON.stringify(query)));
+    };
+
+    $scope.formInit =function(){
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.action = action;
+      $scope.products = Api.Collection('products').query();
+      $scope.movement = Api.Collection('movements').query();
+      var status = Library.Status.Cycle;
+
+    if(action=='add'){
+      console.log("adding cycle");
+      $scope.title = "ADD CYCLE COUNT";
+      var cycle = Api.Collection('cycle');
+      $scope.cycle = new cycle();
+      var query = {"movement":"C"};
+      Api.Collection('products',query,2,100).query().$promise.then(function(data){
+        $scope.cycle.counted_items = data;
+      });
+    $scope.saveCycle = function(){
+      console.log("saved");
+      $scope.cycle.$save(function(){
+        $location.path('/cycle/index');
+        return false;
+      });
+        $scope.cycle.status = status.created;
+          console.log($scope.cycle.status);
+
+
       }
     }    
   
@@ -2907,19 +2986,23 @@ Structure.Schedules.query().$promise.then(function(data){
       };
   
   if(id && action == 'approve'){
+    if(action == 'read'){
+      $scope.title = "VIEW CYCLE COUNT" + id;
+      $scope.cycle =  Api.Collection('cycle').get({id:$routeParams.id});
+    }
 
-      $scope.title = "APPROVE SCHEDULE "+ id;
-      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
-      });
-      $scope.saveSched = function(){
-        $scope.schedules.status = status.approved;
-        $scope.schedules.$update(function(){
-          $location.path('/calendar/index/');
+    if(action == 'approve'){
+      $scope.title = "APPROVE CYCLE COUNT" + id;
+      $scope.cycle =  Api.Collection('cycle').get({id:$routeParams.id});
+
+      $scope.saveCycle = function(){
+        $scope.cycle.status = status.approved;
+        $scope.cycle.$update(function(){
+          $location.path('/cds/index');
           return false;
         });
       };
-    $scope.rejectSched = function(){
+      $scope.rejectSched = function(){
       $scope.schedules.status = status.rejected;
       $scope.schedules.$update(function(){
         $location.path('/calendar/index');
@@ -3089,4 +3172,10 @@ Structure.Schedules.query().$promise.then(function(data){
 
 
 
+});
+    }
+
+
+  } //end form init
+  });
 });

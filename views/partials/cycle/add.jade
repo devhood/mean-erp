@@ -1,0 +1,96 @@
+block title
+  title CYCLE COUNT SALES
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && saveCycle()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="cycle.cycno", readonly)
+                span.col-md-12.help-block Cycle Count
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="cycle.date_start", datepicker-popup="{{format}}", ng-disabled="action!='add'")
+                span.col-md-12.help-block	Date Start
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cycle.date_end", datepicker-popup="{{format}}", ng-disabled="action!='add'")
+                span.col-md-12.help-block Date End
+                br
+                br
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12.center
+                input.form-control(type="text", ng-model="cycle.notes", ng-disabled="action=='read'")
+                span.col-md-12.help-block Notes
+          .col-md-1
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="cycle.encoded_by", ng-disabled="action!='add'")
+                span.col-md-12.help-block Encoded By
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="cycle.approved_by", ng-disabled="action!='add'")
+                span.col-md-12.help-block Approved By
+        .portlet.box.grey
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-1
+                    .col-md-10
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Item Name
+                              th Movement
+                              th Quantity
+                          tbody
+                            tr(ng-repeat="counted_item in cycle.counted_items track by $index")
+                              td {{counted_item.bl_code}}
+                              td {{counted_item.name}}
+                              td {{counted_item.movement}}
+                              td 
+                                input.form-control(type="number", ng-model="counted_item.quantity", ng-disabled="action!='add'")
+                    .col-md-1
+                .col-md-1
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-1.col-md-11
+              button.btn.blue(type="submit" ng-show="save_form.$valid && (action=='approve')") Submit
+              | &nbsp;
+              button.btn.green(type="submit" ng-show="save_form.$valid && (action=='add')") Submit
+              | &nbsp;
+              a.btn.default(type="button", href="/#/cycle/index") Cancel
+          .col-md-6

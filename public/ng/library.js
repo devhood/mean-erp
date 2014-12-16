@@ -41,7 +41,12 @@ angular.module('erp')
           .renderWith(function(data, type, full, meta) {
             var btnGroup = '<div class="btn-group btn-group-xs btn-group-solid style="min-width:150px;">';
             for(var i in buttons){
-              if(buttons[i].filter){
+              if(buttons[i].exclude){
+                if(data[buttons[i].exclude.key]){
+                  btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
+                }
+              }
+              else if(buttons[i].filter){
                 if(!data[buttons[i].filter.key]){
                   btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
                 }
@@ -84,6 +89,16 @@ angular.module('erp')
           update : {status_code : "PRODUCT_MERGE_UPDATED", status_name : "Update Product Merge Submitted"},
           rejected : {status_code : "PRODUCT_MERGE_REJECTED", status_name : "Product Merge rejecteded"},
           approved : {status_code : "PRODUCT_MERGE_APPROVED", status_name : "Product Merge approved"},      
+      Cycle:{
+        created : {status_code : "CYCLE_CREATED", status_name : "Cycle Count submitted"},
+        approved : {status_code : "CYCLE_APPROVED", status_name : "Cycle Count approved"},
+      },
+      Schedules:{
+        created : {status_code : "SCHEDULE_CREATED", status_name : "Schedule Submitted"},
+        update : {status_code : "SCHEDULE_UPDATED", status_name : "Update Schedule Submitted"},
+        rejected : {status_code : "SCHEDULED_REJECTED", status_name : "Schedule rejecteded"},
+        approved : {status_code : "SCHEDULED_APPROVED", status_name : "Schedule approved"},
+
       },
       Schedule:{
           created : {status_code : "SCHEDULE_CREATED", status_name : "Schedule Submitted"},
