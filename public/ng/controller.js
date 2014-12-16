@@ -667,7 +667,7 @@ angular.module('erp')
           case "payment" :
             columns = [
             $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            $scope.structure.delivery_method, $scope.structure.delivery_date, $scope.structure.customer.payment_term,$scope.structure.total_amount_due, $scope.structure.status.status_name
             ];
 
             buttons = [
@@ -677,7 +677,9 @@ angular.module('erp')
             {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", exclude:{key:"pmno"}},
             ];
 
-            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code, status.memo.approved.status_code, status.payment.updated.status_code, status.payment.created.status_code ]}};
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code,
+                                                        status.memo.approved.status_code, status.payment.updated.status_code,
+                                                        status.payment.created.status_code, status.tripticket.delivered.status_code]}};
             $scope.title = "PAYMENT";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1282,7 +1284,7 @@ angular.module('erp')
   }
 
   $scope.reCompute = function(sales){
-    if($scope.sales.customer){      
+    if($scope.sales.customer){
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
         0,
@@ -1628,6 +1630,7 @@ angular.module('erp')
               if(item.status == "delivered"){
                 sales.status = statusSales.tripticket.delivered;
                 $scope.trip.status = statusSales.tripticket.delivered;
+                counter++;
               }
               else if(item.status == "failed"){
                 sales.status = statusSales.tripticket.failed;
@@ -1644,6 +1647,7 @@ angular.module('erp')
             console.log(err);
           }
         });
+        $scope.trip.status = statusSales.tripticket.delivered;
         $scope.trip.$update(function(){
           $location.path('/trips/index');
           return false;
