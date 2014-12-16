@@ -2912,8 +2912,8 @@ angular.module('erp')
       $scope.title = "ADD CYCLE COUNT";
       var cycle = Api.Collection('cycle');
       $scope.cycle = new cycle();
-      var query = {"movement":"C"};
-      Api.Collection('products',query,2,100).query().$promise.then(function(data){
+      var query = {"movement":"A"};
+      Api.Collection('products',query,1,100).query().$promise.then(function(data){
         $scope.cycle.counted_items = data;
       });
     $scope.saveCycle = function(){
