@@ -86,8 +86,8 @@ angular.module('erp')
           approved : {status_code : "SCHEDULED_APPROVED", status_name : "Schedule approved"},
         },
       CDS:{
-        created : {status_code : "CONSIGNMENTDAILY_CREATED", status_name : "Consignment Daily submitted"},
-        approved : {status_code : "CONSIGNMENTDAILY_APPROVED", status_name : "Consignment Daily approved"},
+        created : {status_code : "CDS_CREATED", status_name : "Consignment Daily submitted"},
+        approved : {status_code : "CDS_APPROVED", status_name : "Consignment Daily approved"},
       },
       Adjustment:{
         created : {status_code : "ADJUSTMENT_CREATED", status_name : "Adjustment submitted"},

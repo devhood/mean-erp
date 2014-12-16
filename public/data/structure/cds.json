@@ -1,7 +1,7 @@
 [
   {
-    "date": {
-      "name": "date",
+    "sales_date": {
+      "name": "sales_date",
       "title": "Date",
       "type": "text"
     },
@@ -15,132 +15,16 @@
       "title": "Consultant",
       "type": "select"
     },
-    "customer": {
-      "company_name": {
-        "name": "customer.company_name",
-        "title": "Company Name",
-        "type": "select"
+    "status": {
+      "status_code": {
+        "name": "status.status_code",
+        "title": "Status",
+        "type": "text"
       },
-      "shipping_mode": {
-        "name": "customer.shipping_mode",
-        "title": "Delivery Method",
-        "type": "select"
-      },
-      "branch": {
-        "name": "customer.branch",
-        "title": "Branch",
-        "type": "select"
-      },
-      "price_type": {
-        "name": "customer.price_type",
-        "title": "Price Type",
-        "type": "select"
-      },
-      "shipping_address": {
-        "landmark": {
-          "name": "customer.shipping_address.landmark",
-          "title": "ShipTo landmark",
-          "type": "select"
-        },
-        "barangay": {
-          "name": "customer.shipping_address.barangay",
-          "title": "Barangay",
-          "type": "select"
-        },
-        "country": {
-          "name": "customer.shipping_address.country",
-          "title": "ShipTo Country",
-          "type": "select"
-        },
-        "province": {
-          "name": "customer.shipping_address.province",
-          "title": "ShipTo Province",
-          "type": "select"
-        },
-        "city": {
-          "name": "customer.shipping_address.city",
-          "title": "ShipTo City",
-          "type": "select"
-        },
-        "zipcode": {
-          "name": "customer.shipping_address.zipcode",
-          "title": "ShipTo Zipcode",
-          "type": "select"
-        }
-      },
-      "billing_address": {
-        "landmark": {
-          "name": "customer.billing_address.landmark",
-          "title": "BillTo Landmark",
-          "type": "select"
-        },
-        "barangay": {
-          "name": "customer.billing_address.barangay",
-          "title": "BillTo Barangay",
-          "type": "select"
-        },
-        "country": {
-          "name": "customer.billing_address.country",
-          "title": "BillTo Country",
-          "type": "select"
-        },
-        "province": {
-          "name": "customer.billing_address.province",
-          "title": "BillTo Province",
-          "type": "select"
-        },
-        "city": {
-          "name": "customer.billing_address.city",
-          "title": "BillTo City",
-          "type": "select"
-        },
-        "zipcode": {
-          "name": "customer.billing_address.zipcode",
-          "title": "BillTo Zipcode",
-          "type": "select"
-        }
-      }
-    },
-    "price_type": {
-      "name": "price_type",
-      "title": "Price Type",
-      "type": "select"
-    },
-    "description": {
-      "name": "description",
-      "title": "Special Instructions",
-      "type": "text"
-    },
-    "consigned_item": {
-      "name": "consigned_item",
-      "title": "CONSIGNED ITEMS",
-      "type": "table",
-      "child_items": {
-        "product": {
-          "name": "product",
-          "title": "Product",
-          "type": "text"
-        },
-        "bl_code": {
-          "name": "bl_code",
-          "title": "BL Code",
-          "type": "text"
-        },
-        "quantity": {
-          "name": "quantity",
-          "title": "Product",
-          "type": "text"
-        },
-        "price": {
-          "name": "price",
-          "title": "Price",
-          "type": "text"
-        },
-        "total": {
-          "name": "total",
-          "title": "Total",
-          "type": "text"
-        }
+      "status_name": {
+        "name": "status.status_name",
+        "title": "Status",
+        "type": "text"
       }
     }
   }
