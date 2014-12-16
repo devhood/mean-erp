@@ -14,7 +14,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select#userId.select2me.form-control.select2-offscreen(ng-model="cds.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", ng-disabled="action=='read'", required)
+                select#userId.select2me.form-control.select2-offscreen(ng-model="cds.sales_executive", ng-selected="cds.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", ng-disabled="action=='read'", required)
                 span.col-md-12.help-block	Sales Executive
           .col-md-6
             .form-group
@@ -46,25 +46,25 @@ block title
               br
               .row(ng-hide="action=='read' || action=='approve'")
                   .col-md-3
-                    .form-group 
+                    .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         select.select2me.form-control.select2-offscreen(ng-model="cds.consigned_item" , ng-options="product.bl_code for product in products")
                         span.col-md-12.help-block Code
                   .col-md-4
-                    .form-group 
+                    .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         select.select2me.form-control.select2-offscreen(ng-model="cds.consigned_item", ng-options="product.name for product in products")
-                        span.col-md-12.help-block Product 
+                        span.col-md-12.help-block Product
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         input.form-control(type="number", ng-min="1", ng-model="cds.consigned_item.quantity")
-                        span.col-md-12.help-block Quantity 
+                        span.col-md-12.help-block Quantity
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         input.form-control(type="number", ng-min="1", ng-model="cds.consigned_item.refno")
-                        span.col-md-12.help-block Reference Number 
+                        span.col-md-12.help-block Reference Number
                   .col-md-1
                     button.btn-sm.green.custom-right(type="button",ng-click="addCDS(cds)")
                       i.fa.fa-plus

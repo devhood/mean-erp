@@ -2887,7 +2887,7 @@ angular.module('erp')
       var id = $routeParams.id;
       var action = $routeParams.action;
       $scope.action = action;
-      $scope.products = Api.Collection('products').query();
+        $scope.products = Api.Collection('products').query();
 
       if(action=='add'){
         console.log("adding cycle");

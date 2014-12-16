@@ -32,7 +32,7 @@
   },
   "status_name": {
     "name": "status.status_name",
-    "title": "Status Code",
+    "title": "Status",
     "type": "text"
   }
 },
