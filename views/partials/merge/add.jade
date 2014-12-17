@@ -15,11 +15,7 @@ block title
       .form-body
         .row
           .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="merges.pm_type ", ng-options="pm_type.name as pm_type.name for pm_type  in pm_types", ng-selected="{{merges.pm_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
-                span.col-md-12.help-block Transaction Type
-
+            
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
