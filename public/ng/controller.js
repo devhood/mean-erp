@@ -2464,7 +2464,7 @@ angular.module('erp')
         }
       };
     }
-        if( id && action == 'reschedule'){
+     if( id && action == 'reschedule'){
 
       $scope.title = "EDIT CONSIGNED ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
@@ -2487,7 +2487,7 @@ angular.module('erp')
       };
     }
 
-    if(id && action == 'approve'){
+  if(id && action == 'approve'){
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
@@ -2919,67 +2919,7 @@ angular.module('erp')
     }
     ]
   });
-    var id = $routeParams.id;
-    var action = $routeParams.action;
-    $scope.action = action;
-    var status = Library.Status.Schedule    
-    $scope.brands = Api.Collection('brands',query).query();
-    $scope.schedule_types = Api.Collection('schedule_types',query).query();
-    var query = {"type":"Professional"};
-    $scope.customers = Api.Collection('customers',query).query();
-    console.log(action);
-    $scope.CustomerChange = function(){
-      if($scope.schedules.customer){
-        $scope.shipping_address =
-        $scope.schedules.customer.shipping_address.landmark + ', ' +
-        $scope.schedules.customer.shipping_address.barangay + ', ' +
-        $scope.schedules.customer.shipping_address.city + ', ' +
-        $scope.schedules.customer.shipping_address.province + ', ' +
-        $scope.schedules.customer.shipping_address.country + ', ' +
-        $scope.schedules.customer.shipping_address.zipcode;
-        $scope.billing_address =
-        $scope.schedules.customer.billing_address.landmark + ', ' +
-        $scope.schedules.customer.billing_address.barangay + ', ' +
-        $scope.schedules.customer.billing_address.city + ', ' +
-        $scope.schedules.customer.billing_address.province + ', ' +
-        $scope.schedules.customer.billing_address.country + ', ' +
-        $scope.schedules.customer.billing_address.zipcode;
-      }
-    }
-    if( action == 'read'){
-      $scope.title = "VIEW SCHEDULE";
-      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
-      });
-    }
-    if(action == 'add'){
-      $scope.title = "ADD SCHEDULE";
-      var Schedules = Api.Collection('schedules');
-      $scope.schedules = new Schedules();
-      
-      $scope.saveSched = function(){
-        $scope.schedules.status = status.created;
-         //    $scope.sales.triggerInventory  = "OUT";
-        $scope.schedules.$save(function(){
-          $location.path('/schedule/index');
-          return false;
-        });
-      }
-    }
-    if( id && action == 'edit'){
 
-      $scope.title = "EDIT SCHEDULE "+ id;
-      $scope.schedules =  Api.Collection('consignments').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
-      });
-      $scope.saveSched = function(){
-          $scope.schedules.status = status.update;
-       $scope.schedules.$update(function(){
-          $location.path('/schedule/index');
-          return false;
-        });
-      };
-    }
  
 })
 .controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
@@ -3000,16 +2940,98 @@ $scope.ajax_ready = false;
           ];
 
         buttons = [
-          {url:"/#/calendar/add/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/calendar/add/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/calendar/add/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          {url:"/#/schedule/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/schedule/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/schedule/approve/",title:"Approve Record",icon:"fa fa-gear"}
         ];
         query = { "status.status_code" : {"$in" : [status.created.status_code]}};
         $scope.title = "ADD SCHEDULE"
-        $scope.addUrl = "/#/calendar/add"
+        $scope.addUrl = "/#/schedule/add/"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
     }
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    $scope.brands = Api.Collection('brands',query).query();
+    $scope.schedule_types = Api.Collection('schedule_types',query).query();
+    var query = {"type":"Professional"};
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.CustomerChange = function(){
+      if($scope.schedules.customer){
+        $scope.shipping_address =
+        $scope.schedules.customer.shipping_address.landmark + ', ' +
+        $scope.schedules.customer.shipping_address.barangay + ', ' +
+        $scope.schedules.customer.shipping_address.city + ', ' +
+        $scope.schedules.customer.shipping_address.province + ', ' +
+        $scope.schedules.customer.shipping_address.country + ', ' +
+        $scope.schedules.customer.shipping_address.zipcode;
+        $scope.billing_address =
+        $scope.schedules.customer.billing_address.landmark + ', ' +
+        $scope.schedules.customer.billing_address.barangay + ', ' +
+        $scope.schedules.customer.billing_address.city + ', ' +
+        $scope.schedules.customer.billing_address.province + ', ' +
+        $scope.schedules.customer.billing_address.country + ', ' +
+        $scope.schedules.customer.billing_address.zipcode;
+      }
+    }
+    
+    if(id && action == 'read'){
+      $scope.title = "VIEW SCHEDULE";
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+      });
+    }
+    if(action == 'add'){
+      $scope.title = "ADD SCHEDULE";
+      var Schedules = Api.Collection('schedules');
+      $scope.schedules = new Schedules();
+      
+      $scope.saveSched = function(){
+        $scope.schedules.status = status.created;
+         //    $scope.sales.triggerInventory  = "OUT";
+        $scope.schedules.$save(function(){
+          $location.path('/schedule/index/');
+          return false;
+        });
+      }
+    };
+    if( id && action == 'edit'){
+
+      $scope.title = "EDIT SCHEDULE "+ id;
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveSched = function(){
+          $scope.schedules.status = status.update;
+       $scope.schedules.$update(function(){
+          $location.path('/schedule/index/');
+          return false;
+        });
+      };
+    };
+    if(id && action == 'approve'){
+      $scope.title = "APPROVE CONSIGNED ORDER "+ id;
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+
+      $scope.scope.saveSched = function(){
+      $scope.schedules.status = status.approved;
+      $scope.schedules.$update(function(){
+          $location.path('/schedule/index');
+          return false;
+        });
+      };
+    $scope.rejectSched = function(){
+      $scope.consignments.status = status.rejected;
+      $scope.consignments.$update(function(){
+        $location.path('/consignment/index');
+        return false;
+      });
+    };
+
+    };
     
   });
 
@@ -3171,5 +3193,37 @@ $scope.ajax_ready = false;
         };
       }
     }
+  });
+})
+.controller('MergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Merges.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    var status = Library.Status.Merges
+    $scope.init = function(){
+      columns = [
+         $scope.structure.pmno,
+         $scope.structure.pm_type,
+         $scope.structure.inventory_location,
+         $scope.structure.status.status_name,
+      ];
+
+      buttons = [
+      {url:"/#/merge/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/merge/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+       query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      query= {};
+      $scope.title = "MERGE ITEM"
+      $scope.addUrl = "/#/merge/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/merges?filter="+encodeURIComponent(JSON.stringify(query)));
+    };
+
   });
 });

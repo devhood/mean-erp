@@ -14,7 +14,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name as schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1", ng-disabled="action=='read' || action=='approve'", required)
+                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name as schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1", required)
                 span.col-md-12.help-block Type
           .col-md-6
             .form-group
@@ -25,7 +25,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="schedules.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{schedules.customer.company_name}}" ,tabindex="-1", ng-disabled="action=='read' || action=='approve'", required)
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="schedules.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{schedules.customer.company_name}}" ,tabindex="-1", required)
                 span.col-md-12.help-block Customer
           .col-md-6
             .form-group
@@ -47,7 +47,7 @@ block title
             .col-md-6
               .form-group
                 .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                  input.form-control(type="text", ng-model="schedules.startDate" ,  datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read' || action=='approve'",required)
+                  input.form-control(type="text", ng-model="schedules.startDate" ,  datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'",required)
                   span.col-md-12.help-block Start Date
             .col-md-6
               .form-group
@@ -61,7 +61,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="rejectSched(schedules)", ng-show="action=='edit' || action=='approve'") Reject
+              button.btn.red(type="button", ng-click="rejectSchedule(schedules)", ng-show="action=='edit' || action=='approve'") Reject
               | &nbsp;
-              a.btn.default(type="button", href="/#/schedule/index") Cancel
+              a.btn.default(type="button", href="/#/calendar/index") Cancel
           .col-md-6

@@ -25,7 +25,7 @@ angular.module('erp')
       Trips : $resource('/data/structure/trips.json'),
       CDS : $resource('/data/structure/cds.json'),
       Cycle : $resource('/data/structure/cycle.json'),
-      Merges : $resource('/data/structure/prodmerges.json'),
+      Merges : $resource('/data/structure/merges.json'),
       Schedules : $resource('/data/structure/schedules.json'),
       Promo : $resource('/data/structure/promo.json')
 

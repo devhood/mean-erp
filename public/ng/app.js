@@ -237,12 +237,24 @@ angular.module('erp', [
         controller: 'ScheduleCtrl'
       })
       .when('/schedule/:action', {
-        templateUrl: '/partials/calendar/add',
-        controller: 'CalendarCtrl'
+        templateUrl: '/partials/schedule/add',
+        controller: 'ScheduleCtrl'
       })
       .when('/schedule/:action/:id', {
-        templateUrl: '/partials/calendar/add',
-        controller: 'CalendarCtrl'
+        templateUrl: '/partials/schedule/add',
+        controller: 'ScheduleCtrl'
+      })
+      .when('/merge/index', {
+        templateUrl: '/partials/merge/index',
+        controller: 'MergeCtrl'
+      })
+      .when('/merge/:action', {
+        templateUrl: '/partials/merge/add',
+        controller: 'MergeCtrl'
+      })
+      .when('/merge/:action/:id', {
+        templateUrl: '/partials/merge/add',
+        controller: 'MergeCtrl'
       })
       .otherwise({
         redirectTo: '/'
