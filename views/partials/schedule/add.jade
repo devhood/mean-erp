@@ -30,7 +30,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen( ng-model="schedules.brand",ng-disabled=("action=='read' || action=='approve'"),ng-options="brand.name for brand in brands track by brand.name",required)
+                select.select2me.form-control.select2-offscreen( ng-model="schedules.brand",ng-disabled=("action=='read' || action=='approve'"),ng-options="brand.name as brand.name for brand in brands",required)
                 span.col-md-12.help-block Brand
         .row
           .col-md-6
@@ -54,7 +54,7 @@ block title
                 .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                   input.form-control(type="text",   ng-model="schedules.start_time" ng-minlength="0", ng-maxlength="20", ui-mask="99:99",ng-disabled=("action=='read' || action=='approve'"))
                   span.col-md-12.help-block Start Time
-     
+
        .form-actions.fluid
         .row
           .col-md-6
