@@ -67,6 +67,11 @@
         "href": "/#/sales/index/print"
       },
       {
+        "title": "Print PF",
+        "description": "Print PF",
+        "href": "/#/sales/index/printPf"
+      },
+      {
         "title": "Return Merchandise",
         "description": "Return Sales Item",
         "href": "/#/sales/index/approveReturn"
