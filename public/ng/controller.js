@@ -2970,8 +2970,6 @@ angular.module('erp')
     $scope.schedule_types = Api.Collection('schedule_types',query).query();
     var query = {"type":"Professional"};
     $scope.customers = Api.Collection('customers',query).query();
-    var query = {"position":"Educator"};
-        $scope.educators = Api.Collection('users',query).query();
     $scope.CustomerChange = function(){
       if($scope.schedules.customer){
         $scope.shipping_address =
@@ -3012,6 +3010,7 @@ angular.module('erp')
       }
     };
     if( id && action == 'edit'){
+
       $scope.title = "EDIT SCHEDULE "+ id;
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
@@ -3024,7 +3023,7 @@ angular.module('erp')
         });
       };
     };
-
+    console.log(action);
     if(id && action == 'approve'){
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
@@ -3274,6 +3273,8 @@ angular.module('erp')
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
+    $scope.pm_types = Api.Collection('consignment_transaction_types').query();
+
     var query = {"type":"Retail"};
     $scope.customers = Api.Collection('customers',query).query();
     $scope.inventory_locations = Api.Collection('customers',query).query();
@@ -3282,7 +3283,8 @@ angular.module('erp')
 
     $scope.init = function(){
       columns = [
-         $scope.structure.mino,
+         $scope.structure.pmno,
+         $scope.structure.pm_type,
          $scope.structure.inventory_location,
          $scope.structure.status.status_name,
       ];
@@ -3302,11 +3304,11 @@ angular.module('erp')
       var item = angular.copy(merges.item);
       if( item && item.name && item.quantity && item.quantity ){
         delete item.inventories;
-        if($scope.merges.merge_item){
-          $scope.merges.merge_item.push(item);
+        if($scope.merges.pm_item){
+          $scope.merges.pm_item.push(item);
         }
         else{
-          $scope.merges.merge_item = [item];
+          $scope.merges.pm_item = [item];
         }
         delete merges.item;
       }
@@ -3325,10 +3327,10 @@ angular.module('erp')
       }
      }
      $scope.removeItemIn = function(index){
-      $scope.merges.merge_item.splice(index, 1);
+      $scope.merges.pm_item.splice(index, 1);
       $scope.merges.subtotal = 0;
-      for(var i=0;i<$scope.merges.merge_item.length; i++){
-        $scope.merges.subtotal+=$scope.merges.merge_item[i].total;
+      for(var i=0;i<$scope.merges.pm_item.length; i++){
+        $scope.merges.subtotal+=$scope.merges.pm_item[i].total;
       }
     }
     $scope.removeItemOut = function(index){
@@ -3350,6 +3352,7 @@ angular.module('erp')
       $scope.merges = new Merges();
 
       $scope.saveMerge = function(){
+      console.log('frank');
           $scope.merges.status = status.created;
           //    $scope.sales.triggerInventory  = "OUT";
 
@@ -3359,41 +3362,7 @@ angular.module('erp')
         });
       }
     }
-     if( id && action == 'edit'){
-      $scope.title = "EDIT MERGE ITEM "+ id;
-      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
-      });
-      $scope.saveSched = function(){
-          $scope.schedules.status = status.update;
-       $scope.schedules.$update(function(){
-          $location.path('/schedule/index/');
-          return false;
-        });
-      };
-    };
-    if(id && action == 'approve'){
-      $scope.title = "APPROVE CONSIGNED ORDER "+ id;
-      $scope.merges =  Api.Collection('merges').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
-      });
 
-      $scope.saveSched = function(){
-       $scope.merges.status = merges.approved;
-        $scope.merges.$update(function(){
-          $location.path('/merge/index');
-          return false;
-        });
-      };
-      $scope.rejectSched = function(){
-        $scope.merges.status = status.rejected;
-          $scope.merges.$update(function(){
-        $location.path('/merge/index');
-        return false;
-        });
-      };
-
-    };
 
   });
 });
