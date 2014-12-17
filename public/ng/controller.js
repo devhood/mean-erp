@@ -781,7 +781,7 @@ angular.module('erp')
      var computation = Library.Compute.Order(
         $scope.sales.subtotal,
         0,
-        $scope.sales.customer.discount.replace(" %","")/100,
+        $scope.sales.customer.discount.replace(" %","")/100 || 0,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
      );
@@ -797,7 +797,7 @@ angular.module('erp')
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
         0,
-        $scope.sales.customer.discount.replace(" %","")/100,
+        $scope.sales.customer.discount.replace(" %","")/100 || 0,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
       );
@@ -1271,7 +1271,8 @@ angular.module('erp')
     }
      var computation = Library.Compute.Order(
         $scope.sales.subtotal,
-        $scope.sales.customer.discount.replace(" %","")/100,
+        0,
+        $scope.sales.customer.discount.replace(" %","")/100 || 0,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
      );
@@ -1283,11 +1284,17 @@ angular.module('erp')
   }
 
   $scope.reCompute = function(sales){
+
     if($scope.sales.customer){
+      console.log($scope.sales.subtotal,
+        0,
+        $scope.sales.customer.discount.replace(" %","")/100 || 0,
+        $scope.sales.isWithholdingTax,
+        $scope.sales.isZeroRateSales);
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
         0,
-        $scope.sales.customer.discount.replace(" %","")/100,
+        $scope.sales.customer.discount.replace(" %","")/100 || 0,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
       );
