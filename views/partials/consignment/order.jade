@@ -17,7 +17,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'|| action='approve'"),required)
                 span.col-md-12.help-block Consignment Transaction Type
 
           .col-md-6
@@ -34,14 +34,14 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="consignments.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="consignments.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read' || action=='approve'")
                 span.col-md-12.help-block Delivery Date
         .row
           .col-md-1
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="consignments.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{consignments.customer.company_name}}" ,tabindex="-1", required, ng-disabled="consignments.consigned_item && consignments.consigned_item.length")
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="consignments.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{consignments.customer.company_name}}" ,tabindex="-1", required, ng-disable=(action=='approve'||action=='read'),ng-disabled="consignments.consigned_item && consignments.consigned_item.length")
                 span.col-md-12.help-block Customer
           .col-md-1
         .row(ng-show="consignments.customer")
@@ -64,12 +64,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{consignments.order_source}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{consignments.order_source}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'|| action=='approve'"),required)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{consignments.delivery_method}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{consignments.delivery_method}}", tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'|| action=='approve'"),required)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-1
@@ -197,13 +197,13 @@ block title
         .row
           .col-md-6
             .col-md-offset-1.col-md-11
-              button.btn.green(type="submit" ng-show="save_form.$valid && (action=='add'||action=='Edit')") Submit
+              button.btn.green(type="submit" ng-show="save_form.$valid && (action=='add'||action=='approve')") Submit
               | &nbsp;
               button.btn.yellow(type="submit" ng-show="save_form.$valid && action==('reschedule')") Reschedule
               | &nbsp;
               button.btn.blue(type="submit" ng-show="save_form.$valid && (action=='edit')") For Approval
               | &nbsp;
-              button.btn.red(type="button", ng-click="rejectConsignments(consignments)", ng-show="action=='edit'") Reject
+              button.btn.red(type="button", ng-click="rejectConsignments(consignments)", ng-show="(action=='edit'||action=='approve' )") Reject
               | &nbsp;
               a.btn.default(type="button", href="/#/consignment/index") Cancel
           .col-md-6

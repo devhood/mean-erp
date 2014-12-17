@@ -14,13 +14,13 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1", required)
-                span.col-md-12.help-block Schedule Type
+                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name as schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1", required)
+                span.col-md-12.help-block Type
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                 input.form-control(type="text", ng-model="schedules.schno", readonly)
-                span.col-md-12.help-block Sched Number
+                span.col-md-12.help-block Schedule Number
         .row
           .col-md-6
             .form-group
@@ -32,7 +32,6 @@ block title
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                 select.select2me.form-control.select2-offscreen( ng-model="schedules.brand", ng-disabled="action=='read'",ng-options="brand.name for brand in brands track by brand.name",required)
                 span.col-md-12.help-block Brand
-     
         .row
           .col-md-6
             .form-group

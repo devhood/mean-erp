@@ -2743,7 +2743,7 @@ angular.module('erp')
           });
         }
       };
-        if( action == 'read'){
+    if( action == 'read'){
       $scope.title = "VIEW ADJUSTMENT ORDER";
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -2919,6 +2919,102 @@ angular.module('erp')
     }
     ]
   });
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    var status = Library.Status.Schedule    
+    $scope.brands = Api.Collection('brands',query).query();
+    $scope.schedule_types = Api.Collection('schedule_types',query).query();
+    var query = {"type":"Professional"};
+    $scope.customers = Api.Collection('customers',query).query();
+    
+    $scope.CustomerChange = function(){
+      if($scope.consignments.customer){
+        $scope.shipping_address =
+        $scope.schedules.customer.shipping_address.landmark + ', ' +
+        $scope.schedules.customer.shipping_address.barangay + ', ' +
+        $scope.schedules.customer.shipping_address.city + ', ' +
+        $scope.schedules.customer.shipping_address.province + ', ' +
+        $scope.schedules.customer.shipping_address.country + ', ' +
+        $scope.schedules.customer.shipping_address.zipcode;
+        $scope.billing_address =
+        $scope.schedules.customer.billing_address.landmark + ', ' +
+        $scope.schedules.customer.billing_address.barangay + ', ' +
+        $scope.schedules.customer.billing_address.city + ', ' +
+        $scope.schedules.customer.billing_address.province + ', ' +
+        $scope.schedules.customer.billing_address.country + ', ' +
+        $scope.schedules.customer.billing_address.zipcode;
+      }
+    }
+    if( action == 'read'){
+      $scope.title = "VIEW SCHEDULE";
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+      });
+    }
+    if(action == 'add'){
+      $scope.title = "ADD SCHEDULE";
+      var Schedules = Api.Collection('schedules');
+      $scope.schedules = new Schedules();
+
+      $scope.saveSched = function(){
+
+          $scope.schedules.status = status.created;
+          //    $scope.sales.triggerInventory  = "OUT";
+
+        $scope.schedules.$save(function(){
+          $location.path('/schedule/index');
+          return false;
+        });
+      }
+    }
+    if( id && action == 'edit'){
+
+      $scope.title = "EDIT SCHEDULE "+ id;
+      $scope.schedules =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveSched = function(){
+          $scope.schedules.status = status.update;
+       $scope.schedules.$update(function(){
+          $location.path('/schedule/index');
+          return false;
+        });
+      };
+    }
+ 
+})
+.controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+$scope.ajax_ready = false;
+  Structure.Schedules.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    var status = Library.Status.Schedule
+    $scope.init = function(){
+        columns = [
+         $scope.structure.schno,
+         $scope.structure.schedule_type,
+         $scope.structure.customer.company_name,
+         $scope.structure.status.status_name,
+          ];
+
+        buttons = [
+          {url:"/#/calendar/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/calendar/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/calendar/approve/",title:"Approve Record",icon:"fa fa-gear"}
+        ];
+        query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+        $scope.title = "ADD SCHEDULE"
+        $scope.addUrl = "/#/calendar/add"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+    
+  });
+
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;

@@ -52,7 +52,7 @@
         "href": "/#/sales/index/delivery"
       },
       {
-        "title": "Consignment Delivery Receipts",
+        "title": "Consignment DR",
         "description": "Prepare and Approve Items for Delivery",
         "href": "/#/consignment/index/delivery"
       },
@@ -206,7 +206,7 @@
       {
         "title": "Schedule for Approval",
         "description": "Demo And Training Schedule",
-        "href": "/#/schedule/index/"
+        "href": "/#/schedule/index"
       }
     ]
   }

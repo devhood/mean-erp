@@ -196,19 +196,7 @@ angular.module('erp', [
         templateUrl: '/partials/calendar/index',
         controller: 'CalendarCtrl'
       })
-      .when('/schedule/index', {
-        templateUrl: '/partials/schedule/index',
-        controller: 'CalendarCtrl'
-      })
-      .when('/schedule/:action', {
-        templateUrl: '/partials/schedule/index',
-        controller: 'CalendarCtrl'
-      })
       .when('/calendar/:action', {
-        templateUrl: '/partials/calendar/add',
-        controller: 'CalendarCtrl'
-      })
-      .when('/calendar/:action/:id', {
         templateUrl: '/partials/calendar/add',
         controller: 'CalendarCtrl'
       })
@@ -231,6 +219,18 @@ angular.module('erp', [
       .when('/reports/:module/:type', {
         templateUrl: '/partials/sales/reports',
         controller: 'ReportCtrl'
+      })
+      .when('/schedule/index', {
+        templateUrl: '/partials/schedule/index',
+        controller: 'ScheduleCtrl'
+      })
+      .when('/schedule/:action', {
+        templateUrl: '/partials/calendar/add',
+        controller: 'ScheduleCtrl'
+      })
+      .when('/schedule/:action/:id', {
+        templateUrl: '/partials/calendar/add',
+        controller: 'ScheduleCtrl'
       })
       .otherwise({
         redirectTo: '/'
