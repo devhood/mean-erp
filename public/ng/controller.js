@@ -440,7 +440,7 @@ angular.module('erp')
             buttons = [
               {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
               {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"},
-              {url:"/#/sales/index/printPf/",title:"Print Record",icon:"fa fa-print"},
+              {url:"/#/print/sales/proforma/",title:"Print Record",icon:"fa fa-print"},
             ];
             query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.proforma.created.status_code, status.proforma.revised.status_code, status.payment.rejected.status_code]}};
             $scope.title = "PROFORMA INVOICE"
@@ -693,32 +693,13 @@ angular.module('erp')
             ];
 
             buttons = [
-            {url:"/#/print/sales/delivery/",title:"View Record",icon:"fa fa-print"},
-            {url:"/#/print/sales/invoice/",title:"Create Payment Record",icon:"fa fa-print"},
+            {url:"/#/print/sales/delivery/",title:"View Record",icon:"fa fa-truck"},
+            {url:"/#/print/sales/invoice/",title:"Create Payment Record",icon:"fa fa-file"},
 
             ];
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
             $scope.title = "Print DR nd SI";
-
-            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-
-          break;
-          case "printPf" :
-            columns = [
-            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-            $scope.structure.delivery_method, $scope.structure.pfno, $scope.structure.sino
-            ];
-
-            buttons = [
-            {url:"/#/print/sales/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/print/sales/proforma/",title:"Print Record",icon:"fa fa-print"},
-
-            ];
-
-            query = { "status.status_code" : {"$in" : [status.proforma.created.status_code]}};
-            $scope.title = "Print PF";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
