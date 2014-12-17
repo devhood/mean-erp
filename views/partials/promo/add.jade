@@ -36,7 +36,7 @@ block title
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-												select.select2me.form-control.select2-offscreen(ng-model="promo.discount ", ng-options="discount.name as discount.name for discount in discounts" , ng-disabled=("action=='read'"),required)
+												select.select2me.form-control.select2-offscreen(ng-model="promo.discount ", ng-options="discount.name as discount.name for discount in discounts" , ng-disabled=("action=='read'"))
 												span.col-md-12.help-block Discount
 									.col-md-6
 										.form-group
@@ -216,7 +216,7 @@ block title
 											.col-md-offset-3.col-md-9
 												button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
 												| &nbsp;
-												button.btn.red(type="button", ng-click="deletePurchase(purchase)", ng-show="action=='edit' || action=='approve'") Delete
+												button.btn.red(type="button", ng-click="deletePromo(promo)", ng-show="action=='edit' || action=='approve'") Delete
 												| &nbsp;
-												a.btn.default(type="button", href="/#/purchase/index") Cancel
+												a.btn.default(type="button", href="/#/promo/index") Cancel
 										.col-md-6

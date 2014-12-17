@@ -2920,7 +2920,7 @@ angular.module('erp')
     ]
   });
 
- 
+
 })
 .controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 $scope.ajax_ready = false;
@@ -2948,7 +2948,7 @@ $scope.ajax_ready = false;
         $scope.addUrl = "/#/schedule/add/"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
-        
+
         var columns1 = [
          $scope.structure.schno,
          $scope.structure.schedule_type,
@@ -2988,7 +2988,7 @@ $scope.ajax_ready = false;
         $scope.schedules.customer.billing_address.zipcode;
       }
     }
-    
+
     if(id && action == 'read'){
       $scope.title = "VIEW SCHEDULE";
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
@@ -2999,7 +2999,7 @@ $scope.ajax_ready = false;
       $scope.title = "ADD SCHEDULE";
       var Schedules = Api.Collection('schedules');
       $scope.schedules = new Schedules();
-      
+
       $scope.saveSched = function(){
         $scope.schedules.status = status.created;
          //    $scope.sales.triggerInventory  = "OUT";
@@ -3046,7 +3046,7 @@ $scope.ajax_ready = false;
     };
 
     };
-    
+
   });
 
 })
@@ -3146,7 +3146,7 @@ $scope.ajax_ready = false;
 
     $scope.init = function(){
       columns = [
-      $scope.structure.name, $scope.structure.date_start, $scope.structure.date_end
+      $scope.structure.promono, $scope.structure.name, $scope.structure.date_start, $scope.structure.date_end
       ];
 
       buttons = [
@@ -3204,6 +3204,14 @@ $scope.ajax_ready = false;
             $location.path('/promo/index');
             return false;
           });
+        };
+        $scope.deletePromo=function(adjustments){
+          if(popupService.showPopup('You are about to delete Record : '+adjustments._id)){
+            $scope.promo.$delete(function(){
+              $location.path('/promo/index');
+              return false;
+            });
+          }
         };
       }
 
@@ -3266,7 +3274,7 @@ $scope.ajax_ready = false;
     var action = $routeParams.action;
     $scope.action = action;
     $scope.pm_types = Api.Collection('consignment_transaction_types').query();
-    
+
     var query = {"type":"Retail"};
     $scope.customers = Api.Collection('customers',query).query();
     $scope.inventory_locations = Api.Collection('customers',query).query();
@@ -3354,7 +3362,7 @@ $scope.ajax_ready = false;
         });
       }
     }
-    
-    
+
+
   });
 });
