@@ -30,6 +30,11 @@
         "title": "Consignment Daily Sales",
         "description": "Create Consignment",
         "href": "/#/cds/index"
+      },
+      {
+        "title": "Promo Maker",
+        "description": "Add Promo",
+        "href": "/#/promo/index"
       }
     ]
   },
@@ -65,11 +70,6 @@
         "title": "Print DR and SI",
         "description": "Print Dr and SI",
         "href": "/#/sales/index/print"
-      },
-      {
-        "title": "Print PF",
-        "description": "Print PF",
-        "href": "/#/sales/index/printPf"
       },
       {
         "title": "Return Merchandise",

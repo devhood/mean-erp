@@ -20,6 +20,19 @@ var pdf = {
 		},
 
 		pageHeader : function(doc,pfinfo){
+			doc.image('beautylane-logo.png', 15, 15, {width: 130});
+			doc.y = 20;
+			doc.font('Courier');
+			doc.fontSize(7);
+			doc.text("BEAUTY LANE PHILIPPINES, INC.",{align:'center'});
+			doc.moveDown(0.2);
+			doc.text("10/F Alabang Business Tower, Acacia Ave.",{align:'center'});
+			doc.moveDown(0.2);
+			doc.text("Madrigal Business Park, Alabang Muntinlupa City 1780 Philippines",{align:'center'});
+			doc.moveDown(0.2);
+			doc.text("02-771-0771 02-772-0772,  0917-707-0707",{align:'center'});
+			doc.moveDown(0.2);
+
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
 			doc.text(pfinfo.sino,500,55);

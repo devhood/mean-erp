@@ -1,0 +1,114 @@
+block title
+	title PROMO MAKER
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							|  {{title}}
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						form.form-horizontal(role="form", name="save_form",  enctype="multipart/form-data", ng-submit="save_form.$valid && savePromo()", novalidate)
+							.form-body
+								.row
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+												input#promoId.form-control(type="text", ng-model="promo.promono" disabled)
+												span.col-md-12.control-label	Promo ID
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+												input#purchaseNo.form-control(type="text", ng-model="promo.name" disabled)
+												span.col-md-12.control-label	Promo Name
+								.row
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+														input#referenceNo.form-control(type="text", ng-model="purchase.reference_number", ng-disabled="action=='read'", required)
+														span.col-md-12.control-label	Reference Number
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+												input#arrivalDate.form-control(type="text", ng-model="purchase.arrival_date", datepicker-popup="{{format}}" , ng-disabled="action=='read'" required)
+												span.col-md-12.control-label	Arrival Date
+								.row
+									.col-md-1
+									.col-md-10
+										.form-group
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+												input.form-control(type="text", ng-model="purchase.notes", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
+												span.col-md-12.help-block Special Instructions
+									.col-md-1
+								.portlet.box.grey
+									.portlet-title
+										.caption
+											i.fa.fa-reorder
+											| PURCHASE ITEMS
+										.tools
+											a.collapse(href="javascript:;")
+									.portlet-body.form
+										.form-body
+											br
+											br
+											.row(ng-hide="action!='add'")
+												.col-md-12
+													.col-md-3
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product", ng-options="product.bl_code for product in products")
+																span.col-md-12.help-block Code
+													.col-md-4
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product", ng-options="product.name for product in products")
+																span.col-md-12.help-block	Product
+													.col-md-2
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="purchase_item.product.quantity")
+																span.col-md-12.help-block	Quantity
+													.col-md-2
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="purchase_item.product.cost")
+																span.col-md-12.help-block	Cost
+													.col-md-1
+														button.btn-sm.green.custom-right(type="button",ng-click="addItem(purchase_item.product)")
+															i.fa.fa-plus
+											.form-group
+												.col-md-1
+												.col-md-10
+													.row
+														br
+														.col-md-12
+															.portlet-body.flip-scroll
+																table.table.table-bordered.table-condensed.flip-content
+																	thead.flip-content.bg-grey
+																		tr
+																			th Code
+																			th Product
+																			th Quantity
+																			th Cost
+																			th(width="5%")
+																	tbody
+																		tr(ng-repeat="purchase_item in purchase.purchase_items track by $index")
+																			td {{purchase_item.bl_code}}
+																			td {{purchase_item.name}}
+																			td {{purchase_item.quantity}}
+																			td {{purchase_item.expiry_date}}
+																			td(width="5%")
+																				.btn-group.btn-group-xs.btn-group-solid
+																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																						i.fa.fa-trash-o
+												.col-md-1
+							.form-actions.fluid
+								.row
+										.col-md-6
+											.col-md-offset-3.col-md-9
+												button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+												| &nbsp;
+												button.btn.red(type="button", ng-click="deletePurchase(purchase)", ng-show="action=='edit' || action=='approve'") Delete
+												| &nbsp;
+												a.btn.default(type="button", href="/#/purchase/index") Cancel
+										.col-md-6

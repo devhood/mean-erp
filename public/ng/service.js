@@ -26,7 +26,8 @@ angular.module('erp')
       Trips : $resource('/data/structure/trips.json'),
       Schedules : $resource('/data/structure/schedules.json'),
       CDS : $resource('/data/structure/cds.json'),
-      Cycle : $resource('/data/structure/cycle.json')
+      Cycle : $resource('/data/structure/cycle.json'),
+      Promo : $resource('/data/structure/promo.json')
     }
   })
   .factory('Api', function ($resource) {

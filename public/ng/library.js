@@ -84,6 +84,10 @@ angular.module('erp')
       },
     },
     Status : {
+      Promo:{
+        created : {status_code : "PROMO_CREATED", status_name : "Promo submitted"},
+        approved : {status_code : "PROMO_APPROVED", status_name : "Promo approved"},
+      },
       Cycle:{
         created : {status_code : "CYCLE_CREATED", status_name : "Cycle Count submitted"},
         approved : {status_code : "CYCLE_APPROVED", status_name : "Cycle Count approved"},
