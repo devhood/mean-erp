@@ -189,6 +189,11 @@ block title
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 										h3.inline Billing Address
+										.col-md-6
+								.form-group
+									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+										label.checkbox Use as Billing Address
+											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1")
 										br
 										br
 						.row
