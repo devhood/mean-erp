@@ -441,7 +441,6 @@ angular.module('erp')
               {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
               {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"}
             ];
-
             query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.proforma.created.status_code, status.proforma.revised.status_code, status.payment.rejected.status_code]}};
             $scope.title = "PROFORMA INVOICE"
             $scope.addUrl = "/#/sales/proforma/add";
@@ -1462,18 +1461,20 @@ angular.module('erp')
             var query2 = {
               "inventory_location":$scope.packing.inventory_location,
               "status.status_code" : {"$in" : [statusSales.payment.created.status_code]},
-              "pfno" : {"$exist":true},
+              "pfno" : {"$exists":true},
             }
+            console.log(query2);
             Api.Collection('sales',query2).query().$promise.then(function(data){
+              console.log(data);
               for(var i in data){
-                for(var j in data[i].consigned_item){
+                for(var j in data[i].ordered_items){
                   var item = {
                     id : data[i]._id,
                     sono : data[i].pfno,
                     customer : data[i].customer.company_name,
-                    brand : data[i].consigned_item[j].brand,
-                    product : data[i].consigned_item[j].name,
-                    quantity : data[i].consigned_item[j].quantity,
+                    brand : data[i].ordered_items[j].brand,
+                    product : data[i].ordered_items[j].name,
+                    quantity : data[i].ordered_items[j].quantity,
                   };
                   $scope.packing.list.push(item);
                 }
