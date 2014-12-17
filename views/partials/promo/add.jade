@@ -15,36 +15,46 @@ block title
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 												input#promoId.form-control(type="text", ng-model="promo.promono" disabled)
-												span.col-md-12.control-label	Promo ID
+												span.col-md-12.help-block	Promo ID
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-												input#purchaseNo.form-control(type="text", ng-model="promo.name" disabled)
-												span.col-md-12.control-label	Promo Name
+												input#purchaseNo.form-control(type="text", ng-model="promo.name" ng-disabled="action!='add'")
+												span.col-md-12.help-block	Promo Name
 								.row
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-														input#referenceNo.form-control(type="text", ng-model="purchase.reference_number", ng-disabled="action=='read'", required)
-														span.col-md-12.control-label	Reference Number
+												input.form-control(type="text", ng-model="promo.date_start", datepicker-popup="{{format}}", ng-disabled="action!='add'")
+												span.col-md-12.help-block	Date Start
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-												input#arrivalDate.form-control(type="text", ng-model="purchase.arrival_date", datepicker-popup="{{format}}" , ng-disabled="action=='read'" required)
-												span.col-md-12.control-label	Arrival Date
+												input.form-control(type="text", ng-model="promo.date_end", datepicker-popup="{{format}}", ng-disabled="action!='add'")
+												span.col-md-12.help-block Date End
+								.row
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+												select.select2me.form-control.select2-offscreen(ng-model="promo.discount ", ng-options="discount.name as discount.name for discount in discounts" , ng-disabled=("action=='read'"),required)
+												span.col-md-12.help-block Discount
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+												input.form-control(type="text", ng-model="promo.price", ng-min="0" ng-disabled="action=='read'", required)
+												span.col-md-12.help-block Promo Price
 								.row
 									.col-md-1
 									.col-md-10
 										.form-group
-											.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-												input.form-control(type="text", ng-model="purchase.notes", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
-												span.col-md-12.help-block Special Instructions
-									.col-md-1
+											.col-xs-12.col-sm-12.col-md-12.col-lg-12.center
+												input.form-control(type="text", ng-model="promo.description", ng-disabled="action=='read'", required)
+												span.col-md-12.help-block Description
 								.portlet.box.grey
 									.portlet-title
 										.caption
 											i.fa.fa-reorder
-											| PURCHASE ITEMS
+											| REQUIRED ITEMS
 										.tools
 											a.collapse(href="javascript:;")
 									.portlet-body.form
@@ -52,33 +62,26 @@ block title
 											br
 											br
 											.row(ng-hide="action!='add'")
-												.col-md-12
-													.col-md-3
-														.form-group
-															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product", ng-options="product.bl_code for product in products")
-																span.col-md-12.help-block Code
+												.col-md-1
+												.col-md-10
 													.col-md-4
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																select.select2me.form-control.select2-offscreen(ng-model="purchase_item.product", ng-options="product.name for product in products")
-																span.col-md-12.help-block	Product
+																select.select2me.form-control.select2-offscreen(ng-model="promo.required_item.product", ng-options="product.name for product in products")
+																span.col-md-12.help-block	Product Family
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="purchase_item.product.quantity")
+																input.form-control(type="text", ng-model="promo.required_item.quantity")
 																span.col-md-12.help-block	Quantity
-													.col-md-2
-														.form-group
-															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="purchase_item.product.cost")
-																span.col-md-12.help-block	Cost
 													.col-md-1
-														button.btn-sm.green.custom-right(type="button",ng-click="addItem(purchase_item.product)")
+														button.btn-sm.green.custom-right(type="button",ng-click="addRequiredItem(promo)")
 															i.fa.fa-plus
+												.col-md-1
+										.row
 											.form-group
 												.col-md-1
-												.col-md-10
+												.col-md-6
 													.row
 														br
 														.col-md-12
@@ -86,22 +89,127 @@ block title
 																table.table.table-bordered.table-condensed.flip-content
 																	thead.flip-content.bg-grey
 																		tr
-																			th Code
 																			th Product
 																			th Quantity
-																			th Cost
-																			th(width="5%")
+																			th(width="5%") Action
 																	tbody
-																		tr(ng-repeat="purchase_item in purchase.purchase_items track by $index")
-																			td {{purchase_item.bl_code}}
-																			td {{purchase_item.name}}
-																			td {{purchase_item.quantity}}
-																			td {{purchase_item.expiry_date}}
+																		tr(ng-repeat="required_item in promo.required_items track by $index")
+																			td {{required_item.product}}
+																			td {{required_item.quantity}}
 																			td(width="5%")
 																				.btn-group.btn-group-xs.btn-group-solid
-																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																					a.tooltips.btn.default.tooltips(ng-click="removeRequiredItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																						i.fa.fa-trash-o
+												.col-md-5
+													br
+													br
+								.portlet.box.grey
+									.portlet-title
+										.caption
+											i.fa.fa-reorder
+											| FREEBIE
+										.tools
+											a.collapse(href="javascript:;")
+									.portlet-body.form
+										.form-body
+											br
+											br
+											.row(ng-hide="action!='add'")
 												.col-md-1
+												.col-md-10
+													.col-md-4
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(ng-model="promo.freebie.product", ng-options="product.name for product in products")
+																span.col-md-12.help-block	Product Family
+													.col-md-2
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="promo.freebie.quantity")
+																span.col-md-12.help-block	Quantity
+													.col-md-1
+														button.btn-sm.green.custom-right(type="button",ng-click="addFreebie(promo.freebie)")
+															i.fa.fa-plus
+												.col-md-1
+										.row
+											.form-group
+												.col-md-1
+												.col-md-6
+													.row
+														br
+														.col-md-12
+															.portlet-body.flip-scroll
+																table.table.table-bordered.table-condensed.flip-content
+																	thead.flip-content.bg-grey
+																		tr
+																			th Product
+																			th Quantity
+																			th(width="5%") Action
+																	tbody
+																		tr(ng-repeat="freebie in promo.freebies track by $index")
+																			td {{freebie.product}}
+																			td {{freebie.quantity}}
+																			td(width="5%")
+																				.btn-group.btn-group-xs.btn-group-solid
+																					a.tooltips.btn.default.tooltips(ng-click="removeFreebie($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																						i.fa.fa-trash-o
+												.col-md-5
+								br
+								br
+								br
+								br
+								br
+								br
+								br
+								.portlet.box.grey
+									.portlet-title
+										.caption
+											i.fa.fa-reorder
+											| TEST LAYOUT
+										.tools
+											a.collapse(href="javascript:;")
+									.portlet-body.form
+										.form-body
+											br
+											br
+											.row(ng-hide="action!='add'")
+												.col-md-6
+													.col-md-6
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																select.select2me.form-control.select2-offscreen(type="text", ng-model="test.freebie.quantity")
+																span.col-md-12.help-block	Product Family
+													.col-md-5
+														.form-group
+															.col-xs-12.col-sm-12.col-md-12.col-lg-12
+																input.form-control(type="text", ng-model="test.freebie.quantity")
+																span.col-md-12.help-block	Quantity
+													.col-md-1
+														button.btn-sm.green.custom-right(type="button")
+															i.fa.fa-plus
+												.col-md-6
+													.row
+														.form-group
+																.row
+																	br
+																	.col-md-1
+																	.col-md-10
+																		.portlet-body.flip-scroll
+																			table.table.table-bordered.table-condensed.flip-content
+																				thead.flip-content.bg-grey
+																					tr
+																						th Product
+																						th Quantity
+																						th(width="5%") Action
+																				tbody
+																					tr(ng-repeat="freebie in promo.freebies track by $index")
+																						td 
+																						td 
+																						td(width="5%")
+																							.btn-group.btn-group-xs.btn-group-solid
+																								a.tooltips.btn.default.tooltips(data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																									i.fa.fa-trash-o
+																	.col-md-1
 							.form-actions.fluid
 								.row
 										.col-md-6

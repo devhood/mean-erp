@@ -1645,7 +1645,7 @@ angular.module('erp')
         if($scope.trip.inventory_location){
           var query = {
             "inventory_location":$scope.trip.inventory_location,
-            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code]}
+            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code, statusConsignments.order.approved.status_code]}
           };
 
           Api.Collection('sales',query).query().$promise.then(function(data){
@@ -3071,11 +3071,54 @@ angular.module('erp')
         $scope.savePromo = function(){
           $scope.promo.status = status.approved;
           $scope.promo.$update(function(){
-            $location.path('/cds/index');
+            $location.path('/promo/index');
             return false;
           });
         };
       }
+
+  //required items
+  $scope.addRequiredItem = function(promo){
+      console.log("promo: "+promo);
+
+    var item = angular.copy(promo.required_item);
+
+      console.log("item: "+item);
+      console.log("product.name: "+item.product.name);
+      console.log("quantity: "+item.quantity);
+
+    if(item && item.product.name && item.quantity){
+      console.log("entered add required item");
+      if($scope.promo.required_item){
+        $scope.promo.required_items.push(item);
+      }
+        else{
+          $scope.promo.required_items = [item];
+        }
     }
+    delete promo.required_item;
+  }
+  $scope.removeRequiredItem = function(index){
+    $scope.shipment.shipment_items.splice(index, 1);
+  }
+
+  //freebie
+  $scope.addFreebie = function(promo){
+    var item = angular.copy(promo.freebie);
+    if(item && item.name && item. quantity){
+      if($scope.promo.freebie){
+        $scope.promo.freebies.push(item);
+      }
+        else{
+          $scope.promo.freebies = [item];
+        }
+    }
+    delete promo.freebie;
+  }
+  $scope.removeFreebie = function(index){
+    $scope.shipment.freebies.splice(index, 1);
+  }
+
+  } //form init end
   });
 });
