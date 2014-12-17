@@ -729,6 +729,59 @@ angular.module('erp')
 
   });
 })
+.controller('ReportCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
+
+  $scope.ajax_ready = false;
+  Structure.Sales.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var status = Library.Status.Sales;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+
+    $scope.init = function(){
+      var module = $routeParams.module;
+      var type = $routeParams.type;
+      switch(type){
+        case "complete" :
+
+          columns = [
+          $scope.structure.pfno, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+          ];
+
+          buttons = [
+          {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/sales/index/printPf/",title:"Print Record",icon:"fa fa-print"},
+          ];
+          query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+          $scope.title = "SALES REPORT"
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          break;
+        case "customer" :
+
+          break;
+        case "product" :
+
+          break;
+        case "brand" :
+
+          break;
+        case "se" :
+
+          break;
+        case "se" :
+
+          break;
+        }
+      };
+
+    });
+  })
 .controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
   var id = $routeParams.id;

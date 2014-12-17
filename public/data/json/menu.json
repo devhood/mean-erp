@@ -130,24 +130,34 @@
     "id": 1,
     "childLink": [
       {
-        "title": "Sales Report",
-        "description": "Vies Sales",
-        "href": "/#/sales/report/index"
+        "title": "Sales",
+        "description": "View Completed Sales Reports",
+        "href": "/#/reports/sales/complete"
       },
       {
-        "title": "RMR Report",
-        "description": "View Returns",
-        "href": "/#/sales/index/return"
+        "title": "Sales Per Customer",
+        "description": "View Sales Report per Product",
+        "href": "/#/reports/sales/product"
       },
       {
-        "title": "Retail Sales Report",
-        "description": "View Sales Declararion",
-        "href": "/#/consignment/index/order"
+        "title": "Sales Per Product",
+        "description": "View Sales Report per Product",
+        "href": "/#/reports/sales/product"
       },
       {
-        "title": "Inventory Report",
-        "description": "View Inventory",
-        "href": "/#/consignment/index/order"
+        "title": "Sales Per Brand",
+        "description": "View Sales Report per Brand",
+        "href": "/#/reports/sales/brand"
+      },
+      {
+        "title": "Sales Per SE",
+        "description": "View Sales Report per SE",
+        "href": "/#/reports/sales/se"
+      },
+      {
+        "title": "Inventory",
+        "description": "View Inventory Report",
+        "href": "/#/reports/sales/inventory"
       }
     ]
   },
