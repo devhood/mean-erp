@@ -36,7 +36,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="schedules.customer.sales_executive", ng-disabled="action=='read'",readonly)
+                select#userId.select2me.form-control.select2-offscreen(ng-model="schedules.educator", ng-options="educator.fullname as educator.fullname for educator in educators", ng-selected="{{shedules.educator}}" ,ng-disabled=("action=='read' || action=='approve'"), required)
                 span.col-md-12.help-block Educator
           .col-md-6
             .form-group

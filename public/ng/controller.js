@@ -2923,7 +2923,7 @@ angular.module('erp')
 
 })
 .controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
-$scope.ajax_ready = false;
+  $scope.ajax_ready = false;
   Structure.Schedules.query().$promise.then(function(data){
     $scope.structure = data[0];
     $scope.ajax_ready = true;
@@ -2970,6 +2970,8 @@ $scope.ajax_ready = false;
     $scope.schedule_types = Api.Collection('schedule_types',query).query();
     var query = {"type":"Professional"};
     $scope.customers = Api.Collection('customers',query).query();
+    var query = {"position":"Educator"};
+        $scope.educators = Api.Collection('users',query).query();
     $scope.CustomerChange = function(){
       if($scope.schedules.customer){
         $scope.shipping_address =
@@ -3010,7 +3012,6 @@ $scope.ajax_ready = false;
       }
     };
     if( id && action == 'edit'){
-
       $scope.title = "EDIT SCHEDULE "+ id;
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
@@ -3023,7 +3024,7 @@ $scope.ajax_ready = false;
         });
       };
     };
-    console.log(action);
+
     if(id && action == 'approve'){
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
@@ -3273,8 +3274,6 @@ $scope.ajax_ready = false;
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
-    $scope.pm_types = Api.Collection('consignment_transaction_types').query();
-
     var query = {"type":"Retail"};
     $scope.customers = Api.Collection('customers',query).query();
     $scope.inventory_locations = Api.Collection('customers',query).query();
@@ -3283,8 +3282,7 @@ $scope.ajax_ready = false;
 
     $scope.init = function(){
       columns = [
-         $scope.structure.pmno,
-         $scope.structure.pm_type,
+         $scope.structure.mino,
          $scope.structure.inventory_location,
          $scope.structure.status.status_name,
       ];
@@ -3304,11 +3302,11 @@ $scope.ajax_ready = false;
       var item = angular.copy(merges.item);
       if( item && item.name && item.quantity && item.quantity ){
         delete item.inventories;
-        if($scope.merges.pm_item){
-          $scope.merges.pm_item.push(item);
+        if($scope.merges.merge_item){
+          $scope.merges.merge_item.push(item);
         }
         else{
-          $scope.merges.pm_item = [item];
+          $scope.merges.merge_item = [item];
         }
         delete merges.item;
       }
@@ -3327,10 +3325,10 @@ $scope.ajax_ready = false;
       }
      }
      $scope.removeItemIn = function(index){
-      $scope.merges.pm_item.splice(index, 1);
+      $scope.merges.merge_item.splice(index, 1);
       $scope.merges.subtotal = 0;
-      for(var i=0;i<$scope.merges.pm_item.length; i++){
-        $scope.merges.subtotal+=$scope.merges.pm_item[i].total;
+      for(var i=0;i<$scope.merges.merge_item.length; i++){
+        $scope.merges.subtotal+=$scope.merges.merge_item[i].total;
       }
     }
     $scope.removeItemOut = function(index){
@@ -3352,7 +3350,6 @@ $scope.ajax_ready = false;
       $scope.merges = new Merges();
 
       $scope.saveMerge = function(){
-      console.log('frank');
           $scope.merges.status = status.created;
           //    $scope.sales.triggerInventory  = "OUT";
 
@@ -3362,7 +3359,41 @@ $scope.ajax_ready = false;
         });
       }
     }
+     if( id && action == 'edit'){
+      $scope.title = "EDIT MERGE ITEM "+ id;
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveSched = function(){
+          $scope.schedules.status = status.update;
+       $scope.schedules.$update(function(){
+          $location.path('/schedule/index/');
+          return false;
+        });
+      };
+    };
+    if(id && action == 'approve'){
+      $scope.title = "APPROVE CONSIGNED ORDER "+ id;
+      $scope.merges =  Api.Collection('merges').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
 
+      $scope.saveSched = function(){
+       $scope.merges.status = merges.approved;
+        $scope.merges.$update(function(){
+          $location.path('/merge/index');
+          return false;
+        });
+      };
+      $scope.rejectSched = function(){
+        $scope.merges.status = status.rejected;
+          $scope.merges.$update(function(){
+        $location.path('/merge/index');
+        return false;
+        });
+      };
+
+    };
 
   });
 });

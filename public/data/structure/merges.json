@@ -10,9 +10,9 @@
             "title": "Transfer Date",
             "type": "select"
         },
-        "pmno": {
-            "name": "pmno",
-            "title": "Product Merge Number",
+        "mino": {
+            "name": "mino",
+            "title": "Merge Item Number",
             "type": "text"
         },
         "inventory_location": {
@@ -20,8 +20,8 @@
             "title": "Inventory Location",
             "type": "select"
         },
-        "pm_item": {
-            "name": "pm_item",
+        "merge_item": {
+            "name": "merge_item",
             "title": "KIT LIST",
             "type": "table",
             "child_items": {

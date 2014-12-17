@@ -95,6 +95,8 @@ angular.module('erp')
       },
       Merge:{
         created : {status_code : "MERGE_CREATED", status_name : "Merge submitted"},
+        rejected : {status_code : "MERGE_REJECTED", status_name : "Merge rejecteded"},
+        update : {status_code : "MERGE_UPDATED", status_name : "Update Merge Submitted"},
         approved : {status_code : "MERGE_APPROVED", status_name : "Merge approved"},
       },
       Schedule:{

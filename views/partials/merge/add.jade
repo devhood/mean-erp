@@ -23,7 +23,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="merges.pmno", readonly)
+                input.form-control(type="text", ng-model="merges.mino", readonly)
                 span.col-md-12.help-block Merge Number
         .row
           .col-md-6
@@ -93,10 +93,10 @@ block title
 
                               th(width="5%")(ng-hide="action=='read'") Action
                           tbody
-                            tr(ng-repeat="pm_item in merges.pm_item track by $index")
-                              td {{pm_item.bl_code}}
-                              td {{pm_item.name}}
-                              td {{pm_item.quantity}}
+                            tr(ng-repeat="merge_item in merges.merge_item track by $index")
+                              td {{merge_item.bl_code}}
+                              td {{merge_item.name}}
+                              td {{merge_item.quantity}}
                               td(width="5%")(ng-hide="action=='read'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeItemIn($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
