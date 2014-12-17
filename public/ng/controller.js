@@ -3275,5 +3275,43 @@ $scope.ajax_ready = false;
         delete merges.item;
       }
      }
+     $scope.removeItemIn = function(index){
+      $scope.merges.pm_item.splice(index, 1);
+      $scope.merges.subtotal = 0;
+      for(var i=0;i<$scope.merges.pm_item.length; i++){
+        $scope.merges.subtotal+=$scope.merges.pm_item[i].total;
+      }
+    }
+    $scope.removeItemOut = function(index){
+      $scope.merges.unmerge_item.splice(index, 1);
+      $scope.merges.subtotal = 0;
+      for(var i=0;i<$scope.merges.unmerge_item.length; i++){
+        $scope.merges.subtotal+=$scope.merges.unmerge_item[i].total;
+      }
+    }
+    if( action == 'read'){
+      $scope.title = "VIEW MERGE";
+      $scope.merges =  Api.Collection('merges').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+      });
+    }
+     if(action == 'add'){
+      $scope.title = "ADD MERGE ITEMS";
+      var Merges = Api.Collection('merges');
+      $scope.merges = new Merges();
+
+      $scope.saveMerge = function(){
+      console.log('frank');
+          $scope.merges.status = status.created;
+          //    $scope.sales.triggerInventory  = "OUT";
+
+        $scope.merges.$save(function(){
+          $location.path('/merge/index/');
+          return false;
+        });
+      }
+    }
+    
+    
   });
 });
