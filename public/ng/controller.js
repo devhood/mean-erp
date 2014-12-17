@@ -2938,17 +2938,30 @@ $scope.ajax_ready = false;
          $scope.structure.customer.company_name,
          $scope.structure.status.status_name,
           ];
-
         buttons = [
           {url:"/#/schedule/read/",title:"View Record",icon:"fa fa-folder-open"},
           {url:"/#/schedule/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/schedule/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          {url:"/#/schedule/approve/",title:"Approve Record",icon:"fa fa-gear"},
         ];
         query = { "status.status_code" : {"$in" : [status.created.status_code]}};
         $scope.title = "ADD SCHEDULE"
         $scope.addUrl = "/#/schedule/add/"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
+        
+        var columns1 = [
+         $scope.structure.schno,
+         $scope.structure.schedule_type,
+         $scope.structure.customer.company_name,
+         $scope.structure.status.status_name,
+        ];
+        var buttons1 = [
+          {url:"/#/schedule/read/",title:"View Record",icon:"fa fa-folder-open"}
+        ];
+        query = { "status.status_code" : {"$in" : [status.approved.status_code,status.rejected.status_code]}};
+        $scope.title1 = "SCHEDULE LIST"
+        $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+        $scope.dtOptions1 = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
     }
     var id = $routeParams.id;
     var action = $routeParams.action;
@@ -3010,23 +3023,24 @@ $scope.ajax_ready = false;
         });
       };
     };
+    console.log(action);
     if(id && action == 'approve'){
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
 
-      $scope.scope.saveSched = function(){
-      $scope.schedules.status = status.approved;
-      $scope.schedules.$update(function(){
+      $scope.saveSched = function(){
+       $scope.schedules.status = status.approved;
+        $scope.schedules.$update(function(){
           $location.path('/schedule/index');
           return false;
         });
       };
-    $scope.rejectSched = function(){
-      $scope.consignments.status = status.rejected;
-      $scope.consignments.$update(function(){
-        $location.path('/consignment/index');
+      $scope.rejectSched = function(){
+        $scope.schedules.status = status.rejected;
+          $scope.schedules.$update(function(){
+        $location.path('/schedule/index');
         return false;
       });
     };
@@ -3204,7 +3218,18 @@ $scope.ajax_ready = false;
     var columns = [];
     var buttons = [];
     var query = {};
-    var status = Library.Status.Merges
+    var status = Library.Status.Merge
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    $scope.pm_types = Api.Collection('consignment_transaction_types').query();
+    
+    var query = {"type":"Retail"};
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+    $scope.products = Api.Collection('products').query();
+    var status = Library.Status.Merge;
+
     $scope.init = function(){
       columns = [
          $scope.structure.pmno,
@@ -3224,6 +3249,31 @@ $scope.ajax_ready = false;
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/merges?filter="+encodeURIComponent(JSON.stringify(query)));
     };
-
+     $scope.addItemIn = function(merges){
+      var item = angular.copy(merges.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        delete item.inventories;
+        if($scope.merges.pm_item){
+          $scope.merges.pm_item.push(item);
+        }
+        else{
+          $scope.merges.pm_item = [item];
+        }
+        delete merges.item;
+      }
+     }
+     $scope.addItemOut = function(merges){
+      var item = angular.copy(merges.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        delete item.inventories;
+        if($scope.merges.unmerge_item){
+          $scope.merges.unmerge_item.push(item);
+        }
+        else{
+          $scope.merges.unmerge_item = [item];
+        }
+        delete merges.item;
+      }
+     }
   });
 });

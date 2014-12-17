@@ -14,7 +14,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name as schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1", ng-disabled="action=='read' || action=='approve'", required)
+                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name as schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='approve'"), required)
                 span.col-md-12.help-block Type
           .col-md-6
             .form-group
@@ -25,7 +25,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="schedules.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{schedules.customer.company_name}}" ,tabindex="-1", ng-disabled="action=='read' || action=='approve'", required)
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="schedules.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{schedules.customer.company_name}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='approve'"), required)
                 span.col-md-12.help-block Customer
           .col-md-6
             .form-group
@@ -47,12 +47,12 @@ block title
             .col-md-6
               .form-group
                 .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                  input.form-control(type="text", ng-model="schedules.startDate" ,  datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read' || action=='approve'",required)
+                  input.form-control(type="text", ng-model="schedules.startDate" ,  datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled=("action=='read' || action=='approve'"),required)
                   span.col-md-12.help-block Start Date
             .col-md-6
               .form-group
                 .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                  input.form-control(type="text",   ng-model="schedules.start_time" ng-minlength="0", ng-maxlength="20", ui-mask="99:99", ng-disabled="action=='read'")
+                  input.form-control(type="text",   ng-model="schedules.start_time" ng-minlength="0", ng-maxlength="20", ui-mask="99:99", ng-disabled=("action=='read' || action=='approve'"))
                   span.col-md-12.help-block Start Time
      
        .form-actions.fluid
