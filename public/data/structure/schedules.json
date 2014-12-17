@@ -10,6 +10,11 @@
             "title": "Schedule Type",
             "type": "select"
       },
+      "educator": {
+            "name": "educator",
+            "title": "Educator",
+            "type": "select"
+      },
         "customer": {
             "company_name": {
                 "name": "customer.company_name",
