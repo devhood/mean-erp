@@ -2971,6 +2971,8 @@ angular.module('erp')
     var query = {"type":"Professional"};
     $scope.customers = Api.Collection('customers',query).query();
     $scope.CustomerChange = function(){
+    var query = {"position":"Educator"};
+        $scope.educators = Api.Collection('users',query).query();
       if($scope.schedules.customer){
         $scope.shipping_address =
         $scope.schedules.customer.shipping_address.landmark + ', ' +
