@@ -197,7 +197,7 @@ block title
         .row
           .col-md-6
             .col-md-offset-1.col-md-11
-              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              button.btn.green(type="submit" ng-show="save_form.$valid && (action=='add'||action=='Edit')") Submit
               | &nbsp;
               button.btn.yellow(type="submit" ng-show="save_form.$valid && action==('reschedule')") Reschedule
               | &nbsp;

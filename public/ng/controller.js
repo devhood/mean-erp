@@ -753,8 +753,6 @@ angular.module('erp')
 
           buttons = [
           {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/sales/index/printPf/",title:"Print Record",icon:"fa fa-print"},
           ];
           query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
           $scope.title = "SALES REPORT"
