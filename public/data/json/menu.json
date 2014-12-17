@@ -85,6 +85,11 @@
         "title": "Cycle Count",
         "description": "Cycle Monitoring",
         "href": "/#/cycle/index"
+      },
+      {
+        "title": "Merge items",
+        "description": "Item Merge",
+        "href": "/#/merge/index"
       }
     ]
   },

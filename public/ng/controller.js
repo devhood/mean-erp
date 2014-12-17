@@ -2927,9 +2927,9 @@ angular.module('erp')
     $scope.schedule_types = Api.Collection('schedule_types',query).query();
     var query = {"type":"Professional"};
     $scope.customers = Api.Collection('customers',query).query();
-    
+    console.log(action);
     $scope.CustomerChange = function(){
-      if($scope.consignments.customer){
+      if($scope.schedules.customer){
         $scope.shipping_address =
         $scope.schedules.customer.shipping_address.landmark + ', ' +
         $scope.schedules.customer.shipping_address.barangay + ', ' +
@@ -2956,12 +2956,10 @@ angular.module('erp')
       $scope.title = "ADD SCHEDULE";
       var Schedules = Api.Collection('schedules');
       $scope.schedules = new Schedules();
-
+      
       $scope.saveSched = function(){
-
-          $scope.schedules.status = status.created;
-          //    $scope.sales.triggerInventory  = "OUT";
-
+        $scope.schedules.status = status.created;
+         //    $scope.sales.triggerInventory  = "OUT";
         $scope.schedules.$save(function(){
           $location.path('/schedule/index');
           return false;
@@ -3002,9 +3000,9 @@ $scope.ajax_ready = false;
           ];
 
         buttons = [
-          {url:"/#/calendar/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/calendar/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/calendar/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          {url:"/#/calendar/add/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/calendar/add/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/calendar/add/approve/",title:"Approve Record",icon:"fa fa-gear"}
         ];
         query = { "status.status_code" : {"$in" : [status.created.status_code]}};
         $scope.title = "ADD SCHEDULE"

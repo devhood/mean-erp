@@ -238,11 +238,11 @@ angular.module('erp', [
       })
       .when('/schedule/:action', {
         templateUrl: '/partials/calendar/add',
-        controller: 'ScheduleCtrl'
+        controller: 'CalendarCtrl'
       })
       .when('/schedule/:action/:id', {
         templateUrl: '/partials/calendar/add',
-        controller: 'ScheduleCtrl'
+        controller: 'CalendarCtrl'
       })
       .otherwise({
         redirectTo: '/'
