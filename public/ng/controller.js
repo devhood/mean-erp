@@ -440,7 +440,7 @@ angular.module('erp')
             buttons = [
               {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
               {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"},
-              {url:"/#/sales/printPf/",title:"Print Record",icon:"fa fa-print"},
+              {url:"/#/sales/index/printPf/",title:"Print Record",icon:"fa fa-print"},
             ];
             query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.proforma.created.status_code, status.proforma.revised.status_code, status.payment.rejected.status_code]}};
             $scope.title = "PROFORMA INVOICE"
@@ -712,7 +712,7 @@ angular.module('erp')
             ];
 
             buttons = [
-            {url:"/#/print/sales/read/",title:"View Record",icon:"fa fa-print"},
+            {url:"/#/print/sales/read/",title:"View Record",icon:"fa fa-folder-open"},
             {url:"/#/print/sales/proforma/",title:"Print Record",icon:"fa fa-print"},
 
             ];
