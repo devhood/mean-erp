@@ -2842,6 +2842,30 @@ angular.module('erp')
     };
   }
 
+  var events = [];
+  Api.Collection('schedules').query().$promise.then(function(data){
+    for(var i in data){
+      if(data[i] && data[i].customer){
+        console.log(data[i]);
+        if(data[i].status && data[i].status.status_code == "SCHEDULE_CREATED"){
+          events.push({
+            title: data[i].customer.company_name,
+            start: new Date(data[i].startDate),
+            backgroundColor: App.getLayoutColorCode('yellow'),
+            url: '/#/schedule/read/'+data[i]._id,
+          });
+        }
+        else{
+          events.push({
+            title: data[i].customer.company_name,
+            start: new Date(data[i].startDate),
+            backgroundColor: App.getLayoutColorCode('green'),
+            url: '/#/schedule/read/'+data[i]._id,
+          });
+        }
+      }
+    }
+  });
   $('#calendar').fullCalendar('destroy'); // destroy the calendar
   $('#calendar').fullCalendar({ //re-initialize the calendar
     header: h,
@@ -2870,54 +2894,7 @@ angular.module('erp')
         $(this).remove();
       }
     },
-    events: [{
-      title: 'Metro Salon Fairview',
-      start: new Date(y, m, 1),
-      url: 'http://google.com/',
-    }, {
-      title: 'Morph Salon',
-      start: new Date(y, m, d - 5),
-      end: new Date(y, m, d - 2),
-      backgroundColor: App.getLayoutColorCode('green'),
-      url: 'http://google.com/',
-    }, {
-      title: 'Contour Salon',
-      start: new Date(y, m, d - 3, 16, 0),
-      allDay: false,
-      backgroundColor: App.getLayoutColorCode('red'),
-    }, {
-      title: 'Salon De Cai',
-      start: new Date(y, m, d + 4, 16, 0),
-      allDay: false,
-      backgroundColor: App.getLayoutColorCode('green'),
-      url: 'http://google.com/',
-    }, {
-      title: 'Vanity Salon',
-      start: new Date(y, m, d, 10, 30),
-      allDay: false,
-      url: 'http://google.com/',
-    }, {
-      title: 'Afford D Nails and Day Spa',
-      start: new Date(y, m, d, 12, 0),
-      end: new Date(y, m, d, 14, 0),
-      backgroundColor: App.getLayoutColorCode('grey'),
-      allDay: false,
-      url: 'http://google.com/',
-    }, {
-      title: 'Shelkea Gorgeous Salon',
-      start: new Date(y, m, d + 1, 19, 0),
-      end: new Date(y, m, d + 1, 22, 30),
-      backgroundColor: App.getLayoutColorCode('purple'),
-      allDay: false,
-      url: 'http://google.com/',
-    }, {
-      title: 'Introspect Hair Salon & Make-up Studio',
-      start: new Date(y, m, 28),
-      end: new Date(y, m, 29),
-      backgroundColor: App.getLayoutColorCode('yellow'),
-      url: 'http://google.com/',
-    }
-    ]
+    events: events
   });
 
 

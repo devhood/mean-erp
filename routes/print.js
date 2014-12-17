@@ -43,7 +43,7 @@ var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
   });
 })
 .get('/sales/proforma/:id',function(req,res){
-  \var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
+  var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
   req.query.filter = JSON.parse(req.query.filter || '{}');
   req.query.filter._id = id;
   req.db.collection('sales')
