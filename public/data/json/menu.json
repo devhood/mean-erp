@@ -137,7 +137,7 @@
       {
         "title": "Sales Per Customer",
         "description": "View Sales Report per Product",
-        "href": "/#/reports/sales/product"
+        "href": "/#/reports/sales/customer"
       },
       {
         "title": "Sales Per Product",
