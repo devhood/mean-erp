@@ -2464,7 +2464,7 @@ angular.module('erp')
         }
       };
     }
-        if( id && action == 'reschedule'){
+     if( id && action == 'reschedule'){
 
       $scope.title = "EDIT CONSIGNED ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
@@ -2487,7 +2487,7 @@ angular.module('erp')
       };
     }
 
-    if(id && action == 'approve'){
+  if(id && action == 'approve'){
       $scope.title = "APPROVE CONSIGNED ORDER "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
@@ -2743,7 +2743,7 @@ angular.module('erp')
           });
         }
       };
-        if( action == 'read'){
+    if( action == 'read'){
       $scope.title = "VIEW ADJUSTMENT ORDER";
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -2919,6 +2919,136 @@ angular.module('erp')
     }
     ]
   });
+
+ 
+})
+.controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+$scope.ajax_ready = false;
+  Structure.Schedules.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    var status = Library.Status.Schedule
+    $scope.init = function(){
+        columns = [
+         $scope.structure.schno,
+         $scope.structure.schedule_type,
+         $scope.structure.customer.company_name,
+         $scope.structure.status.status_name,
+          ];
+        buttons = [
+          {url:"/#/schedule/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/schedule/edit/",title:"Edit Record",icon:"fa fa-edit"},
+          {url:"/#/schedule/approve/",title:"Approve Record",icon:"fa fa-gear"},
+        ];
+        query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+        $scope.title = "ADD SCHEDULE"
+        $scope.addUrl = "/#/schedule/add/"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
+        
+        var columns1 = [
+         $scope.structure.schno,
+         $scope.structure.schedule_type,
+         $scope.structure.customer.company_name,
+         $scope.structure.status.status_name,
+        ];
+        var buttons1 = [
+          {url:"/#/schedule/read/",title:"View Record",icon:"fa fa-folder-open"}
+        ];
+        query = { "status.status_code" : {"$in" : [status.approved.status_code,status.rejected.status_code]}};
+        $scope.title1 = "SCHEDULE LIST"
+        $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+        $scope.dtOptions1 = Library.DataTable.options("/api/schedules?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    $scope.brands = Api.Collection('brands',query).query();
+    $scope.schedule_types = Api.Collection('schedule_types',query).query();
+    var query = {"type":"Professional"};
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.CustomerChange = function(){
+      if($scope.schedules.customer){
+        $scope.shipping_address =
+        $scope.schedules.customer.shipping_address.landmark + ', ' +
+        $scope.schedules.customer.shipping_address.barangay + ', ' +
+        $scope.schedules.customer.shipping_address.city + ', ' +
+        $scope.schedules.customer.shipping_address.province + ', ' +
+        $scope.schedules.customer.shipping_address.country + ', ' +
+        $scope.schedules.customer.shipping_address.zipcode;
+        $scope.billing_address =
+        $scope.schedules.customer.billing_address.landmark + ', ' +
+        $scope.schedules.customer.billing_address.barangay + ', ' +
+        $scope.schedules.customer.billing_address.city + ', ' +
+        $scope.schedules.customer.billing_address.province + ', ' +
+        $scope.schedules.customer.billing_address.country + ', ' +
+        $scope.schedules.customer.billing_address.zipcode;
+      }
+    }
+    
+    if(id && action == 'read'){
+      $scope.title = "VIEW SCHEDULE";
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+      });
+    }
+    if(action == 'add'){
+      $scope.title = "ADD SCHEDULE";
+      var Schedules = Api.Collection('schedules');
+      $scope.schedules = new Schedules();
+      
+      $scope.saveSched = function(){
+        $scope.schedules.status = status.created;
+         //    $scope.sales.triggerInventory  = "OUT";
+        $scope.schedules.$save(function(){
+          $location.path('/schedule/index/');
+          return false;
+        });
+      }
+    };
+    if( id && action == 'edit'){
+
+      $scope.title = "EDIT SCHEDULE "+ id;
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveSched = function(){
+          $scope.schedules.status = status.update;
+       $scope.schedules.$update(function(){
+          $location.path('/schedule/index/');
+          return false;
+        });
+      };
+    };
+    console.log(action);
+    if(id && action == 'approve'){
+      $scope.title = "APPROVE CONSIGNED ORDER "+ id;
+      $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+
+      $scope.saveSched = function(){
+       $scope.schedules.status = status.approved;
+        $scope.schedules.$update(function(){
+          $location.path('/schedule/index');
+          return false;
+        });
+      };
+      $scope.rejectSched = function(){
+        $scope.schedules.status = status.rejected;
+          $scope.schedules.$update(function(){
+        $location.path('/schedule/index');
+        return false;
+      });
+    };
+
+    };
+    
+  });
+
 })
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
   var id = $routeParams.id;
@@ -3120,5 +3250,111 @@ angular.module('erp')
   }
 
   } //form init end
+  });
+})
+.controller('MergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Merges.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+    var status = Library.Status.Merge
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    $scope.pm_types = Api.Collection('consignment_transaction_types').query();
+    
+    var query = {"type":"Retail"};
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+    $scope.products = Api.Collection('products').query();
+    var status = Library.Status.Merge;
+
+    $scope.init = function(){
+      columns = [
+         $scope.structure.pmno,
+         $scope.structure.pm_type,
+         $scope.structure.inventory_location,
+         $scope.structure.status.status_name,
+      ];
+
+      buttons = [
+      {url:"/#/merge/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/merge/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+       query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      query= {};
+      $scope.title = "MERGE ITEM"
+      $scope.addUrl = "/#/merge/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/merges?filter="+encodeURIComponent(JSON.stringify(query)));
+    };
+     $scope.addItemIn = function(merges){
+      var item = angular.copy(merges.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        delete item.inventories;
+        if($scope.merges.pm_item){
+          $scope.merges.pm_item.push(item);
+        }
+        else{
+          $scope.merges.pm_item = [item];
+        }
+        delete merges.item;
+      }
+     }
+     $scope.addItemOut = function(merges){
+      var item = angular.copy(merges.item);
+      if( item && item.name && item.quantity && item.quantity ){
+        delete item.inventories;
+        if($scope.merges.unmerge_item){
+          $scope.merges.unmerge_item.push(item);
+        }
+        else{
+          $scope.merges.unmerge_item = [item];
+        }
+        delete merges.item;
+      }
+     }
+     $scope.removeItemIn = function(index){
+      $scope.merges.pm_item.splice(index, 1);
+      $scope.merges.subtotal = 0;
+      for(var i=0;i<$scope.merges.pm_item.length; i++){
+        $scope.merges.subtotal+=$scope.merges.pm_item[i].total;
+      }
+    }
+    $scope.removeItemOut = function(index){
+      $scope.merges.unmerge_item.splice(index, 1);
+      $scope.merges.subtotal = 0;
+      for(var i=0;i<$scope.merges.unmerge_item.length; i++){
+        $scope.merges.subtotal+=$scope.merges.unmerge_item[i].total;
+      }
+    }
+    if( action == 'read'){
+      $scope.title = "VIEW MERGE";
+      $scope.merges =  Api.Collection('merges').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+      });
+    }
+     if(action == 'add'){
+      $scope.title = "ADD MERGE ITEMS";
+      var Merges = Api.Collection('merges');
+      $scope.merges = new Merges();
+
+      $scope.saveMerge = function(){
+      console.log('frank');
+          $scope.merges.status = status.created;
+          //    $scope.sales.triggerInventory  = "OUT";
+
+        $scope.merges.$save(function(){
+          $location.path('/merge/index/');
+          return false;
+        });
+      }
+    }
+    
+    
   });
 });

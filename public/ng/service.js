@@ -14,7 +14,6 @@ angular.module('erp')
   .factory('Structure', function ($resource) {
     return {
       Adjustments : $resource('/data/structure/adjustments.json'),
-      ProdMerges : $resource('/data/structure/prodmerges.json'),
       Sales : $resource('/data/structure/sales.json'),
       Consignments : $resource('/data/structure/consignments.json'),
       Users : $resource('/data/structure/users.json'),
@@ -24,10 +23,12 @@ angular.module('erp')
       Shipments : $resource('/data/structure/shipments.json'),
       Purchases : $resource('/data/structure/purchases.json'),
       Trips : $resource('/data/structure/trips.json'),
-      Schedules : $resource('/data/structure/schedules.json'),
       CDS : $resource('/data/structure/cds.json'),
       Cycle : $resource('/data/structure/cycle.json'),
+      Merges : $resource('/data/structure/merges.json'),
+      Schedules : $resource('/data/structure/schedules.json'),
       Promo : $resource('/data/structure/promo.json')
+
     }
   })
   .factory('Api', function ($resource) {

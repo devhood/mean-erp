@@ -57,7 +57,7 @@
         "href": "/#/sales/index/delivery"
       },
       {
-        "title": "Consignment Delivery Receipts",
+        "title": "Consignment DR",
         "description": "Prepare and Approve Items for Delivery",
         "href": "/#/consignment/index/delivery"
       },
@@ -85,6 +85,11 @@
         "title": "Cycle Count",
         "description": "Cycle Monitoring",
         "href": "/#/cycle/index"
+      },
+      {
+        "title": "Merge items",
+        "description": "Item Merge",
+        "href": "/#/merge/index"
       }
     ]
   },
@@ -206,7 +211,7 @@
       {
         "title": "Schedule for Approval",
         "description": "Demo And Training Schedule",
-        "href": "/#/schedule/index/"
+        "href": "/#/schedule/index"
       }
     ]
   }

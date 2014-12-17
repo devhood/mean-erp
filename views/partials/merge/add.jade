@@ -17,31 +17,31 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="prodmerges.pm_type ", ng-options="pm_type.name as pm_type.name for pm_type  in pm_types", ng-selected="{{prodmerges.pm_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
+                select.select2me.form-control.select2-offscreen(ng-model="merges.pm_type ", ng-options="pm_type.name as pm_type.name for pm_type  in pm_types", ng-selected="{{merges.pm_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Transaction Type
 
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="prodmerges.pmno", readonly)
-                span.col-md-12.help-block Product Merge Number
+                input.form-control(type="text", ng-model="merges.pmno", readonly)
+                span.col-md-12.help-block Merge Number
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="prodmerges.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{prodmerges.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="merges.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{merges.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="prodmerges.adjustment_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="merges.adjustment_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
                 span.col-md-12.help-block Merge/Unmerge Date
         .row
           .col-md-1
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="prodmerges.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
+                input.form-control(type="text", ng-model="merges.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
         .portlet.box.grey
@@ -61,20 +61,20 @@ block title
                   .col-md-3
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.bl_code for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="merges.item", ng-options="product.bl_code for product in products")
                         span.col-md-12.help-block Code
                   .col-md-4
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.name for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="merges.item", ng-options="product.name for product in products")
                         span.col-md-12.help-block Product
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="prodmerges.item.quantity")
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="merges.item.quantity")
                         span.col-md-12.help-block Quantity
                   .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addItemIn(prodmerges)")
+                    button.btn-sm.green.custom-right(type="button",ng-click="addItemIn(merges)")
                       i.fa.fa-plus
                 .col-md-1
               .form-group
@@ -93,7 +93,7 @@ block title
 
                               th(width="5%")(ng-hide="action=='read'") Action
                           tbody
-                            tr(ng-repeat="pm_item in prodmerges.pm_item track by $index")
+                            tr(ng-repeat="pm_item in merges.pm_item track by $index")
                               td {{pm_item.bl_code}}
                               td {{pm_item.name}}
                               td {{pm_item.quantity}}
@@ -119,20 +119,20 @@ block title
                   .col-md-3
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.bl_code for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="merges.item", ng-options="product.bl_code for product in products")
                         span.col-md-12.help-block Code
                   .col-md-4
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="prodmerges.item", ng-options="product.name for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="merges.item", ng-options="product.name for product in products")
                         span.col-md-12.help-block Product
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="prodmerges.item.quantity")
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="merges.item.quantity")
                         span.col-md-12.help-block Quantity
                   .col-md-1
-                    button.btn-sm.green.custom-right(type="button",ng-click="addItemOut(prodmerges)")
+                    button.btn-sm.green.custom-right(type="button",ng-click="addItemOut(merges)")
                       i.fa.fa-plus
                 .col-md-1
               .form-group
@@ -151,7 +151,7 @@ block title
 
                               th(width="5%")(ng-hide="action=='read'") Action
                           tbody
-                            tr(ng-repeat="unmerge_item in prodmerges.unmerge_item track by $index")
+                            tr(ng-repeat="unmerge_item in merges.unmerge_item track by $index")
                               td {{unmerge_item.bl_code}}
                               td {{unmerge_item.name}}
                               td {{unmerge_item.quantity}}
@@ -165,7 +165,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="rejectMerge(prodmerges)", ng-show="action=='edit' || action=='approve'") Reject
+              button.btn.red(type="button", ng-click="rejectMerge(merges)", ng-show="action=='edit' || action=='approve'") Reject
               | &nbsp;
               a.btn.default(type="button", href="/#/prodmerge/index") Cancel
           .col-md-6
