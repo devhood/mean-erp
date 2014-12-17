@@ -3098,4 +3098,80 @@ $scope.ajax_ready = false;
       }
     }
   });
+})
+.controller('PromoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+
+  $scope.ajax_ready = false;
+  Structure.Promo.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+
+
+    $scope.init = function(){
+      columns = [
+      $scope.structure.name, $scope.structure.date_start, $scope.structure.date_end
+      ];
+
+      buttons = [
+      {url:"/#/promo/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/promo/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+      // query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      query= {};
+      $scope.title = "PROMO MAKER"
+      $scope.addUrl = "/#/promo/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/promo?filter="+encodeURIComponent(JSON.stringify(query)));
+    };
+
+    $scope.formInit =function(){
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      $scope.action = action;
+      $scope.products = Api.Collection('products').query();
+      $scope.movement = Api.Collection('movements').query();
+      var status = Library.Status.Promo;
+
+      if(action=='add'){
+        $scope.title = "ADD PROMO";
+        var promo = Api.Collection('promo');
+        $scope.promo = new promo();
+        var query = {"movement":"C"};
+        Api.Collection('products',query,2,100).query().$promise.then(function(data){
+          $scope.promo.counted_items = data;
+        });
+        $scope.savePromo = function(){
+          console.log("saved");
+          $scope.promo.$save(function(){
+            $location.path('/promo/index');
+            return false;
+          });
+          $scope.promo.status = status.created;
+          // console.log($scope.promo.status);
+
+        }
+      }
+
+      if(action == 'read'){
+        $scope.title = "VIEW PROMO" + id;
+        $scope.promo =  Api.Collection('promo').get({id:$routeParams.id});
+      }
+
+      if(action == 'approve'){
+        $scope.title = "APPROVE PROMO" + id;
+        $scope.promo =  Api.Collection('promo').get({id:$routeParams.id});
+
+        $scope.savePromo = function(){
+          $scope.promo.status = status.approved;
+          $scope.promo.$update(function(){
+            $location.path('/cds/index');
+            return false;
+          });
+        };
+      }
+    }
+  });
 });

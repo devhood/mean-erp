@@ -24,9 +24,10 @@ angular.module('erp')
       Purchases : $resource('/data/structure/purchases.json'),
       Trips : $resource('/data/structure/trips.json'),
       CDS : $resource('/data/structure/cds.json'),
-      Cycle : $resource('/data/structure/cycle.json'),
+      Cycle : $resource('/data/structure/cycle.json')
       Merges : $resource('/data/structure/prodmerges.json'),
-      Schedules : $resource('/data/structure/schedules.json')
+      Schedules : $resource('/data/structure/schedules.json'),
+      Promo : $resource('/data/structure/promo.json')
 
     }
   })

@@ -84,13 +84,18 @@ angular.module('erp')
       },
     },
     Status : {
-      Merge:{
-        created : {status_code : "MERGE_CREATED", status_name : "Merge submitted"},
-        approved : {status_code : "MERGE_APPROVED", status_name : "Merge approved"},
+      
+      Promo:{
+        created : {status_code : "PROMO_CREATED", status_name : "Promo submitted"},
+        approved : {status_code : "PROMO_APPROVED", status_name : "Promo approved"},
       },
       Cycle:{
         created : {status_code : "CYCLE_CREATED", status_name : "Cycle Count submitted"},
         approved : {status_code : "CYCLE_APPROVED", status_name : "Cycle Count approved"},
+      },
+      Merge:{
+        created : {status_code : "MERGE_CREATED", status_name : "Merge submitted"},
+        approved : {status_code : "MERGE_APPROVED", status_name : "Merge approved"},
       },
       Schedule:{
           created : {status_code : "SCHEDULE_CREATED", status_name : "Schedule Submitted"},
