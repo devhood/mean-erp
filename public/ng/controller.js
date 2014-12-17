@@ -2049,7 +2049,7 @@ angular.module('erp')
     var computation = Library.Compute.Order(
       $scope.sales.subtotal,
       $scope.sales.returnsubtotal,
-      $scope.sales.customer.discount.replace(" %","")/100,
+      $scope.sales.customer.discount.replace(" %","")/100 || 0,
       $scope.sales.isWithholdingTax,
       $scope.sales.isZeroRateSales
     );
