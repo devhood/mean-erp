@@ -2348,7 +2348,7 @@ angular.module('erp')
 
         $scope.consignments.subtotal,
         0,
-        $scope.consignments.customer.discount.replace(" %","")/100,
+        $scope.consignments.customer.discount.replace(" %","")/100 || 0,
         $scope.consignments.isWithholdingTax,
         $scope.consignments.isZeroRateSales
       );
@@ -2365,7 +2365,7 @@ angular.module('erp')
         var computation = Library.Compute.Order(
           $scope.consignments.subtotal,
           0,
-          $scope.consignments.customer.discount.replace(" %","")/100,
+          $scope.consignments.customer.discount.replace(" %","")/100 || 0,
           $scope.consignments.isWithholdingTax,
           $scope.consignments.isZeroRateSales
         );
