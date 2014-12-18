@@ -23,6 +23,7 @@ mongoimport --db beautylane-db --collection number_generators --type csv --heade
 mongoimport --db beautylane-db --collection conditions --type csv --headerline --file data/csv/conditions.csv
 mongoimport --db beautylane-db --collection schedule_types --type csv --headerline --file data/csv/schedule_types.csv
 mongoimport --db beautylane-db --collection pm_types --type csv --headerline --file data/csv/pm_types.csv
+mongoimport --db beautylane-db --collection report_periods --type csv --headerline --file data/csv/report_periods.csv
 mongoimport --db beautylane-db --collection customers --file data/json/customers.json
 mongoimport --db beautylane-db --collection products --file data/json/products.json
 mongoimport --db beautylane-db --collection provinces --file data/json/Albay.json

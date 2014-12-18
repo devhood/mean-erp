@@ -42,6 +42,7 @@ app.use(function(req, res, next) {
   req.db = db;
   next();
 })
+app.use('/reports', require('./routes/reports'));
 app.use('/api', require('./routes/api'));
 app.use('/auth', require('./routes/auth'));
 app.use('/print', require('./routes/print'))

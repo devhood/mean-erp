@@ -727,6 +727,11 @@ angular.module('erp')
       switch(type){
         case "complete" :
 
+          $scope.report_periods =  Api.Collection('report_periods', query).query();
+          $scope.report = {};
+
+          console.log($scope.report_periods);
+
           columns = [
           $scope.structure.pfno, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
           $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
@@ -739,6 +744,17 @@ angular.module('erp')
           $scope.title = "SALES REPORT"
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
           $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          $scope.changeField = function () {
+            if ($scope.report.period && $scope.report.param) {
+
+          //query the reports
+          console.log($scope.report);
+            }
+            else {
+
+            }
+          }
 
           break;
         case "customer" :
@@ -758,6 +774,7 @@ angular.module('erp')
           break;
         }
       };
+
 
     });
   })
@@ -3123,6 +3140,7 @@ angular.module('erp')
         $scope.saveCycle = function(){
           $scope.cycle.status = status.approved;
           $scope.cycle.$update(function(){
+            console.log("cycle updated");
             $location.path('/cycle/index');
             return false;
           });

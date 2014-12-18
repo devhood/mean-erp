@@ -8,6 +8,24 @@ block title
     .tools
       a.collapse(href="javascript:;")
   .portlet-body
+    br
+    .row
+      .col-md-4
+        .form-group
+          .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+            select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods", ng-change="changeField()")
+            span.col-md-12.help-block Select Reports Period
+      .col-md-2
+        .form-group
+          //- (ng-show="report.period=='daily'")
+          .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+            input.form-control(type="text", ng-model="report.param", ng-change="changeField()")
+            span.col-md-12.help-block Value
+      .col-md-6
+        br
+        br
+        br
+        br
     .table-toolbar(ng-show='"{{addUrl}}"?true:false')
       .btn-group.btn-group-xs.btn-group-solid
         a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
