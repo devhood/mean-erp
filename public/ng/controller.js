@@ -3090,7 +3090,7 @@ angular.module('erp')
               items.push({
                 bl_code : data[i].bl_code,
                 name : data[i].name,
-                movement: data[i].movement
+                movement: data[i].movement,
                 quantity : "",
                 inventory : location_stock
 
