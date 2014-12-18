@@ -3123,7 +3123,7 @@ angular.module('erp')
         $scope.saveCycle = function(){
           $scope.cycle.status = status.approved;
           $scope.cycle.$update(function(){
-            $location.path('/cds/index');
+            $location.path('/cycle/index');
             return false;
           });
         };
