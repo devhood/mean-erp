@@ -496,7 +496,7 @@ angular.module('erp')
         case "delivery" :
 
           columns = [
-            $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.customer.company_name, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
             $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
           ];
 
@@ -512,7 +512,7 @@ angular.module('erp')
           $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
           var columns1 = [
-          $scope.structure.sono,$scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
           $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
           ];
 
@@ -2288,7 +2288,6 @@ angular.module('erp')
               status.packing.created.status_code,
                 ]}};
             $scope.title = "CONSIGNMENT ORDERS FOR APPROVAL"
-            $scope.addUrl = "/#/consignment/delivery/add";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
