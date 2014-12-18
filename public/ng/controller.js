@@ -3079,7 +3079,7 @@ angular.module('erp')
           var items = [];
           var location_stock = 0;
           for(var i in data){
-            if(data[i]){
+            if(data[i].bl_code){
               for(var j in data[i].inventories){
                 // console.log("inventories: "data[i].inventories[j]);
                 if(data[i].inventories[j] && data[i].inventories[j].company_name == "Beautylane-Dasma"){
