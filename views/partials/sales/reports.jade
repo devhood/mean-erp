@@ -9,7 +9,7 @@ block title
       a.collapse(href="javascript:;")
   .portlet-body
     br
-    .row
+    .row(ng-show="type=='complete'")
       .col-md-4
         .form-group
           .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
@@ -17,10 +17,17 @@ block title
             span.col-md-12.help-block Select Reports Period
       .col-md-2
         .form-group
-          //- (ng-show="report.period=='daily'")
           .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
             input.form-control(type="text", ng-model="report.param", ng-change="changeField()")
             span.col-md-12.help-block Value
+      .col-md-6
+    .row(ng-show="type=='customer'")
+      .col-md-4
+        .form-group
+          .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+            select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods", ng-change="changeField()")
+            span.col-md-12.help-block Select 
+      .col-md-2
       .col-md-6
         br
         br

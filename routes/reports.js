@@ -16,14 +16,14 @@ router
       var content = [];
       for(var i in data){
 
-        //   content.push({
-        //   data[i].sono,
-        //   data[i].drno,
-        //   data[i].sino,
-        //   data[i].pfno,
-        //   data[i].rmrno,
-        //   data[i].cmno
-        //  });
+          content.push({
+          // data[i].sono,
+          // data[i].drno,
+          // data[i].sino,
+          // data[i].pfno,
+          // data[i].rmrno,
+          // data[i].cmno
+         });
       }
       res.status(200).json(content);
     })

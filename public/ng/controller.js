@@ -726,7 +726,6 @@ angular.module('erp')
       var type = $routeParams.type;
       switch(type){
         case "complete" :
-
           $scope.report_periods =  Api.Collection('report_periods', query).query();
           $scope.report = {};
 
@@ -747,9 +746,7 @@ angular.module('erp')
 
           $scope.changeField = function () {
             if ($scope.report.period && $scope.report.param) {
-
-          //query the reports
-          console.log($scope.report);
+              //query the reports
             }
             else {
 
@@ -758,6 +755,32 @@ angular.module('erp')
 
           break;
         case "customer" :
+          $scope.report_periods =  Api.Collection('report_periods', query).query();
+          $scope.report = {};
+
+          console.log($scope.report_periods);
+
+          columns = [
+          $scope.structure.pfno, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+          ];
+
+          buttons = [
+          {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
+          ];
+          query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+          $scope.title = "SALES REPORT"
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+          $scope.changeField = function () {
+            if ($scope.report.period && $scope.report.param) {
+              //query the reports
+            }
+            else {
+
+            }
+          }
 
           break;
         case "product" :
