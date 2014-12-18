@@ -2058,7 +2058,7 @@ angular.module('erp')
     var computation = Library.Compute.Order(
       $scope.sales.subtotal,
       $scope.sales.returnsubtotal,
-      $scope.sales.customer.discount.replace(" %","")/100,
+      $scope.sales.customer.discount.replace(" %","")/100 || 0,
       $scope.sales.isWithholdingTax,
       $scope.sales.isZeroRateSales
     );
@@ -3071,14 +3071,34 @@ angular.module('erp')
       var status = Library.Status.Cycle;
 
       if(action=='add'){
-        console.log("adding cycle");
         $scope.title = "ADD CYCLE COUNT";
         var cycle = Api.Collection('cycle');
         $scope.cycle = new cycle();
         var query = {"movement":"C"};
         Api.Collection('products',query,2,100).query().$promise.then(function(data){
-          $scope.cycle.counted_items = data;
+          var items = [];
+          var location_stock = 0;
+          for(var i in data){
+            if(data[i]){
+              for(var j in data[i].inventories){
+                // console.log("inventories: "data[i].inventories[j]);
+                if(data[i].inventories[j] && data[i].inventories[j].company_name == "Beautylane-Dasma"){
+                  location_stock = data[i].inventories[j].quantity;
+                  // console.log("location_stock: " location_stock);
+                }
+              }
+              items.push({
+                bl_code : data[i].bl_code,
+                name : data[i].name,
+                quantity : "",
+                inventory : location_stock
+
+              });
+            }
+          }
+          $scope.cycle.counted_items = items;
         });
+
         $scope.saveCycle = function(){
           console.log("saved");
           $scope.cycle.$save(function(){
@@ -3087,7 +3107,6 @@ angular.module('erp')
           });
           $scope.cycle.status = status.created;
           console.log($scope.cycle.status);
-
         }
       }
 
