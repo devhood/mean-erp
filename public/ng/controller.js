@@ -1270,17 +1270,18 @@ angular.module('erp')
         };
       } //end action approve
 
-      $scope.addItem = function(item){
-        var purchase_item = angular.copy(item);
+      $scope.addItem = function(container_item){
+        var purchase_item = angular.copy(container_item.product);
         delete purchase_item.inventories;
         if(purchase_item.name && purchase_item.quantity && purchase_item.cost){
           if($scope.purchase.purchase_items){
             $scope.purchase.purchase_items.push(purchase_item);
-          }
-          else{
+            }
+          else
+            {
             $scope.purchase.purchase_items = [purchase_item];
-          }
-          delete $scope.purchase.purchase_item;
+           }
+           container_item.product = {};
         }
       }
       $scope.removeItem = function(index){
