@@ -14,7 +14,7 @@ block title
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-												select.select2me.form-control.select2-offscreen(ng-model="purchase.supplier", ng-options="supplier.name as supplier.name for supplier in suppliers", ng-selected="{{purchase.supplier}}", ng-disabled="action=='read'", required)
+												select.select2me.form-control.select2-offscreen(ng-model="purchase.supplier", ng-options="supplier.name as supplier.name for supplier in suppliers", ng-selected="{{purchase.supplier}}", ng-disabled="action=='read'||action=='approve'", required)
 												span.col-md-12.control-label	Supplier
 									.col-md-6
 										.form-group
@@ -25,19 +25,19 @@ block title
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-														input#referenceNo.form-control(type="text", ng-model="purchase.reference_number", ng-disabled="action=='read'", required)
+														input#referenceNo.form-control(type="text", ng-model="purchase.reference_number", ng-disabled="action=='read'||action=='approve'", required)
 														span.col-md-12.control-label	Reference Number
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-												input#arrivalDate.form-control(type="text", ng-model="purchase.arrival_date", datepicker-popup="{{format}}" , ng-disabled="action=='read'" required)
+												input#arrivalDate.form-control(type="text", ng-model="purchase.arrival_date", datepicker-popup="{{format}}" , ng-disabled="action=='read'||action=='approve'" required)
 												span.col-md-12.control-label	Arrival Date
 								.row
 									.col-md-1
 									.col-md-10
 										.form-group
 											.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-												input.form-control(type="text", ng-model="purchase.notes", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'",required)
+												input.form-control(type="text", ng-model="purchase.notes", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'||action=='approve'",required)
 												span.col-md-12.help-block Special Instructions
 									.col-md-1
 								.portlet.box.grey
@@ -90,16 +90,16 @@ block title
 																			th Product
 																			th Quantity
 																			th Cost
-																			th(width="5%")
+																			th(width="5%" ng-hide="action=='read'||action=='approve'")
 																	tbody
 																		tr(ng-repeat="purchase_item in purchase.purchase_items track by $index")
 																			td {{purchase_item.bl_code}}
 																			td {{purchase_item.name}}
 																			td {{purchase_item.quantity}}
-																			td {{purchase_item.expiry_date}}
-																			td(width="5%")
+																			td {{purchase_item.cost}}
+																			td(width="5%" ng-hide="action=='read'||action=='approve'")
 																				.btn-group.btn-group-xs.btn-group-solid
-																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																					a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top",ng-hide="action=='read'||action=='approve'", data-html="true", data-original-title="Delete Record")
 																						i.fa.fa-trash-o
 												.col-md-1
 							.form-actions.fluid

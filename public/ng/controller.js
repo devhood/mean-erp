@@ -1036,7 +1036,6 @@ angular.module('erp')
           query = { "status.status_code" : {"$in" : [status.approved.status_code]}};
 
           $scope.title1 = "SHIPMENTS FOR APPROVAL"
-          $scope.addUrl = "/#/shipment/add"
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
 
@@ -1057,7 +1056,6 @@ angular.module('erp')
           query = { "status.status_code" : {"$in" : [status.created.status_code, status.approved.status_code]}};
 
           $scope.title = "SHIPMENTS FOR APPROVAL"
-          $scope.addUrl = "/#/shipment/add"
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
           $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
 
@@ -1282,6 +1280,7 @@ angular.module('erp')
           else{
             $scope.purchase.purchase_items = [purchase_item];
           }
+          delete $scope.purchase.purchase_item;
         }
       }
       $scope.removeItem = function(index){
