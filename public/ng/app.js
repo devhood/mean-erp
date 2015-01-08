@@ -232,6 +232,10 @@ angular.module('erp', [
         templateUrl: '/partials/sales/reports',
         controller: 'ReportCtrl'
       })
+      .when('/reports/:module/:type/:id', {
+        templateUrl: '/partials/sales/record',
+        controller: 'ReportCtrl'
+      })
       .when('/schedule/index', {
         templateUrl: '/partials/schedule/index',
         controller: 'ScheduleCtrl'

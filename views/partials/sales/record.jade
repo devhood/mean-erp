@@ -1,0 +1,325 @@
+block title
+  title PAYMENT RECORD
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+      a.config(href="#portlet-config", data-toggle="modal")
+      a.reload(href="javascript:;")
+      a.remove(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSales()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.pmno", readonly)
+                span.col-md-12.help-block PM Number
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.cleared ", readonly)
+                span.col-md-12.help-block  Date Cleared
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.pfno", readonly)
+                span.col-md-12.help-block PF Number
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.cmno", readonly)
+                span.col-md-12.help-block  CM Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.sino", readonly)
+                span.col-md-12.help-block SI Number
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.drno", readonly)
+                span.col-md-12.help-block DR Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.transaction_type", readonly)
+                span.col-md-12.help-block Transaction Type
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.sono", readonly)
+                span.col-md-12.help-block SO Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.reference_no", readonly)
+                span.col-md-12.help-block Reference No
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", readonly)
+                span.col-md-12.help-block Delivery Date
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-model="sales.customer.company_name" , readonly)
+                span.col-md-12.help-block Customer
+          .col-md-1
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-value="shipping_address", readonly)
+                span.col-md-12.help-block Shipping Address
+          .col-md-1
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-value="billing_address", readonly)
+                span.col-md-12.help-block Billing Address
+          .col-md-1
+        .row(ng-show="sales.customer")
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.customer.price_type", readonly)
+                span.col-md-12.help-block Price Type
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.customer.discount", readonly)
+                span.col-md-12.help-block Permanent Discount
+        .row(ng-show="sales.customer")
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.customer.sales_executive", readonly)
+                span.col-md-12.help-block Sales Executive
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.customer.payment_term", readonly)
+                span.col-md-12.help-block Payment Terms
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.order_source", readonly)
+                span.col-md-12.help-block Order Source
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.delivery_method", readonly)
+                span.col-md-12.help-block Delivery Method
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations track by inventory_locations._id" ,tabindex="-1", readonly,required)
+                span.col-md-12.help-block Inventory Location
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", readonly,required)
+                span.col-md-12.help-block Ordered By
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", readonly,required)
+                span.col-md-12.help-block Special Instructions
+          .col-md-1
+        .portlet.box.grey(ng-show="sales.customer")
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ORDERED ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Quantity
+                              th Unit Price
+                              th Total
+                          tbody
+                            tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
+                              td {{ordered_item.bl_code}}
+                              td {{ordered_item.name}}
+                              td {{ordered_item.quantity}}
+                              td {{ordered_item.price}}
+                              td {{ordered_item.total}}
+                .col-md-1
+        .portlet.box.grey(ng-show="sales.returned_items")
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | RETURNED ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Return Quantity
+                              th Unit Price
+                              th Total
+                          tbody
+                            tr(ng-repeat="returned_item in sales.returned_items track by $index")
+                              td {{returned_item.bl_code}}
+                              td {{returned_item.name}}
+                              td {{returned_item.quantity}}
+                              td {{returned_item.price}}
+                              td {{returned_item.total}}
+                .col-md-1
+         .row
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                 input.form-control(type="text", ng-model="sales.discount", readonly, style="text-align: right;")
+                 span.col-md-12.help-block Discount
+         .row
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                 input.form-control(type="text", ng-model="sales.total_vat", readonly, style="text-align: right;")
+                 span.col-md-12.help-block VATable Sales
+         .row
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                 input.form-control(type="checkbox", ng-model="sales.isWithholdingTax",ng-checked="reCompute(sales)", value="1", readonly, style="text-align: right;")
+               .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                 input.form-control(type="text", ng-model="sales.withholding_tax", readonly, style="text-align: right;")
+                 span.col-md-12.help-block W/Holding Tax
+               .col-md-2
+         .row
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                 input.form-control(type="checkbox", ng-model="sales.isZeroRateSales",ng-checked="", value="1", readonly)
+               .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                 input.form-control(type="text", ng-model="sales.zero_rate_sales", readonly, style="text-align: right;")
+                 span.col-md-12.help-block VAT Exempt/ Zero Rated Sales
+               .col-md-2
+         .row
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+           .col-md-6
+             .form-group
+               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                 input.form-control(type="text", ng-model="sales.total_amount_due", readonly, style="text-align: right;")
+                 span.col-md-12.help-block TOTAL AMOUNT DUE
+        .portlet.box.grey
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | PAYMENT DETAILS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Type
+                              th Number
+                              th Check/Dep date
+                              th Bank
+                              th Amount
+                          tbody
+                            tr(ng-repeat="payment_detail in sales.payment_details track by $index")
+                              td {{payment_detail.payment_type}}
+                              td {{payment_detail.check_number}}
+                              td {{payment_detail.check_dep_date | date}}
+                              td {{payment_detail.bank}}
+                              td(style="text-align: right;") {{payment_detail.amount}}
+                .col-md-1
+            .row
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                    input.form-control(type="text", ng-model="sales.total_payment", readonly, style="text-align: right;")
+                    span.col-md-12.help-block  Total Payment
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.orno", readonly)
+                span.col-md-12.help-block OR Number
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.prno", readonly)
+                span.col-md-12.help-block  PR Number
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-3.col-md-9
+              a.btn.default(type="button", ng-href="/#/reports/{{index_url}}") Cancel
+          .col-md-6

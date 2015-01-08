@@ -9,30 +9,113 @@ block title
       a.collapse(href="javascript:;")
   .portlet-body
     br
-    .row(ng-show="type=='complete'")
+    .row(ng-show="type=='complete'").col-md-12
+      .col-md-10
+        .col-md-4
+          .form-group
+            .col-md-12
+              select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods")
+              span.col-md-12.help-block Select Reports Period
+        .col-md-4
+          .form-group
+            .col-md-12
+              input.form-control(type="text", ng-model="report.value")
+              span.col-md-12.help-block(ng-show="report.period=='day' || report.period=='week' || report.period=='month'") Enter Start Date
+              span.col-md-12.help-block(ng-show="report.period=='annual' || report.period=='quarter'") Enter Year
+        .col-md-2(ng-show="report.period=='quarter'")
+          .form-group
+            .col-md-12
+              input.form-control(type="text", ng-model="report.quarter")
+              span.col-md-12.help-block Enter Quarter
+        .col-md-2
+          .col-md-12
+            button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
+      .col-md-2
+    .row(ng-show="type=='customer'").col-md-12
       .col-md-4
         .form-group
           .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
             select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods", ng-change="changeField()")
             span.col-md-12.help-block Select Reports Period
       .col-md-2
-        .form-group
-          .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-            input.form-control(type="text", ng-model="report.param", ng-change="changeField()")
-            span.col-md-12.help-block Value
+        .col-md-offset-3.col-md-9
+          button.btn.green(type="submit" ng-click="generateReport()") Generate Report
       .col-md-6
-    .row(ng-show="type=='customer'")
-      .col-md-4
-        .form-group
-          .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-            select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods", ng-change="changeField()")
-            span.col-md-12.help-block Select 
-      .col-md-2
-      .col-md-6
+    .row(ng-show="type=='product'").col-md-12
+      .col-md-12
+        .col-md-4
+          .form-group
+            .col-md-12
+              select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
+                option(value="All") All
+              span.col-md-12.help-block Select Product
+        .col-md-3
+          .form-group
+            .col-md-12
+              select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods")
+                span.col-md-12.help-block Select Reports Period
+        .col-md-3
+          .form-group
+            .col-md-12
+              input.form-control(type="text", ng-model="report.value")
+              span.col-md-12.help-block Value
+        .col-md-2
+          .col-md-12
+            button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
         br
         br
         br
         br
+    .row(ng-show="type=='brand'").col-md-12
+      .col-md-12
+        .col-md-4
+          .form-group
+            .col-md-12
+              select.select2me.form-control.select2-offscreen(ng-model="report.brand", ng-options="product.brand for product in products")
+              span.col-md-12.help-block Select Brand
+        .col-md-3
+          .form-group
+            .col-md-12
+              select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods")
+                span.col-md-12.help-block Select Reports Period
+        .col-md-3
+          .form-group
+            .col-md-12
+              input.form-control(type="text", ng-model="report.value")
+              span.col-md-12.help-block Value
+        .col-md-2
+          .col-md-12
+            button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
+        br
+        br
+        br
+        br
+      .row(ng-show="type=='product'").col-md-12
+        .col-md-12
+          .col-md-4
+            .form-group
+              .col-md-12
+                select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
+                  option(value="All") All
+                span.col-md-12.help-block Select Product
+          .col-md-3
+            .form-group
+              .col-md-12
+                select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods")
+                  span.col-md-12.help-block Select Reports Period
+          .col-md-3
+            .form-group
+              .col-md-12
+                input.form-control(type="text", ng-model="report.value")
+                span.col-md-12.help-block Value
+          .col-md-2
+            .col-md-12
+              button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
+          br
+          br
+          br
+          br
+
     .table-toolbar(ng-show='"{{addUrl}}"?true:false')
       .btn-group.btn-group-xs.btn-group-solid
         a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
