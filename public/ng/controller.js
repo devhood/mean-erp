@@ -752,6 +752,8 @@ $scope.init = function(){
   $scope.report = {};
 
   var generateReport = function (query,api_url) {
+    console.log(query);
+    console.log(api_url);
     if ($scope.report.period && $scope.report.value) {
       var period = $scope.report.period;
       var value = $scope.report.value;
@@ -777,9 +779,10 @@ $scope.init = function(){
         }
         console.log("startdate: "+ start_date);
         console.log("enddate: "+ end_date);
-        query.delivery_date = {"$gte": start_date, "$lte": end_date};
-        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
-        $scope.title = "SALES REPORT PRODUCT:"
+        query.payment_date = {"$gte": start_date, "$lte": end_date};
+        console.log("query.payment_date: "+JSON.stringify(query.payment_date));
+        $scope.title = "SALES REPORT : DAILY"
+
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
@@ -790,9 +793,8 @@ $scope.init = function(){
         if (start_date == "Invalid Date") {
           window.alert("Invalid input, please check the date format.");
         }
-        query.delivery_date = {"$gte": start_date, "$lte": end_date};
-        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
-        $scope.title = "SALES REPORT PRODUCT:"
+        query.payment_date = {"$gte": start_date, "$lte": end_date};
+        $scope.title = "SALES REPORT : WEEKLY"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
@@ -807,31 +809,10 @@ $scope.init = function(){
         if (start_date == "Invalid Date") {
           window.alert("Invalid input, please check the date format.");
         }
-        // query.delivery_date = {"$gte": start_date, "$lte": end_date};
-        query =
-        // {"status.status_code":{"$in":["PAYMENT_CONFIRMED"]},
-        [{'$match': {
-              'time': {
-                  '$gte': start_date,
-                  '$lt':  end_date } } },
-        {'$project': {
-                'path': 1,
-                'date': {
-                    'y': { '$year': '$time' },
-                    'm': { '$month': '$time' },
-                    'd': { '$dayOfMonth': '$time' } } } },
-        {'$group': {
-                '_id': {
-                    'p':'$path',
-                    'y': '$date.y',
-                    'm': '$date.m',
-                    'd': '$date.d' },
-                'hits': { '$sum': 1 } } }];
-
-        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
+        query.payment_date = {"$gte": start_date, "$lte": end_date};
         console.log("query: "+JSON.stringify(query));
 
-        $scope.title = "SALES REPORT PRODUCT:"
+        $scope.title = "SALES REPORT : MONTH"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
@@ -865,14 +846,14 @@ $scope.init = function(){
         }
         console.log("startdate: "+ start_date);
         console.log("enddate: "+ end_date);
-        query.delivery_date = {"$gte": start_date, "$lte": end_date};
-        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
-        $scope.title = "SALES REPORT PRODUCT:"
+        query.payment_date = {"$gte": start_date, "$lte": end_date};
+        $scope.title = "SALES REPORT : QUARTERLY"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
-      case 'year':
+      case 'annual':
         var start_year = $scope.report.value;
+        console.log("start_year"+ $scope.report.value);
         if (start_year < 2010 || start_year > 2020 ) {
           window.confirm("The Year is out of range.");
         }
@@ -884,28 +865,30 @@ $scope.init = function(){
         }
         console.log("startdate: "+ start_date);
         console.log("enddate: "+ end_date);
-        // query.delivery_date = {"$gte": start_date, "$lte": end_date};
-
-        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
-        $scope.title = "SALES REPORT PRODUCT:"
-        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        query.payment_date = {"$gte": start_date, "$lte": end_date};
+        $scope.title = "SALES REPORT : ANNUALLY :"
+        $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       default:
+        console.log("inside default");
       }
     }
     else {
-
+      window.alert("Please fill up the Reports Period Properly.");
     }
   }
 
   switch(type){
     case "complete" :
       columns = [
-      $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-      $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+      {"name": "customer","title": "Company Name"},
+      {"name": "sales_executive", "title" :"Sales Executive"},
+      {"name": "delivery_method", "title": "Delivery Method"},
+      {"name": "payment_term", "title": "Payment Term"},
+      {"name": "status_code", "title": "Status"}
       ];
       buttons = [
-      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-cloud-download"},
       ];
       query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
 
@@ -2268,6 +2251,7 @@ $scope.formInit = function(){
     });
     $scope.saveSales = function(){
       $scope.sales.status = status.payment.confirmed;
+      $scope.sales.payment_date = new Date();
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;

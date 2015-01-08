@@ -7,7 +7,7 @@
     },
     "username": {
       "name": "username",
-      "title": "SO Number",
+      "title": "Username",
       "type": "text"
     },
     "password": {
