@@ -383,6 +383,11 @@
       "name": "total_amount_due",
       "title": "Total Amount Due ",
       "type": "text"
+    },
+    "add_vat": {
+      "name": "add_vat",
+      "title": "Add : Vat",
+      "type": "text"
     }
   }
 ]

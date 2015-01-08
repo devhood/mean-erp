@@ -4,33 +4,25 @@ var router = express.Router();
 var mongoq = require('mongoq');
 
 router
-.get('/:object', function(req, res) {
-    req.query.filter = JSON.parse(req.query.filter || '{}');
-    req.query.columns = JSON.parse(req.query.columns || '{}');
-    req.query.sorting = JSON.parse(req.query.sorting || '{}');
-    req.db.collection(req.params.object)
-    .find(req.query.filter,req.query.columns)
-    .sort(req.query.sorting).skip(Number(req.query.page) || 0)
-    .limit(Number(req.query.rows) || 0).toArray()
-    .done(function(data){
-      var content = [];
-      for(var i in data){
+.get('/sales/complete', function(req, res) {
 
-          content.push({
-          // data[i].sono,
-          // data[i].drno,
-          // data[i].sino,
-          // data[i].pfno,
-          // data[i].rmrno,
-          // data[i].cmno
-         });
-      }
-      res.status(200).json(content);
-    })
-    .fail( function( err ) {
-      console.log(err);
-       res.status(400).json(err);
-    });
+  var content = {};
+  content.group = {
+    "_id":"$sino",
+    "sino":{$first:"$sino"},
+    "customer":{$first:"$customer.company_name"},
+    "total_amount_due":{$sum:"$total_amount_due"}
+  };
+  content.match = JSON.parse(req.query.filter || '{}');
+  req.db.collection('sales')
+  .aggregate([{$group:content.group},{$match:content.match||{}}])
+  .done(function(result){
+    res.status(200).json(result);
+  })
+  .fail( function( err ) {
+    console.log(err);
+    res.status(400).json(err);
+  });
 
 })
 

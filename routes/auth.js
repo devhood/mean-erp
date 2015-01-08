@@ -39,8 +39,9 @@ router.post('/login', function(req, res, next) {
 
 router.get('/logout', function(req,res){
   if(req.user){
+    req.session.destroy();
     req.logout();
-    res.send(200);
+    res.redirect("/");
   }
   else{
     res.send(400,'Not logged in');

@@ -49,6 +49,7 @@ app.use('/print', require('./routes/print'))
 app.get('/',function(req,res){
   res.render('dashboard',{});
 });
+
 app.get('/partials/:module/:page',function(req,res){
   res.render('partials/'+req.params.module+'/'+req.params.page,{});
 });

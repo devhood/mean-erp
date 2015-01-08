@@ -1,13 +1,35 @@
 'use strict';
 
 angular.module('erp')
-.controller('MainCtrl', function ($scope, $location, Reference, Session) {
-  $scope.menus = Reference.Menu.query();
-  Session.get(function(client){
-    $scope.client = client;
+.controller('MainCtrl', function ($scope, $location, $window, Reference, Session) {
+  Reference.Menu.query().$promise.then(function(data){
+    Session.get(function(client) {
+      $scope.client = client;
+      var menu = [];
+      for(var i in data){
+        for(var j in data[i].childLink){
+          for(var k in client.permissions){
+            if(data[i].childLink[j].href.indexOf(client.permissions[k].route) != -1){
+              data[i].childLink[j].show = true;
+            }
+          }
+        }
+      }
+      $scope.menus = data;
+    });
+
   });
+  if($location.path() == "/auth/logout"){
+    $window.location.href = '/auth/logout';
+  }
 })
-.controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService, Session) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Users.query().$promise.then(function(data){
@@ -1036,7 +1058,6 @@ angular.module('erp')
           query = { "status.status_code" : {"$in" : [status.approved.status_code]}};
 
           $scope.title1 = "SHIPMENTS FOR APPROVAL"
-          $scope.addUrl = "/#/shipment/add"
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
 
@@ -1057,7 +1078,6 @@ angular.module('erp')
           query = { "status.status_code" : {"$in" : [status.created.status_code, status.approved.status_code]}};
 
           $scope.title = "SHIPMENTS FOR APPROVAL"
-          $scope.addUrl = "/#/shipment/add"
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
           $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
 
@@ -1272,16 +1292,18 @@ angular.module('erp')
         };
       } //end action approve
 
-      $scope.addItem = function(item){
-        var purchase_item = angular.copy(item);
+      $scope.addItem = function(container_item){
+        var purchase_item = angular.copy(container_item.product);
         delete purchase_item.inventories;
         if(purchase_item.name && purchase_item.quantity && purchase_item.cost){
           if($scope.purchase.purchase_items){
             $scope.purchase.purchase_items.push(purchase_item);
-          }
-          else{
+            }
+          else
+            {
             $scope.purchase.purchase_items = [purchase_item];
-          }
+           }
+           container_item.product = {};
         }
       }
       $scope.removeItem = function(index){
