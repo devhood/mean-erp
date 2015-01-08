@@ -742,18 +742,38 @@ Structure.Sales.query().$promise.then(function(data){
   var columns = [];
   var buttons = [];
   var query = {};
+  query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
 
 $scope.init = function(){
   var module = $routeParams.module;
   var type = $routeParams.type;
   $scope.type = type;
-  $scope.report_periods =  Api.Collection('report_periods', query).query();
-  $scope.products =  Api.Collection('products', query).query();
+  $scope.report_periods =  Api.Collection('report_periods').query();
+  $scope.products =  Api.Collection('products').query();
+  $scope.customers = Api.Collection('customers').query();
+  var dig = {"position":"Sales Executive"};
+  $scope.sales_executives = Api.Collection('users',dig).query();
+  console.log("sales executive");
+  console.log($scope.sales_executives);
+  $scope.sales_executives = Api.Collection('sales_executives').query();
+  $scope.users = Api.Collection('users').query();
   $scope.report = {};
 
   var generateReport = function (query,api_url) {
-    console.log(query);
-    console.log(api_url);
+    if (api_url == "/reports/sales/customer") {
+
+      query["customer.company_name"] = $scope.report.customer;
+    }
+    if (api_url == "/reports/sales/product") {
+      // query.product =  {"product_name" : {"$in" : [$scope.report.product]}};
+    }
+    if (api_url == "/reports/sales/brand") {
+      // query.brand = {"brand" : {"$in" : [$scope.report.brand]}};
+    }
+    if (api_url == "/reports/sales/se") {
+      query.sales_executive = $scope.report.sales_executive;
+    }
+
     if ($scope.report.period && $scope.report.value) {
       var period = $scope.report.period;
       var value = $scope.report.value;
@@ -890,8 +910,7 @@ $scope.init = function(){
       buttons = [
       {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-cloud-download"},
       ];
-      query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
-
+      query.report = {};
 
       $scope.title = "COMPLETED SALES REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -904,40 +923,40 @@ $scope.init = function(){
 
       break;
     case "customer" :
-      // console.log($scope.report_periods);
-      //
-      // columns = [
-      // $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-      // $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
-      // ];
-      //
-      // buttons = [
-      // {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
-      // ];
-      // query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
-      // $scope.title = "SALES REPORT"
-      // $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      // $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+      columns = [
+      {"name": "customer","title": "Company Name"},
+      {"name": "branch", "title" :"Branch"},
+      {"name": "type", "title": "Type"},
+      {"name": "total_amount_due", "title": "Total Amount Due"},
+      ];
+      buttons = [
+      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-cloud-download"},
+      ];
+      $scope.title = "COMPLETED SALES REPORT "
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/reports/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+      $scope.generateReport = function(){
+        generateReport(query,"/reports/sales/customer");
+      }
 
       break;
-    case "product" :
+    case "products" :
+      console.log(type);
       columns = [
       {"name": "name","title": "Product"},
       {"name": "bl_code","title": "Code"},
       {"name": "brand","title": "Brand"},
-      {"name": "customer","title": "Customer"},
       {"name": "quantity","title": "Quantity"}
       ];
 
       buttons = [
-      {url:"/#/reports/sales/product/",title:"View Record",icon:"fa fa-folder-open"}
+      {url:"/#/reports/sales/product/",title:"View Record",icon:"fa fa-folder-cloud-download"}
       ];
-      query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
       $scope.title = "SALES REPORT BY PRODUCT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-
       query = {};
+      $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.generateReport = function(){
         if($scope.product && $scope.product._id){
           query.ordered_items = {"$elemMatch" : { _id: $scope.product._id }};
@@ -959,7 +978,6 @@ $scope.init = function(){
       buttons = [
       {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
       ];
-      query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
       $scope.title = "SALES REPORT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
@@ -975,6 +993,22 @@ $scope.init = function(){
 
       break;
     case "se" :
+      columns = [
+      {"name": "customer","title": "Company Name"},
+      {"name": "branch", "title" :"Branch"},
+      {"name": "type", "title": "Type"},
+      {"name": "total_amount_due", "title": "Total Amount Due"},
+      ];
+      buttons = [
+      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-cloud-download"},
+      ];
+      $scope.title = "COMPLETED SALES REPORT "
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/reports/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+      $scope.generateReport = function(){
+        generateReport(query,"/reports/sales/se");
+      }
       break;
     }
   };
