@@ -734,94 +734,294 @@ angular.module('erp')
 })
 .controller('ReportCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
 
-  $scope.ajax_ready = false;
-  Structure.Sales.query().$promise.then(function(data){
-    $scope.structure = data[0];
-    $scope.ajax_ready = true;
-    var status = Library.Status.Sales;
-    var columns = [];
-    var buttons = [];
-    var query = {};
+$scope.ajax_ready = false;
+Structure.Sales.query().$promise.then(function(data){
+  $scope.structure = data[0];
+  $scope.ajax_ready = true;
+  var status = Library.Status.Sales;
+  var columns = [];
+  var buttons = [];
+  var query = {};
 
-    $scope.init = function(){
-      var module = $routeParams.module;
-      var type = $routeParams.type;
-      switch(type){
-        case "complete" :
-          $scope.report_periods =  Api.Collection('report_periods', query).query();
-          $scope.report = {};
+$scope.init = function(){
+  var module = $routeParams.module;
+  var type = $routeParams.type;
+  $scope.type = type;
+  $scope.report_periods =  Api.Collection('report_periods', query).query();
+  $scope.products =  Api.Collection('products', query).query();
+  $scope.report = {};
 
-          console.log($scope.report_periods);
+  var generateReport = function (query,api_url) {
+    if ($scope.report.period && $scope.report.value) {
+      var period = $scope.report.period;
+      var value = $scope.report.value;
+      var start_year = 1;
+      var start_month = 0;
+      var start_day = 1;
+      var start_hours = 0;
+      var start_minute = 0;
 
-          columns = [
-          $scope.structure.pfno, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
-          ];
+    var splitDate = function () {
+       start_year = Number($scope.report.value.split("/")[2]);
+       start_month = Number($scope.report.value.split("/")[0])-1;
+       start_day = Number($scope.report.value.split("/")[1]);
+      }
 
-          buttons = [
-          {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
-          ];
-          query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
-          $scope.title = "SALES REPORT"
-          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-          $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-
-          $scope.changeField = function () {
-            if ($scope.report.period && $scope.report.param) {
-              //query the reports
-            }
-            else {
-
-            }
-          }
-
-          break;
-        case "customer" :
-          $scope.report_periods =  Api.Collection('report_periods', query).query();
-          $scope.report = {};
-
-          console.log($scope.report_periods);
-
-          columns = [
-          $scope.structure.pfno, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-          $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
-          ];
-
-          buttons = [
-          {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
-          ];
-          query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
-          $scope.title = "SALES REPORT"
-          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-          $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-
-          $scope.changeField = function () {
-            if ($scope.report.period && $scope.report.param) {
-              //query the reports
-            }
-            else {
-
-            }
-          }
-
-          break;
-        case "product" :
-
-          break;
-        case "brand" :
-
-          break;
-        case "se" :
-
-          break;
-        case "se" :
-
-          break;
+      switch (period) {
+      case 'day':
+        splitDate();
+        var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
+        var end_date = new Date(start_year,start_month,start_day+1,start_hours,start_minute);
+        if (start_date == "Invalid Date") {
+          window.alert("Invalid input, please check the date format.");
         }
-      };
+        console.log("startdate: "+ start_date);
+        console.log("enddate: "+ end_date);
+        query.delivery_date = {"$gte": start_date, "$lte": end_date};
+        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
+        $scope.title = "SALES REPORT PRODUCT:"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
+      break;
+      case 'week':
+        splitDate();
+        var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
+        var end_date = new Date(start_year,start_month,start_day+7,start_hours,start_minute);
+        if (start_date == "Invalid Date") {
+          window.alert("Invalid input, please check the date format.");
+        }
+        query.delivery_date = {"$gte": start_date, "$lte": end_date};
+        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
+        $scope.title = "SALES REPORT PRODUCT:"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
+      break;
+      case 'month':
+        splitDate();
+        if (start_day != 1) {
+          window.confirm("The day is not set to 1.");
+        }
+        var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
+        start_month = start_month==12 ? 0 : start_month;
+        var end_date = new Date(start_year,start_month+1,start_day,start_hours,start_minute);
+        if (start_date == "Invalid Date") {
+          window.alert("Invalid input, please check the date format.");
+        }
+        // query.delivery_date = {"$gte": start_date, "$lte": end_date};
+        query =
+        // {"status.status_code":{"$in":["PAYMENT_CONFIRMED"]},
+        [{'$match': {
+              'time': {
+                  '$gte': start_date,
+                  '$lt':  end_date } } },
+        {'$project': {
+                'path': 1,
+                'date': {
+                    'y': { '$year': '$time' },
+                    'm': { '$month': '$time' },
+                    'd': { '$dayOfMonth': '$time' } } } },
+        {'$group': {
+                '_id': {
+                    'p':'$path',
+                    'y': '$date.y',
+                    'm': '$date.m',
+                    'd': '$date.d' },
+                'hits': { '$sum': 1 } } }];
+
+        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
+        console.log("query: "+JSON.stringify(query));
+
+        $scope.title = "SALES REPORT PRODUCT:"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
+      break;
+      case 'quarter':
+        start_year = $scope.report.value;
+        switch ($scope.report.quarter) {
+        case '1':
+          start_month = 0;
+          break;
+        case '2':
+          start_month = 3;
+          break;
+        case '3':
+          start_month = 6;
+          break;
+        case '4':
+          start_month = 9;
+          break;
+        default:
+          window.confirm("The Quarter is out of range.");
+        }
+
+        if (start_year < 2010 || start_year > 2020 ) {
+          window.confirm("The Year is out of range.");
+        }
+        var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
+        start_month = start_month==12 ? 0 : start_month;
+        var end_date = new Date(start_year,start_month+3,start_day,start_hours,start_minute);
+        if (start_date == "Invalid Date") {
+          window.alert("Invalid input, please check the date format.");
+        }
+        console.log("startdate: "+ start_date);
+        console.log("enddate: "+ end_date);
+        query.delivery_date = {"$gte": start_date, "$lte": end_date};
+        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
+        $scope.title = "SALES REPORT PRODUCT:"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
+      break;
+      case 'year':
+        var start_year = $scope.report.value;
+        if (start_year < 2010 || start_year > 2020 ) {
+          window.confirm("The Year is out of range.");
+        }
+        var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
+        start_month = start_month==12 ? 0 : start_month;
+        var end_date = new Date(start_year,start_month+12,start_day,start_hours,start_minute);
+        if (start_date == "Invalid Date") {
+          window.alert("Invalid input, please check the date format.");
+        }
+        console.log("startdate: "+ start_date);
+        console.log("enddate: "+ end_date);
+        // query.delivery_date = {"$gte": start_date, "$lte": end_date};
+
+        console.log("query.delivery_date: "+JSON.stringify(query.delivery_date));
+        $scope.title = "SALES REPORT PRODUCT:"
+        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      break;
+      default:
+      }
+    }
+    else {
+
+    }
+  }
+
+  switch(type){
+    case "complete" :
+      columns = [
+      $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+      $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+      ];
+      buttons = [
+      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-folder-open"},
+      ];
+      query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
 
 
-    });
+      $scope.title = "COMPLETED SALES REPORT "
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+      $scope.generateReport = function(){
+        generateReport(query,"/reports/sales/complete");
+      }
+
+
+      break;
+    case "customer" :
+      // console.log($scope.report_periods);
+      //
+      // columns = [
+      // $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+      // $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+      // ];
+      //
+      // buttons = [
+      // {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
+      // ];
+      // query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+      // $scope.title = "SALES REPORT"
+      // $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      // $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+      break;
+    case "product" :
+      columns = [
+      {"name": "name","title": "Product"},
+      {"name": "bl_code","title": "Code"},
+      {"name": "brand","title": "Brand"},
+      {"name": "customer","title": "Customer"},
+      {"name": "quantity","title": "Quantity"}
+      ];
+
+      buttons = [
+      {url:"/#/reports/sales/product/",title:"View Record",icon:"fa fa-folder-open"}
+      ];
+      query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+      $scope.title = "SALES REPORT BY PRODUCT"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+      query = {};
+      $scope.generateReport = function(){
+        if($scope.product && $scope.product._id){
+          query.ordered_items = {"$elemMatch" : { _id: $scope.product._id }};
+        }
+        generateReport(query,"/reports/sales/product");
+      }
+
+      break;
+    case "brand" :
+      columns = [
+      {"name": "name","title": "Product"},
+      {"name": "bl_code","title": "Code"},
+      {"name": "brand","title": "Brand"},
+      {"name": "customer","title": "Customer"},
+      {"name": "quantity","title": "Quantity"}
+
+      ];
+
+      buttons = [
+      {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+      ];
+      query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+      $scope.title = "SALES REPORT"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+      query = {};
+      $scope.generateReport = function(){
+        console.log("in the lower generateReport");
+        if($scope.brand && $scope.product._id){
+          query.ordered_items = {"$elemMatch" : { "brand": $scope.brand }};
+        }
+        generateReport(query,"/reports/sales/brand");
+      }
+
+      break;
+    case "se" :
+      break;
+    }
+  };
+
+$scope.formInit = function(){
+  var type = $routeParams.type;
+  var module = $routeParams.module;
+  $scope.index_url = module+"/"+type;
+  $scope.title = "VIEW SALES ";
+  $scope.inventory_locations =  Api.Collection('inventory_locations').query();
+  $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+    $scope.shipping_address =
+    $scope.sales.customer.shipping_address.landmark + ', ' +
+    $scope.sales.customer.shipping_address.barangay + ', ' +
+    $scope.sales.customer.shipping_address.city + ', ' +
+    $scope.sales.customer.shipping_address.province + ', ' +
+    $scope.sales.customer.shipping_address.country + ', ' +
+    $scope.sales.customer.shipping_address.zipcode;
+    $scope.billing_address =
+    $scope.sales.customer.billing_address.landmark + ', ' +
+    $scope.sales.customer.billing_address.barangay + ', ' +
+    $scope.sales.customer.billing_address.city + ', ' +
+    $scope.sales.customer.billing_address.province + ', ' +
+    $scope.sales.customer.billing_address.country + ', ' +
+    $scope.sales.customer.billing_address.zipcode;
+  });
+}
+
+
+  });
   })
 .controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
 
