@@ -16,6 +16,10 @@ angular.module('erp', [
         templateUrl: '/partials/home/index',
         controller: 'MainCtrl'
       })
+      .when('/auth/logout',{
+        templateUrl: '/partials/home/index',
+        controller: 'MainCtrl'
+      })
       .when('/user/index', {
         templateUrl: '/partials/user/index',
         controller: 'UserCtrl'
@@ -255,6 +259,10 @@ angular.module('erp', [
       .when('/merge/:action/:id', {
         templateUrl: '/partials/merge/add',
         controller: 'MergeCtrl'
+      })
+      .when('/auth/unauthorized', {
+        templateUrl: '/partials/home/unauthorized',
+        controller: 'MainCtrl'
       })
       .otherwise({
         redirectTo: '/'

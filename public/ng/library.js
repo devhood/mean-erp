@@ -83,8 +83,19 @@ angular.module('erp')
         };
       },
     },
+    Permission : {
+      isAllowed : function(client,path){
+        var allowed = false;
+        for(var i in client.permissions){
+          if(client.permissions[i].route.indexOf(path) != -1){
+            allowed = true;
+          }
+        }
+        return allowed;
+      }
+    },
     Status : {
-      
+
       Promo:{
         created : {status_code : "PROMO_CREATED", status_name : "Promo submitted"},
         approved : {status_code : "PROMO_APPROVED", status_name : "Promo approved"},

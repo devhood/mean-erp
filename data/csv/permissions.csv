@@ -2,6 +2,7 @@ name,route
 "Add User","/user/add"
 "Edit User","/user/edit"
 "View User","/user/read"
+"Manage User","/user/index"
 "Add Customer","/customer/add"
 "Edit Customer","/customer/edit"
 "View Customer","/customer/read"
@@ -10,3 +11,7 @@ name,route
 "Edit Product","/product/edit"
 "View Product","/product/read"
 "Approve Product","/product/approve"
+"Manage Product","/product/index"
+"Manage Customer","/customer/index"
+"Manage Sales Order","/sales/index/order",
+"Manage Sales Order Approval","/sales/index/override"

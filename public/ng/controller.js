@@ -1,13 +1,35 @@
 'use strict';
 
 angular.module('erp')
-.controller('MainCtrl', function ($scope, $location, Reference, Session) {
-  $scope.menus = Reference.Menu.query();
-  Session.get(function(client){
-    $scope.client = client;
+.controller('MainCtrl', function ($scope, $location, $window, Reference, Session) {
+  Reference.Menu.query().$promise.then(function(data){
+    Session.get(function(client) {
+      $scope.client = client;
+      var menu = [];
+      for(var i in data){
+        for(var j in data[i].childLink){
+          for(var k in client.permissions){
+            if(data[i].childLink[j].href.indexOf(client.permissions[k].route) != -1){
+              data[i].childLink[j].show = true;
+            }
+          }
+        }
+      }
+      $scope.menus = data;
+    });
+
   });
+  if($location.path() == "/auth/logout"){
+    $window.location.href = '/auth/logout';
+  }
 })
-.controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService, Session) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Users.query().$promise.then(function(data){
