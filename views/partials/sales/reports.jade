@@ -39,18 +39,24 @@ block title
             span.col-md-12.help-block Customer
       .col-md-6
     .row(ng-show="type=='product'").col-md-12
-      .col-md-6
-        .form-group
-          .col-md-12
-            select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
-              option(value="All") All
-            span.col-md-12.help-block Select Product
-      .col-md-6
+      .col-md-12
+      .form-group
+        .col-md-4
+          .form-group
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.bl_code for product in products")
+              span.col-md-12.help-block Code
+        .col-md-4
+          .form-group
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
+              span.col-md-12.help-block Product
+        .col-md-4
     .row(ng-show="type=='brand'").col-md-12
       .col-md-6
         .form-group
           .col-md-12
-            select.select2me.form-control.select2-offscreen(ng-model="report.brand", ng-options="product.brand for product in products")
+            select.select2me.form-control.select2-offscreen(ng-model="report.brand", ng-options="brand.name for brand in brands")
             span.col-md-12.help-block Select Brand
       .col-md-6
     .row(ng-show="type=='se'").col-md-12
