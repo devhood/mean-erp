@@ -813,29 +813,34 @@ $scope.init = function(){
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
-console.log("query : ", JSON.stringify(query));
+        console.log("query : ", JSON.stringify(query));
         $scope.title = "SALES REPORT : WEEKLY"
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       case 'month':
-        splitDate();
-        if (start_day != 1) {
-          window.confirm("The day is not set to 1.");
-        }
+        start_day = 1;
+        start_month = $scope.report.value;
+        start_year = $scope.report.year;
+      console.log(start_year, start_month, start_day);
         var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
-        start_month = start_month==12 ? 0 : start_month;
+      console.log(start_year, start_month, start_day);
+        if (start_month==12) {
+          start_month = 0;
+          start_year = start_year + 1;
+        }
         var end_date = new Date(start_year,start_month+1,start_day,start_hours,start_minute);
+      console.log(end_date);
         if (start_date == "Invalid Date") {
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
-console.log("query : ", JSON.stringify(query));
+        console.log("query nga : ", JSON.stringify(query));
 
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       case 'quarter':
-        start_year = $scope.report.value;
+        start_year = $scope.report.year;
         switch ($scope.report.quarter) {
         case '1':
           start_month = 0;
@@ -863,12 +868,12 @@ console.log("query : ", JSON.stringify(query));
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
-console.log("query : ", JSON.stringify(query));
+        console.log("query : ", JSON.stringify(query));
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       case 'annual':
-        var start_year = $scope.report.value;
+        var start_year = $scope.report.year;
         if (start_year < 2010 || start_year > 2020 ) {
           window.confirm("The Year is out of range.");
         }
@@ -879,7 +884,7 @@ console.log("query : ", JSON.stringify(query));
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
-console.log("query : ", JSON.stringify(query));
+        console.log("query : ", JSON.stringify(query));
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       default:
@@ -896,8 +901,7 @@ console.log("query : ", JSON.stringify(query));
       {"name": "customer","title": "Company Name"},
       {"name": "sales_executive", "title" :"Sales Executive"},
       {"name": "delivery_method", "title": "Delivery Method"},
-      {"name": "payment_term", "title": "Payment Term"},
-      {"name": "status_code", "title": "Status"}
+      {"name": "payment_term", "title": "Payment Term"}
       ];
       $scope.title = "COMPLETED SALES REPORT "
       console.log(JSON.stringify(query));

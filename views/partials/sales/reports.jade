@@ -7,6 +7,7 @@ block title
       | {{title}}
     .tools
       a.collapse(href="javascript:;")
+      //- script(src='public/vendor/ui-utils/ui-utils.min.js')
   .portlet-body
     br
     .row
@@ -18,10 +19,18 @@ block title
               span.col-md-12.help-block Select Reports Period
         .col-md-4
           .form-group
-            .col-md-12
+            .col-md-12(ng-show="report.period=='day'")
               input.form-control(type="text", ng-model="report.value")
-              span.col-md-12.help-block(ng-show="report.period=='day' || report.period=='week' || report.period=='month'") Enter Start Date
-              span.col-md-12.help-block(ng-show="report.period=='annual' || report.period=='quarter'") Enter Year
+              span.col-md-12.help-block Enter Starting Date
+            .col-md-12(ng-show="report.period=='week'")
+              input.form-control(type="text", ng-model="report.value")
+              span.col-md-12.help-block Enter Starting Date of Week
+            .col-md-12(ng-show="report.period=='month'")
+              input.form-control(type="text", ng-model="report.value")
+              span.col-md-12.help-block Enter Month
+            .col-md-12(ng-show="report.period=='annual' || report.period=='quarter' || report.period=='month'")
+              input.form-control(type="text", ng-model="report.year")
+              span.col-md-12.help-block Enter Year
         .col-md-2(ng-show="report.period=='quarter'")
           .form-group
             .col-md-12
