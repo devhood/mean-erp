@@ -56,7 +56,7 @@ block title
       .col-md-6
         .form-group
           .col-md-12
-            select.select2me.form-control.select2-offscreen(ng-model="report.brand", ng-options="brand.name for brand in brands")
+            select.select2me.form-control.select2-offscreen(ng-model="report.brand", ng-options="brand.name as brand.name for brand in brands")
             span.col-md-12.help-block Select Brand
       .col-md-6
     .row(ng-show="type=='se'").col-md-12

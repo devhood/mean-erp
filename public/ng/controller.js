@@ -742,7 +742,14 @@ Structure.Sales.query().$promise.then(function(data){
   var columns = [];
   var buttons = [];
   var query = {};
-  query = {"status.status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+  // query.status = {"status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+  var now = new Date()
+  var date = now.getDate();
+  var year = now.getFullYear();
+  var month = now.getMonth();
+  var start_date = new Date(year,month,date,0,0);
+  var end_date = new Date(year,month,date,23,59);
+  query.payment_date = {"$gte": start_date, "$lte": end_date};
 
 $scope.init = function(){
   var module = $routeParams.module;
@@ -795,7 +802,7 @@ $scope.init = function(){
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
-        console.log("query: ", JSON.stringify(query));
+        console.log("query : ", JSON.stringify(query));
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       case 'week':
@@ -806,6 +813,7 @@ $scope.init = function(){
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
+console.log("query : ", JSON.stringify(query));
         $scope.title = "SALES REPORT : WEEKLY"
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
@@ -821,8 +829,8 @@ $scope.init = function(){
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
+console.log("query : ", JSON.stringify(query));
 
-        $scope.title = "SALES REPORT : MONTH"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
@@ -855,7 +863,7 @@ $scope.init = function(){
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
-        $scope.title = "SALES REPORT : QUARTERLY"
+console.log("query : ", JSON.stringify(query));
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
@@ -871,7 +879,7 @@ $scope.init = function(){
           window.alert("Invalid input, please check the date format.");
         }
         query.payment_date = {"$gte": start_date, "$lte": end_date};
-        $scope.title = "SALES REPORT : ANNUALLY :"
+console.log("query : ", JSON.stringify(query));
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       default:
@@ -891,13 +899,10 @@ $scope.init = function(){
       {"name": "payment_term", "title": "Payment Term"},
       {"name": "status_code", "title": "Status"}
       ];
-      buttons = [
-      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-cloud-download"},
-      ];
       $scope.title = "COMPLETED SALES REPORT "
-      query = {};
+      console.log(JSON.stringify(query));
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/sales/complete");
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/complete?filter="+encodeURIComponent(JSON.stringify(query)));
 
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/complete");
@@ -911,14 +916,10 @@ $scope.init = function(){
       {"name": "type", "title": "Type"},
       {"name": "total_amount_due", "title": "Total Amount Due"},
       ];
-      buttons = [
-      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-cloud-download"},
-      ];
       query["customer.company_name"] = $scope.report.customer;
       $scope.title = "COMPLETED SALES REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/reports/sales/customer");
-
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/customer?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/customer");
       }
@@ -932,14 +933,9 @@ $scope.init = function(){
       {"name": "quantity","title": "Quantity"},
       {"name": "total","title": "Total"}
       ];
-
-      buttons = [
-      {url:"/#/reports/sales/product/",title:"View Record",icon:"fa fa-cloud-download"}
-      ];
       $scope.title = "SALES REPORT BY PRODUCT"
-      query = {};
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/reports/sales/product");
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/product?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/product");
       }
@@ -951,13 +947,9 @@ $scope.init = function(){
       {"name": "quantity","title": "Quantity"},
       {"name": "total","title": "Total"}
       ];
-      buttons = [
-      {url:"/#/reports/sales/brand/",title:"View Record",icon:"fa fa-cloud-download"},
-      ];
       $scope.title = "SALES REPORT BY BRAND"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/sales/brand");
-      query = {};
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/brand?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/brand");
       }
@@ -967,13 +959,9 @@ $scope.init = function(){
       {"name": "sales_executive","title": "Sales Executive"},
       {"name": "total_amount_due", "title": "Total Amount Due"}
       ];
-      buttons = [
-      {url:"/#/reports/sales/complete/",title:"View Record",icon:"fa fa-cloud-download"}
-      ];
-      query = {};
       $scope.title = "COMPLETED SALES REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/sales?filter=?filter={'payment_date':{''$gte':'2015-01-08T16:00:00.000Z',''$lte':'2025-01-09T16:00:00.000Z'}}");
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/se?filter="+encodeURIComponent(JSON.stringify(query)));
 
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/se");
