@@ -23,7 +23,7 @@ angular.module('erp')
     $window.location.href = '/auth/logout';
   }
 })
-.controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService, Session) {
+.controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
     if(Library.Permission.isAllowed(client,$location.path())){
@@ -114,7 +114,13 @@ angular.module('erp')
     }
   });
 })
-.controller('CustomerCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('CustomerCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Customers.query().$promise.then(function(data){
@@ -275,7 +281,13 @@ angular.module('erp')
 
   });
 })
-.controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService, fileUpload) {
+.controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService, fileUpload) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Products.query().$promise.then(function(data){
@@ -438,7 +450,13 @@ angular.module('erp')
   });
 
 })
-.controller('SalesCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
+.controller('SalesCtrl', function ($scope, $window, $filter, $routeParams,  $location, Structure, Library, Session, Api) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Sales.query().$promise.then(function(data){
@@ -732,7 +750,13 @@ angular.module('erp')
 
   });
 })
-.controller('ReportCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
+.controller('ReportCtrl', function ($scope, $window, $filter, $routeParams, $location, Structure, Library, Session, Api) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
 $scope.ajax_ready = false;
 Structure.Sales.query().$promise.then(function(data){
@@ -743,7 +767,7 @@ Structure.Sales.query().$promise.then(function(data){
   var buttons = [];
   var query = {};
   // query.status = {"status_code" : {"$in" : [status.payment.confirmed.status_code]}};
-  var now = new Date()
+  var now = new Date();
   var date = now.getDate();
   var year = now.getFullYear();
   var month = now.getMonth();
@@ -975,7 +999,13 @@ $scope.init = function(){
   };
 });
   })
-.controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   var id = $routeParams.id;
   var action = $routeParams.action;
@@ -1165,7 +1195,13 @@ $scope.init = function(){
   }
 
 })
-.controller('ShipmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('ShipmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Shipments.query().$promise.then(function(data){
@@ -1238,106 +1274,106 @@ $scope.init = function(){
   };
 
 
-    $scope.formInit = function(){
-      var id = $routeParams.id;
-      var action = $routeParams.action;
-      $scope.suppliers = Api.Collection('suppliers').query();
-      $scope.products = Api.Collection('products').query();
-      $scope.conditions = Api.Collection('conditions').query();
-      var status = Library.Status.Shipments;
+  $scope.formInit = function(){
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.suppliers = Api.Collection('suppliers').query();
+    $scope.products = Api.Collection('products').query();
+    $scope.conditions = Api.Collection('conditions').query();
+    var status = Library.Status.Shipments;
 
-
-
-      $scope.action = action;
-      if(action == 'add'){
-        $scope.title = "ADD SHIPMENT";
-        var Shipment = Api.Collection('shipments');
-        $scope.shipment = new Shipment();
-        $scope.shipment.status = status.created;
-        $scope.saveShipment = function(){
-          $scope.shipment.$save(function(){
-            $location.path('/shipment/index/create');
-            return false;
-          });
-        }
-      }
-
-
-
-      if(action == 'read'){
-        $scope.title = "VIEW SHIPMENT " + id;
-        $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+    $scope.action = action;
+    if(action == 'add'){
+      $scope.title = "ADD SHIPMENT";
+      var Shipment = Api.Collection('shipments');
+      $scope.shipment = new Shipment();
+      $scope.shipment.status = status.created;
+      $scope.saveShipment = function(){
+        $scope.shipment.$save(function(){
+          $location.path('/shipment/index/create');
+          return false;
         });
-      }
-
-      if (action == 'edit') {
-        $scope.title = "EDIT SHIPMENT" + id;
-        $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
-        });
-        $scope.saveShipment = function(){
-          $scope.shipment.status = status.updated;
-          $scope.shipment.$update(function(){
-            $location.path('/shipment/index/create');
-            return false;
-          });
-        };
-        $scope.deleteShipment=function(shipment){
-          if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
-            $scope.shipment.$delete(function(){
-              $location.path('/shipment/index/create');
-              return false;
-            });
-          }
-        };
-      }
-
-
-
-      if(action == 'approve'){
-        $scope.title = "APPROVE SHIPMENT "+ id;
-        $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
-        });
-        $scope.saveShipment = function(){
-          $scope.shipment.status = status.approved;
-          $scope.shipment.$update(function(){
-            $location.path('/shipment/index/approve');
-            return false;
-          });
-        };
-        $scope.deleteShipment=function(shipment){
-          if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
-            $scope.shipment.$delete(function(){
-              $location.path('/shipment/index/aprove');
-              return false;
-            });
-          }
-        };
-      }
-
-      $scope.addItem = function(shipment){
-        var shipment_item = angular.copy(shipment.item);
-        if(shipment_item){
-          delete shipment_item.inventories;
-        }
-        if(shipment_item && shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
-          if($scope.shipment.shipment_items){
-            $scope.shipment.shipment_items.push(shipment_item);
-          }
-          else{
-            $scope.shipment.shipment_items = [shipment_item];
-          }
-        }
-       delete shipment.item ;
-      }
-      $scope.removeItem = function(index){
-        $scope.shipment.shipment_items.splice(index, 1);
       }
     }
+
+    if(action == 'read'){
+      $scope.title = "VIEW SHIPMENT " + id;
+      $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+      });
+    }
+
+    if (action == 'edit') {
+      $scope.title = "EDIT SHIPMENT" + id;
+      $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+      });
+      $scope.saveShipment = function(){
+        $scope.shipment.status = status.updated;
+        $scope.shipment.$update(function(){
+          $location.path('/shipment/index/create');
+          return false;
+        });
+      };
+      $scope.deleteShipment=function(shipment){
+        if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
+          $scope.shipment.$delete(function(){
+            $location.path('/shipment/index/create');
+            return false;
+          });
+        }
+      };
+    }
+
+  if(action == 'approve'){
+    $scope.title = "APPROVE SHIPMENT "+ id;
+    $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+    });
+    $scope.saveShipment = function(){
+      $scope.shipment.status = status.approved;
+      $scope.shipment.$update(function(){
+        $location.path('/shipment/index/approve');
+        return false;
+      });
+    };
+    $scope.deleteShipment=function(shipment){
+      if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
+        $scope.shipment.$delete(function(){
+          $location.path('/shipment/index/aprove');
+          return false;
+        });
+      }
+    };
+  }
+
+  $scope.addItem = function(shipment){
+    var shipment_item = angular.copy(shipment.item);
+    if(shipment_item){
+      delete shipment_item.inventories;
+    }
+    if(shipment_item && shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
+      if($scope.shipment.shipment_items){
+        $scope.shipment.shipment_items.push(shipment_item);
+      }
+      else{
+        $scope.shipment.shipment_items = [shipment_item];
+      }
+    }
+    delete shipment.item ;
+  }
+  $scope.removeItem = function(index){
+    $scope.shipment.shipment_items.splice(index, 1);
+  }
+}
 
   });
 
 })
-.controller('PurchaseCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('PurchaseCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Purchases.query().$promise.then(function(data){
@@ -1466,7 +1502,13 @@ $scope.init = function(){
   });
 
 })
-.controller('SalesProformaCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesProformaCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   var id = $routeParams.id;
   var action = $routeParams.action;
@@ -1658,7 +1700,13 @@ $scope.init = function(){
   }
 
 })
-.controller('PackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('PackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Packing.query().$promise.then(function(data){
@@ -1825,7 +1873,14 @@ $scope.init = function(){
     }
   });
 })
-.controller('TripsCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('TripsCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
   $scope.ajax_ready = false;
   Structure.Trips.query().$promise.then(function(data){
     $scope.structure = data[0];
@@ -1973,7 +2028,14 @@ $scope.init = function(){
   }
   });
 })
-.controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
@@ -2036,7 +2098,14 @@ $scope.init = function(){
     };
   }
 })
-.controller('SalesInvoiceCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesInvoiceCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
@@ -2099,7 +2168,13 @@ $scope.init = function(){
     };
   }
 })
-.controller('SalesPaymentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesPaymentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   var id = $routeParams.id;
   var action = $routeParams.action;
@@ -2230,7 +2305,14 @@ $scope.init = function(){
   }
 
 })
-.controller('SalesReturnCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesReturnCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
@@ -2366,7 +2448,14 @@ $scope.init = function(){
     };
   }
 })
-.controller('SalesMemoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('SalesMemoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
@@ -2429,7 +2518,13 @@ $scope.init = function(){
     };
   }
 })
-.controller('ConsignCtrl', function ($scope, $window, $filter, $routeParams, Structure, Library, Api) {
+.controller('ConsignCtrl', function ($scope, $window, $filter, $routeParams, $location, Structure, Library, Session, Api) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Consignments.query().$promise.then(function(data){
@@ -2528,7 +2623,13 @@ $scope.init = function(){
 
   });
 })
-.controller('ConsignOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('ConsignOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
     var id = $routeParams.id;
     var action = $routeParams.action;
@@ -2725,20 +2826,26 @@ $scope.init = function(){
   };
 
 })
-.controller('ConsignDeliveryCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('ConsignDeliveryCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
-    var id = $routeParams.id;
-    var action = $routeParams.action;
-    $scope.action = action;
-    $scope.consignment_transaction_types = Api.Collection('consignment_transaction_types').query();
-    $scope.price_types = Api.Collection('price_types').query();
-    $scope.order_sources = Api.Collection('order_sources').query();
-    $scope.delivery_methods = Api.Collection('delivery_methods').query();
-    var query = {"type":"Retail"};
-    $scope.customers = Api.Collection('customers',query).query();
-    $scope.inventory_locations = Api.Collection('customers',query).query();
-    $scope.products = Api.Collection('products').query();
-    var status = Library.Status.Consignments;
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.consignment_transaction_types = Api.Collection('consignment_transaction_types').query();
+  $scope.price_types = Api.Collection('price_types').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  var query = {"type":"Retail"};
+  $scope.customers = Api.Collection('customers',query).query();
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.products = Api.Collection('products').query();
+  var status = Library.Status.Consignments;
 
   $scope.CustomerChange = function(){
     if($scope.consignments.customer){
@@ -2787,15 +2894,21 @@ $scope.init = function(){
     };
   }
 })
-.controller('CDSCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('CDSCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.CDS.query().$promise.then(function(data){
-    $scope.structure = data[0];
-    $scope.ajax_ready = true;
-    var columns = [];
-    var buttons = [];
-    var query = {};
+  $scope.structure = data[0];
+  $scope.ajax_ready = true;
+  var columns = [];
+  var buttons = [];
+  var query = {};
 
 
     $scope.init = function(){
@@ -2887,10 +3000,16 @@ $scope.init = function(){
   }
   });
 })
-.controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
-    $scope.ajax_ready = false;
-    Structure.Adjustments.query().$promise.then(function(data){
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
+  $scope.ajax_ready = false;
+  Structure.Adjustments.query().$promise.then(function(data){
     $scope.structure = data[0];
     $scope.ajax_ready = true;
     var columns = [];
@@ -2899,7 +3018,7 @@ $scope.init = function(){
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
-   // $scope.price_types = Api.Collection('price_types').query();
+    // $scope.price_types = Api.Collection('price_types').query();
     $scope.transaction_types = Api.Collection('transaction_type').query();
     var query = {"type":"Retail"};
     $scope.customers = Api.Collection('customers',query).query();
@@ -2909,22 +3028,22 @@ $scope.init = function(){
 
     $scope.init = function(){
 
-        columns = [
+      columns = [
+      $scope.structure.adjno,$scope.structure.transaction_type,$scope.structure.inventory_location,
+      $scope.structure.status.status_name
+      ];
 
-         $scope.structure.adjno,$scope.structure.transaction_type,$scope.structure.inventory_location,$scope.structure.status.status_name
-          ];
-
-        buttons = [
-          {url:"/#/adjustment/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/adjustment/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/adjustment/approve/",title:"Approve Record",icon:"fa fa-gear"}
-        ];
-        query = { "status.status_code" : {"$in" : [status.created.status_code]}};
-        $scope.title = "ADJUSTMENT"
-        $scope.addUrl = "/#/adjustment/add"
-        $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-        $scope.dtOptions = Library.DataTable.options("/api/adjustments?filter="+encodeURIComponent(JSON.stringify(query)));
-  }
+      buttons = [
+      {url:"/#/adjustment/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/adjustment/edit/",title:"Edit Record",icon:"fa fa-edit"},
+      {url:"/#/adjustment/approve/",title:"Approve Record",icon:"fa fa-gear"}
+      ];
+      query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      $scope.title = "ADJUSTMENT"
+      $scope.addUrl = "/#/adjustment/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/adjustments?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
     $scope.addOrder = function(adjustments){
       var item = angular.copy(adjustments.item);
       if( item && item.name && item.quantity && item.quantity ){
@@ -2950,17 +3069,17 @@ $scope.init = function(){
       }
     }
     $scope.deleteAdjustments=function(adjustments){
-        if(popupService.showPopup('You are about to delete Record : '+adjustments._id)){
-          $scope.adjustments.$delete(function(){
-            $location.path('/adjustment/index');
-            return false;
-          });
-        }
-      };
+      if(popupService.showPopup('You are about to delete Record : '+adjustments._id)){
+        $scope.adjustments.$delete(function(){
+          $location.path('/adjustment/index');
+          return false;
+        });
+      }
+    };
     if( action == 'read'){
       $scope.title = "VIEW ADJUSTMENT ORDER";
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
+        $scope.CustomerChange();
       });
     }
     if(action == 'add'){
@@ -3028,7 +3147,13 @@ $scope.init = function(){
 
   });
 })
-.controller('CalendarCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('CalendarCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   if (!jQuery().fullCalendar) {
     return;
@@ -3113,7 +3238,14 @@ $scope.init = function(){
 
 
 })
-.controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
   $scope.ajax_ready = false;
   Structure.Schedules.query().$promise.then(function(data){
     $scope.structure = data[0];
@@ -3243,13 +3375,26 @@ $scope.init = function(){
   });
 
 })
-.controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
   var id = $routeParams.id;
   var type = $routeParams.type;
 
   $window.location.href = '/print/sales/'+type+'/'+id;
 })
-.controller('CycleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('CycleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Cycle.query().$promise.then(function(data){
@@ -3347,7 +3492,13 @@ $scope.init = function(){
     }
   });
 })
-.controller('PromoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('PromoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Promo.query().$promise.then(function(data){
@@ -3474,7 +3625,13 @@ $scope.init = function(){
   } //form init end
   });
 })
-.controller('MergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Api, popupService) {
+.controller('MergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
 
   $scope.ajax_ready = false;
   Structure.Merges.query().$promise.then(function(data){
