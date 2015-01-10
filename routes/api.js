@@ -32,6 +32,7 @@ router
 .post('/:object', generator.generate, inventory.check, function(req, res) {
     delete req.user.password;
     delete req.user.permissions;
+    delete req.user.audit_history;
     var audit = {
       user : req.user,
       creation_date : new Date(),

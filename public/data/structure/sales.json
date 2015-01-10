@@ -25,6 +25,11 @@
       "title": "CM Number",
       "type": "text"
     },
+    "pckno" : {
+      "name": "pckno",
+      "title": "Pack No",
+      "type": "select"
+    },
     "pmno": {
       "name": "pmno",
       "title": "PM Number",
@@ -43,6 +48,11 @@
     "pckno": {
       "name": "pckno",
       "title": "Packing Number",
+      "type": "text"
+    },
+    "prepared_by" : {
+      "name": "prepared_by",
+      "title": "Prepared By",
       "type": "text"
     },
     "transaction_type": {

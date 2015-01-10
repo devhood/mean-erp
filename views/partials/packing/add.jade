@@ -1,5 +1,5 @@
 block title
-	title ADD PACKING
+	title APPROVE PACKING
 .portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
 	.portlet-title
 		.caption
@@ -7,29 +7,65 @@ block title
 			| {{title}}
 		.tools
 			a.collapse(href="javascript:;")
+			a.config(href="#portlet-config", data-toggle="modal")
+			a.reload(href="javascript:;")
+			a.remove(href="javascript:;")
 	.portlet-body.form
-		form.form-horizontal(role="form", name="save_form", enctype="multipart/form-data", ng-submit="save_form.$valid && savePacking()", novalidate)
+		form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSales()", novalidate)
 			.form-body
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select.select2me.form-control.select2-offscreen(ng-change="ListChange()", ng-model="packing.inventory_location", tabindex="-1",ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-disabled="action=='read'",required)
+								input.form-control(type="text", ng-model="sales.pckno", disabled)
+								span.col-md-12.help-block Packing Number
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input.form-control(type="text", ng-model="sales.sono", readonly)
+								span.col-md-12.help-block SO Number
+				.row
+					.col-md-1
+					.col-md-10
+						.form-group
+							.col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+								input.form-control(type="text", ng-model="sales.customer.company_name", disabled)
+								span.col-md-12.help-block Customer
+					.col-md-1
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input.form-control(type="text", ng-model="sales.customer.sales_executive", ng-disabled="action!='approve'")
+								span.col-md-12.help-block Sales Executive
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input.form-control(type="text", ng-model="sales.delivery_method", disabled)
+								span.col-md-12.help-block Delivery Method
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input.form-control(type="text", ng-model="sales.inventory_location", disabled)
 								span.col-md-12.help-block Inventory Location
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input.form-control(type="text", ng-model="packing.prepared_by", ng-disabled="action=='read'",required)
-								span.col-md-12.help-block Prepared By
+								input.form-control(type="text", ng-model="sales.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", disabled)
+								span.col-md-12.help-block Delivery Date
+					.col-md-1
 				.portlet.box.grey
 					.portlet-title
 						.caption
 							i.fa.fa-reorder
-							| LIST OF ORDER
+							| ORDERED ITEMS
 						.tools
 							a.collapse(href="javascript:;")
 					.portlet-body.form
 						.form-body
+							br
+							br
 							.form-group
 								.col-md-1
 								.col-md-10
@@ -40,33 +76,38 @@ block title
 												table.table.table-bordered.table-condensed.flip-content
 													thead.flip-content.bg-grey
 														tr
-															td SO Number
-															td PF Number
-															th Customer
-															th Brand
+															th Code
 															th Product
 															th Quantity
+															th Unit Price
+															th Total
 															th(width="5%", ng-hide="action=='read'") Action
 													tbody
-														tr(ng-repeat="item in packing.list")
-															td {{item.sono}}
-															td {{item.pfno}}
-															td {{item.customer}}
-															td {{item.brand}}
-															td {{item.product}}
-															td {{item.quantity}}
+														tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
+															td {{ordered_item.bl_code}}
+															td {{ordered_item.name}}
+															td {{ordered_item.quantity}}
+															td {{ordered_item.price}}
+															td {{ordered_item.total}}
 															td(width="5%", ng-hide="action=='read'")
 																.btn-group.btn-group-xs.btn-group-solid
-																	a.tooltips.btn.default.tooltips(ng-click="removeItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+																	a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																		i.fa.fa-trash-o
 								.col-md-1
+			.row
+				.col-md-6
+					.form-group
+						.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+							input.form-control(type="text", ng-model="sales.prepared_by", ng-disabled="action='read'", required)
+							span.col-md-12.help-block Prepared By
+				.col-md-6
+					.form-group
+						.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
 			.form-actions.fluid
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
 							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
-							| &nbsp;
-							button.btn.red(type="button", ng-click="deletePacking(packing)", ng-show="action=='edit' || action=='approve'") Delete
 							| &nbsp;
 							a.btn.default(type="button", href="/#/packing/index") Cancel
 					.col-md-6

@@ -1700,6 +1700,179 @@ $scope.init = function(){
   }
 
 })
+// .controller('OldPackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+//
+//   Session.get(function(client) {
+//     if(Library.Permission.isAllowed(client,$location.path())){
+//       $location.path("/auth/unauthorized");
+//     }
+//   });
+//
+//   $scope.ajax_ready = false;
+//   Structure.Packing.query().$promise.then(function(data){
+//     $scope.structure = data[0];
+//     $scope.ajax_ready = true;
+//     var columns = [];
+//     var buttons = [];
+//     var query = {};
+//     $scope.init = function(){
+//       columns = [
+//       $scope.structure.pckno, $scope.structure.prepared_by
+//       ];
+//
+//       buttons = [
+//       {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"}
+//       ];
+//       $scope.title = "PACKING"
+//       $scope.addUrl = "/#/packing/add"
+//       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+//       $scope.dtOptions = Library.DataTable.options("/api/packing");
+//     };
+//     $scope.formInit = function(){
+//
+//       var id = $routeParams.id;
+//       var action = $routeParams.action;
+//       var statusSales = Library.Status.Sales;
+//       var statusConsignments = Library.Status.Consignments;
+//       $scope.inventory_locations = Api.Collection('customers',query).query();
+//       $scope.ListChange = function(){
+//           $scope.packing.list = [];
+//           if($scope.packing.inventory_location){
+//             var query = {
+//               "inventory_location":$scope.packing.inventory_location,
+//               "status.status_code" : {"$in" : [statusSales.order.created.status_code,statusSales.order.revised.status_code]}
+//             };
+//
+//             Api.Collection('sales',query).query().$promise.then(function(data){
+//               for(var i in data){
+//                 for(var j in data[i].ordered_items){
+//                   var item = {
+//                     id : data[i]._id,
+//                     pfno : data[i].pfno,
+//                     sono : data[i].sono,
+//                     customer : data[i].customer.company_name,
+//                     brand : data[i].ordered_items[j].brand,
+//                     product : data[i].ordered_items[j].name,
+//                     quantity : data[i].ordered_items[j].quantity,
+//                   };
+//                   $scope.packing.list.push(item);
+//                 }
+//               }
+//             });
+//             var query1 = {
+//               "inventory_location":$scope.packing.inventory_location,
+//               "status.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
+//               "consignment_transaction_type" : "OUT",
+//             }
+//             Api.Collection('consignments',query1).query().$promise.then(function(data){
+//               for(var i in data){
+//                 for(var j in data[i].consigned_item){
+//                   var item = {
+//                     id : data[i]._id,
+//                     sono : data[i].cono,
+//                     customer : data[i].customer.company_name,
+//                     brand : data[i].consigned_item[j].brand,
+//                     product : data[i].consigned_item[j].name,
+//                     quantity : data[i].consigned_item[j].quantity,
+//                   };
+//                   $scope.packing.list.push(item);
+//                 }
+//               }
+//             });
+//             var query2 = {
+//               "inventory_location":$scope.packing.inventory_location,
+//               "status.status_code" : {"$in" : [statusSales.payment.created.status_code]},
+//               "pfno" : {"$exists":true},
+//             }
+//             console.log(query2);
+//             Api.Collection('sales',query2).query().$promise.then(function(data){
+//               console.log(data);
+//               for(var i in data){
+//                 for(var j in data[i].ordered_items){
+//                   var item = {
+//                     id : data[i]._id,
+//                     sono : data[i].pfno,
+//                     customer : data[i].customer.company_name,
+//                     brand : data[i].ordered_items[j].brand,
+//                     product : data[i].ordered_items[j].name,
+//                     quantity : data[i].ordered_items[j].quantity,
+//                   };
+//                   $scope.packing.list.push(item);
+//                 }
+//               }
+//             });
+//           }
+//       };
+//
+//       $scope.action = action;
+//       if(id && action == 'read'){
+//         $scope.title = "VIEW PACKING " + id;
+//         $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
+//       }
+//       if(id && action == 'edit'){
+//         $scope.title = "EDIT PACKING " + id;
+//         $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
+//
+//         $scope.deletePacking=function(packing){
+//           if(popupService.showPopup('You are about to delete Record : '+packing._id)){
+//             $scope.packing.$delete(function(){
+//               $location.path('/packing/index');
+//               return false;
+//             });
+//           }
+//         };
+//       }
+//       if(action == 'add'){
+//         $scope.title = "ADD PACKING";
+//         var Packing = Api.Collection('packing');
+//         $scope.packing = new Packing();
+//         $scope.savePacking = function(){
+//           $scope.packing.status = statusSales.packing.created;
+//           $scope.packing.$save(function(){
+//             var sono = [];
+//             var cono = [];
+//             async.each($scope.packing.list, function( item, callback) {
+//               if(sono.indexOf(item.sono) == -1){
+//                 sono.push(item.sono);
+//                 Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
+//                   sales.status = statusSales.packing.created;
+//                   sales.pckno =  $scope.packing.pckno;
+//                   sales.$update(function(){
+//                     callback();
+//                   });
+//                 });
+//               }
+//               if(item.cono && cono.indexOf(item.cono) == -1){
+//                 cono.push(item.cono);
+//                 Api.Collection('consignments').get({id : item.id}).$promise.then(function(consignments){
+//                   consignments.status = statusConsignments.packing.created;
+//                   consignments.cpckno =  $scope.packing.cpckno;
+//                   consignments.$update(function(){
+//                     callback();
+//                   });
+//                 });
+//               }
+//
+//               else{
+//                 callback();
+//               }
+//             },function(err){
+//               if(err){
+//                 console.log(err);
+//               }
+//             });
+//
+//             $location.path('/packing/index');
+//             return false;
+//           });
+//         }
+//         $scope.removeItem = function(index){
+//           $scope.packing.list.splice(index, 1);
+//         };
+//       }
+//     }
+//   });
+// })
 .controller('PackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
@@ -1708,170 +1881,61 @@ $scope.init = function(){
     }
   });
 
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+    console.log(action, id);
   $scope.ajax_ready = false;
-  Structure.Packing.query().$promise.then(function(data){
+  var status = Library.Status.Sales;
+  Structure.Sales.query().$promise.then(function(data){
     $scope.structure = data[0];
     $scope.ajax_ready = true;
     var columns = [];
     var buttons = [];
     var query = {};
+
     $scope.init = function(){
       columns = [
-      $scope.structure.pckno, $scope.structure.prepared_by
+      $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.pckno, $scope.structure.prepared_by, $scope.structure.status.status_name
       ];
 
       buttons = [
-      {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"}
+      {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
+      {url:"/#/packing/approve/",title:"View Record",icon:"fa fa-gear"}
       ];
+      query = { "status.status_code" : {"$in" : [status.order.created.status_code]}};
+
       $scope.title = "PACKING"
-      $scope.addUrl = "/#/packing/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/packing");
+      $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
     };
-    $scope.formInit = function(){
 
-      var id = $routeParams.id;
-      var action = $routeParams.action;
-      var statusSales = Library.Status.Sales;
-      var statusConsignments = Library.Status.Consignments;
-      $scope.inventory_locations = Api.Collection('customers',query).query();
-      $scope.ListChange = function(){
-          $scope.packing.list = [];
-          if($scope.packing.inventory_location){
-            var query = {
-              "inventory_location":$scope.packing.inventory_location,
-              "status.status_code" : {"$in" : [statusSales.order.created.status_code,statusSales.order.revised.status_code]}
-            };
+  $scope.formInit = function(){
+    // var id = $routeParams.id;
+    // var status = Library.Status.Sales;
+    // $scope.sales = Api.Collection('sales',query).query();
 
-            Api.Collection('sales',query).query().$promise.then(function(data){
-              for(var i in data){
-                for(var j in data[i].ordered_items){
-                  var item = {
-                    id : data[i]._id,
-                    pfno : data[i].pfno,
-                    sono : data[i].sono,
-                    customer : data[i].customer.company_name,
-                    brand : data[i].ordered_items[j].brand,
-                    product : data[i].ordered_items[j].name,
-                    quantity : data[i].ordered_items[j].quantity,
-                  };
-                  $scope.packing.list.push(item);
-                }
-              }
-            });
-            var query1 = {
-              "inventory_location":$scope.packing.inventory_location,
-              "status.status_code" : {"$in" : [statusConsignments.order.approved.status_code]},
-              "consignment_transaction_type" : "OUT",
-            }
-            Api.Collection('consignments',query1).query().$promise.then(function(data){
-              for(var i in data){
-                for(var j in data[i].consigned_item){
-                  var item = {
-                    id : data[i]._id,
-                    sono : data[i].cono,
-                    customer : data[i].customer.company_name,
-                    brand : data[i].consigned_item[j].brand,
-                    product : data[i].consigned_item[j].name,
-                    quantity : data[i].consigned_item[j].quantity,
-                  };
-                  $scope.packing.list.push(item);
-                }
-              }
-            });
-            var query2 = {
-              "inventory_location":$scope.packing.inventory_location,
-              "status.status_code" : {"$in" : [statusSales.payment.created.status_code]},
-              "pfno" : {"$exists":true},
-            }
-            console.log(query2);
-            Api.Collection('sales',query2).query().$promise.then(function(data){
-              console.log(data);
-              for(var i in data){
-                for(var j in data[i].ordered_items){
-                  var item = {
-                    id : data[i]._id,
-                    sono : data[i].pfno,
-                    customer : data[i].customer.company_name,
-                    brand : data[i].ordered_items[j].brand,
-                    product : data[i].ordered_items[j].name,
-                    quantity : data[i].ordered_items[j].quantity,
-                  };
-                  $scope.packing.list.push(item);
-                }
-              }
-            });
-          }
-      };
-
-      $scope.action = action;
-      if(id && action == 'read'){
-        $scope.title = "VIEW PACKING " + id;
-        $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
-      }
-      if(id && action == 'edit'){
-        $scope.title = "EDIT PACKING " + id;
-        $scope.packing =  Api.Collection('packing').get({id:$routeParams.id});
-
-        $scope.deletePacking=function(packing){
-          if(popupService.showPopup('You are about to delete Record : '+packing._id)){
-            $scope.packing.$delete(function(){
-              $location.path('/packing/index');
-              return false;
-            });
-          }
-        };
-      }
-      if(action == 'add'){
-        $scope.title = "ADD PACKING";
-        var Packing = Api.Collection('packing');
-        $scope.packing = new Packing();
-        $scope.savePacking = function(){
-          $scope.packing.status = statusSales.packing.created;
-          $scope.packing.$save(function(){
-            var sono = [];
-            var cono = [];
-            async.each($scope.packing.list, function( item, callback) {
-              if(sono.indexOf(item.sono) == -1){
-                sono.push(item.sono);
-                Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
-                  sales.status = statusSales.packing.created;
-                  sales.pckno =  $scope.packing.pckno;
-                  sales.$update(function(){
-                    callback();
-                  });
-                });
-              }
-              if(item.cono && cono.indexOf(item.cono) == -1){
-                cono.push(item.cono);
-                Api.Collection('consignments').get({id : item.id}).$promise.then(function(consignments){
-                  consignments.status = statusConsignments.packing.created;
-                  consignments.cpckno =  $scope.packing.cpckno;
-                  consignments.$update(function(){
-                    callback();
-                  });
-                });
-              }
-
-              else{
-                callback();
-              }
-            },function(err){
-              if(err){
-                console.log(err);
-              }
-            });
-
-            $location.path('/packing/index');
-            return false;
-          });
-        }
-        $scope.removeItem = function(index){
-          $scope.packing.list.splice(index, 1);
-        };
-      }
+    if(action == 'read'){
+      $scope.title = "VIEW PACKING " + id;
+      $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
+  console.log("inside approve: ", $scope.sales);
     }
-  });
+
+    if(action == 'approve'){
+      $scope.title = "APPROVE SALES INVOICE "+ id;
+      $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
+  console.log("inside approve: ", $scope.sales);
+
+      $scope.saveSales = function(){
+        $scope.sales.status = status.packing.created;
+        $scope.sales.$update(function(){
+          $location.path('/packing/index');
+          return false;
+        });
+      };
+    }
+  } //form init end
+})
 })
 .controller('TripsCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
@@ -2147,7 +2211,6 @@ $scope.init = function(){
     });
   }
   if(action == 'approve'){
-
     $scope.title = "APPROVE SALES INVOICE "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
