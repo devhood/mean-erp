@@ -36,7 +36,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input.form-control(type="text", ng-model="sales.customer.sales_executive", ng-disabled="action!='approve'")
+								input.form-control(type="text", ng-model="sales.customer.sales_executive", disabled)
 								span.col-md-12.help-block Sales Executive
 					.col-md-6
 						.form-group
@@ -47,7 +47,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input.form-control(type="text", ng-model="sales.inventory_location", disabled)
+								select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", disabled, required)
 								span.col-md-12.help-block Inventory Location
 					.col-md-6
 						.form-group
@@ -98,7 +98,7 @@ block title
 				.col-md-6
 					.form-group
 						.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-							input.form-control(type="text", ng-model="sales.prepared_by", ng-disabled="action='read'", required)
+							input.form-control(type="text", ng-model="sales.prepared_by", ng-disabled="action=='read'", required)
 							span.col-md-12.help-block Prepared By
 				.col-md-6
 					.form-group

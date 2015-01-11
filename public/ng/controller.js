@@ -24,10 +24,13 @@ angular.module('erp')
   }
 })
 .controller('UserCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
-
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
-      $location.path("/auth/unauthorized");
+    if(!Library.Permission.isAllowed(client,$location.path())){
+      console.log("chito",$location.path());
+      $location.path("/auth/unauthorize");
+    }
+    else{
+      console.log("chito",$location.path());
     }
   });
 
@@ -117,7 +120,7 @@ angular.module('erp')
 .controller('CustomerCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -284,7 +287,7 @@ angular.module('erp')
 .controller('ProductCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService, fileUpload) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -453,7 +456,7 @@ angular.module('erp')
 .controller('SalesCtrl', function ($scope, $window, $filter, $routeParams,  $location, Structure, Library, Session, Api) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -753,7 +756,7 @@ angular.module('erp')
 .controller('ReportCtrl', function ($scope, $window, $filter, $routeParams, $location, Structure, Library, Session, Api) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -1002,7 +1005,7 @@ $scope.init = function(){
 .controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -1198,7 +1201,7 @@ $scope.init = function(){
 .controller('ShipmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -1370,7 +1373,7 @@ $scope.init = function(){
 .controller('PurchaseCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -1505,7 +1508,7 @@ $scope.init = function(){
 .controller('SalesProformaCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -1703,7 +1706,7 @@ $scope.init = function(){
 // .controller('OldPackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 //
 //   Session.get(function(client) {
-//     if(Library.Permission.isAllowed(client,$location.path())){
+//     if(!Library.Permission.isAllowed(client,$location.path())){
 //       $location.path("/auth/unauthorized");
 //     }
 //   });
@@ -1876,7 +1879,7 @@ $scope.init = function(){
 .controller('PackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -1914,17 +1917,20 @@ $scope.init = function(){
     // var id = $routeParams.id;
     // var status = Library.Status.Sales;
     // $scope.sales = Api.Collection('sales',query).query();
+    var query = {"type":"Retail"};
+    $scope.inventory_locations = Api.Collection('customers',query).query();
 
     if(action == 'read'){
       $scope.title = "VIEW PACKING " + id;
       $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
-  console.log("inside approve: ", $scope.sales);
+      console.log("inside read: ", $scope.sales);
     }
 
     if(action == 'approve'){
       $scope.title = "APPROVE SALES INVOICE "+ id;
       $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
   console.log("inside approve: ", $scope.sales);
+    console.log("status", status);
 
       $scope.saveSales = function(){
         $scope.sales.status = status.packing.created;
@@ -1940,7 +1946,7 @@ $scope.init = function(){
 .controller('TripsCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2095,7 +2101,7 @@ $scope.init = function(){
 .controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2165,7 +2171,7 @@ $scope.init = function(){
 .controller('SalesInvoiceCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2234,7 +2240,7 @@ $scope.init = function(){
 .controller('SalesPaymentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2274,6 +2280,13 @@ $scope.init = function(){
           $scope.sales.customer.billing_address.zipcode;
     }
   }
+  var otherFeesChange = 0;
+   $scope.OtherFeesChange = function(){
+    if (!$scope.sales.other_fees) { $scope.sales.other_fees = null; }
+    otherFeesChange =1;
+    PrintTotalPayment();
+    console.log("other fees change");
+  }
 
   var PrintTotalPayment = function() {
     $scope.sales.total_payment = 0;
@@ -2281,6 +2294,10 @@ $scope.init = function(){
       for(var i=0;i<$scope.sales.payment_details.length; i++){
         $scope.sales.total_payment+=$scope.sales.payment_details[i].amount;
       }
+    }
+      if (otherFeesChange == 1) {
+    $scope.sales.total_payment += Number($scope.sales.other_fees);
+      console.log($scope.sales.total_payment + $scope.sales.other_fees);
     }
   }
 
@@ -2371,7 +2388,7 @@ $scope.init = function(){
 .controller('SalesReturnCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2514,7 +2531,7 @@ $scope.init = function(){
 .controller('SalesMemoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2584,7 +2601,7 @@ $scope.init = function(){
 .controller('ConsignCtrl', function ($scope, $window, $filter, $routeParams, $location, Structure, Library, Session, Api) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2689,7 +2706,7 @@ $scope.init = function(){
 .controller('ConsignOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2892,7 +2909,7 @@ $scope.init = function(){
 .controller('ConsignDeliveryCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -2960,7 +2977,7 @@ $scope.init = function(){
 .controller('CDSCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -3066,7 +3083,7 @@ $scope.init = function(){
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -3213,7 +3230,7 @@ $scope.init = function(){
 .controller('CalendarCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -3304,7 +3321,7 @@ $scope.init = function(){
 .controller('ScheduleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -3441,7 +3458,7 @@ $scope.init = function(){
 .controller('PrintCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -3454,7 +3471,7 @@ $scope.init = function(){
 .controller('CycleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -3558,7 +3575,7 @@ $scope.init = function(){
 .controller('PromoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });
@@ -3691,7 +3708,7 @@ $scope.init = function(){
 .controller('MergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
+    if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
   });

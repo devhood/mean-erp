@@ -87,7 +87,7 @@ angular.module('erp')
       isAllowed : function(client,path){
         var allowed = false;
         for(var i in client.permissions){
-          if(client.permissions[i].route.indexOf(path) != -1){
+          if(path.indexOf(client.permissions[i].route) != -1){
             allowed = true;
           }
         }

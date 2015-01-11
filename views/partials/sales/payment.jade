@@ -380,6 +380,8 @@ block title
               .col-md-6
                 .form-group
                   .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                    input.form-control(type="text", ng-model="sales.other_fees", ng-disabled="action=='read'", ng-change="OtherFeesChange()", style="text-align: right;")
+                    span.col-md-12.help-block  Other Fees
               .col-md-6
                 .form-group
                   .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left

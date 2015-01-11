@@ -62,7 +62,7 @@ angular.module('erp')
       });
   })
   .factory('Session', function ($resource) {
-    return $resource('/auth/session/');
+    return $resource('/auth/session');
   })
   .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
     $rootScope.currentUser = $cookieStore.get('user') || null;

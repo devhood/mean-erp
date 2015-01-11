@@ -130,6 +130,7 @@ router
     req.query.filter._id = id;
     delete req.user.password;
     delete req.user.permissions;
+    delete req.user.audit_history;
     var audit = {
       user : req.user,
       update_date : new Date(),
