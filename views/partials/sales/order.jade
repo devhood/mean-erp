@@ -17,7 +17,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="action=='read' || action=='reschedule'",required)
                 span.col-md-12.help-block Transaction Type
           .col-md-6
             .form-group
@@ -28,12 +28,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="action=='read' || action=='reschedule'")
                 span.col-md-12.help-block Reference No
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="sales.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'", required)
                 span.col-md-12.help-block Delivery Date
         .row
           .col-md-1
@@ -74,7 +74,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="sales.customer.sales_executive", ng-disabled="action!='approve'")
+                input.form-control(type="text", ng-model="sales.customer.sales_executive", ng-disabled="action!='approve' || action=='reschedule'")
                 span.col-md-12.help-block Sales Executive
           .col-md-6
             .form-group
@@ -85,23 +85,23 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="action=='read' || action=='reschedule'",required)
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="action=='read' || action=='reschedule'",required)
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read' || action=='reschedule'",required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", ng-disabled="action=='read'",required)
+                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", ng-disabled="action=='read' || action=='reschedule'",required)
                 span.col-md-12.help-block Ordered By
         .row
           .col-md-1
@@ -122,7 +122,7 @@ block title
             .form-body
               br
               br
-              .row(ng-hide="action=='read'")
+              .row(ng-hide="action=='read' || action=='reschedule'")
                 .col-md-1
                 .col-md-10
                   .col-md-3

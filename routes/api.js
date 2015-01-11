@@ -9,6 +9,7 @@ var path = require('path');
 var fs = require('fs');
 var async = require("async");
 var inventory = require('../lib/inventory.js');
+var inventories = require('../lib/inventories.js');
 var generator = require('../lib/generator.js');
 
 router
@@ -29,7 +30,7 @@ router
     });
 
 })
-.post('/:object', generator.generate, inventory.check, function(req, res) {
+.post('/:object', generator.generate,inventories.process_request, function(req, res) {
     delete req.user.password;
     delete req.user.permissions;
     delete req.user.audit_history;
@@ -43,16 +44,14 @@ router
       .insert(req.body, {safe: true})
       .done(function(data){
         generator.update(req,function(err,result){
-          inventory.deduct(req,res,function(err,result){
-            res.status(200).json(data[0]);
-          });
+          res.status(200).json(data[0]);
         });
       })
       .fail( function( err ) {
         res.status(400).json(err);
       });
 })
-.get('/:object/:id', function(req, res) {
+.get('/:object/:id',  function(req, res) {
     var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
@@ -121,7 +120,7 @@ router
   }
 
 })
-.put('/:object/:id', generator.generate, inventory.check, function(req, res) {
+.put('/:object/:id', generator.generate,inventories.process_request, function(req, res) {
     var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     delete req.body._id;
     req.query.filter = JSON.parse(req.query.filter || '{}');
@@ -141,10 +140,7 @@ router
       .update(req.query.filter, {"$set" : req.body}, {safe: true})
       .done(function(data){
         generator.update(req,function(err,result){
-          inventory.deduct(req,res,function(err,result){
-            res.status(200).json(data);
-          });
-
+          res.status(200).json(data);
         });
       })
       .fail( function( err ) {

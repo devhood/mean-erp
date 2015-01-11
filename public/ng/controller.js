@@ -502,13 +502,14 @@ angular.module('erp')
 
             buttons = [
               {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
-              {url:"/#/sales/order/edit/",title:"Edit Record",icon:"fa fa-edit"}
-            ];
+              {url:"/#/sales/order/edit/",title:"Edit Record",icon:"fa fa-edit"},
+              {url:"/#/sales/order/reschedule/",title:"Approve Record",icon:"fa fa-upload",exclude:{key:"trpno"}},
+              ];
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
-                status.order.override.status_code,
                 status.delivery.rejected.status_code,
                 status.invoice.rejected.status_code,
+                status.tripticket.failed.status_code
                 ]}};
             $scope.title = "SALES ORDERS"
             $scope.addUrl = "/#/sales/order/add";
@@ -526,10 +527,13 @@ angular.module('erp')
 
           buttons = [
             {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-gear", exclude:{key:"pfno"}},
+            {url:"/#/sales/proforma/approve/",title:"Approve Record",icon:"fa fa-gear",exclude:{key:"pfno"}},
           ];
 
-          query = { "status.status_code" : {"$in" : [status.order.override.status_code]}};
+          query = {
+            "status.status_code" : {"$in" : [status.order.override.status_code,status.proforma.override.status_code]}
+          };
           $scope.title = "APPROVE SALES ORDERS";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1196,6 +1200,19 @@ $scope.init = function(){
       }
     };
   }
+  if(action == 'reschedule'){
+    $scope.title = "RESCHEDULE SALES ORDER "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+        $scope.sales.status = status.order.rescheduled;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    };
+  }//resched
 
 })
 .controller('ShipmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
@@ -1984,7 +2001,7 @@ $scope.init = function(){
         if($scope.trip.inventory_location){
           var query = {
             "inventory_location":$scope.trip.inventory_location,
-            "status.status_code" : {"$in" : [statusSales.invoice.approved.status_code, statusConsignments.order.approved.status_code]}
+            "status.status_code" : {"$in" : [statusSales.order.rescheduled.status_code, statusSales.invoice.approved.status_code, statusConsignments.order.approved.status_code]}
           };
 
           Api.Collection('sales',query).query().$promise.then(function(data){
