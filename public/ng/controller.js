@@ -2261,6 +2261,7 @@ $scope.init = function(){
   $scope.inventory_locations = Api.Collection('customers',query).query();
   $scope.products = Api.Collection('products').query();
   var status = Library.Status.Sales;
+  $scope.proceedPayment ='false';
 
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
@@ -2295,10 +2296,14 @@ $scope.init = function(){
         $scope.sales.total_payment+=$scope.sales.payment_details[i].amount;
       }
     }
-      if (otherFeesChange == 1) {
+    if (otherFeesChange == 1) {
     $scope.sales.total_payment += Number($scope.sales.other_fees);
       console.log($scope.sales.total_payment + $scope.sales.other_fees);
     }
+    if ($scope.sales.total_payment >= $scope.sales.total_amount_due){$scope.proceedPayment ='true';}
+    else $scope.proceedPayment ='false';
+        console.log("$scope.sales.total_amount_due: ", $scope.sales.total_amount_due);
+        console.log("$scope.sales.total_payment: ", $scope.sales.total_payment);
   }
 
 
@@ -2323,7 +2328,6 @@ $scope.init = function(){
     $scope.sales.payment_details.splice(index, 1);
     PrintTotalPayment();
   }
-
 
   if(action == 'read'){
     $scope.title = "VIEW SALES PAYMENT";
