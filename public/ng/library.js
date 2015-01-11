@@ -190,6 +190,7 @@ angular.module('erp')
         },
         payment : {
           created : {status_code : "PAYMENT_CREATED", status_name : "Accounting-Payment created"},
+          partialed : {status_code : "PAYMENT_PARTIALED", status_name : "Accounting-Partial Payment received"},
           updated : {status_code : "PAYMENT_UPDATED", status_name : "Accounting-Payment updated"},
           rejected : {status_code : "PAYMENT_REJECTED", status_name : "Accounting-Payment rejected"},
           confirmed : {status_code : "PAYMENT_CONFIRMED", status_name : "TRANSACTION COMPLETE"}

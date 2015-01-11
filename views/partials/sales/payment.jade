@@ -39,7 +39,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="true" )
                 span.col-md-12.help-block Transaction Type
           .col-md-6
             .form-group
@@ -107,30 +107,30 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="true" )
                 span.col-md-12.help-block Order Source
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="true" )
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations track by inventory_locations._id" ,tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations track by inventory_locations._id" ,tabindex="-1", ng-disabled="true" )
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", ng-disabled="true",required)
+                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", ng-disabled="true" )
                 span.col-md-12.help-block Ordered By
         .row
           .col-md-1
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="true",required)
+                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="true" )
                 span.col-md-12.help-block Special Instructions
           .col-md-1
         .portlet.box.grey(ng-show="sales.customer")
@@ -391,12 +391,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="sales.orno", ng-readonly="action=='read' && action=='approve'")
+                input.form-control(type="text", ng-model="sales.orno", ng-readonly="action!='create'")
                 span.col-md-12.help-block OR Number
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.prno", ng-readonly="action=='read' && action=='approve'")
+                input.form-control(type="text", ng-model="sales.prno", ng-readonly="action!='create'")
                 span.col-md-12.help-block  PR Number
       .form-actions.fluid
         .row

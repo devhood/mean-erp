@@ -20,10 +20,14 @@ block title
 								input.form-control(type="text", ng-model="sales.pckno", disabled)
 								span.col-md-12.help-block Packing Number
 					.col-md-6
-						.form-group
+						.form-group(ng-show="sales.sono")
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
 								input.form-control(type="text", ng-model="sales.sono", readonly)
 								span.col-md-12.help-block SO Number
+						.form-group(ng-show="sales.pfno")
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								input.form-control(type="text", ng-model="sales.pfno", readonly)
+								span.col-md-12.help-block PF Number
 				.row
 					.col-md-1
 					.col-md-10

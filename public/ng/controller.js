@@ -485,7 +485,7 @@ angular.module('erp')
               {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"},
               {url:"/#/print/sales/proforma/",title:"Print Record",icon:"fa fa-print"},
             ];
-            query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.proforma.created.status_code, status.proforma.revised.status_code, status.payment.rejected.status_code]}};
+            query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.proforma.created.status_code, status.proforma.revised.status_code, status.payment.rejected.status_code, status.delivery.rejected.status_code]}};
             $scope.title = "PROFORMA INVOICE"
             $scope.addUrl = "/#/sales/proforma/add";
 
@@ -517,7 +517,7 @@ angular.module('erp')
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
-        break;
+            break;
         case "override" :
 
           columns = [
@@ -526,18 +526,28 @@ angular.module('erp')
           ];
 
           buttons = [
-            {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-gear", exclude:{key:"pfno"}},
-            {url:"/#/sales/proforma/approve/",title:"Approve Record",icon:"fa fa-gear",exclude:{key:"pfno"}},
+          {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/sales/order/approve/",title:"Approve Record",icon:"fa fa-gear"},
           ];
-
-          query = {
-            "status.status_code" : {"$in" : [status.order.override.status_code,status.proforma.override.status_code]}
-          };
+          query = {"status.status_code" : {"$in" : [status.order.override.status_code]}};
           $scope.title = "APPROVE SALES ORDERS";
-
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
           $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+
+
+          var columns1 = [
+            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+          ];
+          var buttons1 = [
+          {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/sales/proforma/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          ];
+          query = {"status.status_code" : {"$in" : [status.proforma.override.status_code]}};
+          $scope.title1 = "APPROVED PROFORMA INVOICE";
+          $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+          $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
         break;
         case "delivery" :
@@ -726,7 +736,9 @@ angular.module('erp')
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code,
                                                         status.memo.approved.status_code, status.payment.updated.status_code,
-                                                        status.payment.created.status_code, status.tripticket.delivered.status_code]}};
+                                                        status.payment.created.status_code, status.tripticket.delivered.status_code,
+                                                        status.proforma.approved.status_code
+                                                        ]}};
             $scope.title = "PAYMENT";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1522,7 +1534,7 @@ $scope.init = function(){
   });
 
 })
-.controller('SalesProformaCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+  .controller('SalesProformaCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
     if(!Library.Permission.isAllowed(client,$location.path())){
@@ -1673,13 +1685,21 @@ $scope.init = function(){
   if(action == 'edit'){
 
     $scope.title = "EDIT PROFORMA INVOICE"+ id;
+    var dataStatus;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
+      dataStatus = $scope.sales.status.status_code;
     });
+
+    if (dataStatus == status.delivery.rejected.status_code ) {
+      console.log("shit, cant make the status to proforma revised");
+    }
+
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){
         $scope.sales.status = status.order.override;
       }
+
       $scope.sales.$update(function(){
         $location.path('/sales/index/proforma');
         return false;
@@ -1702,7 +1722,7 @@ $scope.init = function(){
     });
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){
-        $scope.sales.status = status.order.created;
+        $scope.sales.status = status.proforma.created;
       }
       $scope.sales.$update(function(){
         $location.path('/sales/index/override');
@@ -1916,14 +1936,14 @@ $scope.init = function(){
 
     $scope.init = function(){
       columns = [
-      $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.pckno, $scope.structure.prepared_by, $scope.structure.status.status_name
+      $scope.structure.customer.company_name, $scope.structure.delivery_date, $scope.structure.prepared_by, $scope.structure.status.status_name
       ];
 
       buttons = [
       {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
       {url:"/#/packing/approve/",title:"View Record",icon:"fa fa-gear"}
       ];
-      query = { "status.status_code" : {"$in" : [status.order.created.status_code]}};
+      query = { "status.status_code" : {"$in" : [status.order.created.status_code, status.payment.partialed.status_code]}};
 
       $scope.title = "PACKING"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1931,9 +1951,6 @@ $scope.init = function(){
     };
 
   $scope.formInit = function(){
-    // var id = $routeParams.id;
-    // var status = Library.Status.Sales;
-    // $scope.sales = Api.Collection('sales',query).query();
     var query = {"type":"Retail"};
     $scope.inventory_locations = Api.Collection('customers',query).query();
 
@@ -2319,8 +2336,6 @@ $scope.init = function(){
     }
     if ($scope.sales.total_payment >= $scope.sales.total_amount_due){$scope.proceedPayment ='true';}
     else $scope.proceedPayment ='false';
-        console.log("$scope.sales.total_amount_due: ", $scope.sales.total_amount_due);
-        console.log("$scope.sales.total_payment: ", $scope.sales.total_payment);
   }
 
 
@@ -2379,10 +2394,20 @@ $scope.init = function(){
   if(action == 'create'){
     $scope.title = "CREATE SALES PAYMENT "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+    if (!$scope.sales.total_amount_due) {
+    $scope.proceedPayment ='true';
+    console.log("there is no total amount due");
+    }
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
-      $scope.sales.status = status.payment.created;
+
+      if($scope.sales.pfno){
+        $scope.sales.status = status.payment.partialed;
+      }
+      else{
+        $scope.sales.status = status.payment.created;
+      }
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
@@ -2390,6 +2415,8 @@ $scope.init = function(){
     };
   }
   if(action == 'approve'){
+    $scope.proceedPayment='true';
+    console.log($scope.proceedPayment);
     $scope.title = "APPROVE SALES PAYMENT "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
