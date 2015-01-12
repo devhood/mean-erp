@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var printer = require('../lib/printing.js');
 var mongoq = require("mongoq");
+var path = require('path');
 
 router
 .get('/sales/delivery/:id',function(req,res){
@@ -14,7 +15,10 @@ router
   .done(function(data){
     printer.printDR(data[0],function(err,filename){
       setTimeout(function(){
-       res.redirect(filename);
+       console.log(filename);
+       console.log(__dirname);
+       var directory = __dirname.replace("routes","public") + filename;
+       res.download(directory);
       }, 1000);
 
     });
@@ -33,7 +37,10 @@ var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
   .done(function(data){
     printer.printSI(data[0],function(err,filename){
       setTimeout(function(){
-        res.redirect(filename);
+        console.log("filename", filename);
+        console.log("dirname", __dirname);
+        var directory=__dirname.replace("routes","public") + filename;
+        res.download(directory);
       }, 1000);
 
     });
@@ -52,7 +59,8 @@ var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
   .done(function(data){
     printer.printPF(data[0],function(err,filename){
       setTimeout(function(){
-        res.redirect(filename);
+        var directory=__dirname.replace("routes","public") + filename;
+        res.download(directory);
       }, 1000);
 
     });

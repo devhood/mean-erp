@@ -173,6 +173,10 @@ angular.module('erp')
           approved : {status_code : "SALES_INVOICE_APPROVED", status_name : "Accounting-SI approved"},
           rejected : {status_code : "SALES_INVOICE_REJECTED", status_name : "Accounting-SI rejected"}
         },
+        printed : {
+          dr : {status_code : "DELIVERY_RECEIPT_PRINTED", status_name : "Warehouse-DR printed"},
+          si : {status_code : "SALES_INVOICE_PRINTED", status_name : "Warehouse-SI printed"}
+        },
         tripticket : {
           created : {status_code : "TRIP_TICKET_CREATED", status_name : "Warehouse-Delivery in progress"},
           delivered : {status_code : "TRIP_TICKET_DELIVERED", status_name : "Warehouse-Order delivered"},

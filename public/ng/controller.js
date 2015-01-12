@@ -587,7 +587,7 @@ angular.module('erp')
         case "invoice" :
 
           columns = [
-          $scope.structure.sono,$scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.pfno,$scope.structure.sono,$scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
           $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
           ];
 
@@ -603,7 +603,7 @@ angular.module('erp')
           $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
           var columns1 = [
-          $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.pfno,$scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
           $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
           ];
 
@@ -631,7 +631,7 @@ angular.module('erp')
             {url:"/#/sales/return/create/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
+          query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.tripticket.delivered.status_code, ]}};
           $scope.title = "RETURN MERCHANDISE RECEIPT";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -723,7 +723,7 @@ angular.module('erp')
           break;
           case "payment" :
             columns = [
-            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.pfno, $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
             $scope.structure.delivery_method, $scope.structure.delivery_date, $scope.structure.customer.payment_term,$scope.structure.total_amount_due, $scope.structure.status.status_name
             ];
 
@@ -737,7 +737,8 @@ angular.module('erp')
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code,
                                                         status.memo.approved.status_code, status.payment.updated.status_code,
                                                         status.payment.created.status_code, status.tripticket.delivered.status_code,
-                                                        status.proforma.approved.status_code
+                                                        status.proforma.approved.status_code, status.proforma.revised.status_code,
+                                                        status.payment.partialed.status_code,
                                                         ]}};
             $scope.title = "PAYMENT";
 
@@ -757,7 +758,7 @@ angular.module('erp')
 
             ];
 
-            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.printed.dr.status_code, status.printed.si.status_code]}};
             $scope.title = "Print DR nd SI";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -950,6 +951,9 @@ $scope.init = function(){
       console.log(JSON.stringify(query));
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/complete?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
 
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/complete");
@@ -967,6 +971,10 @@ $scope.init = function(){
       $scope.title = "COMPLETED SALES REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/customer?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/customer");
       }
@@ -983,6 +991,10 @@ $scope.init = function(){
       $scope.title = "SALES REPORT BY PRODUCT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/product?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/product");
       }
@@ -997,6 +1009,10 @@ $scope.init = function(){
       $scope.title = "SALES REPORT BY BRAND"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/brand?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/brand");
       }
@@ -1009,6 +1025,9 @@ $scope.init = function(){
       $scope.title = "COMPLETED SALES REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/se?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
 
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/se");
@@ -1685,19 +1704,15 @@ $scope.init = function(){
   if(action == 'edit'){
 
     $scope.title = "EDIT PROFORMA INVOICE"+ id;
-    var dataStatus;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
-      dataStatus = $scope.sales.status.status_code;
     });
-
-    if (dataStatus == status.delivery.rejected.status_code ) {
-      console.log("shit, cant make the status to proforma revised");
-    }
-
     $scope.saveSales = function(){
+      if ($scope.sales.status.status_code == status.delivery.rejected.status_code || $scope.sales.status.status_code == status.proforma.revised.status_code ) {
+        $scope.sales.status = status.proforma.revised;
+      }
       if($scope.sales.isNeedApproval){
-        $scope.sales.status = status.order.override;
+        $scope.sales.status = status.proforma.override;
       }
 
       $scope.sales.$update(function(){
@@ -1961,7 +1976,7 @@ $scope.init = function(){
     }
 
     if(action == 'approve'){
-      $scope.title = "APPROVE SALES INVOICE "+ id;
+      $scope.title = "APPROVE PACKING OF "+ id;
       $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
   console.log("inside approve: ", $scope.sales);
     console.log("status", status);
@@ -2018,7 +2033,7 @@ $scope.init = function(){
         if($scope.trip.inventory_location){
           var query = {
             "inventory_location":$scope.trip.inventory_location,
-            "status.status_code" : {"$in" : [statusSales.order.rescheduled.status_code, statusSales.invoice.approved.status_code, statusConsignments.order.approved.status_code]}
+            "status.status_code" : {"$in" : [statusSales.order.rescheduled.status_code, statusSales.invoice.approved.status_code, statusConsignments.order.approved.status_code, statusSales.printed.dr.status_code, statusSales.printed.si.status_code]}
           };
 
           Api.Collection('sales',query).query().$promise.then(function(data){
@@ -2063,7 +2078,7 @@ $scope.init = function(){
               if(item.status == "delivered"){
                 sales.status = statusSales.tripticket.delivered;
                 $scope.trip.status = statusSales.tripticket.delivered;
-                counter++;
+                console.log("delivered na");
               }
               else if(item.status == "failed"){
                 sales.status = statusSales.tripticket.failed;
@@ -2342,7 +2357,7 @@ $scope.init = function(){
   $scope.addPayment = function(sales){
     console.log(sales);
     var payment = angular.copy(sales.payment_detail);
-    if(payment && payment.payment_type && payment.check_number && payment.check_dep_date && payment.bank && payment.amount){
+    if(payment && payment.payment_type && payment.amount){
         if($scope.sales.payment_details){
           $scope.sales.payment_details.push(payment);
         }
@@ -2401,7 +2416,8 @@ $scope.init = function(){
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
-
+      $scope.sales.status = status.payment.created;
+      console.log("payment created");
       if($scope.sales.pfno){
         $scope.sales.status = status.payment.partialed;
       }
@@ -2410,7 +2426,6 @@ $scope.init = function(){
       }
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
-        return false;
       });
     };
   }
@@ -3510,11 +3525,23 @@ $scope.init = function(){
       $location.path("/auth/unauthorized");
     }
   });
-
+  var type = $routeParams.type;
+  var status = Library.Status.Sales;
+  console.log("status: ", status);
   var id = $routeParams.id;
   var type = $routeParams.type;
+  $scope.sales =  Api.Collection('sales').get({id:id},function(){
+    if (type == 'delivery') {
+    $scope.sales.status.status_code = status.printed.dr.status_code;
+    }
+    if (type == 'invoice') {
+    $scope.sales.status.status_code = status.printed.si.status_code;
+    }
+    $scope.sales.$update(function(){
+        $window.location.href = '/print/sales/'+type+'/'+id;
+    });
+  });
 
-  $window.location.href = '/print/sales/'+type+'/'+id;
 })
 .controller('CycleCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
