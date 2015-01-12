@@ -51,6 +51,7 @@ group,name,route
 "Consignment","View Consignment Order","/consignment/order/read"
 "Consignment","Reschedule Consignment Order","/consignment/order/reschedule"
 "Consignment","Approve Consignment Order","/consignment/order/approve"
+"Consignment","Manage Consignment Delivery","/consignment/index/delivery"
 "Consignment","View Consignment Delivery","/consignment/delivery/read"
 "Consignment","Approve Consignment Delivery","/consignment/delivery/approve"
 "CDS","Manage Consignment Daily Sales","/cds/index"
