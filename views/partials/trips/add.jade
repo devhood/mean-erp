@@ -81,7 +81,7 @@ block title
         .row
           .col-md-6
             .col-md-offset-3.col-md-9
-              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read' && trip.list.length") Submit
               | &nbsp;
               a.btn.default(type="button", href="/#/trips/index") Cancel
           .col-md-6

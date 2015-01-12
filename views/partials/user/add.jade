@@ -65,27 +65,27 @@ block title
 							.form-body
 								br
 								.row(ng-hide="action=='read'")
-									.col-md-1
-									.col-md-10
-										.col-md-7
-											.form-group
-												.col-xs-12.col-sm-12.col-md-12.col-lg-12
-													select#permission.select2me.form-control.select2-offscreen(ng-model="user.permission", tabindex="-1",ng-options="permission.name for permission in permissions", ng-selected="{{user.status}}")
-													span.col-md-12.control-label Permission
-										.col-md-3
-											.form-group
-												.col-xs-12.col-sm-12.col-md-12.col-lg-12
-													select#allowed.select2me.form-control.select2-offscreen(ng-model="user.permission.allowed", tabindex="-1")
-														option(value='Yes') Yes
-														option(value='No') No
-													span.col-md-12.help-block	Allowed
-										.col-md-2
-											button.btn-sm.green.custom-right(type="button",ng-click="addPermission(user)")
-												i.fa.fa-plus
-									.col-md-1
+									.col-md-8
+										.col-md-4
+										.col-md-4
+												.form-group
+													.col-xs-12.col-sm-12.col-md-12.col-lg-12
+														select#permission.select2me.form-control.select2-offscreen(ng-model="user.permission", tabindex="-1",ng-options="permission.name group by permission.group for permission in permissions", ng-selected="{{user.status}}")
+														span.col-md-12.control-label Permission
+											.col-md-2
+												.form-group
+													.col-xs-12.col-sm-12.col-md-12.col-lg-12
+														select#allowed.select2me.form-control.select2-offscreen(ng-model="user.permission.allowed", tabindex="-1")
+															option(value='Yes') Yes
+															option(value='No') No
+														span.col-md-12.help-block	Allowed
+											.col-md-1
+												button.btn-sm.green.custom-right(type="button",ng-click="addPermission(user)")
+													i.fa.fa-plus
+									.col-md-4
 								.form-group
-									.col-md-1
-									.col-md-10
+									.col-md-2
+									.col-md-8
 										.row
 											br
 											.col-md-12
@@ -104,7 +104,7 @@ block title
 																	.btn-group.btn-group-xs.btn-group-solid
 																		a.tooltips.btn.default(ng-click="removePermission($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																			i.fa.fa-trash-o
-									.col-md-1
+									.col-md-2
 			.form-actions.fluid
 				.row
 					.col-md-6
