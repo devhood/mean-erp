@@ -1172,12 +1172,12 @@ $scope.init = function(){
       }
       else{
         $scope.sales.status = status.order.created;
-    //    $scope.sales.triggerInventory  = "OUT";
+        //$scope.sales.triggerInventory  = "OUT";
       }
-      $scope.sales.$save(function(){
-        $location.path('/sales/index/order');
-        return false;
-      });
+    $scope.sales.$save(function(){
+      $location.path('/sales/index/order');
+      return false;
+    });
     }
   }
   if(action == 'edit'){

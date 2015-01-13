@@ -8,7 +8,6 @@ var config = require('../config.local.js');
 var path = require('path');
 var fs = require('fs');
 var async = require("async");
-var inventory = require('../lib/inventory.js');
 var inventories = require('../lib/inventories.js');
 var generator = require('../lib/generator.js');
 
