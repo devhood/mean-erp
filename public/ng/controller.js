@@ -507,6 +507,7 @@ angular.module('erp')
               ];
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
+                status.order.revised.status_code,
                 status.delivery.rejected.status_code,
                 status.invoice.rejected.status_code,
                 status.tripticket.failed.status_code
@@ -1167,7 +1168,6 @@ $scope.init = function(){
 
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){
-
         $scope.sales.status = status.order.override;
       }
       else{
@@ -1190,8 +1190,15 @@ $scope.init = function(){
         $scope.sales.status = status.order.override;
       }
       else{
+        if ($scope.sales.status.status_code == status.invoice.rejected.status_code || $scope.sales.status.status_code == status.delivery.rejected.status_code || $scope.sales.status.status_code == status.order.revised.status_code) {
+          $scope.sales.status = status.order.revised;
+          console.log("order revised");
+        }
+        else {
         $scope.sales.status = status.order.created;
         //    $scope.sales.triggerInventory  = "OUT";
+        console.log("ordinary order");
+        }
       }
       $scope.sales.$update(function(){
         $location.path('/sales/index/order');
@@ -1958,7 +1965,7 @@ $scope.init = function(){
       {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
       {url:"/#/packing/approve/",title:"View Record",icon:"fa fa-gear"}
       ];
-      query = { "status.status_code" : {"$in" : [status.order.created.status_code, status.payment.partialed.status_code]}};
+      query = { "status.status_code" : {"$in" : [status.order.created.status_code, status.payment.partialed.status_code, status.order.revised.status_code ]}};
 
       $scope.title = "PACKING"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -2696,6 +2703,7 @@ $scope.init = function(){
 
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
+                status.order.revised.status_code,
                 status.delivery.rejected.status_code,
                 status.order.rescheduled.status_code,
                 status.order.update.status_code,
@@ -2719,6 +2727,7 @@ $scope.init = function(){
             ];
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
+                status.order.revised.status_code,
                 status.order.rescheduled.status_code,
                 status.order.update.status_code,
                 ]}};
