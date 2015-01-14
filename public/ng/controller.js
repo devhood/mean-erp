@@ -348,13 +348,16 @@ angular.module('erp')
 
       $scope.addInventory = function(product){
         if( product.inventory && product.inventory.company_name && product.inventory.quantity ){
+        product.inventory.rquantity = product.inventory.quantity;
+        console.log("product.inventory.rquantity", product.inventory.rquantity);
           var content = {
             _id: product.inventory._id,
             company_name: product.inventory.company_name,
             branch: product.inventory.branch,
             price_type: product.inventory.price_type,
             shipping_address: product.inventory.shipping_address,
-            quantity: product.inventory.quantity
+            quantity: product.inventory.quantity,
+            rquantity: product.inventory.rquantity
           };
 
           if($scope.product.inventories){
@@ -377,7 +380,6 @@ angular.module('erp')
         $scope.product =  Api.Collection('products').get({id:$routeParams.id},function(){
           $scope.product.product_photo = $scope.product.product_photo ? "/uploads/"+$scope.product.product_photo  : "http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image";
         });
-
       }
       if(id && action == 'edit'){
         $scope.title = "EDIT PRODUCT " + id;
@@ -485,7 +487,14 @@ angular.module('erp')
               {url:"/#/sales/proforma/edit/",title:"Edit Record",icon:"fa fa-edit"},
               {url:"/#/print/sales/proforma/",title:"Print Record",icon:"fa fa-print"},
             ];
-            query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [status.proforma.created.status_code, status.proforma.revised.status_code, status.payment.rejected.status_code, status.delivery.rejected.status_code]}};
+            query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [
+            status.proforma.created.status_code,
+            status.proforma.revised.status_code,
+            status.payment.rejected.status_code,
+            status.proforma.rejected.status_code,
+            status.delivery.rejected.status_code
+             ]}};
+
             $scope.title = "PROFORMA INVOICE"
             $scope.addUrl = "/#/sales/proforma/add";
 
@@ -508,6 +517,7 @@ angular.module('erp')
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
                 status.order.revised.status_code,
+                status.order.rejected.status_code,
                 status.delivery.rejected.status_code,
                 status.invoice.rejected.status_code,
                 status.tripticket.failed.status_code
@@ -546,7 +556,7 @@ angular.module('erp')
           {url:"/#/sales/proforma/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
           query = {"status.status_code" : {"$in" : [status.proforma.override.status_code]}};
-          $scope.title1 = "APPROVED PROFORMA INVOICE";
+          $scope.title1 = "APPROVE PROFORMA INVOICE";
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
 
@@ -1215,7 +1225,7 @@ $scope.init = function(){
     };
   }
   if(action == 'approve'){
-
+    console.log(action);
     $scope.title = "APPROVE SALES ORDER "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -1229,13 +1239,12 @@ $scope.init = function(){
         return false;
       });
     };
-    $scope.deleteSales=function(sales){
-      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
-        $scope.sales.$delete(function(){
-          $location.path('/sales/index/override');
-          return false;
-        });
-      }
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.order.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
     };
   }
   if(action == 'reschedule'){
@@ -1736,6 +1745,7 @@ $scope.init = function(){
       }
     };
   }
+
   if(action == 'approve'){
 
     $scope.title = "APPROVE PROFORMA INVOICE"+ id;
@@ -1743,21 +1753,18 @@ $scope.init = function(){
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
-      if($scope.sales.isNeedApproval){
-        $scope.sales.status = status.proforma.created;
-      }
+      $scope.sales.status = status.proforma.created;
       $scope.sales.$update(function(){
         $location.path('/sales/index/override');
         return false;
       });
     };
-    $scope.deleteSales=function(sales){
-      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
-        $scope.sales.$delete(function(){
-          $location.path('/sales/index/override');
-          return false;
-        });
-      }
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.proforma.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/proforma');
+        return false;
+      });
     };
   }
 

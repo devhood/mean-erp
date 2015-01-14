@@ -158,6 +158,7 @@ angular.module('erp')
         order : {
           created : {status_code : "SALES_ORDER_CREATED", status_name : "Sales-Order submitted"},
           revised : {status_code : "SALES_ORDER_REVISED", status_name : "Sales-Order revised"},
+          rejected : {status_code : "SALES_ORDER_REJECTED", status_name : "Sales-Order rejected"},
           override : {status_code : "SALES_ORDER_OVERRIDE", status_name : "Sales-Order for approval"},
           rescheduled : {status_code : "SALES_ORDER_SCHEDULE_UPDATED", status_name : "Sales-Delivery Schedule updated"}
         },

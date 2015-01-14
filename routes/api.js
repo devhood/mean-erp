@@ -29,7 +29,7 @@ router
     });
 
 })
-.post('/:object', generator.generate,inventories.process_request, function(req, res) {
+.post('/:object', generator.generate, inventories.process_request, function(req, res) {
     delete req.user.password;
     delete req.user.permissions;
     delete req.user.audit_history;
@@ -119,7 +119,7 @@ router
   }
 
 })
-.put('/:object/:id', generator.generate,inventories.process_request, function(req, res) {
+.put('/:object/:id', inventories.process_request, generator.generate, function(req, res) {
     var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     delete req.body._id;
     req.query.filter = JSON.parse(req.query.filter || '{}');
