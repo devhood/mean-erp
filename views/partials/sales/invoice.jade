@@ -243,7 +243,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button" ng-click="rejectSales(sales)", ng-show="save_form.$valid && action!='read'") Reject
+              button.btn.red(type="button" ng-click="rejectSales(sales)", ng-show="save_form.$valid && action!='read' && !sales.pfno ") Reject
               | &nbsp;
               a.btn.default(type="button", href="/#/sales/index/delivery") Cancel
           .col-md-6

@@ -490,7 +490,6 @@ angular.module('erp')
             query = {"pfno": { "$exists": true }, "status.status_code" : {"$in" : [
             status.proforma.created.status_code,
             status.proforma.revised.status_code,
-            status.payment.rejected.status_code,
             status.proforma.rejected.status_code,
             status.delivery.rejected.status_code
              ]}};
@@ -513,6 +512,7 @@ angular.module('erp')
               {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
               {url:"/#/sales/order/edit/",title:"Edit Record",icon:"fa fa-edit"},
               {url:"/#/sales/order/reschedule/",title:"Approve Record",icon:"fa fa-upload",exclude:{key:"trpno"}},
+              {url:"/#/consignment/order/reschedule/",title:"Reschedule Record",icon:"fa fa-truck", state:{statusArray:["TRIP_TICKET_FAILED"]}},
               ];
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
@@ -641,8 +641,10 @@ angular.module('erp')
             {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"},
             {url:"/#/sales/return/create/",title:"Approve Record",icon:"fa fa-gear"}
           ];
-
-          query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.tripticket.delivered.status_code, ]}};
+          query = { "status.status_code" : {"$in" : [
+            status.invoice.approved.status_code,
+            status.tripticket.delivered.status_code,
+          ]}};
           $scope.title = "RETURN MERCHANDISE RECEIPT";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -737,19 +739,20 @@ angular.module('erp')
             $scope.structure.pfno, $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
             $scope.structure.delivery_method, $scope.structure.delivery_date, $scope.structure.customer.payment_term,$scope.structure.total_amount_due, $scope.structure.status.status_name
             ];
-
+            // filter:{key:"pmno"}},
             buttons = [
             {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save",filter:{key:"pmno"}},
+            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save", state:{statusArray:["TRIP_TICKET_DELIVERED", "PROFORMA_INVOICE_CREATED"]}},
             {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit", exclude:{key:"pmno"}},
-            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", exclude:{key:"pmno"}},
+            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", state:{statusArray:["PAYMENT_UPDATED"]}},
             ];
 
             query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code,
                                                         status.memo.approved.status_code, status.payment.updated.status_code,
                                                         status.payment.created.status_code, status.tripticket.delivered.status_code,
+                                                        status.tripticket.created.status_code,
                                                         status.proforma.approved.status_code, status.proforma.revised.status_code,
-                                                        status.payment.partialed.status_code,
+                                                        status.payment.partialed.status_code, status.payment.rejected.status_code
                                                         ]}};
             $scope.title = "PAYMENT";
 
@@ -814,8 +817,8 @@ $scope.init = function(){
   $scope.products =  Api.Collection('products').query();
   $scope.brands =  Api.Collection('brands').query();
   $scope.customers = Api.Collection('customers').query();
-  var dig = {"position":"Sales Executive"};
-  $scope.sales_executives = Api.Collection('users',dig).query();
+  var query = {"position":"Sales Executive"};
+  $scope.sales_executives = Api.Collection('users',query).query();
   $scope.users = Api.Collection('users').query();
   $scope.report = {};
 
@@ -1593,6 +1596,7 @@ $scope.init = function(){
   var status = Library.Status.Sales;
 
   $scope.CustomerChange = function(){
+    console.log("calling customer change");
     if($scope.sales.customer){
       $scope.shipping_address =
           $scope.sales.customer.shipping_address.landmark + ', ' +
@@ -1657,7 +1661,6 @@ $scope.init = function(){
      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
      $scope.sales.withholding_tax = computation.withholdingTax;
   }
-
   $scope.reCompute = function(sales){
 
     if($scope.sales.customer){
@@ -1953,7 +1956,6 @@ $scope.init = function(){
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
-    console.log(action, id);
   $scope.ajax_ready = false;
   var status = Library.Status.Sales;
   Structure.Sales.query().$promise.then(function(data){
@@ -1972,11 +1974,15 @@ $scope.init = function(){
       {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
       {url:"/#/packing/approve/",title:"View Record",icon:"fa fa-gear"}
       ];
-      query = { "status.status_code" : {"$in" : [status.order.created.status_code, status.payment.partialed.status_code, status.order.revised.status_code ]}};
-
-      $scope.title = "PACKING"
+      query = { "status.status_code" : {"$in" : [
+        status.order.created.status_code,
+        status.payment.partialed.status_code,
+        status.order.revised.status_code,
+        ]}};
+      $scope.title = "SALES PACKING"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
     };
 
   $scope.formInit = function(){
@@ -1986,14 +1992,11 @@ $scope.init = function(){
     if(action == 'read'){
       $scope.title = "VIEW PACKING " + id;
       $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
-      console.log("inside read: ", $scope.sales);
     }
 
     if(action == 'approve'){
       $scope.title = "APPROVE PACKING OF "+ id;
       $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
-  console.log("inside approve: ", $scope.sales);
-    console.log("status", status);
 
       $scope.saveSales = function(){
         $scope.sales.status = status.packing.created;
@@ -2036,21 +2039,28 @@ $scope.init = function(){
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/trips");
     };
-  $scope.formInit = function(){
-    var id = $routeParams.id;
-    var action = $routeParams.action;
-    var statusSales = Library.Status.Sales;
-    var statusConsignments = Library.Status.Consignments;
-    $scope.inventory_locations = Api.Collection('customers',query).query();
-    $scope.ListChange = function(){
+    $scope.formInit = function(){
+      var id = $routeParams.id;
+      var action = $routeParams.action;
+      var statusSales = Library.Status.Sales;
+      var statusConsignments = Library.Status.Consignments;
+      $scope.inventory_locations = Api.Collection('customers',query).query();
+      $scope.ListChange = function(){
         $scope.trip.list = [];
         if($scope.trip.inventory_location){
           var query = {
             "inventory_location":$scope.trip.inventory_location,
-            "status.status_code" : {"$in" : [statusSales.order.rescheduled.status_code, statusSales.invoice.approved.status_code, statusConsignments.order.approved.status_code, statusSales.printed.dr.status_code, statusSales.printed.si.status_code]}
+            "status.status_code" : {"$in" : [
+            statusSales.order.rescheduled.status_code,
+            statusSales.invoice.approved.status_code,
+            statusConsignments.delivery.approved.status_code,
+            statusSales.printed.dr.status_code,
+            statusSales.printed.si.status_code
+            ]}
           };
 
           Api.Collection('sales',query).query().$promise.then(function(data){
+              console.log(data);
             for(var i in data){
               if(data[i].customer){
                 $scope.trip.list.push({
@@ -2058,12 +2068,12 @@ $scope.init = function(){
                   drno : data[i].drno,
                   customer : data[i].customer.company_name,
                   shipping_address :
-                      data[i].customer.shipping_address.landmark + ', ' +
-                      data[i].customer.shipping_address.barangay + ', ' +
-                      data[i].customer.shipping_address.city + ', ' +
-                      data[i].customer.shipping_address.province + ', ' +
-                      data[i].customer.shipping_address.country + ', ' +
-                      data[i].customer.shipping_address.zipcode,
+                  data[i].customer.shipping_address.landmark + ', ' +
+                  data[i].customer.shipping_address.barangay + ', ' +
+                  data[i].customer.shipping_address.city + ', ' +
+                  data[i].customer.shipping_address.province + ', ' +
+                  data[i].customer.shipping_address.country + ', ' +
+                  data[i].customer.shipping_address.zipcode,
                   received_by : "",
                   arrival_date : "",
                   departure : "",
@@ -2074,20 +2084,20 @@ $scope.init = function(){
             }
           });
         }
-    };
+      };
 
-    $scope.action = action;
-    if(id && action == 'read'){
-      $scope.title = "VIEW TRIP TICKET " + id;
-      $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
-    }
+      $scope.action = action;
+      if(id && action == 'read'){
+        $scope.title = "VIEW TRIP TICKET " + id;
+        $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
+      }
 
-    if(id && action == 'edit'){
-      $scope.title = "EDIT TRIP TICKET " + id;
-      $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
+      if(id && action == 'edit'){
+        $scope.title = "EDIT TRIP TICKET " + id;
+        $scope.trip =  Api.Collection('trips').get({id:$routeParams.id});
 
-      $scope.saveTrip = function(){
-        async.each($scope.trip.list, function( item, callback) {
+        $scope.saveTrip = function(){
+          async.each($scope.trip.list, function( item, callback) {
             Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
               if(item.status == "delivered"){
                 sales.status = statusSales.tripticket.delivered;
@@ -2104,61 +2114,66 @@ $scope.init = function(){
                 callback();
               });
             });
-        },function(err){
-          if(err){
-            console.log(err);
-          }
-        });
-        $scope.trip.status = statusSales.tripticket.delivered;
-        $scope.trip.$update(function(){
-          $location.path('/trips/index');
-          return false;
-        });
-      }
-
-      $scope.deleteTrip=function(trip){
-        if(popupService.showPopup('You are about to delete Record : '+trip._id)){
-          $scope.trip.$delete(function(){
-            $location.path('/trips/index');
-            return false;
-          });
-        }
-      };
-      $scope.removeItem = function(index){
-        $scope.trip.list.splice(index, 1);
-      };
-    }
-
-    if(action == 'add'){
-      $scope.title = "ADD TRIP TICKET";
-      var Trip = Api.Collection('trips');
-      $scope.trip = new Trip();
-      $scope.saveTrip = function(){
-        $scope.trip.status = statusSales.tripticket.created;
-        $scope.trip.$save(function(){
-          async.each($scope.trip.list, function( item, callback) {
-              Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
-                sales.status = statusSales.tripticket.created;
-                sales.trpno =  $scope.trip.trpno;
-                sales.$update(function(){
-                  callback();
-                });
-              });
           },function(err){
             if(err){
               console.log(err);
             }
           });
-          $location.path('/trips/index');
-          return false;
-        });
+          $scope.trip.status = statusSales.tripticket.delivered;
+          $scope.trip.$update(function(){
+            $location.path('/trips/index');
+            return false;
+          });
+        }
+
+        $scope.deleteTrip=function(trip){
+          if(popupService.showPopup('You are about to delete Record : '+trip._id)){
+            $scope.trip.$delete(function(){
+              $location.path('/trips/index');
+              return false;
+            });
+          }
+        };
+        $scope.removeItem = function(index){
+          $scope.trip.list.splice(index, 1);
+        };
       }
 
-      $scope.removeItem = function(index){
-        $scope.trip.list.splice(index, 1);
-      };
-    }
-  }
+      if(action == 'add'){
+        $scope.title = "ADD TRIP TICKET";
+        var Trip = Api.Collection('trips');
+        $scope.trip = new Trip();
+        $scope.saveTrip = function(){
+          if (false) {
+            // statusConsignments
+          }
+          else if(true){
+            $scope.trip.status = statusSales.tripticket.created;
+            $scope.trip.$save(function(){
+              async.each($scope.trip.list, function( item, callback) {
+                Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
+                  sales.status = statusSales.tripticket.created;
+                  sales.trpno =  $scope.trip.trpno;
+                  sales.$update(function(){
+                    callback();
+                  });
+                });
+              },function(err){
+                if(err){
+                  console.log(err);
+                }
+              });
+              $location.path('/trips/index');
+              return false;
+            });
+          }
+
+          $scope.removeItem = function(index){
+            $scope.trip.list.splice(index, 1);
+          };
+        }
+      }//end add
+    }//end forminit
   });
 })
 .controller('DeliveryReceiptCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
@@ -2238,7 +2253,6 @@ $scope.init = function(){
       $location.path("/auth/unauthorized");
     }
   });
-
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
@@ -2404,15 +2418,14 @@ $scope.init = function(){
       PrintTotalPayment();
     });
     $scope.saveSales = function(){
-      $scope.sales.status = status.payment.updated;
-      $scope.sales.$update(function(){
-        $location.path('/sales/index/payment');
-        return false;
-      });
-    };
-
-    $scope.rejectSales = function(){
-      $scope.sales.status = status.payment.rejected;
+      if ($scope.sales.status.status_code == status.proforma.revised.status_code || $scope.sales.status.status_code == status.payment.rejected.status_code ) {
+        console.log("proforma partialed");
+        $scope.sales.status = status.payment.partialed;
+      }
+      else {
+        console.log("payment updated");
+        $scope.sales.status = status.payment.updated;
+      }
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
@@ -2453,6 +2466,15 @@ $scope.init = function(){
     $scope.saveSales = function(){
       $scope.sales.status = status.payment.confirmed;
       $scope.sales.payment_date = new Date();
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/payment');
+        return false;
+      });
+    };
+
+    $scope.rejectPayment = function(){
+      console.log("payment rejected");
+      $scope.sales.status = status.payment.rejected;
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;
@@ -2696,7 +2718,6 @@ $scope.init = function(){
       var type = $routeParams.type;
       switch(type){
          case "order" :
-
             columns = [
               $scope.structure.cono,$scope.structure.consignment_transaction_type,
               $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
@@ -2705,24 +2726,25 @@ $scope.init = function(){
             buttons = [
               {url:"/#/consignment/order/read/",title:"View Record",icon:"fa fa-folder-open"},
               {url:"/#/consignment/order/edit/",title:"Edit Record",icon:"fa fa-edit"},
-              {url:"/#/consignment/order/reschedule/",title:"Reschedule Record",icon:"fa fa-truck"},
+              {url:"/#/consignment/order/reschedule/",title:"Reschedule Record",icon:"fa fa-truck", state:{statusArray:["TRIP_TICKET_FAILED"]}},
             ];
 
             query = { "status.status_code" : {"$in" : [
                 status.order.created.status_code,
                 status.order.revised.status_code,
                 status.delivery.rejected.status_code,
+                status.order.rejected.status_code,
                 status.order.rescheduled.status_code,
                 status.order.update.status_code,
                 ]}};
-            $scope.title = "CONSIGNMENT ORDERS"
+            $scope.title = "CONSIGNMENT ORDERS";
             $scope.addUrl = "/#/consignment/order/add";
 
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
 
         break;
-        case "capprove" :
+        case "approval" :
             columns = [
               $scope.structure.cono,$scope.structure.consignment_transaction_type,
               $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
@@ -2738,28 +2760,28 @@ $scope.init = function(){
                 status.order.rescheduled.status_code,
                 status.order.update.status_code,
                 ]}};
-            $scope.title = "CONSIGNMENT ORDERS FOR APPROVAL"
-            $scope.addUrl = "/#/consignment/order/add";
-
+            $scope.title = "CONSIGNMENT ORDERS FOR APPROVAL";
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
         break;
         case "delivery" :
-            columns = [
-              $scope.structure.cono,$scope.structure.consignment_transaction_type,
-              $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
-            ];
-            buttons = [
-            {url:"/#/consignment/delivery/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/consignment/delivery/approve/",title:"Approve Record",icon:"fa fa-gear"}
-            ];
-            query = { "status.status_code" : {"$in" : [
-              status.packing.created.status_code,
-                ]}};
-            $scope.title = "CONSIGNMENT ORDERS FOR APPROVAL"
+          console.log("delivering");
+          columns = [
+            $scope.structure.cono,$scope.structure.consignment_transaction_type,
+            $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
+          ];
+          buttons = [
+          {url:"/#/consignment/delivery/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/consignment/delivery/approve/",title:"Approve Record",icon:"fa fa-gear"}
+          ];
+          query = { "status.status_code" : {"$in" : [
+            status.packing.created.status_code,
+              ]}};
+          $scope.title = "CONSIGNMENT ORDERS FOR APPROVAL"
 
-            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-            $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
+
 
           var columns1 = [
           $scope.structure.cdrno,$scope.structure.cono,$scope.structure.consignment_transaction_type,
@@ -2777,13 +2799,32 @@ $scope.init = function(){
           $scope.dtOptions1 = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
 
         break;
+        case "packing":
+            console.log("pack!");
+            columns = [
+            $scope.structure.cono, $scope.structure.consignment_transaction_type,
+            $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/consignment/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/consignment/packing/approve/",title:"View Record",icon:"fa fa-gear"}
+            ];
+            query = { "status.status_code" : {"$in" : [
+              status.order.approved.status_code,
+              ]}};
+
+            $scope.title = "CONSIGNMENTS PACKING"
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
+        break;
         }
-    };
+    }
 
   });
 })
 .controller('ConsignOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
-
+var type = $routeParams.type;
   Session.get(function(client) {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
@@ -2821,53 +2862,67 @@ $scope.init = function(){
         $scope.consignments.customer.billing_address.zipcode;
       }
     }
+
     $scope.addOrder = function(consignments){
       var item = angular.copy(consignments.item);
-      if( item && item.name && item.quantity && item.quantity ){
-        item.override = item.override ? item.override : "NORMAL";
+      if( item && item.name && item.quantity){
+          console.log("with quantity", item);
         if(consignments.customer.price_type == "Professional"){
           item.price = item.professional_price
+          console.log("item.price: pro",item.price);
         }
         if(consignments.customer.price_type == "Retail"){
           item.price = item.retail_price;
+          console.log("item.price retail: ",item.price);
         }
         if(!isNaN(item.price)){
           item.total = item.quantity * item.price;
         }
         delete item.inventories;
-        if($scope.consignments.consigned_item){
-          $scope.consignments.consigned_item.push(item);
+        if($scope.consignments.consigned_items){
+          $scope.consignments.consigned_items.push(item);
         }
         else{
-          $scope.consignments.consigned_item = [item];
+          $scope.consignments.consigned_items = [item];
         }
         delete consignments.item;
       }
       $scope.consignments.subtotal = 0;
-      $scope.consignments.isNeedApproval = false;
-      for(var i=0;i<$scope.consignments.consigned_item.length; i++){
-        $scope.consignments.subtotal+=$scope.consignments.consigned_item[i].total;
-
+      for(var i=0;i<$scope.consignments.consigned_items.length; i++){
+        console.log("subtotal", $scope.consignments.subtotal );
+        $scope.consignments.subtotal+=$scope.consignments.consigned_items[i].total;
       }
 
-      var computation = Library.Compute.Order(
-
-        $scope.consignments.subtotal,
-        0,
-        $scope.consignments.customer.discount.replace(" %","")/100 || 0,
-        $scope.consignments.isWithholdingTax,
-        $scope.consignments.isZeroRateSales
-      );
-      $scope.consignments.discount = computation.totalDiscount;
-      $scope.consignments.total_vat = computation.vatableSales;
-      $scope.consignments.total_amount_due = computation.totalAmountDue;
-      $scope.consignments.zero_rate_sales = computation.zeroRatedSales;
-      $scope.consignments.withholding_tax = computation.withholdingTax;
-
+      console.log("final subtotal:",$scope.consignments.subtotal);
+       var computation = Library.Compute.Order(
+          $scope.consignments.subtotal,
+          0,
+          $scope.consignments.customer.discount.replace(" %","")/100 || 0,
+          $scope.consignments.isWithholdingTax,
+          $scope.consignments.isZeroRateSales
+       );
+       $scope.consignments.discount = computation.totalDiscount;
+       $scope.consignments.total_vat = computation.vatableSales;
+       $scope.consignments.total_amount_due = computation.totalAmountDue;
+       $scope.consignments.zero_rate_sales = computation.zeroRatedSales;
+       $scope.consignments.withholding_tax = computation.withholdingTax;
+       console.log("vat:", $scope.consignments.discount);
+       console.log("total_vat:", $scope.consignments.total_vat);
+       console.log("total_amount_due:", $scope.consignments.total_amount_due);
+       console.log("zero_rate_sales:", $scope.consignments.zero_rate_sales);
+       console.log("withholding_tax:", $scope.consignments.withholding_tax);
     }
 
+
     $scope.reCompute = function(consignments){
+
       if($scope.consignments.customer){
+        console.log($scope.consignments.subtotal,
+          0,
+          $scope.consignments.customer.discount.replace(" %","")/100 || 0,
+          $scope.consignments.isWithholdingTax,
+          $scope.consignments.isZeroRateSales);
+
         var computation = Library.Compute.Order(
           $scope.consignments.subtotal,
           0,
@@ -2883,16 +2938,14 @@ $scope.init = function(){
       }
     }
     $scope.removeOrder = function(index){
-      $scope.consignments.consigned_item.splice(index, 1);
+      $scope.consignments.consigned_items.splice(index, 1);
       $scope.consignments.subtotal = 0;
-      $scope.consignments.isNeedApproval = false;
-      for(var i=0;i<$scope.consignments.consigned_item.length; i++){
-        $scope.consignments.subtotal+=$scope.consignments.consigned_item[i].total;
-        if($scope.consignments.consigned_item[i].override != "NORMAL"){
-          $scope.consignments.isNeedApproval = true;
-        }
+      for(var i=0;i<$scope.consignments.consigned_items.length; i++){
+        $scope.consignments.subtotal+=$scope.consignments.consigned_items[i].total;
       }
     }
+
+
 
     if( action == 'read'){
       $scope.title = "VIEW CONSIGN ORDER";
@@ -2923,7 +2976,7 @@ $scope.init = function(){
         $scope.CustomerChange();
       });
       $scope.saveConsignments = function(){
-          $scope.consignments.status = status.order.update;
+          $scope.consignments.status = status.order.revised;
        $scope.consignments.$update(function(){
           $location.path('/consignment/index/order');
           return false;
@@ -2970,14 +3023,14 @@ $scope.init = function(){
       $scope.saveConsignments = function(){
       $scope.consignments.status = status.order.approved;
       $scope.consignments.$update(function(){
-          $location.path('/consignment/index/capprove');
+          $location.path('/consignment/index/approval');
           return false;
         });
       };
     $scope.rejectConsignments = function(){
       $scope.consignments.status = status.order.rejected;
       $scope.consignments.$update(function(){
-        $location.path('/consignment/index/order');
+        $location.path('/consignment/index/approval');
         return false;
       });
     };
@@ -2996,43 +3049,41 @@ $scope.init = function(){
   var id = $routeParams.id;
   var action = $routeParams.action;
   $scope.action = action;
-  $scope.consignment_transaction_types = Api.Collection('consignment_transaction_types').query();
-  $scope.price_types = Api.Collection('price_types').query();
-  $scope.order_sources = Api.Collection('order_sources').query();
-  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+
+  $scope.formInit = function(){
   var query = {"type":"Retail"};
   $scope.customers = Api.Collection('customers',query).query();
   $scope.inventory_locations = Api.Collection('customers',query).query();
-  $scope.products = Api.Collection('products').query();
+  $scope.consignments = Api.Collection('consignments').query();
   var status = Library.Status.Consignments;
 
   $scope.CustomerChange = function(){
     if($scope.consignments.customer){
       $scope.shipping_address =
-      $scope.consignments.customer.shipping_address.landmark + ', ' +
-      $scope.consignments.customer.shipping_address.barangay + ', ' +
-      $scope.consignments.customer.shipping_address.city + ', ' +
-      $scope.consignments.customer.shipping_address.province + ', ' +
-      $scope.consignments.customer.shipping_address.country + ', ' +
-      $scope.consignments.customer.shipping_address.zipcode;
-
+          $scope.consignments.customer.shipping_address.landmark + ', ' +
+          $scope.consignments.customer.shipping_address.barangay + ', ' +
+          $scope.consignments.customer.shipping_address.city + ', ' +
+          $scope.consignments.customer.shipping_address.province + ', ' +
+          $scope.consignments.customer.shipping_address.country + ', ' +
+          $scope.consignments.customer.shipping_address.zipcode;
       $scope.billing_address =
-      $scope.consignments.customer.billing_address.landmark + ', ' +
-      $scope.consignments.customer.billing_address.barangay + ', ' +
-      $scope.consignments.customer.billing_address.city + ', ' +
-      $scope.consignments.customer.billing_address.province + ', ' +
-      $scope.consignments.customer.billing_address.country + ', ' +
-      $scope.consignments.customer.billing_address.zipcode;
+          $scope.consignments.customer.billing_address.landmark + ', ' +
+          $scope.consignments.customer.billing_address.barangay + ', ' +
+          $scope.consignments.customer.billing_address.city + ', ' +
+          $scope.consignments.customer.billing_address.province + ', ' +
+          $scope.consignments.customer.billing_address.country + ', ' +
+          $scope.consignments.customer.billing_address.zipcode;
     }
   }
+
   if(action == 'read'){
     $scope.title = "VIEW CONSIGNMENT DELIVERY RECEIPT";
     $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
   }
-  if(action == 'approve'){
 
+  if(action == 'approve'){
     $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
     $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -3051,6 +3102,114 @@ $scope.init = function(){
         return false;
       });
     };
+  }
+
+}
+})
+.controller('ConsignPackingCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+
+  console.log("pack");
+  Session.get(function(client) {
+    if(!Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  var status = Library.Status.Consignments;
+  var query = {};
+
+
+  $scope.formInit = function(){
+    var query = {"type":"Retail"};
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+
+    if(action == 'read'){
+      $scope.title = "VIEW PACKING " + id;
+      $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id});
+    }
+
+    if(action == 'approve'){
+      $scope.title = "APPROVE PACKING OF "+ id;
+      $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id});
+
+      $scope.savePacking = function(){
+        $scope.consignments.status = status.packing.created;
+        $scope.consignments.$update(function(){
+          $location.path('/consignment/index/packing');
+          return false;
+        });
+      };
+    }
+  } //form init end
+
+})
+.controller('ConsignApprovalCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+  Session.get(function(client) {
+    if(!Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+
+  $scope.formInit = function(){
+    var query = {"type":"Retail"};
+    $scope.customers = Api.Collection('customers',query).query();
+    $scope.inventory_locations = Api.Collection('customers',query).query();
+    $scope.consignments = Api.Collection('consignments').query();
+    var status = Library.Status.Consignments;
+
+    $scope.CustomerChange = function(){
+      if($scope.consignments.customer){
+        $scope.shipping_address =
+        $scope.consignments.customer.shipping_address.landmark + ', ' +
+        $scope.consignments.customer.shipping_address.barangay + ', ' +
+        $scope.consignments.customer.shipping_address.city + ', ' +
+        $scope.consignments.customer.shipping_address.province + ', ' +
+        $scope.consignments.customer.shipping_address.country + ', ' +
+        $scope.consignments.customer.shipping_address.zipcode;
+        $scope.billing_address =
+        $scope.consignments.customer.billing_address.landmark + ', ' +
+        $scope.consignments.customer.billing_address.barangay + ', ' +
+        $scope.consignments.customer.billing_address.city + ', ' +
+        $scope.consignments.customer.billing_address.province + ', ' +
+        $scope.consignments.customer.billing_address.country + ', ' +
+        $scope.consignments.customer.billing_address.zipcode;
+      }
+    }
+
+    if(action == 'read'){
+      $scope.title = "VIEW CONSIGNMENT ORDER";
+      $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+    }
+
+    if(action == 'approve'){
+      $scope.title = "APPROVE CONSIGNMENT"+ id;
+      $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
+        $scope.CustomerChange();
+      });
+      $scope.saveConsignments = function(){
+        $scope.consignments.status = status.order.approved;
+        $scope.consignments.$update(function(){
+          $location.path('/consignment/index/approval');
+          return false;
+        });
+      };
+      $scope.rejectConsignments = function(){
+        $scope.consignments.status = status.order.rejected;
+        $scope.consignments.$update(function(){
+          $location.path('/consignment/index/approval');
+          return false;
+        });
+      };
+    }
   }
 })
 .controller('CDSCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
@@ -3174,11 +3333,13 @@ $scope.init = function(){
     var columns = [];
     var buttons = [];
     var query = {};
+
     var id = $routeParams.id;
     var action = $routeParams.action;
     $scope.action = action;
-    // $scope.price_types = Api.Collection('price_types').query();
-    $scope.transaction_types = Api.Collection('transaction_type').query();
+
+    $scope.price_types = Api.Collection('price_types').query();
+    $scope.adjustment_transaction_types = Api.Collection('consignment_transaction_types').query();
     var query = {"type":"Retail"};
     $scope.customers = Api.Collection('customers',query).query();
     $scope.inventory_locations = Api.Collection('customers',query).query();
@@ -3197,7 +3358,7 @@ $scope.init = function(){
       {url:"/#/adjustment/edit/",title:"Edit Record",icon:"fa fa-edit"},
       {url:"/#/adjustment/approve/",title:"Approve Record",icon:"fa fa-gear"}
       ];
-      query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+      query = { "status.status_code" : {"$in" : [status.created.status_code, status.revised.status_code,]}};
       $scope.title = "ADJUSTMENT"
       $scope.addUrl = "/#/adjustment/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -3247,15 +3408,7 @@ $scope.init = function(){
       $scope.adjustments = new Adjustments();
 
       $scope.saveAdjustments = function(){
-
-        if($scope.adjustments.isNeedApproval){
-
-          $scope.adjustments.status = status.override;
-        }
-        else{
-          $scope.adjustments.status = status.created;
-          //    $scope.sales.triggerInventory  = "OUT";
-        }
+        $scope.adjustments.status = status.created;
         $scope.adjustments.$save(function(){
           $location.path('/adjustment/index/');
           return false;
@@ -3266,42 +3419,34 @@ $scope.init = function(){
     if( id && action == 'edit'){
       $scope.title = "EDIT ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
       });
       $scope.saveAdjustments = function(){
-        if($scope.adjustments.isNeedApproval){
-          $scope.adjustments.status = status.override;
-        }
-        $scope.consignments.$update(function(){
-          $location.path('/adjustment/index/add');
+        $scope.adjustments.status = status.revised;
+        $scope.adjustments.$update(function(){
+          $location.path('/adjustment/index');
           return false;
         });
       };
-      $scope.deleteAdjustments=function(adjustments){
+      $scope.deleteAdjustments = function(adjustments){
         if(popupService.showPopup('You are about to delete Record : '+adjustments._id)){
           $scope.adjustments.$delete(function(){
-            $location.path('/adjustment/index/add');
+            $location.path('/adjustment/index');
             return false;
           });
         }
       };
     }
     if(id && action == 'approve'){
-
       $scope.title = "APPROVE ADJUSTMENT ORDER "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
-        $scope.CustomerChange();
       });
       $scope.saveAdjustments = function(){
-        if($scope.adjustments.isNeedApproval){
-          $scope.adjustments.status = status.approved;
-        }
+        $scope.adjustments.status = status.approved;
         $scope.adjustments.$update(function(){
           $location.path('/adjustment/index/');
           return false;
         });
       };
-
     }
 
   });
@@ -3548,10 +3693,10 @@ $scope.init = function(){
   var type = $routeParams.type;
   $scope.sales =  Api.Collection('sales').get({id:id},function(){
     if (type == 'delivery') {
-    $scope.sales.status.status_code = status.printed.dr.status_code;
+    $scope.sales.status = status.printed.dr;
     }
     if (type == 'invoice') {
-    $scope.sales.status.status_code = status.printed.si.status_code;
+    $scope.sales.status = status.printed.si;
     }
     $scope.sales.$update(function(){
         $window.location.href = '/print/sales/'+type+'/'+id;

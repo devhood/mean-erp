@@ -238,7 +238,7 @@ block title
             .col-md-offset-3.col-md-9
               button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
               | &nbsp;
-              button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='edit' || action=='approve'") Reject
+              button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='approve'") Reject
               | &nbsp;
               a.btn.default(type="button", href="/#/sales/index/proforma") Cancel
           .col-md-6

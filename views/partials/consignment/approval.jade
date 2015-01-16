@@ -1,5 +1,5 @@
 block title
-  title CONSIGNMENT ORDER
+  title CONSIGNMENT APPROVAL
 .portlet.box.grey(ng-init="formInit()")
   .portlet-title
     .caption
@@ -16,8 +16,17 @@ block title
         .row
           .col-md-6
             .form-group
+
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="consignments.cdrno", readonly)
+                span.col-md-12.help-block CDR Number pang
+        .row
+          .col-md-6
+            .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text",ng-model="consignments.consignment_transaction_type" , ng-disabled="action=='read' || action=='approve'")
+                input.form-control(type="text", ng-model="consignments.consignment_transaction_type", ng-disabled="action=='read' || action=='approve'")
                 span.col-md-12.help-block Consignment Transaction Type
           .col-md-6
             .form-group
@@ -28,7 +37,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",readonly)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read || action=='approve'")
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
@@ -106,7 +115,7 @@ block title
                               th Unit Price
                               th Total
                           tbody
-                            tr(ng-repeat="consigned_item in consignments.consigned_items track by $index")
+                            tr(ng-repeat="consigned_item in consignments.consigned_item track by $index")
                               td {{consigned_item.bl_code}}
                               td {{consigned_item.name}}
                               td {{consigned_item.quantity}}

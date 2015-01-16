@@ -1,5 +1,5 @@
 block title
-  title adjustments Order
+  title ADJUSTMENTS Order
 .portlet.box.grey
   .portlet-title
     .caption
@@ -17,8 +17,8 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-               select.select2me.form-control.select2-offscreen(ng-model="consignments.consignment_transaction_type ", ng-options="consignment_transaction_type.name as consignment_transaction_type.name for consignment_transaction_type  in consignment_transaction_types", ng-selected="{{consigments.consignment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'"),required)
-                span.col-md-12.help-block Transaction Type
+               select.select2me.form-control.select2-offscreen(ng-model="adjustments.adjustment_transaction_type", ng-options="adjustment_transaction_type.name as adjustment_transaction_type.name for adjustment_transaction_type  in adjustment_transaction_types", ng-selected="{{adjustments.adjustment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'|| action=='approve'"),required)
+               span.col-md-12.help-block Transaction Type
 
           .col-md-6
             .form-group
@@ -29,12 +29,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="adjustments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{adjustments.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="adjustments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{adjustments.inventory_location}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule' || action=='approve'"),required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="adjustments.adjustment_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="adjustments.adjustment_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="action=='read' || action=='approve'", required)
                 span.col-md-12.help-block Adjustment Date
         .row
           .col-md-1
@@ -55,7 +55,7 @@ block title
             .form-body
               br
               br
-              .row(ng-hide="action=='read'")
+              .row(ng-hide="action=='read' || action=='approve'")
                 .col-md-1
                 .col-md-10
                   .col-md-3
@@ -90,19 +90,18 @@ block title
                               th Code
                               th Product
                               th Quantity
-
-                              th(width="5%")(ng-hide="action=='read'") Action
+                              th(width="5%")(ng-hide="action=='read' || action=='approve'") Action
                           tbody
                             tr(ng-repeat="adjusted_item in adjustments.adjusted_item track by $index")
                               td {{adjusted_item.bl_code}}
                               td {{adjusted_item.name}}
                               td {{adjusted_item.quantity}}
-                              td(width="5%")(ng-hide="action=='read'")
+                              td(width="5%" , ng-hide="action=='read' || action=='approve'")
                                 .btn-group.btn-group-xs.btn-group-solid
                                   a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
                 .col-md-1
-  
+
         .row
           .col-md-6
             .col-md-offset-3.col-md-9
@@ -110,5 +109,5 @@ block title
               | &nbsp;
               button.btn.red(type="button", ng-click="deleteAdjustments(adjustments)", ng-show="action=='edit' || action=='approve'") Delete
               | &nbsp;
-              a.btn.default(type="button", href="/#/adjsutment/index") Cancel
+              a.btn.default(type="button", href="/#/adjustment/index") Cancel
           .col-md-6

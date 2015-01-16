@@ -47,14 +47,19 @@
     "id": 2,
     "childLink": [
       {
-        "title": "Print Pick List",
+        "title": "Sales Pick List",
         "description": "Prepare Items for Delivery",
         "href": "/#/packing/index"
       },
       {
-        "title": "Delivery Receipts",
+        "title": "Sales Delivery Receipts",
         "description": "Prepare and Approve Items for Delivery",
         "href": "/#/sales/index/delivery"
+      },
+      {
+        "title": "Consignments Pick List",
+        "description": "Prepare Items for Delivery",
+        "href": "/#//consignment/index/packing"
       },
       {
         "title": "Consignment DR",
@@ -201,7 +206,7 @@
       {
         "title": "Approve Consigned Order",
         "description": "Create Sales Order",
-        "href": "/#/consignment/index/capprove"
+        "href": "/#/consignment/index/approval"
       },
       {
         "title": "Calendar",

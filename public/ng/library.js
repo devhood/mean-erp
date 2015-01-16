@@ -51,6 +51,11 @@ angular.module('erp')
                   btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
                 }
               }
+              else if(buttons[i].state){
+                if(buttons[i].state.statusArray.indexOf(data.status.status_code) != -1){
+                  btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
+                }
+              }
               else{
                 btnGroup+='<a href="'+ buttons[i].url + data._id + '", class="tooltips btn default" data-container="body", data-placement="top", data-html="true", data-original-title="'+buttons[i].title+'"><i class="'+buttons[i].icon+'"></i></a>';
               }
@@ -132,14 +137,15 @@ angular.module('erp')
           revised : {status_code : "CONSIGNED_ORDER_REVISED", status_name : "Consigned-Order revised"},
           approved : {status_code : "CONSIGNED_ORDER_APPROVED", status_name : "Consigned-Order approved"},
           update : {status_code : "CONSIGNED_ORDER_UPDATED", status_name : "Consigned-Order for approval"},
-          rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"}
+          rescheduled : {status_code : "CONSIGNED_ORDER_SCHEDULE_UPDATED", status_name : "Consigned-Delivery Schedule updated"},
+          rejected : {status_code : "CONSIGNED_ORDER_REJECTED", status_name : "Consigned-Order for rejected"}
         },
         packing :{
-          created : {status_code : "PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
+          created : {status_code : "CONSIGNED_PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
         },
         delivery : {
-          approved : {status_code : "CONSIGN_DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consign DR approved"},
-          rejected : {status_code : "CONSIGN_DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consign DR rejected"}
+          approved : {status_code : "CONSIGNED_DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consigned DR approved"},
+          rejected : {status_code : "CONSIGNED_DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consigned DR rejected"}
         }
       },
       Shipments : {
