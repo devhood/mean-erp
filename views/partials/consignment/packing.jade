@@ -82,7 +82,7 @@ block title
 															th Unit Price
 															th Total
 													tbody
-														tr(ng-repeat="ordered_item in consignments.consigned_item track by $index")
+														tr(ng-repeat="ordered_item in consignments.consigned_items track by $index")
 															td {{ordered_item.bl_code}}
 															td {{ordered_item.name}}
 															td {{ordered_item.quantity}}
