@@ -159,6 +159,49 @@ block title
 																	a.tooltips.btn.default(ng-click="removeInventory($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																		i.fa.fa-trash-o
 								.col-md-1
+				.portlet.box.grey
+					.portlet-title
+						.caption
+							i.fa.fa-reorder
+							| MOVEMENT HISTORY
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+						.form-body
+							br
+							.row(ng-hide="action!='read'")
+							.form-group
+								.col-md-1
+								.col-md-10
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Reference
+															th BL Code
+															th Item
+															th Brand
+															th Quantity
+															th UOM
+															th location
+															th View
+													tbody
+														tr(ng-repeat="record in movement_history")
+															td {{record.reference.value}}
+															td {{record.item.bl_code}}
+															td {{record.item.name}}
+															td {{record.item.brand}}
+															td {{record.item.quantity}}
+															td {{record.item.uom}}
+															td {{record.location}}
+															td(width="5%") a(href="http://{{item.link}}")
+																//- .btn-group.btn-group-xs.btn-group-solid
+																//- 	a.tooltips.btn.default(ng-click="($index)", data-container="body", data-placement="top", data-html="true", data-original-title="View Record")
+																		i.fa.fa-trash-o
+								.col-md-1
 				.portlet.box.grey(ng-show="product.uom=='Package'")
 					.portlet-title
 						.caption

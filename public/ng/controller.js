@@ -376,6 +376,8 @@ angular.module('erp')
 
       $scope.action = action;
       if(id && action == 'read'){
+        query = {location:$routeParams};
+        $scope.movement_history = Api.Collection('inv_trans_history').query();
         $scope.title = "VIEW PRODUCT " + id;
         $scope.product =  Api.Collection('products').get({id:$routeParams.id},function(){
           $scope.product.product_photo = $scope.product.product_photo ? "/uploads/"+$scope.product.product_photo  : "http://www.placehold.it/400x300/EFEFEF/AAAAAA&text=no+image";
