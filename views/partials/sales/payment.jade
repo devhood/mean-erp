@@ -378,17 +378,26 @@ block title
                                   a.tooltips.btn.default.tooltips(ng-click="removePayment($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
                 .col-md-1
+            .row(ng-show="sales.cmno")
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                    input.form-control(type="text", ng-model="sales.credit_memo", style="text-align: right;", disabled)
+                    span.col-md-12.help-block  Credit Memo
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
             .row
               .col-md-6
                 .form-group
                   .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                    input.form-control(type="text", ng-model="sales.other_fees", ng-disabled="action=='read'", ng-change="OtherFeesChange()", style="text-align: right;")
+                    input.form-control(type="number", ng-model="sales.other_fees", ng-disabled="action=='read'", ng-change="OtherFeesChange()", style="text-align: right;")
                     span.col-md-12.help-block  Other Fees
               .col-md-6
                 .form-group
                   .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                    input.form-control(type="text", ng-model="sales.total_payment", readonly, style="text-align: right;")
-                    span.col-md-12.help-block  Total Payment
+                    input.form-control(type="number", ng-model="sales.total_payment", readonly, style="text-align: right;")
+                    span.col-md-12.help-block  Total Payment here
         .row
           .col-md-6
             .form-group

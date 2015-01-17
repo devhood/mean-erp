@@ -14,8 +14,6 @@ block title
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-												select.select2me.form-control.select2-offscreen(ng-model="shipment.supplier", ng-options="supplier.name as supplier.name for supplier in suppliers", ng-selected="{{shipment.supplier}}", ng-disabled="action=='read'|| action=='approve'", required)
-												span.col-md-12.control-label	Supplier
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
@@ -25,8 +23,19 @@ block title
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-														input#referenceNo.form-control(type="text", ng-model="shipment.reference_number", ng-disabled="action=='read'|| action=='approve'", required)
-														span.col-md-12.control-label	Reference Number
+												select.select2me.form-control.select2-offscreen(ng-model="shipment.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{shipment.inventory_location}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule' || action=='approve'"),required)
+												span.col-md-12.help-block Inventory Location
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+												select.select2me.form-control.select2-offscreen(ng-model="shipment.supplier", ng-options="supplier.name as supplier.name for supplier in suppliers", ng-selected="{{shipment.supplier}}", ng-disabled="action=='read'|| action=='approve'", required)
+												span.col-md-12.control-label	Supplier
+								.row
+									.col-md-6
+										.form-group
+											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+												input#referenceNo.form-control(type="text", ng-model="shipment.reference_number", ng-disabled="action=='read'|| action=='approve'", required)
+												span.col-md-12.control-label	Reference Number
 									.col-md-6
 										.form-group
 											.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
@@ -51,7 +60,7 @@ block title
 										.form-body
 											br
 											br
-											.row(ng-hide="action!='add'")
+											.row(ng-show="action=='add' || action=='edit'")
 												.col-md-12
 													.col-md-2
 														.form-group
@@ -66,7 +75,7 @@ block title
 													.col-md-2
 														.form-group
 															.col-xs-12.col-sm-12.col-md-12.col-lg-12
-																input.form-control(type="text", ng-model="shipment.item.quantity")
+																input.form-control(type="number", ng-model="shipment.item.quantity")
 																span.col-md-12.help-block	Quantity
 													.col-md-2
 														.form-group
@@ -115,7 +124,7 @@ block title
 											.col-md-offset-3.col-md-9
 												button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
 												| &nbsp;
-												button.btn.red(type="button", ng-click="deleteShipment(shipment)", ng-show="action=='edit' || action=='approve'") Delete
+												button.btn.red(type="button", ng-click="rejectShipment(shipment)", ng-show="action=='approve'") Reject
 												| &nbsp;
 												a.btn.default(type="button", href="/#/shipment/index/create") Cancel
 										.col-md-6

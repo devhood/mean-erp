@@ -92,7 +92,7 @@ block title
                               th Quantity
                               th(width="5%")(ng-hide="action=='read' || action=='approve'") Action
                           tbody
-                            tr(ng-repeat="adjusted_item in adjustments.adjusted_item track by $index")
+                            tr(ng-repeat="adjusted_item in adjustments.adjusted_items track by $index")
                               td {{adjusted_item.bl_code}}
                               td {{adjusted_item.name}}
                               td {{adjusted_item.quantity}}

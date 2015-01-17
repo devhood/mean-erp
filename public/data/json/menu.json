@@ -12,11 +12,6 @@
         "href": "/#/sales/index/order"
       },
       {
-        "title": "Return Merchandise",
-        "description": "Return Sales Item",
-        "href": "/#/sales/index/return"
-      },
-      {
         "title": "Proforma Invoice",
         "description": "Create Proforma Invoice",
         "href": "/#/sales/index/proforma"
@@ -30,6 +25,11 @@
         "title": "Consignment Daily Sales",
         "description": "Create Consignment",
         "href": "/#/cds/index"
+      },
+      {
+        "title": "Return Merchandise",
+        "description": "Return Sales Item",
+        "href": "/#/sales/index/return"
       },
       {
         "title": "Promo Maker",

@@ -17,13 +17,11 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input.form-control(type="text", ng-model="sales.pckno", disabled)
-								span.col-md-12.help-block Packing Number
+								input.form-control(type="text", ng-model="sales.sono", readonly)
+								span.col-md-12.help-block SO Number
 					.col-md-6
 						.form-group(ng-show="sales.sono")
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-								input.form-control(type="text", ng-model="sales.sono", readonly)
-								span.col-md-12.help-block SO Number
 						.form-group(ng-show="sales.pfno")
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
 								input.form-control(type="text", ng-model="sales.pfno", readonly)

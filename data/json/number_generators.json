@@ -1,4 +1,6 @@
 {"status_code":["SALES_ORDER_CREATED"],"field":"sono","prefix":"SO","suffix":2014,"count":1}
+{"status_code":["CONSIGNED_ORDER_CREATED"],"field":"cono","prefix":"CO","suffix":2014,"count":1}
+{"status_code":["CONSIGNED_DELIVERY_RECEIPT_APPROVED"],"field":"cdrno","prefix":"CDR","suffix":2014,"count":1}
 {"status_code":["PACKING_CREATED"],"field":"pckno","prefix":"PACK","suffix":2014,"count":1}
 {"status_code":["DELIVERY_RECEIPT_APPROVED"],"field":"drno","prefix":"DR","suffix":2014,"count":1}
 {"status_code":["SALES_INVOICE_APPROVED"],"field":"sino","prefix":"SI","suffix":2014,"count":1}
@@ -7,11 +9,9 @@
 {"status_code":["MEMO_APPROVED"],"field":"cmno","prefix":"CRDT","suffix":2014,"count":1}
 {"status_code":["PAYMENT_CREATED","PAYMENT_PARTIALED"],"field":"pmno","prefix":"PYMT","suffix":"2014","count":1}
 {"status_code":["PROFORMA_INVOICE_CREATED"],"field":"pfno","prefix":"PRFM","suffix":2014,"count":1}
-{"status_code":["CONSIGNED_ORDER_CREATED"],"field":"cono","prefix":"CO","suffix":2014,"count":1}
 {"status_code":["ADJUSTMENT_CREATED"],"field":"adjno","prefix":"ADJ","suffix":2014,"count":1}
 {"status_code":["SHIPMENT_CREATED"],"field":"shipno","prefix":"SHIP","suffix":2014,"count":1}
 {"status_code":["PURCHASE_CREATED"],"field":"purno","prefix":"PCHS","suffix":2014,"count":1}
-{"status_code":["CONSIGN_DELIVERY_RECEIPT_APPROVED"],"field":"cdrno","prefix":"CDR","suffix":2014,"count":1}
 {"status_code":["CDS_CREATED"],"field":"cdsno","prefix":"CDS","suffix":2014,"count":1}
 {"status_code":["SCHEDULE_CREATED"],"field":"schno","prefix":"SCH","suffix":2014,"count":1}
 {"status_code":["CYCLE_CREATED"],"field":"cycno","prefix":"CYC","suffix":2014,"count":1}

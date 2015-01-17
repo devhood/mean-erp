@@ -146,12 +146,18 @@ angular.module('erp')
         delivery : {
           approved : {status_code : "CONSIGNED_DELIVERY_RECEIPT_APPROVED", status_name : "Warehouse-Consigned DR approved"},
           rejected : {status_code : "CONSIGNED_DELIVERY_RECEIPT_REJECTED", status_name : "Warehouse-Consigned DR rejected"}
+        },
+        tripticket : {
+          created : {status_code : "TRIP_TICKET_CREATED", status_name : "Warehouse-Delivery in progress"},
+          delivered : {status_code : "TRIP_TICKET_DELIVERED", status_name : "Warehouse-Order delivered"},
+          failed : {status_code : "TRIP_TICKET_FAILED", status_name : "Warehouse-Delivery failed"}
         }
       },
       Shipments : {
         created  : {status_code : "SHIPMENT_CREATED", status_name : "Shipment submitted"},
         approved : {status_code : "SHIPMENT_APPROVED", status_name : "Shipment approved"},
         cancel : {status_code : "SHIPMENT_CANCEL", status_name : "Shipment cancelled"},
+        rejected : {status_code : "SHIPMENT_REJECTED", status_name : "Shipment rejected"},
         updated : {status_code : "SHIPMENT_UPDATED", status_name : "Shipment updated"}
       },
       Purchases : {

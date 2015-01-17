@@ -92,7 +92,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#Family.form-control(type="text", ng-model="product.family",-disabled="action=='read'")
+								input#Family.form-control(type="text", ng-model="product.family", ng-disabled="action=='read'")
 								span.col-md-12.help-block Product Family
 					.col-md-6
 						.form-group
@@ -149,12 +149,12 @@ block title
 														tr
 															th Inventory Location
 															th Quantity
-															th Action
+															th(ng-hide="action=='read' || action=='approve'") Action
 													tbody
 														tr(ng-repeat="item in product.inventories")
 															td {{item.company_name}}
 															td {{item.quantity}}
-															td(width="5%")
+															td(width="5%", ng-hide="action=='read' || action=='approve'")
 																.btn-group.btn-group-xs.btn-group-solid
 																	a.tooltips.btn.default(ng-click="removeInventory($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																		i.fa.fa-trash-o
@@ -198,12 +198,12 @@ block title
 														tr
 															th Product
 															th Quantity
-															th Action
+															th(ng-hide="action=='read' || action=='approve'") Action
 													tbody
 														tr(ng-repeat="item in product.packages")
 															td {{item.name}}
 															td {{item.quantity}}
-															td(width="5%")
+															td(width="5%", ng-hide="action=='read' || action=='approve'")
 																.btn-group.btn-group-xs.btn-group-solid
 																	a.tooltips.btn.default(ng-click="removePackage($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																		i.fa.fa-trash-o

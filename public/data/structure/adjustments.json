@@ -1,7 +1,7 @@
 [
     {
-        "transaction_type": {
-            "name": "transaction_type",
+        "adjustment_transaction_type": {
+            "name": "adjustment_transaction_type",
             "title": "Transaction Type",
             "type": "select"
         },

@@ -639,10 +639,13 @@ angular.module('erp')
 
           buttons = [
             {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"},
-            {url:"/#/sales/return/create/",title:"Approve Record",icon:"fa fa-gear"}
+            {url:"/#/sales/return/create/",title:"Approve Record",icon:"fa fa-level-up"}
           ];
           query = { "status.status_code" : {"$in" : [
             status.tripticket.delivered.status_code,
+            status.payment.updated.status_code,
+            status.returned.rejected.status_code,
+            status.payment.created.status_code
           ]}};
           $scope.title = "RETURN MERCHANDISE RECEIPT";
 
@@ -741,8 +744,8 @@ angular.module('erp')
           // filter:{key:"pmno"}},
           buttons = [
           {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save", state:{statusArray:["TRIP_TICKET_DELIVERED", "PROFORMA_INVOICE_CREATED"]}},
-          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit", state:{statusArray:["TRIP_TICKET_DELIVERED", "TRIP_TICKET_CREATED"]}},
+          {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save", state:{statusArray:["TRIP_TICKET_DELIVERED","TRIP_TICKET_CREATED", "PROFORMA_INVOICE_CREATED","MEMO_APPROVED"]}},
+          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_PARTIALED", "TRIP_TICKET_DELIVERED"]}},
           {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", state:{statusArray:["PAYMENT_UPDATED"]}},
           ];
 
@@ -1296,12 +1299,33 @@ $scope.init = function(){
           {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.created.status_code]}};
+          query = { "status.status_code" : {"$in" : [status.created.status_code, status.updated.status_code, status.rejected.status_code ]}};
 
           $scope.title = "NEW SHIPMENTS"
           $scope.addUrl = "/#/shipment/add"
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
           $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
+
+        break;
+        case "approve" :
+          console.log("approving");
+          columns = [
+          $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
+          $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
+          ];
+
+          buttons = [
+          {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
+          {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
+          ];
+
+          var status = Library.Status.Shipments;
+          query = { "status.status_code" : {"$in" : [status.created.status_code, status.updated.status_code]}};
+
+          $scope.title = "SHIPMENTS FOR APPROVAL"
+          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+          $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
+
 
           var columns1 = [
           $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
@@ -1314,29 +1338,10 @@ $scope.init = function(){
 
           query = { "status.status_code" : {"$in" : [status.approved.status_code]}};
 
-          $scope.title1 = "SHIPMENTS FOR APPROVAL"
+          $scope.title1 = "APPROVED SHIPMENTS"
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
           $scope.dtOptions1 = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
 
-        break;
-        case "approve" :
-          columns = [
-          $scope.structure.shipno, $scope.structure.supplier, $scope.structure.reference_number,
-          $scope.structure.arrival_date, $scope.structure.notes, $scope.structure.status.status_name
-          ];
-
-          buttons = [
-          {url:"/#/shipment/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/shipment/edit/",title:"Edit Record",icon:"fa fa-edit"},
-          {url:"/#/shipment/approve/",title:"Approve Shipment",icon:"fa fa-gear"}
-          ];
-
-          var status = Library.Status.Shipments;
-          query = { "status.status_code" : {"$in" : [status.created.status_code, status.approved.status_code]}};
-
-          $scope.title = "SHIPMENTS FOR APPROVAL"
-          $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-          $scope.dtOptions = Library.DataTable.options("/api/shipments?filter="+encodeURIComponent(JSON.stringify(query)));
 
         break;
       }//end of switch
@@ -1349,6 +1354,8 @@ $scope.init = function(){
     $scope.suppliers = Api.Collection('suppliers').query();
     $scope.products = Api.Collection('products').query();
     $scope.conditions = Api.Collection('conditions').query();
+    var query = {"type":"Retail"};
+    $scope.inventory_locations = Api.Collection('customers',query).query();
     var status = Library.Status.Shipments;
 
     $scope.action = action;
@@ -1357,6 +1364,7 @@ $scope.init = function(){
       var Shipment = Api.Collection('shipments');
       $scope.shipment = new Shipment();
       $scope.shipment.status = status.created;
+
       $scope.saveShipment = function(){
         $scope.shipment.$save(function(){
           $location.path('/shipment/index/create');
@@ -1382,19 +1390,12 @@ $scope.init = function(){
           return false;
         });
       };
-      $scope.deleteShipment=function(shipment){
-        if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
-          $scope.shipment.$delete(function(){
-            $location.path('/shipment/index/create');
-            return false;
-          });
-        }
-      };
     }
 
   if(action == 'approve'){
     $scope.title = "APPROVE SHIPMENT "+ id;
     $scope.shipment =  Api.Collection('shipments').get({id:$routeParams.id},function(){
+      console.log($scope.shipment.blcode);
     });
     $scope.saveShipment = function(){
       $scope.shipment.status = status.approved;
@@ -1403,13 +1404,12 @@ $scope.init = function(){
         return false;
       });
     };
-    $scope.deleteShipment=function(shipment){
-      if(popupService.showPopup('You are about to delete Record : '+shipment._id)){
-        $scope.shipment.$delete(function(){
+    $scope.rejectShipment=function(shipment){
+        $scope.shipment.status = status.rejected;
+        $scope.shipment.$update(function(){
           $location.path('/shipment/index/aprove');
           return false;
         });
-      }
     };
   }
 
@@ -2153,7 +2153,29 @@ $scope.init = function(){
               console.log(err);
             }
           });
-          $scope.trip.status = statusSales.tripticket.delivered;
+          async.each($scope.trip.list, function( item, callback) {
+            Api.Collection('consignments').get({id : item.id}).$promise.then(function(consignment){
+              if(item.status == "delivered"){
+                consignment.status = statusConsignments.tripticket.delivered;
+                $scope.trip.status = statusConsignments.tripticket.delivered;
+                console.log("delivered na");
+              }
+              else if(item.status == "failed"){
+                consignment.status = statusConsignments.tripticket.failed;
+                $scope.trip.status = statusConsignments.tripticket.failed;
+              }
+
+              consignment.trpno =  $scope.trip.trpno;
+              consignment.$update(function(){
+                callback();
+              });
+            });
+          },function(err){
+            if(err){
+              console.log(err);
+            }
+          });
+          $scope.trip.status = statusConsignments.tripticket.delivered;
           // $scope.trip.status = statusConsignments.tripticket.delivered;
           $scope.trip.$update(function(){
             $location.path('/trips/index');
@@ -2170,6 +2192,7 @@ $scope.init = function(){
           }
         };
         $scope.removeItem = function(index){
+          console.log("deleting trip item");
           $scope.trip.list.splice(index, 1);
         };
       }
@@ -2179,34 +2202,50 @@ $scope.init = function(){
         var Trip = Api.Collection('trips');
         $scope.trip = new Trip();
         $scope.saveTrip = function(){
-          if (false) {
-            // statusConsignments
-          }
-          else if(true){
-            $scope.trip.status = statusSales.tripticket.created;
-            $scope.trip.$save(function(){
-              async.each($scope.trip.list, function( item, callback) {
-                Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
-                  sales.status = statusSales.tripticket.created;
-                  sales.trpno =  $scope.trip.trpno;
-                  sales.$update(function(){
-                    callback();
-                  });
+          $scope.trip.status = statusSales.tripticket.created;
+          $scope.trip.$save(function(){
+            async.each($scope.trip.list, function( item, callback) {
+              Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
+                sales.status = statusSales.tripticket.created;
+                sales.trpno =  $scope.trip.trpno;
+                sales.$update(function(){
+                  callback();
                 });
-              },function(err){
-                if(err){
-                  console.log(err);
-                }
               });
-              $location.path('/trips/index');
-              return false;
+            },function(err){
+              if(err){
+                console.log(err);
+              }
             });
-          }
+            $location.path('/trips/index');
+            return false;
+          });
+          async.each($scope.trip.list, function( item, callback) {
+            Api.Collection('consignments').get({id : item.id}).$promise.then(function(consignment){
+              if(item.status == "delivered"){
+                consignment.status = statusConsignments.tripticket.delivered;
+                $scope.trip.status = statusConsignments.tripticket.delivered;
+              }
+              else if(item.status == "failed"){
+                consignment.status = statusConsignments.tripticket.failed;
+                $scope.trip.status = statusConsignments.tripticket.failed;
+              }
 
-          $scope.removeItem = function(index){
-            $scope.trip.list.splice(index, 1);
-          };
-        }
+              consignment.trpno =  $scope.trip.trpno;
+              consignment.$update(function(){
+                callback();
+              });
+            });
+          },function(err){
+            if(err){
+              console.log(err);
+            }
+          });
+      }
+        $scope.removeItem = function(index){
+          console.log("deleting trip item");
+          $scope.trip.list.splice(index, 1);
+        };
       }//end add
     }//end forminit
   });
@@ -2414,11 +2453,14 @@ $scope.init = function(){
     }
     if ($scope.sales.total_payment >= $scope.sales.total_amount_due){$scope.proceedPayment ='true';}
     else $scope.proceedPayment ='false';
+    if ($scope.sales.cmno) {
+      console.log("total change");
+      $scope.sales.credit_memo = $scope.sales.total_payment - $scope.sales.total_amount_due;
+      }
   }
 
 
   $scope.addPayment = function(sales){
-    console.log(sales);
     var payment = angular.copy(sales.payment_detail);
     if(payment && payment.payment_type && payment.amount){
         if($scope.sales.payment_details){
@@ -2429,7 +2471,6 @@ $scope.init = function(){
         }
     }
     payment = {};
-
     delete sales.payment_detail;
     PrintTotalPayment();
   }
@@ -2445,6 +2486,10 @@ $scope.init = function(){
       $scope.CustomerChange();
     });
   }
+
+  // $scope.TotalPaymentChange = function(){
+  //   console.log("change credit memo");
+  // }
 
   if(action == 'update'){
     $scope.title = "UPDATE SALES PAYMENT"+ id;
@@ -2475,7 +2520,10 @@ $scope.init = function(){
     $scope.proceedPayment ='true';
     console.log("there is no total amount due");
     }
-      $scope.CustomerChange();
+        $scope.CustomerChange();
+        if ($scope.sales.cmno) {
+        $scope.sales.credit_memo = $scope.sales.total_payment - $scope.sales.total_amount_due;
+        }
     });
     $scope.saveSales = function(){
       $scope.sales.status = status.payment.created;
@@ -2623,10 +2671,8 @@ $scope.init = function(){
   }
   if(action == 'read'){
     $scope.title = "VIEW RETURN MERCHANDISE RECEIPT";
-
   }
   if(action == 'create'){
-
     $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
     $scope.saveSales = function(){
       $scope.sales.status = status.returned.created;
@@ -2644,19 +2690,18 @@ $scope.init = function(){
     };
   }
   if(action == 'approve'){
-
     $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
     $scope.saveSales = function(){
       $scope.sales.status = status.returned.approved;
       $scope.sales.$update(function(){
-        $location.path('/sales/index/return');
+        $location.path('/sales/return/approve');
         return false;
       });
     };
     $scope.rejectSales = function(){
       $scope.sales.status = status.returned.rejected;
       $scope.sales.$update(function(){
-        $location.path('/sales/index/return');
+        $location.path('/sales/return/approve');
         return false;
       });
     };
@@ -2994,10 +3039,8 @@ var type = $routeParams.type;
       $scope.consignments = new Consignments();
 
       $scope.saveConsignments = function(){
-
           $scope.consignments.status = status.order.created;
           //    $scope.sales.triggerInventory  = "OUT";
-
         $scope.consignments.$save(function(){
           $location.path('/consignment/index/order');
           return false;
@@ -3384,7 +3427,7 @@ var type = $routeParams.type;
     $scope.init = function(){
 
       columns = [
-      $scope.structure.adjno,$scope.structure.transaction_type,$scope.structure.inventory_location,
+      $scope.structure.adjno,$scope.structure.adjustment_transaction_type,$scope.structure.inventory_location,
       $scope.structure.status.status_name
       ];
 
@@ -3403,22 +3446,22 @@ var type = $routeParams.type;
       var item = angular.copy(adjustments.item);
       if( item && item.name && item.quantity && item.quantity ){
         delete item.inventories;
-        if($scope.adjustments.adjusted_item){
-          $scope.adjustments.adjusted_item.push(item);
+        if($scope.adjustments.adjusted_items){
+          $scope.adjustments.adjusted_items.push(item);
         }
         else{
-          $scope.adjustments.adjusted_item = [item];
+          $scope.adjustments.adjusted_items = [item];
         }
         delete adjustments.item;
       }
     }
     $scope.removeOrder = function(index){
-      $scope.adjustments.adjusted_item.splice(index, 1);
+      $scope.adjustments.adjusted_items.splice(index, 1);
       $scope.adjustments.subtotal = 0;
       $scope.adjustments.isNeedApproval = false;
-      for(var i=0;i<$scope.adjustments.adjusted_item.length; i++){
-        $scope.adjustments.subtotal+=$scope.adjustments.adjusted_item[i].total;
-        if($scope.adjustments.adjusted_item[i].override != "NORMAL"){
+      for(var i=0;i<$scope.adjustments.adjusted_items.length; i++){
+        $scope.adjustments.subtotal+=$scope.adjustments.adjusted_items[i].total;
+        if($scope.adjustments.adjusted_items[i].override != "NORMAL"){
           $scope.adjustments.isNeedApproval = true;
         }
       }
