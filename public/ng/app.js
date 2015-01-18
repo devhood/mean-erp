@@ -112,6 +112,14 @@ angular.module('erp', [
         templateUrl: '/partials/sales/proforma',
         controller: 'SalesProformaCtrl'
       })
+      .when('/sales/promo/:action', {
+        templateUrl: '/partials/sales/promo',
+        controller: 'SalesPromoCtrl'
+      })
+      .when('/sales/promo/:action/:id', {
+        templateUrl: '/partials/sales/promo',
+        controller: 'SalesPromoCtrl'
+      })
       .when('/sales/return/:action/:id', {
         templateUrl: '/partials/sales/return',
         controller: 'SalesReturnCtrl'

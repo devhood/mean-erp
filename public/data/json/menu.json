@@ -32,6 +32,11 @@
         "href": "/#/sales/index/return"
       },
       {
+        "title": "Promo Order",
+        "description": "Create Promo Order",
+        "href": "/#/sales/index/promo"
+      },
+      {
         "title": "Promo Maker",
         "description": "Add Promo",
         "href": "/#/promo/index"

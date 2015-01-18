@@ -50,6 +50,11 @@
       "title": "Packing Number",
       "type": "text"
     },
+    "promo": {
+      "name": "promo",
+      "title": "Promo Order",
+      "type": "text"
+    },
     "prepared_by" : {
       "name": "prepared_by",
       "title": "Prepared By",

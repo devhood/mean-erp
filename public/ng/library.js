@@ -174,7 +174,6 @@ angular.module('erp')
           override : {status_code : "SALES_ORDER_OVERRIDE", status_name : "Sales-Order for approval"},
           rescheduled : {status_code : "SALES_ORDER_SCHEDULE_UPDATED", status_name : "Sales-Delivery Schedule updated"}
         },
-
         packing : {
           created : {status_code : "PACKING_CREATED", status_name : "Warehouse-Order under preparation"}
         },

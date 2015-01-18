@@ -477,6 +477,34 @@ angular.module('erp')
     $scope.init = function(){
       var type = $routeParams.type;
       switch(type){
+        case "promo" :
+
+            columns = [
+              $scope.structure.promo, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+              $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+              {url:"/#/sales/promo/read/",title:"View Record",icon:"fa fa-folder-open"},
+              {url:"/#/sales/promo/edit/",title:"Edit Record",icon:"fa fa-edit"},
+              {url:"/#/print/sales/promo/",title:"Print Record",icon:"fa fa-print"},
+            ];
+            query = {"promo": { "$exists": true }, "status.status_code" : {"$in" : [
+              status.order.created.status_code,
+              status.order.revised.status_code,
+              status.order.rejected.status_code,
+              status.delivery.rejected.status_code,
+              status.invoice.rejected.status_code,
+              status.tripticket.failed.status_code
+             ]}};
+
+            $scope.title = "ADD PROMO SALES ORDER"
+            $scope.addUrl = "/#/sales/promo/add";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+        break;
         case "proforma" :
 
             columns = [
@@ -1172,6 +1200,231 @@ $scope.init = function(){
       }
     }
   }
+  if(action == 'read'){
+    $scope.title = "VIEW SALES ORDER";
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+  }
+  if(action == 'add'){
+    $scope.title = "ADD SALES ORDER";
+    var Sales = Api.Collection('sales');
+    $scope.sales = new Sales();
+
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.order.override;
+      }
+      else{
+        $scope.sales.status = status.order.created;
+        //$scope.sales.triggerInventory  = "OUT";
+      }
+    $scope.sales.$save(function(){
+      $location.path('/sales/index/order');
+      return false;
+    });
+    }
+  }
+  if(action == 'edit'){
+    $scope.title = "EDIT SALES ORDER "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.order.override;
+      }
+      else{
+        if ($scope.sales.status.status_code == status.invoice.rejected.status_code || $scope.sales.status.status_code == status.delivery.rejected.status_code || $scope.sales.status.status_code == status.order.revised.status_code) {
+          $scope.sales.status = status.order.revised;
+          console.log("order revised");
+        }
+        else {
+        $scope.sales.status = status.order.created;
+        //    $scope.sales.triggerInventory  = "OUT";
+        console.log("ordinary order");
+        }
+      }
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    };
+    $scope.deleteSales=function(sales){
+      if(popupService.showPopup('You are about to delete Record : '+sales._id)){
+        $scope.sales.$delete(function(){
+          $location.path('/sales/index/order');
+          return false;
+        });
+      }
+    };
+  }
+  if(action == 'approve'){
+    console.log(action);
+    $scope.title = "APPROVE SALES ORDER "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+      if($scope.sales.isNeedApproval){
+        $scope.sales.status = status.order.created;
+      }
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/override');
+        return false;
+      });
+    };
+    $scope.rejectSales = function(){
+      $scope.sales.status = status.order.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    };
+  }
+  if(action == 'reschedule'){
+    $scope.title = "RESCHEDULE SALES ORDER "+ id;
+    $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
+      $scope.CustomerChange();
+    });
+    $scope.saveSales = function(){
+        $scope.sales.status = status.order.rescheduled;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    };
+  }//resched
+
+})
+.controller('SalesPromoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+console.log("inside promo ctrl");
+  Session.get(function(client) {
+    if(!Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
+  var id = $routeParams.id;
+  var action = $routeParams.action;
+  $scope.action = action;
+  $scope.transaction_types = Api.Collection('transaction_types').query();
+  $scope.customers = Api.Collection('customers').query();
+  $scope.price_types = Api.Collection('price_types').query();
+  $scope.discounts = Api.Collection('discounts').query();
+  $scope.payment_terms = Api.Collection('payment_terms').query();
+  $scope.order_sources = Api.Collection('order_sources').query();
+  $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
+  $scope.promo = Api.Collection('promo').query();
+  var status = Library.Status.Sales;
+
+
+
+
+
+  $scope.CustomerChange = function(){
+    if($scope.sales.customer){
+      $scope.shipping_address =
+          $scope.sales.customer.shipping_address.landmark + ', ' +
+          $scope.sales.customer.shipping_address.barangay + ', ' +
+          $scope.sales.customer.shipping_address.city + ', ' +
+          $scope.sales.customer.shipping_address.province + ', ' +
+          $scope.sales.customer.shipping_address.country + ', ' +
+          $scope.sales.customer.shipping_address.zipcode;
+      $scope.billing_address =
+          $scope.sales.customer.billing_address.landmark + ', ' +
+          $scope.sales.customer.billing_address.barangay + ', ' +
+          $scope.sales.customer.billing_address.city + ', ' +
+          $scope.sales.customer.billing_address.province + ', ' +
+          $scope.sales.customer.billing_address.country + ', ' +
+          $scope.sales.customer.billing_address.zipcode;
+    }
+  }
+  $scope.addOrder = function(sales){
+    var item = angular.copy(sales.item);
+    if( item && item.name && item.quantity && item.quantity ){
+      item.override = item.override ? item.override : "NORMAL";
+      if(sales.customer.price_type == "Professional"){
+        item.price = item.professional_price
+      }
+      if(sales.customer.price_type == "Retail"){
+        item.price = item.retail_price;
+      }
+      if(item.override != "NORMAL"){
+        item.price = item.override;
+        item.total = 0.00;
+      }
+      if(!isNaN(item.price)){
+        item.total = item.quantity * item.price;
+      }
+      delete item.inventories;
+      if($scope.sales.ordered_items){
+        $scope.sales.ordered_items.push(item);
+      }
+      else{
+        $scope.sales.ordered_items = [item];
+      }
+      delete sales.item;
+    }
+    $scope.sales.subtotal = 0;
+    $scope.sales.isNeedApproval = false;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+      if($scope.sales.ordered_items[i].override != "NORMAL"){
+        $scope.sales.isNeedApproval = true;
+      }
+     }
+     var computation = Library.Compute.Order(
+        $scope.sales.subtotal,
+        0,
+        $scope.sales.customer.discount.replace(" %","")/100 || 0,
+        $scope.sales.isWithholdingTax,
+        $scope.sales.isZeroRateSales
+     );
+     $scope.sales.discount = computation.totalDiscount;
+     $scope.sales.total_vat = computation.vatableSales;
+     $scope.sales.total_amount_due = computation.totalAmountDue;
+     $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+     $scope.sales.withholding_tax = computation.withholdingTax;
+  }
+
+  $scope.reCompute = function(sales){
+    if($scope.sales.customer){
+      var computation = Library.Compute.Order(
+        $scope.sales.subtotal,
+        0,
+        $scope.sales.customer.discount.replace(" %","")/100 || 0,
+        $scope.sales.isWithholdingTax,
+        $scope.sales.isZeroRateSales
+      );
+      $scope.sales.discount = computation.totalDiscount;
+      $scope.sales.total_vat = computation.vatableSales;
+      $scope.sales.total_amount_due = computation.totalAmountDue;
+      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+      $scope.sales.withholding_tax = computation.withholdingTax;
+    }
+  }
+  $scope.removeOrder = function(index){
+    $scope.sales.ordered_items.splice(index, 1);
+
+    $scope.sales.subtotal = 0;
+    $scope.sales.isNeedApproval = false;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+      if($scope.sales.ordered_items[i].override != "NORMAL"){
+        $scope.sales.isNeedApproval = true;
+      }
+    }
+  }
+  $scope.PromoChange = function(){
+    //query for products
+  var query = {name:$scope.promo.name};
+  $scope.products = Api.Collection('products').query();
+
+  }
+
   if(action == 'read'){
     $scope.title = "VIEW SALES ORDER";
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
@@ -3927,26 +4180,22 @@ var type = $routeParams.type;
       var action = $routeParams.action;
       $scope.action = action;
       $scope.products = Api.Collection('products').query();
-      $scope.movement = Api.Collection('movements').query();
+      $scope.brands = Api.Collection('brands').query();
       var status = Library.Status.Promo;
 
       if(action=='add'){
         $scope.title = "ADD PROMO";
-        var promo = Api.Collection('promo');
-        $scope.promo = new promo();
-        var query = {"movement":"C"};
-        Api.Collection('products',query,2,100).query().$promise.then(function(data){
-          $scope.promo.counted_items = data;
-        });
+        var Promo = Api.Collection('promo');
+        $scope.promo = new Promo();
+        $scope.discounts = Api.Collection('discounts').query();
+
         $scope.savePromo = function(){
+          $scope.promo.status = status.created;
           console.log("saved");
           $scope.promo.$save(function(){
             $location.path('/promo/index');
             return false;
           });
-          $scope.promo.status = status.created;
-          // console.log($scope.promo.status);
-
         }
       }
 
@@ -3976,49 +4225,45 @@ var type = $routeParams.type;
         };
       }
 
-  //required items
-  $scope.addRequiredItem = function(promo){
-      console.log("promo: "+promo);
-
-    var item = angular.copy(promo.required_item);
-
-      console.log("item: "+item);
-      console.log("product.name: "+item.product.name);
-      console.log("quantity: "+item.quantity);
-
-    if(item && item.product.name && item.quantity){
-      console.log("entered add required item");
-      if($scope.promo.required_item){
-        $scope.promo.required_items.push(item);
-      }
-        else{
-          $scope.promo.required_items = [item];
+      $scope.addRequiredItem = function(promo){
+        var item = angular.copy(promo.item);
+        delete item.inventories;
+        delete item.audit_history;
+        if(item && item.name && item.quantity){
+          if($scope.promo.required_items){
+            $scope.promo.required_items.push(item);
+          }
+          else{
+            $scope.promo.required_items = [item];
+          }
         }
-    }
-    delete promo.required_item;
-  }
-  $scope.removeRequiredItem = function(index){
-    $scope.shipment.shipment_items.splice(index, 1);
-  }
 
-  //freebie
-  $scope.addFreebie = function(promo){
-    var item = angular.copy(promo.freebie);
-    if(item && item.name && item. quantity){
-      if($scope.promo.freebie){
-        $scope.promo.freebies.push(item);
+        delete promo.item;
       }
-        else{
-          $scope.promo.freebies = [item];
-        }
-    }
-    delete promo.freebie;
-  }
-  $scope.removeFreebie = function(index){
-    $scope.shipment.freebies.splice(index, 1);
-  }
+      $scope.removeRequiredItem = function(index){
+        $scope.promo.required_items.splice(index, 1);
+      }
 
-  } //form init end
+      //freebie
+      $scope.addFreebie = function(promo){
+        var item = angular.copy(promo.freebie);
+        delete item.inventories;
+        delete item.audit_history;
+        if(item && item.name && item.quantity){
+          if($scope.promo.freebies){
+            $scope.promo.freebies.push(item);
+          }
+          else{
+            $scope.promo.freebies = [item];
+          }
+        }
+        delete promo.freebie;
+      }
+      $scope.removeFreebie = function(index){
+        $scope.promo.freebies.splice(index, 1);
+      }
+
+    } //form init end
   });
 })
 .controller('MergeCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
