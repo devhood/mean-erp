@@ -745,7 +745,7 @@ angular.module('erp')
           {url:"/#/sales/memo/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
-          query = {"rmrno": { "$exists": true }, "status.status_code" : {"$in" : [status.returned.approved.status_code, status.returned.revised.status_code, status.payment.rejected.status_code]}};
+          query = {"rmrno": { "$exists": true }, "status.status_code" : {"$in" : [status.returned.approved.status_code, status.payment.rejected.status_code]}};
 
           $scope.title = "CREDIT MEMO";
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
