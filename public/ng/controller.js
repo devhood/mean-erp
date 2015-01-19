@@ -56,8 +56,8 @@ angular.module('erp')
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/users");
     };
-    $scope.formInit = function(){
 
+    $scope.formInit = function(){
       var id = $routeParams.id;
       var action = $routeParams.action;
       $scope.positions = Api.Collection('positions').query();
@@ -544,7 +544,7 @@ angular.module('erp')
               {url:"/#/sales/order/reschedule/",title:"Approve Record",icon:"fa fa-upload",exclude:{key:"trpno"}},
               {url:"/#/consignment/order/reschedule/",title:"Reschedule Record",icon:"fa fa-truck", state:{statusArray:["TRIP_TICKET_FAILED"]}},
               ];
-            query = { "status.status_code" : {"$in" : [
+            query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
                 status.order.created.status_code,
                 status.order.revised.status_code,
                 status.order.rejected.status_code,
@@ -675,7 +675,8 @@ angular.module('erp')
             status.tripticket.delivered.status_code,
             status.payment.updated.status_code,
             status.returned.rejected.status_code,
-            status.payment.created.status_code
+            status.payment.created.status_code,
+            status.memo.rejected.status_code
           ]}};
           $scope.title = "RETURN MERCHANDISE RECEIPT";
 
@@ -691,7 +692,7 @@ angular.module('erp')
           {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.returned.created.status_code]}};
+          query = { "status.status_code" : {"$in" : [status.returned.created.status_code, status.returned.revised.status_code]}};
           $scope.title1 = "CREATED RETURN MERCHANDISE RECEIPT";
 
           $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
@@ -710,7 +711,7 @@ angular.module('erp')
           {url:"/#/sales/return/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
-          query = { "status.status_code" : {"$in" : [status.returned.created.status_code]}};
+          query = { "status.status_code" : {"$in" : [status.returned.created.status_code, status.returned.revised.status_code]}};
           $scope.title = "RETURN MERCHANDISE RECEIPT";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -744,7 +745,7 @@ angular.module('erp')
           {url:"/#/sales/memo/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
-          query = {"rmrno": { "$exists": true }, "status.status_code" : {"$in" : [status.returned.approved.status_code, status.payment.rejected.status_code]}};
+          query = {"rmrno": { "$exists": true }, "status.status_code" : {"$in" : [status.returned.approved.status_code, status.returned.revised.status_code, status.payment.rejected.status_code]}};
 
           $scope.title = "CREDIT MEMO";
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1298,7 +1299,7 @@ $scope.init = function(){
 
 })
 .controller('SalesPromoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
-console.log("inside promo ctrl");
+
   Session.get(function(client) {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
@@ -1315,15 +1316,23 @@ console.log("inside promo ctrl");
   $scope.payment_terms = Api.Collection('payment_terms').query();
   $scope.order_sources = Api.Collection('order_sources').query();
   $scope.delivery_methods = Api.Collection('delivery_methods').query();
+  $scope.promo = Api.Collection('promo').query();
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
-  $scope.promo = Api.Collection('promo').query();
   var status = Library.Status.Sales;
 
 
 
 
+  $scope.PromoChange = function(){
+    var query = {name:$scope.sales.promo};
+    console.log(query);
+    Api.Collection('promo',query).query(function (data) {
+      $scope.products = data[0].required_items;
+    console.log($scope.products);
+    });
 
+  }
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
       $scope.shipping_address =
@@ -1418,12 +1427,7 @@ console.log("inside promo ctrl");
       }
     }
   }
-  $scope.PromoChange = function(){
-    //query for products
-  var query = {name:$scope.promo.name};
-  $scope.products = Api.Collection('products').query();
 
-  }
 
   if(action == 'read'){
     $scope.title = "VIEW SALES ORDER";
@@ -2388,20 +2392,35 @@ console.log("inside promo ctrl");
         $scope.saveTrip = function(){
           async.each($scope.trip.list, function( item, callback) {
             Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
-              if(item.status == "delivered"){
-                sales.status = statusSales.tripticket.delivered;
-                $scope.trip.status = statusSales.tripticket.delivered;
-                console.log("delivered na");
-              }
-              else if(item.status == "failed"){
-                sales.status = statusSales.tripticket.failed;
-                $scope.trip.status = statusSales.tripticket.failed;
-              }
+              if(sales.pfno || sales.sono){
+                var allowed_status = [
+                statusSales.order.rescheduled.status_code,
+                statusSales.invoice.approved.status_code,
+                statusSales.payment.updated.status_code,
+                statusSales.printed.dr.status_code,
+                statusSales.printed.si.status_code
+                ];
+                if(item.status == "delivered"){
+                  console.log("status: delivered");
 
-              sales.trpno =  $scope.trip.trpno;
-              sales.$update(function(){
-                callback();
-              });
+                  if(allowed_status.indexOf(sales.status.status_code) != -1){
+                    sales.status = statusSales.tripticket.delivered;
+                  }
+                }
+                else if(item.status == "failed"){
+                  console.log("status: failed");
+
+
+                  if(allowed_status.indexOf(sales.status.status_code) != -1){
+                    sales.status = statusSales.tripticket.failed;
+                  }
+                }
+                $scope.trip.status = statusSales.tripticket.delivered;
+                sales.trpno =  $scope.trip.trpno;
+                sales.$update(function(){
+                  callback();
+                });
+              }
             });
           },function(err){
             if(err){
@@ -2410,20 +2429,33 @@ console.log("inside promo ctrl");
           });
           async.each($scope.trip.list, function( item, callback) {
             Api.Collection('consignments').get({id : item.id}).$promise.then(function(consignment){
-              if(item.status == "delivered"){
-                consignment.status = statusConsignments.tripticket.delivered;
-                $scope.trip.status = statusConsignments.tripticket.delivered;
-                console.log("delivered na");
-              }
-              else if(item.status == "failed"){
-                consignment.status = statusConsignments.tripticket.failed;
-                $scope.trip.status = statusConsignments.tripticket.failed;
-              }
+              console.log("consignment",consignment);
+              if(consignment.cono){
+                var allowed_status =[
+                statusSales.order.rescheduled.status_code,
+                statusSales.invoice.approved.status_code,
+                statusSales.payment.updated.status_code,
+                statusSales.printed.dr.status_code,
+                statusSales.printed.si.status_code
+                ];
+                if(item.status == "delivered"){
+                  console.log("cono delivered");
+                  if(allowed_status.indexOf(consignment.status.status_code) != -1){
+                    consignment.status = statusConsignments.tripticket.delivered;
+                  }
+                }
+                else if(item.status == "failed"){
+                  console.log("cono failed");
+                  if(allowed_status.indexOf(consignment.status.status_code) != -1){
+                    consignment.status = statusConsignments.tripticket.failed;
+                  }
+                }
 
-              consignment.trpno =  $scope.trip.trpno;
-              consignment.$update(function(){
-                callback();
-              });
+                consignment.trpno =  $scope.trip.trpno;
+                consignment.$update(function(){
+                  callback();
+                });
+              }
             });
           },function(err){
             if(err){
@@ -2930,33 +2962,35 @@ console.log("inside promo ctrl");
   if(action == 'create'){
     $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
     $scope.saveSales = function(){
+      if ($scope.sales.rmrno) {
+      $scope.sales.status = status.returned.revised;
+      console.log("return revised");
+      }
+      else {
       $scope.sales.status = status.returned.created;
-      $scope.sales.$update(function(){
-        $location.path('/sales/index/return');
-        return false;
-      });
-    };
-    $scope.rejectSales = function(){
-      $scope.sales.status = status.returned.rejected;
+      console.log("return created");
+      }
       $scope.sales.$update(function(){
         $location.path('/sales/index/return');
         return false;
       });
     };
   }
+
   if(action == 'approve'){
+    console.log("return approve not returnApprove");
     $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
     $scope.saveSales = function(){
       $scope.sales.status = status.returned.approved;
       $scope.sales.$update(function(){
-        $location.path('/sales/return/approve');
+        $location.path('/sales/index/approveReturn');
         return false;
       });
     };
     $scope.rejectSales = function(){
       $scope.sales.status = status.returned.rejected;
       $scope.sales.$update(function(){
-        $location.path('/sales/return/approve');
+        $location.path('/sales/index/approveReturn');
         return false;
       });
     };
@@ -3024,8 +3058,10 @@ console.log("inside promo ctrl");
       });
     };
     $scope.rejectSales = function(){
+      console.log("memo rejected");
       $scope.sales.status = status.memo.rejected;
       $scope.sales.$update(function(){
+        console.log("rejected memo");
         $location.path('/sales/index/memo');
         return false;
       });

@@ -197,6 +197,7 @@ angular.module('erp')
         returned : {
           created : {status_code : "RETURN_CREATED", status_name : "Sales-Return submitted"},
           approved : {status_code : "RETURN_APPROVED", status_name : "Warehouse-Return approved"},
+          revised : {status_code : "RETURN_REVISED", status_name : "Warehouse-Return revised"},
           rejected : {status_code : "RETURN_REJECTED", status_name : "Warehouse-Return rejected"},
           cancel : {status_code : "RETURN_CANCEL", status_name : "Warehouse-Return cancelled"}
         },

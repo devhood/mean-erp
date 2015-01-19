@@ -123,6 +123,13 @@ block title
                 input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="true",required)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
+        .row(ng-show="sales.promo")
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text",ng-model="sales.promo", disabled)
+                span.col-md-12.help-block Promo
         .portlet.box.grey(ng-show="sales.customer")
           .portlet-title
             .caption

@@ -116,10 +116,10 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                select.select2me.form-control.select2-offscreen(ng-model="promo.name", ng-options="promo.name for promo in promo", ng-change="PromoChange()", ng-disabled="action=='read'  || action=='approve'",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.promo", ng-options="promo.name as promo.name for promo in promo", ng-selected="{{sales.promo}}",ng-change="PromoChange()", ng-disabled="action=='read'  || action=='approve'",required)
                 span.col-md-12.help-block Promo
           .col-md-1
-        .portlet.box.grey(ng-show="sales.customer")
+        .portlet.box.grey(ng-show="sales.promo")
           .portlet-title
             .caption
               i.fa.fa-reorder
@@ -136,26 +136,18 @@ block title
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="promo.item", ng-options="product.bl_code for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.bl_code for product in products")
                         span.col-md-12.help-block Code
                   .col-md-3
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="promo.item", ng-options="product.name for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.name for product in products")
                         span.col-md-12.help-block	Product
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="sales.item.quantity")
                         span.col-md-12.help-block Quantity
-                  .col-md-2
-                    .form-group
-                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="sales.item.override")
-                          option(value='NORMAL') None
-                          option(value='FREEBIE') Freebie
-                          option(value='DEMO') Demo
-                        span.col-md-12.help-block Override
                   .col-md-1
                     button.btn-sm.green.custom-right(type="button",ng-click="addOrder(sales)")
                       i.fa.fa-plus
@@ -248,5 +240,5 @@ block title
               | &nbsp;
               button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='approve'") Reject
               | &nbsp;
-              a.btn.default(type="button", href="/#/sales/index/order") Cancel
+              a.btn.default(type="button", href="/#/sales/index/promo") Cancel
           .col-md-6
