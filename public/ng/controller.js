@@ -1838,12 +1838,7 @@ $scope.init = function(){
     }
     $scope.sales.subtotal = $scope.sales.price;
     $scope.sales.isNeedApproval = false;
-    // for(var i=0;i<$scope.sales.ordered_items.length; i++){
-    //   $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
-    //   if($scope.sales.ordered_items[i].override != "NORMAL"){
-    //     $scope.sales.isNeedApproval = true;
-    //   }
-    //  }
+
      var computation = Library.Compute.Order(
         $scope.sales.subtotal,
         0,

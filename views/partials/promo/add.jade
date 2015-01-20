@@ -98,14 +98,14 @@ block title
 																			th Product
 																			th Brand
 																			th Quantity
-																			th(width="5%") Action
+																			th(width="5%", ng-hide="action!=add") Action
 																	tbody
 																		tr(ng-repeat="required in promo.required_items track by $index")
 																			td {{required.bl_code}}
 																			td {{required.name}}
 																			td {{required.brand}}
 																			td {{required.quantity}}
-																			td(width="5%")
+																			td(width="5%", ng-hide="action!=add")
 																				.btn-group.btn-group-xs.btn-group-solid
 																					a.tooltips.btn.default.tooltips(ng-click="removeRequiredItem($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																						i.fa.fa-trash-o
@@ -158,13 +158,13 @@ block title
 																			th Code
 																			th Product
 																			th Quantity
-																			th(width="5%") Action
+																			th(width="5%", ng-hide="action!=add") Action
 																	tbody
 																		tr(ng-repeat="freebie in promo.freebies track by $index")
 																			td {{freebie.bl_code}}
 																			td {{freebie.product}}
 																			td {{freebie.quantity}}
-																			td(width="5%")
+																			td(width="5%", ng-hide="action!=add")
 																				.btn-group.btn-group-xs.btn-group-solid
 																					a.tooltips.btn.default.tooltips(ng-click="removeFreebie($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																						i.fa.fa-trash-o
