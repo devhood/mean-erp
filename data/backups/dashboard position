@@ -1,0 +1,35 @@
+President/CEO
+  approve sales order
+  approve consigned order
+  schedule for approval
+
+Accounting Manager
+  +invoice
+  +payments
+  +credit memo
+  +shipments approve
+Accounting Staff
+
+
+Warehouse Manager
+  +DR
+  +Consignment DR
+  +return approve
+Warehouse Supervisor
+Warehouse Staff
+  +Packing
+
+HR Manager
+  +Users
+
+Sales Manager
+  +Sales Order
+  +Sales Override
+  +Proforma Invoice
+Sales Assistant
+  +Sales Order
+Sales Executive
+  +Sales Order - read only
+
+Educator
+  Calendar

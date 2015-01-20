@@ -119,7 +119,7 @@ block title
                 select.select2me.form-control.select2-offscreen(ng-model="sales.promo", ng-options="promo.name as promo.name for promo in promo", ng-selected="{{sales.promo}}",ng-change="PromoChange()", ng-disabled="action=='read'  || action=='approve'",required)
                 span.col-md-12.help-block Promo
           .col-md-1
-        .portlet.box.grey(ng-show="sales.promo")
+        .portlet.box.grey(ng-show="sales.promo && sales.customer")
           .portlet-title
             .caption
               i.fa.fa-reorder
@@ -133,6 +133,13 @@ block title
               .row(ng-hide="action=='read' || action=='reschedule'  || action=='approve'")
                 .col-md-1
                 .col-md-10
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.promo_type", ng-change="promoTypeChange()")
+                          option(value='NORMAL') Normal
+                          option(value='FREEBIE') Freebie
+                      span.col-md-12.help-block Promo Type
                   .col-md-2
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
