@@ -17,19 +17,340 @@ angular.module('erp')
       }
       $scope.menus = data;
       switch(client.position){
-        case "Sales Executive" :
+        case "President/CEO" :
+
+          break;
+        case "Accounting Manager" :
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var columns = [];
+            var buttons = [];
+            var query = {};
+
+            columns = [
+            $scope.structure.pfno,$scope.structure.sono,$scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/invoice/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/invoice/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = {"drno": { "$exists": true }, "status.status_code" : {"$in" : [status.delivery.approved.status_code, status.payment.rejected.status_code]}};
+            $scope.title = "SALES INVOICE";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            var columns1 = [
+            $scope.structure.pfno,$scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            var buttons1 = [
+            {url:"/#/sales/invoice/read/",title:"View Record",icon:"fa fa-folder-open"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
+            $scope.title1 = "APPROVED SALES INVOICE";
+
+            $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+            $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            //payment
+            columns = [
+            $scope.structure.pfno, $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.delivery_date, $scope.structure.customer.payment_term,$scope.structure.total_amount_due, $scope.structure.status.status_name
+            ];
+            // filter:{key:"pmno"}},
+            buttons = [
+            {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save", state:{statusArray:["TRIP_TICKET_DELIVERED","TRIP_TICKET_CREATED", "PROFORMA_INVOICE_CREATED","MEMO_APPROVED"]}},
+            {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_PARTIALED", "TRIP_TICKET_DELIVERED"]}},
+            {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", state:{statusArray:["PAYMENT_UPDATED"]}},
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.proforma.created.status_code,
+            status.memo.approved.status_code, status.payment.updated.status_code,
+            status.payment.created.status_code, status.tripticket.delivered.status_code,
+            status.tripticket.created.status_code,
+            status.proforma.approved.status_code, status.proforma.revised.status_code,
+            status.payment.partialed.status_code, status.payment.rejected.status_code
+            ]}};
+            $scope.title = "PAYMENT";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            //credit memo
+            columns = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.rmrno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/memo/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/memo/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = {"rmrno": { "$exists": true }, "status.status_code" : {"$in" : [status.returned.approved.status_code, status.payment.rejected.status_code]}};
+
+            $scope.title = "CREDIT MEMO";
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            var columns1 = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            var buttons1 = [
+            {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.memo.approved.status_code]}};
+            $scope.title1 = "APPROVED CREDIT MEMO";
+
+            $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+            $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
+          break;
+        case "Warehouse Manager" :
+          //approve return
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var columns = [];
+            var buttons = [];
+            var query = {};
+
+            columns = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/return/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.returned.created.status_code, status.returned.revised.status_code]}};
+            $scope.title = "RETURN MERCHANDISE RECEIPT";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            var columns1 = [
+            $scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.rmrno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            var buttons1 = [
+            {url:"/#/sales/return/read/",title:"View Record",icon:"fa fa-folder-open"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.returned.approved.status_code]}};
+            $scope.title1 = "APPROVED RETURN MERCHANDISE RECEIPT";
+
+            $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+            $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
+        case "Warehouse Supervisor" :
+          //approve delivery
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var columns = [];
+            var buttons = [];
+            var query = {};
+
+            columns = [
+            $scope.structure.customer.company_name, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/delivery/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/delivery/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.packing.created.status_code]}};
+            $scope.title = "DELIVERY RECEIPTS";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            var columns1 = [
+            $scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            var buttons1 = [
+            {url:"/#/sales/delivery/read/",title:"View Record",icon:"fa fa-folder-open"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code]}};
+            $scope.title1 = "APPROVED DELIVERY RECEIPTS";
+
+            $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+            $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
+        case "Warehouse Staff" :
+          //packing
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var columns = [];
+            var buttons = [];
+            var query = {};
+
+            columns = [
+            $scope.structure.customer.company_name, $scope.structure.delivery_date, $scope.structure.prepared_by, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/packing/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/packing/approve/",title:"View Record",icon:"fa fa-gear"}
+            ];
+            query = { "status.status_code" : {"$in" : [
+            status.order.created.status_code,
+            status.payment.partialed.status_code,
+            status.order.revised.status_code,
+            ]}};
+            $scope.title = "SALES PACKING"
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
+          break;
+
+        case "Sales Manager" :
+          //sales orders
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var columns = [];
+            var buttons = [];
+            var query = {};
+
+            columns = [
+            $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/order/edit/",title:"Edit Record",icon:"fa fa-edit"},
+            {url:"/#/sales/order/reschedule/",title:"Approve Record",icon:"fa fa-upload",exclude:{key:"trpno"}},
+            {url:"/#/consignment/order/reschedule/",title:"Reschedule Record",icon:"fa fa-truck", state:{statusArray:["TRIP_TICKET_FAILED"]}},
+            ];
+            query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
+            status.order.created.status_code,
+            status.order.revised.status_code,
+            status.order.rejected.status_code,
+            status.delivery.rejected.status_code,
+            status.invoice.rejected.status_code,
+            status.tripticket.failed.status_code
+            ]}};
+            $scope.title = "SALES ORDERS"
+            $scope.addUrl = "/#/sales/order/add";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
+          break;
+        case "Accounting Staff" :
+          //invoice
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var columns = [];
+            var buttons = [];
+            var query = {};
+
+            columns = [
+            $scope.structure.pfno,$scope.structure.sono,$scope.structure.drno,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/invoice/read/",title:"View Record",icon:"fa fa-folder-open"},
+            {url:"/#/sales/invoice/approve/",title:"Approve Record",icon:"fa fa-gear"}
+            ];
+
+            query = {"drno": { "$exists": true }, "status.status_code" : {"$in" : [status.delivery.approved.status_code, status.payment.rejected.status_code]}};
+            $scope.title = "SALES INVOICE";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+
+            var columns1 = [
+            $scope.structure.pfno,$scope.structure.sono,$scope.structure.drno,$scope.structure.sino,$scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            var buttons1 = [
+            {url:"/#/sales/invoice/read/",title:"View Record",icon:"fa fa-folder-open"}
+            ];
+
+            query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code]}};
+            $scope.title1 = "APPROVED SALES INVOICE";
+
+            $scope.dtColumns1 = Library.DataTable.columns(columns1,buttons1);
+            $scope.dtOptions1 = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
           break;
         case "Sales Executive" :
+        case "Sales Assistant" :
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var columns = [];
+            var buttons = [];
+            var query = {};
+
+            columns = [
+            $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            ];
+
+            buttons = [
+            {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+            ];
+            query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
+            status.order.created.status_code,
+            status.order.revised.status_code,
+            status.order.rejected.status_code,
+            status.delivery.rejected.status_code,
+            status.invoice.rejected.status_code,
+            status.tripticket.failed.status_code
+            ]}};
+            $scope.title = "SALES ORDERS"
+            $scope.addUrl = "/#/sales/order/add";
+
+            $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
           break;
-        case "Sales Executive" :
-          break;
-        case "Sales Executive" :
-          break;
-        case "Sales Executive" :
-          break;
-        case "Sales Executive" :
+        case "Educator" :
           break;
         default:
+          //delivery
           $scope.ajax_ready = false;
           Structure.Sales.query().$promise.then(function(data){
             $scope.ajax_ready = true;
