@@ -288,6 +288,14 @@ angular.module('erp', [
         templateUrl: '/partials/merge/add',
         controller: 'MergeCtrl'
       })
+      .when('/upload/index', {
+        templateUrl: '/partials/upload/index',
+        controller: 'UploadCtrl'
+      })
+      .when('/upload/:type/:collection', {
+        templateUrl: '/partials/upload/add',
+        controller: 'UploadCtrl'
+      })
       .when('/auth/unauthorized', {
         templateUrl: '/partials/home/unauthorized',
         controller: 'MainCtrl'

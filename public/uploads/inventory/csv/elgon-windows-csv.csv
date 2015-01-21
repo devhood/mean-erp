@@ -1,0 +1,313 @@
+bl_code,name,quantity
+EL0101010000A,Moda & Styling Color 0/0,181
+EL0101010001A,Moda & Styling Color 1,138
+EL0101010003A,Moda & Styling Color 3,238
+EL0101010004A,Moda & Styling Color 4,214
+EL0101010005A,Moda & Styling Color 5,211
+EL0101010006A,Moda & Styling Color 6,120
+EL0101010007A,Moda & Styling Color 7,120
+EL0101010008A,Moda & Styling Color 8,132
+EL0101010009A,Moda & Styling Color 9,130
+EL0101010010A,Moda & Styling Color 10,124
+EL0101010043A,Moda & Styling Color 4/3,67
+EL0101010046A,Moda & Styling Color 4/6,106
+EL0101010047A,Moda & Styling Color 4/7,102
+EL0101010051A,Moda & Styling Color 5/1,91
+EL0101010053A,Moda & Styling Color 5/3,65
+EL0101010055A,Moda & Styling Color 5/5,65
+EL0101010056A,Moda & Styling Color 5/6,97
+EL0101010061A,Moda & Styling Color 6/1,83
+EL0101010063A,Moda & Styling Color 6/3,51
+EL0101010064A,Moda & Styling Color 6/4,59
+EL0101010065A,Moda & Styling Color 6/5,48
+EL0101010067A,Moda & Styling Color 6/7,99
+EL0101010071A,Moda & Styling Color 7/1,66
+EL0101010073A,Moda & Styling Color 7/3,31
+EL0101010079A,Moda & Styling Color 7/9,110
+EL0101010081A,Moda & Styling Color 8/1,75
+EL0101010089A,Moda & Styling Color 8/9,106
+EL0101010091A,Moda & Styling Color 9/1,89
+EL0101010099A,Moda & Styling Color 9/9,116
+EL0101010101A,Moda & Styling Color 10/1,65
+EL0101010102A,Moda & Styling Color 10/2,63
+EL0101010111A,Moda & Styling Color 1/11,139
+EL0101010112A,Moda & Styling Color 11/2,66
+EL0101010485A,Moda & Styling Color 4/85,106
+EL0101010500A,Moda & Styling Color 5/00,141
+EL0101010511A,Moda & Styling Color 5/11,132
+EL0101010555A,Moda & Styling Color 5/555,69
+EL0101010556A,Moda & Styling Color 5/56,91
+EL0101010581A,Moda & Styling Color 5/81,97
+EL0101010585A,Moda & Styling Color 5/85,99
+EL0101010600A,Moda & Styling Color 6/00,137
+EL0101010611A,Moda & Styling Color 6/11,142
+EL0101010655A,Moda & Styling Color 6/55,104
+EL0101010657A,Moda & Styling Color 6/57,83
+EL0101010681A,Moda & Styling Color 6/81,88
+EL0101010685A,Moda & Styling Color 6 /85,98
+EL0101010700A,Moda & Styling Color 7/00,132
+EL0101010711A,Moda & Styling Color 7/11,123
+EL0101010743A,Moda & Styling Color 7/43,58
+EL0101010744A,Moda & Styling Color 7/44,82
+EL0101010754A,Moda & Styling Color 7/54,96
+EL0101010755A,Moda & Styling Color 7/55,91
+EL0101010781A,Moda & Styling Color 7/81,62
+EL0101010800A,Moda & Styling Color 8/00,59
+EL0101010811A,Moda & Styling Color 8/11,124
+EL0101010827A,Moda & Styling Color 8/27,68
+EL0101010831A,Moda & Styling Color 8/31,64
+EL0101010843A,Moda & Styling Color 8/43,53
+EL0101010900A,Moda & Styling Color 9/00,62
+EL0101010911A,Moda & Styling Color 9/11,156
+EL0101010927A,Moda & Styling Color 9/27,82
+EL0101010931A,Moda & Styling Color 9/31,80
+EL0101010981A,Moda & Styling Color 9/81,112
+EL0101010991A,Moda & Styling Booster/Corrector Blue,63
+EL0101010993A,Moda & Styling Booster/Corrector Red,61
+EL0101010994A,Moda & Styling Booster/Corrector Violet,60
+EL0101010995A,Moda & Styling Booster/Corrector Anti-Red,60
+EL0101010996A,Moda & Styling Booster/Corrector Orange,63
+EL0101011000A,Moda & Styling Color 10/00,60
+EL0101011027A,Moda & Styling Color 10/27,76
+EL0101011031A,Moda & Styling Color 10/31,95
+EL0101011211A,Moda & Styling Color 12/11,57
+EL0101011271A,Moda & Styling Color 12/71,57
+EL010101S111A,Moda & Styling Color 11/1,58
+EL010101T901A,Moda & Styling Chroma Toner 901,92
+EL010101T911A,Moda & Styling Chroma Toner 911,69
+EL010101T944A,Moda & Styling Chroma Toner 944,106
+EL010101T955A,Moda & Styling Chroma Toner 955,99
+EL010101T977A,Moda & Styling Chroma Toner 977,106
+EL0158010003,10 Minute Color 3,16
+EL0158010004,10 Minute Color 4,36
+EL0158010005,10 Minute Color 5,31
+EL0158010007,10 Minute Color 7,29
+EL0158010008,10 Minute Color 8,47
+EL0158010009,10 Minute Color 9,53
+EL0158010037,10 Minute Color 3.77,66
+EL0158010051,10 Minute Color 5.1,35
+EL0158010053,10 Minute Color 5.3,25
+EL0158010054,10 Minute Color 5.4,45
+EL0158010055,10 Minute Color 5.5,56
+EL0158010061,10 Minute Color 6.1,17
+EL0158010063,10 Minute Color 6.3,29
+EL0158010064,10 Minute Color 6.4,58
+EL0158010071,10 Minute Color 7.1,30
+EL0158010073,10 Minute Color 7.3,37
+EL01580105MK,10 Minute Color 5.Mk,16
+EL0158010655,10 Minute Color 6.55,47
+EL0158010677,10 Minute Color 5.77,56
+EL01580106MK,10 Minute Color 6.Mk,35
+EL0158010744,10 Minute Color 7.44,55
+EL0158014CHO,10 Minute Color 4Cho,20
+EL0158015CHO,10 Minute Color 5Cho,32
+EL0158016CHO,10 Minute Color 6Cho,32
+EL0159010001,Man Upgray Gel 2,2
+EL0159010004,Man Upgray Gel 4,2
+EL0159010005,Man Upgray Gel 5,2
+EL0159010007,Man Upgray Gel 7,2
+EL0159010911,Man Upgray Gel 11,2
+EL0219010001,Get The Color Dolce 1,63
+EL0219010003,Get The Color Dolce 3,82
+EL0219010004,Get The Color Dolce 4,87
+EL0219010005,Get The Color Dolce 5,93
+EL0219010006,Get The Color Dolce 6,50
+EL0219010007,Get The Color Dolce 7,61
+EL0219010008,Get The Color Dolce 8,64
+EL0219010009,Get The Color Dolce 9,66
+EL0219010011,Get The Color Dolce 1.1,61
+EL0219010046,Get The Color Dolce 4.6,62
+EL0219010047,Get The Color Dolce 4.7,72
+EL0219010048,Get The Color Dolce 4.8MK,71
+EL0219010051,Get The Color Dolce 5.1,64
+EL0219010052,Get The Color Dolce 5.2,68
+EL0219010053,Get The Color  Dolce 5.3,66
+EL0219010055,Get The Color Dolce 5.5,70
+EL0219010056,Get The Color Dolce 5.6,61
+EL0219010057,Get The Color Dolce 5.7,71
+EL0219010058,Get The Color Dolce 5.8MK,71
+EL0219010061,Get The Color Dolce 6.1,64
+EL0219010062,Get The Color Dolce 6.2,67
+EL0219010063,Get The Color Dolce 6.3,71
+EL0219010064,Get The Color Dolce 6.4,68
+EL0219010065,Get The Color Dolce 6.5,62
+EL0219010068,Get The Color Dolce 6.8MK,72
+EL0219010071,Get The Color Dolce 7.1,64
+EL0219010072,Get The Color Dolce 7.2,49
+EL0219010073,Get The Color Dolce 7.3,45
+EL0219010074,Get The Color Dolce 7.4,70
+EL0219010078,Get The Color Dolce 7.8MK,56
+EL0219010081,Get The Color Dolce 8.1,53
+EL0219010082,Get The Color Dolce 8.2,55
+EL0219010083,Get The Color Dolce 8.3,55
+EL0219010084,Get The Color Dolce 8.4,72
+EL0219010091,Get The Color Dolce 9.1,47
+EL0219010092,Get The Color Dolce 9.2,54
+EL0219010093,Get The Color Dolce 9.3,53
+EL0219010483,Get The Color Dolce 4.83,72
+EL0219010501,Get The Color Dolce 5.01,69
+EL0219010555,Get The Color Dolce 5.55,72
+EL0219010583,Get The Color Dolce 5.83,49
+EL0219010588,Get The Color Dolce 5.88,106
+EL0219010601,Get The Color Dolce 6.01,69
+EL0219010644,Get The Color Dolce 6.44,70
+EL0219010683,Get The Color Dolce 6.83,61
+EL0219010688,Get The Color Dolce 6.88,94
+EL0219010701,Get The Color Dolce 7.01,68
+EL0219010744,Get The Color Dolce 7.44,63
+EL0219010783,Get The Color Dolce 7.83,53
+EL0219010788,Get The Color Dolce 7.88,99
+EL0219010801,Get The Color Dolce 8.01,61
+EL0219010907,Get The Color Dolce 907,61
+EL0219010911,Get The Color Dolce 911,61
+EL0219010923,Get The Color Dolce 923,63
+EL0310030000,I|Light Shine Neutral N,80
+EL0310030001A,I|Light Shine Beige,83
+EL0310030002A,I|Light Shine Gold,66
+EL0310030003A,I|Light Shine Silver,57
+EL0310030004A,I|Light Shine Brown,87
+EL0310030005A,I|Light Shine Mocha,86
+EL0310030006A,I|Light Shine Chocolate,86
+EL0310030007A,I|Light Shine Chestnut,83
+EL0310030008A,I|Light Shine Venetian Red,85
+EL0310030009A,I|Light Shine Intensive Red,111
+EL0310030010A,I|Light Shine Cardinal Red .,108
+EL0310030011A,I|Light Shine Cherry,112
+EL0310030012A,I|Light Shine Jeans,99
+EL0310030013,I|Light Shine Violet,107
+EL0310030014,I|Light Shine Orange,83
+EL0310030015,I|Light Shine Green,78
+EL0359010150,Man Corrector Ebony,5
+EL0359020150,Man Corrector Light Ebony,6
+EL0359030150,Man Corrector Silver,5
+EL0374010003,I|Care Extra Light Gold C3,6
+EL0374010004,I|Care Copper C4,6
+EL0374010006,I|Care Mahogany C6,5
+EL0374010008,I|Care Mocha C8,6
+EL0374010017,I|Care White Platinum C17,5
+EL0374010023,I|Care Light Beige C23,6
+EL0374010034,I|Care Copper Golden C34,5
+EL0374010054,I|Care Ruby Red C56,5
+EL0374010055,I|Care Deep Red C55,6
+EL0374010077,I|Care Deep Violet C77,5
+EL0374010111,I|Care Sea Blu C111,6
+EL0405020050,De-Color Blu Bleach,24
+EL0405020500,De-Color Blu Bleach,32
+EL0405030050,De-Color Ammonia Free,25
+EL0405030500,De-Color Ammonia Free,33
+EL0405060500,De-Color Blueberry,25
+EL0405070150,De-Color 6. Pasta,16
+EL0405110500,De-Color White Bleach Empowered,44
+EL0405120050,De-Color White Bleach Empowered,60
+EL0501020200A,Oxi-Cream 10 Vol.,60
+EL0501021000B,Oxi-Cream 10 Vol.,30
+EL0501030200A,Oxi-Cream  20 Vol.,594
+EL0501031000B,Oxi-Cream 20 Vol.,249
+EL0501040200A,Oxi-Cream 30 Vol.,1113
+EL0501041000B,Oxi-Cream 30 Vol.,717
+EL0501050200A,Oxi-Cream 40 Vol.,540
+EL0501051000B,Oxi-Cream 40 Vol.,0
+EL0701015000,Shampoo Neutro,4
+EL0701035000,Shampoo Latte,4
+EL0703090250A,Primaria Energy Bath,48
+EL0703100250A,Primaria Bath of Life,47
+EL0703110250A,Primaria Cachemere Bath,48
+EL0703120250A,Primaria White Clay Purifying Bath,48
+EL0703130250A,Primaria Zinco Py Hygienising Bath,48
+EL0703140250A,Primaria Stimulating Bath,47
+EL0703150750A,Primaria Energy Bath,12
+EL0703160750A,Primaria Bath of Life,12
+EL0703170750A,Primaria Cachemere Bath,12
+EL0703180750A,Primaria White Clay Purifying Bath,12
+EL0703190750A,Primaria Zinco Py Hygienising Bath,13
+EL0703200750A,Primaria Stimulating Bath,12
+EL0707040300,Colorcare Re-Animation Shampoo,6
+EL0707041000,Colorcare Re-Animation Shampoo,6
+EL0707050300,Colorcare Daily Shampoo,12
+EL0707060300,Colorcare Lenitive Shampoo,6
+EL0707061000,Colorcare Lenitive Shampoo,6
+EL0707070010,Colorcare Luminous Lotion 12vials,58
+EL0707080300,Colorcare Silver Shampoo,6
+EL0707081000,Colorcare Silver Shampoo,12
+EL0707101000,Color Fix Shampoo,174
+EL0712010250,Bambini Delicate Shampoo,12
+EL0712020250,Bambini Wash-Away Shampoo,12
+EL0717010250A,Refibra Restoring Shampoo,48
+EL0717010750,Refibra Restoring Shampoo,6
+EL071701250A,Refibra Bagno Riparatore  250 mL B.I.,0
+EL0717020250,Amplea Volumizing Bath,12
+EL0718010250,Sinsea Moisturizing Bath Oil,12
+EL0718010750,Sinsea Moisturizing Bath Oil,3
+EL0718020250,Sinsea Rebalancing Bath,12
+EL0718020750,Sinsea Rebalancing Bath,5
+EL0718030250,Sinsea Biodaily Bath,12
+EL0718030750,Sinsea Biodaily Bath,5
+EL0723010250,Sun Nourishing Shampoo,12
+EL0723010300,Sun Shower Gel,12
+EL0759010250,Man Day Up Shampoo,11
+EL0759020250,Man Silver Shampoo,11
+EL0759030250,Man Stimulating Shampoo,11
+EL0759040250,Man Chill Shampoo,11
+EL0764020250,Ritualiss Keratin Shampoo pH6,24
+EL0803060125A,Primaria Remineralizing Water,48
+EL0803070125A,Primaria Detox Tonic,120
+EL0803080056A,Primaria Zinco Py Intensive Lotion 8 vials,46
+EL0803090056A,Primaria Dermotonic Treatment 8 vials,48
+EL0817010120A,Refibra Restructuring Cosmetic Lotion 12 vials,48
+EL0859010056,Man Stimulating Lotion 8 vials,5
+EL0859020056,Man Chill Lotion 8 vials,5
+EL0907020300,Colorcare Leave-In Conditioner,24
+EL0907040300,Colorcare Silver Conditioner,12
+EL0917010200,Amplea Volumizing Spray,12
+EL0960010300,Luminoil,252
+EL1001010500,M&S Crema Rigenerante,6
+EL1003040150A,Primaria Peeling Mask,47
+EL1003080150A,Primaria Nourishing Silk Mask,48
+EL1003080250A,Primaria White Clay Astringent Mask,48
+EL1003090150A,Primaria Diamond Mask,36
+EL1003100200A,Primaria Weightless Texturizer,47
+EL1003110200A,Primaria Relaxing Ritual Mask,48
+EL1003120150A,Primaria Sublimating Mask,59
+EL1007020500,Colorcare Re-Animaton Pack,12
+EL1007030200,Colorcare Volume Conditioner,6
+EL1007040500,Color Fix Mask,265
+EL1017010100A,Refibra Concentrated Restoring Mask,48
+EL1018010100,Sinsea Soothing Milk,0
+EL1018010200,Sinsea Soothing Milk,11
+EL1018010250,Sinsea Nutrienergetic Mask,10
+EL1023010250,Sun Restructuring Mask,6
+EL1023030100,Sun Conditioner Cream,0
+EL1064020250,Ritualiss Keratin Conditioner pH4,24
+EL1109020200A,Affixx Sculpting Gel Extra,12
+EL1117010075,Amplea Volumizing Pre-Treatment,12
+EL1118010200,Sinsea Rebalancing Pre-Treatment,11
+EL1209010500A,Affixx Hair Spray Fix Hold,12
+EL1309010150A,Affixx Finish Spray Flex Hold,12
+EL1309020200A,Affixx Spray Gel,12
+EL1309030075,Affixx Hair Lift,12
+EL1409010300A,Affix Straight Look,0
+EL1509010075,Affixx Light Drops,12
+EL1512010125,Bambini Tangle Remover,12
+EL1518010050,Sinsea 7 Oils Blend,11
+EL1523010125,Sun Protective Oil,12
+EL1523020125,Sun Moisturizing Fluid,21
+EL1609010200A,Affixx Pack Oil,12
+EL1609020300A,Affixx Foam Strong Hold,24
+EL1609030300A,Affixx Foam Flex Hold,12
+EL1609040200,Affixx Curly Look,12
+EL1709010125A,Affixx Format Wax,24
+EL1709030100A,Affixx Design Glue,12
+EL1709040100A,Affixx Rasta Gum,12
+EL1709050100,Affixx Elastic Paste,12
+EL1709060100,Affixx Craft Mud,12
+EL1807080005,Colorcare Lenitive Serum 12vials,12
+EL1807090100,Colorcare Skin Guard,44
+EL1807100100,Colorcare Stain Remover Strong,12
+EL1807110030,Colorcare Color Remover,17
+EL1807120100,Colorcare Color Oil Additive,12
+EL1807130300,Colorcare Mousse Ph 5-5.5,12
+EL1807140250,Color Fix Scalp Cleanser,475
+EL4459F155,Sun Crema Disciplinante,12
+EL530025000,10 minute Kit,12
+EL5364010000,Ritualiss Kit,5
+EL5618010000,Sinsea Limited Edition Kit,0

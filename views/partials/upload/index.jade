@@ -1,0 +1,18 @@
+block title
+	title UPLOAD PRODUCTS INVENTORY
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-edit
+			| {{title}}
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body
+		.row(ng-hide="action=='read'")
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				form(action="/api/upload/csv", method="post", enctype="multipart/form-data")
+					input(type="file", name="inventory")
+					br
+					button.btn.green(type="submit", value="upload_csv", name="submit") Upload
+					| &nbsp;
+					a.btn.default(type="button", href="/#/upload/index") Cancel

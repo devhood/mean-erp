@@ -906,6 +906,23 @@ angular.module('erp')
     }
   });
 
+}).controller('UploadCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService, fileUpload) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
+
+    var query = {};
+    $scope.title = "UPLOAD PRODUCT INVENTORY";
+
+    $scope.init = function(){
+     
+    };
+  
+
 })
 .controller('SalesCtrl', function ($scope, $window, $filter, $routeParams,  $location, Structure, Library, Session, Api) {
 

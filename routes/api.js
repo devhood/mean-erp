@@ -10,8 +10,51 @@ var fs = require('fs');
 var async = require("async");
 var inventories = require('../lib/inventories.js');
 var generator = require('../lib/generator.js');
+// var parse = require('csv-parse');
+var csv2json = require('csv2json-stream');
+
+
 
 router
+.post('/upload/:type', multipartMiddleware, function(req, res) {
+    // if (req.params.type == 'csv') { console.log("csv type"); };
+    // if (req.params.type == 'json') { console.log("json type");};
+     for( var i in req.files){
+        var temp_path = req.files[i].path;
+        var file_name = req.files[i].originalFilename;
+        var upload_path = __dirname.replace('routes',"") + config.upload_path_inventory + req.params.type + path.sep + file_name;
+        var parsed_path = __dirname.replace('routes',"") + config.upload_path_inventory + "json" + path.sep + file_name.replace(".csv",".json");
+
+        fs.rename(temp_path, upload_path, function(err){
+            if(err){
+              console.log(err);
+              res.status(400).json(err);
+            }
+            else{
+                var cws =
+                 fs.createReadStream(upload_path)
+                  .pipe(csv2json({
+                    delim: ",",
+                    headers: true,
+                    outputArray: true
+                  }))
+                  .pipe(
+                    fs.createWriteStream(parsed_path)
+                  );
+                setTimeout(function(){
+                  var content = require(parsed_path);
+                }, 3000);
+
+
+
+            }
+        });
+      }
+
+
+
+
+})
 .get('/:object', function(req, res) {
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
@@ -27,7 +70,6 @@ router
       console.log(err);
        res.status(400).json(err);
     });
-
 })
 .post('/:object', generator.generate, inventories.process_request, function(req, res) {
     delete req.user.password;
@@ -67,6 +109,23 @@ router
         res.status(400).json(err);
       });
 })
+.get('/print/:object/:id', function(req, res) {
+    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
+    req.query.filter = JSON.parse(req.query.filter || '{}');
+    req.query.columns = JSON.parse(req.query.columns || '{}');
+    req.query.sorting = JSON.parse(req.query.sorting || '{}');
+    req.query.filter._id = id;
+    req.db.collection(req.params.object)
+    .find(req.query.filter,req.query.columns || {})
+    .sort(req.query.sorting || {}).skip(req.query.page || 0)
+    .limit(req.query.rows || 0).toArray()
+    .done(function(data){
+      res.status(200).json(data[0]);
+    })
+    .fail( function( err ) {
+      res.status(400).json(err);
+    });
+})
 .get('/:object/:key/:value',  function(req, res) {
   req.query.filter = JSON.parse(req.query.filter || '{}');
   req.query.columns = JSON.parse(req.query.columns || '{}');
@@ -89,23 +148,6 @@ router
   .fail( function( err ) {
     res.status(400).json(err);
   });
-})
-.get('/print/:object/:id', function(req, res) {
-    var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
-    req.query.filter = JSON.parse(req.query.filter || '{}');
-    req.query.columns = JSON.parse(req.query.columns || '{}');
-    req.query.sorting = JSON.parse(req.query.sorting || '{}');
-    req.query.filter._id = id;
-    req.db.collection(req.params.object)
-    .find(req.query.filter,req.query.columns || {})
-    .sort(req.query.sorting || {}).skip(req.query.page || 0)
-    .limit(req.query.rows || 0).toArray()
-    .done(function(data){
-      res.status(200).json(data[0]);
-    })
-    .fail( function( err ) {
-      res.status(400).json(err);
-    });
 })
 .put('/:object/:id/upload',multipartMiddleware, function(req, res) {
   var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
@@ -133,14 +175,11 @@ router
               });
             }
         });
-
-
     }
   }
   else{
     res.status(400).json({"message": "No files uploaded"});
   }
-
 })
 .put('/:object/:id', inventories.process_request, generator.generate, function(req, res) {
     var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
