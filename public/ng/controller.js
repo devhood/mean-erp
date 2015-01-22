@@ -462,7 +462,7 @@ angular.module('erp')
         // case "Educator" :
         //   break;
         default:
-          $window.alert("There is no matched positions");
+          console.log("There is no matched positions");
 
       }
 
