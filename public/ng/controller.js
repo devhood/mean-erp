@@ -906,7 +906,7 @@ angular.module('erp')
     }
   });
 
-}).controller('UploadCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService, fileUpload) {
+}).controller('UploadCtrl', function ($scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session, Api, CustomApi, popupService, fileUpload) {
 
   Session.get(function(client) {
     if(Library.Permission.isAllowed(client,$location.path())){
@@ -915,13 +915,41 @@ angular.module('erp')
   });
 
 
-    var query = {};
-    $scope.title = "UPLOAD PRODUCT INVENTORY";
+  $scope.title = "UPLOAD PRODUCT INVENTORY";
+  $scope.uploadFile = function(){
+    var inventory_csv = $scope.upload.inventory;
+    var uploadUrl = '/api/upload/csv';
+    if(inventory_csv.name){
+      fileUpload.uploadFileToUrl('inventory_file', inventory_csv, uploadUrl,function(err,data){
+        $scope.inventories = data;
+      });
+    }
+  };
 
-    $scope.init = function(){
-     
-    };
-  
+// {"inventories": {"$in":[{_id:"5487b197e1ff103526e687c4"}]}}
+
+  $scope.approveData = function() {
+  async.each($scope.inventories, function(item, callback) {
+    CustomApi.Collection('products').get({key : 'bl_code', value : item.bl_code}).$promise.then(function(products){
+        if (item.bl_code) {
+        for(var i in products.inventories){
+          if (products.inventories[i]._id == "5487b197e1ff103526e687c4") {
+            products.inventories[i].quantity = item.quantity;
+            products.inventories[i].rquantity = item.quantity;
+            products.$update(function(){
+              callback();
+            });
+          }
+        }
+        }
+        else console.log("no bl_code");
+    });
+  },function(err){
+    if(err){
+      console.log(err);
+    }
+  });
+  }
 
 })
 .controller('SalesCtrl', function ($scope, $window, $filter, $routeParams,  $location, Structure, Library, Session, Api) {

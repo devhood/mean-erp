@@ -49,6 +49,24 @@ angular.module('erp')
       }
     }
   })
+  .factory('CustomApi', function ($resource) {
+    return {
+      Collection : function(table,query,page,rows){
+          var url = '/api/'+table+'/:key/:value'
+          if(query){
+            url = '/api/'+table+'?&filter='+encodeURIComponent(JSON.stringify(query));
+          }
+          if(page && rows && query){
+            url = '/api/'+table+'?page='+page+'&rows='+rows+'&filter='+encodeURIComponent(JSON.stringify(query));
+          }
+          return $resource(url,{key:'bl_code',value:'@bl_code'},{
+            update: {
+              method: 'PUT'
+            }
+          });
+      }
+    }
+  })
   .factory('User', function ($resource) {
     return $resource('/auth/users/:id/', {},
       {
@@ -87,16 +105,18 @@ angular.module('erp')
 
     };
   }).service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function(key,file, uploadUrl){
+    this.uploadFileToUrl = function(key,file, uploadUrl,callback){
       var fd = new FormData();
       fd.append(key, file);
       $http.put(uploadUrl, fd, {
         transformRequest: angular.identity,
         headers: {'Content-Type': undefined}
       })
-      .success(function(){
+      .success(function(data){
+        callback(null,data);
       })
-      .error(function(){
+      .error(function(err){
+        callback(err);
       });
     }
   }]).directive('fileModel', ['$parse', function ($parse) {

@@ -1,18 +1,70 @@
 block title
-	title UPLOAD PRODUCTS INVENTORY
+	title INVENTORY
 .portlet.box.grey
 	.portlet-title
 		.caption
 			i.fa.fa-edit
-			| {{title}}
+			| UPLOAD PRODUCT INVENTORY
 		.tools
 			a.collapse(href="javascript:;")
-	.portlet-body
-		.row(ng-hide="action=='read'")
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				form(action="/api/upload/csv", method="post", enctype="multipart/form-data")
-					input(type="file", name="inventory")
+	.portlet-body.form
+		form.form-horizontal(role="form", name="save_form", method="post", enctype="multipart/form-data", ng-submit="uploadFile()", novalidate)
+			.form-body
+				.caption.title
+				br
+				.row
+					.col-xs-12.col-sm-6.col-md-4.col-lg-4
+						.alert {{upload.inventory.name}}
+					.col-sm-6.col-md-8.col-lg-8
+				.row(ng-hide="action=='read'")
+					.col-xs-12.col-sm-12.col-md-12.col-lg-12
+						span.btn.default.btn-file
+							span.fileinput-new
+								| Select Inventory File
+							input(type="file", file-model="upload.inventory")
+							br
+						|	&nbsp;
+						button.btn.green(type="submit") Upload
+						| &nbsp;
+						button.btn.default(type="button", href="/#/upload/index") Cancel
+						| &nbsp;
+					.col-md-1
+					.col-md-10
 					br
-					button.btn.green(type="submit", value="upload_csv", name="submit") Upload
-					| &nbsp;
-					a.btn.default(type="button", href="/#/upload/index") Cancel
+					br
+					br
+				.portlet.box.grey
+					.portlet-title
+						.caption
+							i.fa.fa-edit
+							| {{title}}
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Code
+															th Product
+															th Quantity
+													tbody
+														tr(ng-repeat="item in inventories")
+															td {{item.bl_code}}
+															td {{item.name}}
+															td {{item.quantity}}
+										.col-md-2
+										br
+										br
+										br
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							a.btn.green(ng-click="approveData(inventories)", ng-show="true") Approve
+							| &nbsp;
+							a.btn.default(type="button", href="/#/upload/index") Cancel
+					.col-md-6

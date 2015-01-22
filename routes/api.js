@@ -16,9 +16,10 @@ var csv2json = require('csv2json-stream');
 
 
 router
-.post('/upload/:type', multipartMiddleware, function(req, res) {
+.put('/upload/:type', multipartMiddleware, function(req, res) {
     // if (req.params.type == 'csv') { console.log("csv type"); };
     // if (req.params.type == 'json') { console.log("json type");};
+      console.log("posted", req.files);
      for( var i in req.files){
         var temp_path = req.files[i].path;
         var file_name = req.files[i].originalFilename;
@@ -43,17 +44,11 @@ router
                   );
                 setTimeout(function(){
                   var content = require(parsed_path);
+                  res.status(200).json(content);
                 }, 3000);
-
-
-
             }
         });
       }
-
-
-
-
 })
 .get('/:object', function(req, res) {
     req.query.filter = JSON.parse(req.query.filter || '{}');
@@ -181,6 +176,40 @@ router
     res.status(400).json({"message": "No files uploaded"});
   }
 })
+.put('/:object/:key/:value', inventories.process_request, generator.generate, function(req, res) {
+
+    req.query.filter = JSON.parse(req.query.filter || '{}');
+    req.query.columns = JSON.parse(req.query.columns || '{}');
+    req.query.sorting = JSON.parse(req.query.sorting || '{}');
+    if(req.params.key == "_id"){
+      var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.value);
+      req.query.filter._id = id;
+    }
+    else{
+      req.query.filter[req.params.key] = req.params.value;
+    }
+    delete req.body._id;
+    delete req.user.password;
+    delete req.user.permissions;
+    delete req.user.audit_history;
+    var audit = {
+      user : req.user,
+      update_date : new Date(),
+      module : req.params.object
+    };
+    req.body.audit_history = [audit];
+    req.db.collection(req.params.object)
+      .update(req.query.filter, {"$set" : req.body}, {safe: true})
+      .done(function(data){
+        generator.update(req,function(err,result){
+          res.status(200).json(data);
+        });
+      })
+      .fail( function( err ) {
+        console.log(err);
+        res.status(400).json(err);
+      });
+})
 .put('/:object/:id', inventories.process_request, generator.generate, function(req, res) {
     var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     delete req.body._id;
@@ -208,6 +237,7 @@ router
         res.status(400).json(err);
       });
 })
+
 .delete('/:object/:id', function(req, res) {
     var id = mongoq.mongodb.BSONPure.ObjectID.createFromHexString(req.params.id);
     req.query.filter = JSON.parse(req.query.filter || '{}');

@@ -292,8 +292,12 @@ angular.module('erp', [
         templateUrl: '/partials/upload/index',
         controller: 'UploadCtrl'
       })
-      .when('/upload/:type/:collection', {
+      .when('/upload/:type', {
         templateUrl: '/partials/upload/add',
+        controller: 'UploadCtrl'
+      })
+      .when('/upload/:type/approve', {
+        templateUrl: '/partials/upload/approve',
         controller: 'UploadCtrl'
       })
       .when('/auth/unauthorized', {

@@ -1,0 +1,41 @@
+block title
+	title PRODUCT UPLOADER
+.portlet.box.grey
+	//- (ng-if="ajax_ready", ng-init="formInit()")
+	.portlet-title
+		.caption
+			i.fa.fa-reorder
+			| {{title}}
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body.form
+		.form-body
+			.form-group
+				.col-md-1
+				.col-md-10
+					.row
+						br
+						.col-md-12
+							.portlet-body.flip-scroll
+								table.table.table-bordered.table-condensed.flip-content
+									thead.flip-content.bg-grey
+										tr
+											th Code
+											th Product
+											th Quantity
+									tbody
+										tr(ng-repeat="item in inventories")
+											td {{item.transaction_type}}
+											td {{item.reference_no}}
+											td {{item.delivery_date}}
+								.col-md-1
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+							| &nbsp;
+							button.btn.red(type="button", ng-click="deleteProduct(product)", ng-show="action=='edit' || action=='approve'") Delete
+							| &nbsp;
+							a.btn.default(type="button", href="/#/product/index") Cancel
+					.col-md-6
