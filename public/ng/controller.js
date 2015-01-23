@@ -929,20 +929,35 @@ angular.module('erp')
 // {"inventories": {"$in":[{_id:"5487b197e1ff103526e687c4"}]}}
 
   $scope.approveData = function() {
+  var ctr = 0;
   async.each($scope.inventories, function(item, callback) {
     CustomApi.Collection('products').get({key : 'bl_code', value : item.bl_code}).$promise.then(function(products){
         if (item.bl_code) {
         for(var i in products.inventories){
+          console.log("i",i);
+          ctr ++;
           if (products.inventories[i]._id == "5487b197e1ff103526e687c4") {
             products.inventories[i].quantity = item.quantity;
             products.inventories[i].rquantity = item.quantity;
+            // console.log("bl_code", products.bl_code);
+            // console.log("quantity", products.inventories[i].quantity);
+            // console.log("rquantity", products.inventories[i].rquantity);
             products.$update(function(){
               callback();
             });
           }
+          else {
+            console.log("no inventory location");
+            console.log("no bl_code", products.bl_code);
+            console.log("quantity", products.inventories[i].quantity);
+            console.log("rquantity", products.inventories[i].rquantity);
+          }
+          console.log(ctr);
         }
-        }
-        else console.log("no bl_code");
+      }
+      else {
+      console.log("no bl_code", products.bl_code);
+      }
     });
   },function(err){
     if(err){

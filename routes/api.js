@@ -177,7 +177,7 @@ router
   }
 })
 .put('/:object/:key/:value', inventories.process_request, generator.generate, function(req, res) {
-
+    console.log("PUT:/:object/:key/:value");
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
