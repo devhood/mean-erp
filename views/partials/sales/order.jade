@@ -118,7 +118,8 @@ block title
                 input.form-control(type="text",ng-model="sales.promo", disabled)
                 span.col-md-12.help-block Promo
           .col-md-1
-        .portlet.box.grey(ng-show="sales.customer")
+        .alert.alert-warning(role='alert', ng-hide="sales.customer && sales.inventory_location") Please select Customer and Inventory Location to Proceed
+        .portlet.box.grey(ng-show="sales.customer && sales.inventory_location")
           .portlet-title
             .caption
               i.fa.fa-reorder

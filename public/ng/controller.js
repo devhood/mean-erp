@@ -914,7 +914,8 @@ angular.module('erp')
     }
   });
 
-
+  var query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
   $scope.title = "UPLOAD PRODUCT INVENTORY";
   $scope.uploadFile = function(){
     var inventory_csv = $scope.upload.inventory;
@@ -927,45 +928,66 @@ angular.module('erp')
   };
 
 // {"inventories": {"$in":[{_id:"5487b197e1ff103526e687c4"}]}}
-
+  $scope.update_finished = false;
+  $scope.na_products = [];
   $scope.approveData = function() {
   var ctr = 0;
+  var na_product = {};
   async.each($scope.inventories, function(item, callback) {
-    CustomApi.Collection('products').get({key : 'bl_code', value : item.bl_code}).$promise.then(function(products){
-        if (item.bl_code) {
-        for(var i in products.inventories){
-          console.log("i",i);
+    if(item.bl_code){
+      CustomApi.Collection('products').get({key : 'bl_code', value : item.bl_code}).$promise.then(function(products){
           ctr ++;
-          if (products.inventories[i]._id == "5487b197e1ff103526e687c4") {
-            products.inventories[i].quantity = item.quantity;
-            products.inventories[i].rquantity = item.quantity;
-            // console.log("bl_code", products.bl_code);
-            // console.log("quantity", products.inventories[i].quantity);
-            // console.log("rquantity", products.inventories[i].rquantity);
-            products.$update(function(){
-              callback();
-            });
+          if (products && products.bl_code) {
+            var isLocationFound = false;
+            for(var i in products.inventories){
+              if (products.inventories[i]._id == $scope.inventory_location._id) {
+                isLocationFound = true;
+                products.inventories[i].quantity = item.quantity;
+                products.inventories[i].rquantity = item.quantity;
+                products.$update(function(){
+                  callback();
+                });
+              }
+            }
+            if(!isLocationFound){
+              if(!(products.inventories instanceof Array)){
+                products.inventories = [];
+              }
+              products.inventories.push({
+                _id : $scope.inventory_location._id,
+                quantity : item.quantity,
+                rquantity : item.quantity
+                });
+              products.$update(function(){
+                callback();
+              });
+            }
           }
           else {
-            console.log("no inventory location");
-            console.log("no bl_code", products.bl_code);
-            console.log("quantity", products.inventories[i].quantity);
-            console.log("rquantity", products.inventories[i].rquantity);
+            na_product = {};
+            na_product.bl_code = item.bl_code;
+            na_product.name = item.name;
+            na_product.quantity = item.quantity;
+            console.log(ctr, ") no PP", na_product);
+            $scope.na_products.push(na_product);
           }
-          console.log(ctr);
-        }
-      }
-      else {
-      console.log("no bl_code", products.bl_code);
-      }
-    });
+      });
+    }
+    else{
+      console.log("no item bl_code", item.bl_code);
+    }
   },function(err){
     if(err){
       console.log(err);
     }
   });
+    $scope.update_finished = true;
   }
 
+  // if (  $scope.update_finished == true) {
+  //   window.alert("There are non-existing Product Profile.");
+  //   $scope.na_products = [];
+  // }
 })
 .controller('SalesCtrl', function ($scope, $window, $filter, $routeParams,  $location, Structure, Library, Session, Api) {
 
@@ -1636,30 +1658,46 @@ $scope.init = function(){
     }
   }
   $scope.addOrder = function(sales){
+    var no_inventory_location = false;
     var item = angular.copy(sales.item);
     if( item && item.name && item.quantity && item.quantity ){
-      item.override = item.override ? item.override : "NORMAL";
-      if(sales.customer.price_type == "Professional"){
-        item.price = item.professional_price
+
+      console.log(item);
+      var isInventoryExist = false;
+      var insufficient_item = [];
+      for(var i in item.inventories){
+        if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
+          isInventoryExist = true;
+        }
       }
-      if(sales.customer.price_type == "Retail"){
-        item.price = item.retail_price;
-      }
-      if(item.override != "NORMAL"){
-        item.price = item.override;
-        item.total = 0.00;
-      }
-      if(!isNaN(item.price)){
-        item.total = item.quantity * item.price;
-      }
-      delete item.inventories;
-      if($scope.sales.ordered_items){
-        $scope.sales.ordered_items.push(item);
+      if(isInventoryExist){
+        item.override = item.override ? item.override : "NORMAL";
+        if(sales.customer.price_type == "Professional"){
+          item.price = item.professional_price
+        }
+        if(sales.customer.price_type == "Retail"){
+          item.price = item.retail_price;
+        }
+        if(item.override != "NORMAL"){
+          item.price = item.override;
+          item.total = 0.00;
+        }
+        if(!isNaN(item.price)){
+          item.total = item.quantity * item.price;
+        }
+        delete item.inventories;
+        if($scope.sales.ordered_items){
+          $scope.sales.ordered_items.push(item);
+        }
+        else{
+          $scope.sales.ordered_items = [item];
+        }
+        delete sales.item;
       }
       else{
-        $scope.sales.ordered_items = [item];
+        window.alert("The stock is insufficient. Please check your inventory location.");
       }
-      delete sales.item;
+
     }
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
@@ -1711,12 +1749,28 @@ $scope.init = function(){
       }
     }
   }
+
   if(action == 'read'){
     $scope.title = "VIEW SALES ORDER";
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
   }
+
+  // $scope.checkInventory = function(inventories) {
+  //   console.log(inventories);
+  //   for(var i in inventories){
+  //     if (inventories[i]._id == $scope.sales.inventory_location) {
+  //       if (sales.item.quantity > inventories.rquantity) {
+  //         console.log("INSUFFICIENT");
+  //       }
+  //     }
+  //     else {
+  //
+  //     }
+  //   }
+  // }
+
   if(action == 'add'){
     $scope.title = "ADD SALES ORDER";
     var Sales = Api.Collection('sales');

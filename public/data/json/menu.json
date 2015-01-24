@@ -222,6 +222,11 @@
         "title": "Schedule for Approval",
         "description": "Demo And Training Schedule",
         "href": "/#/schedule/index"
+      },
+      {
+        "title": "Upload Inventory",
+        "description": "Upload Product Inventory",
+        "href": "/#/upload/index"
       }
     ]
   }
