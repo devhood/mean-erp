@@ -110,8 +110,9 @@ block title
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
                 input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read' || action=='approve'",required)
                 span.col-md-12.help-block Special Instructions
+        .alert.alert-warning(role='alert', ng-hide="sales.customer && sales.inventory_location") Please select Customer and Inventory Location to Proceed
           .col-md-1
-        .portlet.box.grey(ng-show="sales.customer")
+        .portlet.box.grey(ng-show="sales.customer && sales.inventory_locations")
           .portlet-title
             .caption
               i.fa.fa-reorder

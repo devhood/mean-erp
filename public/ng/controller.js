@@ -1388,16 +1388,22 @@ $scope.init = function(){
   $scope.report = {};
 
   var generateReport = function (query,api_url) {
+    var query = {};
+    console.log("generating");
     if (api_url == "/reports/sales/customer" && $scope.report.customer) {
+      console.log("1");
       query["customer.company_name"] = $scope.report.customer;
     }
     if (api_url == "/reports/sales/product" && $scope.report.product.bl_code) {
+      console.log("2");
       query["ordered_items.bl_code"] = $scope.report.product.bl_code;
     }
     if (api_url == "/reports/sales/brand" && $scope.report.brand) {
+      console.log("3");
       query["ordered_items.brand"] = $scope.report.brand;
     }
     if (api_url == "/reports/sales/se" && $scope.report.sales_executive) {
+      console.log("4");
       query["customer.sales_executive"] = $scope.report.sales_executive;
     }
 
@@ -1791,7 +1797,7 @@ $scope.init = function(){
     }
   }
   if(action == 'edit'){
-    $scope.title = "EDIT SALES ORDER "+ id;
+    $scope.title = "EDIT SALES ORDER - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -1826,7 +1832,7 @@ $scope.init = function(){
   }
   if(action == 'approve'){
     console.log(action);
-    $scope.title = "APPROVE SALES ORDER "+ id;
+    $scope.title = "APPROVE SALES ORDER - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -1848,7 +1854,7 @@ $scope.init = function(){
     };
   }
   if(action == 'reschedule'){
-    $scope.title = "RESCHEDULE SALES ORDER "+ id;
+    $scope.title = "RESCHEDULE SALES ORDER - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -1888,12 +1894,14 @@ $scope.init = function(){
 
 
   $scope.PromoChange = function(){
+    console.log("promo - change");
     var query = {name:$scope.sales.promo};
   Api.Collection('promo',query).query(function (data) {
     $scope.promo_products = data[0];
     console.log($scope.promo_products.name);
     $scope.sales.price = data[0].price;
     });
+    $scope.promoTypeChange();
   };
 
   $scope.promoTypeChange = function (){
@@ -1927,45 +1935,59 @@ $scope.init = function(){
     }
   }
   $scope.addOrder = function(sales){
+    var no_inventory_location = false;
     var item = angular.copy(sales.item);
-    if( item && item.name && item.quantity && item.quantity){
-      item.override = item.override ? item.override : "NORMAL";
-      if(sales.customer.price_type == "Professional"){
-        item.price = item.professional_price
+    if( item && item.name && item.quantity){
+      console.log(item);
+      var isInventoryExist = false;
+      var insufficient_item = [];
+      for(var i in item.inventories){
+        if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
+          isInventoryExist = true;
+        }
       }
-      if(sales.customer.price_type == "Retail"){
-        item.price = item.retail_price;
-      }
+      if(isInventoryExist){
+        item.override = item.override ? item.override : "NORMAL";
+        if(sales.customer.price_type == "Professional"){
+          item.price = item.professional_price
+        }
+        if(sales.customer.price_type == "Retail"){
+          item.price = item.retail_price;
+        }
 
 
-      if(!isNaN(item.price)){
-        item.total = item.quantity * item.price;
-      }
-      delete item.inventories;
-      if($scope.sales.ordered_items){
-        $scope.sales.ordered_items.push(item);
+        if(!isNaN(item.price)){
+          item.total = item.quantity * item.price;
+        }
+        delete item.inventories;
+        if($scope.sales.ordered_items){
+          $scope.sales.ordered_items.push(item);
+        }
+        else{
+          $scope.sales.ordered_items = [item];
+        }
+        delete sales.item;
       }
       else{
-        $scope.sales.ordered_items = [item];
+        window.alert("The stock is insufficient. Please check your inventory location.");
       }
-      delete sales.item;
     }
-    $scope.sales.subtotal = $scope.sales.price;
-    $scope.sales.isNeedApproval = false;
+      $scope.sales.subtotal = $scope.sales.price;
+      $scope.sales.isNeedApproval = false;
 
-     var computation = Library.Compute.Order(
+      var computation = Library.Compute.Order(
         $scope.sales.subtotal,
         0,
         $scope.sales.customer.discount.replace(" %","")/100 || 0,
         $scope.sales.isWithholdingTax,
         $scope.sales.isZeroRateSales
-     );
-     $scope.sales.discount = computation.totalDiscount;
-     $scope.sales.total_vat = computation.vatableSales;
-     $scope.sales.total_amount_due = computation.totalAmountDue;
-     $scope.sales.zero_rate_sales = computation.zeroRatedSales;
-     $scope.sales.withholding_tax = computation.withholdingTax;
-  }
+      );
+      $scope.sales.discount = computation.totalDiscount;
+      $scope.sales.total_vat = computation.vatableSales;
+      $scope.sales.total_amount_due = computation.totalAmountDue;
+      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
+      $scope.sales.withholding_tax = computation.withholdingTax;
+    }
 
   $scope.reCompute = function(sales){
     if($scope.sales.customer){
@@ -2023,7 +2045,7 @@ $scope.init = function(){
     }
   }
   if(action == 'edit'){
-    $scope.title = "EDIT SALES ORDER "+ id;
+    $scope.title = "EDIT SALES ORDER  - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -2058,7 +2080,7 @@ $scope.init = function(){
   }
   if(action == 'approve'){
     console.log(action);
-    $scope.title = "APPROVE SALES ORDER "+ id;
+    $scope.title = "APPROVE SALES ORDER - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -2080,7 +2102,7 @@ $scope.init = function(){
     };
   }
   if(action == 'reschedule'){
-    $scope.title = "RESCHEDULE SALES ORDER "+ id;
+    $scope.title = "RESCHEDULE SALES ORDER - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -2440,31 +2462,60 @@ $scope.init = function(){
           $scope.sales.customer.billing_address.zipcode;
     }
   }
+
+ //  $scope.add200 = function(sales){
+ //    var items=[];
+ //    for (var i = 0; itemslength<200; i++) {
+
+ //    };
+ //    $scope.sales.ordered_items =
+ //      delete item.inventories;
+ // cope.sales.ordered_items = [item];
+ //    console.log($scope.sales.ordered_items);
+ //  }
+
+    /////
   $scope.addOrder = function(sales){
+    var no_inventory_location = false;
     var item = angular.copy(sales.item);
     if( item && item.name && item.quantity && item.quantity ){
-      item.override = item.override ? item.override : "NORMAL";
-      if(sales.customer.price_type == "Professional"){
-        item.price = item.professional_price
+
+      console.log(item);
+      var isInventoryExist = false;
+      var insufficient_item = [];
+      for(var i in item.inventories){
+        if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
+          isInventoryExist = true;
+        }
       }
-      if(sales.customer.price_type == "Retail"){
-        item.price = item.retail_price;
-      }
-      if(item.override != "NORMAL"){
-        item.price = item.override;
-        item.total = 0.00;
-      }
-      if(!isNaN(item.price)){
-        item.total = item.quantity * item.price;
-      }
-      delete item.inventories;
-      if($scope.sales.ordered_items){
-        $scope.sales.ordered_items.push(item);
+      if(isInventoryExist){
+        item.override = item.override ? item.override : "NORMAL";
+        if(sales.customer.price_type == "Professional"){
+          item.price = item.professional_price
+        }
+        if(sales.customer.price_type == "Retail"){
+          item.price = item.retail_price;
+        }
+        if(item.override != "NORMAL"){
+          item.price = item.override;
+          item.total = 0.00;
+        }
+        if(!isNaN(item.price)){
+          item.total = item.quantity * item.price;
+        }
+        delete item.inventories;
+        if($scope.sales.ordered_items){
+          $scope.sales.ordered_items.push(item);
+        }
+        else{
+          $scope.sales.ordered_items = [item];
+        }
+        delete sales.item;
       }
       else{
-        $scope.sales.ordered_items = [item];
+        window.alert("The stock is insufficient. Please check your inventory location.");
       }
-      delete sales.item;
+
     }
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
@@ -2821,7 +2872,7 @@ $scope.init = function(){
     }
 
     if(action == 'approve'){
-      $scope.title = "APPROVE PACKING OF "+ id;
+      $scope.title = "APPROVE PACKING - Ref.No.: "+ id;
       $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
 
       $scope.saveSales = function(){
@@ -3155,7 +3206,7 @@ $scope.init = function(){
   }
   if(action == 'approve'){
 
-    $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
+    $scope.title = "APPROVE DELIVERY RECEIPT - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -3223,7 +3274,7 @@ $scope.init = function(){
     });
   }
   if(action == 'approve'){
-    $scope.title = "APPROVE SALES INVOICE "+ id;
+    $scope.title = "APPROVE SALES INVOICE - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -3347,7 +3398,7 @@ $scope.init = function(){
   // }
 
   if(action == 'update'){
-    $scope.title = "UPDATE SALES PAYMENT"+ id;
+    $scope.title = "UPDATE SALES PAYMENT  - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
       PrintTotalPayment();
@@ -3369,7 +3420,7 @@ $scope.init = function(){
   }
 
   if(action == 'create'){
-    $scope.title = "CREATE SALES PAYMENT "+ id;
+    $scope.title = "CREATE SALES PAYMENT - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
     if (!$scope.sales.total_amount_due) {
     $scope.proceedPayment ='true';
@@ -3397,7 +3448,7 @@ $scope.init = function(){
   if(action == 'approve'){
     $scope.proceedPayment='true';
     console.log($scope.proceedPayment);
-    $scope.title = "APPROVE SALES PAYMENT "+ id;
+    $scope.title = "APPROVE SALES PAYMENT - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -3528,7 +3579,7 @@ $scope.init = function(){
     $scope.title = "VIEW RETURN MERCHANDISE RECEIPT";
   }
   if(action == 'create'){
-    $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
+    $scope.title = "CREATE RETURN MERCHANDISE RECEIPT  - Ref.No.: "+ id;
     $scope.saveSales = function(){
       if ($scope.sales.rmrno) {
       $scope.sales.status = status.returned.revised;
@@ -3547,7 +3598,7 @@ $scope.init = function(){
 
   if(action == 'approve'){
     console.log("return approve not returnApprove");
-    $scope.title = "CREATE RETURN MERCHANDISE RECEIPT"+ id;
+    $scope.title = "CREATE RETURN MERCHANDISE RECEIPT  - Ref.No.: "+ id;
     $scope.saveSales = function(){
       $scope.sales.status = status.returned.approved;
       $scope.sales.$update(function(){
@@ -3614,7 +3665,7 @@ $scope.init = function(){
   }
   if(action == 'approve'){
 
-    $scope.title = "APPROVE CREDIT MEMO "+ id;
+    $scope.title = "APPROVE CREDIT MEMO - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -3802,10 +3853,19 @@ var type = $routeParams.type;
       }
     }
 
-    $scope.addOrder = function(consignments){
-      var item = angular.copy(consignments.item);
-      if( item && item.name && item.quantity){
-          console.log("with quantity", item);
+  $scope.addOrder = function(consignments){
+    var no_inventory_location = false;
+    var item = angular.copy(consignments.item);
+    if( item && item.name && item.quantity){
+      console.log("with quantity", item);
+      var isInventoryExist = false;
+      var insufficient_item = [];
+      for(var i in item.inventories){
+        if(item.inventories[i]._id == $scope.consignments.inventory_location && $scope.consignments.item.quantity <= item.inventories[i].rquantity){
+          isInventoryExist = true;
+        }
+      }
+      if(isInventoryExist){
         if(consignments.customer.price_type == "Professional"){
           item.price = item.professional_price
           console.log("item.price: pro",item.price);
@@ -3826,6 +3886,11 @@ var type = $routeParams.type;
         }
         delete consignments.item;
       }
+      else{
+        window.alert("The stock is insufficient. Please check your inventory location.");
+      }
+
+    }
       $scope.consignments.subtotal = 0;
       for(var i=0;i<$scope.consignments.consigned_items.length; i++){
         console.log("subtotal", $scope.consignments.subtotal );
@@ -3908,7 +3973,7 @@ var type = $routeParams.type;
     }
     if( id && action == 'edit'){
 
-      $scope.title = "EDIT CONSIGNED ORDER "+ id;
+      $scope.title = "EDIT CONSIGNED ORDER - Ref.No.: "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -3930,7 +3995,7 @@ var type = $routeParams.type;
     }
      if( id && action == 'reschedule'){
 
-      $scope.title = "EDIT CONSIGNED ORDER "+ id;
+      $scope.title = "EDIT CONSIGNED ORDER - Ref.No.: "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -3952,7 +4017,7 @@ var type = $routeParams.type;
     }
 
   if(id && action == 'approve'){
-      $scope.title = "APPROVE CONSIGNED ORDER "+ id;
+      $scope.title = "APPROVE CONSIGNED ORDER - Ref.No.: "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -4021,7 +4086,7 @@ var type = $routeParams.type;
   }
 
   if(action == 'approve'){
-    $scope.title = "APPROVE DELIVERY RECEIPT "+ id;
+    $scope.title = "APPROVE DELIVERY RECEIPT - Ref.No.: "+ id;
     $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
@@ -4069,7 +4134,7 @@ var type = $routeParams.type;
     }
 
     if(action == 'approve'){
-      $scope.title = "APPROVE PACKING OF "+ id;
+      $scope.title = "APPROVE PACKING - Ref.No.: "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id});
 
       $scope.savePacking = function(){
@@ -4128,7 +4193,7 @@ var type = $routeParams.type;
     }
 
     if(action == 'approve'){
-      $scope.title = "APPROVE CONSIGNMENT"+ id;
+      $scope.title = "APPROVE CONSIGNMENT  - Ref.No.: "+ id;
       $scope.consignments =  Api.Collection('consignments').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -4239,7 +4304,7 @@ var type = $routeParams.type;
     }
 
     if(action == 'approve'){
-      $scope.title = "APPROVE CONSIGNMENT DAILY SALES"+ id;
+      $scope.title = "APPROVE CONSIGNMENT DAILY SALES  - Ref.No.: "+ id;
       $scope.cds =  Api.Collection('cds').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -4354,7 +4419,7 @@ var type = $routeParams.type;
     }
 
     if( id && action == 'edit'){
-      $scope.title = "EDIT ADJUSTMENT ORDER "+ id;
+      $scope.title = "EDIT ADJUSTMENT ORDER - Ref.No.: "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
       });
       $scope.saveAdjustments = function(){
@@ -4374,7 +4439,7 @@ var type = $routeParams.type;
       };
     }
     if(id && action == 'approve'){
-      $scope.title = "APPROVE ADJUSTMENT ORDER "+ id;
+      $scope.title = "APPROVE ADJUSTMENT ORDER - Ref.No.: "+ id;
       $scope.adjustments =  Api.Collection('adjustments').get({id:$routeParams.id},function(){
       });
       $scope.saveAdjustments = function(){
@@ -4577,7 +4642,7 @@ var type = $routeParams.type;
     };
     if( id && action == 'edit'){
 
-      $scope.title = "EDIT SCHEDULE "+ id;
+      $scope.title = "EDIT SCHEDULE - Ref.No.: "+ id;
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });
@@ -4591,7 +4656,7 @@ var type = $routeParams.type;
     };
     console.log(action);
     if(id && action == 'approve'){
-      $scope.title = "APPROVE CONSIGNED ORDER "+ id;
+      $scope.title = "APPROVE CONSIGNED ORDER - Ref.No.: "+ id;
       $scope.schedules =  Api.Collection('schedules').get({id:$routeParams.id},function(){
         $scope.CustomerChange();
       });

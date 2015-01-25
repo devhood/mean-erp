@@ -29,7 +29,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="consignments.inventory_location ", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule' || action=='approve'"),required)
+                select.select2me.form-control.select2-offscreen(ng-model="consignments.inventory_location", ng-options="inventory_location._id   as inventory_location.company_name  for inventory_location in inventory_locations", ng-selected="{{consigments.inventory_location}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule' || action=='approve'"),required)
                 span.col-md-12.help-block Inventory Location
           .col-md-6
             .form-group
@@ -79,7 +79,8 @@ block title
                 input.form-control(type="text", ng-model="consignments.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled=("action=='read' || action=='reschedule'"),required)
                 span.col-md-12.help-block Special Instructions
           .col-md-1
-        .portlet.box.grey(ng-show="consignments.customer")
+        .alert.alert-warning(role='alert', ng-hide="consignments.customer && consignments.inventory_location") Please select Customer and Inventory Location to Proceed
+        .portlet.box.grey(ng-show="consignments.customer && consignments.inventory_location")
           .portlet-title
             .caption
               i.fa.fa-reorder
