@@ -431,33 +431,50 @@ angular.module('erp')
         });
           break;
         case "Sales Executive" :
-          $scope.ajax_ready = false;
-          Structure.Sales.query().$promise.then(function(data){
-            $scope.ajax_ready = true;
-            $scope.structure = data[0];
-            var status = Library.Status.Sales;
-            var query = {};
+          // $scope.ajax_ready = false;
+          // Structure.Sales.query().$promise.then(function(data){
+          //   $scope.ajax_ready = true;
+          //   $scope.structure = data[0];
+          //   var status = Library.Status.Sales;
+          //   var query = {};
 
             var columns = [
-            $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            {"name": "customer","title": "Sales Executive"},
+            {"name": "sono", "title": "Sales Order"},
+            {"name": "status", "title": "Status Code"},
             ];
 
             var buttons = [
-            {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+              {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"}
             ];
-            query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
-            status.order.created.status_code,
-            status.order.revised.status_code,
-            status.order.rejected.status_code,
-            status.delivery.rejected.status_code,
-            status.invoice.rejected.status_code,
-            status.tripticket.failed.status_code
-            ]}};
-            $scope.title = "SALES ORDERS"
+
+            $scope.title = "Sales Executive Sales"
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-          });
+            $scope.dtOptions = Library.DataTable.options("/reports/sales/se_dash");
+            $scope.dtOptions
+              .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+              .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
+            // var columns = [
+            // $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            // $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            // ];
+            //
+            // var buttons = [
+            // {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+            // ];
+            // query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
+            // status.order.created.status_code,
+            // status.order.revised.status_code,
+            // status.order.rejected.status_code,
+            // status.delivery.rejected.status_code,
+            // status.invoice.rejected.status_code,
+            // status.tripticket.failed.status_code
+            // ]}};
+            // $scope.title = "SALES ORDERS"
+            // $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+            // $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          // });
           break;
         // case "Educator" :
         //   break;
@@ -1406,8 +1423,19 @@ $scope.init = function(){
       console.log("4");
       query["customer.sales_executive"] = $scope.report.sales_executive;
     }
-
-    if ($scope.report.period && $scope.report.value) {
+    console.log($scope.report.value, "value");
+    if ($scope.report.start_date && $scope.report.end_date ) {
+      $scope.report.value = "";
+      var start_date = $scope.report.start_date;
+      var end_date = $scope.report.end_date;
+      if (start_date == "Invalid Date") {
+        window.alert("Invalid input, please check the date format.");
+      }
+      query.payment_date = {"$gte": start_date, "$lte": end_date};
+      console.log("query : ", JSON.stringify(query));
+      $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+    else if ($scope.report.period && $scope.report.value || $scope.report.year) {
       var period = $scope.report.period;
       var value = $scope.report.value;
       var start_year = 1;
@@ -1517,6 +1545,7 @@ $scope.init = function(){
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
       break;
       default:
+      break;
       }
     }
     else {
@@ -1617,6 +1646,26 @@ $scope.init = function(){
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/se");
       }
+      break;
+    case "inventory" :
+      columns = [
+      {"name": "customer","title": "Company Name"},
+      {"name": "branch", "title" :"Branch"},
+      {"name": "type", "title": "Type"},
+      {"name": "total_amount_due", "title": "Total Amount Due"},
+      ];
+
+      $scope.title = "COMPLETED SALES REPORT "
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/inventory?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
+      $scope.generateReport = function(){
+        generateReport(query,"/reports/sales/se");
+      }
+
       break;
     }
   };
@@ -4541,7 +4590,7 @@ var type = $routeParams.type;
     events: events
   });
   });
-  
+
 
 
 })

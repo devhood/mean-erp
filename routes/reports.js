@@ -117,5 +117,38 @@ router
   });
 
 })
+.get('/sales/inventory', function(req, res) {
+  req.query.filter = JSON.parse(req.query.filter || '{}');
+  console.log("filter",req.query.filter);
+  var content = {};
+  content.project = {id : $id };
+  // bl_code" : "$bl_code" , "product" : "$product"
+  // {$project:content.project}
+  //   "_id":"$bl_code",
+  content.group = {
+    "_id":"$inventories._id",
+    "inventory_location":{$first:"$inventories.company_name"},
+    "branch":{$first:"$inventories.branch"},
+    "quantity":{$sum:"$inventories.quantity"},
+    "rquantity":{$sum:"$inventories.rquantity"}
+  };
+
+  console.log(content);
+  content.match = req.query.filter;
+  req.db.collection('products')
+  .aggregate([{$match:content.match||{}},{$project:content.project}, {$group:content.group}])
+  .done(function(result){
+    console.log("result: ", result);
+    res.status(200).json(result);
+  })
+  .fail( function( err ) {
+    console.log(err);
+    res.status(400).json(err);
+  });
+
+})
+.get('/sales/se_dash', function(req, res) {
+;
+})
 
 module.exports = router;
