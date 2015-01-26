@@ -16,7 +16,7 @@ block title
 					.col-md-6
 							.form-group
 								.col-xs-12.col-sm-12.col-md-12.col-lg-12
-									select.select2me.form-control.select2-offscreen(ng-model="inventory_location", ng-options="customer.company_name for customer in inventory_locations")
+									select.select2me.form-control.select2-offscreen(ng-model="inventory_location", ng-options="customer.company_name as customer.company_name for customer in inventory_locations", ng-selected="Watsons")
 									span.col-md-12.help-block Inventory Location
 					.col-md-6
 				.row
