@@ -4510,8 +4510,7 @@ var type = $routeParams.type;
         }
       }
     }
-  });
-  $('#calendar').fullCalendar('destroy'); // destroy the calendar
+    $('#calendar').fullCalendar('destroy'); // destroy the calendar
   $('#calendar').fullCalendar({ //re-initialize the calendar
     header: h,
     slotMinutes: 15,
@@ -4541,6 +4540,8 @@ var type = $routeParams.type;
     },
     events: events
   });
+  });
+  
 
 
 })
