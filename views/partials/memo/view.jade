@@ -1,0 +1,56 @@
+block title
+  title CONSIGNMENT DAILY SALES
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+  .portlet-body.form
+    .portlet.box.grey(ng-show="action=='view'")
+      .portlet-title
+        .caption
+          i.fa.fa-reorder
+          | ITEMS
+        .tools
+          a.collapse(href="javascript:;")
+      .portlet-body.form
+        .form-body
+          br
+          br
+          .row
+          .form-group
+            .col-md-1
+            .col-md-10
+              .row
+                br
+                .col-md-12
+                  .portlet-body.flip-scroll
+                    table.table.table-bordered.table-condensed.flip-content
+                      thead.flip-content.bg-grey
+                        tr
+                          th Memo No.
+                          th Title
+                          th Quantity
+                          th View
+                      tbody
+                        tr(ng-repeat="memo in memorandum")
+                          td {{memo.memono}}
+                          td {{memo.memo_title}}
+                          td {{memo.issue_date}}
+                          td 
+                            .btn-group.btn-group-xs.btn-group-solid
+                              a.tooltips.btn.default.tooltips(ng-href="memo.link", data-container="body", data-placement="top", data-html="true", data-original-title="Open Memo")
+                                i.fa.fa-folder-open
+            .col-md-1
+  .form-actions.fluid
+    .row
+      .col-md-6
+        .col-md-offset-1.col-md-11
+          //- button.btn.blue(type="submit") Submit
+          //- | &nbsp;
+          //- button.btn.green(type="submit" ng-show="save_form.$valid && (action=='add')") Submit
+          //- | &nbsp;
+          a.btn.default(type="button", href="/#/cds/index") Cancel
+      .col-md-6

@@ -1,0 +1,29 @@
+[
+  {
+    "user": {
+      "name": "user",
+      "title": "User",
+      "type": "select"
+    },
+    "memo_title": {
+      "name": "memo_title",
+      "title": "Title",
+      "type": "text"
+    },
+    "status": {
+      "name": "status",
+      "title": "Status",
+      "type": "text"
+    },
+    "issue_date": {
+      "name": "issue_date",
+      "title": "Issue Date",
+      "type": "text"
+    },
+    "memono": {
+      "name": "memono",
+      "title": "Memo Number",
+      "type": "text"
+    }
+  }
+]

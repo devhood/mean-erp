@@ -184,6 +184,18 @@ angular.module('erp', [
         templateUrl: '/partials/cds/add',
         controller: 'CDSCtrl'
       })
+      .when('/memo/index', {
+        templateUrl: '/partials/memo/index',
+        controller: 'MemoCtrl'
+      })
+      .when('/memo/:action', {
+        templateUrl: '/partials/memo/add',
+        controller: 'MemoCtrl'
+      })
+      .when('/memo/:action/:id', {
+        templateUrl: '/partials/memo/add',
+        controller: 'MemoCtrl'
+      })
       .when('/shipment/index/:type', {
         templateUrl: '/partials/shipment/index',
         controller: 'ShipmentCtrl'

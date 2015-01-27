@@ -1,0 +1,88 @@
+block title
+  title CONSIGNMENT DAILY SALES
+.portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", method="post", enctype="multipart/form-data", ng-submit="uploadFile()", novalidate)
+      .form-body
+        .caption.title
+        br
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="memo.code", required)
+                span.col-md-12.help-block	Memo Code
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="memo.subject", required)
+                span.col-md-12.help-block Memo Subject
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="memo.file.name", required, disabled)
+                span.col-md-12.help-block	Memo File
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                span.btn.blue.btn-file
+                  span.fileinput-new
+                    | Select Memo File (PDF)
+                  input(type="file", file-model="memo.file")
+              br
+            | &nbsp;
+          .col-md-1
+          .col-md-10
+            br
+        .portlet.box.grey(ng-show="action=='view'")
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Memo No.
+                              th Title
+                              th Quantity
+                              th View
+                          tbody
+                            tr(ng-repeat="memo in memorandum")
+                              td {{memo.code}}
+                              td {{memo.subject}}
+                              td {{memo.issue_date}}
+                              td 
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-href="memo.link", data-container="body", data-placement="top", data-html="true", data-original-title="Open Memo")
+                                    i.fa.fa-folder-open
+                .col-md-1
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-1.col-md-11
+              //- button.btn.blue(type="submit") Submit
+              button.btn.green(type="submit", ng-show="memo.file") Upload
+              | &nbsp;
+              a.btn.default(type="button", href="/#/cds/index") Cancel
+          .col-md-6

@@ -20,16 +20,20 @@ block title
 									span.col-md-12.help-block Inventory Location
 					.col-md-6
 				.row
-					.col-xs-12.col-sm-6.col-md-4.col-lg-4
-						.alert {{upload.inventory.name}}
-					.col-sm-6.col-md-8.col-lg-8
-				.row(ng-hide="action=='read'")
-					.col-xs-12.col-sm-12.col-md-12.col-lg-12
-						span.btn.default.btn-file
-							span.fileinput-new
-								| Select Inventory File
-							input(type="file", file-model="upload.inventory")
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input.form-control(type="text", ng-model="upload.inventory.name", required, disabled)
+								span.col-md-12.help-block	Inventory File
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								span.btn.blue.btn-file
+									span.fileinput-new
+										| Select Inventory File
+									input(type="file", file-model="upload.inventory")
 							br
+						//- .row(ng-hide="action=='read'")
 						|	&nbsp;
 						button.btn.green(type="submit", ng-show="upload.inventory.name && inventory_location") Upload
 						| &nbsp;

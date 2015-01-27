@@ -224,6 +224,11 @@
         "href": "/#/schedule/index"
       },
       {
+        "title": "Memorandum",
+        "description": "Announce Memo",
+        "href": "/#/memo/index"
+      },
+      {
         "title": "Upload Inventory",
         "description": "Upload Product Inventory",
         "href": "/#/upload/index"

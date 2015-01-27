@@ -431,50 +431,35 @@ angular.module('erp')
         });
           break;
         case "Sales Executive" :
-          // $scope.ajax_ready = false;
-          // Structure.Sales.query().$promise.then(function(data){
-          //   $scope.ajax_ready = true;
-          //   $scope.structure = data[0];
-          //   var status = Library.Status.Sales;
-          //   var query = {};
+          $scope.ajax_ready = false;
+          Structure.Sales.query().$promise.then(function(data){
+            $scope.ajax_ready = true;
+            $scope.structure = data[0];
+            var status = Library.Status.Sales;
+            var query = {};
+
 
             var columns = [
-            {"name": "customer","title": "Sales Executive"},
-            {"name": "sono", "title": "Sales Order"},
-            {"name": "status", "title": "Status Code"},
+            $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
             ];
 
             var buttons = [
-              {url:"/#/sales/proforma/read/",title:"View Record",icon:"fa fa-folder-open"}
+            {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
             ];
+            query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
+            status.order.created.status_code,
+            status.order.revised.status_code,
+            status.order.rejected.status_code,
+            status.delivery.rejected.status_code,
+            status.invoice.rejected.status_code,
+            status.tripticket.failed.status_code
+            ]}};
 
-            $scope.title = "Sales Executive Sales"
+            $scope.title = "SALES ORDERS"
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-            $scope.dtOptions = Library.DataTable.options("/reports/sales/se_dash");
-            $scope.dtOptions
-              .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
-              .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
-
-            // var columns = [
-            // $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-            // $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
-            // ];
-            //
-            // var buttons = [
-            // {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
-            // ];
-            // query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
-            // status.order.created.status_code,
-            // status.order.revised.status_code,
-            // status.order.rejected.status_code,
-            // status.delivery.rejected.status_code,
-            // status.invoice.rejected.status_code,
-            // status.tripticket.failed.status_code
-            // ]}};
-            // $scope.title = "SALES ORDERS"
-            // $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-            // $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
-          // });
+            $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+          });
           break;
         // case "Educator" :
         //   break;
@@ -4368,6 +4353,74 @@ var type = $routeParams.type;
 
   }
   });
+})
+.controller('MemoCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService, fileUpload) {
+
+  Session.get(function(client) {
+    if(Library.Permission.isAllowed(client,$location.path())){
+      $location.path("/auth/unauthorized");
+    }
+  });
+
+  $scope.ajax_ready = false;
+  Structure.Memo.query().$promise.then(function(data){
+    $scope.structure = data[0];
+    $scope.ajax_ready = true;
+    var columns = [];
+    var buttons = [];
+    var query = {};
+
+    $scope.init = function(){
+      columns = [
+      $scope.structure.memono, $scope.structure.memo_title,  $scope.structure.issue_date
+      ];
+
+      buttons = [
+      {url:"/#/cds/read/",title:"View Memo",icon:"fa fa-folder-open"}
+      ];
+
+      $scope.title = "MEMORANDUM"
+      $scope.addUrl = "/#/memo/add"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/api/memo?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+  });
+
+  $scope.uploadFile = function(){
+    var memo_pdf = $scope.memo.file;
+    var uploadUrl = '/api/upload/memo';
+    if(memo.file){
+      fileUpload.uploadFileToUrl('inventory_file', inventory_csv, uploadUrl,function(err,data){
+        $scope.inventories = data;
+      });
+    }
+
+    $scope.memo.issue_date =new Date();
+      $scope.memo.$save(function(){
+        $location.path('/memo/index');
+        return false;
+      });
+  };
+
+  $scope.formInit = function(){
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+    $scope.id = id;
+    console.log(action);
+
+
+    if (action=='add') {
+      var Memorandum = Api.Collection('memorandum');
+      $scope.memo = new Memorandum();
+
+      // $scope.memo.file ="sample pdf";
+      // $scope.memo.title = "sample title";
+
+    }
+
+  }
+
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 

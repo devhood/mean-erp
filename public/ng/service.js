@@ -27,6 +27,7 @@ angular.module('erp')
       Cycle : $resource('/data/structure/cycle.json'),
       Merges : $resource('/data/structure/merges.json'),
       Schedules : $resource('/data/structure/schedules.json'),
+      Memo : $resource('/data/structure/memo.json'),
       Promo : $resource('/data/structure/promo.json')
 
     }
