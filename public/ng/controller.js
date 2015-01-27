@@ -918,6 +918,7 @@ angular.module('erp')
 
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
+  console.log($scope.inventory_locations);
   $scope.title = "UPLOAD PRODUCT INVENTORY";
   $scope.uploadFile = function(){
     var inventory_csv = $scope.upload.inventory;
@@ -932,17 +933,18 @@ angular.module('erp')
 // {"inventories": {"$in":[{_id:"5487b197e1ff103526e687c4"}]}}
   $scope.update_finished = false;
   $scope.na_products = [];
-  $scope.approveData = function() {
+  $scope.approveData = function(inventories) {
   var ctr = 0;
   var na_product = {};
-  async.each($scope.inventories, function(item, callback) {
+  async.each(inventories, function(item, callback) {
+    console.log(ctr, "____ctr____");
     if(item.bl_code){
       CustomApi.Collection('products').get({key : 'bl_code', value : item.bl_code}).$promise.then(function(products){
           ctr ++;
           if (products && products.bl_code) {
             var isLocationFound = false;
             for(var i in products.inventories){
-              if (products.inventories[i]._id == $scope.inventory_location._id) {
+              if (products.inventories[i]._id == $scope.inventory_location) {
                 isLocationFound = true;
                 products.inventories[i].quantity = item.quantity;
                 products.inventories[i].rquantity = item.quantity;
@@ -952,13 +954,15 @@ angular.module('erp')
               }
             }
             if(!isLocationFound){
+              console.log("inventory_location not found", i);
               if(!(products.inventories instanceof Array)){
                 products.inventories = [];
               }
               products.inventories.push({
-                _id : $scope.inventory_location._id,
+                _id : $scope.inventory_location,
                 quantity : item.quantity,
-                rquantity : item.quantity
+                rquantity : item.quantity,
+                peste : "peste"
                 });
               products.$update(function(){
                 callback();

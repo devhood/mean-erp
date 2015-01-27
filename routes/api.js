@@ -17,9 +17,6 @@ var csv2json = require('csv2json-stream');
 
 router
 .put('/upload/:type', multipartMiddleware, function(req, res) {
-    // if (req.params.type == 'csv') { console.log("csv type"); };
-    // if (req.params.type == 'json') { console.log("json type");};
-      console.log("posted", req.files);
      for( var i in req.files){
         var temp_path = req.files[i].path;
         var file_name = req.files[i].originalFilename;
@@ -177,7 +174,9 @@ router
   }
 })
 .put('/:object/:key/:value', inventories.process_request, generator.generate, function(req, res) {
-    console.log("PUT:/:object/:key/:value");
+    console.log("object", req.params.object);
+    console.log("key", req.params.key);
+    console.log("value", req.params.value);
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');
     req.query.sorting = JSON.parse(req.query.sorting || '{}');
@@ -198,6 +197,9 @@ router
       module : req.params.object
     };
     req.body.audit_history = [audit];
+    console.log("_______________________________________________");
+      console.log("filter", req.query.filter);
+      console.log("$set", req.body);
     req.db.collection(req.params.object)
       .update(req.query.filter, {"$set" : req.body}, {safe: true})
       .done(function(data){

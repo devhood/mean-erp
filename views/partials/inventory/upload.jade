@@ -4,7 +4,7 @@ block title
 	.portlet-title
 		.caption
 			i.fa.fa-edit
-			| UPLOAD PRODUCT INVENTORY
+			| UPLOAD PRODUCT 
 		.tools
 			a.collapse(href="javascript:;")
 	.portlet-body.form
@@ -14,10 +14,11 @@ block title
 				br
 				.row(ng-hide="action=='read'")
 					.col-md-6
-							.form-group
-								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-									select.select2me.form-control.select2-offscreen(ng-model="inventory_location", ng-options="customer._id as customer.company_name for customer in inventory_locations")
-									span.col-md-12.help-block Inventory Location
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								select.select2me.form-control.select2-offscreen(ng-model="inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{inventory_location}}" ,tabindex="-1",required)
+								//- select.select2me.form-control.select2-offscreen(ng-model="inventory_location", ng-options="customer.company_name as customer._id for customer in inventory_locations")
+								span.col-md-12.help-block Inventory Location
 					.col-md-6
 				.row
 					.col-md-6
@@ -33,13 +34,12 @@ block title
 										| Select Inventory File
 									input(type="file", file-model="upload.inventory")
 							br
-						| &nbsp;
 					.col-md-1
 					.col-md-10
 					br
 					br
 					br
-				.portlet.box.grey
+				.portlet.box.grey(ng-show="inventories")
 					.portlet-title
 						.caption
 							i.fa.fa-edit
@@ -97,10 +97,10 @@ block title
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
-							a.btn.yellow(type="button" ng-show="update_finished == true", href="/#/") Confirm Update
+							a.btn.yellow(type="button" ng-show="update_finished == true", href="/#/") Confirm
 							| &nbsp;
 							button.btn.green(type="submit", ng-show="upload.inventory.name && inventory_location", ng-hide="inventories[0]") Upload
-							|	&nbsp;
+							| &nbsp;
 							a.btn.green(ng-click="approveData(inventories)", ng-show="inventories[0] && update_finished != true") Update Inventory
 							| &nbsp;
 							a.btn.default(type="button", href="/#/", ng-hide="update_finished == true") Cancel
