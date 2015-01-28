@@ -45,7 +45,8 @@ app.use(function(req, res, next) {
 app.use('/reports', require('./routes/reports'));
 app.use('/api', require('./routes/api'));
 app.use('/auth', require('./routes/auth'));
-app.use('/print', require('./routes/print'))
+app.use('/print', require('./routes/print'));
+app.use('/memo', require('./routes/memo'));
 app.get('/',function(req,res){
   res.render('dashboard',{});
 });

@@ -4380,14 +4380,28 @@ var type = $routeParams.type;
     var buttons = [];
     var query = {};
 
+    var id = $routeParams.id;
+    var action = $routeParams.action;
+    $scope.action = action;
+
+    // var temp_users = [];
+    // $scope.memo_users = Api.Collection('users').query();
+    // console.log("memo_users", $scope.memo_users);
+    // var user = $scope.memo_users;
+    // for (var i = 0; i < user.length; i++) {
+    // console.log("user", user[i]);
+    // }
     $scope.init = function(){
       columns = [
       $scope.structure.code, $scope.structure.subject,  $scope.structure.issue_date
       ];
 
       buttons = [
-      {url:"/#/memo/read/",title:"View Memo",icon:"fa fa-folder-open"}
+      {url:"/#/memo/view/",title:"View Memo",icon:"fa fa-folder-open"},
+      {url:"/#/memo/download/",title:"Download Memo",icon:"fa fa-cloud-download"},
+      {url:"/#/memo/confirmations/",title:"Check Confirmations",icon:"fa fa-gear"}
       ];
+      $scope.title = "MEMORANDUM";
       // query = {}{ },{$limit(2)}};
       $scope.addUrl = "/#/memo/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -4395,7 +4409,26 @@ var type = $routeParams.type;
     }
   });
 
+  // $scope.memorandum =  Api.Collection('memorandum').get({id:id},function(){
+  //   if (action == 'download') {
+  //     for(var i in memorandum.confirmation){
+  //
+  //     }
+  //   }
+  //   if (action == 'view') {
+  //   }
+  //   $scope.sales.$update(function(){
+  //     $window.location.href = '/print/sales/'+type+'/'+id;
+  //   });
+  // });
+// $scope.client = client;
+// console.log(client);
+
+// $scope.client = Session.get(function(client) {});
+// console.log($scope.client);
+
   $scope.uploadFile = function(){
+    console.log("users",$scope.memo.users);
     var memo_pdf = $scope.memo.file;
     var uploadUrl = '/api/memo/upload';
     if($scope.memo.file.name && $scope.memo.code && $scope.memo.subject ){
@@ -4413,23 +4446,34 @@ var type = $routeParams.type;
   $scope.formInit = function(){
     var id = $routeParams.id;
     var action = $routeParams.action;
-    $scope.action = action;
     $scope.id = id;
-    console.log(action);
-
+    $scope.action = action;
 
     if (action=='add') {
       $scope.title = "ANNOUNCE A MEMORANDUM";
       var Memorandum = Api.Collection('memorandum');
       $scope.memo = new Memorandum();
+
+      Api.Collection('users').query().$promise.then(function(data){
+        var users = [];
+        for(var i in data){
+          var temp = {};
+          temp._id = data[i]._id;
+          temp.fullname = data[i].fullname;
+          temp.username = data[i].username;
+          temp.position = data[i].position;
+          users[i] = temp;
+          // console.log("data",i," ",data[i]);
+        }
+        $scope.memo.users = users;
+        // console.log("users",$scope.memo.users);
+      });
     }
-    if (action=='read') {
+    if (action=='confirmations') {
       $scope.memo =  Api.Collection('memorandum').get({id:$routeParams.id},function(){});
       $scope.title = "MEMORANDUM "+ id;
     }
-
   }
-
 })
 .controller('AdjustmentCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
@@ -4807,13 +4851,13 @@ var type = $routeParams.type;
   var type = $routeParams.type;
   $scope.sales =  Api.Collection('sales').get({id:id},function(){
     if (type == 'delivery') {
-    $scope.sales.status = status.printed.dr;
+      $scope.sales.status = status.printed.dr;
     }
     if (type == 'invoice') {
-    $scope.sales.status = status.printed.si;
+      $scope.sales.status = status.printed.si;
     }
     $scope.sales.$update(function(){
-        $window.location.href = '/print/sales/'+type+'/'+id;
+      $window.location.href = '/print/sales/'+type+'/'+id;
     });
   });
 
