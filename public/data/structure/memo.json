@@ -5,9 +5,9 @@
       "title": "User",
       "type": "select"
     },
-    "memo_title": {
-      "name": "memo_title",
-      "title": "Title",
+    "subject": {
+      "name": "subject",
+      "title": "Subject",
       "type": "text"
     },
     "status": {
@@ -20,8 +20,8 @@
       "title": "Issue Date",
       "type": "text"
     },
-    "memono": {
-      "name": "memono",
+    "code": {
+      "name": "code",
       "title": "Memo Number",
       "type": "text"
     }

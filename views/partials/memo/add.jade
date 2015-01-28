@@ -1,5 +1,5 @@
 block title
-  title CONSIGNMENT DAILY SALES
+  title MEMORANDUM
 .portlet.box.grey(ng-if="ajax_ready", ng-init="formInit()")
   .portlet-title
     .caption
@@ -9,7 +9,7 @@ block title
       a.collapse(href="javascript:;")
   .portlet-body.form
     form.form-horizontal(role="form", name="save_form", method="post", enctype="multipart/form-data", ng-submit="uploadFile()", novalidate)
-      .form-body
+      .form-body(ng-show="action=='add'")
         .caption.title
         br
         .row
@@ -17,18 +17,18 @@ block title
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
                 input.form-control(type="text", ng-model="memo.code", required)
-                span.col-md-12.help-block	Memo Code
+                span.col-md-12.help-block Code
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                 input.form-control(type="text", ng-model="memo.subject", required)
-                span.col-md-12.help-block Memo Subject
+                span.col-md-12.help-block Subject
         .row
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
                 input.form-control(type="text", ng-model="memo.file.name", required, disabled)
-                span.col-md-12.help-block	Memo File
+                span.col-md-12.help-block File Name
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
@@ -82,7 +82,7 @@ block title
           .col-md-6
             .col-md-offset-1.col-md-11
               //- button.btn.blue(type="submit") Submit
-              button.btn.green(type="submit", ng-show="memo.file") Upload
+              button.btn.green(type="submit", ng-show="memo.file && action!='read'") Upload
               | &nbsp;
-              a.btn.default(type="button", href="/#/cds/index") Cancel
+              a.btn.default(type="button", href="/#/memo/index") Cancel
           .col-md-6

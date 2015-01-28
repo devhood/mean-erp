@@ -920,6 +920,10 @@ angular.module('erp')
   $scope.inventory_locations = Api.Collection('customers',query).query();
   console.log($scope.inventory_locations);
   $scope.title = "UPLOAD PRODUCT INVENTORY";
+  $scope.showUpload = true;
+  $scope.showConfirmUpdate = false;
+  $scope.update_finished = false;
+
   $scope.uploadFile = function(){
     var inventory_csv = $scope.upload.inventory;
     var uploadUrl = '/api/upload/csv';
@@ -928,10 +932,10 @@ angular.module('erp')
         $scope.inventories = data;
       });
     }
+    $scope.showUpload = false;
   };
 
 // {"inventories": {"$in":[{_id:"5487b197e1ff103526e687c4"}]}}
-  $scope.update_finished = false;
   $scope.na_products = [];
   $scope.approveData = function(inventories) {
   var ctr = 0;
@@ -962,7 +966,6 @@ angular.module('erp')
                 _id : $scope.inventory_location,
                 quantity : item.quantity,
                 rquantity : item.quantity,
-                peste : "peste"
                 });
               products.$update(function(){
                 callback();
@@ -988,6 +991,8 @@ angular.module('erp')
     }
   });
     $scope.update_finished = true;
+    $scope.showUpload = false;
+    $scope.showConfirmUpdate = true;
   }
 
   // if (  $scope.update_finished == true) {
@@ -4370,40 +4375,39 @@ var type = $routeParams.type;
   Structure.Memo.query().$promise.then(function(data){
     $scope.structure = data[0];
     $scope.ajax_ready = true;
+    $scope.title = "";
     var columns = [];
     var buttons = [];
     var query = {};
 
     $scope.init = function(){
       columns = [
-      $scope.structure.memono, $scope.structure.memo_title,  $scope.structure.issue_date
+      $scope.structure.code, $scope.structure.subject,  $scope.structure.issue_date
       ];
 
       buttons = [
-      {url:"/#/cds/read/",title:"View Memo",icon:"fa fa-folder-open"}
+      {url:"/#/memo/read/",title:"View Memo",icon:"fa fa-folder-open"}
       ];
-
-      $scope.title = "MEMORANDUM"
+      // query = {}{ },{$limit(2)}};
       $scope.addUrl = "/#/memo/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/api/memo?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions = Library.DataTable.options("/api/memorandum?filter="+encodeURIComponent(JSON.stringify(query)));
     }
   });
 
   $scope.uploadFile = function(){
     var memo_pdf = $scope.memo.file;
-    var uploadUrl = '/api/upload/memo';
-    if(memo.file){
-      fileUpload.uploadFileToUrl('inventory_file', inventory_csv, uploadUrl,function(err,data){
+    var uploadUrl = '/api/memo/upload';
+    if($scope.memo.file.name && $scope.memo.code && $scope.memo.subject ){
+      fileUpload.uploadFileToUrl('memo_file', memo_pdf, uploadUrl,function(err,data){
         $scope.inventories = data;
       });
-    }
-
-    $scope.memo.issue_date =new Date();
+      $scope.memo.issue_date =new Date();
       $scope.memo.$save(function(){
         $location.path('/memo/index');
         return false;
       });
+    }
   };
 
   $scope.formInit = function(){
@@ -4415,12 +4419,13 @@ var type = $routeParams.type;
 
 
     if (action=='add') {
+      $scope.title = "ANNOUNCE A MEMORANDUM";
       var Memorandum = Api.Collection('memorandum');
       $scope.memo = new Memorandum();
-
-      // $scope.memo.file ="sample pdf";
-      // $scope.memo.title = "sample title";
-
+    }
+    if (action=='read') {
+      $scope.memo =  Api.Collection('memorandum').get({id:$routeParams.id},function(){});
+      $scope.title = "MEMORANDUM "+ id;
     }
 
   }

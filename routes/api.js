@@ -47,6 +47,28 @@ router
         });
       }
 })
+.put('/memo/upload', multipartMiddleware, function(req, res) {
+     for( var i in req.files){
+        var temp_path = req.files[i].path;
+                                                                          console.log("temp",temp_path);
+        var file_name = req.files[i].originalFilename;
+                                                                          console.log("name",file_name);
+        var upload_path = __dirname.replace('routes',"") + config.upload_path_memo + file_name;
+        console.log("upload_path",upload_path);
+        // var parsed_path = __dirname.replace('routes',"") + config.upload_path_memo + file_name;
+
+        fs.rename(temp_path, upload_path, function(err){
+          if(err){
+            console.log(err);
+            res.status(400).json(err);
+          }
+          else{
+            console.log("replying upload");
+            res.status(200).json(file_name);
+          }
+        });
+        }
+})
 .get('/:object', function(req, res) {
     req.query.filter = JSON.parse(req.query.filter || '{}');
     req.query.columns = JSON.parse(req.query.columns || '{}');

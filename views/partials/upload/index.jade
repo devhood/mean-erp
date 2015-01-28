@@ -39,11 +39,11 @@ block title
 					br
 					br
 					br
-				.portlet.box.grey
+				.portlet.box.grey(ng-show="inventories")
 					.portlet-title
 						.caption
 							i.fa.fa-edit
-							| {{title}}
+							| UPLOADED INVENTORY
 						.tools
 							a.collapse(href="javascript:;")
 					.portlet-body.form
@@ -99,7 +99,7 @@ block title
 						.col-md-offset-3.col-md-9
 							a.btn.yellow(type="button" ng-show="update_finished == true", href="/#/") Confirm Update
 							| &nbsp;
-							button.btn.green(type="submit", ng-show="upload.inventory.name && inventory_location", ng-hide="inventories[0]") Upload
+							button.btn.green(type="submit", ng-show="showUpload") Upload
 							|	&nbsp;
 							a.btn.green(ng-click="approveData(inventories)", ng-show="inventories[0] && update_finished != true") Update Inventory
 							| &nbsp;
