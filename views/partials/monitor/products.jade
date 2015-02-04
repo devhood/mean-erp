@@ -1,0 +1,43 @@
+table.table.table-bordered.table-condensed.flip-content(ng-if="ajax_ready", ng-init="formInit()")
+	thead
+		tr
+			th BL Code
+			th Brand
+			th Name
+			th Intrnl Cost
+			th Retail Price
+			th Pro Price
+			th Size
+			th Color
+			th UOM
+			th Part Number
+			th Payment Term
+			th Description
+			th Supplier Code
+			th Status
+			th Movement
+			th Supplier
+			th Photo
+			th quantity
+			th rquantity
+	tbody
+		tr(ng-repeat="product in products")
+			td {{product.bl_code}}
+			td {{product.brand}}
+			td {{product.name
+			td {{product.international_cost}}
+			td {{product.retail_price}}
+			td {{product.professional_price}}
+			td {{product.size}}
+			td {{product.color}}
+			td {{product.uom}}
+			td {{product.part_number}}
+			td {{product.payment_term}}
+			td {{product.description}}
+			td {{product.supplier_code}}
+			td {{product.status}}
+			td {{product.movement}}
+			td {{product.supplier}}
+			td {{product.product_photo}}
+			td {{product.quantity}}
+			td {{product.rquantity}}

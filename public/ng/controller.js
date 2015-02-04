@@ -908,6 +908,17 @@ angular.module('erp')
     }
   });
 
+// }).controller('MonitorCtrl', function ($scope, Api) {
+//   $scope.ajax_ready = false;
+//   Structure.Products.query().$promise.then(function(data){
+//     $scope.ajax_ready = true;
+//     $scope.ajax_ready = true;
+//     $scope.products =  Api.Collection('products');
+//   };
+
+//     // $scope.formInit = function(){
+//     // $scope.products =  Api.Collection('products');
+//     // }
 }).controller('UploadCtrl', function ($scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session, Api, CustomApi, popupService, fileUpload) {
 
   Session.get(function(client) {
