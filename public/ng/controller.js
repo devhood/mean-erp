@@ -1908,6 +1908,16 @@ $scope.init = function(){
         return false;
       });
     };
+
+     $scope.deleteSales = function(){
+      $scope.sales.status = status.order.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
+    };
+
+
   }
   if(action == 'reschedule'){
     $scope.title = "RESCHEDULE SALES ORDER - Ref.No.: "+ id;
@@ -2900,7 +2910,7 @@ $scope.init = function(){
 
     $scope.init = function(){
       columns = [
-      $scope.structure.customer.company_name, $scope.structure.delivery_date, $scope.structure.prepared_by, $scope.structure.status.status_name
+      $scope.structure.customer.company_name, $scope.structure.delivery_date, $scope.structure.status.status_name
       ];
 
       buttons = [
