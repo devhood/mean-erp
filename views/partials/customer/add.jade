@@ -70,13 +70,13 @@ block title
 						.form-group
 							.col-xs-12.col-sm-12.col-md-7.col-lg-7.custom-right
 								label.checkbox
-									input#consignee(type="checkbox",   ng-model="customer.consignee" value="1")
+									input#consignee(type="checkbox",   ng-model="customer.consignee" value="1", ng-disabled="action=='read'")
 									| Consignee
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 								label.checkbox
-									input#franchise(type="checkbox", ng-model="customer.franchise", value="1")
+									input#franchise(type="checkbox", ng-model="customer.franchise", value="1", ng-disabled="action=='read'")
 									| Franchise
 				.row
 					.col-md-6
@@ -99,7 +99,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								select.select2me.form-control.select2-offscreen(ng-model="customer.discount", ng-options="discount.name as discount.name for discount in discounts" )
+								select.select2me.form-control.select2-offscreen(ng-model="customer.discount", ng-options="discount.name as discount.name for discount in discounts", ng-disabled="action=='read'")
 								span.col-md-12.help-block	Permanent Discount
 				.row
 					.col-md-6
@@ -179,7 +179,7 @@ block title
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 										label.checkbox Use as Billing Address
-											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1")
+											input(type="checkbox", ng-checked="copyShipping()", ng-model="customer.shipping_address.same", value="1", ng-disabled="action=='read'")
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
@@ -274,14 +274,14 @@ block title
 															th Position
 															th Email
 															th Phone
-															th Action
+															th(ng-hide="action=='read'") Action
 													tbody
 														tr(ng-repeat="contact in customer.contacts")
 															td {{contact.name}}
 															td {{contact.position}}
 															td {{contact.email}}
 															td {{contact.phone}}
-															td(width="5%")
+															td(width="5%", ng-hide="action=='read'")
 																.btn-group.btn-group-xs.btn-group-solid
 																	a.tooltips.btn.default(ng-click="removeContact($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
 																		i.fa.fa-trash-o
