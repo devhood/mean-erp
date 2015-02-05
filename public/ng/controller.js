@@ -687,6 +687,7 @@ angular.module('erp')
           $scope.customer =  Api.Collection('customers').get({id:$routeParams.id});
           $scope.province_ng_option = "geography.province for geography in geographys track by customer.billing_address.province";
           $scope.saveCustomer = function(){
+            console.log("updating customer");
             $scope.customer.$update(function(){
               $location.path('/customer/index');
               return false;
