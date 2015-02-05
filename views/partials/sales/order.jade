@@ -63,7 +63,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types track by sales.customer.price_type", ng-selected="{{sales.customer.price_type}}", tabindex="-1", disabled)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types track by sales.customer.price_type", ng-selected="{{sales.customer.price_type}}", tabindex="-1")
                 span.col-md-12.help-block Price Type
           .col-md-6
             .form-group
