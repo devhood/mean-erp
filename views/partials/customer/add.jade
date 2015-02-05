@@ -290,7 +290,7 @@ block title
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
-							button.btn.green(type="submit" ng-show="action=='approve'") Submit
+							button.btn.green(type="submit" ng-show="action!='read'") Submit
 							| &nbsp;
 							button.btn.red(type="button", ng-click="deleteCustomer(customer)", ng-show="action=='edit' || action=='approve'") Delete
 							| &nbsp;

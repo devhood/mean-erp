@@ -707,6 +707,7 @@ angular.module('erp')
           $scope.province_ng_option = "geography.province for geography in geographys track by customer.billing_address.province";
           $scope.saveCustomer = function(){
             $scope.customer.$update(function(){
+                console.log("saving customer");
               $location.path('/customer/index');
               return false;
             });
