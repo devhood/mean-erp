@@ -138,7 +138,7 @@ block title
                   .col-md-3
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.bl_code for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.bl_code for product in products | orderBy:'bl_code'")
                         span.col-md-12.help-block Code
                   .col-md-4
                     .form-group
