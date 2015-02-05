@@ -285,7 +285,7 @@ block title
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
-							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+							button.btn.green(type="submit" ng-show="action=='approve'") Submit
 							| &nbsp;
 							button.btn.red(type="button", ng-click="deleteProduct(product)", ng-show="action=='edit' || action=='approve'") Delete
 							| &nbsp;
