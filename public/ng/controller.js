@@ -1727,6 +1727,17 @@ $scope.init = function(){
       console.log(item);
       var isInventoryExist = false;
       var insufficient_item = [];
+      if (item.uom == "Package" || item.uom == "Promo") {
+        console.log("UOM", item.uom);
+        isInventoryExist = true;
+      }
+      else {
+      for(var i in item.inventories){
+        if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
+          isInventoryExist = true;
+        }
+      }
+      }
       for(var i in item.inventories){
         if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
           isInventoryExist = true;
@@ -1895,6 +1906,7 @@ $scope.init = function(){
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){
         $scope.sales.status = status.order.created;
+        console.log("status order created");
       }
       $scope.sales.$update(function(){
         $location.path('/sales/index/override');

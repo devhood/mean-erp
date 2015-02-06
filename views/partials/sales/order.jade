@@ -111,7 +111,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="action=='read'  || action=='approve'",required)
+                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'  || action=='approve'",required)
                 span.col-md-12.help-block Special Instructions
         .row(ng-show="sales.promo")
           .col-md-1
@@ -144,7 +144,7 @@ block title
                   .col-md-4
                     .form-group
                       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.name for product in products")
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.name for product in products | orderBy:'name'")
                         span.col-md-12.help-block Product
                   .col-md-2
                     .form-group
