@@ -63,12 +63,12 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types track by price_type.price_type_name" ,tabindex="-1", , ng-disabled="action=='read' || action=='approve'")
+                input.form-control(type="text", ng-model="sales.customer.price_type", disabled)
                 span.col-md-12.help-block Price Type
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.name as discount.name for discount in discounts track by discount.discount_name", ng-selected="{{sales.discount}}" ,ng-disabled="action=='read' || action=='approve'")
+                input.form-control(type="text", ng-model="sales.customer.discount", disabled)
                 span.col-md-12.help-block Permanent Discount
         .row(ng-show="sales.customer")
           .col-md-6
@@ -79,7 +79,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms track by payment_term.payment_term_name",tabindex="-1", ng-disabled="action=='read' || action=='approve'")
+                input.form-control(type="text", ng-model="sales.customer.payment_term", disabled)
                 span.col-md-12.help-block Payment Terms
         .row
           .col-md-6
@@ -112,7 +112,7 @@ block title
                 span.col-md-12.help-block Special Instructions
         .alert.alert-warning(role='alert', ng-hide="sales.customer && sales.inventory_location") Please select Customer and Inventory Location to Proceed
           .col-md-1
-        .portlet.box.grey(ng-show="sales.customer && sales.inventory_locations")
+        .portlet.box.grey(ng-show="sales.customer && sales.inventory_location")
           .portlet-title
             .caption
               i.fa.fa-reorder
