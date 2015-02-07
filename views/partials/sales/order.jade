@@ -48,7 +48,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-value="shipping_address", disabled)
+                input.form-control(ng-model="sales.customer.shipping_address", type="text")
                 span.col-md-12.help-block Shipping Address
           .col-md-1
         .row(ng-show="sales.customer")
@@ -56,7 +56,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-value="billing_address", disabled)
+                input.form-control(ng-model="sales.customer.billing_address", type="text")
                 span.col-md-12.help-block Billing Address
           .col-md-1
         .row(ng-show="sales.customer")
