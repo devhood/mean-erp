@@ -244,11 +244,13 @@ block title
 												table.table.table-bordered.table-condensed.flip-content
 													thead.flip-content.bg-grey
 														tr
+															th BL Code
 															th Product
 															th Quantity
 															th(ng-hide="action=='read' || action=='approve'") Action
 													tbody
 														tr(ng-repeat="item in product.packages")
+															td {{item.bl_code}}
 															td {{item.name}}
 															td {{item.quantity}}
 															td(width="5%", ng-hide="action=='read' || action=='approve'")
