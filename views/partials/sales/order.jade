@@ -40,7 +40,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="sales.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{sales.customer.company_name}}" ,tabindex="-1", required, ng-disabled="sales.ordered_items && sales.ordered_items.length")
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="sales.customer", ng-options="customer.company_name+' - '+customer.branch for customer in customers  | orderBy:'company_name' track by customer.company_name", ng-selected="{{sales.customer.company_name}}" ,tabindex="-1", required, ng-disabled="sales.ordered_items && sales.ordered_items.length")
                 span.col-md-12.help-block Customer
           .col-md-1
         .row(ng-show="sales.customer")
