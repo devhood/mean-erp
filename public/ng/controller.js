@@ -1701,6 +1701,9 @@ $scope.init = function(){
   $scope.products = Api.Collection('products').query();
   var status = Library.Status.Sales;
 
+  var query = {"position":"Sales Executive"};
+  $scope.sales_executives = Api.Collection('users',query).query();
+
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
       $scope.shipping_address =
@@ -3907,8 +3910,8 @@ var type = $routeParams.type;
     $scope.price_types = Api.Collection('price_types').query();
     $scope.order_sources = Api.Collection('order_sources').query();
     $scope.delivery_methods = Api.Collection('delivery_methods').query();
+    $scope.customers = Api.Collection('customers').query();
     var query = {"type":"Retail"};
-    $scope.customers = Api.Collection('customers',query).query();
     $scope.inventory_locations = Api.Collection('customers',query).query();
     $scope.products = Api.Collection('products').query();
     var status = Library.Status.Consignments;
