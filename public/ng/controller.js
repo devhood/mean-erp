@@ -918,9 +918,9 @@ angular.module('erp')
 //     $scope.products =  Api.Collection('products');
 //   };
 
-//     // $scope.formInit = function(){
-//     // $scope.products =  Api.Collection('products');
-//     // }
+    // $scope.formInit = function(){
+    // $scope.products =  Api.Collection('products');
+    // }
 }).controller('UploadCtrl', function ($scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session, Api, CustomApi, popupService, fileUpload) {
 
   Session.get(function(client) {
@@ -1743,7 +1743,8 @@ $scope.init = function(){
           isInventoryExist = true;
         }
       }
-      if(isInventoryExist){
+      // if(isInventoryExist){
+      if(true){
         item.override = item.override ? item.override : "NORMAL";
         if(sales.customer.price_type == "Professional"){
           item.price = item.professional_price
