@@ -1910,6 +1910,7 @@ $scope.init = function(){
       }
     };
     // displayItemQuantity();
+    
   }
   if(action == 'approve'){
     console.log(action);
