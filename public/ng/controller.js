@@ -1724,11 +1724,12 @@ $scope.init = function(){
   }
 
   var displayItemQuantity = function() {
-    $scope.totalQuantity=0;
-    for(var i=0;i<$scope.sales.ordered_items.length; i++){
-    $scope.totalQuantity += $scope.sales.ordered_items[i].quantity;
-    console.log("totalQuantity",$scope.totalQuantity);
-    }
+    // $scope.totalQuantity=0;
+    // for(var i=0;i<$scope.sales.ordered_items.length; i++){
+    // $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
+    // console.log("totalQuantity",$scope.sales.totalQuantity);
+    // }
+    console.log("items",$scope.sales.ordered_items);
   }
 
   $scope.addOrder = function(sales){
@@ -1755,7 +1756,7 @@ $scope.init = function(){
           isInventoryExist = true;
         }
       }
-      // if(isInventoryExist){
+      // if(isInventoryExist)
       if(true){
         item.override = item.override ? item.override : "NORMAL";
         if(sales.customer.price_type == "Professional"){
@@ -1805,7 +1806,13 @@ $scope.init = function(){
      $scope.sales.total_amount_due = computation.totalAmountDue;
      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
      $scope.sales.withholding_tax = computation.withholdingTax;
-     displayItemQuantity();
+    //  displayItemQuantity();
+
+     $scope.sales.totalQuantity=0;
+     for(var i=0;i<$scope.sales.ordered_items.length; i++){
+     $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
+     console.log("totalQuantity",$scope.sales.totalQuantity);
+     }
   }
 
   $scope.reCompute = function(sales){
@@ -1835,7 +1842,12 @@ $scope.init = function(){
         $scope.sales.isNeedApproval = true;
       }
     }
-    displayItemQuantity();
+    // displayItemQuantity();
+    $scope.sales.totalQuantity=0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+    $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
+    console.log("totalQuantity",$scope.sales.totalQuantity);
+    }
   }
 
   if(action == 'read'){
@@ -1844,20 +1856,6 @@ $scope.init = function(){
       $scope.CustomerChange();
     });
   }
-
-  // $scope.checkInventory = function(inventories) {
-  //   console.log(inventories);
-  //   for(var i in inventories){
-  //     if (inventories[i]._id == $scope.sales.inventory_location) {
-  //       if (sales.item.quantity > inventories.rquantity) {
-  //         console.log("INSUFFICIENT");
-  //       }
-  //     }
-  //     else {
-  //
-  //     }
-  //   }
-  // }
 
   if(action == 'add'){
     $scope.title = "ADD SALES ORDER";
@@ -1911,6 +1909,7 @@ $scope.init = function(){
         });
       }
     };
+    // displayItemQuantity();
   }
   if(action == 'approve'){
     console.log(action);
@@ -1943,8 +1942,7 @@ $scope.init = function(){
         return false;
       });
     };
-
-
+    // displayItemQuantity();
   }
   if(action == 'reschedule'){
     $scope.title = "RESCHEDULE SALES ORDER - Ref.No.: "+ id;
@@ -2031,9 +2029,9 @@ $scope.init = function(){
   var displayItemQuantity = function() {
     console.log("displayItemQuantity");
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
-    $scope.totalQuantity=0;
-    $scope.totalQuantity += $scope.sales.ordered_items[i].quantity;
-    console.log($scope.totalQuantity);
+    $scope.sales.totalQuantity=0;
+    $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
+    console.log($scope.sales.totalQuantity);
     }
 
   }
@@ -2568,22 +2566,11 @@ $scope.init = function(){
     }
   }
 
- //  $scope.add200 = function(sales){
- //    var items=[];
- //    for (var i = 0; itemslength<200; i++) {
-
- //    };
- //    $scope.sales.ordered_items =
- //      delete item.inventories;
- // cope.sales.ordered_items = [item];
- //    console.log($scope.sales.ordered_items);
- //  }
-
 var displayItemQuantity = function() {
-  $scope.totalQuantity=0;
+  $scope.sales.totalQuantity=0;
   for(var i=0;i<$scope.sales.ordered_items.length; i++){
-  $scope.totalQuantity += $scope.sales.ordered_items[i].quantity;
-  console.log("totalQuantity",$scope.totalQuantity);
+  $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
+  console.log("totalQuantity",$scope.sales.totalQuantity);
   }
 }
 
@@ -2651,6 +2638,7 @@ var displayItemQuantity = function() {
      $scope.sales.withholding_tax = computation.withholdingTax;
      displayItemQuantity();
   }
+
   $scope.reCompute = function(sales){
 
     if($scope.sales.customer){
@@ -2673,6 +2661,7 @@ var displayItemQuantity = function() {
       $scope.sales.withholding_tax = computation.withholdingTax;
     }
   }
+
   $scope.removeOrder = function(index){
     $scope.sales.ordered_items.splice(index, 1);
     $scope.sales.subtotal = 0;
@@ -2685,13 +2674,16 @@ var displayItemQuantity = function() {
     }
     displayItemQuantity();
   }
+
   if(action == 'read'){
+    displayItemQuantity();
     $scope.title = "VIEW PROFORMA INVOICE";
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
   }
   if(action == 'add'){
+
     $scope.title = "ADD PROFORMA INVOICE";
     var Sales = Api.Collection('sales');
     $scope.sales = new Sales();
@@ -2712,7 +2704,7 @@ var displayItemQuantity = function() {
     }
   }
   if(action == 'edit'){
-
+    displayItemQuantity();
     $scope.title = "EDIT PROFORMA INVOICE"+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -2741,7 +2733,7 @@ var displayItemQuantity = function() {
   }
 
   if(action == 'approve'){
-
+    displayItemQuantity();
     $scope.title = "APPROVE PROFORMA INVOICE"+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
