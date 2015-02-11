@@ -87,14 +87,14 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								input#transaction_limit.form-control(type="text", ng-model="customer.transaction_limit", min="1", max="3", ui-mask="9" ng-disabled="action!='approve'")
+								input#transaction_limit.form-control(type="text", ng-model="customer.transaction_limit", min="1", max="3", ui-mask="9", ng-disabled="action!='approve'")
 								span.col-md-12.help-block
 									| Unpaid Transaction Limit
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#payment_term.select2me.form-control.select2-offscreen(ng-model="customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms", ng-selected="{{customer.payment_term}}" ng-disabled="action!='approve'")
+								select#payment_term.select2me.form-control.select2-offscreen(ng-model="customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms", ng-selected="{{customer.payment_term}}", ng-disabled="action!='approve'")
 								span.col-md-12.help-block	Payment Terms
 					.col-md-6
 						.form-group
@@ -105,23 +105,23 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#shippingModeId.select2me.form-control.select2-offscreen(ng-model="customer.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{customer.shipping_mode}}" ng-disabled="action=='read'" )
+								select#shippingModeId.select2me.form-control.select2-offscreen(ng-model="customer.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{customer.shipping_mode}}", ng-disabled="action=='read'" )
 								span.col-md-12.help-block	Delivery Method
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								select#userId.select2me.form-control.select2-offscreen(ng-model="customer.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", ng-selected="{{customer.sales_executive}}" ng-disabled="action=='read'" )
+								select#userId.select2me.form-control.select2-offscreen(ng-model="customer.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", ng-selected="{{customer.sales_executive}}", ng-disabled="action=='read'" )
 								span.col-md-12.help-block	Sales Executive
 				.row
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#priceTypeId.select2me.form-control.select2-offscreen(ng-model="customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types", ng-selected="{{customer.price_type}}" ng-disabled="action=='read'" )
+								select#priceTypeId.select2me.form-control.select2-offscreen(ng-model="customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types", ng-selected="{{customer.price_type}}", ng-disabled="action=='read'" )
 								span.col-md-12.help-block	Price Type
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left.select
-								select#status.select2me.form-control.select2-offscreen(ng-model="customer.status", ng-options="status.name as status.name for status in customer_status", ng-selected="{{customer.status}}" ng-disabled="action=='read'" )
+								select#status.select2me.form-control.select2-offscreen(ng-model="customer.status", ng-options="status.name as status.name for status in customer_status", ng-selected="{{customer.status}}", ng-disabled="action=='read'" )
 								span.col-md-12.help-block	Customer Status
 				.portlet.box.grey
 					.portlet-title

@@ -1722,6 +1722,15 @@ $scope.init = function(){
           $scope.sales.customer.billing_address.zipcode;
     }
   }
+
+  var displayItemQuantity = function() {
+    $scope.totalQuantity=0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+    $scope.totalQuantity += $scope.sales.ordered_items[i].quantity;
+    console.log("totalQuantity",$scope.totalQuantity);
+    }
+  }
+
   $scope.addOrder = function(sales){
     var no_inventory_location = false;
     var item = angular.copy(sales.item);
@@ -1796,6 +1805,7 @@ $scope.init = function(){
      $scope.sales.total_amount_due = computation.totalAmountDue;
      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
      $scope.sales.withholding_tax = computation.withholdingTax;
+     displayItemQuantity();
   }
 
   $scope.reCompute = function(sales){
@@ -1814,9 +1824,9 @@ $scope.init = function(){
       $scope.sales.withholding_tax = computation.withholdingTax;
     }
   }
+
   $scope.removeOrder = function(index){
     $scope.sales.ordered_items.splice(index, 1);
-
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
@@ -1825,6 +1835,7 @@ $scope.init = function(){
         $scope.sales.isNeedApproval = true;
       }
     }
+    displayItemQuantity();
   }
 
   if(action == 'read'){
@@ -2016,6 +2027,17 @@ $scope.init = function(){
           $scope.sales.customer.billing_address.zipcode;
     }
   }
+
+  var displayItemQuantity = function() {
+    console.log("displayItemQuantity");
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+    $scope.totalQuantity=0;
+    $scope.totalQuantity += $scope.sales.ordered_items[i].quantity;
+    console.log($scope.totalQuantity);
+    }
+
+  }
+
   $scope.addOrder = function(sales){
     var no_inventory_location = false;
     var item = angular.copy(sales.item);
@@ -2069,6 +2091,7 @@ $scope.init = function(){
       $scope.sales.total_amount_due = computation.totalAmountDue;
       $scope.sales.zero_rate_sales = computation.zeroRatedSales;
       $scope.sales.withholding_tax = computation.withholdingTax;
+      displayItemQuantity();
     }
 
   $scope.reCompute = function(sales){
@@ -2556,7 +2579,14 @@ $scope.init = function(){
  //    console.log($scope.sales.ordered_items);
  //  }
 
-    /////
+var displayItemQuantity = function() {
+  $scope.totalQuantity=0;
+  for(var i=0;i<$scope.sales.ordered_items.length; i++){
+  $scope.totalQuantity += $scope.sales.ordered_items[i].quantity;
+  console.log("totalQuantity",$scope.totalQuantity);
+  }
+}
+
   $scope.addOrder = function(sales){
     var no_inventory_location = false;
     var item = angular.copy(sales.item);
@@ -2619,6 +2649,7 @@ $scope.init = function(){
      $scope.sales.total_amount_due = computation.totalAmountDue;
      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
      $scope.sales.withholding_tax = computation.withholdingTax;
+     displayItemQuantity();
   }
   $scope.reCompute = function(sales){
 
@@ -2652,6 +2683,7 @@ $scope.init = function(){
         $scope.sales.isNeedApproval = true;
       }
     }
+    displayItemQuantity();
   }
   if(action == 'read'){
     $scope.title = "VIEW PROFORMA INVOICE";
