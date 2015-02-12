@@ -1,4 +1,4 @@
-{"status_code":["SALES_ORDER_CREATED"],"field":"sono","prefix":"SO","suffix":2015,"count":144}
+{"status_code":["SALES_ORDER_CREATED"],"field":"sono","prefix":"SO","suffix":2015,"count":1}
 {"status_code":["CONSIGNED_ORDER_CREATED"],"field":"cono","prefix":"CO","suffix":2015,"count":1}
 {"status_code":["CONSIGNED_DELIVERY_RECEIPT_APPROVED"],"field":"cdrno","prefix":"CDR","suffix":2015,"count":1}
 {"status_code":["PACKING_CREATED"],"field":"pckno","prefix":"PACK","suffix":2015,"count":1}

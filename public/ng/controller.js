@@ -1361,7 +1361,7 @@ angular.module('erp')
 
           ];
 
-          query = { "status.status_code" : {"$in" : [status.invoice.approved.status_code, status.printed.dr.status_code, status.printed.si.status_code]}};
+          query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code,status.invoice.approved.status_code, status.printed.dr.status_code, status.printed.si.status_code]}};
           $scope.title = "Print DR nd SI";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
