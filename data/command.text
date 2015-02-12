@@ -91,3 +91,8 @@ mongoimport --db beautylane-db --collection provinces --file data/json/provinces
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/ZamboangaSibugay.json
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/ZamboangadelSur.json
 mongoimport --db beautylane-db --collection payment_types --type csv --headerline --file data/csv/payment_types.csv
+
+
+
+
+mongoexport --db beautylane-db --collection sales --out /home/beautylaneph1234_gmail_com/applications/mean-erp/data/backups/sales_backup.json --journal
