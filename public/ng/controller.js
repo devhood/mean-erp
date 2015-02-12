@@ -1760,7 +1760,7 @@ $scope.init = function(){
       if(true){
         item.override = item.override ? item.override : "NORMAL";
         if(sales.customer.price_type == "Professional"){
-          item.price = item.professional_price
+          item.price = item.professional_price;
         }
         if(sales.customer.price_type == "Retail"){
           item.price = item.retail_price;
@@ -1769,7 +1769,11 @@ $scope.init = function(){
           item.price = item.override;
           item.total = 0.00;
         }
-        if(!isNaN(item.price)){
+        if(!isNaN(item.override)){
+          item.price = item.professional_price+" ("+item.override+"% discount"+")";
+          item.total = (item.professional_price - ((item.override/100)*item.professional_price)) * item.quantity;
+        }
+        else if(!isNaN(item.price)){
           item.total = item.quantity * item.price;
         }
         delete item.inventories;
@@ -1910,7 +1914,7 @@ $scope.init = function(){
       }
     };
     // displayItemQuantity();
-    
+
   }
   if(action == 'approve'){
     console.log(action);
@@ -2002,6 +2006,7 @@ $scope.init = function(){
       console.log("got required_items");
       $scope.products = $scope.promo_products.required_items;
     }
+
     else if ($scope.sales.promo_type == "FREEBIE") {
       $scope.products = $scope.promo_products.freebies;
       console.log("got freebies");

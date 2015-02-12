@@ -49,7 +49,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(ng-model="sales.customer.shipping_address", ng-value="sales.customer.shipping_address.landmark+ ','+sales.customer.shipping_address.barangay+ ',' +sales.customer.shipping_address.city + ',' +sales.customer.shipping_address.provice + ',' +sales.customer.shipping_address.country", type="text")
+                input.form-control(ng-model="sales.customer.shipping_address", ng-value="sales.customer.shipping_address.landmark+ ','+sales.customer.shipping_address.barangay+ ',' +sales.customer.shipping_address.city + ',' +sales.customer.shipping_address.provice + ',' +sales.customer.shipping_address.country", type="text",ng-disabled="action=='read' || action=='approve'")
                 span.col-md-12.help-block Shipping Address
           .col-md-1
         .row(ng-show="sales.customer")
@@ -57,7 +57,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(ng-model="sales.customer.billing_address", ng-value="sales.customer.shipping_address.landmark+ ','+sales.customer.billing_address.barangay+ ',' +sales.customer.billing_address.city + ',' +sales.customer.billing_address.provice + ',' +sales.customer.billing_address.country", type="text")
+                input.form-control(ng-model="sales.customer.billing_address", ng-value="sales.customer.shipping_address.landmark+ ','+sales.customer.billing_address.barangay+ ',' +sales.customer.billing_address.city + ',' +sales.customer.billing_address.provice + ',' +sales.customer.billing_address.country", type="text",ng-disabled="action=='read' || action=='approve'")
                 span.col-md-12.help-block Billing Address
           .col-md-1
         .row(ng-show="sales.customer")
@@ -105,14 +105,14 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", ng-disabled="action=='read' || action=='reschedule'",required)
+                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", ng-disabled="action=='read' || action=='reschedule' || action=='approve'",required)
                 span.col-md-12.help-block Ordered By
         .row
           .col-md-1
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'  || action=='approve'",required)
+                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'",required)
                 span.col-md-12.help-block Special Instructions
         .row(ng-show="sales.promo")
           .col-md-1
@@ -159,6 +159,13 @@ block title
                           option(value='NORMAL') None
                           option(value='FREEBIE') Freebie
                           option(value='DEMO') Demo
+                          option(value=5) 5% Discount
+                          option(value=10) 10% Discount
+                          option(value=15) 15% Discount
+                          option(value=20) 20% Discount
+                          option(value=25) 25% Discount
+                          option(value=30) 30% Discount
+                          option(value=35) 35% Discount
                         span.col-md-12.help-block Override
                   .col-md-1
                     button.btn-sm.green.custom-right(type="button",ng-click="addOrder(sales)")
