@@ -920,9 +920,16 @@ angular.module('erp')
       $scope.formInit = function(){
         $scope.products =  Api.Collection('products').query();
       };
-    var products = $scope.products;
-    console.log("products", products);
     });
+
+    $scope.traceDuplicate = function() {
+      for (var i = 0; i < array.length; i++) {
+        array[i]
+      }
+
+
+    }
+
 
     // $scope.total = $scope.products.length;
 

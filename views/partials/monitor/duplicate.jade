@@ -8,44 +8,44 @@ block title
     .tools
       a.collapse(href="javascript:;")
   .portlet-body.form
-        .portlet.box.grey
-          .portlet-title
-            .caption
-            .row
-              .col-md-6
-                .form-group
-                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                    input.form-control(type="text", ng-model="products.length", readonly)
-                    span.col-md-12.help-block Total Products
-            .row
-              .col-md-6
-                .form-group
-                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                    input.form-control(type="text", ng-model="duplicate", readonly)
-                    span.col-md-12.help-block Duplicated bl_code
-              a.collapse(href="javascript:;")
-          .portlet-body.form
-                  .row
-                    br
-                    .col-md-12
-                      .portlet-body.flip-scroll
-                        table.table.table-bordered.table-condensed.flip-content
-                          thead.flip-content.bg-grey
-                            tr
-                              th Code
-                              th Product
-                              th rquantity
-                              th quantity
-                          tbody
-                            tr(ng-repeat="item in products")
-                              td {{item.bl_code}}
-                              td {{item.name}}
-                              td {{item.inventories[0].rquantity}}
-                              td {{item.inventories[0].quantity}}
-                    .col-md-2
-                    br
-                    br
-                    br
+      .row
+        .col-md-6
+          .form-group
+            .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+              input.form-control(type="text", ng-model="products.length", readonly)
+              span.col-md-12.help-block Total Products
+        .col-md-6
+          .form-group
+            .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+              input.form-control(type="text", ng-model="duplicate", readonly)
+              span.col-md-12.help-block Duplicated bl_code
+      .row
+        .col-md-6
+          .col-md-offset-3.col-md-9
+            button.btn.green(type="button", ng-click="traceDuplicate()") Submit
+        br
+        br
+      .row
+        br
+        .col-md-12
+          .portlet-body.flip-scroll
+            table.table.table-bordered.table-condensed.flip-content
+              thead.flip-content.bg-grey
+                tr
+                  th Code
+                  th Product
+                  th rquantity
+                  th quantity
+              tbody
+                tr(ng-repeat="item in products")
+                  td {{item.bl_code}}
+                  td {{item.name}}
+                  td {{item.inventories[0].rquantity}}
+                  td {{item.inventories[0].quantity}}
+        .col-md-2
+        br
+        br
+        br
 
       .form-actions.fluid
         .row
