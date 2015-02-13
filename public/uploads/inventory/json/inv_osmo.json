@@ -1,0 +1,105 @@
+[{
+    "bl_code": 61001,
+    "name": "Shaper Maker",
+    "quantity": 8
+},{
+    "bl_code": 61002,
+    "name": "Shaper Maker Traveller",
+    "quantity": "0"
+},{
+    "bl_code": 61003,
+    "name": "Aqua Wax",
+    "quantity": 3
+},{
+    "bl_code": 61004,
+    "name": "Wax Pomade",
+    "quantity": 2
+},{
+    "bl_code": 61005,
+    "name": "Clay Wax",
+    "quantity": 3
+},{
+    "bl_code": 61006,
+    "name": "Clay Wax Traveller",
+    "quantity": "0"
+},{
+    "bl_code": 61007,
+    "name": "Aqua Wax Hard",
+    "quantity": "0"
+},{
+    "bl_code": 61008,
+    "name": "Fibre Paste",
+    "quantity": 2
+},{
+    "bl_code": 61009,
+    "name": "Fibre Hard",
+    "quantity": 2
+},{
+    "bl_code": 61011,
+    "name": "Power Dust",
+    "quantity": 10
+},{
+    "bl_code": 61012,
+    "name": "Day Two Styler Dry Shampoo",
+    "quantity": 1
+},{
+    "bl_code": 61013,
+    "name": "Extreme Extra Firm Hairspray",
+    "quantity": 11
+},{
+    "bl_code": 61014,
+    "name": "Thermal Defense",
+    "quantity": 2
+},{
+    "bl_code": 61015,
+    "name": "Blowdry Potion",
+    "quantity": 6
+},{
+    "bl_code": 61016,
+    "name": "Curl Fluid",
+    "quantity": 1
+},{
+    "bl_code": 61042,
+    "name": "Blinding Shine Shampoo",
+    "quantity": 2
+},{
+    "bl_code": 61044,
+    "name": "Blinding Shine Conditioner",
+    "quantity": 2
+},{
+    "bl_code": 61046,
+    "name": "Blinding Shine Illuminating Finisher",
+    "quantity": 2
+},{
+    "bl_code": 61053,
+    "name": "Deep Moisturising Shampoo",
+    "quantity": 2
+},{
+    "bl_code": 61055,
+    "name": "Deep Moisturising Conditioner",
+    "quantity": 2
+},{
+    "bl_code": 61065,
+    "name": "Extreme Volume Shampoo",
+    "quantity": 1
+},{
+    "bl_code": 61067,
+    "name": "Extreme Volume Conditioner",
+    "quantity": 1
+},{
+    "bl_code": 61069,
+    "name": "Extreme Volume Root Lifter",
+    "quantity": 1
+},{
+    "bl_code": 61076,
+    "name": "Colour Mission Vibrance Mask",
+    "quantity": 3
+},{
+    "bl_code": 71035,
+    "name": "Colour Mission Shampoo",
+    "quantity": 1
+},{
+    "bl_code": 61010,
+    "name": "Corruptor",
+    "quantity": 1
+}] 

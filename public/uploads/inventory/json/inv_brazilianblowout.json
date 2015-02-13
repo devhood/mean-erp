@@ -1,0 +1,657 @@
+[{
+    "bl_code": "BB11R10",
+    "name": "Açai Brazilian Dry Oil",
+    "quantity": 48
+},{
+    "bl_code": "BB11R13",
+    "name": "Açai Flexible Molding Clay Wax",
+    "quantity": "0"
+},{
+    "bl_code": "BB11R02",
+    "name": "Acai Anti Frizz Conditioner",
+    "quantity": 453
+},{
+    "bl_code": "BB11R01",
+    "name": "Acai Anti Frizz Shampoo",
+    "quantity": 361
+},{
+    "bl_code": "BB11R03",
+    "name": "Acai Daily Smoothing Serum",
+    "quantity": 703
+},{
+    "bl_code": "BB11R04",
+    "name": "Acai Deep Conditioning Masque",
+    "quantity": 548
+},{
+    "bl_code": "BB11R08",
+    "name": "Acai Instant Volume Thermal Root Lift",
+    "quantity": 110
+},{
+    "bl_code": "BB11P05",
+    "name": "Acai Professional Anti Residue Shampoo",
+    "quantity": 347
+},{
+    "bl_code": "BB11P06",
+    "name": "Acai Professional Smoothing Solution",
+    "quantity": 1
+},{
+    "bl_code": "BB11P66",
+    "name": "Acai Professional Smoothing Solution_ZERO",
+    "quantity": 45
+},{
+    "bl_code": "BB11R07",
+    "name": "Acai Protective Thermal Straightening Balm",
+    "quantity": 245
+},{
+    "bl_code": "BB11R05",
+    "name": "Acai Restorative Sculpt & Define Polish",
+    "quantity": 98
+},{
+    "bl_code": "BB11R06",
+    "name": "Acai Shine & Shield Spray Shine",
+    "quantity": 225
+},{
+    "bl_code": "BASIC",
+    "name": "Basic",
+    "quantity": "0"
+},{
+    "bl_code": "BB",
+    "name": "Basic Blowout",
+    "quantity": "0"
+},{
+    "bl_code": "BBZERO",
+    "name": "Basic Blowout Zero",
+    "quantity": "0"
+},{
+    "bl_code": "BBZEROPLUS",
+    "name": "Basic Blowout Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BSC2013_Cash",
+    "name": "Basic Original",
+    "quantity": "0"
+},{
+    "bl_code": "BSC2013_Terms",
+    "name": "Basic Original",
+    "quantity": "0"
+},{
+    "bl_code": "BZERO",
+    "name": "Basic Zero",
+    "quantity": "0"
+},{
+    "bl_code": "BSCZ2013_Cash",
+    "name": "Basic Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BSCZ2013_Terms",
+    "name": "Basic Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BZEROPLUS",
+    "name": "Basic Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M60",
+    "name": "BB Boar Bristle Brush",
+    "quantity": "0"
+},{
+    "bl_code": "BBBLBROCH1",
+    "name": "BB Brochure1 BL",
+    "quantity": "0"
+},{
+    "bl_code": "BBBLBROCH2",
+    "name": "BB Brochure2 BL",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M61",
+    "name": "BB Cape",
+    "quantity": "0"
+},{
+    "bl_code": "BBBLCAPE",
+    "name": "BB Cape BL",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000008",
+    "name": "BB Easel Card by BL",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000009",
+    "name": "BB Easel Card from US",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000001",
+    "name": "BB Eco Bag",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M62",
+    "name": "BB Hair Clips",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000002",
+    "name": "BB Original Catalog from US",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000012",
+    "name": "BB Original Post Card",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000011",
+    "name": "BB Paper Bag by BL",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000010",
+    "name": "BB Paper Bag from US",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000015",
+    "name": "BB Shirt Female",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000016",
+    "name": "BB Shirt Male",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000014",
+    "name": "BB Tarpaulin",
+    "quantity": "0"
+},{
+    "bl_code": "BB11V24",
+    "name": "BB Volume Shelf Talker",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000006",
+    "name": "BB Window Decal Large",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000007",
+    "name": "BB Window Decal Small",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000003",
+    "name": "BB Zero Catalog by BL",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000005",
+    "name": "BB Zero Catalog from US",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000004",
+    "name": "BB Zero Easel Card from US",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000017",
+    "name": "BB Zero Post Card",
+    "quantity": "0"
+},{
+    "bl_code": "MBB000013",
+    "name": "BB Zero Step by Step",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT12013_Cash",
+    "name": "Blowout 1 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT12013_Terms",
+    "name": "Blowout 1 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT1Z2013_Terms",
+    "name": "Blowout 1 Zero",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT1Z2013_Cash",
+    "name": "Blowout 1 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT22013_Cash",
+    "name": "Blowout 2 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT22013_Terms",
+    "name": "Blowout 2 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT2Z2013_Cash",
+    "name": "Blowout 2 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT2Z2013_Terms",
+    "name": "Blowout 2 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT32013_Cash",
+    "name": "Blowout 3 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT32013_Terms",
+    "name": "Blowout 3 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT3Z2013_Cash",
+    "name": "Blowout 3 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BLWT3Z2013_Terms",
+    "name": "Blowout 3 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BBM",
+    "name": "Brazilian Blowout Mini",
+    "quantity": 16
+},{
+    "bl_code": "BB11P76",
+    "name": "Brazilian Blowout Zero Plus Solution (12oz)",
+    "quantity": 120
+},{
+    "bl_code": "BB11P66ZEROPLUS",
+    "name": "Brazilian Blowout Zero Plus Solution (34oz)",
+    "quantity": 78
+},{
+    "bl_code": "BB11M24",
+    "name": "Brochures BB",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M24-1",
+    "name": "Brochures BB",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE12013_Cash",
+    "name": "Bundle 1 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE12013_Terms",
+    "name": "Bundle 1 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE1Z2013_Cash",
+    "name": "Bundle 1 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE1Z2013_Terms",
+    "name": "Bundle 1 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE22013_Cash",
+    "name": "Bundle 2 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE22013_Terms",
+    "name": "Bundle 2 Original",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE2Z2013_Cash",
+    "name": "Bundle 2 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BNDLE2Z2013_Terms",
+    "name": "Bundle 2 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BB1",
+    "name": "Bundle Blowout 1",
+    "quantity": "0"
+},{
+    "bl_code": "BB1ZERO",
+    "name": "Bundle Blowout 1 Zero",
+    "quantity": "0"
+},{
+    "bl_code": "BB1ZEROPLUS",
+    "name": "Bundle Blowout 1 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BB2",
+    "name": "Bundle Blowout 2",
+    "quantity": "0"
+},{
+    "bl_code": "BB2ZERO",
+    "name": "Bundle Blowout 2 Zero",
+    "quantity": "0"
+},{
+    "bl_code": "BB2ZEROPLUS",
+    "name": "Bundle Blowout 2 Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BB11X23",
+    "name": "Care Shelf Talker",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M20",
+    "name": "Celebrity Easel Card 1",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M09",
+    "name": "Celebrity Easel Card 2",
+    "quantity": "0"
+},{
+    "bl_code": "BB.CLSC1",
+    "name": "CLASSIC 1 (1 Solution 1L 1 Anti-Res Shampoo 1L)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL1.1",
+    "name": "CLASSIC 1 (1 Solution 1L 1 Anti-Res Shampoo 1L)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL1.2",
+    "name": "testing",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.2C",
+    "name": "CLASSIC 2 (1 Solution 1L 1 Anti-Res Shampoo 1L 1 Masque 24oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.2T",
+    "name": "CLASSIC 2 (1 Solution 1L 1 Anti-Res Shampoo 1L 1 Masque 24oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.1C",
+    "name": "CLASSIC 2 (1 Solution 1L 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.1T",
+    "name": "CLASSIC 2 (1 Solution 1L 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.4C",
+    "name": "CLASSIC 2 (3 Solution 12oz 1 Anti-Res Shampoo 1L 1 Masque 24oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.4T",
+    "name": "CLASSIC 2 (3 Solution 12oz 1 Anti-Res Shampoo 1L 1 Masque 24oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.3C",
+    "name": "CLASSIC 2 (3 Solution 12oz 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL2.3T",
+    "name": "CLASSIC 2 (3 Solution 12oz 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.2C",
+    "name": "CLASSIC 3 (1 Solution 1L 1 Anti-Res Shampoo 1L 1 Masque 24oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.2T",
+    "name": "CLASSIC 3 (1 Solution 1L 1 Anti-Res Shampoo 1L 1 Masque 24oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.1C",
+    "name": "CLASSIC 3 (1 Solution 1L 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.1T",
+    "name": "CLASSIC 3 (1 Solution 1L 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.4C",
+    "name": "CLASSIC 3 (3 Solution 12oz 1 Anti-Res Shampoo 1L 1 Masque 24oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.4T",
+    "name": "CLASSIC 3 (3 Solution 12oz 1 Anti-Res Shampoo 1L 1 Masque 24oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.3C",
+    "name": "CLASSIC 3 (3 Solution 12oz 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBCL3.3T",
+    "name": "CLASSIC 3 (3 Solution 12oz 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz 2 S&S 4oz 1 Serum 8oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M15-1",
+    "name": "Client Post Card 1",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M15",
+    "name": "Client Post Card 1 (10pk)",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M25-1",
+    "name": "Client Post Card 2",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M25",
+    "name": "Client Post Card 2 (10pk)",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M47",
+    "name": "Comb/Brush Applicator",
+    "quantity": "0"
+},{
+    "bl_code": "BB11P44",
+    "name": "Deep Conditioning Masque",
+    "quantity": 318
+},{
+    "bl_code": "GRAND",
+    "name": "Grand",
+    "quantity": "0"
+},{
+    "bl_code": "GRAND A",
+    "name": "GRAND A",
+    "quantity": "0"
+},{
+    "bl_code": "GZERO",
+    "name": "Grand Zero",
+    "quantity": "0"
+},{
+    "bl_code": "GZEROPLUS",
+    "name": "Grand Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M400",
+    "name": "Hanging Banner BB",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M64",
+    "name": "Hot Tools Mat",
+    "quantity": "0"
+},{
+    "bl_code": "BB11R18",
+    "name": "Instant Volume Body Boost Hair Powder",
+    "quantity": 92
+},{
+    "bl_code": "BB11R17",
+    "name": "Instant Volume Thermal Root Lift",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M18",
+    "name": "Large Window Decal",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M22",
+    "name": "Mirror Cling (Original)",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP1.2T",
+    "name": "NEW BLOWOUT PACKAGE 1 (1 Solution 1L 1 Anti-Res Shampoo 1L 1 Masque 24oz 5 Shampoo/Conditioner Sets 12oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP1.1T",
+    "name": "NEW BLOWOUT PACKAGE 1 (1 Solution 1L 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz 5 Shampoo/Conditioner Sets 12oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP1.2C",
+    "name": "NEW BLOWOUT PACKAGE 1 (1 Solution 1L",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP1V.2C",
+    "name": "NEW BLOWOUT PACKAGE 1 (1 Solution 1L",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP1V.1C",
+    "name": "NEW BLOWOUT PACKAGE 1 (1 Solution 1L",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP1.1C",
+    "name": "NEW BLOWOUT PACKAGE 1 (1 Solution 1L",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2.2T",
+    "name": "NEW BLOWOUT PACKAGE 2 (1 Solution 1L 1 Anti-Res Shampoo 1L 1 Masque 24oz 10 Shampoo/Conditioner Sets 12oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2.1T",
+    "name": "NEW BLOWOUT PACKAGE 2 (1 Solution 1L 1 Anti-Res Shampoo 1L 3 Masque Tubes 8oz 10 Shampoo/Conditioner Sets 12oz)",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2.2C",
+    "name": "NEW BLOWOUT PACKAGE 2 (1 Solution 1L",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2.1C",
+    "name": "NEW BLOWOUT PACKAGE 2 (1 Solution 1L",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2a.1T",
+    "name": "NEW BLOWOUT PACKAGE 2 (1 Solution 1L",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2a.1C",
+    "name": "NEW BLOWOUT PACKAGE 2A.C",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2afs.1C",
+    "name": "NEW BLOWOUT PACKAGE 2AFS.C",
+    "quantity": "0"
+},{
+    "bl_code": "BBNBP2avc.1C",
+    "name": "NEW BLOWOUT PACKAGE 2AVC.C",
+    "quantity": "0"
+},{
+    "bl_code": "BBBB698",
+    "name": "ORIGINAL Large Kit",
+    "quantity": "0"
+},{
+    "bl_code": "BBBB295",
+    "name": "ORIGINAL Small Kit",
+    "quantity": "0"
+},{
+    "bl_code": "BBOTC10.C",
+    "name": "OTC BUNDLE 10 (10 Shampoo/Conditioner Sets 12oz",
+    "quantity": "0"
+},{
+    "bl_code": "BBOTC10.C2",
+    "name": "OTC BUNDLE 10 (10 Shampoo/Conditioner Sets 12oz",
+    "quantity": "0"
+},{
+    "bl_code": "BBOTC10+.C",
+    "name": "OTC BUNDLE 10+ (10 Shampoo/Conditioner Sets 12oz",
+    "quantity": "0"
+},{
+    "bl_code": "BBOTC5.C",
+    "name": "OTC BUNDLE 5 (5 Shampoo/Conditioner Sets 12oz",
+    "quantity": "0"
+},{
+    "bl_code": "BBOTC5C",
+    "name": "OTC BUNDLE 5 (5 Shampoo/Conditioner Sets 12oz",
+    "quantity": "0"
+},{
+    "bl_code": "BBSDOTC20.C",
+    "name": "OTC SUB-DISTRIBUTOR 20pcs/kind/15% off",
+    "quantity": "0"
+},{
+    "bl_code": "BBSDOTC30.C",
+    "name": "OTC SUB-DISTRIBUTOR 30pcs/kind/25% off",
+    "quantity": "0"
+},{
+    "bl_code": "BB11T22EU",
+    "name": "Professional Flat Iron EU",
+    "quantity": "0"
+},{
+    "bl_code": "BB11P16",
+    "name": "Professional Smoothing Solution",
+    "quantity": 294
+},{
+    "bl_code": "BB11P19",
+    "name": "Professional Split End repair",
+    "quantity": 24
+},{
+    "bl_code": "BB11M29-1",
+    "name": "Retail Bag",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M29",
+    "name": "Retail Bags (10)",
+    "quantity": "0"
+},{
+    "bl_code": "BBPP200SET.C",
+    "name": "SACHET SET (4pk Solution 37ml each/148ml total 1 Anti-Res Shampoo 1L)",
+    "quantity": "0"
+},{
+    "bl_code": "BBPP200SET.T",
+    "name": "SACHET SET (4pk Solution 37ml each/148ml total 1 Anti-Res Shampoo 1L)",
+    "quantity": "0"
+},{
+    "bl_code": "BBSTLKR",
+    "name": "Shelf Talker (Original)",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M-30",
+    "name": "Silk Banner",
+    "quantity": "0"
+},{
+    "bl_code": "BBPP200",
+    "name": "Single Serve Sachets Original Professional Smoothing Solution 4pk",
+    "quantity": 42
+},{
+    "bl_code": "BB11M23",
+    "name": "Split End Repair Mirror Cling",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M19",
+    "name": "Split End Repair Pop-up Easel Card",
+    "quantity": "0"
+},{
+    "bl_code": "BB11X24",
+    "name": "Style Shelf Talker",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M63",
+    "name": "Stylist Handheld BB Mirror",
+    "quantity": "0"
+},{
+    "bl_code": "BBTRL.C",
+    "name": "TRIAL SET (4pk Solution 37ml each/148ml total",
+    "quantity": "0"
+},{
+    "bl_code": "BBTRL.T",
+    "name": "TRIAL SET (4pk Solution 37ml each/148ml total",
+    "quantity": "0"
+},{
+    "bl_code": "BBBLTEE-L01",
+    "name": "T-shirt Ladies",
+    "quantity": 10
+},{
+    "bl_code": "BBBLTEE-M01",
+    "name": "T-shirt Men",
+    "quantity": "0"
+},{
+    "bl_code": "VITAL",
+    "name": "Vital",
+    "quantity": "0"
+},{
+    "bl_code": "VZERO",
+    "name": "Vital Zero",
+    "quantity": "0"
+},{
+    "bl_code": "VZEROPLUS",
+    "name": "Vital Zero Plus",
+    "quantity": "0"
+},{
+    "bl_code": "BB11R16",
+    "name": "Volume Conditioner",
+    "quantity": 24
+},{
+    "bl_code": "BB11R15",
+    "name": "Volume Shampoo",
+    "quantity": "0"
+},{
+    "bl_code": "BBDCLCERT",
+    "name": "Window Decal (Certified Salon)",
+    "quantity": "0"
+},{
+    "bl_code": "BB11M17",
+    "name": "Window Decal (Original)",
+    "quantity": "0"
+}] 
