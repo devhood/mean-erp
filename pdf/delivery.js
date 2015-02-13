@@ -83,7 +83,7 @@ module.exports.print = function(drinfo,result){
 		doc.text(drinfo.ordered_items[i].bl_code,-1,y,{width:80});
 		doc.text(drinfo.ordered_items[i].name,90,y,{width:100,align:'left'});
 		doc.text(drinfo.ordered_items[i].brand,205,y,{width:100});
-		doc.text(drinfo.ordered_items[i].description,310,y,{width:190});
+		// doc.text(drinfo.ordered_items[i].description,310,y,{width:190});
 		doc.text(drinfo.ordered_items[i].uom,510,y,{width:50});
 		doc.text(drinfo.ordered_items[i].quantity,560,y,{width:35,align:'center'});
 		doc.moveDown(1);
