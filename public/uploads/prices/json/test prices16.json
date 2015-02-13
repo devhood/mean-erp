@@ -1,0 +1,15 @@
+[{
+    "bl_code": "FB.KB-1",
+    "international_cost": "peste",
+    "professional_price": 8888,
+    "retail_price": "0",
+    "sub_distributor_price": "N/A"
+},{
+    "bl_code": "FB.KLKT",
+    "international_cost": 80,
+    "professional_price": "peste",
+    "retail_price": 80,
+    "sub_distributor_price": "N/A"
+},{
+    "bl_code": ""
+}] 

@@ -17,11 +17,6 @@
         "href": "/#/sales/index/proforma"
       },
       {
-        "title": "Consignment",
-        "description": "Create Consignment",
-        "href": "/#/consignment/index/order"
-      },
-      {
         "title": "Consignment Daily Sales",
         "description": "Create Consignment",
         "href": "/#/cds/index"
@@ -60,16 +55,6 @@
         "title": "Sales Delivery Receipts",
         "description": "Prepare and Approve Items for Delivery",
         "href": "/#/sales/index/delivery"
-      },
-      {
-        "title": "Consignments Pick List",
-        "description": "Prepare Items for Delivery",
-        "href": "/#//consignment/index/packing"
-      },
-      {
-        "title": "Consignment DR",
-        "description": "Prepare and Approve Items for Delivery",
-        "href": "/#/consignment/index/delivery"
       },
       {
         "title": "Trip Ticket",
@@ -209,11 +194,6 @@
         "href": "/#/sales/index/override"
       },
       {
-        "title": "Approve Consigned Order",
-        "description": "Create Sales Order",
-        "href": "/#/consignment/index/approval"
-      },
-      {
         "title": "Calendar",
         "description": "Calendar",
         "href": "/#/calendar/index"
@@ -227,11 +207,6 @@
         "title": "Memorandum",
         "description": "Announce Memo",
         "href": "/#/memo/index"
-      },
-      {
-        "title": "Upload Inventory",
-        "description": "Upload Product Inventory",
-        "href": "/#/upload/index"
       }
     ]
   }

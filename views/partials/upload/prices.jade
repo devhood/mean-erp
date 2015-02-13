@@ -1,0 +1,108 @@
+block title
+	title UPLOAD
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-edit
+			| UPLOAD PRODUCT PRICES
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body.form
+		form.form-horizontal(role="form", name="save_form", method="post", enctype="multipart/form-data", ng-submit="uploadFile()", novalidate)
+			.form-body
+				.caption.title
+				br
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input.form-control(type="text", ng-model="upload.file.name", required, disabled)
+								span.col-md-12.help-block	Product File
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								span.btn.blue.btn-file
+									span.fileinput-new
+										| Select Product Prices File
+									input(type="file", file-model="upload.file")
+							br
+						| &nbsp;
+					.col-md-1
+					.col-md-10
+					br
+					br
+					br
+				.portlet.box.grey(ng-show="products_prices")
+					.portlet-title
+						.caption
+							i.fa.fa-edit
+							| UPLOADED PRODUCT PRICES
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Code
+															th Int'l Price
+															th Retail Price
+															th Prof Price
+															th Sub-Dist Price
+													tbody
+														tr(ng-repeat="item in products_prices")
+															td {{item.bl_code}}
+															td {{item.international_cost}}
+															td {{item.retail_price}}
+															td {{item.professional_price}}
+															td {{item.sub_distributor_price}}
+										.col-md-2
+										br
+										br
+										br
+				.portlet.box.grey(ng-show="na_products[0]")
+					.portlet-title
+						.caption
+							i.fa.fa-edit
+							| NON-EXISTING PRODUCT PROFILE IN DATABASE
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Code
+															th Int'l Price
+															th Retail Price
+															th Prof Price
+															th Sub-Dist Price
+													tbody
+														tr(ng-repeat="item in na_products")
+															td {{item.bl_code}}
+															td {{item.international_cost}}
+															td {{item.retail_price}}
+															td {{item.professional_price}}
+															td {{item.sub_distributor_price}}
+										.col-md-2
+										br
+										br
+										br
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							a.btn.yellow(type="button", ng-show="update_finished == true", href="/#/") Confirm Update
+							| &nbsp;
+							button.btn.green(type="submit", ng-show="showUpload") Upload
+							|	&nbsp;
+							a.btn.green(ng-click="approveData(products_prices)") Update Prices
+							| &nbsp;
+							a.btn.default(type="button", href="/#/", ng-hide="update_finished == true") Cancel
+					.col-md-6

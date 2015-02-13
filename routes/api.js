@@ -16,12 +16,44 @@ var csv2json = require('csv2json-stream');
 
 
 router
-.put('/upload/:type', multipartMiddleware, function(req, res) {
+.put('/upload/csv', multipartMiddleware, function(req, res) {
      for( var i in req.files){
         var temp_path = req.files[i].path;
         var file_name = req.files[i].originalFilename;
-        var upload_path = __dirname.replace('routes',"") + config.upload_path_inventory + req.params.type + path.sep + file_name;
+        var upload_path = __dirname.replace('routes',"") + config.upload_path_inventory + "csv" + path.sep + file_name;
         var parsed_path = __dirname.replace('routes',"") + config.upload_path_inventory + "json" + path.sep + file_name.replace(".csv",".json");
+
+        fs.rename(temp_path, upload_path, function(err){
+            if(err){
+              console.log(err);
+              res.status(400).json(err);
+            }
+            else{
+                var cws =
+                 fs.createReadStream(upload_path)
+                  .pipe(csv2json({
+                    delim: ",",
+                    headers: true,
+                    outputArray: true
+                  }))
+                  .pipe(
+                    fs.createWriteStream(parsed_path)
+                  );
+                setTimeout(function(){
+                  var content = require(parsed_path);
+                  res.status(200).json(content);
+                }, 3000);
+            }
+        });
+      }
+})
+.put('/upload/prices', multipartMiddleware, function(req, res) {
+  console.log("inside upload prices");
+     for( var i in req.files){
+        var temp_path = req.files[i].path;
+        var file_name = req.files[i].originalFilename;
+        var upload_path = __dirname.replace('routes',"") + config.upload_path_prices + "csv" + path.sep + file_name;
+        var parsed_path = __dirname.replace('routes',"") + config.upload_path_prices + "json" + path.sep + file_name.replace(".csv",".json");
 
         fs.rename(temp_path, upload_path, function(err){
             if(err){

@@ -64,6 +64,10 @@ angular.module('erp', [
         templateUrl: '/partials/monitor/customers',
         controller: 'MonitorCtrl'
       })
+      .when('/monitor/duplicate', {
+        templateUrl: '/partials/monitor/duplicate',
+        controller: 'MonitorCtrl'
+      })
       .when('/packing/index', {
         templateUrl: '/partials/packing/index',
         controller: 'PackingCtrl'
@@ -308,9 +312,13 @@ angular.module('erp', [
         templateUrl: '/partials/merge/add',
         controller: 'MergeCtrl'
       })
-      .when('/upload/index', {
-        templateUrl: '/partials/upload/index',
-        controller: 'UploadCtrl'
+      .when('/upload/inventories', {
+        templateUrl: '/partials/upload/inventories',
+        controller: 'UploadInventoriesCtrl'
+      })
+      .when('/upload/prices', {
+        templateUrl: '/partials/upload/prices',
+        controller: 'UploadPricesCtrl'
       })
       .when('/auth/unauthorized', {
         templateUrl: '/partials/home/unauthorized',

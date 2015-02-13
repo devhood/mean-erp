@@ -1,0 +1,107 @@
+block title
+	title INVENTORY
+.portlet.box.grey
+	.portlet-title
+		.caption
+			i.fa.fa-edit
+			| UPLOAD PRODUCT INVENTORY
+		.tools
+			a.collapse(href="javascript:;")
+	.portlet-body.form
+		form.form-horizontal(role="form", name="save_form", method="post", enctype="multipart/form-data", ng-submit="uploadFile()", novalidate)
+			.form-body
+				.caption.title
+				br
+				.row(ng-hide="action=='read'")
+					.col-md-6
+							.form-group
+								.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+									select.select2me.form-control.select2-offscreen(ng-model="inventory_location", ng-options="customer._id as customer.company_name for customer in inventory_locations")
+									span.col-md-12.help-block Inventory Location
+					.col-md-6
+				.row
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+								input.form-control(type="text", ng-model="upload.inventory.name", required, disabled)
+								span.col-md-12.help-block	Inventory File
+					.col-md-6
+						.form-group
+							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+								span.btn.blue.btn-file
+									span.fileinput-new
+										| Select Inventory File
+									input(type="file", file-model="upload.inventory")
+							br
+						| &nbsp;
+					.col-md-1
+					.col-md-10
+					br
+					br
+					br
+				.portlet.box.grey(ng-show="inventories")
+					.portlet-title
+						.caption
+							i.fa.fa-edit
+							| UPLOADED INVENTORY
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Code
+															th Product
+															th Quantity
+													tbody
+														tr(ng-repeat="item in inventories")
+															td {{item.bl_code}}
+															td {{item.name}}
+															td {{item.quantity}}
+										.col-md-2
+										br
+										br
+										br
+				.portlet.box.grey(ng-show="na_products[0]")
+					.portlet-title
+						.caption
+							i.fa.fa-edit
+							| NON-EXISTING PRODUCT PROFILE IN DATABASE
+						.tools
+							a.collapse(href="javascript:;")
+					.portlet-body.form
+									.row
+										br
+										.col-md-12
+											.portlet-body.flip-scroll
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+														tr
+															th Code
+															th Product
+															th Quantity
+													tbody
+														tr(ng-repeat="item in na_products")
+															td {{item.bl_code}}
+															td {{item.name}}
+															td {{item.quantity}}
+										.col-md-2
+										br
+										br
+										br
+			.form-actions.fluid
+				.row
+					.col-md-6
+						.col-md-offset-3.col-md-9
+							a.btn.yellow(type="button", ng-show="update_finished == true", href="/#/") Confirm Update
+							| &nbsp;
+							button.btn.green(type="submit", ng-show="showUpload") Upload
+							|	&nbsp;
+							a.btn.green(ng-click="approveData(inventories)", ng-show="inventories[0] && update_finished != true") Update Inventory
+							| &nbsp;
+							a.btn.default(type="button", href="/#/", ng-hide="update_finished == true") Cancel
+					.col-md-6
