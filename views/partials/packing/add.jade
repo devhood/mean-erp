@@ -74,7 +74,22 @@ block title
 									.row
 										br
 										.col-md-12
-											.portlet-body.flip-scroll
+											.portlet-body.flip-scrolltable.table.table-bordered.table-condensed.flip-content
+												table.table.table-bordered.table-condensed.flip-content
+													thead.flip-content.bg-grey
+													tbody
+														tr
+															td SO Number:
+															td {{sales.sono}}
+														tr
+															td Customer:
+															td {{sales.customer.company_name}}
+														tr
+															td Address:
+															td {{sales.customer.shipping_address.landmark+ ','+sales.customer.shipping_address.barangay+ ',' +sales.customer.shipping_address.city + ',' +sales.customer.shipping_address.provice + ',' +sales.customer.shipping_address.country}}
+														tr
+															td Delivery Date:
+															td {{sales.delivery_date | date: 'longDate'}}
 												table.table.table-bordered.table-condensed.flip-content
 													thead.flip-content.bg-grey
 														tr

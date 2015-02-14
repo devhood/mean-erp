@@ -930,7 +930,7 @@ angular.module('erp')
         for (var y in $scope.products) {
           if ($scope.products[x].bl_code == $scope.products[y].bl_code && (y!=x)) {
             duplicate.push($scope.products[x]);
-            console.log("x: ",$scope.products[x].bl_code+"-"+$scope.products[x].name+"-"+$scope.products[x]._id+"--"+$scope.products[x].inventories[0].quantity || no_inv+"-"+$scope.products[x].inventories[0].rquantity || no_inv);
+            console.log("x: ",$scope.products[x].bl_code+"-"+$scope.products[x].name+"-"+$scope.products[x]._id+"--"+$scope.products[x].inventories[0].quantity+"-"+$scope.products[x].inventories[0].rquantity);
             console.log("y: ",$scope.products[y].bl_code+"-"+$scope.products[y].name+"-"+$scope.products[y]._id+"--"+$scope.products[x].inventories[0].quantity+"-"+$scope.products[x].inventories[0].rquantity);
             // console.log("y: ",$scope.products[y]);
           }
@@ -3071,7 +3071,7 @@ var displayItemQuantity = function() {
 
     $scope.init = function(){
       columns = [
-      $scope.structure.customer.company_name, $scope.structure.delivery_date, $scope.structure.status.status_name
+      $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.delivery_date, $scope.structure.status.status_name
       ];
 
       buttons = [

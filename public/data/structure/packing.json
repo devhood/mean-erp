@@ -1,5 +1,10 @@
 [
   {
+    "sono": {
+    "name": "sono",
+    "title": "SO Number",
+    "type": "text"
+  },
     "inventory_location" : {
       "name": "inventory_location",
       "title": "Inventory Location",
