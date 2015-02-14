@@ -9,20 +9,41 @@ block title
       a.collapse(href="javascript:;")
   .portlet-body.form
       .row
-        .col-md-6
+        br
+        .col-md-12
+          .portlet-body.flip-scroll
+            .caption DUPLICATE
+            table.table.table-bordered.table-condensed.flip-content
+              thead.flip-content.bg-grey
+                tr
+                  th Code
+                  th Product
+                  th rquantity
+                  th quantity
+              tbody
+                tr(ng-repeat="item in duplicate track by 'item._id'")
+                  td {{item.bl_code}}
+                  td {{item.name}}
+                  td {{item.inventories[0].rquantity}}
+                  td {{item.inventories[0].quantity}}
+        .col-md-2
+        br
+        br
+        br
+      .row
+        .col-md-4
           .form-group
             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
               input.form-control(type="text", ng-model="products.length", readonly)
               span.col-md-12.help-block Total Products
-        .col-md-6
+        .col-md-4
           .form-group
             .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-              input.form-control(type="text", ng-model="duplicate", readonly)
+              input.form-control(type="text", ng-model="duplicate.length", readonly)
               span.col-md-12.help-block Duplicated bl_code
-      .row
-        .col-md-6
+        .col-md-4
           .col-md-offset-3.col-md-9
-            button.btn.green(type="button", ng-click="traceDuplicate()") Submit
+            button.btn.green(type="button", ng-click="traceDuplicate()") Trace
         br
         br
       .row

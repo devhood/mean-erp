@@ -922,12 +922,21 @@ angular.module('erp')
       };
     });
 
+  var duplicate = [];
     $scope.traceDuplicate = function() {
-      for (var i = 0; i < array.length; i++) {
-        array[i]
+      var no_inv = "NI";
+      for (var x in $scope.products) {
+        var temp = $scope.products[x];
+        for (var y in $scope.products) {
+          if ($scope.products[x].bl_code == $scope.products[y].bl_code && (y!=x)) {
+            duplicate.push($scope.products[x]);
+            console.log("x: ",$scope.products[x].bl_code+"-"+$scope.products[x].name+"-"+$scope.products[x]._id+"--"+$scope.products[x].inventories[0].quantity || no_inv+"-"+$scope.products[x].inventories[0].rquantity || no_inv);
+            console.log("y: ",$scope.products[y].bl_code+"-"+$scope.products[y].name+"-"+$scope.products[y]._id+"--"+$scope.products[x].inventories[0].quantity+"-"+$scope.products[x].inventories[0].rquantity);
+            // console.log("y: ",$scope.products[y]);
+          }
+        }
       }
-
-
+    $scope.duplicate = duplicate;
     }
 
 
