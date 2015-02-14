@@ -1265,7 +1265,7 @@ angular.module('erp')
         case "delivery" :
 
           columns = [
-            $scope.structure.customer.company_name, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
             $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
           ];
 
@@ -3982,7 +3982,6 @@ var displayItemQuantity = function() {
             $scope.dtOptions = Library.DataTable.options("/api/consignments?filter="+encodeURIComponent(JSON.stringify(query)));
         break;
         case "delivery" :
-          console.log("delivering");
           columns = [
             $scope.structure.cono,$scope.structure.consignment_transaction_type,
             $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
