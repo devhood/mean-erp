@@ -1100,6 +1100,7 @@ angular.module('erp')
                 products.$update(function(){
                   callback();
                 });
+            console.log("updated: ", ctr);
           }
           else {
             na_product = {};

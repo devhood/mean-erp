@@ -1,99 +1,3 @@
-x:  PCR7.48C-Nail Polish Display Rack, 48 Bottles-54cb19f8e1ff103526e6bfe1--0
-y:  PCR7.48C-Nail Polish Display Rack, 72 Bottles-54cb19f8e1ff103526e6bfe2--0-0
-
-x:  TS1.C-Toe Separator Crown-54cb19f8e1ff103526e6c036--0
-y:  TS1.C-Toe Separator Crown-54cb19f8e1ff103526e6c016--0-0
-
-x:  TS2.C-Toe Separator Sassy -54cb19f8e1ff103526e6c037--0
-y:  TS2.C-Toe Separator Sassy -54cb19f8e1ff103526e6c017--0-0
-
-x:  TS3.C-Toe Separator Sassy -54cb19f8e1ff103526e6c038--0
-y:  TS3.C-Toe Separator Sassy -54cb19f8e1ff103526e6c018--0-0
-
-x:  TS4.C-Toe Separator Sassy -54cb19f8e1ff103526e6c039--0
-y:  TS4.C-Toe Separator Sassy -54cb19f8e1ff103526e6c019--0-0
-
-x:  TS5.C-Toe Separator Sassy -54cb19f8e1ff103526e6c03a--0
-y:  TS5.C-Toe Separator Sassy -54cb19f8e1ff103526e6c01a--0-0
-
-x:  TS6.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03b--0
-y:  TS6.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c01b--0-0
-
-x:  TS7.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03c--0
-y:  TS7.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c01c--0-0
-
-x:  TS8.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03d--0
-y:  TS8.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c01d--0-0
-
-x:  TS9.C-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c03e--0
-y:  TS9.C-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c01e--0-0
-
-x:  TS10-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c03f--0
-y:  TS10-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c01f--0-0
-
-x:  TS11.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c040--0
-y:  TS11.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c020--0-0
-
-x:  TS12.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c041--0
-y:  TS12.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c021--0-0
-
-x:  TS13.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c042--0
-y:  TS13.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c022--0-0
-
-x:  TS14.C-Toe Separator Tulips-54cb19f8e1ff103526e6c043--0
-y:  TS14.C-Toe Separator Tulips-54cb19f8e1ff103526e6c023--0-0
-
-x:  TS15.C-Toe Separator Tulips-54cb19f8e1ff103526e6c044--0
-y:  TS15.C-Toe Separator Tulips-54cb19f8e1ff103526e6c024--0-0
-
-x:  TS16.C-Toe Separator Dog-54cb19f8e1ff103526e6c045--0
-
-x:  TS17.C-Toe Separator Cat-54cb19f8e1ff103526e6c046--0
-
-x:  TS18.C-Toe Separator Cat-54cb19f8e1ff103526e6c047--0
-y:  TS18.C-Toe Separator Cat-54cb19f8e1ff103526e6c027--0-0
-
-x:  TS19.C-Toe Separator Snail-54cb19f8e1ff103526e6c048--0
-y:  TS19.C-Toe Separator Snail-54cb19f8e1ff103526e6c028--0-0
-
-x:  TS20.C-Toe Separator Snail-54cb19f8e1ff103526e6c049--0
-y:  TS20.C-Toe Separator Snail-54cb19f8e1ff103526e6c029--0-0
-
-x:  TS21.C-Toe Separator Snail-54cb19f8e1ff103526e6c04a--0
-y:  TS21.C-Toe Separator Snail-54cb19f8e1ff103526e6c02a--0-0
-
-x:  TS22.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04b--0
-y:  TS22.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c02b--0-0
-
-x:  TS23.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04c--0
-
-x:  TS24.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04d--0
-y:  TS24.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c02d--0-0
-
-x:  TS25.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c04e--0
-y:  TS25.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c02e--0-0
-
-x:  TS26.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c04f--0
-y:  TS26.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c02f--0-0
-
-x:  TS27.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c050--0
-y:  TS27.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c030--0-0
-
-x:  TS28.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c051--0
-y:  TS28.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c031--0-0
-
-x:  TS29.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c052--0
-y:  TS29.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c032--0-0
-
-x:  TS30.C-Toe Separator Leopard-54cb19f8e1ff103526e6c053--0
-y:  TS30.C-Toe Separator Leopard-54cb19f8e1ff103526e6c033--0-0
-
-x:  TS31.C-Toe Separator Leopard-54cb19f8e1ff103526e6c054--0
-y:  TS31.C-Toe Separator Leopard-54cb19f8e1ff103526e6c034--0-0
-
-x:  TS32.C-Toe Separator Leopard-54cb19f8e1ff103526e6c055--0
-y:  TS32.C-Toe Separator Leopard-54cb19f8e1ff103526e6c035--0-0
-
 x:  AR61210-Fashion Lashes 112 Lower Lash Black-54cb19f8e1ff103526e6c60d--0
 y:  AR61210-Naturals 112 Black (Lower Lash)-54cb19f8e1ff103526e6c5ea--0-0
 
@@ -157,12 +61,12 @@ x:  EL5974010001-I-Care I-Guide Spa/Ing 42X62-54cb19f8e1ff103526e6c776--0
 y:  EL5974010001-I|Guide EL-54cb19f8e1ff103526e6c7b2--0-0
 
 x:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca27--0
-y:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca28--0-0
+y:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca28--0--0-0
 
 x:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca3f--37
-y:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca40--37-37
+y:  54cb19f8e1ff103526e6ca40--37-37
 
-x:  GG0820-Clean Collars for 14oz Warmers-54cb19f8e1ff103526e6caac--95
+x:  -54cb19f8e1ff103526e6caac--95
 y:  GG0820-Clean Collars for 14oz Warmers-54cb19f8e1ff103526e6caad--95-91
 
 x:  TS25.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c02e--1537
@@ -183,7 +87,7 @@ y:  TS7.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03c--915-915
 x:  TS8.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c01d--995
 y:  TS8.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03d--995-995
 
-x:  TS17.C-Toe Separator Cat-54cb19f8e1ff103526e6c026--1724
+x:  54cb19f8e1ff103526e6c026--1724
 y:  TS17.C-Toe Separator Cat-54cb19f8e1ff103526e6c046--1724-1724
 
 x:  TS18.C-Toe Separator Cat-54cb19f8e1ff103526e6c027--0
@@ -198,7 +102,7 @@ y:  TS10-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c03f--998-998
 x:  TS9.C-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c01e--997
 y:  TS9.C-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c03e--997-997
 
-x:  TS16.C-Toe Separator Dog-54cb19f8e1ff103526e6c025--1009
+x:  Dog-54cb19f8e1ff103526e6c025--1009
 y:  TS16.C-Toe Separator Dog-54cb19f8e1ff103526e6c045--1009-1009
 
 x:  TS11.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c020--616
@@ -211,10 +115,10 @@ x:  TS12.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c021--1590
 y:  TS12.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c041--1590-1590
 
 x:  TS22.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c02b--913
-y:  TS22.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04b--913-913
+y:  TS22.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04b--0--913-913
 
-x:  TS23.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c02c--978
-y:  TS23.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04c--978-978
+x:  -54cb19f8e1ff103526e6c02c--978
+y:  TS23.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04c--0--978-978
 
 x:  TS24.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c02d--999
 y:  TS24.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04d--999-999
@@ -261,7 +165,7 @@ y:  TS14.C-Toe Separator Tulips-54cb19f8e1ff103526e6c043--912-912
 x:  TS15.C-Toe Separator Tulips-54cb19f8e1ff103526e6c024--1852
 y:  TS15.C-Toe Separator Tulips-54cb19f8e1ff103526e6c044--1852-1852
 
-x:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca40--2
+x:  54cb19f8e1ff103526e6ca40--2
 y:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca3f--2-6
 
 x:  CG72405-Color Wheel 6pk-54dc5e8a8622445a4909a67b--5

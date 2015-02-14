@@ -1,0 +1,2257 @@
+[{
+    "bl_code": "TS1.C",
+    "international_cost": 0.1,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS2.C",
+    "international_cost": 0.097,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS3.C",
+    "international_cost": 0.097,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS4.C",
+    "international_cost": 0.097,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS5.C",
+    "international_cost": 0.097,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS6.C",
+    "international_cost": 0.098,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS7.C",
+    "international_cost": 0.098,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS8.C",
+    "international_cost": 0.098,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS9.C",
+    "international_cost": 0.098,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS10",
+    "international_cost": 0.098,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS11.C",
+    "international_cost": 0.12,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 20
+},{
+    "bl_code": "TS12.C",
+    "international_cost": 0.12,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 20
+},{
+    "bl_code": "TS13.C",
+    "international_cost": 0.12,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 20
+},{
+    "bl_code": "TS14.C",
+    "international_cost": 0.097,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS15.C",
+    "international_cost": 0.097,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "TS16.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS17.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS18.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS19.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS20.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS21.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS22.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS23.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS24.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 35
+},{
+    "bl_code": "TS25.C",
+    "international_cost": 0.105,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 20
+},{
+    "bl_code": "TS26.C",
+    "international_cost": 0.105,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 20
+},{
+    "bl_code": "TS27.C",
+    "international_cost": 0.105,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 20
+},{
+    "bl_code": "TS28.C",
+    "international_cost": 0.098,
+    "professional_price": 10,
+    "sub_distributor_price": 10,
+    "retail_price": 15
+},{
+    "bl_code": "TS29.C",
+    "international_cost": 0.098,
+    "professional_price": 10,
+    "sub_distributor_price": 10,
+    "retail_price": 15
+},{
+    "bl_code": "TS30.C",
+    "international_cost": 0.098,
+    "professional_price": 10,
+    "sub_distributor_price": 10,
+    "retail_price": 15
+},{
+    "bl_code": "TS31.C",
+    "international_cost": 0.098,
+    "professional_price": 10,
+    "sub_distributor_price": 10,
+    "retail_price": 15
+},{
+    "bl_code": "TS32.C",
+    "international_cost": 0.098,
+    "professional_price": 10,
+    "sub_distributor_price": 10,
+    "retail_price": 15
+},{
+    "bl_code": "TZ1.C",
+    "international_cost": 0.27,
+    "professional_price": 30,
+    "sub_distributor_price": 40,
+    "retail_price": 77
+},{
+    "bl_code": "SM1.C",
+    "international_cost": 0.44,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 77
+},{
+    "bl_code": "LFA1.C",
+    "international_cost": 0.25,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 50
+},{
+    "bl_code": "BTHS1",
+    "international_cost": 1.27,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": 150
+},{
+    "bl_code": "IBATK.C",
+    "international_cost": "0",
+    "professional_price": 300,
+    "sub_distributor_price": 300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBSGK.C",
+    "international_cost": "0",
+    "professional_price": 1200,
+    "sub_distributor_price": 1200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBPGK.C",
+    "international_cost": "0",
+    "professional_price": 1900,
+    "sub_distributor_price": 1900,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBPREP1.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBPREP2.C",
+    "international_cost": "0",
+    "professional_price": 320,
+    "sub_distributor_price": 320,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBDHY.C",
+    "international_cost": "0",
+    "professional_price": 120,
+    "sub_distributor_price": 120,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBPB.C",
+    "international_cost": "0",
+    "professional_price": 300,
+    "sub_distributor_price": 300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBSP.C",
+    "international_cost": "0",
+    "professional_price": 220,
+    "sub_distributor_price": 220,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBNNP.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBFGC1.C",
+    "international_cost": "0",
+    "professional_price": 800,
+    "sub_distributor_price": 800,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBFGC2.C",
+    "international_cost": "0",
+    "professional_price": 1700,
+    "sub_distributor_price": 1700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBINT.C",
+    "international_cost": "0",
+    "professional_price": 390,
+    "sub_distributor_price": 390,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBUS.C",
+    "international_cost": "0",
+    "professional_price": 300,
+    "sub_distributor_price": 300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBABTC.C",
+    "international_cost": "0",
+    "professional_price": 120,
+    "sub_distributor_price": 120,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBFDUVTC.C",
+    "international_cost": "0",
+    "professional_price": 190,
+    "sub_distributor_price": 190,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBADTC.C",
+    "international_cost": "0",
+    "professional_price": 120,
+    "sub_distributor_price": 120,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBBLN.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBLCO.C",
+    "international_cost": "0",
+    "professional_price": 160,
+    "sub_distributor_price": 160,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBRCON.C",
+    "international_cost": "0",
+    "professional_price": 190,
+    "sub_distributor_price": 190,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBNW.C",
+    "international_cost": "0",
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRA1.2C",
+    "international_cost": 1.1,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRA1.4C",
+    "international_cost": 1.25,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRA1.6C",
+    "international_cost": 1.35,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRA2.2C",
+    "international_cost": 1,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRA2.4C",
+    "international_cost": 1,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRA2.6C",
+    "international_cost": 1,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRAS1.C",
+    "international_cost": 10.5,
+    "professional_price": 800,
+    "sub_distributor_price": 800,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRG1.C",
+    "international_cost": 0.9,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRG2.C",
+    "international_cost": 0.9,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRG3.C",
+    "international_cost": 0.9,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRG4.C",
+    "international_cost": 1.2,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRG5.C",
+    "international_cost": 1.2,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRG6.C",
+    "international_cost": 1.2,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRGS1.C",
+    "international_cost": 1,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRGS2.C",
+    "international_cost": 2.9,
+    "professional_price": 250,
+    "sub_distributor_price": 250,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FRM1.C",
+    "international_cost": 2.25,
+    "professional_price": 180,
+    "sub_distributor_price": 180,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FRM2.C",
+    "international_cost": 2.4,
+    "professional_price": 180,
+    "sub_distributor_price": 180,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FRM3.C",
+    "international_cost": 3.2,
+    "professional_price": 220,
+    "sub_distributor_price": 220,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FRMH.C",
+    "international_cost": 1.5,
+    "professional_price": 120,
+    "sub_distributor_price": 120,
+    "retail_price": "0.00"
+},{
+    "bl_code": "GRFC.C",
+    "international_cost": 1,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FNT1.C",
+    "international_cost": 1.5,
+    "professional_price": 400,
+    "sub_distributor_price": 400,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FNT2.C",
+    "international_cost": 5,
+    "professional_price": 400,
+    "sub_distributor_price": 400,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BOTP1.C",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "BOTP2.C",
+    "international_cost": 0.44,
+    "professional_price": 45,
+    "sub_distributor_price": 45,
+    "retail_price": 60
+},{
+    "bl_code": "BOTP3.C",
+    "international_cost": 0.44,
+    "professional_price": 45,
+    "sub_distributor_price": 45,
+    "retail_price": 60
+},{
+    "bl_code": "BOTP4.C",
+    "international_cost": 0.37,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CER1",
+    "international_cost": 1.4,
+    "professional_price": 80,
+    "sub_distributor_price": "0.00",
+    "retail_price": "0.00"
+},{
+    "bl_code": "BOTP5.C",
+    "international_cost": 1,
+    "professional_price": 90,
+    "sub_distributor_price": 90,
+    "retail_price": 115
+},{
+    "bl_code": "BOTP6",
+    "international_cost": 1,
+    "professional_price": 90,
+    "sub_distributor_price": 90,
+    "retail_price": 115
+},{
+    "bl_code": "JAR1.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BOTS1.C",
+    "international_cost": 0.323,
+    "professional_price": 38,
+    "sub_distributor_price": 38,
+    "retail_price": 55
+},{
+    "bl_code": "BOTS2.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 50
+},{
+    "bl_code": "BOTP7.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BOTS3.C",
+    "international_cost": 0.6,
+    "professional_price": 60,
+    "sub_distributor_price": 60,
+    "retail_price": 75
+},{
+    "bl_code": "BOTS4.C",
+    "international_cost": 0.58,
+    "professional_price": 60,
+    "sub_distributor_price": 60,
+    "retail_price": 75
+},{
+    "bl_code": "BOTP8.C",
+    "international_cost": 0.56,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 65
+},{
+    "bl_code": "BOTP9.C",
+    "international_cost": 0.59,
+    "professional_price": 60,
+    "sub_distributor_price": 60,
+    "retail_price": 80
+},{
+    "bl_code": "BOTS5.C",
+    "international_cost": 0.56,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 65
+},{
+    "bl_code": "BOTS6.C",
+    "international_cost": 0.59,
+    "professional_price": 60,
+    "sub_distributor_price": 60,
+    "retail_price": 80
+},{
+    "bl_code": "BOTP10.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 70
+},{
+    "bl_code": "BOTP11.C",
+    "international_cost": 0.57,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 75
+},{
+    "bl_code": "BOTS7.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 70
+},{
+    "bl_code": "BOTS8.C",
+    "international_cost": 0.57,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 75
+},{
+    "bl_code": "BOTS9.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 70
+},{
+    "bl_code": "BOTS10.C",
+    "international_cost": 0.56,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": 75
+},{
+    "bl_code": "BOTS11.C",
+    "international_cost": 0.5,
+    "professional_price": 50,
+    "sub_distributor_price": 50,
+    "retail_price": 65
+},{
+    "bl_code": "BOTS12.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS13.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS14.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS15.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS16.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS17.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS18.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS19.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS20.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS21.C",
+    "international_cost": 0.4,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 50
+},{
+    "bl_code": "BOTS22.C",
+    "international_cost": 0.4,
+    "professional_price": 45,
+    "sub_distributor_price": 45,
+    "retail_price": 55
+},{
+    "bl_code": "BOTS23.C",
+    "international_cost": 0.4,
+    "professional_price": 45,
+    "sub_distributor_price": 45,
+    "retail_price": 55
+},{
+    "bl_code": "BOTS24.C",
+    "international_cost": 0.4,
+    "professional_price": 45,
+    "sub_distributor_price": 45,
+    "retail_price": 55
+},{
+    "bl_code": "BOTS25.C",
+    "international_cost": 0.4,
+    "professional_price": 45,
+    "sub_distributor_price": 45,
+    "retail_price": 55
+},{
+    "bl_code": "BOTP12.C",
+    "international_cost": "0",
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BOTP13.C",
+    "international_cost": "0",
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BFB1.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB2.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB3.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB4.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB5.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB6.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB7.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB8.C",
+    "international_cost": 0.15,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": 25
+},{
+    "bl_code": "BFB9.C",
+    "international_cost": 0.19,
+    "professional_price": 23,
+    "sub_distributor_price": 23,
+    "retail_price": 25
+},{
+    "bl_code": "BFB10",
+    "international_cost": 0.19,
+    "professional_price": 23,
+    "sub_distributor_price": 23,
+    "retail_price": 25
+},{
+    "bl_code": "BFBIB.C",
+    "international_cost": "0",
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BFL1.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 45
+},{
+    "bl_code": "BFL2.C",
+    "international_cost": 0.29,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": 45
+},{
+    "bl_code": "BFL3.C",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": "0.00"
+},{
+    "bl_code": "SPT1.C",
+    "international_cost": 0.00604,
+    "professional_price": 95,
+    "sub_distributor_price": 95,
+    "retail_price": "0.00"
+},{
+    "bl_code": "SPT1.R20",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 17
+},{
+    "bl_code": "SPT1.R50",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 38
+},{
+    "bl_code": "SPT1.R100",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 66
+},{
+    "bl_code": "SSWS1.C",
+    "international_cost": 0.0048,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": "0.00"
+},{
+    "bl_code": "SSWS1.R20",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 21
+},{
+    "bl_code": "SSWS1.R50",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 48
+},{
+    "bl_code": "SSWS2.C",
+    "international_cost": 0.00604,
+    "professional_price": 85,
+    "sub_distributor_price": 85,
+    "retail_price": "0.00"
+},{
+    "bl_code": "SSWS2.R20",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 15
+},{
+    "bl_code": "SSWS2.R50",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 33
+},{
+    "bl_code": "SSWS2.R100",
+    "international_cost": "0",
+    "professional_price": "0.00",
+    "sub_distributor_price": "0.00",
+    "retail_price": 60
+},{
+    "bl_code": "MANB1",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "MANB2.C",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "MANB3.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": "0.00"
+},{
+    "bl_code": "MANB4.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": "0.00"
+},{
+    "bl_code": "MANB5.C",
+    "international_cost": 0.55,
+    "professional_price": 55,
+    "sub_distributor_price": 55,
+    "retail_price": "0.00"
+},{
+    "bl_code": "MANB6.C",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "MANB7.C",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "MANB8.C",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "MANB9.C",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "MANB10.C",
+    "international_cost": 0.253,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 35
+},{
+    "bl_code": "CPEN1.C",
+    "international_cost": 0.25,
+    "professional_price": 25,
+    "sub_distributor_price": 25,
+    "retail_price": 30
+},{
+    "bl_code": "CPEN2.C",
+    "international_cost": 0.25,
+    "professional_price": 25,
+    "sub_distributor_price": 25,
+    "retail_price": 30
+},{
+    "bl_code": "CPEN3.C",
+    "international_cost": 0.25,
+    "professional_price": 25,
+    "sub_distributor_price": 25,
+    "retail_price": 30
+},{
+    "bl_code": "CPEN4.C",
+    "international_cost": 0.25,
+    "professional_price": 25,
+    "sub_distributor_price": 25,
+    "retail_price": 30
+},{
+    "bl_code": "CPEN5.C",
+    "international_cost": 0.25,
+    "professional_price": 25,
+    "sub_distributor_price": 25,
+    "retail_price": 30
+},{
+    "bl_code": "BRM1.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM3.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM4.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM5.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM6.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM7.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM8.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM9.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRM10.C",
+    "international_cost": 0.05,
+    "professional_price": 8,
+    "sub_distributor_price": 8,
+    "retail_price": 10
+},{
+    "bl_code": "BRD1",
+    "international_cost": 1.8,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": 150
+},{
+    "bl_code": "BRD2",
+    "international_cost": 1.8,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": 150
+},{
+    "bl_code": "BRD3",
+    "international_cost": 1.8,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": 150
+},{
+    "bl_code": "BRD4",
+    "international_cost": 1.5,
+    "professional_price": 90,
+    "sub_distributor_price": 90,
+    "retail_price": 130
+},{
+    "bl_code": "ORB1.C",
+    "international_cost": 5,
+    "professional_price": 350,
+    "sub_distributor_price": 350,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB2.C",
+    "international_cost": "0",
+    "professional_price": 200,
+    "sub_distributor_price": 200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB3.C",
+    "international_cost": 1.8,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB4.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB5.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB6.C",
+    "international_cost": 3.3,
+    "professional_price": 250,
+    "sub_distributor_price": 250,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB7.C",
+    "international_cost": 3.3,
+    "professional_price": 250,
+    "sub_distributor_price": 250,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB8.C",
+    "international_cost": "0",
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB9.C",
+    "international_cost": "0",
+    "professional_price": 60,
+    "sub_distributor_price": 60,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ORB10.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR1.12C",
+    "international_cost": 7.57,
+    "professional_price": 500,
+    "sub_distributor_price": 500,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR2.24C",
+    "international_cost": 9.3,
+    "professional_price": 700,
+    "sub_distributor_price": 700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR3.24C",
+    "international_cost": 5.6,
+    "professional_price": 700,
+    "sub_distributor_price": 700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR4.48C",
+    "international_cost": 17.89,
+    "professional_price": 1300,
+    "sub_distributor_price": 1300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR5.72C",
+    "international_cost": 28.61,
+    "professional_price": 2100,
+    "sub_distributor_price": 2100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR6.24C",
+    "international_cost": 14.25,
+    "professional_price": 1100,
+    "sub_distributor_price": 1100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR7.48C",
+    "international_cost": 25.8,
+    "professional_price": 2000,
+    "sub_distributor_price": 2000,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PCR7.48C",
+    "international_cost": 47.33,
+    "professional_price": 3500,
+    "sub_distributor_price": 3500,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PWR.60C",
+    "international_cost": 12.83,
+    "professional_price": 1000,
+    "sub_distributor_price": 1000,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PWR.90C",
+    "international_cost": 16.4,
+    "professional_price": 1300,
+    "sub_distributor_price": 1300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "UVL1.C",
+    "international_cost": 11.9,
+    "professional_price": 980,
+    "sub_distributor_price": 980,
+    "retail_price": "0.00"
+},{
+    "bl_code": "UVL2.C",
+    "international_cost": 31.8,
+    "professional_price": 2500,
+    "sub_distributor_price": 2500,
+    "retail_price": "0.00"
+},{
+    "bl_code": "UVL3.C",
+    "international_cost": "0",
+    "professional_price": 2500,
+    "sub_distributor_price": 2500,
+    "retail_price": "0.00"
+},{
+    "bl_code": "UVL4.C",
+    "international_cost": "0",
+    "professional_price": 900,
+    "sub_distributor_price": 900,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBJETE.C",
+    "international_cost": "0",
+    "professional_price": 3300,
+    "sub_distributor_price": 3300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "IBJET1000.C",
+    "international_cost": "0",
+    "professional_price": 3000,
+    "sub_distributor_price": 3000,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LED1.C",
+    "international_cost": 29,
+    "professional_price": 1900,
+    "sub_distributor_price": 1900,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LED2.C",
+    "international_cost": 29,
+    "professional_price": 1900,
+    "sub_distributor_price": 1900,
+    "retail_price": "0.00"
+},{
+    "bl_code": "UVBI",
+    "international_cost": 0.6,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": "0.00"
+},{
+    "bl_code": "STEB",
+    "international_cost": 2.1,
+    "professional_price": 140,
+    "sub_distributor_price": 140,
+    "retail_price": "0.00"
+},{
+    "bl_code": "NFS1.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS2.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS3.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS4.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS5.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS6.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS7.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS8.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS9.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS10.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NFS11.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS12.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS13.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS14.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS15.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS16.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS17.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS18.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS19.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NFS20.C",
+    "international_cost": 0.39,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 55
+},{
+    "bl_code": "NF1.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF2.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF3.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF4.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF5.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF6.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF7.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF8.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF9.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF10.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF11.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF12.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF13.C",
+    "international_cost": 0.096,
+    "professional_price": 12,
+    "sub_distributor_price": 12,
+    "retail_price": 20
+},{
+    "bl_code": "NF14.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NF15.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 40
+},{
+    "bl_code": "NF16.C",
+    "international_cost": 0.26,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 30
+},{
+    "bl_code": "NF17.C",
+    "international_cost": 0.089,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 22
+},{
+    "bl_code": "NF18.C",
+    "international_cost": 0.089,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 22
+},{
+    "bl_code": "NF19.C",
+    "international_cost": 0.089,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 22
+},{
+    "bl_code": "NF20.C",
+    "international_cost": 0.089,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 22
+},{
+    "bl_code": "NF21.C",
+    "international_cost": 0.089,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 22
+},{
+    "bl_code": "NF22.C",
+    "international_cost": 0.089,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 22
+},{
+    "bl_code": "NF23.C",
+    "international_cost": "0",
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": 22
+},{
+    "bl_code": "DRL1.C",
+    "international_cost": 39.12,
+    "professional_price": 3000,
+    "sub_distributor_price": 3000,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRL2.C",
+    "international_cost": "0",
+    "professional_price": 3500,
+    "sub_distributor_price": 3500,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRY1.C",
+    "international_cost": 20.7,
+    "professional_price": 1300,
+    "sub_distributor_price": 1300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRY2.C",
+    "international_cost": "0",
+    "professional_price": 1000,
+    "sub_distributor_price": 1000,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRY3.C",
+    "international_cost": "0",
+    "professional_price": 1300,
+    "sub_distributor_price": 1300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRY4.C",
+    "international_cost": "0",
+    "professional_price": 1300,
+    "sub_distributor_price": 1300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRYF1.C",
+    "international_cost": "0",
+    "professional_price": 350,
+    "sub_distributor_price": 350,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRYF2.C",
+    "international_cost": "0",
+    "professional_price": 350,
+    "sub_distributor_price": 350,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRYM1.C",
+    "international_cost": "0",
+    "professional_price": 200,
+    "sub_distributor_price": 200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRYM2.C",
+    "international_cost": "0",
+    "professional_price": 200,
+    "sub_distributor_price": 200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "STK.C",
+    "international_cost": 0.19,
+    "professional_price": 30,
+    "sub_distributor_price": "0.00",
+    "retail_price": 30
+},{
+    "bl_code": "STKP.C",
+    "international_cost": "0",
+    "professional_price": 330,
+    "sub_distributor_price": "0.00",
+    "retail_price": 330
+},{
+    "bl_code": "STKT.C",
+    "international_cost": 0.24,
+    "professional_price": 30,
+    "sub_distributor_price": "0.00",
+    "retail_price": 30
+},{
+    "bl_code": "STKW.C",
+    "international_cost": 0.33,
+    "professional_price": 50,
+    "sub_distributor_price": "0.00",
+    "retail_price": 50
+},{
+    "bl_code": "LCET.C",
+    "international_cost": 0.58,
+    "professional_price": 50,
+    "sub_distributor_price": "0.00",
+    "retail_price": 50
+},{
+    "bl_code": "CHMS1.C",
+    "international_cost": 2.6,
+    "professional_price": 300,
+    "sub_distributor_price": "0.00",
+    "retail_price": 300
+},{
+    "bl_code": "CHMS2.C",
+    "international_cost": 3.1,
+    "professional_price": 300,
+    "sub_distributor_price": "0.00",
+    "retail_price": 300
+},{
+    "bl_code": "CHMS3.C",
+    "international_cost": 3.1,
+    "professional_price": 300,
+    "sub_distributor_price": "0.00",
+    "retail_price": 300
+},{
+    "bl_code": "CHPS1.C",
+    "international_cost": 2.5,
+    "professional_price": 280,
+    "sub_distributor_price": "0.00",
+    "retail_price": 280
+},{
+    "bl_code": "CHP2.C",
+    "international_cost": 1.2,
+    "professional_price": 110,
+    "sub_distributor_price": "0.00",
+    "retail_price": 110
+},{
+    "bl_code": "FMO1.C",
+    "international_cost": 1,
+    "professional_price": 110,
+    "sub_distributor_price": "0.00",
+    "retail_price": 110
+},{
+    "bl_code": "FMOS.C",
+    "international_cost": 0.772,
+    "professional_price": 120,
+    "sub_distributor_price": "0.00",
+    "retail_price": 120
+},{
+    "bl_code": "FMOC.C",
+    "international_cost": 0.2,
+    "professional_price": 30,
+    "sub_distributor_price": "0.00",
+    "retail_price": 30
+},{
+    "bl_code": "3DPENS.C",
+    "international_cost": 8.75,
+    "professional_price": 600,
+    "sub_distributor_price": "0.00",
+    "retail_price": 600
+},{
+    "bl_code": "3DMO.C",
+    "international_cost": 1.1,
+    "professional_price": 80,
+    "sub_distributor_price": "0.00",
+    "retail_price": 80
+},{
+    "bl_code": "NAD1.C",
+    "international_cost": 0.5,
+    "professional_price": 45,
+    "sub_distributor_price": "0.00",
+    "retail_price": 45
+},{
+    "bl_code": "NAD2.C",
+    "international_cost": 1.7,
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "DFLS1.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "DFLS2.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "DFLS3.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "DFLS4.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "DFLS5.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "CSHS.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "MBDS.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "GLT.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "GLTSS.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "GLFS.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": "0.00",
+    "retail_price": 150
+},{
+    "bl_code": "TWZ1.C",
+    "international_cost": 1.4,
+    "professional_price": 120,
+    "sub_distributor_price": "0.00",
+    "retail_price": 120
+},{
+    "bl_code": "BFCM.C",
+    "international_cost": 1.5,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CP1.C",
+    "international_cost": 0.5,
+    "professional_price": 35,
+    "sub_distributor_price": 35,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PDB.C",
+    "international_cost": "0",
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ARML1.C",
+    "international_cost": 1.3,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "ARMF1.C",
+    "international_cost": 1.3,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FGLV.C",
+    "international_cost": 3,
+    "professional_price": 200,
+    "sub_distributor_price": 200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PSL1.C",
+    "international_cost": 0.15,
+    "professional_price": 15,
+    "sub_distributor_price": 15,
+    "retail_price": "0.00"
+},{
+    "bl_code": "DRG1.C",
+    "international_cost": 0.28,
+    "professional_price": 20,
+    "sub_distributor_price": 20,
+    "retail_price": "0.00"
+},{
+    "bl_code": "SC1.C",
+    "international_cost": 0.634,
+    "professional_price": 45,
+    "sub_distributor_price": 45,
+    "retail_price": "0.00"
+},{
+    "bl_code": "NWR.C",
+    "international_cost": 1.5,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "NW.C",
+    "international_cost": 4,
+    "professional_price": 320,
+    "sub_distributor_price": 320,
+    "retail_price": "0.00"
+},{
+    "bl_code": "NWH.C",
+    "international_cost": 1.5,
+    "professional_price": 120,
+    "sub_distributor_price": 120,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TLH.C",
+    "international_cost": 0.85,
+    "professional_price": 60,
+    "sub_distributor_price": 60,
+    "retail_price": "0.00"
+},{
+    "bl_code": "STEB.C",
+    "international_cost": 2.3,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "PSTL1.C",
+    "international_cost": 19.85,
+    "professional_price": 2080,
+    "sub_distributor_price": 2080,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CC1.C",
+    "international_cost": 0.968,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CC2.C",
+    "international_cost": 0.968,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CC3.C",
+    "international_cost": 2.025,
+    "professional_price": 180,
+    "sub_distributor_price": 180,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CC4.C",
+    "international_cost": 2.175,
+    "professional_price": 180,
+    "sub_distributor_price": 180,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CC5.C",
+    "international_cost": 2.325,
+    "professional_price": 180,
+    "sub_distributor_price": 180,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CC6.C",
+    "international_cost": 3.6,
+    "professional_price": 250,
+    "sub_distributor_price": 250,
+    "retail_price": "0.00"
+},{
+    "bl_code": "APR1.C",
+    "international_cost": 3,
+    "professional_price": 250,
+    "sub_distributor_price": 250,
+    "retail_price": "0.00"
+},{
+    "bl_code": "APR2.C",
+    "international_cost": 3.75,
+    "professional_price": 250,
+    "sub_distributor_price": 250,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TBW1.C",
+    "international_cost": 0.45,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TBW2.C",
+    "international_cost": 0.13,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TBW3.C",
+    "international_cost": 0.13,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TBRC1.C",
+    "international_cost": 0.095,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TBRC2.C",
+    "international_cost": 0.12,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TBR1.C",
+    "international_cost": 0.095,
+    "professional_price": 18,
+    "sub_distributor_price": 18,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRR1.C",
+    "international_cost": 1.031,
+    "professional_price": 160,
+    "sub_distributor_price": 160,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRR2.C",
+    "international_cost": 1.29,
+    "professional_price": 180,
+    "sub_distributor_price": 180,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRR3.C",
+    "international_cost": 1.452,
+    "professional_price": 190,
+    "sub_distributor_price": 190,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRBM1.C",
+    "international_cost": 0.6,
+    "professional_price": 90,
+    "sub_distributor_price": 90,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRBM3.C",
+    "international_cost": 0.83,
+    "professional_price": 100,
+    "sub_distributor_price": 100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRBM4.C",
+    "international_cost": 0.46,
+    "professional_price": 75,
+    "sub_distributor_price": 75,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRBM2.C",
+    "international_cost": 0.57,
+    "professional_price": 70,
+    "sub_distributor_price": 70,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRV1.C",
+    "international_cost": 0.96,
+    "professional_price": 110,
+    "sub_distributor_price": 110,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRV2.C",
+    "international_cost": 0.96,
+    "professional_price": 110,
+    "sub_distributor_price": 110,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRPD1.C",
+    "international_cost": 1.12,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BRPD2.C",
+    "international_cost": 1.36,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CMB1.C",
+    "international_cost": 0.47,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CMB2.C",
+    "international_cost": 0.47,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CMB3.C",
+    "international_cost": 0.47,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "CMB4.C",
+    "international_cost": 0.47,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TCMB1.C",
+    "international_cost": 0.47,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "HC1.C",
+    "international_cost": 4,
+    "professional_price": 300,
+    "sub_distributor_price": 300,
+    "retail_price": "0.00"
+},{
+    "bl_code": "HC2.C",
+    "international_cost": 1.12,
+    "professional_price": 130,
+    "sub_distributor_price": 130,
+    "retail_price": "0.00"
+},{
+    "bl_code": "HC3.C",
+    "international_cost": 0.21,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": "0.00"
+},{
+    "bl_code": "HC4.C",
+    "international_cost": 0.21,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": "0.00"
+},{
+    "bl_code": "SHC1.C",
+    "international_cost": 1,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "EAR1.C",
+    "international_cost": 1.2,
+    "professional_price": 140,
+    "sub_distributor_price": 140,
+    "retail_price": "0.00"
+},{
+    "bl_code": "EAR2.C",
+    "international_cost": 2.1,
+    "professional_price": 150,
+    "sub_distributor_price": 150,
+    "retail_price": "0.00"
+},{
+    "bl_code": "SLV1.C",
+    "international_cost": 3.1,
+    "professional_price": 200,
+    "sub_distributor_price": 200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "GLV1.C",
+    "international_cost": 1.9,
+    "professional_price": 200,
+    "sub_distributor_price": 200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "GLV2.C",
+    "international_cost": 1,
+    "professional_price": 130,
+    "sub_distributor_price": 130,
+    "retail_price": "0.00"
+},{
+    "bl_code": "TFL1.C",
+    "international_cost": 3.3,
+    "professional_price": 200,
+    "sub_distributor_price": 200,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BEN1.C",
+    "international_cost": 0.503,
+    "professional_price": 70,
+    "sub_distributor_price": 70,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BEN2.C",
+    "international_cost": 0.535,
+    "professional_price": 75,
+    "sub_distributor_price": 75,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BEN3.C",
+    "international_cost": 0.595,
+    "professional_price": 80,
+    "sub_distributor_price": 80,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BEN4.C",
+    "international_cost": 0.674,
+    "professional_price": 85,
+    "sub_distributor_price": 85,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BEN5.C",
+    "international_cost": 0.695,
+    "professional_price": 90,
+    "sub_distributor_price": 90,
+    "retail_price": "0.00"
+},{
+    "bl_code": "BEN6.C",
+    "international_cost": 0.753,
+    "professional_price": 95,
+    "sub_distributor_price": 95,
+    "retail_price": "0.00"
+},{
+    "bl_code": "NGLV1.C",
+    "international_cost": 4.6,
+    "professional_price": 295,
+    "sub_distributor_price": 295,
+    "retail_price": "0.00"
+},{
+    "bl_code": "NGLV2.C",
+    "international_cost": 4.6,
+    "professional_price": 295,
+    "sub_distributor_price": 295,
+    "retail_price": "0.00"
+},{
+    "bl_code": "COL1.C",
+    "international_cost": 9.2,
+    "professional_price": 620,
+    "sub_distributor_price": 620,
+    "retail_price": "0.00"
+},{
+    "bl_code": "COL2.C",
+    "international_cost": 9.7,
+    "professional_price": 700,
+    "sub_distributor_price": 700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "COL3.C",
+    "international_cost": 10.4,
+    "professional_price": 800,
+    "sub_distributor_price": 800,
+    "retail_price": "0.00"
+},{
+    "bl_code": "COL4.C",
+    "international_cost": 11.7,
+    "professional_price": 850,
+    "sub_distributor_price": 850,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FSM1.C",
+    "international_cost": 9.52,
+    "professional_price": 800,
+    "sub_distributor_price": 800,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FSM2.C",
+    "international_cost": 16,
+    "professional_price": 1000,
+    "sub_distributor_price": 1000,
+    "retail_price": "0.00"
+},{
+    "bl_code": "STE1.C",
+    "international_cost": 11.1,
+    "professional_price": 800,
+    "sub_distributor_price": 800,
+    "retail_price": "0.00"
+},{
+    "bl_code": "FF1.C",
+    "international_cost": 0.21,
+    "professional_price": 25,
+    "sub_distributor_price": 25,
+    "retail_price": 25
+},{
+    "bl_code": "FF2.C",
+    "international_cost": 0.24,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 30
+},{
+    "bl_code": "FF3.C",
+    "international_cost": 0.24,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 30
+},{
+    "bl_code": "FF4.C",
+    "international_cost": 0.24,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 30
+},{
+    "bl_code": "FF5.C",
+    "international_cost": 0.24,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 30
+},{
+    "bl_code": "FF6.C",
+    "international_cost": 0.24,
+    "professional_price": 30,
+    "sub_distributor_price": 30,
+    "retail_price": 30
+},{
+    "bl_code": "SFF7.C",
+    "international_cost": 0.47,
+    "professional_price": 40,
+    "sub_distributor_price": 40,
+    "retail_price": 48
+},{
+    "bl_code": "FF8.C",
+    "international_cost": 0.66,
+    "professional_price": 75,
+    "sub_distributor_price": 75,
+    "retail_price": 75
+},{
+    "bl_code": "HX402",
+    "international_cost": 11.27,
+    "professional_price": 800,
+    "sub_distributor_price": 800,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP2.C",
+    "international_cost": 11.27,
+    "professional_price": 800,
+    "sub_distributor_price": 800,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP3.C",
+    "international_cost": 14.4,
+    "professional_price": 980,
+    "sub_distributor_price": 980,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP4.C",
+    "international_cost": 15.65,
+    "professional_price": 1100,
+    "sub_distributor_price": 1100,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP5.C",
+    "international_cost": 25.04,
+    "professional_price": 1500,
+    "sub_distributor_price": 1500,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP6.C",
+    "international_cost": 25.04,
+    "professional_price": 1500,
+    "sub_distributor_price": 1500,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP7.C",
+    "international_cost": 28.17,
+    "professional_price": 1700,
+    "sub_distributor_price": 1700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP8.C",
+    "international_cost": 28.17,
+    "professional_price": 1700,
+    "sub_distributor_price": 1700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP9.C",
+    "international_cost": 12.52,
+    "professional_price": 850,
+    "sub_distributor_price": 850,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP10.C",
+    "international_cost": 10.96,
+    "professional_price": 750,
+    "sub_distributor_price": 750,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP11.C",
+    "international_cost": 7.04,
+    "professional_price": 550,
+    "sub_distributor_price": 550,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP12.C",
+    "international_cost": 7.04,
+    "professional_price": 550,
+    "sub_distributor_price": 550,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP13.C",
+    "international_cost": 28.17,
+    "professional_price": 1700,
+    "sub_distributor_price": 1700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP14.C",
+    "international_cost": 28.17,
+    "professional_price": 1700,
+    "sub_distributor_price": 1700,
+    "retail_price": "0.00"
+},{
+    "bl_code": "LMP15.C",
+    "international_cost": 30.52,
+    "professional_price": 1950,
+    "sub_distributor_price": 1950,
+    "retail_price": "0.00"
+}] 
