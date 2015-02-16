@@ -1,0 +1,74 @@
+x:  AR61210-Fashion Lashes 112 Lower Lash Black-54cb19f8e1ff103526e6c60d--0
+y:  AR61210-Naturals 112 Black (Lower Lash)-54cb19f8e1ff103526e6c5ea--0-0
+
+x:  AR61220-Fashion Lashes 112 Lower Lash Brown-54cb19f8e1ff103526e6c60e--0
+y:  AR61220-Naturals 112 Brown ( Lower Lash)-54cb19f8e1ff103526e6c5eb--0-0
+
+x:  AR61410-Fashion Lashes 114 Black-54cb19f8e1ff103526e6c610--0
+y:  AR61410-Naturals 114 Black-54cb19f8e1ff103526e6c5ec--0-0
+
+x:  AR61510-Fashion Lashes 115 Black-54cb19f8e1ff103526e6c611--0
+y:  AR61510-Naturals 115 Black-54cb19f8e1ff103526e6c5ed--0-0
+
+x:  EL5974010001-I|Guide EL-54cb19f8e1ff103526e6c7b2--0
+y:  EL5974010001-I-Care I-Guide Spa/Ing 42X62-54cb19f8e1ff103526e6c776--0-0
+
+x:  EL5907010002-Color Fix Color Ritual Guide ITA ENG SPA EL-54cb19f8e1ff103526e6c7b4--0
+y:  EL5907010002-Colorfix Rituale Colore Guide Eng-Ted-54cb19f8e1ff103526e6c777--0-0
+
+x:  BB11P66-Professional Smoothing Solution ZERO-54cb19f8e1ff103526e6c7cf--45
+y:  BB11P66-ZERO Plus Professional Smoothing Solution-54cb19f8e1ff103526e6c7d0--45-45
+
+x:  BB11P76-Professional Smoothing Solution ZERO-54cb19f8e1ff103526e6c7d1--120
+y:  BB11P76-ZERO Plus Professional Smoothing Solution-54cb19f8e1ff103526e6c7d2--120-120
+
+x:  BB11M18-Window Decal (Certified Salon)-54cb19f8e1ff103526e6c7e6--0
+y:  BB11M18-Window Decal (Original2)-54cb19f8e1ff103526e6c7e5--0-0
+
+x:  FB.VLK1-Volume Lash Kit-54cb19f8e1ff103526e6ca10--0
+y:  FB.VLK1-Volume Lash Kit-54cb19f8e1ff103526e6ca11--0-0
+
+
+
+x:  GG0820-Clean Collars for 14oz Warmers-54cb19f8e1ff103526e6caad--0
+y:  54cb19f8e1ff103526e6caac--0-0
+
+x:  AR61210-Naturals 112 Black (Lower Lash)-54cb19f8e1ff103526e6c5ea--22
+y:  -54cb19f8e1ff103526e6c60d--22-22
+
+x:  AR61220-Naturals 112 Brown ( Lower Lash)-54cb19f8e1ff103526e6c5eb--64
+y:  AR61220-Fashion Lashes 112 Lower Lash Brown-54cb19f8e1ff103526e6c60e--64-64
+
+x:  AR61410-Naturals 114 Black-54cb19f8e1ff103526e6c5ec--102
+y:  AR61410-Fashion Lashes 114 Black-54cb19f8e1ff103526e6c610--102-102
+
+x:  AR61510-Naturals 115 Black-54cb19f8e1ff103526e6c5ed--163
+y:  AR61510-Fashion Lashes 115 Black-54cb19f8e1ff103526e6c611--163-163
+
+x:  BB11M18-Window Decal (Original2)-54cb19f8e1ff103526e6c7e5--0
+y:  BB11M18-Window Decal (Certified Salon)-54cb19f8e1ff103526e6c7e6--0-0
+
+x:  CG72405-Color Wheel 6pk-54cb19f8e1ff103526e6c16e--73
+y:  CG72405-Color Wheel 6pk-54dc5e8a8622445a4909a67b--73-73
+
+x:  EL5907010002-Colorfix Rituale Colore Guide Eng-Ted-54cb19f8e1ff103526e6c777--0
+y:  EL5907010002-Color Fix Color Ritual Guide ITA ENG SPA EL-54cb19f8e1ff103526e6c7b4--0-0
+
+x:  EL5974010001-I-Care I-Guide Spa/Ing 42X62-54cb19f8e1ff103526e6c776--0
+y:  EL5974010001-I|Guide EL-54cb19f8e1ff103526e6c7b2--0-0
+
+x:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca27--0
+y:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca28--0--0-0
+
+x:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca3f--37
+y:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca40--37-37
+
+x:  -54cb19f8e1ff103526e6caac--95
+y:  GG0820-Clean Collars for 14oz Warmers-54cb19f8e1ff103526e6caad--95-91
+
+
+x:  54cb19f8e1ff103526e6ca40--2
+y:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca3f--2-6
+
+x:  CG72405-Color Wheel 6pk-54dc5e8a8622445a4909a67b--5
+y:  CG72405-Color Wheel 6pk-54cb19f8e1ff103526e6c16e--5-5

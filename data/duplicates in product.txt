@@ -1,172 +1,41 @@
-x:  AR61210-Fashion Lashes 112 Lower Lash Black-54cb19f8e1ff103526e6c60d--0
-y:  AR61210-Naturals 112 Black (Lower Lash)-54cb19f8e1ff103526e6c5ea--0-0
+  AR61210-Fashion Lashes 112 Lower Lash Black 
+  AR61210-Naturals 112 Black (Lower Lash) 
 
-x:  AR61220-Fashion Lashes 112 Lower Lash Brown-54cb19f8e1ff103526e6c60e--0
-y:  AR61220-Naturals 112 Brown ( Lower Lash)-54cb19f8e1ff103526e6c5eb--0-0
+  AR61220-Fashion Lashes 112 Lower Lash Brown 
+  AR61220-Naturals 112 Brown ( Lower Lash) 
+	
+  AR61410-Fashion Lashes 114 Black 
+  AR61410-Naturals 114 Black 
 
-x:  AR61410-Fashion Lashes 114 Black-54cb19f8e1ff103526e6c610--0
-y:  AR61410-Naturals 114 Black-54cb19f8e1ff103526e6c5ec--0-0
+  AR61510-Fashion Lashes 115 Black 
+  AR61510-Naturals 115 Black 
 
-x:  AR61510-Fashion Lashes 115 Black-54cb19f8e1ff103526e6c611--0
-y:  AR61510-Naturals 115 Black-54cb19f8e1ff103526e6c5ed--0-0
+  EL5974010001-I|Guide EL 
+  EL5974010001-I-Care I-Guide Spa/Ing 42X62 
 
-x:  EL5974010001-I|Guide EL-54cb19f8e1ff103526e6c7b2--0
-y:  EL5974010001-I-Care I-Guide Spa/Ing 42X62-54cb19f8e1ff103526e6c776--0-0
+  EL5907010002-Color Fix Color Ritual Guide ITA ENG SPA EL 
+  EL5907010002-Colorfix Rituale Colore Guide Eng 
 
-x:  EL5907010002-Color Fix Color Ritual Guide ITA ENG SPA EL-54cb19f8e1ff103526e6c7b4--0
-y:  EL5907010002-Colorfix Rituale Colore Guide Eng-Ted-54cb19f8e1ff103526e6c777--0-0
+  BB11P66-Professional Smoothing Solution ZERO 
+  BB11P66-ZERO Plus Professional Smoothing Solution 
 
-x:  BB11P66-Professional Smoothing Solution ZERO-54cb19f8e1ff103526e6c7cf--45
-y:  BB11P66-ZERO Plus Professional Smoothing Solution-54cb19f8e1ff103526e6c7d0--45-45
+  BB11P76-Professional Smoothing Solution ZERO 
+  BB11P76-ZERO Plus Professional Smoothing Solution 
 
-x:  BB11P76-Professional Smoothing Solution ZERO-54cb19f8e1ff103526e6c7d1--120
-y:  BB11P76-ZERO Plus Professional Smoothing Solution-54cb19f8e1ff103526e6c7d2--120-120
+  FB.VLK1-Volume Lash Kit 
+  FB.VLK1-Volume Lash Kit 
 
-x:  BB11M18-Window Decal (Certified Salon)-54cb19f8e1ff103526e6c7e6--0
-y:  BB11M18-Window Decal (Original2)-54cb19f8e1ff103526e6c7e5--0-0
+  BB11M18-Window Decal (Original2) 
+  BB11M18-Window Decal (Certified Salon) 
 
-x:  FB.VLK1-Volume Lash Kit-54cb19f8e1ff103526e6ca10--0
-y:  FB.VLK1-Volume Lash Kit-54cb19f8e1ff103526e6ca11--0-0
+  GG.MBK.C-Mini Brazilian Kit BL 
+  GG.MBK.C-Mini Brazilian Kit BL 
 
-x:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca28--0
-y:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca27--0-0
+  GG0375.C-Hemp Wax 
+  GG0375.C-Hemp Wax 
 
-y:  GG0755.C-Sure Clean-54cb19f8e1ff103526e6ca81--0-3
+  CG72405-Color Wheel 6pk 
+  CG72405-Color Wheel 6pk 
 
-x:  GG0820-Clean Collars for 14oz Warmers-54cb19f8e1ff103526e6caad--0
-y:  54cb19f8e1ff103526e6caac--0-0
-
-x:  AR61210-Naturals 112 Black (Lower Lash)-54cb19f8e1ff103526e6c5ea--22
-y:  -54cb19f8e1ff103526e6c60d--22-22
-
-x:  AR61220-Naturals 112 Brown ( Lower Lash)-54cb19f8e1ff103526e6c5eb--64
-y:  AR61220-Fashion Lashes 112 Lower Lash Brown-54cb19f8e1ff103526e6c60e--64-64
-
-x:  AR61410-Naturals 114 Black-54cb19f8e1ff103526e6c5ec--102
-y:  AR61410-Fashion Lashes 114 Black-54cb19f8e1ff103526e6c610--102-102
-
-x:  AR61510-Naturals 115 Black-54cb19f8e1ff103526e6c5ed--163
-y:  AR61510-Fashion Lashes 115 Black-54cb19f8e1ff103526e6c611--163-163
-
-x:  BB11M18-Window Decal (Original2)-54cb19f8e1ff103526e6c7e5--0
-y:  BB11M18-Window Decal (Certified Salon)-54cb19f8e1ff103526e6c7e6--0-0
-
-x:  CG72405-Color Wheel 6pk-54cb19f8e1ff103526e6c16e--73
-y:  CG72405-Color Wheel 6pk-54dc5e8a8622445a4909a67b--73-73
-
-x:  EL5907010002-Colorfix Rituale Colore Guide Eng-Ted-54cb19f8e1ff103526e6c777--0
-y:  EL5907010002-Color Fix Color Ritual Guide ITA ENG SPA EL-54cb19f8e1ff103526e6c7b4--0-0
-
-x:  EL5974010001-I-Care I-Guide Spa/Ing 42X62-54cb19f8e1ff103526e6c776--0
-y:  EL5974010001-I|Guide EL-54cb19f8e1ff103526e6c7b2--0-0
-
-x:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca27--0
-y:  GG.MBK.C-Mini Brazilian Kit BL-54cb19f8e1ff103526e6ca28--0--0-0
-
-x:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca3f--37
-y:  54cb19f8e1ff103526e6ca40--37-37
-
-x:  -54cb19f8e1ff103526e6caac--95
-y:  GG0820-Clean Collars for 14oz Warmers-54cb19f8e1ff103526e6caad--95-91
-
-x:  TS25.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c02e--1537
-y:  TS25.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c04e--1537-1537
-
-x:  TS26.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c02f--966
-y:  TS26.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c04f--966-966
-
-x:  TS27.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c030--1349
-y:  TS27.C-Toe Separator Bunnies-54cb19f8e1ff103526e6c050--1349-1349
-
-x:  TS6.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c01b--697
-y:  TS6.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03b--697-697
-
-x:  TS7.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c01c--915
-y:  TS7.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03c--915-915
-
-x:  TS8.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c01d--995
-y:  TS8.C-Toe Separator Butterfly-54cb19f8e1ff103526e6c03d--995-995
-
-x:  54cb19f8e1ff103526e6c026--1724
-y:  TS17.C-Toe Separator Cat-54cb19f8e1ff103526e6c046--1724-1724
-
-x:  TS18.C-Toe Separator Cat-54cb19f8e1ff103526e6c027--0
-y:  TS18.C-Toe Separator Cat-54cb19f8e1ff103526e6c047--0-0
-
-x:  TS1.C-Toe Separator Crown-54cb19f8e1ff103526e6c016--1547
-y:  TS1.C-Toe Separator Crown-54cb19f8e1ff103526e6c036--1547-1547
-
-x:  TS10-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c01f--998
-y:  TS10-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c03f--998-998
-
-x:  TS9.C-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c01e--997
-y:  TS9.C-Toe Separator Crown&Stars-54cb19f8e1ff103526e6c03e--997-997
-
-x:  Dog-54cb19f8e1ff103526e6c025--1009
-y:  TS16.C-Toe Separator Dog-54cb19f8e1ff103526e6c045--1009-1009
-
-x:  TS11.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c020--616
-y:  TS11.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c040--616-616
-
-x:  TS13.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c022--850
-y:  TS13.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c042--850-850
-
-x:  TS12.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c021--1590
-y:  TS12.C-Toe Separator Flower Dots-54cb19f8e1ff103526e6c041--1590-1590
-
-x:  TS22.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c02b--913
-y:  TS22.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04b--0--913-913
-
-x:  -54cb19f8e1ff103526e6c02c--978
-y:  TS23.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04c--0--978-978
-
-x:  TS24.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c02d--999
-y:  TS24.C-Toe Separator Flower&Stars-54cb19f8e1ff103526e6c04d--999-999
-
-x:  TS30.C-Toe Separator Leopard-54cb19f8e1ff103526e6c033--150
-y:  TS30.C-Toe Separator Leopard-54cb19f8e1ff103526e6c053--150-150
-
-x:  TS31.C-Toe Separator Leopard-54cb19f8e1ff103526e6c034--49
-y:  TS31.C-Toe Separator Leopard-54cb19f8e1ff103526e6c054--49-49
-
-x:  TS32.C-Toe Separator Leopard-54cb19f8e1ff103526e6c035--49
-y:  TS32.C-Toe Separator Leopard-54cb19f8e1ff103526e6c055--49-49
-
-x:  TS2.C-Toe Separator Sassy -54cb19f8e1ff103526e6c017--815
-y:  TS2.C-Toe Separator Sassy -54cb19f8e1ff103526e6c037--815-815
-
-x:  TS3.C-Toe Separator Sassy -54cb19f8e1ff103526e6c018--937
-y:  TS3.C-Toe Separator Sassy -54cb19f8e1ff103526e6c038--937-937
-
-x:  TS4.C-Toe Separator Sassy -54cb19f8e1ff103526e6c019--985
-y:  TS4.C-Toe Separator Sassy -54cb19f8e1ff103526e6c039--985-985
-
-x:  TS5.C-Toe Separator Sassy -54cb19f8e1ff103526e6c01a--1002
-y:  TS5.C-Toe Separator Sassy -54cb19f8e1ff103526e6c03a--1002-1002
-
-x:  TS28.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c031--50
-y:  TS28.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c051--50-50
-
-x:  TS29.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c032--20
-y:  TS29.C-Toe Separator SmileyFace -54cb19f8e1ff103526e6c052--20-20
-
-x:  TS19.C-Toe Separator Snail-54cb19f8e1ff103526e6c028--988
-y:  TS19.C-Toe Separator Snail-54cb19f8e1ff103526e6c048--988-988
-
-x:  TS20.C-Toe Separator Snail-54cb19f8e1ff103526e6c029--1517
-y:  TS20.C-Toe Separator Snail-54cb19f8e1ff103526e6c049--1517-1517
-
-x:  TS21.C-Toe Separator Snail-54cb19f8e1ff103526e6c02a--1796
-y:  TS21.C-Toe Separator Snail-54cb19f8e1ff103526e6c04a--1796-1796
-
-x:  TS14.C-Toe Separator Tulips-54cb19f8e1ff103526e6c023--912
-y:  TS14.C-Toe Separator Tulips-54cb19f8e1ff103526e6c043--912-912
-
-x:  TS15.C-Toe Separator Tulips-54cb19f8e1ff103526e6c024--1852
-y:  TS15.C-Toe Separator Tulips-54cb19f8e1ff103526e6c044--1852-1852
-
-x:  54cb19f8e1ff103526e6ca40--2
-y:  GG0375.C-Hemp Wax-54cb19f8e1ff103526e6ca3f--2-6
-
-x:  CG72405-Color Wheel 6pk-54dc5e8a8622445a4909a67b--5
-y:  CG72405-Color Wheel 6pk-54cb19f8e1ff103526e6c16e--5-5
+  GG0820-Clean Collars for 14oz Warmers 
+  GG0820-Clean Collars for 14oz Warmers

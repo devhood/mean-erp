@@ -1819,6 +1819,7 @@ $scope.init = function(){
 
   var query = {"position":"Sales Executive"};
   $scope.sales_executives = Api.Collection('users',query).query();
+  $scope.show_button = true;
 
   $scope.CustomerChange = function(){
     if($scope.sales.customer){
@@ -1873,7 +1874,7 @@ $scope.init = function(){
         }
       }
       // if(isInventoryExist)
-      if(true){
+      if(isInventoryExist){
         item.override = item.override ? item.override : "NORMAL";
         if(sales.customer.price_type == "Professional"){
           item.price = item.professional_price;
@@ -2492,7 +2493,7 @@ $scope.init = function(){
     if(shipment_item){
       delete shipment_item.inventories;
     }
-    if(shipment_item && shipment_item.name && shipment_item.quantity && shipment_item.cost && shipment_item.condition){
+    if(shipment_item && shipment_item.name && shipment_item.quantity && shipment_item.condition){
       if($scope.shipment.shipment_items){
         $scope.shipment.shipment_items.push(shipment_item);
       }
