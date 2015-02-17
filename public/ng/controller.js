@@ -1841,10 +1841,10 @@ $scope.init = function(){
   }
 
   var displayItemQuantity = function() {
-    // $scope.totalQuantity=0;
+    // $scope.total_quantity=0;
     // for(var i=0;i<$scope.sales.ordered_items.length; i++){
-    // $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
-    // console.log("totalQuantity",$scope.sales.totalQuantity);
+    // $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+    // console.log("total_quantity",$scope.sales.total_quantity);
     // }
     console.log("items",$scope.sales.ordered_items);
   }
@@ -1929,10 +1929,10 @@ $scope.init = function(){
      $scope.sales.withholding_tax = computation.withholdingTax;
     //  displayItemQuantity();
 
-     $scope.sales.totalQuantity=0;
+     $scope.sales.total_quantity=0;
      for(var i=0;i<$scope.sales.ordered_items.length; i++){
-     $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
-     console.log("totalQuantity",$scope.sales.totalQuantity);
+     $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+     console.log("total_quantity",$scope.sales.total_quantity);
      }
   }
 
@@ -1964,10 +1964,10 @@ $scope.init = function(){
       }
     }
     // displayItemQuantity();
-    $scope.sales.totalQuantity=0;
+    $scope.sales.total_quantity=0;
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
-    $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
-    console.log("totalQuantity",$scope.sales.totalQuantity);
+    $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+    console.log("total_quantity",$scope.sales.total_quantity);
     }
   }
 
@@ -2152,9 +2152,9 @@ $scope.init = function(){
   var displayItemQuantity = function() {
     console.log("displayItemQuantity");
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
-    $scope.sales.totalQuantity=0;
-    $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
-    console.log($scope.sales.totalQuantity);
+    $scope.sales.total_quantity=0;
+    $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+    console.log($scope.sales.total_quantity);
     }
 
   }
@@ -2690,10 +2690,10 @@ $scope.init = function(){
   }
 
 var displayItemQuantity = function() {
-  $scope.sales.totalQuantity=0;
+  $scope.sales.total_quantity=0;
   for(var i=0;i<$scope.sales.ordered_items.length; i++){
-  $scope.sales.totalQuantity += $scope.sales.ordered_items[i].quantity;
-  console.log("totalQuantity",$scope.sales.totalQuantity);
+  $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+  console.log("total_quantity",$scope.sales.total_quantity);
   }
 }
 
@@ -3673,6 +3673,16 @@ var displayItemQuantity = function() {
         $location.path('/sales/index/payment');
       });
     };
+        
+    $scope.rejectPayment = function(){
+      console.log("payment rejected");
+      $scope.sales.status = status.payment.rejected;
+      $scope.sales.$update(function(){
+        $location.path('/sales/index/payment');
+        return false;
+      });
+    };
+
   }
   if(action == 'approve'){
     $scope.proceedPayment='true';
