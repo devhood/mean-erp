@@ -25,12 +25,13 @@ var pdf = {
 			doc.text(siinfo.sino,500,55);
 			doc.font('Courier');
 			doc.fontSize(10);
-			doc.text(siinfo.delivery_created_at,510,70);
+			var date = siinfo.delivery_date.replace("T16:00:00.000Z","");
+			doc.text(date,510,70);
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
 			doc.fontSize(10);
-			doc.text(siinfo.company_name,40,90,{width:260,indent:40});
-			doc.text(siinfo.company_name,340,90,{width:260,indent:40});
+			doc.text(siinfo.customer.company_name,40,90,{width:260,indent:40});
+			doc.text(siinfo.customer.company_name,340,90,{width:260,indent:40});
 			doc.moveDown(0);
 			doc.font('Courier');
 			doc.fontSize(10);
@@ -45,7 +46,7 @@ var pdf = {
 			doc.moveDown(0);
 			y = doc.y;
 			doc.text(siinfo.payment_term,35);
-			doc.text(siinfo.delivery_date,220,y);
+			doc.text(date,220,y);
 			doc.text(siinfo.delivery_method,360,y);
 			doc.text(siinfo.sales_executive,500,y);
 			doc.text(siinfo.special_instruction,35,y+10);
@@ -53,7 +54,7 @@ var pdf = {
 			doc.font('Courier-Bold');
 			doc.text("CODE",15,200);
 			doc.text("PRODUCT",85,200);
-			doc.text("DESCRIPTION",205,200);
+			// doc.text("DESCRIPTION",205,200);
 			doc.text("QTY",345,200);
 			doc.text("UOM",395,200);
 			doc.text("U/P",450,200);
@@ -75,7 +76,11 @@ var pdf = {
 			doc.text(siinfo.total_vat,560,706,{width:50});/*Add Vat*/
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
-			doc.text(siinfo.total_amount_due,560,718,{width:50});/*Total Amount Due*/
+
+			// var num = siinfo.total_amount_due;
+			// var total = num.toFixed(2);
+			// var total = siinfo.total_amount_due.toFixed(2);
+			doc.text(siinfo.total_amount_due,460,718,{width:50});/*Total Amount Due*/
 			doc.fontSize(10);
 			doc.font('Courier');
 			doc.text(siinfo.order_created_by,25,755);
@@ -103,8 +108,8 @@ module.exports.print = function(siinfo,result){
 		doc.font('Courier');
 	        doc.fontSize(8);
 		doc.text(siinfo.ordered_items[i].bl_code,3,y,{width:65});
-		doc.text(siinfo.ordered_items[i].name,70,y,{width:100});
-		doc.text(siinfo.ordered_items[i].description,175,y,{width:160});
+		doc.text(siinfo.ordered_items[i].name,70,y,{width:150});
+		// doc.text(siinfo.ordered_items[i].description,175,y,{width:160});
 		doc.text(siinfo.ordered_items[i].quantity,340,y,{width:35,align:'center'});
 		doc.text(siinfo.ordered_items[i].uom,390,y,{width:50});
 		doc.text(siinfo.ordered_items[i].professional_price,440,y,{width:35,align:'center'});
