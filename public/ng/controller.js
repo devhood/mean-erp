@@ -5050,10 +5050,10 @@ var type = $routeParams.type;
   var type = $routeParams.type;
   $scope.sales =  Api.Collection('sales').get({id:id},function(){
     if (type == 'delivery') {
-      $scope.sales.status = status.printed.dr;
+      // $scope.sales.status = status.printed.dr;
     }
     if (type == 'invoice') {
-      $scope.sales.status = status.printed.si;
+      // $scope.sales.status = status.printed.si;
     }
     $scope.sales.$update(function(){
       $window.location.href = '/print/sales/'+type+'/'+id;

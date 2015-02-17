@@ -19,6 +19,9 @@ var pdf = {
 			return doc;
 		},
 
+		// var n = d.toDateString();
+		// T16:00:00.000Z
+
 		pageHeader : function(doc,drinfo){
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
@@ -26,7 +29,9 @@ var pdf = {
 			doc.moveDown(0);
 			doc.font('Courier');
 			doc.fontSize(10);
-			doc.text(drinfo.delivery_date,480,108,{align:'left'});
+
+			var date = drinfo.delivery_date.replace("T16:00:00.000Z","");
+			doc.text(date,480,108,{align:'left'});
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
 			doc.fontSize(10);
@@ -39,14 +44,22 @@ var pdf = {
 			doc.text(drinfo.customer.billing_address.landmark+","+drinfo.customer.billing_address.barangay+","+drinfo.customer.billing_address.city+","+drinfo.customer.billing_address.province+","+drinfo.customer.billing_address.country+","+drinfo.customer.billing_address.zipcode,10,doc.y,{width:250,align:'justify'});
 			doc.text(drinfo.customer.shipping_address.landmark+","+drinfo.customer.shipping_address.barangay+","+drinfo.customer.shipping_address.city+","+drinfo.customer.shipping_address.province+","+drinfo.customer.shipping_address.country+","+drinfo.customer.shipping_address.zipcode,300,y,{width:250,align:'justify'});
 			doc.moveDown(0);
+			if (drinfo.sono) {
 			doc.text(drinfo.sono,35,180);
+			};
+			if (drinfo.pono) {
 			doc.text(drinfo.pono,205,180);
+			};
+			if (drinfo.refno) {
 			doc.text(drinfo.refno,360,180);
+			};
 			doc.text(drinfo.ordered_by,520,180);
 			doc.moveDown(0);
 			y = doc.y;
 			doc.text(drinfo.payment_term,35);
-			doc.text(drinfo.delivery_date,220,y);
+
+			// date = drinfo.delivery_date.replace("T16:00:00.000Z","");
+			doc.text(date,220,y);
 			doc.text(drinfo.delivery_method,360,y);
 			doc.text(drinfo.sales_executive,500,y);
 			doc.text(drinfo.special_instruction,35,y+10);
@@ -80,9 +93,9 @@ module.exports.print = function(drinfo,result){
 		var y= doc.y;
 		doc.font('Courier');
 		doc.fontSize(8);
-		doc.text(drinfo.ordered_items[i].bl_code,-1,y,{width:80});
-		doc.text(drinfo.ordered_items[i].name,90,y,{width:100,align:'left'});
-		doc.text(drinfo.ordered_items[i].brand,205,y,{width:100});
+		doc.text(drinfo.ordered_items[i].bl_code,15,y,{width:80});
+		doc.text(drinfo.ordered_items[i].name,95,y,{width:130,align:'left'});
+		doc.text(drinfo.ordered_items[i].brand,240,y,{width:100});
 		// doc.text(drinfo.ordered_items[i].description,310,y,{width:190});
 		doc.text(drinfo.ordered_items[i].uom,510,y,{width:50});
 		doc.text(drinfo.ordered_items[i].quantity,560,y,{width:35,align:'center'});
