@@ -1309,7 +1309,7 @@ angular.module('erp')
           {url:"/#/sales/invoice/approve/",title:"Approve Record",icon:"fa fa-gear"}
           ];
 
-          query = {"drno": { "$exists": true }, "status.status_code" : {"$in" : [status.delivery.approved.status_code, status.payment.rejected.status_code]}};
+          query = {"drno": { "$exists": true }, "status.status_code" : {"$in" : [status.printed.dr.status_code,status.delivery.approved.status_code, status.payment.rejected.status_code]}};
           $scope.title = "SALES INVOICE";
 
           $scope.dtColumns = Library.DataTable.columns(columns,buttons);
