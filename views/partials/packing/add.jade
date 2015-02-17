@@ -90,6 +90,12 @@ block title
 														tr
 															td Delivery Date:
 															td {{sales.delivery_date | date: 'longDate'}}
+														tr
+															td Special Instructions: 
+															td {{sales.special_instruction}}
+														tr
+															td Total Quantity: 
+															td {{sales.total_quantity || sales.totalQuantity}}
 												table.table.table-bordered.table-condensed.flip-content
 													thead.flip-content.bg-grey
 														tr
@@ -110,7 +116,7 @@ block title
 				.col-md-6
 					.form-group
 						.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-							input.form-control(type="text", ng-model="sales.prepared_by", ng-disabled="action=='read'", required)
+							input.form-control(type="text", ng-model="sales.prepared_by", ng-disabled="action=='read'", value="{{client.fullname}}", required)
 							span.col-md-12.help-block Prepared By
 				.col-md-6
 					.form-group
@@ -119,7 +125,7 @@ block title
 				.row
 					.col-md-6
 						.col-md-offset-3.col-md-9
-							button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+							button.btn.green(type="submit" ng-show="action!='read'") Submit
 							| &nbsp;
 							a.btn.default(type="button", href="/#/packing/index") Cancel
 					.col-md-6
