@@ -1882,6 +1882,12 @@ $scope.init = function(){
         if(sales.customer.price_type == "Retail"){
           item.price = item.retail_price;
         }
+        if(sales.customer.juro_price == "Juro"){
+          item.price = item.retail_price;
+        }
+        if(sales.customer.sub_distributor_price == "Sub Distributor"){
+          item.price = item.retail_price;
+        }
         if(item.override != "NORMAL"){
           item.price = item.override;
           item.total = 0.00;
@@ -2050,6 +2056,8 @@ $scope.init = function(){
       });
     };
     $scope.rejectSales = function(){
+        var confirm = window.prompt("Please Confirm Rejecting Sales.");
+        console.log(confirm);
       $scope.sales.status = status.order.rejected;
       $scope.sales.$update(function(){
         $location.path('/sales/index/order');
@@ -3507,6 +3515,7 @@ var displayItemQuantity = function() {
     });
   }
   if(action == 'approve'){
+
     $scope.title = "APPROVE SALES INVOICE - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
@@ -3519,6 +3528,9 @@ var displayItemQuantity = function() {
       });
     };
     $scope.rejectSales = function(){
+    var confirm = window.confirm("Pleases Confirm Rejecting Sales.");
+    console.log("confirm",confirm);
+
       $scope.sales.status = status.invoice.rejected;
       $scope.sales.$update(function(){
         $location.path('/sales/index/invoice');

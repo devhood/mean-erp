@@ -53,9 +53,9 @@ var pdf = {
 
 			doc.font('Courier-Bold');
 			doc.text("CODE",15,200);
-			doc.text("PRODUCT",85,200);
+			doc.text("PRODUCT",110,200);
 			// doc.text("DESCRIPTION",205,200);
-			doc.text("QTY",345,200);
+			doc.text("QTY",300,200);
 			doc.text("UOM",395,200);
 			doc.text("U/P",450,200);
 			doc.text("DISCOUNT",480,200);
@@ -107,10 +107,10 @@ module.exports.print = function(siinfo,result){
 		var y= doc.y;
 		doc.font('Courier');
 	        doc.fontSize(8);
-		doc.text(siinfo.ordered_items[i].bl_code,3,y,{width:65});
-		doc.text(siinfo.ordered_items[i].name,70,y,{width:150});
+		doc.text(siinfo.ordered_items[i].bl_code,15,y,{width:80});
+		doc.text(siinfo.ordered_items[i].name,100,y,{width:150});
 		// doc.text(siinfo.ordered_items[i].description,175,y,{width:160});
-		doc.text(siinfo.ordered_items[i].quantity,340,y,{width:35,align:'center'});
+		doc.text(siinfo.ordered_items[i].quantity,300,y,{width:35,align:'center'});
 		doc.text(siinfo.ordered_items[i].uom,390,y,{width:50});
 		doc.text(siinfo.ordered_items[i].professional_price,440,y,{width:35,align:'center'});
 		doc.text(siinfo.ordered_items[i].price,480,y,{width:35,align:'center'});
