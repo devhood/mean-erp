@@ -5,50 +5,5 @@ block title
     .caption
       i.fa.fa-edit
       | ADMIN TOOLS
-    .tools
-      a.collapse(href="javascript:;")
-  .portlet-body
-    .table-toolbar(ng-show='"{{addUrl}}"?true:false')
       .btn-group.btn-group-xs.btn-group-solid
         a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
-          i.fa.fa-plus
-    table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions" dt-columns="dtColumns")
-.portlet.box.grey(ng-if="ajax_ready && dtOptions1",  ng-init="init()")
-  .portlet-title
-    .caption
-      i.fa.fa-edit
-      | {{title1}}
-    .tools
-      a.collapse(href="javascript:;")
-  .portlet-body
-    .table-toolbar(ng-show='"{{addUrl1}}"?true:false')
-      .btn-group.btn-group-xs.btn-group-solid
-        a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
-          i.fa.fa-plus
-    table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions1" dt-columns="dtColumns1")
-.portlet.box.grey(ng-if="ajax_ready && dtOptions2",  ng-init="init()")
-  .portlet-title
-    .caption
-      i.fa.fa-edit
-      | {{title2}}
-    .tools
-      a.collapse(href="javascript:;")
-  .portlet-body
-    .table-toolbar(ng-show='"{{addUrl2}}"?true:false')
-      .btn-group.btn-group-xs.btn-group-solid
-        a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
-          i.fa.fa-plus
-    table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions2" dt-columns="dtColumns2")
-.portlet.box.grey(ng-if="ajax_ready && dtOptions3",  ng-init="init()")
-  .portlet-title
-    .caption
-      i.fa.fa-edit
-      | {{title3}}
-    .tools
-      a.collapse(href="javascript:;")
-  .portlet-body
-    .table-toolbar(ng-show='"{{addUrl3}}"?true:false')
-      .btn-group.btn-group-xs.btn-group-solid
-        a.btn.default.tooltips(href="{{addUrl}}", data-container="body", data-placement="top", data-html="true", data-original-title="Add new Record")
-          i.fa.fa-plus
-    table.table.table-bordered.table-striped( datatable="" dt-options="dtOptions3" dt-columns="dtColumns3")

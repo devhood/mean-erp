@@ -44,7 +44,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="action=='read'")
+                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="action=='read'", readonly)
                 span.col-md-12.help-block Reference No
           .col-md-6
         .row
@@ -102,7 +102,7 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}" ,tabindex="-1", ng-disabled="true",required)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}" ,tabindex="-1", ng-disabled="true")
                 span.col-md-12.help-block Delivery Method
         .row
           .col-md-6
@@ -120,7 +120,7 @@ block title
           .col-md-10
             .form-group
               .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
-                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="true",required)
+                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="true")
                 span.col-md-12.help-block Special Instructions
           .col-md-1
         .row(ng-show="sales.promo")
