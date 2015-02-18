@@ -1883,11 +1883,11 @@ $scope.init = function(){
         if(sales.customer.price_type == "Retail"){
           item.price = item.retail_price;
         }
-        if(sales.customer.juro_price == "Juro"){
-          item.price = item.retail_price;
+        if(sales.customer.price_type == "Juro"){
+          item.price = item.juro_price;
         }
-        if(sales.customer.sub_distributor_price == "Sub Distributor"){
-          item.price = item.retail_price;
+        if(sales.customer.price_type == "Sub Distributor"){
+          item.price = item.sub_distributor_price;
         }
         if(item.override != "NORMAL"){
           item.price = item.override;
