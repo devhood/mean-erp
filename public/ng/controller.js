@@ -1879,6 +1879,7 @@ $scope.init = function(){
         if(sales.customer.price_type == "Professional"){
           item.price = item.professional_price;
         }
+        //juro added
         if(sales.customer.price_type == "Retail"){
           item.price = item.retail_price;
         }
