@@ -184,6 +184,11 @@
         "href": "/#/user/index"
       },
       {
+        "title": "Sales Monitoring",
+        "description": "Monitoring Sales Status",
+        "href": "/#/sales/index/monitor"
+      },
+      {
         "title": "Adjustment",
         "description": "Adjustment",
         "href": "/#/adjustment/index"

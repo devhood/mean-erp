@@ -68,14 +68,6 @@ angular.module('erp', [
         templateUrl: '/partials/monitor/duplicate',
         controller: 'MonitorProductsCtrl'
       })
-      .when('/monitor/sales', {
-        templateUrl: '/partials/monitor/sales',
-        controller: 'MonitorSalesCtrl'
-      })
-      .when('/monitor/sales/sale', {
-        templateUrl: '/partials/monitor/sale',
-        controller: 'MonitorSalesCtrl'
-      })
       .when('/packing/index', {
         templateUrl: '/partials/packing/index',
         controller: 'PackingCtrl'
@@ -155,6 +147,14 @@ angular.module('erp', [
       .when('/sales/payment/:action/:id', {
         templateUrl: '/partials/sales/payment',
         controller: 'SalesPaymentCtrl'
+      })
+      .when('/sales/monitor/:action', {
+        templateUrl: '/partials/sales/monitor',
+        controller: 'SalesMonitorCtrl'
+      })
+      .when('/sales/monitor/:action/:id', {
+        templateUrl: '/partials/sales/monitor',
+        controller: 'SalesMonitorCtrl'
       })
       .when('/consignment/index/:type', {
         templateUrl: '/partials/consignment/index',

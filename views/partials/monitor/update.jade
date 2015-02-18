@@ -1,0 +1,305 @@
+block title
+  title ADMIN
+.portlet.box.grey(ng-if="ajax_ready",  ng-init="formInit()")
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .tools
+      a.collapse(href="javascript:;")
+      a.config(href="#portlet-config", data-toggle="modal")
+      a.reload(href="javascript:;")
+      a.remove(href="javascript:;")
+  .portlet-body.form
+    form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSales()", novalidate)
+      .form-body
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="true")
+                span.col-md-12.help-block Transaction Type
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.sono" )
+                span.col-md-12.help-block SO Number
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.reference_no", ng-disabled="true")
+                span.col-md-12.help-block Reference No
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.delivery_date", datepicker-popup="{{'MM/dd/yyyy'}}", ng-disabled="true")
+                span.col-md-12.help-block Delivery Date
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                select.select2me.form-control.select2-offscreen(ng-change="CustomerChange()",ng-model="sales.customer", ng-options="customer.company_name for customer in customers track by customer.company_name", ng-selected="{{sales.customer.company_name}}" ,tabindex="-1", ng-disabled="sales.ordered_items && sales.ordered_items.length")
+                span.col-md-12.help-block Customer
+          .col-md-1
+        .row(ng-show="sales.customer")
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-value="shipping_address", disabled)
+                span.col-md-12.help-block Shipping Address
+          .col-md-1
+        .row(ng-show="sales.customer")
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-value="billing_address", disabled)
+                span.col-md-12.help-block Billing Address
+          .col-md-1
+        .row(ng-show="sales.customer")
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types track by price_type.price_type_name", ng-selected="{{sales.customer.price_type}}", tabindex="-1", ng-disabled="true")
+                span.col-md-12.help-block Price Type
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.discount", ng-options="discount.name as discount.name for discount in discounts track by discount.discount_name", ng-selected="{{sales.customer.discount}}" ,ng-disabled="true")
+                span.col-md-12.help-block Permanent Discount
+        .row(ng-show="sales.customer")
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text", ng-model="sales.customer.sales_executive", ng-disabled="true")
+                span.col-md-12.help-block Sales Executive
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms track by payment_term.payment_term_name",tabindex="-1", ng-disabled="true")
+                span.col-md-12.help-block Payment Terms
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="sales.order_source", ng-options="order_source.name as order_source.name for order_source in order_sources", ng-selected="{{sales.order_source}}", tabindex="-1", ng-disabled="true")
+                span.col-md-12.help-block Order Source
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                select.select2me.form-control.select2-offscreen(ng-model="sales.delivery_method", ng-options="delivery_method.name as delivery_method.name for delivery_method in delivery_methods", ng-selected="{{sales.delivery_method}}", tabindex="-1", ng-disabled="true")
+                span.col-md-12.help-block Delivery Method
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="true")
+                span.col-md-12.help-block Inventory Location
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.ordered_by", ng-minlength="0", ng-maxlength="25", ng-disabled="true")
+                span.col-md-12.help-block Ordered By
+        .row
+          .col-md-1
+          .col-md-10
+            .form-group
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
+                input.form-control(type="text", ng-model="sales.special_instruction", ng-minlength="0", ng-maxlength="100", ng-disabled="true")
+                span.col-md-12.help-block Special Instructions
+          .col-md-1
+        .portlet.box.grey(ng-show="sales.customer")
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | ORDERED ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row(ng-hide="true")
+                .col-md-1
+                .col-md-10
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-4
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item", ng-options="product.name for product in products")
+                        span.col-md-12.help-block Product
+                  .col-md-2
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="sales.item.quantity")
+                        span.col-md-12.help-block Quantity
+                  .col-md-2
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.item.override")
+                          option(value='NORMAL') None
+                          option(value='FREEBIE') Freebie
+                          option(value='DEMO') Demo
+                        span.col-md-12.help-block Override
+                  .col-md-1
+                    button.btn-sm.green.custom-right(type="button",ng-click="addOrder(sales)")
+                      i.fa.fa-plus
+                .col-md-1
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Quantity
+                              th Unit Price
+                              th Total
+                              th(width="5%") Action
+                          tbody
+                            tr(ng-repeat="ordered_item in sales.ordered_items track by $index")
+                              td {{ordered_item.bl_code}}
+                              td {{ordered_item.name}}
+                              td {{ordered_item.quantity}}
+                              td {{ordered_item.price}}
+                              td {{ordered_item.total}}
+                              td(width="5%")
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-click="removeOrder($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                    i.fa.fa-trash-o
+                .col-md-1
+        .portlet.box.grey(ng-show="sales.customer")
+          .portlet-title
+            .caption
+              i.fa.fa-reorder
+              | RETURNED ITEMS
+            .tools
+              a.collapse(href="javascript:;")
+          .portlet-body.form
+            .form-body
+              br
+              br
+              .row(ng-hide="action!='create'")
+                .col-md-1
+                .col-md-10
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.return", ng-options="product.bl_code for product in products")
+                        span.col-md-12.help-block Code
+                  .col-md-5
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        select.select2me.form-control.select2-offscreen(ng-model="sales.return", ng-options="product.name for product in products")
+                        span.col-md-12.help-block Product
+                  .col-md-3
+                    .form-group
+                      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        input.form-control(type="number", ng-min="1", ng-minlength="0", ng-maxlength="20", ng-model="sales.return.quantity")
+                        span.col-md-12.help-block Quantity
+                  .col-md-1
+                    button.btn-sm.green.custom-right(type="button",ng-click="addReturn(sales)")
+                      i.fa.fa-plus
+                .col-md-1
+              .form-group
+                .col-md-1
+                .col-md-10
+                  .row
+                    br
+                    .col-md-12
+                      .portlet-body.flip-scroll
+                        table.table.table-bordered.table-condensed.flip-content
+                          thead.flip-content.bg-grey
+                            tr
+                              th Code
+                              th Product
+                              th Return Quantity
+                              th Unit Price
+                              th Total
+                              th(width="5%", ng-hide="action!='create'") Action
+                          tbody
+                            tr(ng-repeat="returned_item in sales.returned_items track by $index")
+                              td {{returned_item.bl_code}}
+                              td {{returned_item.name}}
+                              td {{returned_item.quantity}}
+                              td {{returned_item.price}}
+                              td {{returned_item.total}}
+                              td(width="5%", ng-hide="action!='create'")
+                                .btn-group.btn-group-xs.btn-group-solid
+                                  a.tooltips.btn.default.tooltips(ng-click="removeReturn($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
+                                    i.fa.fa-trash-o
+                .col-md-1
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.discount" )
+                span.col-md-12.help-block Discount
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.total_vat" )
+                span.col-md-12.help-block VATable Sales
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                input.form-control(type="checkbox", ng-model="sales.isWithholdingTax",ng-checked="reCompute(sales)", value="1", ng-disabled="true")
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                input.form-control(type="text", ng-model="sales.withholding_tax" )
+                span.col-md-12.help-block W/Holding Tax
+              .col-md-2
+
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-3.col-lg-1.custom-left
+                input.form-control(type="checkbox", ng-model="sales.isZeroRateSales",ng-checked="reCompute(sales)", value="1", ng-disabled="true")
+              .col-xs-12.col-sm-12.col-md-7.col-lg-9.custom-left
+                input.form-control(type="text", ng-model="sales.zero_rate_sales" )
+                span.col-md-12.help-block VAT Exempt/ Zero Rated Sales
+              .col-md-2
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.total_amount_due")
+                span.col-md-12.help-block TOTAL AMOUNT DUE
+      .form-actions.fluid
+        .row
+          .col-md-6
+            .col-md-offset-3.col-md-9
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              | &nbsp;
+              button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='edit' || action=='approve'") Reject
+              | &nbsp;
+              a.btn.default(type="button", href="/#/sales/index/memo") Cancel
+          .col-md-6
