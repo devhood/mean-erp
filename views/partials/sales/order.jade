@@ -69,8 +69,8 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.customer.payment_term", disabled)
-                //- select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms track by sales.customer.payment_term",tabindex="-1", ng-disabled="action=='read' || action=='approve'")
+                //- input.form-control(type="text", ng-model="sales.customer.payment_term", disabled)
+                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.payment_term", ng-options="payment_term.name as payment_term.name for payment_term in payment_terms track by sales.customer.payment_term",tabindex="-1", ng-disabled="action=='read' || action=='approve'")
                 span.col-md-12.help-block Payment Terms
         .row(ng-show="sales.customer")
           .col-md-6
