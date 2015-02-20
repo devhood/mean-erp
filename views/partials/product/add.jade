@@ -20,7 +20,7 @@ block title
 								select#brand.select2me.form-control.select2-offscreen(ng-model="product.brand", ng-options="br.name as br.name for br in brands", ng-selected="{{product.brand}}" ,tabindex="-1", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Brand
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#name.form-control(type="text", ng-model="product.name", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'",required)
+								input#name.form-control(type="text", ng-model="product.name", ng-minlength="0", ng-maxlength="700", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Item Name
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 								input#size.form-control(type="text", ng-model="product.size", ng-minlength="0", ng-maxlength="50", ng-disabled="action=='read'",required)

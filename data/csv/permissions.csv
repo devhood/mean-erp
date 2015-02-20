@@ -44,6 +44,8 @@ group,name,route
 "Sales Memo","Manage Sales Memo","/sales/index/memo"
 "Sales Memo","View Sales Memo","/sales/memo/read"
 "Sales Memo","Approve Sales Memo","/sales/memo/approve"
+"Sales Monitor","Manage Sales Monitor","/sales/index/monitor"
+"Sales Monitor","View Sales Monitor","/sales/monitor/read"
 "Consignment","Manage Consignment Order","/consignment/index/order"
 "Consignment","Add Consignment Order","/consignment/order/add"
 "Consignment","Edit Consignment Order","/consignment/order/edit"
