@@ -1492,7 +1492,7 @@ angular.module('erp')
 
             buttons = [
               {url:"/#/sales/monitor/read/",title:"View Record",icon:"fa fa-folder-open"},
-              {url:"/#/sales/monitor/edit/",title:"Edit Record",icon:"fa fa-edit"}
+              // {url:"/#/sales/monitor/edit/",title:"Edit Record",icon:"fa fa-edit"}
               ];
             query =  {};
             $scope.title = "SALES MONITOR"

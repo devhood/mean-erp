@@ -11,22 +11,19 @@ block title
   .portlet-body
     br
     .row
-      .col-md-8
-        .col-md-4
+      .col-md-12
+        .col-md-6
           input.form-control(type="text", ng-model="report.start_date", datepicker-popup="{{'MM/dd/yyyy'}}")
           span.col-md-12.help-block Enter Start Date
-        .col-md-4
+        .col-md-6
           input.form-control(type="text", ng-model="report.end_date", datepicker-popup="{{'MM/dd/yyyy'}}")
           span.col-md-12.help-block Enter End Date
-        .col-md-4
-          .col-md-12
-            button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
-      .col-md-4
+      //- .col-md-4
           .form-group
               select.select2me.form-control.select2-offscreen(ng-model="report.period", ng-options="period.name as period.name for period in report_periods")
               span.col-md-12.help-block Select Reports by Period
-      .col-md-8
-      .col-md-4
+      //- .col-md-8
+      //- .col-md-4
         .form-group
           .col-md-12(ng-show="report.period=='day'")
             input.form-control(type="text", ng-model="report.value")
@@ -46,26 +43,31 @@ block title
               span.col-md-12.help-block Enter Quarter
             .col-md-2
     .row(ng-show="type=='customer'")
-      .col-md-6
+      .col-md-12
         .form-group
           .col-xs-12.col-sm-12.col-md-12.col-lg-12(align="center")
             select.select2me.form-control.select2-offscreen(ng-model="report.customer", ng-options="customer.company_name as customer.company_name for customer in customers")
             span.col-md-12.help-block Customer
-      .col-md-6
-    .row(ng-show="type=='product' || 'inventory'").col-md-12
+    .row(ng-show="type=='product' || type=='inventory'")
       .col-md-12
-      .form-group
-        .col-md-4
+        .col-md-6
           .form-group
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
               select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.bl_code for product in products")
               span.col-md-12.help-block Code
-        .col-md-4
+        .col-md-6
           .form-group
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
               select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
               span.col-md-12.help-block Product
-        .col-md-4
+    br
+    .row
+      .col-md-1
+      .col-md-4
+        button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
+      .col-md-6
+      .col-md-1
+    br
     .row(ng-show="type=='brand'").col-md-12
       .col-md-6
         .form-group
