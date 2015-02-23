@@ -1441,7 +1441,7 @@ angular.module('erp')
         break;
         case "payment" :
           columns = [
-          $scope.structure.pfno, $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+          $scope.structure.sino, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
           $scope.structure.delivery_method, $scope.structure.delivery_date, $scope.structure.customer.payment_term,$scope.structure.total_amount_due, $scope.structure.status.status_name
           ];
           // filter:{key:"pmno"}},
@@ -1528,7 +1528,8 @@ Structure.Sales.query().$promise.then(function(data){
   var month = now.getMonth();
   var start_date = new Date(year,month,date,0,0);
   var end_date = new Date(year,month,date,23,59);
-  query.payment_date = {"$gte": start_date, "$lte": end_date};
+  // query.payment_date = {"$gte": start_date, "$lte": end_date};
+ 
 
 $scope.init = function(){
   var module = $routeParams.module;
@@ -1542,6 +1543,8 @@ $scope.init = function(){
   $scope.sales_executives = Api.Collection('users',query).query();
   $scope.users = Api.Collection('users').query();
   $scope.report = {};
+   query = {};
+   query.sono = true;
 
   var generateReport = function (query,api_url) {
     var query = {};
@@ -1570,25 +1573,26 @@ $scope.init = function(){
       if (start_date == "Invalid Date") {
         window.alert("Invalid input, please check the date format.");
       }
-      query.payment_date = {"$gte": start_date, "$lte": end_date};
+      query = {delivery_date:{"$gte": start_date, "$lte": end_date}};
       console.log("query : ", JSON.stringify(query));
 
       $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
     }
-    else if ($scope.report.period && $scope.report.value || $scope.report.year) {
-      var period = $scope.report.period;
-      var value = $scope.report.value;
-      var start_year = 1;
-      var start_month = 0;
-      var start_day = 1;
-      var start_hours = 0;
-      var start_minute = 0;
 
-    var splitDate = function () {
-       start_year = Number($scope.report.value.split("/")[2]);
-       start_month = Number($scope.report.value.split("/")[0])-1;
-       start_day = Number($scope.report.value.split("/")[1]);
-      }
+    // else if ($scope.report.period && $scope.report.value || $scope.report.year) {
+    //   var period = $scope.report.period;
+    //   var value = $scope.report.value;
+    //   var start_year = 1;
+    //   var start_month = 0;
+    //   var start_day = 1;
+    //   var start_hours = 0;
+    //   var start_minute = 0;
+
+    // var splitDate = function () {
+    //    start_year = Number($scope.report.value.split("/")[2]);
+    //    start_month = Number($scope.report.value.split("/")[0])-1;
+    //    start_day = Number($scope.report.value.split("/")[1]);
+    //   }
 
     // switch (period) {
     //   case 'day':
@@ -1687,22 +1691,30 @@ $scope.init = function(){
     //   default:
     //   break;
     //   }
-    }
+    // }
     else {
       window.alert("Please fill up the Reports Period Properly.");
     }
   }
 
+// date
+// no
+// customer
+// amount due
+
+
   switch(type){
     case "complete" :
       columns = [
+      {"name": "sino","title": "SI No."},
       {"name": "customer","title": "Company Name"},
       {"name": "sales_executive", "title" :"Sales Executive"},
-      {"name": "delivery_method", "title": "Delivery Method"},
-      {"name": "payment_term", "title": "Payment Term"}
+      {"name": "payment_term", "title": "Payment Term"},
+      {"name": "delivery_date", "title": "Delivery Date"},
+      {"name": "total_amount_due", "title": "Total Amount Due"}
       ];
       $scope.title = "COMPLETED SALES REPORT "
-      console.log(JSON.stringify(query));
+      console.log("query ko", JSON.stringify(query));
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/complete?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
@@ -1744,6 +1756,7 @@ $scope.init = function(){
       ];
       $scope.title = "SALES REPORT BY PRODUCT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+
       $scope.dtOptions = Library.DataTable.options("/reports/sales/product?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
@@ -2015,6 +2028,7 @@ $scope.init = function(){
         $scope.sales.status = status.order.created;
         //$scope.sales.triggerInventory  = "OUT";
       }
+    if (!$scope.sales.so_date) { $scope.sales.so_date = new Date(); }
     $scope.sales.$save(function(){
       $location.path('/sales/index/order');
       return false;
@@ -2064,6 +2078,7 @@ $scope.init = function(){
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
+        if (!$scope.sales.so_date) { $scope.sales.so_date = new Date(); }
       if($scope.sales.isNeedApproval){
         $scope.sales.status = status.order.created;
         console.log("status order created");

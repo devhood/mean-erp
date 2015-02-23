@@ -22,7 +22,8 @@ router
   };
   content.match = req.query.filter;
   req.db.collection('sales')
-  .aggregate([{$match:{"status.status_name":"TRANSACTION COMPLETE"}},{$match:content.match||{}},{$group:content.group}])
+  // $match:{"status.status_name":"TRANSACTION COMPLETE"}
+  .aggregate([{$match:content.match||{}},{$group:content.group}])
   .done(function(result){
     res.status(200).json(result);
   })
@@ -44,7 +45,8 @@ router
   };
   content.match = req.query.filter;
   req.db.collection('sales')
-  .aggregate([{$match:{"status.status_name":"TRANSACTION COMPLETE"}},{$match:content.match||{}},{$group:content.group}])
+  // {$match:{"status.status_name":"TRANSACTION COMPLETE"}}
+  .aggregate([{$match:content.match||{}},{$group:content.group}])
   .done(function(result){
     res.status(200).json(result);
   })
@@ -67,7 +69,8 @@ router
   };
   content.match = req.query.filter;
   req.db.collection('sales')
-  .aggregate([{$match:{"status.status_name":"TRANSACTION COMPLETE"}},{$unwind:"$ordered_items"},{$match:content.match||{}},{$group:content.group}])
+  // {$match:{"status.status_name":"TRANSACTION COMPLETE"}},
+  .aggregate([{$unwind:"$ordered_items"},{$match:content.match||{}},{$group:content.group}])
   .done(function(result){
     res.status(200).json(result);
   })
@@ -88,7 +91,8 @@ router
   };
   content.match = req.query.filter;
   req.db.collection('sales')
-  .aggregate([{$match:{"status.status_name":"TRANSACTION COMPLETE"}},{$unwind:"$ordered_items"},{$match:content.match||{}},{$group:content.group}])
+  // {$match:{"status.status_name":"TRANSACTION COMPLETE"}}
+  .aggregate([{$unwind:"$ordered_items"},{$match:content.match||{}},{$group:content.group}])
   .done(function(result){
     res.status(200).json(result);
   })
@@ -107,7 +111,8 @@ router
   };
   content.match = req.query.filter;
   req.db.collection('sales')
-  .aggregate([{$match:{"status.status_name":"TRANSACTION COMPLETE"}},{$match:content.match||{}},{$group:content.group}])
+  // {$match:{"status.status_name":"TRANSACTION COMPLETE"}}
+  .aggregate([{$match:content.match||{}},{$group:content.group}])
   .done(function(result){
     res.status(200).json(result);
   })
@@ -146,9 +151,6 @@ router
     res.status(400).json(err);
   });
 
-})
-.get('/sales/se_dash', function(req, res) {
-;
 })
 
 module.exports = router;
