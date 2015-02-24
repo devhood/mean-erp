@@ -1266,8 +1266,8 @@ angular.module('erp')
         case "delivery" :
 
           columns = [
-            $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-            $scope.structure.delivery_method, $scope.structure.customer.payment_term, $scope.structure.status.status_name
+            $scope.structure.sono, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+            $scope.structure.delivery_method, $scope.structure.status.status_name
           ];
 
           buttons = [
