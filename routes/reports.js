@@ -9,7 +9,7 @@ router
 
   var content = {};
   content.group = {
-    "_id":"$sino",
+    "_id":"$_id",
     "sono":{$first:"$sono"},
     "drno":{$first:"$drno"},
     "sino":{$first:"$sino"},
