@@ -1468,13 +1468,12 @@ angular.module('erp')
         case "print" :
           columns = [
           $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-          $scope.structure.delivery_method, $scope.structure.drno, $scope.structure.sino
+          $scope.structure.delivery_method, $scope.structure.sono, $scope.structure.drno, $scope.structure.sino
           ];
 
           buttons = [
           {url:"/#/print/sales/delivery/",title:"View Record",icon:"fa fa-truck"},
           {url:"/#/print/sales/invoice/",title:"Create Payment Record",icon:"fa fa-file"},
-
           ];
 
           query = { "status.status_code" : {"$in" : [status.delivery.approved.status_code,status.invoice.approved.status_code, status.printed.dr.status_code, status.printed.si.status_code]}};
@@ -1718,7 +1717,7 @@ $scope.init = function(){
       ];
 
      buttons = [
-        {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+        {url:"/#/sales/monitor/read/",title:"View Record",icon:"fa fa-folder-open"},
         ];
 
       $scope.title = "COMPLETED SALES REPORT "
