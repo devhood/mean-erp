@@ -3289,6 +3289,7 @@ var displayItemQuantity = function() {
       $scope.sales =  Api.Collection('sales').get({id:$routeParams.id});
 
       $scope.saveSales = function(){
+      $scope.sales.prepared_by = $scope.client.fullname;
         $scope.sales.status = status.packing.created;
         $scope.sales.$update(function(){
           $location.path('/packing/index');
@@ -3575,6 +3576,7 @@ var displayItemQuantity = function() {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
+    $scope.client = client;
   });
 
   var id = $routeParams.id;
@@ -3624,6 +3626,7 @@ var displayItemQuantity = function() {
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
+      $scope.sales.dr_approved_by = $scope.client.fullname;
     if (!$scope.sales.dr_approved_date) { $scope.sales.dr_approved_date = new Date(); }
       $scope.sales.status = status.delivery.approved;
       $scope.sales.$update(function(){
@@ -3646,6 +3649,7 @@ var displayItemQuantity = function() {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
+    $scope.client = client;
   });
   var id = $routeParams.id;
   var action = $routeParams.action;
@@ -3693,6 +3697,7 @@ var displayItemQuantity = function() {
       $scope.CustomerChange();
     });
     $scope.saveSales = function(){
+      $scope.sales.si_approved_by = $scope.client.fullname;
       $scope.sales.status = status.invoice.approved;
       if (!$scope.sales.si_approved_date) { $scope.sales.si_approved_date = new Date(); }
       $scope.sales.$update(function(){

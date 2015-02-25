@@ -112,11 +112,12 @@ block title
 															td {{ordered_item.price}}
 															td {{ordered_item.total}}
 								.col-md-1
-			.row
+			//- .row
 				.col-md-6
 					.form-group
 						.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-							input.form-control(type="text", ng-model="sales.prepared_by", ng-disabled="action=='read'", value="{{client.fullname}}")
+							//- ng-value="{{sales.prepared_by}}
+							input.form-control(type="text", ng-model="sales.prepared_by", ng-disabled="action=='read'")
 							span.col-md-12.help-block Prepared By
 				.col-md-6
 					.form-group

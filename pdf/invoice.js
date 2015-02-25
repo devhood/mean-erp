@@ -48,7 +48,7 @@ var pdf = {
 			doc.text(siinfo.payment_term,35);
 			doc.text(date,220,y);
 			doc.text(siinfo.delivery_method,360,y);
-			doc.text(siinfo.sales_executive,500,y);
+			doc.text(siinfo.customer.sales_executive,500,y);
 			doc.text(siinfo.special_instruction,35,y+10);
 
 			doc.font('Courier-Bold');
@@ -83,8 +83,8 @@ var pdf = {
 			doc.text(siinfo.total_amount_due,460,718,{width:50});/*Total Amount Due*/
 			doc.fontSize(10);
 			doc.font('Courier');
-			doc.text(siinfo.order_created_by,25,755);
-			doc.text(siinfo.delivery_created_by,180,755);
+			if (dr_approved_by) doc.text(siinfo.dr_approved_by,25,755);
+			if (si_approved_by) doc.text(siinfo.si_approved_by,180,755);
 			 return doc
 		}
 };

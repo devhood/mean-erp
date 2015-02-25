@@ -56,21 +56,21 @@ var pdf = {
 			doc.text(drinfo.ordered_by,520,180);
 			doc.moveDown(0);
 			y = doc.y;
-			doc.text(drinfo.payment_term,35);
+			doc.text(drinfo.customer.payment_term,35);
 
 			// date = drinfo.delivery_date.replace("T16:00:00.000Z","");
 			doc.text(date,220,y);
 			doc.text(drinfo.delivery_method,360,y);
-			doc.text(drinfo.sales_executive,500,y);
+			doc.text(drinfo.customer.sales_executive,500,y);
 			doc.text(drinfo.special_instruction,35,y+10);
 			doc.moveDown(1);
 			return doc;
 		},
 		pageFooter : function(doc,drinfo){
 			doc.text(drinfo.ordered_items.length,130,610);
-			doc.text(drinfo.ordered_items.length,560,610,{width:35,align:'center'});
-			doc.text(drinfo.fullname,25,730);
-			doc.text(drinfo.fullname,180,730);
+			doc.text(drinfo.total_quantity,560,610,{width:35,align:'center'});
+			if (drinfo.prepared_by) doc.text(drinfo.prepared_by,25,730);
+			if (drinfo.dr_approved_by) doc.text(drinfo.dr_approved_by,180,730);
 			 return doc
 		}
 };

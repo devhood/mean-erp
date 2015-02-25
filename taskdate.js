@@ -9,7 +9,13 @@ console.log((fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFull
 //  fixes
 //  dr print
 //  si print
-//  
+//  customer type ng-options
+
+
+// add
+// color club profiles
+
+
 
 
 
