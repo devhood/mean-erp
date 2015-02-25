@@ -22,16 +22,16 @@ var pdf = {
 		pageHeader : function(doc,siinfo){
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
-			doc.text(siinfo.sino,500,55);
+			doc.text(siinfo.sino,500,75);
 			doc.font('Courier');
 			doc.fontSize(10);
 			var date = siinfo.delivery_date.replace("T16:00:00.000Z","");
-			doc.text(date,510,70);
+			doc.text(date,510,90);
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
 			doc.fontSize(10);
-			doc.text(siinfo.customer.company_name,40,90,{width:260,indent:40});
-			doc.text(siinfo.customer.company_name,340,90,{width:260,indent:40});
+			doc.text(siinfo.customer.company_name,40,110,{width:260,indent:40});
+			doc.text(siinfo.customer.company_name,340,110,{width:260,indent:40});
 			doc.moveDown(0);
 			doc.font('Courier');
 			doc.fontSize(10);
@@ -39,27 +39,27 @@ var pdf = {
 			doc.text(siinfo.customer.billing_address.landmark+","+siinfo.customer.billing_address.barangay+","+siinfo.customer.billing_address.city+","+siinfo.customer.billing_address.province+","+siinfo.customer.billing_address.country+","+siinfo.customer.billing_address.zipcode,10,doc.y,{width:240,align:'justify'});
 			doc.text(siinfo.customer.shipping_address.landmark+","+siinfo.customer.shipping_address.barangay+","+siinfo.customer.shipping_address.city+","+siinfo.customer.shipping_address.province+","+siinfo.customer.shipping_address.country+","+siinfo.customer.shipping_address.zipcode,310,y,{width:240,align:'justify'});
 			doc.moveDown(0);
-			doc.text(siinfo.sono,35,145);
-			doc.text(siinfo.pono,205,145);
-			doc.text(siinfo.refno,360,145);
-			doc.text(siinfo.ordered_by,520,145);
+			doc.text(siinfo.sono,35,165);
+			if (siinfo.pono)	doc.text(siinfo.pono,205,165);
+			if (siinfo.reference_no)	doc.text(siinfo.reference_no,360,165);
+			doc.text(siinfo.ordered_by,520,165);
 			doc.moveDown(0);
 			y = doc.y;
-			doc.text(siinfo.payment_term,35);
+			doc.text(siinfo.customer.payment_term,35);
 			doc.text(date,220,y);
 			doc.text(siinfo.delivery_method,360,y);
 			doc.text(siinfo.customer.sales_executive,500,y);
 			doc.text(siinfo.special_instruction,35,y+10);
 
 			doc.font('Courier-Bold');
-			doc.text("CODE",15,200);
-			doc.text("PRODUCT",110,200);
+			doc.text("CODE",15,220);
+			doc.text("PRODUCT",110,220);
 			// doc.text("DESCRIPTION",205,200);
-			doc.text("QTY",300,200);
-			doc.text("UOM",395,200);
-			doc.text("U/P",450,200);
-			doc.text("DISCOUNT",480,200);
-			doc.text("AMOUNT",540,200);
+			doc.text("QTY",300,220);
+			doc.text("UOM",395,220);
+			doc.text("U/P",450,220);
+			doc.text("DISCOUNT",480,220);
+			doc.text("AMOUNT",540,220);
 			doc.moveDown(1);
 			return doc;
 		},
@@ -83,8 +83,8 @@ var pdf = {
 			doc.text(siinfo.total_amount_due,460,718,{width:50});/*Total Amount Due*/
 			doc.fontSize(10);
 			doc.font('Courier');
-			if (dr_approved_by) doc.text(siinfo.dr_approved_by,25,755);
-			if (si_approved_by) doc.text(siinfo.si_approved_by,180,755);
+			if (siinfo.dr_approved_by) doc.text(siinfo.dr_approved_by,25,755);
+			if (siinfo.si_approved_by) doc.text(siinfo.si_approved_by,180,755);
 			 return doc
 		}
 };
@@ -102,7 +102,7 @@ module.exports.print = function(siinfo,result){
 
 	doc = pdf.pageHeader(doc,siinfo);
 	doc = pdf.pageFooter(doc,siinfo);
-	doc.y = 225;
+	doc.y = 255;
 	for(var i in siinfo.ordered_items){
 		var y= doc.y;
 		doc.font('Courier');
@@ -120,7 +120,7 @@ module.exports.print = function(siinfo,result){
 			doc.addPage();
 			doc = pdf.pageHeader(doc,siinfo);
 			doc = pdf.pageFooter(doc,siinfo);
-			doc.y = 225;
+			doc.y = 255;
 		}
 	}
 	doc.end();
