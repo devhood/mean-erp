@@ -1161,14 +1161,14 @@ angular.module('erp')
               {url:"/#/sales/promo/edit/",title:"Edit Record",icon:"fa fa-edit"},
               {url:"/#/print/sales/promo/",title:"Print Record",icon:"fa fa-print"},
             ];
-            query = {"promo": { "$exists": true }, "status.status_code" : {"$in" : [
-              status.order.created.status_code,
-              status.order.revised.status_code,
-              status.order.rejected.status_code,
-              status.delivery.rejected.status_code,
-              status.invoice.rejected.status_code,
-              status.tripticket.failed.status_code
-             ]}};
+            // query = {"promo": { "$exists": true }, "status.status_code" : {"$in" : [
+            //   status.order.created.status _code,
+            //   status.order.revised.status_code,
+            //   status.order.rejected.status_code,
+            //   status.delivery.rejected.status_code,
+            //   status.invoice.rejected.status_code,
+            //   status.tripticket.failed.status_code
+            //  ]}};
 
             $scope.title = "ADD PROMO SALES ORDER"
             $scope.addUrl = "/#/sales/promo/add";
@@ -1529,7 +1529,7 @@ Structure.Sales.query().$promise.then(function(data){
   var start_date = new Date(year,month,date,0,0);
   var end_date = new Date(year,month,date,23,59);
   // query.payment_date = {"$gte": start_date, "$lte": end_date};
- 
+
 
 $scope.init = function(){
   var module = $routeParams.module;
@@ -1573,10 +1573,11 @@ $scope.init = function(){
       if (start_date == "Invalid Date") {
         window.alert("Invalid input, please check the date format.");
       }
-      query = {delivery_date:{"$gte": start_date, "$lte": end_date}};
+      // {drno:{$exists:true}}
+      query = {sino:{$exists:true},delivery_date:{"$gte": start_date, "$lte": end_date}};
       console.log("query : ", JSON.stringify(query));
 
-      $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
+    $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
     }
 
     // else if ($scope.report.period && $scope.report.value || $scope.report.year) {
@@ -1706,6 +1707,8 @@ $scope.init = function(){
   switch(type){
     case "complete" :
       columns = [
+      {"name": "sono","title": "SO No."},
+      {"name": "drno","title": "DR No."},
       {"name": "sino","title": "SI No."},
       {"name": "customer","title": "Company Name"},
       {"name": "sales_executive", "title" :"Sales Executive"},
@@ -1713,6 +1716,11 @@ $scope.init = function(){
       {"name": "delivery_date", "title": "Delivery Date"},
       {"name": "total_amount_due", "title": "Total Amount Due"}
       ];
+
+     buttons = [
+        {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
+        ];
+
       $scope.title = "COMPLETED SALES REPORT "
       console.log("query ko", JSON.stringify(query));
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
@@ -1720,6 +1728,10 @@ $scope.init = function(){
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
         .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
+
+
+    // $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/complete");

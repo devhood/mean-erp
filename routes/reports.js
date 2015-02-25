@@ -10,6 +10,8 @@ router
   var content = {};
   content.group = {
     "_id":"$sino",
+    "sono":{$first:"$sono"},
+    "drno":{$first:"$drno"},
     "sino":{$first:"$sino"},
     "customer":{$first:"$customer.company_name"},
     "sales_executive":{$first:"$customer.sales_executive"},

@@ -61,13 +61,6 @@ block title
               select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
               span.col-md-12.help-block Product
     br
-    .row
-      .col-md-1
-      .col-md-4
-        button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
-      .col-md-6
-      .col-md-1
-    br
     .row(ng-show="type=='brand'").col-md-12
       .col-md-6
         .form-group
@@ -80,9 +73,18 @@ block title
         .form-group
           .col-md-12
             select#userId.select2me.form-control.select2-offscreen(ng-model="report.sales_executive", ng-selected="report.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", required)
-            span.col-md-12.help-block	Select Sales Executive
+            span.col-md-12.help-block Select Sales Executive
       .col-md-6
         br
+        br
+        br
+    br
+    .row
+      .col-md-1
+      .col-md-4
+        button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
+      .col-md-6
+      .col-md-1
         br
         br
     .table-toolbar(ng-show='"{{addUrl}}"?true:false')
