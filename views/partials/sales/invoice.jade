@@ -32,7 +32,8 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="true",required)
+                input.form-control(type="text", ng-model="sales.transaction_type",  disabled)
+                //- select.select2me.form-control.select2-offscreen(ng-model="sales.transaction_type", ng-options="transaction_type.name as transaction_type.name for transaction_type in transaction_types", ng-selected="{{sales.transaction_type}}" ,tabindex="-1", ng-disabled="true",required)
                 span.col-md-12.help-block Transaction Type
           .col-md-6
             .form-group
@@ -78,7 +79,8 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types track by sales.customer.price_type" ,tabindex="-1", , ng-disabled="true")
+                input.form-control(type="text", ng-model="sales.customer.price_type",  disabled)
+                //- select.select2me.form-control.select2-offscreen(ng-model="sales.customer.price_type", ng-options="price_type.name as price_type.name for price_type in price_types track by sales.customer.price_type" ,tabindex="-1", , ng-disabled="true")
                 span.col-md-12.help-block Price Type
           .col-md-6
             .form-group

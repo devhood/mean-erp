@@ -7,18 +7,16 @@ console.log((fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFull
 
 
 //  fixes
-//  dr print
-//  si print
-//  customer type ng-options
+//
 
 
 // add
 // color club profiles
 
 
-
-
-
+// cache for website
+// https://github.com/goodeggs/angular-cached-resource
+// https://www.npmjs.com/package/node-cache
 
 
 // We need an IT staff to assist our Web/System Developer.
