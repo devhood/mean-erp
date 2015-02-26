@@ -26,7 +26,7 @@ block title
 								input#size.form-control(type="text", ng-model="product.size", ng-minlength="0", ng-maxlength="50", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Size
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								input#color.form-control(type="text", ng-model="product.color", ng-minlength="0", ng-maxlength="25", ng-disabled="action=='read'",required)
+								input#color.form-control(type="text", ng-model="product.color", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'",required)
 								span.col-md-12.help-block Color
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
 								select#uom.select2me.form-control.select2-offscreen(ng-model="product.uom", tabindex="-1",ng-options="uom.name as uom.name for uom in uoms", ng-disabled="action=='read'",required)
