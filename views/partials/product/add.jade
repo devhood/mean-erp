@@ -70,7 +70,7 @@ block title
 					.col-md-6
 						.form-group
 							.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.name as status.name for status in product_status", ng-selected="{{product.status}}", ng-disabled="action='read'")
+								select#status.select2me.form-control.select2-offscreen(ng-model="product.status", tabindex="-1",ng-options="status.name as status.name for status in product_status", ng-selected="{{product.status}}", ng-disabled="action='approve'")
 								span.col-md-12.help-block Status
 					.col-md-6
 						.form-group
