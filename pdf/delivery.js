@@ -68,7 +68,8 @@ var pdf = {
 		},
 		pageFooter : function(doc,drinfo){
 			doc.text(drinfo.ordered_items.length,130,610);
-			doc.text(drinfo.total_quantity,560,610,{width:35,align:'center'});
+			if (drinfo.total_quantity)	doc.text(drinfo.total_quantity,560,610,{width:35,align:'center'});
+			else if (drinfo.totalQuantity)	doc.text(drinfo.totalQuantity,560,610,{width:35,align:'center'});
 			if (drinfo.prepared_by) doc.text(drinfo.prepared_by,25,730);
 			if (drinfo.dr_approved_by) doc.text(drinfo.dr_approved_by,180,730);
 			 return doc

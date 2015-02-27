@@ -12,6 +12,7 @@ console.log((fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFull
 
 // add
 // color club profiles
+//upload PP - CG and Ardell v2
 
 
 // cache for website
