@@ -72,6 +72,7 @@ mongoimport --db beautylane-db --collection provinces --file data/json/provinces
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/DinagatIslands.json
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/Guimaras.json
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/IlocosSur.json
+mongoimport --db beautylane-db --collection provinces --file data/json/provinces/Aklan.json
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/IlocosNorte.json
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/KalingaApayao.json
 mongoimport --db beautylane-db --collection provinces --file data/json/provinces/Maguindanao.json

@@ -161,7 +161,7 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('scities',customer.shipping_address.province)",ng-model="customer.shipping_address.province", ng-options="province.province as province.province for province in provinces track by customer.shipping_address.province", ng-selected="{{customer.shipping_address.province}}",ng-disabled="action=='read'" )
+										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('scities',customer.shipping_address.province)",ng-model="customer.shipping_address.province", ng-options="province.province as province.province for province in provinces", ng-selected="{{customer.shipping_address.province}}",ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Province
 						.row
 							.col-md-6

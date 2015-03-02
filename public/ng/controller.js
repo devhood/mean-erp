@@ -1447,8 +1447,8 @@ angular.module('erp')
           // filter:{key:"pmno"}},
           buttons = [
           {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-save", state:{statusArray:["TRIP_TICKET_DELIVERED","TRIP_TICKET_CREATED", "PROFORMA_INVOICE_CREATED","MEMO_APPROVED"]}},
-          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-edit", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_PARTIALED", "TRIP_TICKET_DELIVERED"]}},
+          {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-plus-square-o", state:{statusArray:["SALES_INVOICE_APPROVED","PROFORMA_INVOICE_CREATED","MEMO_APPROVED"]}},
+          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-plus-square", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_PARTIALED", "TRIP_TICKET_DELIVERED"]}},
           {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", state:{statusArray:["PAYMENT_UPDATED"]}},
           ];
 
@@ -1908,11 +1908,6 @@ $scope.init = function(){
           isInventoryExist = true;
         }
       }
-      }
-      for(var i in item.inventories){
-        if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
-          isInventoryExist = true;
-        }
       }
       // if(isInventoryExist)
       if(isInventoryExist){
@@ -3039,11 +3034,11 @@ $scope.init = function(){
   }
 
 var displayItemQuantity = function() {
-  $scope.sales.total_quantity=0;
-  for(var i=0;i<$scope.sales.ordered_items.length; i++){
-  $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
-  console.log("total_quantity",$scope.sales.total_quantity);
-  }
+  // $scope.sales.total_quantity=0;
+  // for(var i=0;i<$scope.sales.ordered_items.length; i++){
+  // $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+  // console.log("total_quantity",$scope.sales.total_quantity);
+  // }
 }
 
   $scope.addOrder = function(sales){
@@ -3054,9 +3049,15 @@ var displayItemQuantity = function() {
       console.log(item);
       var isInventoryExist = false;
       var insufficient_item = [];
-      for(var i in item.inventories){
-        if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
-          isInventoryExist = true;
+      if (item.uom == "Package" || item.uom == "Promo") {
+        console.log("UOM", item.uom);
+        isInventoryExist = true;
+      }
+      else {
+        for(var i in item.inventories){
+          if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
+            isInventoryExist = true;
+          }
         }
       }
       if(isInventoryExist){
@@ -3067,11 +3068,21 @@ var displayItemQuantity = function() {
         if(sales.customer.price_type == "Retail"){
           item.price = item.retail_price;
         }
+        if(sales.customer.price_type == "Special"){
+          item.price = item.special_price;
+        }
+        if(sales.customer.price_type == "Sub Distributor"){
+          item.price = item.sub_distributor_price;
+        }
         if(item.override != "NORMAL"){
           item.price = item.override;
           item.total = 0.00;
         }
-        if(!isNaN(item.price)){
+        if(!isNaN(item.override)){
+          item.price = item.professional_price+" ("+item.override+"% discount"+")";
+          item.total = (item.professional_price - ((item.override/100)*item.professional_price)) * item.quantity;
+        }
+        else if(!isNaN(item.price)){
           item.total = item.quantity * item.price;
         }
         delete item.inventories;
@@ -3086,7 +3097,6 @@ var displayItemQuantity = function() {
       else{
         window.alert("The stock is insufficient. Please check your inventory location.");
       }
-
     }
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
@@ -3108,17 +3118,17 @@ var displayItemQuantity = function() {
      $scope.sales.total_amount_due = computation.totalAmountDue;
      $scope.sales.zero_rate_sales = computation.zeroRatedSales;
      $scope.sales.withholding_tax = computation.withholdingTax;
-     displayItemQuantity();
+    //  displayItemQuantity();
+
+    $scope.sales.total_quantity=0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+    $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+    console.log("total_quantity",$scope.sales.total_quantity);
+    }
   }
 
   $scope.reCompute = function(sales){
-
     if($scope.sales.customer){
-      console.log($scope.sales.subtotal,
-        0,
-        $scope.sales.customer.discount.replace(" %","")/100 || 0,
-        $scope.sales.isWithholdingTax,
-        $scope.sales.isZeroRateSales);
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
         0,
@@ -3144,7 +3154,12 @@ var displayItemQuantity = function() {
         $scope.sales.isNeedApproval = true;
       }
     }
-    displayItemQuantity();
+    // displayItemQuantity();
+    $scope.sales.total_quantity=0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+    $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+    console.log("total_quantity",$scope.sales.total_quantity);
+    }
   }
 
   if(action == 'read'){
@@ -3162,13 +3177,13 @@ var displayItemQuantity = function() {
 
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){
-
         $scope.sales.status = status.proforma.override;
       }
       else{
         $scope.sales.status = status.proforma.created;
       //  $scope.sales.triggerInventory  = "OUT";
       }
+      if (!$scope.sales.so_date) { $scope.sales.so_date = new Date(); }
       $scope.sales.$save(function(){
         $location.path('/sales/index/proforma');
         return false;

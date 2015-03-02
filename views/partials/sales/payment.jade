@@ -13,6 +13,15 @@ block title
   .portlet-body.form
     form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSales()", novalidate)
       .form-body
+        .row(ng-show="sales.cmno")
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.cmno", readonly)
+                span.col-md-12.help-block  CM Number
         .row
           .col-md-6
             .form-group(ng-show="sales.pfno")
@@ -22,12 +31,12 @@ block title
             .form-group(ng-show="sales.sono")
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
                 input.form-control(type="text", ng-model="sales.sono", readonly)
-                span.col-md-12.help-block SO Number
+                span.col-md-12.help-block SO Numbers
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.cmno", readonly)
-                span.col-md-12.help-block  CM Number
+                input.form-control(type="text", ng-model="sales.pmno", readonly)
+                span.col-md-12.help-block  PM Number
         .row
           .col-md-6
             .form-group
