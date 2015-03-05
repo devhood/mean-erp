@@ -1893,7 +1893,7 @@ $scope.init = function(){
   $scope.addOrder = function(sales){
     var no_inventory_location = false;
     var item = angular.copy(sales.item);
-    if( item && item.name && item.quantity && item.quantity ){
+    if( item && item.name && item.quantity ){
 
       console.log(item);
       var isInventoryExist = false;
@@ -2000,6 +2000,7 @@ $scope.init = function(){
 
   $scope.removeOrder = function(index){
     $scope.sales.ordered_items.splice(index, 1);
+
     $scope.sales.subtotal = 0;
     $scope.sales.isNeedApproval = false;
     for(var i=0;i<$scope.sales.ordered_items.length; i++){
@@ -2512,22 +2513,44 @@ $scope.init = function(){
       console.log(item);
       var isInventoryExist = false;
       var insufficient_item = [];
+      if (item.uom == "Package" || item.uom == "Promo") {
+        console.log("UOM", item.uom);
+        isInventoryExist = true;
+
+        //check for no-inventory
+      }
+      else {
       for(var i in item.inventories){
         if(item.inventories[i]._id == $scope.sales.inventory_location && $scope.sales.item.quantity <= item.inventories[i].rquantity){
           isInventoryExist = true;
         }
       }
+      }
+      // if(isInventoryExist)
       if(isInventoryExist){
         item.override = item.override ? item.override : "NORMAL";
         if(sales.customer.price_type == "Professional"){
-          item.price = item.professional_price
+          item.price = item.professional_price;
         }
+        //juro added
         if(sales.customer.price_type == "Retail"){
           item.price = item.retail_price;
         }
-
-
-        if(!isNaN(item.price)){
+        if(sales.customer.price_type == "Special"){
+          item.price = item.special_price;
+        }
+        if(sales.customer.price_type == "Sub Distributor"){
+          item.price = item.sub_distributor_price;
+        }
+        if(item.override != "NORMAL"){
+          item.price = item.override;
+          item.total = 0.00;
+        }
+        if(!isNaN(item.override)){
+          item.price = item.professional_price+" ("+item.override+"% discount"+")";
+          item.total = (item.professional_price - ((item.override/100)*item.professional_price)) * item.quantity;
+        }
+        else if(!isNaN(item.price)){
           item.total = item.quantity * item.price;
         }
         delete item.inventories;
@@ -2542,9 +2565,17 @@ $scope.init = function(){
       else{
         window.alert("The stock is insufficient. Please check your inventory location.");
       }
+
     }
-      $scope.sales.subtotal = $scope.sales.price;
+      $scope.sales.subtotal = 0;
       $scope.sales.isNeedApproval = false;
+      for(var i=0;i<$scope.sales.ordered_items.length; i++){
+        $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+        if($scope.sales.ordered_items[i].override != "NORMAL"){
+          $scope.sales.isNeedApproval = true;
+        }
+      }
+    }
 
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
@@ -2558,7 +2589,12 @@ $scope.init = function(){
       $scope.sales.total_amount_due = computation.totalAmountDue;
       $scope.sales.zero_rate_sales = computation.zeroRatedSales;
       $scope.sales.withholding_tax = computation.withholdingTax;
-      displayItemQuantity();
+      // displayItemQuantity();
+
+      $scope.sales.total_quantity=0;
+      for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+      console.log("total_quantity",$scope.sales.total_quantity);
     }
 
   $scope.reCompute = function(sales){
@@ -2588,8 +2624,13 @@ $scope.init = function(){
         $scope.sales.isNeedApproval = true;
       }
     }
+    // displayItemQuantity();
+    $scope.sales.total_quantity=0;
+    for(var i=0;i<$scope.sales.ordered_items.length; i++){
+    $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+    console.log("total_quantity",$scope.sales.total_quantity);
   }
-
+}
 
   if(action == 'read'){
     $scope.title = "VIEW PROMO SALES ORDER";
