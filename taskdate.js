@@ -7,12 +7,15 @@ console.log((fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFull
 
 
 //  fixes
-//
+//  marketing collateral inventories
+//  fix payment status : set apart the status when delivered in trip ticket
+  when: trip ticket-  delivered/
 
 
 // add
 // color club profiles
 //upload PP - CG and Ardell v2
+
 
 
 // cache for website
@@ -23,7 +26,9 @@ console.log((fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFull
 // We need an IT staff to assist our Web/System Developer.
 // Should know basics in programming. Preferably, Javascript or C#.
 
-
+//adjustment
+, ng-selected="{{adjustments.adjustment_transaction_type}}"
+ng-options="adjustment_transaction_type.name as adjustment_transaction_type.name for adjustment_transaction_type  in adjustment_transaction_types track by adjustment_transaction_type.name"
 
 
 Programming Tutorials - C, C++, C#, Javascript, PHP, HTML, CSS

@@ -1213,7 +1213,7 @@ angular.module('erp')
             buttons = [
               {url:"/#/sales/order/read/",title:"View Record",icon:"fa fa-folder-open"},
               {url:"/#/sales/order/edit/",title:"Edit Record",icon:"fa fa-edit"},
-              {url:"/#/sales/order/reschedule/",title:"Approve Record",icon:"fa fa-upload",exclude:{key:"trpno"}},
+              {url:"/#/sales/order/reschedule/",title:"Approve Record",icon:"fa fa-truck",exclude:{key:"trpno"}},
               {url:"/#/consignment/order/reschedule/",title:"Reschedule Record",icon:"fa fa-truck", state:{statusArray:["TRIP_TICKET_FAILED"]}},
               ];
             query =  { promo: { $exists: false } , "status.status_code" : {"$in" : [
@@ -1901,6 +1901,8 @@ $scope.init = function(){
       if (item.uom == "Package" || item.uom == "Promo") {
         console.log("UOM", item.uom);
         isInventoryExist = true;
+
+        //check for no-inventory
       }
       else {
       for(var i in item.inventories){
@@ -4159,7 +4161,7 @@ var displayItemQuantity = function() {
          case "order" :
             columns = [
               $scope.structure.cono,$scope.structure.consignment_transaction_type,
-              $scope.structure.customer.company_name,$scope.structure.delivery_date,$scope.structure.status.status_name
+              $scope.structure.customer.company_name, $scope.structure.delivery_date, $scope.structure.status.status_name
             ];
 
             buttons = [

@@ -17,7 +17,9 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-               select.select2me.form-control.select2-offscreen(ng-model="adjustments.adjustment_transaction_type", ng-options="adjustment_transaction_type.name as adjustment_transaction_type.name for adjustment_transaction_type  in adjustment_transaction_types", ng-selected="{{adjustments.adjustment_transaction_type}}" ,tabindex="-1", ng-disabled=("action=='read' || action=='reschedule'|| action=='approve'"),required)
+                select.select2me.form-control.select2-offscreen(ng-model="adjustments.adjustment_transaction_type",  ng-disabled=("action=='read' || action=='reschedule'|| action=='approve'"),required)
+                  option(value='IN') IN
+                  option(value='OUT') OUT
                span.col-md-12.help-block Transaction Type
 
           .col-md-6
