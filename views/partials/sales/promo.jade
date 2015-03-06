@@ -195,6 +195,15 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-model="sales.total_quantity", readonly)
+                span.col-md-12.help-block Total Ordered Items Quantity
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                 input.form-control(type="text", ng-model="sales.discount", readonly)
                 span.col-md-12.help-block Discount
         .row
