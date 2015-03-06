@@ -2574,7 +2574,7 @@ $scope.init = function(){
       }
 
     }
-      // $scope.sales.subtotal = 0;
+      $scope.sales.subtotal = 0;
       $scope.sales.isNeedApproval = false;
       for(var i=0;i<$scope.sales.ordered_items.length; i++){
         $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
@@ -2582,7 +2582,6 @@ $scope.init = function(){
           $scope.sales.isNeedApproval = true;
         }
       }
-    }
 
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
@@ -2603,6 +2602,7 @@ $scope.init = function(){
       $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
       console.log("total_quantity",$scope.sales.total_quantity);
     }
+}
 
   $scope.reCompute = function(sales){
     if($scope.sales.customer){
