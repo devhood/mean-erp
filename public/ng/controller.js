@@ -2534,7 +2534,7 @@ $scope.init = function(){
       }
       }
       // if(isInventoryExist)
-      if(isInventoryExist){
+      if(true){
         item.override = item.override ? item.override : "NORMAL";
         if(sales.customer.price_type == "Professional"){
           item.price = item.professional_price;
@@ -2574,7 +2574,7 @@ $scope.init = function(){
       }
 
     }
-      $scope.sales.subtotal = 0;
+      // $scope.sales.subtotal = 0;
       $scope.sales.isNeedApproval = false;
       for(var i=0;i<$scope.sales.ordered_items.length; i++){
         $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;

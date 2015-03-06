@@ -83,7 +83,7 @@ block title
 															td {{sales.sono}}
 														tr
 															td Customer:
-															td {{sales.customer.company_name}}
+															td {{sales.customer.company_name}} - {{sales.customer.branch}}
 														tr
 															td Address:
 															td {{sales.customer.shipping_address.landmark+ ','+sales.customer.shipping_address.barangay+ ',' +sales.customer.shipping_address.city + ',' +sales.customer.shipping_address.provice + ',' +sales.customer.shipping_address.country}}
@@ -91,10 +91,10 @@ block title
 															td Delivery Date:
 															td {{sales.delivery_date | date: 'longDate'}}
 														tr
-															td Special Instructions: 
+															td Special Instructions:
 															td {{sales.special_instruction}}
 														tr
-															td Total Quantity: 
+															td Total Quantity:
 															td {{sales.total_quantity || sales.totalQuantity}}
 												table.table.table-bordered.table-condensed.flip-content
 													thead.flip-content.bg-grey
