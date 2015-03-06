@@ -2548,9 +2548,9 @@ $scope.init = function(){
         if(sales.customer.price_type == "Retail"){
           item.price = item.retail_price;
         }
-        if(sales.customer.price_type == "Special"){
-          item.price = item.special_price;
-        }
+        // if(sales.customer.price_type == "Special"){
+        //   item.price = item.special_price;
+        // }
         if(sales.customer.price_type == "Sub Distributor"){
           item.price = item.sub_distributor_price;
         }
