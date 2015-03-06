@@ -1717,9 +1717,14 @@ $scope.init = function(){
       {"name": "drno","title": "DR No."},
       {"name": "sino","title": "SI No."},
       {"name": "customer","title": "Company Name"},
+      {"name": "bcity","title": "Billing - City"},
+      {"name": "scity","title": "Shipping - City"},
       {"name": "sales_executive", "title" :"Sales Executive"},
       {"name": "payment_term", "title": "Payment Term"},
       {"name": "delivery_date", "title": "Delivery Date"},
+      {"name": "so_date", "title": "SO - Date"},
+      {"name": "dr_approved_date", "title": "DR Approved - Date"},
+      {"name": "si_approved_date", "title": "SI Approved - Date"},
       {"name": "total_amount_due", "title": "Total Amount Due"}
       ];
 

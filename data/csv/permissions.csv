@@ -108,7 +108,7 @@ group,name,route
 "Merge Items","Add Merge Items","/merge/add"
 "Merge Items","Edit Merge Items","/merge/edit"
 "Merge Items","View Merge Items","/merge/read"
-"Reports","View All Reports","/reports/sales"
+"Reports","View All Sale Reports","/reports/sales"
 "Reports","View Report per Complete Sales","/reports/sales/complete"
 "Reports","View Report per Customer","/reports/sales/customer"
 "Reports","View Report per Product","/reports/sales/product"
