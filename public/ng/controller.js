@@ -2503,15 +2503,15 @@ $scope.init = function(){
     }
   }
 
-  var displayItemQuantity = function() {
-    console.log("displayItemQuantity");
-    for(var i=0;i<$scope.sales.ordered_items.length; i++){
-    $scope.sales.total_quantity=0;
-    $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
-    console.log($scope.sales.total_quantity);
-    }
-
-  }
+  // var displayItemQuantity = function() {
+  //   console.log("displayItemQuantity");
+  //   for(var i=0;i<$scope.sales.ordered_items.length; i++){
+  //   $scope.sales.total_quantity=0;
+  //   $scope.sales.total_quantity += $scope.sales.ordered_items[i].quantity;
+  //   console.log($scope.sales.total_quantity);
+  //   }
+  //
+  // }
 
   $scope.addOrder = function(sales){
     var no_inventory_location = false;
