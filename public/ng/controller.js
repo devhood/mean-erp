@@ -1485,8 +1485,8 @@ angular.module('erp')
         break;
         case "monitor" :
             columns = [
-              $scope.structure.sono, $scope.structure.drno, $scope.structure.sino, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-              $scope.structure.delivery_method, $scope.structure.status.status_name
+              $scope.structure.sono, $scope.structure.drno, $scope.structure.sino, $scope.structure.customer.shipping_address.city, $scope.structure.customer.billing_address.city, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+              $scope.structure.delivery_method,   $scope.structure.delivery_date, $scope.structure.status.status_name, $scope.structure.total_amount_due
             ];
 
             buttons = [
@@ -1497,6 +1497,9 @@ angular.module('erp')
             $scope.title = "SALES MONITOR"
             $scope.dtColumns = Library.DataTable.columns(columns,buttons);
             $scope.dtOptions = Library.DataTable.options("/api/sales?filter="+encodeURIComponent(JSON.stringify(query)));
+            $scope.dtOptions
+              .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+              .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
 
         break;
       }
@@ -1561,6 +1564,10 @@ $scope.init = function(){
       query["ordered_items.brand"] = $scope.report.brand;
     }
     if (api_url == "/reports/sales/se" && $scope.report.sales_executive) {
+      console.log("4");
+      query["customer.sales_executive"] = $scope.report.sales_executive;
+    }
+    if (api_url == "/reports/sales/city" && $scope.report.city) {
       console.log("4");
       query["customer.sales_executive"] = $scope.report.sales_executive;
     }

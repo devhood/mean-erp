@@ -155,6 +155,11 @@
         "href": "/#/reports/sales/se"
       },
       {
+        "title": "Sales Per City",
+        "description": "View Sales Report per City",
+        "href": "/#/reports/sales/city"
+      },
+      {
         "title": "Inventory",
         "description": "View Inventory Report",
         "href": "/#/reports/sales/inventory"
