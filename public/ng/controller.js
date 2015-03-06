@@ -2470,8 +2470,9 @@ $scope.init = function(){
     var query = {name:$scope.sales.promo};
   Api.Collection('promo',query).query(function (data) {
     $scope.promo_products = data[0];
-    console.log($scope.promo_products.name);
+    console.log("products",$scope.promo_products.name);
     $scope.sales.price = data[0].price;
+    $scope.sales.subtotal = data[0].price;
     });
     $scope.promoTypeChange();
   };
@@ -2540,31 +2541,31 @@ $scope.init = function(){
       }
       // if(isInventoryExist)
       if(true){
-        item.override = item.override ? item.override : "NORMAL";
-        if(sales.customer.price_type == "Professional"){
-          item.price = item.professional_price;
-        }
+        // item.override = item.override ? item.override : "NORMAL";
+        // if(sales.customer.price_type == "Professional"){
+        //   item.price = item.professional_price;
+        // }
         //juro added
-        if(sales.customer.price_type == "Retail"){
-          item.price = item.retail_price;
-        }
+        // if(sales.customer.price_type == "Retail"){
+        //   item.price = item.retail_price;
+        // }
         // if(sales.customer.price_type == "Special"){
         //   item.price = item.special_price;
         // }
-        if(sales.customer.price_type == "Sub Distributor"){
-          item.price = item.sub_distributor_price;
-        }
+        // if(sales.customer.price_type == "Sub Distributor"){
+        //   item.price = item.sub_distributor_price;
+        // }
         if(item.override != "NORMAL"){
           item.price = item.override;
           item.total = 0.00;
         }
-        if(!isNaN(item.override)){
-          item.price = item.professional_price+" ("+item.override+"% discount"+")";
-          item.total = (item.professional_price - ((item.override/100)*item.professional_price)) * item.quantity;
-        }
-        else if(!isNaN(item.price)){
-          item.total = item.quantity * item.price;
-        }
+        // if(!isNaN(item.override)){
+        //   item.price = item.professional_price+" ("+item.override+"% discount"+")";
+        //   item.total = (item.professional_price - ((item.override/100)*item.professional_price)) * item.quantity;
+        // }
+        // else if(!isNaN(item.price)){
+        //   item.total = item.quantity * item.price;
+        // }
         delete item.inventories;
         if($scope.sales.ordered_items){
           $scope.sales.ordered_items.push(item);
@@ -2579,14 +2580,15 @@ $scope.init = function(){
       }
 
     }
-      $scope.sales.subtotal = 0;
+
+      console.log("products",$scope.sales.price);
       $scope.sales.isNeedApproval = false;
-      for(var i=0;i<$scope.sales.ordered_items.length; i++){
-        $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
-        if($scope.sales.ordered_items[i].override != "NORMAL"){
-          $scope.sales.isNeedApproval = true;
-        }
-      }
+      // for(var i=0;i<$scope.sales.ordered_items.length; i++){
+      //   $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+      //   if($scope.sales.ordered_items[i].override != "NORMAL"){
+      //     $scope.sales.isNeedApproval = true;
+      //   }
+      // }
 
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
