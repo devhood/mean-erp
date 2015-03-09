@@ -407,24 +407,25 @@ block title
               .col-md-6
                 .form-group
                   .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                    input.form-control(type="number", ng-model="sales.other_fees", ng-disabled="action=='read'", ng-change="OtherFeesChange()", style="text-align: right;")
+                    input.form-control(type="text", ng-model="sales.payment_notes", ng-readonly="action=='approve'")
+                    span.col-md-12.help-block Payment Notes
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                    input.form-control(type="number", ng-model="sales.other_fees", ng-disabled="action=='approve'", ng-change="OtherFeesChange()", style="text-align: right;")
                     span.col-md-12.help-block  Other Fees
+            .row
+              .col-md-6
+                .form-group
+                  .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                    input.form-control(type="text", ng-model="sales.prno", ng-readonly="action=='approve'")
+                    span.col-md-12.help-block  PR Number
               .col-md-6
                 .form-group
                   .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                     input.form-control(type="number", ng-model="sales.total_payment", readonly, style="text-align: right;")
                     span.col-md-12.help-block  Total Payment here
-        .row
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                input.form-control(type="text", ng-model="sales.orno", ng-readonly="action!='create'")
-                span.col-md-12.help-block OR Number
-          .col-md-6
-            .form-group
-              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="sales.prno", ng-readonly="action!='create'")
-                span.col-md-12.help-block  PR Number
+
       .form-actions.fluid
         .row
           .col-md-6

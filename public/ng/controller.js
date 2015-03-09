@@ -1448,7 +1448,7 @@ angular.module('erp')
           buttons = [
           {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
           {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-plus-square-o", state:{statusArray:["SALES_INVOICE_APPROVED","PROFORMA_INVOICE_CREATED","MEMO_APPROVED"]}},
-          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-plus-square", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_PARTIALED", "TRIP_TICKET_DELIVERED"]}},
+          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-plus-square", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_UPDATED","PAYMENT_PARTIALED", "TRIP_TICKET_DELIVERED"]}},
           {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", state:{statusArray:["PAYMENT_UPDATED"]}},
           ];
 
@@ -2583,12 +2583,12 @@ $scope.init = function(){
 
       console.log("products",$scope.sales.price);
       $scope.sales.isNeedApproval = false;
-      // for(var i=0;i<$scope.sales.ordered_items.length; i++){
-      //   $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
-      //   if($scope.sales.ordered_items[i].override != "NORMAL"){
-      //     $scope.sales.isNeedApproval = true;
-      //   }
-      // }
+      for(var i=0;i<$scope.sales.ordered_items.length; i++){
+        $scope.sales.subtotal+=$scope.sales.ordered_items[i].total;
+        if($scope.sales.ordered_items[i].override != "NORMAL"){
+          $scope.sales.isNeedApproval = true;
+        }
+      }
 
       var computation = Library.Compute.Order(
         $scope.sales.subtotal,
@@ -3852,7 +3852,7 @@ var displayItemQuantity = function() {
     $scope.sales.total_payment += Number($scope.sales.other_fees);
       console.log($scope.sales.total_payment + $scope.sales.other_fees);
     }
-    if ($scope.sales.total_payment >= $scope.sales.total_amount_due){$scope.proceedPayment ='true';}
+    if ($scope.sales.total_payment){$scope.proceedPayment ='true';}
     else $scope.proceedPayment ='false';
     if ($scope.sales.cmno) {
       console.log("total change");
@@ -3960,6 +3960,7 @@ var displayItemQuantity = function() {
     $scope.saveSales = function(){
       $scope.sales.status = status.payment.confirmed;
       $scope.sales.payment_date = new Date();
+      $scope.sales.payment_approved_by = $scope.client.fullname;
       $scope.sales.$update(function(){
         $location.path('/sales/index/payment');
         return false;

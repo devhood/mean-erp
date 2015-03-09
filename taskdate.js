@@ -38,13 +38,8 @@ You need to pay for my transpo if you are not within Alabang.
 Available only from 6pm to 10pm (monday - friday), 7am-8pm (saturday)
 
 
-Dell Vostro 1400 - 2GHZ Laptop
-Intel CoreTM 2 Duo Processor T7250 (2.00 GHz, 800 MHz FSB, 2 MB L2 cache)
-2 GB Dual Channel 667MHz DDR2 SDRAM
-Intel 965GM Express chipset
-Windows 8
-250GB8 configured with a single 5.400 RPM SATA hard drive
+extract sales:
+  sino, drno, sino, customer, city
 
-note: no defects except dead battery (need to plug while using)
-
-package with leather bag
+  sino, drno, sino, customer,
+    brand total
