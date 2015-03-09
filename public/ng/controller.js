@@ -3795,6 +3795,7 @@ var displayItemQuantity = function() {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
+    $scope.client = client;
   });
 
   var id = $routeParams.id;
