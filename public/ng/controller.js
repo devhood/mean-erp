@@ -3418,6 +3418,8 @@ var displayItemQuantity = function() {
             statusSales.order.rescheduled.status_code,
             statusSales.invoice.approved.status_code,
             statusSales.payment.updated.status_code,
+            statusSales.payment.created.status_code,
+            statusSales.payment.partialed.status_code,
             statusSales.printed.dr.status_code,
             statusSales.printed.si.status_code
             ]}
