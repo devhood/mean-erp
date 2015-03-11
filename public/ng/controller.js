@@ -2059,7 +2059,7 @@ $scope.init = function(){
   if(action == 'edit'){
     $scope.title = "EDIT SALES ORDER - Ref.No.: "+ id;
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
-      $scope.CustomerChange();
+      // $scope.CustomerChange();
     });
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){

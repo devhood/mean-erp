@@ -64,7 +64,7 @@ angular.module('erp', [
         templateUrl: '/partials/monitor/customers',
         controller: 'MonitorCtrl'
       })
-      .when('/monitor/:type', {
+      .when('/monitor/duplicate', {
         templateUrl: '/partials/monitor/duplicate',
         controller: 'MonitorCtrl'
       })
