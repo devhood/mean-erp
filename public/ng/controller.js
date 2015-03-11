@@ -1448,7 +1448,7 @@ angular.module('erp')
           buttons = [
           {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
           {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-plus-square-o", state:{statusArray:["SALES_INVOICE_APPROVED","PROFORMA_INVOICE_CREATED","MEMO_APPROVED","TRIP_TICKET_CREATED","TRIP_TICKET_DELIVERED"]}},
-          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-plus-square", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_UPDATED","PAYMENT_PARTIALED","TRIP_TICKET_CREATED","TRIP_TICKET_DELIVERED"]}},
+          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-plus-square", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_UPDATED","PAYMENT_PARTIALED"]}},
           {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", state:{statusArray:["PAYMENT_UPDATED"]}},
           ];
 
@@ -3304,7 +3304,7 @@ var displayItemQuantity = function() {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
-     $scope.client = clien
+     $scope.client = client;
   });
   // Session.get(function(client) {
   //     $scope.client = client;
@@ -3378,6 +3378,7 @@ var displayItemQuantity = function() {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
+    $scope.client = client;
   });
 
   $scope.ajax_ready = false;
@@ -3511,7 +3512,7 @@ var displayItemQuantity = function() {
                   console.log("status: delivered");
 
                   if(allowed_status.indexOf(sales.status.status_code) != -1){
-                    sales.status = statusSales.tripticket.delivered;
+                    sales.delivery_status = statusSales.tripticket.delivered;
                   }
                 }
                 else if(item.status == "failed"){
@@ -3600,7 +3601,8 @@ var displayItemQuantity = function() {
           $scope.trip.$save(function(){
             async.each($scope.trip.list, function( item, callback) {
               Api.Collection('sales').get({id : item.id}).$promise.then(function(sales){
-                sales.status = statusSales.tripticket.created;
+
+                // sales.status = statusSales.tripticket.created;
                 sales.trpno =  $scope.trip.trpno;
                 sales.$update(function(){
                   callback();

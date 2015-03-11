@@ -18,12 +18,14 @@ block title
                 tr
                   th Code
                   th Product
+                  th Brand
                   th rquantity
                   th quantity
               tbody
                 tr(ng-repeat="item in duplicate track by 'item._id'")
                   td {{item.bl_code}}
                   td {{item.name}}
+                  td {{item.brand}}
                   td {{item.inventories[0].rquantity}}
                   td {{item.inventories[0].quantity}}
         .col-md-2
