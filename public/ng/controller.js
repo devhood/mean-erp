@@ -1447,8 +1447,8 @@ angular.module('erp')
           // filter:{key:"pmno"}},
           buttons = [
           {url:"/#/sales/payment/read/",title:"View Record",icon:"fa fa-folder-open"},
-          {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-plus-square-o", state:{statusArray:["SALES_INVOICE_APPROVED","PROFORMA_INVOICE_CREATED","MEMO_APPROVED"]}},
-          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-plus-square", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_UPDATED","PAYMENT_PARTIALED", "TRIP_TICKET_DELIVERED"]}},
+          {url:"/#/sales/payment/create/",title:"Create Payment Record",icon:"fa fa-plus-square-o", state:{statusArray:["SALES_INVOICE_APPROVED","PROFORMA_INVOICE_CREATED","MEMO_APPROVED","TRIP_TICKET_CREATED","TRIP_TICKET_DELIVERED"]}},
+          {url:"/#/sales/payment/update/",title:"Update Record",icon:"fa fa-plus-square", state:{statusArray:["PAYMENT_CREATED", "PAYMENT_UPDATED","PAYMENT_PARTIALED","TRIP_TICKET_CREATED","TRIP_TICKET_DELIVERED"]}},
           {url:"/#/sales/payment/approve/",title:"Approve Record",icon:"fa fa-gear", state:{statusArray:["PAYMENT_UPDATED"]}},
           ];
 
