@@ -139,7 +139,7 @@ router
   // {$project:content.project}
   //   "_id":"$bl_code",
   content.group = {
-    "_id":"$inventories._id",
+    "_id":"$customer.company_name",
     "inventory_location":{$first:"$inventories.company_name"},
     "branch":{$first:"$inventories.branch"},
     "quantity":{$sum:"$inventories.quantity"},

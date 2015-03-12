@@ -56,6 +56,10 @@ angular.module('erp', [
         templateUrl: '/partials/product/add',
         controller: 'ProductCtrl'
       })
+      .when('/monitor/inventory', {
+        templateUrl: '/partials/monitor/inventory',
+        controller: 'InventoryMonitorCtrl'
+      })
       .when('/monitor/products', {
         templateUrl: '/partials/monitor/products',
         controller: 'MonitorCtrl'

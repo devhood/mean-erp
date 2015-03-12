@@ -964,6 +964,33 @@ angular.module('erp')
   //   $scope.formInit = function(){
   //   $scope.products =  Api.Collection('products');
   //   }
+}).controller('InventoryMonitorCtrl', function (Api, $scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session) {
+
+      $scope.ajax_ready = false;
+      Structure.Products.query().$promise.then(function(data){
+        $scope.structure = data[0];
+        $scope.ajax_ready = true;
+
+        $scope.formInit = function(){
+          $scope.products =  Api.Collection('products').query();
+        };
+      });
+
+
+// }).controller('InventoryHistoryMonitorCtrl', function (Api, $scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session) {
+//
+//       $scope.ajax_ready = false;
+//       Structure.Products.query().$promise.then(function(data){
+//         $scope.structure = data[0];
+//         $scope.ajax_ready = true;
+//
+//         $scope.formInit = function(){
+//           $scope.inv_trans_history =  Api.Collection('inv_trans_history').query();
+//         };
+//       });
+
+
+
 }).controller('UploadInventoriesCtrl', function ($scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session, Api, CustomApi, popupService, fileUpload) {
 
   Session.get(function(client) {
@@ -1522,16 +1549,18 @@ Structure.Sales.query().$promise.then(function(data){
   var status = Library.Status.Sales;
   var columns = [];
   var buttons = [];
-  var query = {};
-  // query.status = {"status_code" : {"$in" : [status.payment.confirmed.status_code]}};
   var now = new Date();
   var date = now.getDate();
   var year = now.getFullYear();
   var month = now.getMonth();
   var start_date = new Date(year,month,date,0,0);
   var end_date = new Date(year,month,date,23,59);
-  // query.payment_date = {"$gte": start_date, "$lte": end_date};
 
+  var query = {};
+  //if query is based in confirmed payment
+  // query.status = {"status_code" : {"$in" : [status.payment.confirmed.status_code]}};
+  //if query is based in payment
+  // query.payment_date = {"$gte": start_date, "$lte": end_date};
 
 $scope.init = function(){
   var module = $routeParams.module;
@@ -1545,11 +1574,10 @@ $scope.init = function(){
   $scope.sales_executives = Api.Collection('users',query).query();
   $scope.users = Api.Collection('users').query();
   $scope.report = {};
-   query = {};
-   query.sono = true;
+  query = {};
 
   var generateReport = function (query,api_url) {
-    var query = {};
+    // var query = {};
     console.log("generating");
     if (api_url == "/reports/sales/customer" && $scope.report.customer) {
       console.log("1");
@@ -1568,9 +1596,10 @@ $scope.init = function(){
       query["customer.sales_executive"] = $scope.report.sales_executive;
     }
     if (api_url == "/reports/sales/city" && $scope.report.city) {
-      console.log("4");
-      query["customer.sales_executive"] = $scope.report.sales_executive;
+      console.log("5");
+      query["customer.billing_address.city"] = $scope.report.city;
     }
+
     console.log($scope.report.value, "value");
     if ($scope.report.start_date && $scope.report.end_date ) {
       $scope.report.value = "";
@@ -1579,136 +1608,19 @@ $scope.init = function(){
       if (start_date == "Invalid Date") {
         window.alert("Invalid input, please check the date format.");
       }
-      // {drno:{$exists:true}}
-      query = {sino:{$exists:true},delivery_date:{"$gte": start_date, "$lte": end_date}};
+
+      //all reports must have SI number
+      query.sino = {$exists:true};
+      query.delivery_date={"$gte": start_date, "$lte": end_date};
       console.log("query : ", JSON.stringify(query));
 
     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
     }
 
-    // else if ($scope.report.period && $scope.report.value || $scope.report.year) {
-    //   var period = $scope.report.period;
-    //   var value = $scope.report.value;
-    //   var start_year = 1;
-    //   var start_month = 0;
-    //   var start_day = 1;
-    //   var start_hours = 0;
-    //   var start_minute = 0;
-
-    // var splitDate = function () {
-    //    start_year = Number($scope.report.value.split("/")[2]);
-    //    start_month = Number($scope.report.value.split("/")[0])-1;
-    //    start_day = Number($scope.report.value.split("/")[1]);
-    //   }
-
-    // switch (period) {
-    //   case 'day':
-    //     splitDate();
-    //     var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
-    //     var end_date = new Date(start_year,start_month,start_day+1,start_hours,start_minute);
-    //     if (start_date == "Invalid Date") {
-    //       window.alert("Invalid input, please check the date format.");
-    //     }
-    //     query.payment_date = {"$gte": start_date, "$lte": end_date};
-    //     console.log("query : ", JSON.stringify(query));
-    //     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
-    //   break;
-    //   case 'week':
-    //     splitDate();
-    //     var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
-    //     var end_date = new Date(start_year,start_month,start_day+7,start_hours,start_minute);
-    //     if (start_date == "Invalid Date") {
-    //       window.alert("Invalid input, please check the date format.");
-    //     }
-    //     query.payment_date = {"$gte": start_date, "$lte": end_date};
-    //     console.log("query : ", JSON.stringify(query));
-    //     $scope.title = "SALES REPORT : WEEKLY"
-    //     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
-    //   break;
-    //   case 'month':
-    //     start_day = 1;
-    //     start_month = $scope.report.value;
-    //     start_year = $scope.report.year;
-    //   console.log(start_year, start_month, start_day);
-    //     var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
-    //   console.log(start_year, start_month, start_day);
-    //     if (start_month==12) {
-    //       start_month = 0;
-    //       start_year = start_year + 1;
-    //     }
-    //     var end_date = new Date(start_year,start_month+1,start_day,start_hours,start_minute);
-    //   console.log(end_date);
-    //     if (start_date == "Invalid Date") {
-    //       window.alert("Invalid input, please check the date format.");
-    //     }
-    //     query.payment_date = {"$gte": start_date, "$lte": end_date};
-    //     console.log("query nga : ", JSON.stringify(query));
-    //
-    //     $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-    //     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
-    //   break;
-    //   case 'quarter':
-    //     start_year = $scope.report.year;
-    //     switch ($scope.report.quarter) {
-    //     case '1':
-    //       start_month = 0;
-    //       break;
-    //     case '2':
-    //       start_month = 3;
-    //       break;
-    //     case '3':
-    //       start_month = 6;
-    //       break;
-    //     case '4':
-    //       start_month = 9;
-    //       break;
-    //     default:
-    //       window.confirm("The Quarter is out of range.");
-    //     }
-    //
-    //     if (start_year < 2010 || start_year > 2020 ) {
-    //       window.confirm("The Year is out of range.");
-    //     }
-    //     var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
-    //     start_month = start_month==12 ? 0 : start_month;
-    //     var end_date = new Date(start_year,start_month+3,start_day,start_hours,start_minute);
-    //     if (start_date == "Invalid Date") {
-    //       window.alert("Invalid input, please check the date format.");
-    //     }
-    //     query.payment_date = {"$gte": start_date, "$lte": end_date};
-    //     console.log("query : ", JSON.stringify(query));
-    //     $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-    //     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
-    //   break;
-    //   case 'annual':
-    //     var start_year = $scope.report.year;
-    //     if (start_year < 2010 || start_year > 2020 ) {
-    //       window.confirm("The Year is out of range.");
-    //     }
-    //     var start_date = new Date(start_year,start_month,start_day,start_hours,start_minute);
-    //     start_month = start_month==12 ? 0 : start_month;
-    //     var end_date = new Date(start_year,start_month+12,start_day,start_hours,start_minute);
-    //     if (start_date == "Invalid Date") {
-    //       window.alert("Invalid input, please check the date format.");
-    //     }
-    //     query.payment_date = {"$gte": start_date, "$lte": end_date};
-    //     console.log("query : ", JSON.stringify(query));
-    //     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
-    //   break;
-    //   default:
-    //   break;
-    //   }
-    // }
     else {
       window.alert("Please fill up the Reports Period Properly.");
     }
   }
-
-// date
-// no
-// customer
-// amount due
-
 
   switch(type){
     case "complete" :
@@ -1733,16 +1645,12 @@ $scope.init = function(){
         ];
 
       $scope.title = "COMPLETED SALES REPORT "
-      console.log("query ko", JSON.stringify(query));
+      console.log("query", JSON.stringify(query));
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/complete?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
         .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
-
-
-
-    // $scope.dtColumns = Library.DataTable.columns(columns,buttons);
 
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/complete");
@@ -1756,7 +1664,6 @@ $scope.init = function(){
       {"name": "type", "title": "Type"},
       {"name": "total_amount_due", "title": "Total Amount Due"},
       ];
-      query["customer.company_name"] = $scope.report.customer;
       $scope.title = "COMPLETED SALES REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/customer?filter="+encodeURIComponent(JSON.stringify(query)));
@@ -1779,7 +1686,6 @@ $scope.init = function(){
       ];
       $scope.title = "SALES REPORT BY PRODUCT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-
       $scope.dtOptions = Library.DataTable.options("/reports/sales/product?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
@@ -1831,7 +1737,7 @@ $scope.init = function(){
       {"name": "total_amount_due", "title": "Total Amount Due"},
       ];
 
-      $scope.title = "COMPLETED SALES REPORT "
+      $scope.title = "INVENTORY REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/inventory?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
@@ -1839,12 +1745,12 @@ $scope.init = function(){
         .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
 
       $scope.generateReport = function(){
-        generateReport(query,"/reports/sales/se");
+        generateReport(query,"/reports/sales/inventory");
       }
 
       break;
-    }
-  };
+    } //end of switch
+  }; //end of init 
 });
   })
 .controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {

@@ -1,50 +1,37 @@
 block title
-  title Inventory
+  title INVENTORY
 .portlet.box.grey(ng-if="ajax_ready",  ng-init="formInit()")
   .portlet-title
     .caption
       i.fa.fa-edit
-      | Inventory
+      | CHECK INVENTORY
     .tools
       a.collapse(href="javascript:;")
   .portlet-body.form
       .row
-        br
-        .col-md-2
-        .col-md-8
-          .portlet-body.flip-scroll
-            .caption Inventory
-            table.table.table-bordered.table-condensed.flip-content
-              thead.flip-content.bg-grey
-                tr
-                  th Code
-                  th Product
-                  th quantity
-              tbody
-                tr(ng-repeat="item in duplicate track by 'item._id'")
-                  td {{item.bl_code}}
-                  td {{item.name}}
-                  td {{item.inventories[0].quantity}}
-        .col-md-2
-        br
-        br
-        br
+        .col-md-4
+              span.col-md-12.info Total Products = {{products.length}}
+        .col-md-4
+        .col-md-4
       .row
         br
-        .col-md-12
+        .col-md-1
+        .col-md-10
           .portlet-body.flip-scroll
             table.table.table-bordered.table-condensed.flip-content
               thead.flip-content.bg-grey
                 tr
                   th Code
                   th Product
+                  th Brand
                   th quantity
               tbody
                 tr(ng-repeat="item in products")
                   td {{item.bl_code}}
                   td {{item.name}}
+                  td {{item.brand}}
                   td {{item.inventories[0].quantity}}
-        .col-md-2
+        .col-md-1
         br
         br
         br

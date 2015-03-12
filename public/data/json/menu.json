@@ -194,6 +194,11 @@
         "href": "/#/sales/index/monitor"
       },
       {
+        "title": "Inventory Monitoring",
+        "description": "Inventory Monitoring",
+        "href": "/#/monitor/inventory"
+      },
+      {
         "title": "Adjustment",
         "description": "Adjustment",
         "href": "/#/adjustment/index"
