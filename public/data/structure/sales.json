@@ -142,7 +142,7 @@
         "type": "select"
       },
       "payment_term": {
-        "name": "sales.payment_term",
+        "name": "customer.payment_term",
         "title": "Payment Term",
         "type": "select"
       },
