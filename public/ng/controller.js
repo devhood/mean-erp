@@ -2091,12 +2091,12 @@ $scope.init = function(){
 
 }).controller('SalesMonitorCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
 
-
-  Session.get(function(client) {
-    if(!Library.Permission.isAllowed(client,$location.path())){
-      $location.path("/auth/unauthorized");
-    }
-  });
+Session.get(function(client) {
+  if(!Library.Permission.isAllowed(client,$location.path())){
+    $location.path("/auth/unauthorized");
+  }
+   $scope.client = client;
+});
 
   var id = $routeParams.id;
   var action = $routeParams.action;
