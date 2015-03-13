@@ -10,7 +10,7 @@ block title
       //- script(src='public/vendor/ui-utils/ui-utils.min.js')
   .portlet-body
     br
-    .row
+    .row(ng-show="type!='inventory'")
       .col-md-12
         .col-md-6
           input.form-control(type="text", ng-model="report.start_date", datepicker-popup="{{'MM/dd/yyyy'}}")
@@ -43,13 +43,19 @@ block title
       .col-md-6
         .form-group
           .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.bl_code for product in products")
+            span.col-md-12.help-block BL Code
+      .col-md-6
+        .form-group
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
             select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
             span.col-md-12.help-block Product
-        .col-md-6
-          .form-group
-            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-              select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.bl_code for product in products")
-              span.col-md-12.help-block BL Code
+    .row(ng-show="type=='city'").col-md-12
+      .col-md-6
+        .form-group
+          .col-md-12
+            select#userId.select2me.form-control.select2-offscreen(ng-model="report.sales_executive", ng-selected="report.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", required)
+            span.col-md-12.help-block City
         br
         br
         br

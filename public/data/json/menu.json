@@ -160,7 +160,7 @@
         "href": "/#/reports/sales/city"
       },
       {
-        "title": "Inventory",
+        "title": "Inventory Transaction History",
         "description": "View Inventory Report",
         "href": "/#/reports/sales/inventory"
       }

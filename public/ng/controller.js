@@ -966,6 +966,13 @@ angular.module('erp')
   //   }
 }).controller('InventoryMonitorCtrl', function (Api, $scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session) {
 
+Session.get(function(client) {
+  if(!Library.Permission.isAllowed(client,$location.path())){
+    $location.path("/auth/unauthorized");
+  }
+   $scope.client = client;
+});
+
       $scope.ajax_ready = false;
       Structure.Products.query().$promise.then(function(data){
         $scope.structure = data[0];
@@ -993,11 +1000,12 @@ angular.module('erp')
 
 }).controller('UploadInventoriesCtrl', function ($scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session, Api, CustomApi, popupService, fileUpload) {
 
-  Session.get(function(client) {
-    if(Library.Permission.isAllowed(client,$location.path())){
-      $location.path("/auth/unauthorized");
-    }
-  });
+Session.get(function(client) {
+  if(!Library.Permission.isAllowed(client,$location.path())){
+    $location.path("/auth/unauthorized");
+  }
+   $scope.client = client;
+});
 
   var query = {"type":"Retail"};
   $scope.inventory_locations = Api.Collection('customers',query).query();
@@ -1577,30 +1585,27 @@ $scope.init = function(){
   query = {};
 
   var generateReport = function (query,api_url) {
-    // var query = {};
-    console.log("generating");
     if (api_url == "/reports/sales/customer" && $scope.report.customer) {
       console.log("1");
       query["customer.company_name"] = $scope.report.customer;
     }
-    if (api_url == "/reports/sales/product" && $scope.report.product.bl_code) {
+    else if (api_url == "/reports/sales/product" && $scope.report.product.bl_code) {
       console.log("2");
       query["ordered_items.bl_code"] = $scope.report.product.bl_code;
     }
-    if (api_url == "/reports/sales/brand" && $scope.report.brand) {
+    else if (api_url == "/reports/sales/brand" && $scope.report.brand) {
       console.log("3");
       query["ordered_items.brand"] = $scope.report.brand;
     }
-    if (api_url == "/reports/sales/se" && $scope.report.sales_executive) {
+    else if (api_url == "/reports/sales/se" && $scope.report.sales_executive) {
       console.log("4");
       query["customer.sales_executive"] = $scope.report.sales_executive;
     }
-    if (api_url == "/reports/sales/city" && $scope.report.city) {
-      console.log("5");
+    else if (api_url == "/reports/sales/city" && $scope.report.city) {
+      console.log("6");
       query["customer.billing_address.city"] = $scope.report.city;
     }
 
-    console.log($scope.report.value, "value");
     if ($scope.report.start_date && $scope.report.end_date ) {
       $scope.report.value = "";
       var start_date = $scope.report.start_date;
@@ -1610,11 +1615,16 @@ $scope.init = function(){
       }
 
       //all reports must have SI number
-      query.sino = {$exists:true};
       query.delivery_date={"$gte": start_date, "$lte": end_date};
       console.log("query : ", JSON.stringify(query));
 
     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
+    }
+
+    else if (api_url == "/reports/sales/inventory" && $scope.report.product.bl_code) {
+        query.["item.bl_code"] = $scope.report.product.bl_code;
+        console.log("query : ", JSON.stringify(query));
+        $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
     }
 
     else {
@@ -1624,6 +1634,7 @@ $scope.init = function(){
 
   switch(type){
     case "complete" :
+    console.log("query : ",query);
       columns = [
       {"name": "sono","title": "SO No."},
       {"name": "drno","title": "DR No."},
@@ -1643,10 +1654,10 @@ $scope.init = function(){
      buttons = [
         {url:"/#/sales/monitor/read/",title:"View Record",icon:"fa fa-folder-open"},
         ];
-
       $scope.title = "COMPLETED SALES REPORT "
-      console.log("query", JSON.stringify(query));
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+        query.sino = {$exists:true};
+        console.log("query", JSON.stringify(query));
       $scope.dtOptions = Library.DataTable.options("/reports/sales/complete?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
@@ -1666,6 +1677,8 @@ $scope.init = function(){
       ];
       $scope.title = "COMPLETED SALES REPORT "
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+
+        query.sino = {$exists:true};
       $scope.dtOptions = Library.DataTable.options("/reports/sales/customer?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
@@ -1686,6 +1699,7 @@ $scope.init = function(){
       ];
       $scope.title = "SALES REPORT BY PRODUCT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+       query.sino = {$exists:true};
       $scope.dtOptions = Library.DataTable.options("/reports/sales/product?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
@@ -1704,6 +1718,7 @@ $scope.init = function(){
       ];
       $scope.title = "SALES REPORT BY BRAND"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+       query.sino = {$exists:true};
       $scope.dtOptions = Library.DataTable.options("/reports/sales/brand?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
@@ -1713,13 +1728,15 @@ $scope.init = function(){
         generateReport(query,"/reports/sales/brand");
       }
       break;
+
     case "se" :
       columns = [
       {"name": "sales_executive","title": "Sales Executive"},
       {"name": "total_amount_due", "title": "Total Amount Due"}
       ];
       $scope.title = "COMPLETED SALES REPORT "
-      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtColums = Library.DataTable.columns(columns,buttons);
+       query.sino = {$exists:true};
       $scope.dtOptions = Library.DataTable.options("/reports/sales/se?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
@@ -1729,7 +1746,31 @@ $scope.init = function(){
         generateReport(query,"/reports/sales/se");
       }
       break;
+
     case "inventory" :
+      columns = [
+      {"name": "reference.object","title": "Transaction"},
+      {"name": "item.bl_code", "title" :"Code"},
+      {"name": "item.name", "title": "Name"},
+      {"name": "item.brand","title": "Brand"},
+      {"name": "item.uom","title": "UOM"},
+      {"name": "reference.value","title": "Reference No"},
+      {"name": "item.quantity", "title": "Quantity"}
+      ];
+
+      $scope.title = "INVENTORY REPORT"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/inventory?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
+      $scope.generateReport = function(){
+        generateReport(query,"/reports/sales/inventory");
+      }
+
+      break;
+    case "city" :
       columns = [
       {"name": "customer","title": "Company Name"},
       {"name": "branch", "title" :"Branch"},
@@ -1737,7 +1778,7 @@ $scope.init = function(){
       {"name": "total_amount_due", "title": "Total Amount Due"},
       ];
 
-      $scope.title = "INVENTORY REPORT "
+      $scope.title = "INVENTORY REPORT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/reports/sales/inventory?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
@@ -1750,7 +1791,7 @@ $scope.init = function(){
 
       break;
     } //end of switch
-  }; //end of init 
+  }; //end of init
 });
   })
 .controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {

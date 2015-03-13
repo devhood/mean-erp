@@ -234,3 +234,11 @@ console.log((fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFull
             input.form-control(type="text", ng-model="report.quarter")
             span.col-md-12.help-block Enter Quarter
           .col-md-2
+
+
+
+
+
+EWB
+gigi baustista
+226 4095
