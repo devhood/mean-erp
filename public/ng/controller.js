@@ -1622,7 +1622,7 @@ $scope.init = function(){
     }
 
     else if (api_url == "/reports/sales/inventory" && $scope.report.product.bl_code) {
-        query.["item.bl_code"] = $scope.report.product.bl_code;
+        // query.["item.bl_code"] = $scope.report.product.bl_code;
         console.log("query : ", JSON.stringify(query));
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
     }
