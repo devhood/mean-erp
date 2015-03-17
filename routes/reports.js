@@ -160,24 +160,24 @@ router
 //   });
 
 // })
-  .get('/sales/inventory', function(req, res) {
+  .get('/inventory/transaction', function(req, res) {
   req.query.filter = JSON.parse(req.query.filter || '{}');
   console.log("filter",req.query.filter);
   var content = {};
-  content.group = {
-    "_id":"$item._id",
-    "inventory_location":{$first:"$location"},
-    "quantity":{$first:"$quantity"},
-    "object":{$first:"$reference.object"},
-    "value":{$first:"$reference.value"},
-    "key":{$first:"$reference.key"},
-    "bl_code":{$first:"$bl_code"},
-    "brand":{$first:"$brand"},
-    "uom":{$first:"$uom"}
-  };
+  // content.group = {
+  //   "_id":"$item._id",
+  //   "inventory_location":{$first:"$location"},
+  //   "quantity":{$first:"$quantity"},
+  //   "object":{$first:"$reference.object"},
+  //   "value":{$first:"$reference.value"},
+  //   "key":{$first:"$reference.key"},
+  //   "bl_code":{$first:"$bl_code"},
+  //   "brand":{$first:"$brand"},
+  //   "uom":{$first:"$uom"}
+  // };
 
-  console.log(content);
   content.match = req.query.filter;
+  console.log("content.match", content.match);
   req.db.collection('inv_trans_history')
   .aggregate([{$match:content.match||{}}])
   .done(function(result){
@@ -188,7 +188,6 @@ router
     console.log(err);
     res.status(400).json(err);
   });
-
 })
 
 module.exports = router;

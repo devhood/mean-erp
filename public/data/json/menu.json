@@ -162,7 +162,7 @@
       {
         "title": "Inventory Transaction History",
         "description": "View Inventory Report",
-        "href": "/#/reports/sales/inventory"
+        "href": "/#/reports/inventory/transaction"
       }
     ]
   },
@@ -214,7 +214,7 @@
         "href": "/#/calendar/index"
       },
       {
-        "title": "Schedule for Approval",
+        "title": "Schedules",
         "description": "Demo And Training Schedule",
         "href": "/#/schedule/index"
       },

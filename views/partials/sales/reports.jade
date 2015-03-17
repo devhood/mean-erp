@@ -39,6 +39,15 @@ block title
             select#userId.select2me.form-control.select2-offscreen(ng-model="report.sales_executive", ng-selected="report.sales_executive", ng-options="sales_executive.fullname as sales_executive.fullname for sales_executive in sales_executives", required)
             span.col-md-12.help-block Select Sales Executive
       .col-md-6
+    .row(ng-show="type=='transaction'")
+      .col-md-6
+        .form-group
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            select.select2me.form-control.select2-offscreen(ng-model="sales.inventory_location", ng-options="inventory_location._id as inventory_location.company_name for inventory_location in inventory_locations", ng-selected="{{sales.inventory_location}}" ,tabindex="-1", ng-disabled="action=='read' || action=='reschedule' || action=='approve'",required)
+            span.col-md-12.help-block Inventory Location
+      .col-md-6
+        .form-group
+          .col-xs-12.col-sm-12.col-md-10.col-lg-12
     .row(ng-show="type=='product' || type=='inventory'")
       .col-md-6
         .form-group
@@ -50,6 +59,7 @@ block title
           .col-xs-12.col-sm-12.col-md-12.col-lg-12
             select.select2me.form-control.select2-offscreen(ng-model="report.product", ng-options="product.name for product in products")
             span.col-md-12.help-block Product
+
     .row(ng-show="type=='city'").col-md-12
       .col-md-6
         .form-group
@@ -62,7 +72,7 @@ block title
     br
     .row
       .col-md-4
-        button.btn.green.btn.btn-default(type="submit" ng-click="generateReport()") Generate Report
+        button.btn.green.btn.btn-default(type="submit" ng-click="generateReport(report)") Generate Report
       .col-md-8
         br
         br

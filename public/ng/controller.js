@@ -744,6 +744,7 @@ angular.module('erp')
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
+
   });
 
   $scope.ajax_ready = false;
@@ -1520,7 +1521,7 @@ Session.get(function(client) {
         break;
         case "monitor" :
             columns = [
-              $scope.structure.sono, $scope.structure.drno, $scope.structure.sino, $scope.structure.customer.shipping_address.city, $scope.structure.customer.billing_address.city, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
+              $scope.structure.sono, $scope.structure.drno, $scope.structure.sino, $scope.structure.pmno, $scope.structure.rmrno, $scope.structure.cmno,$scope.structure.customer.shipping_address.city, $scope.structure.customer.billing_address.city, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
               $scope.structure.delivery_method,   $scope.structure.delivery_date, $scope.structure.status.status_name, $scope.structure.total_amount_due
             ];
 
@@ -1581,10 +1582,12 @@ $scope.init = function(){
   var query = {"position":"Sales Executive"};
   $scope.sales_executives = Api.Collection('users',query).query();
   $scope.users = Api.Collection('users').query();
+  query = {"type":"Retail"};
+  $scope.inventory_locations = Api.Collection('customers',query).query();
   $scope.report = {};
   query = {};
 
-  var generateReport = function (query,api_url) {
+  var generateReport = function (query,api_url,report) {
     if (api_url == "/reports/sales/customer" && $scope.report.customer) {
       console.log("1");
       query["customer.company_name"] = $scope.report.customer;
@@ -1621,9 +1624,10 @@ $scope.init = function(){
     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
     }
 
-    else if (api_url == "/reports/sales/inventory" && $scope.report.product.bl_code) {
-        // query.["item.bl_code"] = $scope.report.product.bl_code;
-        console.log("query : ", JSON.stringify(query));
+    else if (api_url == "/reports/inventory/transaction" && $scope.report.product.bl_code) {
+      console.log("report.pro", report.product.bl_code);
+        query.bl_code = report.product.bl_code;
+        console.log("query inv: ", JSON.stringify(query));
         $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
     }
 
@@ -1747,7 +1751,7 @@ $scope.init = function(){
       }
       break;
 
-    case "inventory" :
+    case "transaction" :
       columns = [
       {"name": "reference.object","title": "Transaction"},
       {"name": "item.bl_code", "title" :"Code"},
@@ -1755,6 +1759,7 @@ $scope.init = function(){
       {"name": "item.brand","title": "Brand"},
       {"name": "item.uom","title": "UOM"},
       {"name": "reference.value","title": "Reference No"},
+      {"name": "reference.type","title": "Type"},
       {"name": "item.quantity", "title": "Quantity"}
       ];
 
@@ -1765,8 +1770,9 @@ $scope.init = function(){
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
         .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
 
-      $scope.generateReport = function(){
-        generateReport(query,"/reports/sales/inventory");
+      $scope.generateReport = function(report){
+        generateReport(query,"/reports/sales/inventory",report);
+
       }
 
       break;

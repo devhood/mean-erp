@@ -115,7 +115,7 @@ group,name,route
 "Reports","View Report per Product","/reports/sales/product"
 "Reports","View Report per Brand","/reports/sales/brand"
 "Reports","View Report per Sales Executive","/reports/sales/se"
-"Reports","View Report Inventory Transaction","/reports/sales/inventory"
+"Reports","View Report Inventory Transaction","/reports/inventory/transaction"
 "Reports","View All Reports","/reports"
 "Sales Inventory","View Sales Inventory","/reports/sales/inventory"
 "Printing","Manage Printing of Sales","/sales/index/print"

@@ -14,13 +14,35 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name as schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1",ng-disabled=("action=='read' || action=='approve'"), required)
-                span.col-md-12.help-block Type
+                input.form-control(type="text", ng-model="schedules.startDate" ,  datepicker-popup="{{'MM/dd/yyyy'}}",ng-disabled=("action=='read' || action=='approve'"),required)
+                span.col-md-12.help-block Start Date
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
                 input.form-control(type="text", ng-model="schedules.schno", readonly)
                 span.col-md-12.help-block Schedule Number
+
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                input.form-control(type="text",   ng-model="schedules.start_time" ng-minlength="0", ng-maxlength="20", ui-mask="99:99",ng-disabled=("action=='read' || action=='approve'"))
+                span.col-md-12.help-block Start Time
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text",   ng-model="schedules.end_time" ng-minlength="0", ng-maxlength="20", ui-mask="99:99",ng-disabled=("action=='read' || action=='approve'"))
+                span.col-md-12.help-block End Time
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+                select.select2me.form-control.select2-offscreen(ng-model="schedules.schedule_type", ng-options="schedule_type.name as schedule_type.name for schedule_type in schedule_types", ng-selected="{{schedules.schedule_types.name}}" ,tabindex="-1",ng-disabled=("action=='read' || action=='approve'"), required)
+                span.col-md-12.help-block Type
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+
         .row
           .col-md-6
             .form-group
@@ -30,8 +52,17 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                select.select2me.form-control.select2-offscreen( ng-model="schedules.brand",ng-disabled=("action=='read' || action=='approve'"),ng-options="brand.name as brand.name for brand in brands",required)
-                span.col-md-12.help-block Brand
+                select.select2me.form-control.select2-offscreen(ng-model="schedules.sales_executive", ng-disabled="action=='read'")
+                span.col-md-12.help-block Sales Executive
+        .row
+          .col-lg-2
+          .col-lg-12.col-md-12
+            .form-group
+              .col-lg-2
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10
+                input.form-control(type="text",  ng-model="schedules.address", ng-disabled="action=='read'")
+                span.col-md-12.help-block Address
+          //- .col-md-2
         .row
           .col-md-6
             .form-group
@@ -41,19 +72,11 @@ block title
           .col-md-6
             .form-group
               .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                input.form-control(type="text", ng-model="schedules.customer.sales_executive", ng-disabled="action=='read'",readonly)
-                span.col-md-12.help-block Sales Executive
-        .row
-            .col-md-6
-              .form-group
-                .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-                  input.form-control(type="text", ng-model="schedules.startDate" ,  datepicker-popup="{{'MM/dd/yyyy'}}",ng-disabled=("action=='read' || action=='approve'"),required)
-                  span.col-md-12.help-block Start Date
-            .col-md-6
-              .form-group
-                .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-                  input.form-control(type="text",   ng-model="schedules.start_time" ng-minlength="0", ng-maxlength="20", ui-mask="99:99",ng-disabled=("action=='read' || action=='approve'"))
-                  span.col-md-12.help-block Start Time
+
+                select.select2me.form-control.select2-offscreen( ng-model="schedules.brand",ng-disabled=("action=='read' || action=='approve'"),ng-options="brand.name as brand.name for brand in brands",required)
+                span.col-md-12.help-block Brand
+
+
 
        .form-actions.fluid
         .row
