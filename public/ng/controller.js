@@ -727,6 +727,10 @@ angular.module('erp')
 
           var Customer = Api.Collection('customers');
           $scope.customer = new Customer();
+          $scope.customer.credit_limit = 1;
+          $scope.customer.transaction_limit = 1;
+          $scope.customer.payment_term = "Cash or Terms";
+          $scope.customer.discount = "None";
           $scope.saveCustomer = function(){
             $scope.customer.$save(function(){
               $location.path('/customer/index');
