@@ -1,0 +1,59 @@
+block title
+  title ADMIN
+.portlet.box.grey(ng-if="ajax_ready",  ng-init="formInit()")
+  .portlet-title
+    .caption
+      i.fa.fa-reorder
+      | {{title}}
+    .form-group
+      .col-md-1
+      .col-md-10
+        .row
+          br
+          .col-md-12
+            .portlet-body.flip-scroll
+              table.table.table-bordered.table-condensed.flip-content
+                thead.flip-content.bg-grey
+                  tr
+                    th longitude
+                    th latitude
+                    th asn
+                    th offset
+                    th ip
+                    th area_code
+                    th continent_code
+                    th dma_code
+                    th timezone
+                    th country_code
+                    th isp
+                    th country
+                    th country_code3
+
+                tbody
+                  tr(ng-repeat="info in data")
+                    td {{info.bl_code}}
+                    th {{info.longitude}}
+                    th {{info.latitude}}
+                    th {{info.asn}}
+                    th {{info.offset}}
+                    th {{info.ip}}
+                    th {{info.area_code}}
+                    th {{info.continent_code}}
+                    th {{info.dma_code}}
+                    th {{info.timezone}}
+                    th {{info.country_code}}
+                    th {{info.isp}}
+                    th {{info.country}}
+                    th {{info.country_code3}}
+
+
+      .col-md-1
+        .row
+          .col-md-6
+            .col-md-offset-3.col-md-9
+              button.btn.green(type="submit" ng-show="save_form.$valid && action!='read'") Submit
+              | &nbsp;
+              button.btn.red(type="button", ng-click="rejectSales(sales)", ng-show="action=='edit' || action=='approve'") Reject
+              | &nbsp;
+              a.btn.default(type="button", href="/#/sales/index/memo") Cancel
+          .col-md-6
