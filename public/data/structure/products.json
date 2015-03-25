@@ -88,5 +88,15 @@
   "name": "professional_price",
   "title": "Professional Price",
   "type": "number"
+},
+"sub_distributor_price": {
+  "name": "sub_distributor_price",
+  "title": "Sub Distributor Price",
+  "type": "number"
+},
+"special_price": {
+  "name": "special_price",
+  "title": "Special Price",
+  "type": "number"
 }
 }]
