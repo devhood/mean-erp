@@ -10,7 +10,7 @@ block title
       a.config(href="#portlet-config", data-toggle="modal")
       a.reload(href="javascript:;")
       a.remove(href="javascript:;")
-  .portlet-body.form
+  .portlet-body.formcud
     form.form-horizontal(role="form", name="save_form", ng-submit="save_form.$valid && saveSales()", novalidate)
       .form-body
         .row
@@ -250,6 +250,15 @@ block title
                                   a.tooltips.btn.default.tooltips(ng-click="removeReturn($index)", data-container="body", data-placement="top", data-html="true", data-original-title="Delete Record")
                                     i.fa.fa-trash-o
                 .col-md-1
+        .row
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
+          .col-md-6
+            .form-group
+              .col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
+                input.form-control(type="text", ng-value="sales.total_quantity", readonly, style="text-align: center;")
+                span.col-md-12.help-block Total Quantity
         .row
           .col-md-6
             .form-group
