@@ -41,6 +41,32 @@ router
   });
 
 })
+.get('/sales/items', function(req, res) {
+  req.query.filter = JSON.parse(req.query.filter || '{}');
+
+  var content = {};
+  content.group = {
+  "_id" : "$ordered_items.bl_code",
+  "name":{$first:"$ordered_items.name"},
+  "bl_code":{$first:"$ordered_items.bl_code"},
+  "quantity":{$sum:"$ordered_items.quantity"},
+  "brand":{$first:"$ordered_items.brand"},
+  };
+  content.match = req.query.filter;
+  req.db.collection('sales')
+  // {$match:{"status.status_name":"TRANSACTION COMPLETE"}},
+  // {$group:content.group}
+  // {$match:content.match||{}}
+  .aggregate([{$unwind:"$ordered_items"}])
+  .done(function(result){
+    res.status(200).json(result);
+  })
+  .fail( function( err ) {
+    console.log(err);
+    res.status(400).json(err);
+  });
+
+})
 .get('/sales/customer', function(req, res) {
   req.query.filter = JSON.parse(req.query.filter || '{}');
   var content = {};
