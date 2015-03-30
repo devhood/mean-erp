@@ -53,11 +53,11 @@ router
   "brand":{$first:"$ordered_items.brand"},
   };
   content.match = req.query.filter;
+  // content.match = {dr_approved_date:{"$gte": "2015-02-25T14:04:54.576Z", "$lte": "2015-02-25T14:04:54.576Z"}};
   req.db.collection('sales')
   // {$match:{"status.status_name":"TRANSACTION COMPLETE"}},
   // {$group:content.group}
-  // {$match:content.match||{}}
-  .aggregate([{$unwind:"$ordered_items"}])
+  .aggregate([{$match:content.match||{}},{$unwind:"$ordered_items"}])
   .done(function(result){
     res.status(200).json(result);
   })

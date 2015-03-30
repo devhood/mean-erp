@@ -1762,14 +1762,14 @@ $scope.init = function(){
       {"name": "item.name", "title": "Name"},
       {"name": "item.brand","title": "Brand"},
       {"name": "item.uom","title": "UOM"},
-      {"name": "reference.value","title": "Reference No"},
       {"name": "reference.type","title": "Type"},
+      {"name": "reference.value","title": "Reference No"},
       {"name": "item.quantity", "title": "Quantity"}
       ];
 
       $scope.title = "INVENTORY REPORT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
-      $scope.dtOptions = Library.DataTable.options("/reports/sales/inventory?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions = Library.DataTable.options("/reports/inventory/transaction?filter="+encodeURIComponent(JSON.stringify(query)));
       $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
         .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
