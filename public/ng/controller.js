@@ -1639,7 +1639,7 @@ $scope.init = function(){
       window.alert("Please fill up the Reports Period Properly.");
     }
   }
-
+console.log(type);
   switch(type){
     case "complete" :
     console.log("query : ",query);
@@ -1675,6 +1675,44 @@ $scope.init = function(){
         generateReport(query,"/reports/sales/complete");
       }
 
+    case "items" :
+      console.log("test items");
+      columns = [
+      {"name": "ordered_items.bl_code", "title": "Code"},
+      {"name": "ordered_items.name", "title": "Product"},
+      {"name": "ordered_items.brand", "title": "Brand"},
+      {"name": "ordered_items.total", "title": "Total"},
+      {"name": "sono","title": "SO#"},
+      {"name": "drno","title": "DR#"},
+      {"name": "sino","title": "SI#"},
+      {"name": "pmno","title": "PM#"},
+      {"name": "cmno","title": "CM#"},
+      {"name": "delivery_date","title": "Delivery Date"},
+      {"name": "dr_approved_date","title": "DR Approved Date"},
+      {"name": "si_approved_date","title": "SI Approved Date"},
+      {"name": "payment_date","title": "Payment Date"},
+      {"name": "customer.company_name","title": "Company Name"},
+      {"name": "customer.branch", "title" :"Branch"},
+      {"name": "customer.type", "title" :"Type"},
+      {"name": "customer.discount", "title" :"Discount"},
+      {"name": "customer.sales_executive", "title" :"SE"},
+      {"name": "customer.price_type", "title" :"Price Type"},
+      {"name": "customer.shipping_address.province", "title" :"Province"},
+      {"name": "customer.shipping_address.city", "title" :"City"},
+      {"name": "type", "title": "Type"},
+
+      ];
+
+      $scope.title = "REPORT"
+      $scope.dtColumns = Library.DataTable.columns(columns,buttons);
+      $scope.dtOptions = Library.DataTable.options("/reports/sales/items?filter="+encodeURIComponent(JSON.stringify(query)));
+      $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
+
+      $scope.generateReport = function(){
+        generateReport(query,"/reports/sales/items");
+      }
       break;
     case "customer" :
       columns = [
@@ -1775,7 +1813,7 @@ $scope.init = function(){
         .withTableToolsButtons(['copy','print', {'sExtends': 'xls','sButtonText': 'Download'}]);
 
       $scope.generateReport = function(report){
-        generateReport(query,"/reports/sales/inventory",report);
+        generateReport(query,"/reports/inventory/transaction",report);
 
       }
 

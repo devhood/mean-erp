@@ -135,6 +135,11 @@
         "href": "/#/reports/sales/complete"
       },
       {
+        "title": "Sales Per Code",
+        "description": "View Completed Sales Reports Per Code",
+        "href": "/#/reports/sales/items"
+      },
+      {
         "title": "Sales Per Customer",
         "description": "View Sales Report per Product",
         "href": "/#/reports/sales/customer"
