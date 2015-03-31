@@ -1674,7 +1674,7 @@ console.log(type);
       $scope.generateReport = function(){
         generateReport(query,"/reports/sales/complete");
       }
-
+      break;
     case "items" :
       console.log("test items");
       columns = [
