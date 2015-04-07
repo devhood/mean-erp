@@ -1795,6 +1795,7 @@ console.log(type);
 
     case "transaction" :
       columns = [
+      {"name": "date","title": "date"},
       {"name": "reference.object","title": "Transaction"},
       {"name": "item.bl_code", "title" :"Code"},
       {"name": "item.name", "title": "Name"},
