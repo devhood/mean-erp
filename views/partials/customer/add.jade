@@ -144,35 +144,39 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										input.form-control(type="text", ng-model="customer.shipping_address.landmark", ng-minlength="0", ng-maxlength="70", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.shipping_address.landmark", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Floor/Unit/Building
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										input.form-control(type="text", ng-model="customer.shipping_address.barangay", ng-minlength="0", ng-maxlength="70", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.shipping_address.barangay", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Street/Barangay
 						.row
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.country", ng-options="object.name as object.name for object in countries track by customer.country", ng-selected="{{customer.country}}", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.shipping_address.city", ng-minlength="0", ng-maxlength="150", ng-value="Philippines", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.country", ng-options="object.name as object.name for object in countries track by customer.country", ng-selected="{{customer.country}}", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Country
 
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('scities',customer.shipping_address.province)",ng-model="customer.shipping_address.province", ng-options="province.province as province.province for province in provinces", ng-selected="{{customer.shipping_address.province}}",ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.shipping_address.city", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('scities',customer.shipping_address.province)",ng-model="customer.shipping_address.province", ng-options="province.province as province.province for province in provinces", ng-selected="{{customer.shipping_address.province}}",ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Province
 						.row
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-change="CityChange('szipcodes',customer.shipping_address.city)",ng-model="customer.shipping_address.city", ng-selected="{{customer.shipping_address.city}}", ng-options="city.city as city.city for city in scities", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.shipping_address.city", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-change="CityChange('szipcodes',customer.shipping_address.city)",ng-model="customer.shipping_address.city", ng-selected="{{customer.shipping_address.city}}", ng-options="city.city as city.city for city in scities", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	City
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.zipcode",ng-selected="{{customer.shipping_address.zipcode}}", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in szipcodes", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.shipping_address.zipcode", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-model="customer.shipping_address.zipcode",ng-selected="{{customer.shipping_address.zipcode}}", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in szipcodes", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Zipcode
 						.row
 							.col-md-6
@@ -194,29 +198,32 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										input.form-control(type="text", ng-model="customer.billing_address.landmark", ng-minlength="0", ng-maxlength="70", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.billing_address.landmark", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Floor/Unit/Building
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										input.form-control(type="text", ng-model="customer.billing_address.barangay", ng-minlength="0", ng-maxlength="70", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.billing_address.barangay", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Street/Barangay
 						.row
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.country", ng-options="object.name as object.name for object in countries track by customer.country", ng-disabled="action=='read'", ng-selected="{{customer.country}}" )
+										input.form-control(type="text", ng-model="customer.billing_address.country", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.country", ng-options="object.name as object.name for object in countries track by customer.country", ng-disabled="action=='read'", ng-selected="{{customer.country}}" )
 										span.col-md-12.help-block	Country
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('bcities',customer.billing_address.province)", ng-model="customer.billing_address.province", ng-options="province.province as province.province for province in provinces", ng-selected="{{customer.billing_address.province}}", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.billing_address.province", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-change="ProvinceChange('bcities',customer.billing_address.province)", ng-model="customer.billing_address.province", ng-options="province.province as province.province for province in provinces", ng-selected="{{customer.billing_address.province}}", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Province
 						.row
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-right
-										select.select2me.form-control.select2-offscreen(ng-change="CityChange('bzipcodes',customer.billing_address.city)", ng-model="customer.billing_address.city", ng-options="city.city as city.city for city in bcities", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.billing_address.city", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-change="CityChange('bzipcodes',customer.billing_address.city)", ng-model="customer.billing_address.city", ng-options="city.city as city.city for city in bcities", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	City
 							.col-md-6
 								.form-group
