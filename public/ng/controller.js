@@ -1700,9 +1700,7 @@ console.log(type);
       {"name": "customer.sales_executive", "title" :"SE"},
       {"name": "customer.price_type", "title" :"Price Type"},
       {"name": "customer.shipping_address.province", "title" :"Province"},
-      {"name": "customer.shipping_address.city", "title" :"City"},
-      {"name": "transaction_type", "title": "Type"},
-
+      {"name": "customer.shipping_address.city", "title" :"City"}
       ];
 
       $scope.title = "REPORT"
