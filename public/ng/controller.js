@@ -1681,6 +1681,8 @@ console.log(type);
       {"name": "ordered_items.bl_code", "title": "Code"},
       {"name": "ordered_items.name", "title": "Product"},
       {"name": "ordered_items.brand", "title": "Brand"},
+      {"name": "ordered_items.quantity", "title": "Quantity"},
+      {"name": "ordered_items.uom", "title": "UOM"},
       {"name": "ordered_items.total", "title": "Total"},
       {"name": "sono","title": "SO#"},
       {"name": "drno","title": "DR#"},
@@ -1699,7 +1701,7 @@ console.log(type);
       {"name": "customer.price_type", "title" :"Price Type"},
       {"name": "customer.shipping_address.province", "title" :"Province"},
       {"name": "customer.shipping_address.city", "title" :"City"},
-      {"name": "type", "title": "Type"},
+      {"name": "transaction_type", "title": "Type"},
 
       ];
 
