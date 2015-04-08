@@ -228,7 +228,8 @@ block title
 							.col-md-6
 								.form-group
 									.col-xs-12.col-sm-12.col-md-10.col-lg-10.custom-left
-										select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.zipcode", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in bzipcodes", ng-disabled="action=='read'" )
+										input.form-control(type="text", ng-model="customer.billing_address.zipcode", ng-minlength="0", ng-maxlength="150", ng-disabled="action=='read'" )
+										//- select.select2me.form-control.select2-offscreen(ng-model="customer.billing_address.zipcode", ng-options="zipcode.zipcode as zipcode.zipcode for zipcode in bzipcodes", ng-disabled="action=='read'" )
 										span.col-md-12.help-block	Zipcode
 				.portlet.box.grey
 					.portlet-title
