@@ -9,7 +9,7 @@ var pdf = {
 			  size: options.size || 'letter',
 			  layout: 'portrait',
 			  margins: {
-			    top: 0,
+			    top: 15,
 			    bottom: 0,
 			    left: 0,
 			    right: 0
@@ -25,7 +25,7 @@ var pdf = {
 		pageHeader : function(doc,drinfo){
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
-			doc.text(drinfo.drno,465,88,{align:'left'});
+			doc.text(drinfo.drno,465,98,{align:'left'});
 			doc.moveDown(0);
 			doc.font('Courier');
 			doc.fontSize(10);
