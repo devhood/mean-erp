@@ -1622,7 +1622,7 @@ $scope.init = function(){
       }
 
       //all reports must have SI number
-      query.delivery_date={"$gte": start_date, "$lte": end_date};
+      query.si_approved_date={"$gte": start_date, "$lte": end_date};
       console.log("query : ", JSON.stringify(query));
 
     $scope.dtOptions = Library.DataTable.options(api_url+"?filter="+encodeURIComponent(JSON.stringify(query)));
