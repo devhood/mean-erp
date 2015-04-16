@@ -256,10 +256,35 @@
       "title": "Order Source",
       "type": "select"
     },
+    "so_date": {
+      "name": "so_date",
+      "title": "SO Date",
+      "type": "text"
+    },
     "delivery_date": {
       "name": "delivery_date",
       "title": "Delivery Date",
-      "type": "select"
+      "type": "text"
+    },
+    "dr_approved_date": {
+      "name": "dr_approved_date",
+      "title": "DR Date",
+      "type": "text"
+    },
+    "si_approved_date": {
+      "name": "si_approved_date",
+      "title": "SI Date",
+      "type": "text"
+    },
+    "dr_approved_by": {
+      "name": "dr_approved_by",
+      "title": "DR By",
+      "type": "text"
+    },
+    "si_approved_by": {
+      "name": "si_approved_by",
+      "title": "SI By",
+      "type": "text"
     },
     "delivery_method": {
       "name": "delivery_method",

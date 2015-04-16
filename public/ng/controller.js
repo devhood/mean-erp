@@ -806,7 +806,7 @@ angular.module('erp')
       }
 
       $scope.addInventory = function(product){
-        if( product.inventory && product.inventory.company_name && product.inventory.quantity ){
+        if( product.inventory && product.inventory.company_name && (product.inventory.quantity!=NaN) ){
         product.inventory.rquantity = product.inventory.quantity;
         console.log("product.inventory.rquantity", product.inventory.rquantity);
           var content = {
@@ -1525,8 +1525,8 @@ Session.get(function(client) {
         break;
         case "monitor" :
             columns = [
-              $scope.structure.sono, $scope.structure.drno, $scope.structure.sino, $scope.structure.pmno, $scope.structure.rmrno, $scope.structure.cmno,$scope.structure.customer.shipping_address.city, $scope.structure.customer.billing_address.city, $scope.structure.customer.company_name, $scope.structure.customer.sales_executive,
-              $scope.structure.delivery_method,   $scope.structure.delivery_date, $scope.structure.status.status_name, $scope.structure.total_amount_due
+              $scope.structure.sono, $scope.structure.drno, $scope.structure.sino, $scope.structure.pmno, $scope.structure.rmrno, $scope.structure.cmno, $scope.structure.customer.company_name, $scope.structure.customer.shipping_address.city, $scope.structure.customer.billing_address.city,  $scope.structure.customer.sales_executive,
+              $scope.structure.delivery_method, $scope.structure.so_date, $scope.structure.delivery_date, $scope.structure.dr_approved_date, $scope.structure.si_approved_date, $scope.structure.dr_approved_by, $scope.structure.si_approved_by, $scope.structure.status.status_name, $scope.structure.total_amount_due
             ];
 
             buttons = [

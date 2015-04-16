@@ -14,12 +14,6 @@ by brand
 
 
 
-**** customer/product profile : dont replace, put history
-**** memorandum
-
-**** 3-17-15 deadline for memo: with company manual without loging in;
-**** +3 days for SL VL OT
-
 //calendar
 *** no deletion in calendar
 *** red highlight for canceled
@@ -248,3 +242,24 @@ new Date().toISOString().
 EWB
 gigi baustista
 226 4095
+
+
+
+inventories: [
+{
+_id: "54cada6fe1ff103526e6b8e7",
+company_name: "Beautylane Dasmariñas",
+branch: "Dasmarinas",
+price_type: "Professional",
+shipping_address: {
+landmark: "Warehouse 20 Century Commercial Complex Paliparan-Molino Road",
+barangay: "Brgy Salawag",
+country: "Philippines",
+province: "Cavite",
+city: "Dasmarinas",
+zipcode: ""
+},
+quantity: 11,
+rquantity: 11
+}
+]
