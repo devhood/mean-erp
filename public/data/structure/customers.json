@@ -1,4 +1,19 @@
 [{
+  "contacts_name":{
+    "name": "name",
+    "title": "Name",
+    "type": "text"
+  },
+  "contacts_phone":{
+    "name": "phone",
+    "title": "Phone",
+    "type": "text"
+  },
+  "contacts_email":{
+    "name": "email",
+    "title": "Email",
+    "type": "text"
+  },
   "company_name": {
     "name": "company_name",
     "title": "Company Name",
@@ -141,63 +156,23 @@
       }
     }
   },
+
   "billing_address": {
-    "name": "billing_address",
-    "title": "Billing Address",
-    "type": "table",
-    "child_items": {
       "landmark": {
         "name": "landmark",
-        "title": "Floor/Unit/Building",
+        "title": "Landmark",
         "type": "text"
       },
       "barangay": {
         "name": "barangay",
-        "title": "Street/Barangay",
+        "title": "Position",
         "type": "text"
       },
       "country": {
         "name": "country",
-        "title": "Country",
-        "type": "select"
-      },
-      "province": {
-        "name": "province",
-        "title": "Province",
-        "type": "select"
-      },
-      "city": {
-        "name": "city",
-        "title": "City",
-        "type": "select"
-      },
-      "zipcode": {
-        "name": "zipcode",
-        "title": "Zipcode",
-        "type": "select"
-      }
-    }
-  },
-  "billing_address": {
-    "name": "contact",
-    "title": "CONTACT PERSONS",
-    "type": "table",
-    "child_items": {
-      "name": {
-        "name": "name",
-        "title": "Name",
-        "type": "text"
-      },
-      "position": {
-        "name": "position",
-        "title": "Position",
-        "type": "text"
-      },
-      "email": {
-        "name": "email",
         "title": "Email",
-        "type": "email"
+        "type": "text"
       }
-    }
+
   }
 }]

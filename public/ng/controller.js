@@ -587,6 +587,7 @@ angular.module('erp')
       $scope.init = function(){
         columns = [
           $scope.structure.type, $scope.structure.company_name, $scope.structure.branch,
+          $scope.structure.billing_address.landmark,
           $scope.structure.sales_executive, $scope.structure.status
         ];
 
@@ -599,6 +600,9 @@ angular.module('erp')
         $scope.addUrl = "/#/customer/add"
         $scope.dtColumns = Library.DataTable.columns(columns,buttons);
         $scope.dtOptions = Library.DataTable.options("/api/customers");
+        $scope.dtOptions
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy']);
         };
       $scope.formInit = function(){
 
@@ -1099,6 +1103,79 @@ Session.get(function(client) {
 .controller('UploadPricesCtrl', function ($scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session, Api, CustomApi, popupService, fileUpload) {
 
   $scope.title = "UPLOAD PRODUCT PRICES";
+  $scope.showUpload = true;
+  $scope.showConfirmUpdate = false;
+  $scope.update_finished = false;
+
+  $scope.uploadFile = function(){
+    var prices_csv = $scope.upload.file;
+    var uploadUrl = '/api/upload/prices';
+    if(prices_csv.name){
+      fileUpload.uploadFileToUrl('prices_file', prices_csv, uploadUrl,function(err,data){
+        $scope.products_prices = data;
+      });
+    }
+    $scope.showUpload = false;
+  };
+
+  $scope.na_products = [];
+  $scope.up_products = [];
+
+  $scope.approveData = function(products_prices) {
+  var ctr = 0;
+  var na_product = {};
+  async.each(products_prices, function(item, callback) {
+    console.log(ctr, "--ctr");
+    if(item.bl_code){
+      CustomApi.Collection('products').get({key : 'bl_code', value : item.bl_code}).$promise.then(function(products){
+          ctr ++;
+          if (products.bl_code == item.bl_code) {
+            if (isNaN(item.international_cost)) item.international_cost=0;
+            if (isNaN(item.retail_price)) item.retail_price=0;
+            if (isNaN(item.professional_price)) item.professional_price=0;
+            if (isNaN(item.sub_distributor_price)) item.sub_distributor_price=0;
+
+                products.international_cost = item.international_cost;
+                products.retail_price = item.retail_price;
+                products.professional_price = item.professional_price;
+                products.sub_distributor_price = item.sub_distributor_price;
+
+                $scope.up_products.push(products);
+                products.$update(function(){
+                  callback();
+                });
+            console.log("updated: ", ctr);
+          }
+          else {
+            na_product = {};
+
+            na_product.bl_code = item.bl_code;
+            na_product.international_cost = item.international_cost;
+            na_product.retail_price = item.retail_price;
+            na_product.professional_price = item.professional_price;
+            na_product.sub_distributor_price = item.sub_distributor_price;
+
+            console.log(ctr, ") no PP", na_product);
+            $scope.na_products.push(na_product);
+          }
+      });
+    }
+    else{
+      console.log("Error. No item");
+    }
+  },function(err){
+    if(err){
+      console.log(err);
+    }
+  });
+    $scope.update_finished = true;
+    $scope.showUpload = false;
+    $scope.showConfirmUpdate = true;
+  }
+})
+.controller('UploadContactsCtrl', function ($scope, $http, $window, $filter, $routeParams, $location, Structure, Library, Session, Api, CustomApi, popupService, fileUpload) {
+
+  $scope.title = "UPLOAD PRODUCT CONTACTS";
   $scope.showUpload = true;
   $scope.showConfirmUpdate = false;
   $scope.update_finished = false;
@@ -1681,6 +1758,8 @@ console.log(type);
       {"name": "ordered_items.bl_code", "title": "Code"},
       {"name": "ordered_items.name", "title": "Product"},
       {"name": "ordered_items.brand", "title": "Brand"},
+      {"name": "ordered_items.size", "title": "Size"},
+      {"name": "ordered_items.color", "title": "Color"},
       {"name": "ordered_items.quantity", "title": "Quantity"},
       {"name": "ordered_items.uom", "title": "UOM"},
       {"name": "ordered_items.total", "title": "Total"},

@@ -328,6 +328,10 @@ angular.module('erp', [
         templateUrl: '/partials/upload/prices',
         controller: 'UploadPricesCtrl'
       })
+      .when('/upload/contacts', {
+        templateUrl: '/partials/upload/contacts',
+        controller: 'UploadContactsCtrl'
+      })
       .when('/auth/unauthorized', {
         templateUrl: '/partials/home/unauthorized',
         controller: 'MainCtrl'
