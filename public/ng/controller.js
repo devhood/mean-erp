@@ -765,7 +765,10 @@ angular.module('erp')
     $scope.init = function(){
       columns = [
       $scope.structure.bl_code, $scope.structure.name, $scope.structure.brand,
-      $scope.structure.size, $scope.structure.color, $scope.structure.payment_term
+      $scope.structure.size, $scope.structure.color, $scope.structure.payment_term,
+      $scope.structure.professional_price,
+      $scope.structure.retail_price,
+      $scope.structure.sub_distributor_price,
       ];
 
       buttons = [
@@ -776,6 +779,9 @@ angular.module('erp')
       $scope.addUrl = "/#/product/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/products");
+      $scope.dtOptions     
+        .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons(['copy']);
     };
     $scope.formInit = function(){
 
@@ -1781,6 +1787,10 @@ console.log(type);
       {"name": "customer.shipping_address.province", "title" :"Province"},
       {"name": "customer.shipping_address.city", "title" :"City"}
       ];
+      var today = new Date();
+      console.log(today);
+      query.si_approved_date = {"$gte": today};
+      console.log("query : ", JSON.stringify(query));
 
       $scope.title = "REPORT"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
