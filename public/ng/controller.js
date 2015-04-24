@@ -587,7 +587,9 @@ angular.module('erp')
       $scope.init = function(){
         columns = [
           $scope.structure.type, $scope.structure.company_name, $scope.structure.branch,
-          $scope.structure.billing_address.landmark,
+          $scope.structure.phone,
+          $scope.structure.tin,
+          $scope.structure.sec_no,
           $scope.structure.sales_executive, $scope.structure.status
         ];
 
@@ -779,7 +781,7 @@ angular.module('erp')
       $scope.addUrl = "/#/product/add"
       $scope.dtColumns = Library.DataTable.columns(columns,buttons);
       $scope.dtOptions = Library.DataTable.options("/api/products");
-      $scope.dtOptions     
+      $scope.dtOptions
         .withTableTools('/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
         .withTableToolsButtons(['copy']);
     };
@@ -1136,10 +1138,22 @@ Session.get(function(client) {
       CustomApi.Collection('products').get({key : 'bl_code', value : item.bl_code}).$promise.then(function(products){
           ctr ++;
           if (products.bl_code == item.bl_code) {
-            if (isNaN(item.international_cost)) item.international_cost=0;
-            if (isNaN(item.retail_price)) item.retail_price=0;
+            if (item.international_cost == null) item.international_cost = products.international_cost; console.log("pro to item");
+            if (isNaN(item.international_cost)) item.international_cost = 0;    console.log("item to 0");
+
+            if (item.retail_price == null) item.retail_price = products.retail_price;
+            if (isNaN(item.retail_price)) item.retail_price = 0;
+
+            if (item.professional_price == null) item.professional_price = products.professional_price;
             if (isNaN(item.professional_price)) item.professional_price=0;
+
+            if (item.sub_distributor_price == null) item.sub_distributor_price = products.sub_distributor_price;
             if (isNaN(item.sub_distributor_price)) item.sub_distributor_price=0;
+
+                console.log(item.international_cost);
+                console.log(item.retail_price);
+                console.log(item.professional_price);
+                console.log(item.sub_distributor_price);
 
                 products.international_cost = item.international_cost;
                 products.retail_price = item.retail_price;

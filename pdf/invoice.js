@@ -25,8 +25,8 @@ var pdf = {
 			doc.text(siinfo.sino,500,75);
 			doc.font('Courier');
 			doc.fontSize(10);
-			var date = siinfo.delivery_date.replace("T16:00:00.000Z","");
-			doc.text(date,510,90);
+			var date = siinfo.si_approved_date.replace(/T\S+/,"");
+			doc.text(date,510,90,{align:'left'});
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
 			doc.fontSize(10);
@@ -46,7 +46,8 @@ var pdf = {
 			doc.moveDown(0);
 			y = doc.y;
 			doc.text(siinfo.customer.payment_term,35);
-			doc.text(date,220,y);
+			var delivery_date = siinfo.delivery_date.replace(/T\S+/,"");
+			doc.text(delivery_date,220,y);
 			doc.text(siinfo.delivery_method,360,y);
 			doc.text(siinfo.customer.sales_executive,500,y);
 			doc.text(siinfo.special_instruction,35,y+10);

@@ -63,7 +63,7 @@
     "name": "email",
     "title": "Email",
     "type": "email"
-  },
+  },  
   "consignee": {
     "name": "consignee",
     "title": "Consignee",
