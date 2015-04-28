@@ -586,12 +586,24 @@ angular.module('erp')
       var query = {};
       $scope.init = function(){
         columns = [
-          $scope.structure.type, $scope.structure.company_name, $scope.structure.branch,
-          $scope.structure.phone,
-          $scope.structure.tin,
-          $scope.structure.sec_no,
-          $scope.structure.sales_executive, $scope.structure.status
+        {"name": "company_name","title": "Company"},
+        {"name": "branch","title": "Branch"},
+        {"name": "email","title": "Email"},
+        {"name": "shipping_address.province","title": "Shipping Province"},
+        {"name": "billing_address.province","title": "Billing Province"},
+        {"name": "shipping_address.city","title": "Shipping City"},
+        {"name": "billing_address.city","title": "Billing City"},
+        {"name": "phone","title": "Phone"},
+        {"name": "tin","title": "TIN"},
+        {"name": "sales_executive","title": "SE"},
         ];
+        // columns = [
+        //   $scope.structure.type, $scope.structure.company_name, $scope.structure.branch,
+        //   $scope.structure.phone,
+        //   $scope.structure.tin,
+        //   $scope.structure.sec_no,
+        //   $scope.structure.sales_executive, $scope.structure.status
+        // ];
 
         buttons = [
           {url:"/#/customer/read/",title:"View Record",icon:"fa fa-folder-open"},

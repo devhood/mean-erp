@@ -30,7 +30,7 @@ var pdf = {
 			doc.font('Courier');
 			doc.fontSize(10);
 
-			var date = drinfo.dr_approved_date.replace(/T\S+/,"");
+			var date = drinfo.delivery_date.replace(/T\S+/,"");
 			doc.text(date,480,108,{align:'left'});
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
