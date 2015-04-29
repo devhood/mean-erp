@@ -127,7 +127,10 @@ module.exports.print = function(siinfo,result){
 		doc.text(siinfo.ordered_items[i].quantity,300,y,{width:35,align:'center'});
 		doc.text(siinfo.ordered_items[i].uom,390,y,{width:50});
 		doc.text(siinfo.ordered_items[i].professional_price,440,y,{width:35,align:'center'});
-		doc.text(siinfo.ordered_items[i].price,480,y,{width:35,align:'center'});
+		if(siinfo.ordered_items[i].professional_price != siinfo.ordered_items[i].price)
+			doc.text(siinfo.ordered_items[i].price,480,y,{width:35,align:'center'});
+		else
+			doc.text("",480,y,{width:35,align:'center'});
 		doc.text(siinfo.ordered_items[i].total,530,y,{width:80,align:'center'});
 		doc.moveDown(1);
 		if(doc.y >= 620){
