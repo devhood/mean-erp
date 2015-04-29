@@ -30,7 +30,9 @@ var pdf = {
 			doc.font('Courier');
 			doc.fontSize(10);
 
-			var date = drinfo.delivery_date.replace(/T\S+/,"");
+			var fDate = new Date(drinfo.si_approved_date);
+			date =(fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFullYear();
+
 			doc.text(date,480,108,{align:'left'});
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
@@ -58,7 +60,9 @@ var pdf = {
 			y = doc.y;
 			doc.text(drinfo.customer.payment_term,35);
 
-			var delivery_date = drinfo.delivery_date.replace(/T\S+/,"");
+			var dDate = new Date(drinfo.delivery_date);
+			delivery_date =(dDate.getMonth() + 1) + "/" + dDate.getDate() + "/" + dDate.getFullYear();
+			
 			doc.text(delivery_date,220,y);
 			doc.text(drinfo.delivery_method,360,y);
 			doc.text(drinfo.customer.sales_executive,500,y);

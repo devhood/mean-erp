@@ -25,7 +25,10 @@ var pdf = {
 			doc.text(siinfo.sino,500,75);
 			doc.font('Courier');
 			doc.fontSize(10);
-			var date = siinfo.si_approved_date.replace(/T\S+/,"");
+
+			var fDate = new Date(siinfo.si_approved_date);
+			date =(fDate.getMonth() + 1) + "/" + fDate.getDate() + "/" + fDate.getFullYear();
+
 			doc.text(date,510,90,{align:'left'});
 			doc.moveDown(0);
 			doc.font('Courier-Bold');
@@ -46,7 +49,10 @@ var pdf = {
 			doc.moveDown(0);
 			y = doc.y;
 			doc.text(siinfo.customer.payment_term,35);
-			var delivery_date = siinfo.delivery_date.replace(/T\S+/,"");
+
+			var dDate = new Date(siinfo.delivery_date);
+			delivery_date =(dDate.getMonth() + 1) + "/" + dDate.getDate() + "/" + dDate.getFullYear();
+
 			doc.text(delivery_date,220,y);
 			doc.text(siinfo.delivery_method,360,y);
 			doc.text(siinfo.customer.sales_executive,500,y);
@@ -65,23 +71,30 @@ var pdf = {
 			return doc;
 		},
 		pageFooter : function(doc,siinfo){
-			doc.text(siinfo.total_vat,130,646);/*VATable Sales*/
-			doc.text(siinfo.ttl_discount,130,658);/*Vat Exempt Sales*/
+			// siinfo.total_vat = siinfo.total_vat
+			doc.text(siinfo.total_vat,130,646); /*VATable Sales*/
+			doc.text("",130,658); /*Vat Exempt Sales*/
 			doc.text(siinfo.zero_rate_sales,130,670);/*Zero Rated Sales*/
-			doc.text(siinfo.total_vat,130,682);/*VAT AMOUNT*/
-			doc.text(siinfo.subtotal,560,646);/*Total Sales Vat inclusive*/
-			doc.text(siinfo.total_vat,560,658);/*Less Vat*/
-			doc.text(siinfo.total_vat,560,670);/*Amount Net of VAT*/
-			doc.text(siinfo.discount,560,682,{width:50});/*Less CS/PWD Discount*/
-			doc.text(siinfo.total_vat,560,694,{width:50});/*Amount Due*/
-			doc.text(siinfo.total_vat,560,706,{width:50});/*Add Vat*/
+			doc.text("",130,682);/*VAT AMOUNT*/
+
+			var total_sales = siinfo.total_amount_due.toFixed(3);
+			var less_vat = (total_sales/1.12).toFixed(3);
+			var net_vat = (total_sales - less_vat).toFixed(3);
+			var add_vat = less_vat;
+
+			doc.text(total_sales,560,646);/*Total Sales Vat inclusive*/
+			doc.text(less_vat,560,658);/*Less Vat*/
+			doc.text(net_vat,560,670);/*Amount Net of VAT*/
+			doc.text("",560,682,{width:50});/*Less CS/PWD Discount*/
+			doc.text(" ",560,694,{width:50});/*Amount Due*/
+			doc.text(add_vat,560,706,{width:50});/*Add Vat*/
 			doc.fontSize(14);
 			doc.font('Courier-Bold');
 
 			// var num = siinfo.total_amount_due;
 			// var total = num.toFixed(2);
 			// var total = siinfo.total_amount_due.toFixed(2);
-			doc.text(siinfo.total_amount_due,460,718,{width:50});/*Total Amount Due*/
+			doc.text(total_sales,460,718,{width:150});/*Total Amount Due*/
 			doc.fontSize(10);
 			doc.font('Courier');
 			if (siinfo.dr_approved_by) doc.text(siinfo.dr_approved_by,25,755);
