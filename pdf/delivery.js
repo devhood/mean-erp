@@ -62,7 +62,7 @@ var pdf = {
 
 			var dDate = new Date(drinfo.delivery_date);
 			delivery_date =(dDate.getMonth() + 1) + "/" + dDate.getDate() + "/" + dDate.getFullYear();
-			
+
 			doc.text(delivery_date,220,y);
 			doc.text(drinfo.delivery_method,360,y);
 			doc.text(drinfo.customer.sales_executive,500,y);
@@ -71,11 +71,11 @@ var pdf = {
 			return doc;
 		},
 		pageFooter : function(doc,drinfo){
-			doc.text(drinfo.ordered_items.length,130,610);
-			if (drinfo.total_quantity)	doc.text(drinfo.total_quantity,560,610,{width:35,align:'center'});
-			else if (drinfo.totalQuantity)	doc.text(drinfo.totalQuantity,560,610,{width:35,align:'center'});
-			if (drinfo.prepared_by) doc.text(drinfo.prepared_by,25,730);
-			if (drinfo.dr_approved_by) doc.text(drinfo.dr_approved_by,180,730);
+			doc.text(drinfo.ordered_items.length,130,590);
+			if (drinfo.total_quantity)	doc.text(drinfo.total_quantity,560,590,{width:35,align:'center'});
+			else if (drinfo.totalQuantity)	doc.text(drinfo.totalQuantity,560,590,{width:35,align:'center'});
+			if (drinfo.prepared_by) doc.text(drinfo.prepared_by,25,710);
+			if (drinfo.dr_approved_by) doc.text(drinfo.dr_approved_by,180,710);
 			 return doc
 		}
 };
