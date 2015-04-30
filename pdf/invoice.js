@@ -77,9 +77,9 @@ var pdf = {
 			doc.text(siinfo.zero_rate_sales,130,646);/*Zero Rated Sales*/
 			doc.text("--",130,658);/*VAT AMOUNT*/
 
-			var total_sales = siinfo.total_amount_due.toFixed(3);
-			var net_vat = (total_sales/1.12).toFixed(3);
-			var less_vat = (total_sales - net_vat).toFixed(3);
+			var total_sales = siinfo.total_amount_due.toFixed(2);
+			var net_vat = (total_sales/1.12).toFixed(2);
+			var less_vat = (total_sales - net_vat).toFixed(2);
 			var add_vat = less_vat;
 
 			doc.text(total_sales,460,622,{width:70,align:'right'});/*Total Sales Vat inclusive*/
