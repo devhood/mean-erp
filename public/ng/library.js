@@ -168,6 +168,7 @@ angular.module('erp')
       },
       Sales : {
         order : {
+          faceless : {status_code : "SALES_ORDER_VOID", status_name : "Sales-Order Void"},
           created : {status_code : "SALES_ORDER_CREATED", status_name : "Sales-Order submitted"},
           revised : {status_code : "SALES_ORDER_REVISED", status_name : "Sales-Order revised"},
           rejected : {status_code : "SALES_ORDER_REJECTED", status_name : "Sales-Order rejected"},

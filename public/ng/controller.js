@@ -589,10 +589,16 @@ angular.module('erp')
         {"name": "company_name","title": "Company"},
         {"name": "branch","title": "Branch"},
         {"name": "email","title": "Email"},
+        {"name": "shipping_address.landmark","title": "Shipping Landmark"},
+        {"name": "shipping_address.barangay","title": "Shipping Barangay"},
         {"name": "shipping_address.province","title": "Shipping Province"},
-        {"name": "billing_address.province","title": "Billing Province"},
         {"name": "shipping_address.city","title": "Shipping City"},
+        {"name": "shipping_address.zipcode","title": "Shipping Zipcode"},
+        {"name": "billing_address.landmark","title": "Billing Landmark"},
+        {"name": "billing_address.province","title": "Billing Province"},
+        {"name": "billing_address.barangay","title": "Billing Barangay"},
         {"name": "billing_address.city","title": "Billing City"},
+        {"name": "billing_address.zipcode","title": "Billing Zipcode"},
         {"name": "phone","title": "Phone"},
         {"name": "tin","title": "TIN"},
         {"name": "sales_executive","title": "SE"},
@@ -1958,12 +1964,13 @@ console.log(type);
   }; //end of init
 });
   })
-.controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, Structure, Library, Session, Api, popupService) {
+.controller('SalesOrderCtrl', function ($scope,$window, $filter, $routeParams, $location, $timeout,  Structure, Library, Session, Api, popupService) {
 
   Session.get(function(client) {
     if(!Library.Permission.isAllowed(client,$location.path())){
       $location.path("/auth/unauthorized");
     }
+    $scope.client = client;
   });
 
   var id = $routeParams.id;
@@ -2147,24 +2154,28 @@ console.log(type);
     });
   }
 
-  if(action == 'add'){
-    $scope.title = "ADD SALES ORDER";
-    var Sales = Api.Collection('sales');
-    $scope.sales = new Sales();
+if(action == 'add'){
+  $scope.title = "ADD SALES ORDER";
+  var Sales = Api.Collection('sales');
+  $scope.sales = new Sales();
+  $scope.sent = false;
 
-    $scope.saveSales = function(){
-      if($scope.sales.isNeedApproval){
-        $scope.sales.status = status.order.override;
-      }
-      else{
-        $scope.sales.status = status.order.created;
-        //$scope.sales.triggerInventory  = "OUT";
-      }
+  $scope.saveSales = function(){
+    $scope.sending = true;
+    $scope.ordered_by = $scope.client.fullname;
+
+    if($scope.sales.isNeedApproval){
+      $scope.sales.status = status.order.override;
+    }
+    else{
+      $scope.sales.status = status.order.created;
+    }
     if (!$scope.sales.so_date) { $scope.sales.so_date = new Date(); }
-    $scope.sales.$save(function(){
-      $location.path('/sales/index/order');
-      return false;
-    });
+
+      $scope.sales.$save(function(){
+        $location.path('/sales/index/order');
+        return false;
+      });
     }
   }
   if(action == 'edit'){
@@ -2172,6 +2183,7 @@ console.log(type);
     $scope.sales =  Api.Collection('sales').get({id:$routeParams.id},function(){
       $scope.CustomerChange();
     });
+
     $scope.saveSales = function(){
       if($scope.sales.isNeedApproval){
         $scope.sales.status = status.order.override;
@@ -2192,9 +2204,12 @@ console.log(type);
         return false;
       });
     };
-    $scope.deleteSales=function(sales){
+    $scope.voidSales=function(sales){
+
+      $scope.so_deleted_by = $scope.client.fullname;
+      $scope.sales.status = status.order.faceless;
       if(popupService.showPopup('You are about to delete Record : '+sales._id)){
-        $scope.sales.$delete(function(){
+        $scope.sales.$update(function(){
           $location.path('/sales/index/order');
           return false;
         });
@@ -2221,7 +2236,7 @@ console.log(type);
       });
     };
     $scope.rejectSales = function(){
-        var confirm = window.prompt("Please Confirm Rejecting Sales.");
+        var confirm = window.confirm("Please Confirm Rejecting Sales.");
         console.log(confirm);
       $scope.sales.status = status.order.rejected;
       $scope.sales.$update(function(){
