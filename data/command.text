@@ -103,3 +103,6 @@ mongoexport --db beautylane-db --collection products --out /home/beautylaneph123
 mongoimport --db beautylane-db --collection products --file data/backups/products_backup.json
 mongoimport --db beautylane-db --collection customers --file data/backups/customers_backup.json
 mongoimport --db beautylane-db --collection sales --file data/backups/sales_backup.json
+
+
+mongoimport --db beautylane-db --collection products --file data/json/extracolorclub05142015.json --jsonArray
