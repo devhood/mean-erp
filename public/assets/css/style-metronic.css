@@ -26,7 +26,7 @@ Buttons & Dropdown Buttons
 ***/
 
 .btn {
-	border-width: 0;
+	/*border-width: 0;
 	padding: 7px 14px;
   font-size: 14px;
 	outline: none !important;
@@ -36,7 +36,22 @@ Buttons & Dropdown Buttons
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
           border-radius: 0 !important;
-          text-shadow: none;
+          text-shadow: none;*/
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -moz-transition-property: background;
+  -o-transition-property: background;
+  -webkit-transition-property: background;
+  transition-property: background;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  background: #EEE;
+  border: none;
+  text-shadow: none; 
+
 }
 
 /* fix jumping group buttons */
@@ -106,17 +121,29 @@ Buttons & Dropdown Buttons
   text-shadow: none;
   background-color: #d84a38;
 }
+
 .btn.red:hover,
 .btn.red:focus,
-.btn.red:active,
 .btn.red.active,
 .btn.red[disabled],
 .btn.red.disabled {
   background-color: #bb2413 !important;
-  color: #fff !important;
+  /*color: #fff !important;*/
   outline: none !important;
 }
 
+
+.btn.red:active{
+   -moz-transition-duration: 0s;
+    -o-transition-duration: 0s;
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+    background: #eeeeee;
+    color: #bbbbbb; 
+     background-color: #bb2413 !important;
+    outline: none !important;
+  }
+}
 /*  Blue */
 
 .btn.blue {
@@ -126,7 +153,6 @@ Buttons & Dropdown Buttons
 }
 .btn.blue:hover,
 .btn.blue:focus,
-.btn.blue:active,
 .btn.blue.active,
 .btn.blue[disabled],
 .btn.blue.disabled {
@@ -134,6 +160,17 @@ Buttons & Dropdown Buttons
   color: #fff !important;
   outline: none !important;
 }
+.btn.blue:active{
+   -moz-transition-duration: 0s;
+    -o-transition-duration: 0s;
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+    background: #eeeeee;
+    color: #bbbbbb; 
+ background-color: green !important;
+  outline: none !important;
+  }
+
 
 .btn-group .btn.blue.dropdown-toggle {
   background-color: #4d90fe !important;
@@ -166,8 +203,13 @@ Buttons & Dropdown Buttons
 }
 
 .btn.green:active{
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
+  color: #bbbbbb !important;
+  background: #eeeeee;
   background-color: green !important;
-  color: #fff !important;
   outline: none !important;
 }
 
