@@ -110,7 +110,22 @@ router
     .sort(req.query.sorting).skip(Number(req.query.page) || 0)
     .limit(Number(req.query.rows) || 0).toArray()
     .done(function(data){
-      res.status(200).json(data);
+      var rdata = {};
+      rdata = data;
+      for (var i = 0; i< rdata.length; i++) {
+        if (rdata[i].audit_history) delete rdata[i].audit_history;
+        if (rdata[i].customer) {
+          if (rdata[i].customer.audit_history) delete rdata[i].customer.audit_history;
+        };
+        if (rdata[i].ordered_items) {
+          for (var j=0; j < rdata[i].ordered_items.length; j++) {
+            if (data[i].ordered_items[j].audit_history) {
+              delete rdata[i].ordered_items[j].audit_history;
+            };
+          };
+        };
+      };
+      res.status(200).json(rdata);
     })
     .fail( function( err ) {
       console.log(err);

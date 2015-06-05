@@ -95,11 +95,14 @@ mongoimport --db beautylane-db --collection payment_types --type csv --headerlin
 
 
 
+//google cloud server commands to backup db
+mongoexport --db beautylane-db --collection sales --out /home/beautylaneph1234_gmail_com/applications/db-backup/bl-db/sales_backup.json --journal
+mongoexport --db beautylane-db --collection customers --out /home/beautylaneph1234_gmail_com/applications/db-backup/bl-db/customers_backup.json --journal
+mongoexport --db beautylane-db --collection products --out /home/beautylaneph1234_gmail_com/applications/db-backup/bl-db/products_backup.json --journal
+mongoexport --db beautylane-db --collection inv_trans_history --out /home/beautylaneph1234_gmail_com/applications/db-backup/bl-db/products_backup.json --journal
 
-mongoexport --db beautylane-db --collection sales --out /home/beautylaneph1234_gmail_com/applications/mean-erp/data/backups/sales_backup.json --journal
-mongoexport --db beautylane-db --collection customers --out /home/beautylaneph1234_gmail_com/applications/mean-erp/data/backups/customers_backup.json --journal
-mongoexport --db beautylane-db --collection products --out /home/beautylaneph1234_gmail_com/applications/mean-erp/data/backups/products_backup.json --journal
 
+//commands to initialize products and customers
 mongoimport --db beautylane-db --collection products --file data/backups/products_backup.json
 mongoimport --db beautylane-db --collection customers --file data/backups/customers_backup.json
 mongoimport --db beautylane-db --collection sales --file data/backups/sales_backup.json
