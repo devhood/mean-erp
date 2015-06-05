@@ -74,9 +74,10 @@ angular.module('erp')
         var totalDiscount = total * discount;
         var vatableSales = total - totalDiscount;
         var taxAmount = total - (total / 1.12);
-        var withholdingTax = isWithholdingTax ? (total * 0.01) : 0.00;
+        var totalTax = (total / 1.12) * 0.01;
+        var withholdingTax = isWithholdingTax ? totalTax : 0.00;
         var zeroRatedSales = isVatZeroRated ? total : 0.00;
-        var totalAmountDue = isVatZeroRated ? (total - totalDiscount - withholdingTax - taxAmount) : (total - totalDiscount - withholdingTax);
+        var totalAmountDue = isVatZeroRated ? (total - totalDiscount - withholdingTax) : (total - totalDiscount - withholdingTax);
 
         return {
           totalDiscount: totalDiscount,
